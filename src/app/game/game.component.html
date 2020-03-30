@@ -1,0 +1,7 @@
+<p *ngIf="game">Actions: {{game.actions}}</p>
+
+<app-trail *ngIf="game"
+           [trail]="game.trail"
+           [actions]="game.actions"
+           (action)="action.emit($event)"
+></app-trail>

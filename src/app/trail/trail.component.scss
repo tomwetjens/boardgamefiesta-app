@@ -1,0 +1,17 @@
+.location {
+  stroke-opacity: 1;
+  stroke: #ffffff;
+  stroke-width: 0.82700002;
+  fill: rgb(0, 0, 0, 0.1);
+
+  cursor: pointer;
+
+  &:hover {
+    stroke: red;
+  }
+}
+
+.neutral {
+  fill-opacity: 0.5;
+  fill: #7a6853;
+}
