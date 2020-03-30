@@ -1,0 +1,17 @@
+<div>
+  AUX_GAIN_DOLLAR
+  <button [disabled]="!canPerform('SINGLE_AUX_ACTION')" (click)="performSingle('AUX_GAIN_DOLLAR')">1x</button>
+  <button [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_GAIN_DOLLAR', 2)" (click)="performDouble('AUX_GAIN_DOLLAR')">2x</button>
+</div>
+
+<div>
+  AUX_DRAW_CARD_TO_DISCARD_CARD
+  <button [disabled]="!canPerform('SINGLE_AUX_ACTION') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD')" (click)="performSingle('AUX_DRAW_CARD_TO_DISCARD_CARD')">1x</button>
+  <button [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)" (click)="performDouble('AUX_DRAW_CARD_TO_DISCARD_CARD')">2x</button>
+</div>
+
+<div>
+  AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT
+  <button [disabled]="!canPerform('SINGLE_AUX_ACTION') || !hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')" (click)="performSingle('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')">1x</button>
+  <button [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT', 2)" (click)="performDouble('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')">2x</button>
+</div>

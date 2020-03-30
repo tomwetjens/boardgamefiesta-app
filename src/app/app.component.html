@@ -1,4 +1,5 @@
 <app-game *ngIf="game"
           [game]="game | async"
-(action)="perform($event)">
+          (action)="perform($event)"
+          (endTurn)="endTurn()">
 </app-game>

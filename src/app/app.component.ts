@@ -15,11 +15,16 @@ export class AppComponent {
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get<Game>('/api/games/a')
-      .subscribe(this.game);
+      .subscribe(response => this.game.next(response));
   }
 
-  perform(action: Action) {
+  perform(action: Action): void {
     this.httpClient.post<Game>('/api/games/a/perform', action)
+      .subscribe(response => this.game.next(response));
+  }
+
+  endTurn(): void {
+    this.httpClient.post<Game>('/api/games/a/end-turn', null)
       .subscribe(response => this.game.next(response));
   }
 }

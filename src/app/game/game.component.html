@@ -1,7 +1,19 @@
-<p *ngIf="game">Actions: {{game.actions}}</p>
+<div *ngIf="game">
+  <div>
+    Actions:
+    <button *ngFor="let actionType of game.actions">
+      {{actionType}}
+    </button>
+    <button (click)="endTurn.emit()">End Turn</button>
+  </div>
 
-<app-trail *ngIf="game"
-           [trail]="game.trail"
-           [actions]="game.actions"
-           (action)="action.emit($event)"
-></app-trail>
+  <app-player-board [playerState]="game.player"
+                    [actions]="game.actions"
+                    (action)="action.emit($event)">
+  </app-player-board>
+
+  <app-trail [trail]="game.trail"
+             [actions]="game.actions"
+             (action)="action.emit($event)">
+  </app-trail>
+</div>

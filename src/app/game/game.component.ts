@@ -12,6 +12,7 @@ export class GameComponent implements OnInit {
   game: Game;
 
   @Output() action = new EventEmitter<Action>();
+  @Output() endTurn = new EventEmitter<Action>();
 
   constructor() { }
 

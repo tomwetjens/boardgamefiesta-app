@@ -13,7 +13,6 @@ export class TrailComponent implements OnInit, AfterViewInit {
 
   @Output() action = new EventEmitter<Action>();
 
-
   @ViewChild('locations')
   private locationsElement !: ElementRef<Element>;
 
