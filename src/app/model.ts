@@ -173,7 +173,7 @@ export interface Trail {
   readonly teepeeLocations: LocationName[];
 }
 
-export interface Game {
+export interface State {
   readonly player: PlayerState;
   readonly currentPlayer: Player;
   readonly actions: ActionType[];
@@ -184,6 +184,11 @@ export interface Game {
   readonly otherPlayers: { [player in Player]: PlayerState };
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
+}
+
+export interface Game {
+  id: string;
+  status: 'NEW' | 'STARTED' | 'ENDED';
 }
 
 export interface Action {

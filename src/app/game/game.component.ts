@@ -1,5 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Action, Game} from '../model';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable, ReplaySubject} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
+import {Game, State} from '../model';
 
 @Component({
   selector: 'app-game',
@@ -8,15 +12,20 @@ import {Action, Game} from '../model';
 })
 export class GameComponent implements OnInit {
 
-  @Input()
-  game: Game;
+  game: Observable<Game>;
+  state = new ReplaySubject<State>(1);
 
-  @Output() action = new EventEmitter<Action>();
-  @Output() endTurn = new EventEmitter<Action>();
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
+    this.game = this.route.params
+      .pipe(flatMap(params => this.httpClient.get<Game>('/api/games/' + params.id)));
 
-  constructor() { }
+    this.game
+      .pipe(flatMap(game => this.httpClient.get<State>('/api/games/' + game.id + '/state')))
+      .subscribe(state => this.state.next(state));
+  }
 
   ngOnInit(): void {
+
   }
 
 }

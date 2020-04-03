@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {Component} from '@angular/core';
+import {OAuthService} from 'angular-oauth2-oidc';
+import {ReplaySubject} from 'rxjs';
+import {environment} from '../environments/environment';
 import {Action, Game} from './model';
 
 @Component({
@@ -13,9 +15,17 @@ export class AppComponent {
 
   game = new ReplaySubject<Game>(1);
 
-  constructor(private httpClient: HttpClient) {
-    this.httpClient.get<Game>('/api/games/a')
-      .subscribe(response => this.game.next(response));
+  constructor(private httpClient: HttpClient, private oauthService: OAuthService) {
+    this.oauthService.configure(environment.auth);
+    console.log('AppComponent: tryLogin');
+    this.oauthService.tryLogin();
+
+    // this.httpClient.get<Game>('/api/games/a')
+    //   .subscribe(response => this.game.next(response));
+  }
+
+  initLogin() {
+    this.oauthService.initLoginFlow();
   }
 
   perform(action: Action): void {
@@ -26,5 +36,9 @@ export class AppComponent {
   endTurn(): void {
     this.httpClient.post<Game>('/api/games/a/end-turn', null)
       .subscribe(response => this.game.next(response));
+  }
+
+  logout() {
+    this.oauthService.logOut();
   }
 }

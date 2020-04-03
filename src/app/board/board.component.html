@@ -1,0 +1,19 @@
+<div *ngIf="state">
+  <div>
+    Actions:
+    <button *ngFor="let actionType of state.actions">
+      {{actionType}}
+    </button>
+    <button (click)="endTurn.emit()">End Turn</button>
+  </div>
+
+  <app-player-board [playerState]="state.player"
+                    [actions]="state.actions"
+                    (action)="action.emit($event)">
+  </app-player-board>
+
+  <app-trail [trail]="state.trail"
+             [actions]="state.actions"
+             (action)="action.emit($event)">
+  </app-trail>
+</div>
