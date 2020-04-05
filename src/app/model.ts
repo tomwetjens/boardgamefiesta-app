@@ -110,7 +110,7 @@ export interface ObjectiveCard {
 
 type Card = ObjectiveCard | CattleCard;
 
-export type Player = 'YELLOW' | 'RED' | 'BLUE' | 'WHITE';
+export type PlayerColor = 'YELLOW' | 'RED' | 'BLUE' | 'WHITE';
 
 export type Unlockable = 'CERT_LIMIT_6'
   | 'CERT_LIMIT_4'
@@ -123,7 +123,13 @@ export type Unlockable = 'CERT_LIMIT_6'
   | 'AUX_PAY_TO_MOVE_ENGINE_FORWARD'
   | 'AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD';
 
+export interface Player {
+  readonly name: string;
+  readonly color: PlayerColor;
+}
+
 export interface PlayerState {
+  readonly player: Player;
   readonly balance: Dollars;
   readonly cowboys: number;
   readonly craftsmen: number;
@@ -146,42 +152,41 @@ export type StationMaster = 'PERM_CERT_POINTS_FOR_EACH_2_CERTS'
   | 'GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER';
 
 export interface Station {
-  readonly players: Player[];
+  readonly players: string[];
   readonly stationMaster?: StationMaster;
   readonly worker?: Worker;
 }
 
 export interface RailroadTrack {
-  readonly players: { [player in Player]: Space };
+  readonly players: { [playerName: string]: Space };
   readonly stations: Station[];
 }
 
 export type LocationType = 'START' | 'BUILDING' | 'HAZARD' | 'TEEPEE' | 'KANSAS_CITY';
 
-export type LocationName = string;
-
 export interface Location {
-  readonly name: LocationName;
+  readonly name: string;
   readonly type: LocationType;
-  readonly next: LocationName[];
+  readonly next: string[];
 }
 
 export interface Trail {
   readonly kansasCity: Location;
   readonly start: Location;
-  readonly locations: Location[];
-  readonly teepeeLocations: LocationName[];
+  readonly locations: { [playerName: string]: Location };
+  readonly teepeeLocations: Location[];
+  readonly playerLocations: { [playerName: string]: string };
 }
 
 export interface State {
   readonly player: PlayerState;
-  readonly currentPlayer: Player;
+  readonly currentPlayer: string;
   readonly actions: ActionType[];
   readonly cattleMarket: CattleMarket;
   readonly foresights: Foresights;
   readonly jobMarket: JobMarket;
   readonly objectiveCards: ObjectiveCard[];
-  readonly otherPlayers: { [player in Player]: PlayerState };
+  readonly otherPlayers: { [playerName: string]: PlayerState };
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
 }

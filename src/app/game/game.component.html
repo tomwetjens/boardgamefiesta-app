@@ -1,1 +1,4 @@
-<app-board [state]="state | async"></app-board>
+<app-board [state]="state | async"
+(action)="perform($event)"
+(endTurn)="endTurn()">
+</app-board>

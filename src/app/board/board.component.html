@@ -1,19 +1,30 @@
-<div *ngIf="state">
-  <div>
-    Actions:
-    <button *ngFor="let actionType of state.actions">
-      {{actionType}}
-    </button>
-    <button (click)="endTurn.emit()">End Turn</button>
+<div *ngIf="state" class="container-fluid">
+  <div class="row">
+    <div *ngIf="turn">
+      Actions:
+      <button *ngFor="let actionType of state.actions" (click)="action.emit({type: actionType})">
+        {{actionType}}
+      </button>
+      <button (click)="endTurn.emit()">End Turn</button>
+    </div>
+
+    <app-player-board [playerState]="state.player"
+                      [actions]="state.actions"
+                      (action)="action.emit($event)">
+    </app-player-board>
   </div>
 
-  <app-player-board [playerState]="state.player"
-                    [actions]="state.actions"
-                    (action)="action.emit($event)">
-  </app-player-board>
-
-  <app-trail [trail]="state.trail"
-             [actions]="state.actions"
-             (action)="action.emit($event)">
-  </app-trail>
+  <div class="row">
+    <div class="col-sm">
+      <app-trail [trail]="state.trail"
+                 [actions]="state.actions"
+                 (action)="action.emit($event)">
+      </app-trail>
+    </div>
+    <div class="col-sm">
+      <div *ngFor="let player of state.otherPlayers | keyvalue">
+        <app-other-player [playerState]="player.value"></app-other-player>
+      </div>
+    </div>
+  </div>
 </div>

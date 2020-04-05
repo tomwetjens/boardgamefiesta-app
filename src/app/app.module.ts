@@ -11,6 +11,8 @@ import {TrailComponent} from './trail/trail.component';
 import { PlayerBoardComponent } from './player-board/player-board.component';
 import { HomeComponent } from './home/home.component';
 import { BoardComponent } from './board/board.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { OtherPlayerComponent } from './other-player/other-player.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,20 @@ import { BoardComponent } from './board/board.component';
     TrailComponent,
     PlayerBoardComponent,
     HomeComponent,
-    BoardComponent
+    BoardComponent,
+    OtherPlayerComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    OAuthModule.forRoot(),
-    AppRoutingModule
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['/api'],
+        sendAccessToken: true
+      }
+    }),
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
