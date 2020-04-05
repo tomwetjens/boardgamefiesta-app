@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div *ngFor="let game of games | async">
+  <a [routerLink]="['/games/', game.id]">{{game.id}}</a>
+  <span *ngIf="!game.accepted">
+    <button (click)="accept(game)">Accept</button>
+        <button (click)="reject(game)">Reject</button>
+  </span>
+</div>
+
+<button *ngIf="loggedIn" (click)="create()">Create Game</button>

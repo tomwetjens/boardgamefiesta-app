@@ -11,31 +11,18 @@ import {Action, Game} from './model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'gwt-app';
-
-  game = new ReplaySubject<Game>(1);
 
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {
     this.oauthService.configure(environment.auth);
-    console.log('AppComponent: tryLogin');
     this.oauthService.tryLogin();
-
-    // this.httpClient.get<Game>('/api/games/a')
-    //   .subscribe(response => this.game.next(response));
   }
 
-  initLogin() {
+  get loggedIn(): boolean {
+    return this.oauthService.hasValidAccessToken();
+  }
+
+  login() {
     this.oauthService.initLoginFlow();
-  }
-
-  perform(action: Action): void {
-    this.httpClient.post<Game>('/api/games/a/perform', action)
-      .subscribe(response => this.game.next(response));
-  }
-
-  endTurn(): void {
-    this.httpClient.post<Game>('/api/games/a/end-turn', null)
-      .subscribe(response => this.game.next(response));
   }
 
   logout() {

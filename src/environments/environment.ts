@@ -12,7 +12,7 @@ export const environment: Environment = {
     tokenEndpoint: 'https://gwt-test.auth.eu-west-1.amazoncognito.com/oauth2/token',
     clientId: '376e8rt8oopbqs5k5h2mnvl0nl',
     responseType: 'code',
-    scope: 'openid',
+    scope: 'openid profile',
     oidc: true,
     redirectUri: window.location.origin,
 

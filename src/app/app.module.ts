@@ -5,14 +5,15 @@ import {environment} from '../environments/environment';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {GameComponent} from './game/game.component';
 import {TrailComponent} from './trail/trail.component';
-import { PlayerBoardComponent } from './player-board/player-board.component';
-import { HomeComponent } from './home/home.component';
-import { BoardComponent } from './board/board.component';
+import {PlayerBoardComponent} from './player-board/player-board.component';
+import {HomeComponent} from './home/home.component';
+import {BoardComponent} from './board/board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { OtherPlayerComponent } from './other-player/other-player.component';
+import {OtherPlayerComponent} from './other-player/other-player.component';
+import {AuthHttpInterceptor} from './auth-http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -27,16 +28,15 @@ import { OtherPlayerComponent } from './other-player/other-player.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: ['/api'],
-        sendAccessToken: true
-      }
-    }),
+    OAuthModule.forRoot(),
     AppRoutingModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, multi: true, useClass: AuthHttpInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

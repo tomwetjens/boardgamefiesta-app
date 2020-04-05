@@ -192,8 +192,9 @@ export interface State {
 }
 
 export interface Game {
-  id: string;
-  status: 'NEW' | 'STARTED' | 'ENDED';
+  readonly id: string;
+  readonly status: 'NEW' | 'STARTED' | 'ENDED';
+  readonly accepted: boolean;
 }
 
 export interface Action {

@@ -1,2 +1,3 @@
-<button (click)="logout()">logout</button>
+<button *ngIf="!loggedIn" (click)="login()">login</button>
+<button *ngIf="loggedIn" (click)="logout()">logout</button>
 <router-outlet></router-outlet>

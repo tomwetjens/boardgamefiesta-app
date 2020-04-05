@@ -40,4 +40,10 @@ export class GameComponent implements OnInit {
       .pipe(take(1), flatMap(game => this.httpClient.post<State>('/api/games/' + game.id + '/end-turn', null)))
       .subscribe(state => this.state.next(state));
   }
+
+  start() {
+    this.game
+      .pipe(take(1), flatMap(game => this.httpClient.post<Game>('/api/games/' + game.id + '/start', null)))
+      .subscribe(game => this.game.next(game));
+  }
 }
