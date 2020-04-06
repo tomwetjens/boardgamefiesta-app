@@ -191,10 +191,21 @@ export interface State {
   readonly trail: Trail;
 }
 
+export interface User {
+  readonly id: string;
+  readonly username: string;
+}
+
+export interface GamePlayer {
+  readonly user: User;
+  readonly status: 'INVITED' | 'ACCEPTED' | 'REJECTED';
+}
+
 export interface Game {
   readonly id: string;
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
+  readonly players: GamePlayer[];
 }
 
 export interface Action {
