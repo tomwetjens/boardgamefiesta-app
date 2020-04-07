@@ -1,8 +1,13 @@
-<div *ngIf="game | async as game">
-<button *ngIf="game.status === 'NEW'" (click)="start()">Start</button>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item"><a class="btn btn-secondary" [routerLink]="['/']">Back</a></li>
+    <li class="nav-item">
+      <button *ngIf="turn | async" class="btn btn-secondary" (click)="endTurn()">End Turn</button>
+    </li>
+  </ul>
+</nav>
 
-<app-board [state]="state | async"
-(action)="perform($event)"
-(endTurn)="endTurn()">
+<app-messages></app-messages>
+
+<app-board [state]="state | async" (action)="perform($event)">
 </app-board>

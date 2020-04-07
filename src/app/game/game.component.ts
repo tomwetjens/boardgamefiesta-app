@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ReplaySubject} from 'rxjs';
-import {flatMap, take} from 'rxjs/operators';
+import {flatMap, map, take} from 'rxjs/operators';
 import {Action, Game, State} from '../model';
 import {environment} from '../../environments/environment';
 
@@ -15,6 +15,8 @@ export class GameComponent implements OnInit {
 
   game = new ReplaySubject<Game>(1);
   state = new ReplaySubject<State>(1);
+
+  turn = this.state.pipe(map(state => state.currentPlayer === state.player.player.name));
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
     this.route.params
@@ -42,9 +44,4 @@ export class GameComponent implements OnInit {
       .subscribe(state => this.state.next(state));
   }
 
-  start() {
-    this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<Game>(environment.apiBaseUrl + '/games/' + game.id + '/start', null)))
-      .subscribe(game => this.game.next(game));
-  }
 }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  apiBaseUrl: '/api',
+  apiBaseUrl: 'http://localhost:8080',
 
   auth: {
     issuer: 'https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_s6Ypfd935',

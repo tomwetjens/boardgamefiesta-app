@@ -5,7 +5,6 @@
       <button *ngFor="let actionType of state.actions" (click)="action.emit({type: actionType})">
         {{actionType}}
       </button>
-      <button (click)="endTurn.emit()">End Turn</button>
     </div>
 
     <app-player-board [playerState]="state.player"

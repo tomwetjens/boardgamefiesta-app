@@ -206,6 +206,10 @@ export interface Game {
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
   readonly players: GamePlayer[];
+  readonly created: string;
+  readonly started: string;
+  readonly ended: string;
+  readonly expires: string;
 }
 
 export interface Action {

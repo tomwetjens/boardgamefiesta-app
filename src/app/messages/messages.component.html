@@ -1,0 +1,8 @@
+<ngb-toast *ngFor="let toastMessage of toastMessages"
+           [header]="'Error'"
+           [className]="toastMessage.message.type"
+           [autohide]="toastMessage.autohide"
+           [delay]="toastMessage.delay"
+           (hide)="hide(toastMessage)">
+  <span i18n>{{toastMessage.message.text}}</span>
+</ngb-toast>

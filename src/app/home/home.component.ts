@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, ReplaySubject} from 'rxjs';
 import {Game} from '../model';
 import {HttpClient} from '@angular/common/http';
-import {OAuthService} from 'angular-oauth2-oidc';
 import {environment} from '../../environments/environment';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {UserService} from '../user.service';
+
+export interface GameItem {
+  game: Game;
+  players: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -12,29 +18,33 @@ import {environment} from '../../environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  games = new ReplaySubject<Game[]>(1);
+  loggedIn: Observable<boolean>;
+  currentUser: Observable<object>;
 
-  constructor(private httpClient: HttpClient, private oauthService: OAuthService) { }
+  games = new ReplaySubject<GameItem[]>(1);
 
-  ngOnInit(): void {
-    if (this.loggedIn) {
-      this.refresh();
-    }
+  constructor(private httpClient: HttpClient, private userService: UserService) {
+    this.loggedIn = this.userService.loggedIn;
+    this.currentUser = userService.currentUser;
   }
 
-  create() {
-    this.httpClient.post<Game>(environment.apiBaseUrl + '/games/create', {
-      inviteUserIds: ['34efb2e1-8ef6-47e3-a1d1-3f986d2d7c1d'] // sharon
-    })
+  ngOnInit(): void {
+    this.userService.loggedIn
+      .pipe(distinctUntilChanged(), filter(loggedIn => loggedIn))
       .subscribe(() => this.refresh());
   }
 
-  get loggedIn(): boolean {
-    return this.oauthService.hasValidAccessToken();
+  login() {
+    this.userService.login();
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
   private refresh() {
     this.httpClient.get<Game[]>(environment.apiBaseUrl + '/games')
+      .pipe(map(games => games.map(game => ({game, players: game.players.map(player => player.user.username).join(', ')}))))
       .subscribe(games => this.games.next(games));
   }
 

@@ -11,7 +11,6 @@ export class BoardComponent implements OnInit {
   @Input() state: State;
 
   @Output() action = new EventEmitter<Action>();
-  @Output() endTurn = new EventEmitter();
 
   constructor() {
   }

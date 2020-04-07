@@ -1,0 +1,13 @@
+<form>
+  <div class="form-group">
+    <label for="text">Username or e-mail</label>
+    <input type="text" class="form-control" id="text" required [(ngModel)]="text" name="text">
+  </div>
+  <button type="submit" class="btn btn-success" (click)="search()">Search</button>
+</form>
+
+<ul>
+  <li *ngFor="let user of users | async">
+    {{user.username}} <button (click)="select.emit(user)">Select</button>
+  </li>
+</ul>

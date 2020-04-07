@@ -1,0 +1,31 @@
+<h2>Create Game</h2>
+
+<div *ngIf="inviting">
+  <button (click)="this.inviting = false">Back</button>
+  <app-select-user (select)="addUser($event)"></app-select-user>
+</div>
+
+<div *ngIf="!inviting">
+  <form>
+    <div>
+      <button (click)="this.inviting = true">Invite</button>
+
+      <ul>
+        <li *ngFor="let user of invitedUsers">
+          {{user.username}}
+          <button (click)="uninvite(user)">Uninvite</button>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      Neutral buildings:
+      <input type="radio" [(ngModel)]="beginner" [value]="true" id="beginner" name="beginner">Beginner
+      <input type="radio" [(ngModel)]="beginner" [value]="false" id="notBeginner" name="beginner">Randomize
+    </div>
+
+    <div>
+      <button (click)="create()" [disabled]="!valid">Create</button>
+    </div>
+  </form>
+</div>

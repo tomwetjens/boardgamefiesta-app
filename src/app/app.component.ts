@@ -15,17 +15,7 @@ export class AppComponent {
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {
     this.oauthService.configure(environment.auth);
     this.oauthService.tryLogin();
+    this.oauthService.setupAutomaticSilentRefresh();
   }
 
-  get loggedIn(): boolean {
-    return this.oauthService.hasValidAccessToken();
-  }
-
-  login() {
-    this.oauthService.initLoginFlow();
-  }
-
-  logout() {
-    this.oauthService.logOut();
-  }
 }
