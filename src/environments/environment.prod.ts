@@ -1,6 +1,4 @@
-import {Environment} from './environment';
-
-export const environment: Environment = {
+export const environment = {
   production: true,
   apiBaseUrl: 'https://gwt-api.wetjens.com',
   auth: {
