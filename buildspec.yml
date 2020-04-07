@@ -12,8 +12,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - cd dist/gwt-app && zip -r ../../dist.zip .
 artifacts:
   files:
-    - 'dist.zip'
-  name: dist
+    - '**/*'
+  base-directory: dist/gwt-app
