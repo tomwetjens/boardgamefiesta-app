@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ReplaySubject} from 'rxjs';
 import {flatMap, take} from 'rxjs/operators';
 import {Action, Game, State} from '../model';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-game',
@@ -17,11 +18,11 @@ export class GameComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
     this.route.params
-      .pipe(flatMap(params => this.httpClient.get<Game>('/api/games/' + params.id)))
+      .pipe(flatMap(params => this.httpClient.get<Game>(environment.apiBaseUrl + '/games/' + params.id)))
       .subscribe(game => this.game.next(game));
 
     this.game
-      .pipe(flatMap(game => this.httpClient.get<State>('/api/games/' + game.id + '/state')))
+      .pipe(flatMap(game => this.httpClient.get<State>(environment.apiBaseUrl + '/games/' + game.id + '/state')))
       .subscribe(state => this.state.next(state));
   }
 
@@ -31,19 +32,19 @@ export class GameComponent implements OnInit {
 
   perform(action: Action) {
     this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<State>('/api/games/' + game.id + '/perform', action)))
+      .pipe(take(1), flatMap(game => this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + game.id + '/perform', action)))
       .subscribe(state => this.state.next(state));
   }
 
   endTurn() {
     this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<State>('/api/games/' + game.id + '/end-turn', null)))
+      .pipe(take(1), flatMap(game => this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + game.id + '/end-turn', null)))
       .subscribe(state => this.state.next(state));
   }
 
   start() {
     this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<Game>('/api/games/' + game.id + '/start', null)))
+      .pipe(take(1), flatMap(game => this.httpClient.post<Game>(environment.apiBaseUrl + '/games/' + game.id + '/start', null)))
       .subscribe(game => this.game.next(game));
   }
 }

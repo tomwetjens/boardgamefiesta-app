@@ -2,6 +2,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable} from 'rxjs';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {Injectable} from '@angular/core';
+import {environment} from '../environments/environment';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
@@ -10,7 +11,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.startsWith('/api') && this.oAuthService.hasValidIdToken()) {
+    if (req.url.startsWith(environment.apiBaseUrl) && this.oAuthService.hasValidIdToken()) {
       const token = this.oAuthService.getIdToken();
       const header = 'Bearer ' + token;
 

@@ -6,6 +6,9 @@ import {AuthConfig} from 'angular-oauth2-oidc';
 
 export const environment: Environment = {
   production: false,
+
+  apiBaseUrl: '/api',
+
   auth: {
     issuer: 'https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_s6Ypfd935',
     loginUrl: 'https://gwt-test.auth.eu-west-1.amazoncognito.com/oauth2/authorize',
@@ -22,6 +25,7 @@ export const environment: Environment = {
 
 export interface Environment {
   production: boolean;
+  apiBaseUrl: string;
   auth: AuthConfig;
 }
 
