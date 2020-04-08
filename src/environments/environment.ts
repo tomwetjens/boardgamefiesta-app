@@ -6,6 +6,7 @@ export const environment = {
   production: false,
 
   apiBaseUrl: 'http://localhost:8080',
+  wsBaseUrl: 'ws://localhost:8080',
 
   auth: {
     issuer: 'https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_s6Ypfd935',
@@ -15,9 +16,7 @@ export const environment = {
     responseType: 'code',
     scope: 'openid profile',
     oidc: true,
-    redirectUri: window.location.origin,
-
-    showDebugInformation: true
+    redirectUri: window.location.origin
   }
 };
 
