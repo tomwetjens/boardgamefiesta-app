@@ -35,3 +35,10 @@
 .aux-action {
   cursor: pointer;
 }
+
+.hand {
+  & > app-card {
+    display: inline-block;
+    margin: 4px;
+  }
+}

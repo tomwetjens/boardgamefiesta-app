@@ -5,10 +5,11 @@ import {distinctUntilChanged, filter, flatMap, map, takeUntil} from 'rxjs/operat
 import {UserService} from '../user.service';
 import {GameService} from '../game.service';
 import {EventService} from '../event.service';
+import {Router} from '@angular/router';
 
 export interface GameItem {
   game: Game;
-  players: string;
+  otherPlayers: string;
 }
 
 @Component({
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private gameService: GameService,
               private userService: UserService,
-              private eventService: EventService) {
+              private eventService: EventService,
+              private router: Router) {
     this.loggedIn = this.userService.loggedIn;
     this.currentUser = userService.currentUser;
   }
@@ -59,7 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private refresh() {
     this.gameService.find()
-      .pipe(map(games => games.map(game => ({game, players: game.players.map(player => player.user.username).join(', ')}))))
+      .pipe(map(games => games.map(game => ({game, otherPlayers: game.otherPlayers.map(player => player.user.username).join(', ')}))))
       .subscribe(games => this.games.next(games));
   }
 
@@ -75,5 +77,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed.next(true);
+  }
+
+  openGame(game: Game) {
+    if (game.status === 'STARTED') {
+      this.router.navigate(['/games/', game.id]);
+    } else {
+      this.router.navigate(['/lobby/', game.id]);
+    }
   }
 }

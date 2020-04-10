@@ -1,11 +1,10 @@
-import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ReplaySubject} from 'rxjs';
-import {flatMap, map, switchMap, take} from 'rxjs/operators';
-import {Action, Game, State} from '../model';
-import {environment} from '../../environments/environment';
+import {combineLatest, Observable, ReplaySubject} from 'rxjs';
+import {filter, flatMap, map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {Action, Game, PossibleMove, State} from '../model';
 import {EventService} from '../event.service';
+import {GameService} from '../game.service';
 
 @Component({
   selector: 'app-game',
@@ -17,11 +16,15 @@ export class GameComponent implements OnInit {
   game = new ReplaySubject<Game>(1);
   state = new ReplaySubject<State>(1);
 
-  turn = this.state.pipe(map(state => state.currentPlayer === state.player.player.name));
+  possibleMoves: Observable<PossibleMove[]>;
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private eventService: EventService) {
+  constructor(private route: ActivatedRoute, private gameService: GameService, private eventService: EventService) {
+
+  }
+
+  ngOnInit(): void {
     this.route.params
-      .pipe(flatMap(params => this.httpClient.get<Game>(environment.apiBaseUrl + '/games/' + params.id)))
+      .pipe(flatMap(params => this.gameService.get(params.id)))
       .subscribe(game => this.game.next(game));
 
     this.game.subscribe(() => this.refreshState());
@@ -36,26 +39,23 @@ export class GameComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-
-  }
-
   perform(action: Action) {
     this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + game.id + '/perform', action)))
+      .pipe(take(1), flatMap(game => this.gameService.perform(game.id, action)))
       .subscribe(state => this.state.next(state));
   }
 
   endTurn() {
     this.game
-      .pipe(take(1), flatMap(game => this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + game.id + '/end-turn', null)))
+      .pipe(take(1), flatMap(game => this.gameService.endTurn(game.id)))
       .subscribe(state => this.state.next(state));
   }
 
   private refreshState() {
     this.game.pipe(
       take(1),
-      switchMap(game => this.httpClient.get<State>(environment.apiBaseUrl + '/games/' + game.id + '/state')))
+      switchMap(game => this.gameService.getState(game.id)))
       .subscribe(state => this.state.next(state));
   }
+
 }

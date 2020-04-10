@@ -18,6 +18,10 @@ import { SelectUserComponent } from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
 import { LobbyComponent } from './lobby/lobby.component';
 import { MessagesComponent } from './messages/messages.component';
+import { CardComponent } from './card/card.component';
+import { FromNowPipe } from './from-now.pipe';
+import { HandSelectComponent } from './hand-select/hand-select.component';
+import { DeliveryCityComponent } from './delivery-city/delivery-city.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { MessagesComponent } from './messages/messages.component';
     CreateGameComponent,
     SelectUserComponent,
     LobbyComponent,
-    MessagesComponent
+    MessagesComponent,
+    CardComponent,
+    FromNowPipe,
+    HandSelectComponent,
+    DeliveryCityComponent
   ],
   imports: [
     BrowserModule,

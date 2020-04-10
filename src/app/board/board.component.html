@@ -1,22 +1,23 @@
 <div *ngIf="state" class="container-fluid">
-  <div class="row">
-    <div *ngIf="turn">
-      Actions:
-      <button *ngFor="let actionType of state.actions" (click)="action.emit({type: actionType})">
-        {{actionType}}
-      </button>
-    </div>
+  <div class="row" *ngIf="state.turn">
+    <button *ngFor="let actionType of state.actions" (click)="chooseAction(actionType)">
+      {{actionType}}
+    </button>
+  </div>
 
+  <div class="row">
     <app-player-board [playerState]="state.player"
                       [actions]="state.actions"
+                      [selectedAction]="selectedAction"
                       (action)="action.emit($event)">
     </app-player-board>
   </div>
 
   <div class="row">
     <div class="col-sm">
-      <app-trail [trail]="state.trail"
-                 [actions]="state.actions"
+      <app-trail [game]="game"
+                 [state]="state"
+                 [selectedAction]="selectedAction"
                  (action)="action.emit($event)">
       </app-trail>
     </div>
@@ -27,3 +28,5 @@
     </div>
   </div>
 </div>
+
+

@@ -1,13 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <ul class="navbar-nav">
     <li class="nav-item"><a class="btn btn-secondary" [routerLink]="['/']">Back</a></li>
-    <li class="nav-item">
-      <button *ngIf="turn | async" class="btn btn-secondary" (click)="endTurn()">End Turn</button>
-    </li>
   </ul>
+
+  <div *ngIf="state | async as state">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="state.turn">
+        <button class="btn btn-secondary" (click)="endTurn()">End Turn</button>
+      </li>
+      <li class="nav-item" *ngIf="state.turn">
+        Your Turn ({{state.expires | fromNow}} remaining)
+      </li>
+
+      <li class="nav-item" *ngIf="!state.turn">
+        waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow}} remaining)
+      </li>
+    </ul>
+  </div>
 </nav>
 
 <app-messages></app-messages>
 
-<app-board [state]="state | async" (action)="perform($event)">
+<app-board [game]="game | async"
+           [state]="state | async"
+           (action)="perform($event)">
 </app-board>

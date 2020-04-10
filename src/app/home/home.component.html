@@ -36,14 +36,28 @@
 
   <h2>My Games</h2>
 
-  <ul>
-    <li *ngFor="let game of games | async">
-      <a *ngIf="game.game.status !== 'STARTED'" [routerLink]="['/lobby/', game.game.id]">{{game.game.id}}</a>
-      <a *ngIf="game.game.status === 'STARTED'" [routerLink]="['/games/', game.game.id]">{{game.game.id}}</a>
-      {{game.game.status}}
-      {{game.game.expires | date}} {{game.players}}
-      <button *ngIf="!game.game.accepted" (click)="accept(game.game)">Accept</button>
-      <button *ngIf="!game.game.accepted" (click)="reject(game.game)">Reject</button>
-    </li>
-  </ul>
+  <div *ngFor="let game of games | async" class="game" (click)="openGame(game.game)">
+    <div>
+      Great Western Trail
+      <div *ngIf="game.game.status !== 'STARTED'">
+        <div *ngIf="game.game.accepted">
+          with  {{game.otherPlayers}}, not started yet
+        </div>
+        <div *ngIf="!game.game.accepted">
+          invited by  {{game.game.owner.username}}}
+        </div>
+      </div>
+      <div *ngIf="game.game.status === 'STARTED'">
+        with  {{game.otherPlayers}}, started {{game.game.started | date}}
+        <div *ngIf="!game.game.turn">
+          waiting for {{game.game.currentPlayer.username}} ({{game.game.expires | fromNow}} remaining)
+        </div>
+        <div *ngIf="game.game.turn">
+          your turn ({{game.game.expires | fromNow}} remaining)
+        </div>
+      </div>
+    </div>
+    <button *ngIf="!game.game.accepted" (click)="accept(game.game)">Accept</button>
+    <button *ngIf="!game.game.accepted" (click)="reject(game.game)">Reject</button>
+  </div>
 </div>

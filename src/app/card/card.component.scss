@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  width: 40px;
+  height: 60px;
+
+  color: #ffffff;
+
+  &.BLACK_ANGUS { background-color: black; }
+  &.DUTCH_BELT { background-color: green; }
+  &.AYSHIRE { background-color: blue; }
+  &.GUERNSEY { background-color: white; }
+  &.JERSEY { background-color: grey; }
+  &.HOLSTEIN { background-color: red; }
+  &.WEST_HIGHLAND { background-color: brown; }
+  &.TEXAS_LONGHORN { background-color: purple; }
+}

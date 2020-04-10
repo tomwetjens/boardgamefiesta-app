@@ -1,17 +1,94 @@
-.location {
-  stroke-opacity: 1;
-  stroke: #ffffff;
-  stroke-width: 0.82700002;
-  fill: rgb(0, 0, 0, 0.1);
+.locations {
+  .location {
+    stroke-opacity: 1;
+    stroke: #ffffff;
+    stroke-width: 0.6;
+    fill: rgb(0, 0, 0, 0.1);
 
-  cursor: pointer;
+    cursor: pointer;
 
-  &:hover {
-    stroke: red;
+    &:hover {
+      stroke: red;
+    }
+
+    &.start {
+      stroke-width: 0;
+      cursor: default;
+    }
+  }
+
+  &.disabled {
+    .location {
+      stroke-width: 0 !important;
+      cursor: default !important;
+    }
   }
 }
 
-.neutral {
-  fill-opacity: 0.5;
-  fill: #7a6853;
+.buildings {
+  .building {
+    &.neutral {
+      fill: #7a6853;
+      fill-opacity: 1.0;
+    }
+  }
+}
+
+.cities {
+  .city {
+    stroke-opacity: 1;
+    stroke: #ffffff;
+    stroke-width: 0.6;
+    fill: none;
+    fill: rgb(0, 0, 0, 0.01);
+
+    cursor: pointer;
+
+    &:hover {
+      stroke: red;
+    }
+  }
+
+  &.disabled {
+    .city {
+      stroke-width: 0 !important;
+      cursor: default !important;
+    }
+  }
+}
+
+
+.ranchers {
+
+  .red {
+    fill: red;
+  }
+
+  .blue {
+    fill: blue;
+  }
+
+  .yellow {
+    fill: yellow;
+  }
+
+  .white {
+    fill: white;
+  }
+
+}
+
+.foresights {
+  stroke-opacity: 1;
+  stroke: #ffffff;
+  stroke-width: 0.6;
+  fill: rgb(0, 0, 0, 0.1);
+
+
+  &.disabled {
+    * {
+      stroke-width: 0;
+      cursor: default;
+    }
+  }
 }

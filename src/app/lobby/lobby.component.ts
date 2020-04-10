@@ -14,8 +14,6 @@ export class LobbyComponent implements OnInit {
 
   game = new ReplaySubject<Game>(1);
 
-  canStart = this.game.pipe(map(game => game.status === 'NEW'));
-
   constructor(private route: ActivatedRoute, private gameService: GameService) {
   }
 

@@ -108,24 +108,27 @@ export interface ObjectiveCard {
   readonly penalty: Points;
 }
 
-type Card = ObjectiveCard | CattleCard;
+export type Card = ObjectiveCard | CattleCard;
 
 export type PlayerColor = 'YELLOW' | 'RED' | 'BLUE' | 'WHITE';
 
-export type Unlockable = 'CERT_LIMIT_6'
-  | 'CERT_LIMIT_4'
-  | 'EXTRA_STEP_DOLLARS'
-  | 'EXTRA_STEP_POINTS'
-  | 'EXTRA_CARD'
-  | 'AUX_GAIN_DOLLAR'
-  | 'AUX_DRAW_CARD_TO_DISCARD_CARD'
-  | 'AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT'
-  | 'AUX_PAY_TO_MOVE_ENGINE_FORWARD'
-  | 'AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD';
+export enum Unlockable {
+  CERT_LIMIT_6 = 'CERT_LIMIT_6',
+  CERT_LIMIT_4 = 'CERT_LIMIT_6',
+  EXTRA_STEP_DOLLARS = 'EXTRA_STEP_DOLLARS',
+  EXTRA_STEP_POINTS = 'EXTRA_STEP_POINTS',
+  EXTRA_CARD = 'EXTRA_CARD',
+  AUX_GAIN_DOLLAR = 'AUX_GAIN_DOLLAR',
+  AUX_DRAW_CARD_TO_DISCARD_CARD = 'AUX_DRAW_CARD_TO_DISCARD_CARD',
+  AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT = 'AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT',
+  AUX_PAY_TO_MOVE_ENGINE_FORWARD = 'AUX_PAY_TO_MOVE_ENGINE_FORWARD',
+  AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD = 'AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD'
+}
 
 export interface Player {
   readonly name: string;
   readonly color: PlayerColor;
+  readonly user: User;
 }
 
 export interface PlayerState {
@@ -134,6 +137,7 @@ export interface PlayerState {
   readonly cowboys: number;
   readonly craftsmen: number;
   readonly engineers: number;
+  readonly certificates: number;
   readonly hand: Card[];
   // TODO
 
@@ -168,27 +172,34 @@ export interface Location {
   readonly name: string;
   readonly type: LocationType;
   readonly next: string[];
+  readonly building?: string;
+  readonly teepee?: Teepee;
+  readonly reward?: number;
+  readonly hazard?: Hazard;
 }
 
 export interface Trail {
   readonly kansasCity: Location;
   readonly start: Location;
-  readonly locations: { [playerName: string]: Location };
+  readonly locations: { [name: string]: Location };
   readonly teepeeLocations: Location[];
-  readonly playerLocations: { [playerName: string]: string };
+  readonly playerLocations: { [color in PlayerColor]: string };
 }
 
 export interface State {
   readonly player: PlayerState;
-  readonly currentPlayer: string;
+  readonly currentPlayer: Player;
   readonly actions: ActionType[];
   readonly cattleMarket: CattleMarket;
   readonly foresights: Foresights;
   readonly jobMarket: JobMarket;
   readonly objectiveCards: ObjectiveCard[];
   readonly otherPlayers: { [playerName: string]: PlayerState };
+  readonly players: { [playerName: string]: Player };
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
+  readonly expires: string;
+  readonly turn: boolean;
 }
 
 export interface User {
@@ -205,15 +216,29 @@ export interface Game {
   readonly id: string;
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
-  readonly players: GamePlayer[];
+  readonly otherPlayers: GamePlayer[];
   readonly created: string;
   readonly started: string;
   readonly ended: string;
   readonly expires: string;
+  readonly turn: boolean;
+  readonly currentPlayer: User;
+  readonly owner: User;
+  readonly startable: boolean;
 }
 
 export interface Action {
   type: ActionType;
 
   [key: string]: any;
+}
+
+export interface CreateGameRequest {
+  inviteUserIds: string[];
+}
+
+export interface PossibleMove {
+  cost: number;
+  steps: string[];
+  playerFees: { [key: string]: number };
 }

@@ -5,10 +5,11 @@
   {{game.status}}
 
   <!-- TODO Confirm dialog when not all players have accepted -->
-  <button class="btn btn-primary" *ngIf="canStart | async" (click)="start()">Start</button>
+  <button class="btn btn-primary" *ngIf="game.startable" (click)="start()">Start</button>
 
   <ul>
-    <li *ngFor="let player of game.players">
+    <li>{{game.currentPlayer.username}}</li>
+    <li *ngFor="let player of game.otherPlayers">
       {{player.user.username}}
       {{player.status}}
     </li>

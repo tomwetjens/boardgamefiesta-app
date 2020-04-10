@@ -17,13 +17,17 @@ export class UserService {
   currentUser: Observable<User>;
 
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {
-    this.loggedIn.next(this.oauthService.hasValidAccessToken());
-    this.idToken.next(this.oauthService.getIdentityClaims());
-
     this.oauthService.events.subscribe(() => {
       this.loggedIn.next(this.oauthService.hasValidAccessToken());
       this.idToken.next(this.oauthService.getIdentityClaims());
     });
+
+    this.oauthService.configure(environment.auth);
+    this.oauthService.tryLogin();
+    this.oauthService.setupAutomaticSilentRefresh();
+
+    this.loggedIn.next(this.oauthService.hasValidAccessToken());
+    this.idToken.next(this.oauthService.getIdentityClaims());
 
     this.currentUser = this.idToken.pipe(switchMap(idToken => {
       if (!idToken) {
