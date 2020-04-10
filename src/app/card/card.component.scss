@@ -2,17 +2,51 @@
   display: block;
   border: 1px solid #ffffff;
   border-radius: 5px;
-  width: 40px;
-  height: 60px;
+  width: 80px;
+  height: 120px;
 
   color: #ffffff;
 
-  &.BLACK_ANGUS { background-color: black; }
-  &.DUTCH_BELT { background-color: green; }
-  &.AYSHIRE { background-color: blue; }
-  &.GUERNSEY { background-color: white; }
-  &.JERSEY { background-color: grey; }
-  &.HOLSTEIN { background-color: red; }
-  &.WEST_HIGHLAND { background-color: brown; }
-  &.TEXAS_LONGHORN { background-color: purple; }
+  background-size: contain;
+  background-position: center;
+
+  &.BLACK_ANGUS {
+    background-color: black;
+    background-image: url(../../assets/cards/black_angus.jpg);
+  }
+
+  &.DUTCH_BELT {
+    background-color: green;
+    background-image: url(../../assets/cards/dutch_belt.jpg);
+  }
+
+  &.AYSHIRE {
+    background-color: blue;
+    background-image: url(../../assets/cards/ayshire.jpg);
+  }
+
+  &.GUERNSEY {
+    background-color: white;
+    background-image: url(../../assets/cards/guernsey.jpg);
+  }
+
+  &.JERSEY {
+    background-color: grey;
+    background-image: url(../../assets/cards/jersey.jpg);
+  }
+
+  &.HOLSTEIN {
+    background-color: red;
+    background-image: url(../../assets/cards/holstein.jpg);
+  }
+
+  &.WEST_HIGHLAND {
+    background-color: brown;
+    background-image: url(../../assets/cards/west_highland.jpg);
+  }
+
+  &.TEXAS_LONGHORN {
+    background-color: purple;
+    background-image: url(../../assets/cards/texas_longhorn.jpg)
+  }
 }

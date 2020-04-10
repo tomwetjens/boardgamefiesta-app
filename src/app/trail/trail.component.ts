@@ -1,17 +1,5 @@
-import {
-  AfterContentChecked,
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
-import {Action, ActionType, Game, PlayerColor, PossibleMove, State} from '../model';
+import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
+import {Action, ActionType, Game, Hazard, PlayerColor, PossibleMove, State} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
@@ -33,8 +21,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   @Output() action = new EventEmitter<Action>();
 
-  @ViewChild('locations')
-  private locationsElement !: ElementRef<Element>;
+  @ViewChild('locations') private locationsElement !: ElementRef<Element>;
+  @ViewChild('buildingLocations') private buildingLocationElements !: ElementRef<Element>;
+  @ViewChild('hazardLocations') private hazardLocationElements !: ElementRef<Element>;
+  @ViewChild('teepeeLocations') private teepeeLocationElements !: ElementRef<Element>;
 
   @ViewChild('red')
   private redElement !: ElementRef<Element>;
@@ -86,6 +76,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   clickLocation(name: string) {
     this.selected = name;
 
+    console.log('clickLocation: ',{name});
+
     if (this.state.actions.includes('MOVE')) {
       // TODO Determine and send whole path
 
@@ -112,7 +104,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   getLocationElement(name: string): Element | null {
-    return this.locationsElement.nativeElement.children.namedItem(name);
+    return this.locationsElement.nativeElement.children.namedItem(name) ||
+      this.buildingLocationElements.nativeElement.children.namedItem(name) ||
+      this.hazardLocationElements.nativeElement.children.namedItem(name) ||
+      this.teepeeLocationElements.nativeElement.children.namedItem(name);
   }
 
   ngAfterContentChecked(): void {
@@ -124,6 +119,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
     this.showPossibleMoves();
 
+    // TODO Refresh hazards after state changed
     for (const name of Object.keys(this.state.trail.locations)) {
       const location = this.state.trail.locations[name];
 
@@ -153,6 +149,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         this.renderer.appendChild(this.hazardsElement.nativeElement, g);
 
         this.renderer.setProperty(g, 'innerHTML', '<use xlink:href="#' + id + '"/>');
+        this.renderer.listen(g, 'click', () => this.clickHazard(location.hazard));
       } else if (location.teepee) {
         const id = location.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue';
 
@@ -288,6 +285,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return this.state.actions.includes('MOVE');
   }
 
+  get canSelectHazard(): boolean {
+    return ['REMOVE_HAZARD', 'REMOVE_HAZARD_FOR_FREE'].includes(this.selectedAction);
+  }
+
   clickForesight(rowIndex: number, colIndex: number) {
     console.log('clickForesight', {rowIndex, colIndex});
 
@@ -308,6 +309,12 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
       fromPromise(ngbModalRef.result)
         .subscribe(({certificates, unlock}) => this.action.emit({type: 'DELIVER_TO_CITY', city, certificates, unlock}));
+    }
+  }
+
+  clickHazard(hazard: Hazard) {
+    if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
+      this.action.emit({type: this.selectedAction, hazard});
     }
   }
 }

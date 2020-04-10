@@ -32,7 +32,7 @@
     <path
       id="rancher"
       d="m 11.219139,1.8480133 8.619443,0.668173 1.336347,3.207234 3.808592,0.868625 1.00226,1.202713 -1.5368,3.7417747 -4.142677,0.400905 -0.467722,1.870884 c 0,0 6.681737,2.472243 5.946748,5.078122 -0.734991,2.605878 -1.804069,5.278572 -1.804069,5.278572 0,0 -0.868627,0.801809 -2.605879,1.737254 -1.737251,0.935442 -0.334086,0.133633 -0.334086,0.133633 l 1.670433,4.677217 c 0,0 2.939965,1.269532 3.140416,3.741774 -0.133633,-0.267268 0,0 0,0 l -1.135896,3.274052 -6.815372,-0.267271 c 0,0 -1.202712,-0.267269 -1.536798,-1.870885 -0.334087,-1.603618 -0.935445,-2.939965 -0.935445,-2.939965 0,0 -2.405425,-2.739514 -2.873148,0.133633 -0.233858,0.384201 0,0 0,0 l -1.670433,3.407688 c 0,0 -0.400905,1.135896 -1.4699834,1.069078 -1.069078,-0.06682 -6.681737,-0.467722 -6.681737,-0.467722 l 2.739512,-5.479024 1.336346,-0.133636 1.269532,-4.677216 c 0,0 -6.080381,-2.605879 -5.34539,-5.278573 0.734991,-2.672696 5.879928,-4.543583 5.879928,-4.543583 l -1.135893,-5.011304 -4.34313,-0.801807 c 0,0 -0.400905,-1.2695307 0.334086,-2.4722447 0.734992,-1.202711 1.870887,-2.672694 1.870887,-2.672694 l 3.407686,-0.334086 z"
-      transform="scale(0.2,0.2)"/>
+      transform="scale(0.5,0.5)"/>
 
     <clipPath id="tileclip">
       <rect rx="6" ry="6" width="33" height="39"/>
@@ -222,8 +222,35 @@
             (click)="clickCity('SAN_FRANCISCO')"/>
     </g>
 
-    <g #locations transform="translate(130,-133)" class="locations"
-       [ngClass]="{disabled:!canSelectLocation}">
+    <g #neutralBuildings transform="translate(130,-133)" class="buildings">
+      <g #A>
+        <image href="/assets/a.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #B>
+        <image href="/assets/b.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #C>
+        <image href="/assets/c.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #D>
+        <image href="/assets/d.jpg" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #E>
+        <image href="/assets/e.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #F>
+        <image href="/assets/f.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+      <g #G>
+        <image href="/assets/g.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
+      </g>
+    </g>
+
+    <g #playerBuildings transform="translate(130,-133)"></g>
+
+    <g #hazards transform="translate(130,-133)" class="hazards" [ngClass]="{disabled:!canSelectHazard}"></g>
+
+    <g #locations transform="translate(130,-133)" class="locations" [ngClass]="{disabled:!canSelectLocation}">
 
       <rect id="KANSAS_CITY"
             class="location"
@@ -243,106 +270,87 @@
             width="16"
             (click)="clickLocation('START')"/>
 
-      <g class="buildings">
-        <g #A>
-          <image href="/assets/a.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #B>
-          <image href="/assets/b.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #C>
-          <image href="/assets/c.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #D>
-          <image href="/assets/d.jpg" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #E>
-          <image href="/assets/e.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #F>
-          <image href="/assets/f.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-        <g #G>
-          <image href="/assets/g.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"/>
-        </g>
-
-        <g #playerBuildings></g>
-
-        <g #hazards>
-        </g>
-      </g>
       <!-- TODO From here up multiply xy with 2.81 -->
-      <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="clickLocation('FLOOD-RISK-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="clickLocation('FLOOD-RISK-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="clickLocation('A-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="clickLocation('A-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="clickLocation('A-3')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="clickLocation('B-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="clickLocation('B-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="clickLocation('B-3')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="clickLocation('DROUGHT-RISK-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="clickLocation('C-2-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="clickLocation('INDIAN-TRADE-RISK-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="clickLocation('INDIAN-TRADE-RISK-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="clickLocation('C-1-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="clickLocation('C-1-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="clickLocation('E-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="clickLocation('E-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="clickLocation('F-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="clickLocation('ROCKFALL-RISK-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="clickLocation('ROCKFALL-RISK-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="clickLocation('F-1')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="clickLocation('G-2')"/>
-      <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="clickLocation('G-1')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="833.6133355" x="358.7880323" id="FLOOD-4" (click)="clickLocation('FLOOD-4')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="840.0237323" x="408.931151" id="FLOOD-3" (click)="clickLocation('FLOOD-3')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="839.6482039" x="460.3764905" id="FLOOD-2" (click)="clickLocation('FLOOD-2')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="844.154348" x="511.4463578" id="FLOOD-1" (click)="clickLocation('FLOOD-1')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="751.4024862" x="60.07891838" id="DROUGHT-1" (click)="clickLocation('DROUGHT-1')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="693.1979165" x="54.82173996" id="DROUGHT-2" (click)="clickLocation('DROUGHT-2')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="637.2463205" x="63.45855315" id="DROUGHT-3" (click)="clickLocation('DROUGHT-3')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="581.6703091" x="67.58920257" id="DROUGHT-4" (click)="clickLocation('DROUGHT-4')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="417.9463335" x="534.352691" id="ROCKFALL-1" (click)="clickLocation('ROCKFALL-1')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="365.7499091" x="540.3609206" id="ROCKFALL-2" (click)="clickLocation('ROCKFALL-2')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="313.5535409" x="539.2343916" id="ROCKFALL-3" (click)="clickLocation('ROCKFALL-3')"/>
-      <use xlink:href="#hazardLocation" class="location hazard" y="265.94122686" x="505.4014015" id="ROCKFALL-4" (click)="clickLocation('ROCKFALL-4')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="665.6374365" x="235.67607971" id="TEEPEE-1" (click)="clickLocation('TEEPEE-1')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="671.4180561" x="277.50137016" id="TEEPEE-2" (click)="clickLocation('TEEPEE-2')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="680.8059289" x="321.4364901" id="TEEPEE-4" (click)="clickLocation('TEEPEE-4')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="683.7798081" x="364.1911178" id="TEEPEE-6" (click)="clickLocation('TEEPEE-6')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="686.7536873" x="405.4587778" id="TEEPEE-8" (click)="clickLocation('TEEPEE-8')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="683.77978" x="448.2134055" id="TEEPEE-10" (click)="clickLocation('TEEPEE-10')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="621.0992737" x="352.2437003" id="TEEPEE--3" (click)="clickLocation('TEEPEE--3')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="616.953484" x="395.8186232" id="TEEPEE--2" (click)="clickLocation('TEEPEE--2')"/>
-      <use xlink:href="#teepeeLocation" class="location teepee" y="613.9796048" x="438.5730261" id="TEEPEE--1" (click)="clickLocation('TEEPEE--1')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="498.19"
-           y="755.45"
-           id="A" (click)="clickLocation('A')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="96.13"
-           y="808.49"
-           id="B" (click)="clickLocation('B')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="224.84"
-           y="467.64"
-           id="C" (click)="clickLocation('C')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="400.62"
-           y="520.10"
-           id="D" (click)="clickLocation('D')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="496.22"
-           y="474.98"
-           id="E" (click)="clickLocation('E')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="119.69"
-           y="377.80"
-           id="G" (click)="clickLocation('G')"/>
-      <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-           x="242.904"
-           y="296.001"
-           id="F" (click)="clickLocation('F')"/>
+
+      <g class="hazardLocations" #hazardLocations>
+        <use xlink:href="#hazardLocation" class="location hazard" y="833.6133355" x="358.7880323" id="FLOOD-4" (click)="clickLocation('FLOOD-4')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="840.0237323" x="408.931151" id="FLOOD-3" (click)="clickLocation('FLOOD-3')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="839.6482039" x="460.3764905" id="FLOOD-2" (click)="clickLocation('FLOOD-2')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="844.154348" x="511.4463578" id="FLOOD-1" (click)="clickLocation('FLOOD-1')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="751.4024862" x="60.07891838" id="DROUGHT-1" (click)="clickLocation('DROUGHT-1')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="693.1979165" x="54.82173996" id="DROUGHT-2" (click)="clickLocation('DROUGHT-2')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="637.2463205" x="63.45855315" id="DROUGHT-3" (click)="clickLocation('DROUGHT-3')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="581.6703091" x="67.58920257" id="DROUGHT-4" (click)="clickLocation('DROUGHT-4')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="417.9463335" x="534.352691" id="ROCKFALL-1" (click)="clickLocation('ROCKFALL-1')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="365.7499091" x="540.3609206" id="ROCKFALL-2" (click)="clickLocation('ROCKFALL-2')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="313.5535409" x="539.2343916" id="ROCKFALL-3" (click)="clickLocation('ROCKFALL-3')"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="265.94122686" x="505.4014015" id="ROCKFALL-4" (click)="clickLocation('ROCKFALL-4')"/>
+      </g>
+
+      <g class="teepeeLocations" #teepeeLocations>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="665.6374365" x="235.67607971" id="TEEPEE-1" (click)="clickLocation('TEEPEE-1')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="671.4180561" x="277.50137016" id="TEEPEE-2" (click)="clickLocation('TEEPEE-2')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="680.8059289" x="321.4364901" id="TEEPEE-4" (click)="clickLocation('TEEPEE-4')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="683.7798081" x="364.1911178" id="TEEPEE-6" (click)="clickLocation('TEEPEE-6')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="686.7536873" x="405.4587778" id="TEEPEE-8" (click)="clickLocation('TEEPEE-8')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="683.77978" x="448.2134055" id="TEEPEE-10" (click)="clickLocation('TEEPEE-10')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="621.0992737" x="352.2437003" id="TEEPEE--3" (click)="clickLocation('TEEPEE--3')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="616.953484" x="395.8186232" id="TEEPEE--2" (click)="clickLocation('TEEPEE--2')"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="613.9796048" x="438.5730261" id="TEEPEE--1" (click)="clickLocation('TEEPEE--1')"/>
+      </g>
+
+      <g class="buildingLocations" #buildingLocations>
+        <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="clickLocation('FLOOD-RISK-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="clickLocation('FLOOD-RISK-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="clickLocation('A-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="clickLocation('A-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="clickLocation('A-3')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="clickLocation('B-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="clickLocation('B-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="clickLocation('B-3')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="clickLocation('DROUGHT-RISK-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="clickLocation('C-2-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="clickLocation('INDIAN-TRADE-RISK-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="clickLocation('INDIAN-TRADE-RISK-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="clickLocation('C-1-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="clickLocation('C-1-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="clickLocation('E-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="clickLocation('E-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="clickLocation('F-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="clickLocation('ROCKFALL-RISK-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="clickLocation('ROCKFALL-RISK-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="clickLocation('F-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="clickLocation('G-2')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="clickLocation('G-1')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="498.19"
+             y="755.45"
+             id="A" (click)="clickLocation('A')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="96.13"
+             y="808.49"
+             id="B" (click)="clickLocation('B')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="224.84"
+             y="467.64"
+             id="C" (click)="clickLocation('C')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="400.62"
+             y="520.10"
+             id="D" (click)="clickLocation('D')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="496.22"
+             y="474.98"
+             id="E" (click)="clickLocation('E')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="119.69"
+             y="377.80"
+             id="G" (click)="clickLocation('G')"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="242.904"
+             y="296.001"
+             id="F" (click)="clickLocation('F')"/>
+      </g>
 
       <g ref-ranchers="" class="ranchers">
         <use xlink:href="#rancher" ref-red="" class="red"></use>

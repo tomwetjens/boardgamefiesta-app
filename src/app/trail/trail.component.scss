@@ -21,6 +21,7 @@
     .location {
       stroke-width: 0 !important;
       cursor: default !important;
+      fill: none; /* make it possible to select element underneath */
     }
   }
 }
@@ -57,6 +58,25 @@
   }
 }
 
+.hazards {
+  * {
+    stroke-opacity: 1;
+    stroke: #ffffff;
+    stroke-width: 0.6;
+
+    cursor: pointer;
+
+    &:hover {
+      stroke: red;
+    }
+  }
+
+  &.disabled {
+    * {
+      cursor: default;
+    }
+  }
+}
 
 .ranchers {
 
