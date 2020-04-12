@@ -3,8 +3,7 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   version="1.1"
   viewBox="0 0 800 800"
-  height="1600"
-  width="1600">
+  style="width:100%; height:100%">
   <defs>
     <rect id="largeRect"
           ry="3.699049"
@@ -254,23 +253,21 @@
 
       <rect id="KANSAS_CITY"
             class="location"
-            x="-1"
-            y="91"
+            x="00.69"
+            y="260.80"
             rx="2"
             ry="2"
-            height="14"
-            width="18"
+            height="30"
+            width="42"
             (click)="clickLocation('KANSAS_CITY')"/>
 
       <rect id="START"
-            class="location start"
-            x="222"
-            y=310.5
-            height="12"
-            width="16"
+            class="location"
+            x="626"
+            y="875"
+            height="30"
+            width="44"
             (click)="clickLocation('START')"/>
-
-      <!-- TODO From here up multiply xy with 2.81 -->
 
       <g class="hazardLocations" #hazardLocations>
         <use xlink:href="#hazardLocation" class="location hazard" y="833.6133355" x="358.7880323" id="FLOOD-4" (click)="clickLocation('FLOOD-4')"/>
@@ -300,56 +297,56 @@
       </g>
 
       <g class="buildingLocations" #buildingLocations>
-        <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="clickLocation('FLOOD-RISK-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="clickLocation('FLOOD-RISK-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="clickLocation('A-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="clickLocation('A-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="clickLocation('A-3')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="clickLocation('B-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="clickLocation('B-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="clickLocation('B-3')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="clickLocation('DROUGHT-RISK-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="clickLocation('C-2-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="clickLocation('INDIAN-TRADE-RISK-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="clickLocation('INDIAN-TRADE-RISK-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="clickLocation('C-1-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="clickLocation('C-1-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="clickLocation('E-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="clickLocation('E-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="clickLocation('F-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="clickLocation('ROCKFALL-RISK-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="clickLocation('ROCKFALL-RISK-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="clickLocation('F-1')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="clickLocation('G-2')"/>
-        <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="clickLocation('G-1')"/>
+        <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="clickLocation('FLOOD-RISK-2')" [ngClass]="{disabled:!canMoveTo('FLOOR-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="clickLocation('FLOOD-RISK-1')" [ngClass]="{disabled:!canMoveTo('FLOOD-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="clickLocation('A-1')" [ngClass]="{disabled:!canMoveTo('A-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="clickLocation('A-2')" [ngClass]="{disabled:!canMoveTo('A-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="clickLocation('A-3')" [ngClass]="{disabled:!canMoveTo('A-3')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="clickLocation('B-1')" [ngClass]="{disabled:!canMoveTo('B-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="clickLocation('B-2')" [ngClass]="{disabled:!canMoveTo('B-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="clickLocation('B-3')" [ngClass]="{disabled:!canMoveTo('B-3')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="clickLocation('DROUGHT-RISK-1')" [ngClass]="{disabled:!canMoveTo('DROUGHT-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="clickLocation('C-2-1')" [ngClass]="{disabled:!canMoveTo('C-2-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="clickLocation('INDIAN-TRADE-RISK-1')" [ngClass]="{disabled:!canMoveTo('INDIAN-TRADE-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="clickLocation('INDIAN-TRADE-RISK-2')" [ngClass]="{disabled:!canMoveTo('INDIAN-TRADE-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="clickLocation('C-1-1')" [ngClass]="{disabled:!canMoveTo('C-1-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="clickLocation('C-1-2')" [ngClass]="{disabled:!canMoveTo('C-1-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="clickLocation('E-1')" [ngClass]="{disabled:!canMoveTo('E-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="clickLocation('E-2')" [ngClass]="{disabled:!canMoveTo('E-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="clickLocation('F-2')" [ngClass]="{disabled:!canMoveTo('F-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="clickLocation('ROCKFALL-RISK-1')" [ngClass]="{disabled:!canMoveTo('ROCKFALL-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="clickLocation('ROCKFALL-RISK-2')" [ngClass]="{disabled:!canMoveTo('ROCKFALL-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="clickLocation('F-1')" [ngClass]="{disabled:!canMoveTo('F-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="clickLocation('G-2')" [ngClass]="{disabled:!canMoveTo('G-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="clickLocation('G-1')" [ngClass]="{disabled:!canMoveTo('G-1')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="498.19"
              y="755.45"
-             id="A" (click)="clickLocation('A')"/>
+             id="A" (click)="clickLocation('A')" [ngClass]="{disabled:!canMoveTo('A')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="96.13"
              y="808.49"
-             id="B" (click)="clickLocation('B')"/>
+             id="B" (click)="clickLocation('B')" [ngClass]="{disabled:!canMoveTo('B')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="224.84"
              y="467.64"
-             id="C" (click)="clickLocation('C')"/>
+             id="C" (click)="clickLocation('C')" [ngClass]="{disabled:!canMoveTo('C')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="400.62"
              y="520.10"
-             id="D" (click)="clickLocation('D')"/>
+             id="D" (click)="clickLocation('D')" [ngClass]="{disabled:!canMoveTo( 'D')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="496.22"
              y="474.98"
-             id="E" (click)="clickLocation('E')"/>
-        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
-             x="119.69"
-             y="377.80"
-             id="G" (click)="clickLocation('G')"/>
+             id="E" (click)="clickLocation('E')" [ngClass]="{disabled:!canMoveTo('E')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="242.904"
              y="296.001"
-             id="F" (click)="clickLocation('F')"/>
+             id="F" (click)="clickLocation('F')" [ngClass]="{disabled:!canMoveTo('F')}"/>
+        <use xlink:href="#neutralBuildingLocation" class="location building neutral"
+             x="119.69"
+             y="377.80"
+             id="G" (click)="clickLocation('G')" [ngClass]="{disabled:!canMoveTo('G')}"/>
       </g>
 
       <g ref-ranchers="" class="ranchers">

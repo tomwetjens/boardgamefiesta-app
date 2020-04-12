@@ -12,16 +12,19 @@ import {HomeComponent} from './home/home.component';
 import {BoardComponent} from './board/board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {OtherPlayerComponent} from './other-player/other-player.component';
-import {AuthHttpInterceptor} from './auth-http-interceptor.service';
-import { CreateGameComponent } from './create-game/create-game.component';
-import { SelectUserComponent } from './select-user/select-user.component';
+import {CreateGameComponent} from './create-game/create-game.component';
+import {SelectUserComponent} from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
-import { LobbyComponent } from './lobby/lobby.component';
-import { MessagesComponent } from './messages/messages.component';
-import { CardComponent } from './card/card.component';
-import { FromNowPipe } from './from-now.pipe';
-import { HandSelectComponent } from './hand-select/hand-select.component';
-import { DeliveryCityComponent } from './delivery-city/delivery-city.component';
+import {ToastrComponent} from './toastr/toastr.component';
+import {CardComponent} from './card/card.component';
+import {FromNowPipe} from './from-now.pipe';
+import {HandSelectComponent} from './hand-select/hand-select.component';
+import {DeliveryCityComponent} from './delivery-city/delivery-city.component';
+import {HttpInterceptorService} from './http-interceptor.service';
+import {ConnectionStatusComponent} from './connection-status/connection-status.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {GameListComponent} from './game-list/game-list.component';
+import {LayoutComponent} from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +37,15 @@ import { DeliveryCityComponent } from './delivery-city/delivery-city.component';
     OtherPlayerComponent,
     CreateGameComponent,
     SelectUserComponent,
-    LobbyComponent,
-    MessagesComponent,
+    ToastrComponent,
     CardComponent,
     FromNowPipe,
     HandSelectComponent,
-    DeliveryCityComponent
+    DeliveryCityComponent,
+    ConnectionStatusComponent,
+    NavbarComponent,
+    GameListComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,7 @@ import { DeliveryCityComponent } from './delivery-city/delivery-city.component';
     NgbModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, multi: true, useClass: AuthHttpInterceptor},
+    {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
     {provide: OAuthStorage, useFactory: () => localStorage}
   ],
   bootstrap: [AppComponent]

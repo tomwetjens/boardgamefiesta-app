@@ -1,29 +1,32 @@
-<div *ngIf="state" class="container-fluid">
-  <div class="row" *ngIf="state.turn">
-    <button *ngFor="let actionType of state.actions" (click)="chooseAction(actionType)">
-      {{actionType}}
-    </button>
+<div *ngIf="state">
+  <div class="row no-gutters" *ngIf="state.turn">
+    <form>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedAction">
+      <label ngbButtonLabel class="btn-primary" *ngFor="let actionType of state.actions" >
+        <input ngbButton type="radio" [value]="actionType" (click)="chooseAction(actionType)"> {{actionType}}
+      </label>
+    </div>
+    </form>
   </div>
 
-  <div class="row">
-    <app-player-board [playerState]="state.player"
-                      [actions]="state.actions"
-                      [selectedAction]="selectedAction"
-                      (action)="action.emit($event)">
-    </app-player-board>
-  </div>
-
-  <div class="row">
-    <div class="col-sm">
+  <div class="row no-gutters align-items-start">
+    <div class="col-8">
       <app-trail [game]="game"
                  [state]="state"
                  [selectedAction]="selectedAction"
                  (action)="action.emit($event)">
       </app-trail>
     </div>
-    <div class="col-sm">
+    <div class="col-4">
+      <app-player-board [playerState]="state.player"
+                        [actions]="state.actions"
+                        [selectedAction]="selectedAction"
+                        (action)="action.emit($event)">
+      </app-player-board>
+
       <div *ngFor="let player of state.otherPlayers | keyvalue">
-        <app-other-player [playerState]="player.value"></app-other-player>
+        <app-player-board [playerState]="player.value">
+        </app-player-board>
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {webSocket} from 'rxjs/webSocket';
 import {environment} from '../environments/environment';
-import {concat, of, Subject, throwError} from 'rxjs';
-import {catchError, distinctUntilChanged, flatMap, map, tap} from 'rxjs/operators';
+import {BehaviorSubject, concat, of, ReplaySubject, Subject, throwError} from 'rxjs';
+import {catchError, distinctUntilChanged, map, retry, switchMap, tap} from 'rxjs/operators';
 import {OAuthService} from 'angular-oauth2-oidc';
 
 export interface Event {
@@ -16,26 +16,23 @@ export interface Event {
 })
 export class EventService {
 
-  private webSocket: WebSocketSubject<string>;
-
   events = new Subject<Event>();
 
-  constructor(private oauthService: OAuthService) {
-    console.log('EventService constructor');
+  connected = new BehaviorSubject<boolean>(false);
 
-    concat(of(oauthService.getIdToken(), this.oauthService.events)).pipe(
+  constructor(private oauthService: OAuthService) {
+    concat(of({}, this.oauthService.events)).pipe(
       map((() => this.oauthService.getIdToken())),
       distinctUntilChanged(),
-      flatMap(idToken => {
-        console.log('creating websocket');
-        this.webSocket = webSocket({
-          url: environment.wsBaseUrl + '/events?token=' + idToken
-        });
-        return this.webSocket;
-      }),
+      switchMap(idToken => webSocket({
+        url: environment.wsBaseUrl + '/events?token=' + idToken,
+        openObserver: {next: () => this.connected.next(true)},
+        closeObserver: {next: () => this.connected.next(false)}
+      })
+        .pipe(retry())),
       tap(message => console.log('websocket message:', message)),
       catchError(err => {
-        console.error('websocket error', err);
+        this.connected.next(false);
         return throwError(err);
       }))
       .subscribe(message => this.events.next(message as any));

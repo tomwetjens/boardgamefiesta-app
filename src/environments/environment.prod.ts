@@ -10,6 +10,7 @@ export const environment = {
     responseType: 'code',
     scope: 'openid profile',
     oidc: true,
-    redirectUri: window.location.origin
+    redirectUri: window.location.origin,
+    postLogoutRedirectUri: '/'
   }
 };

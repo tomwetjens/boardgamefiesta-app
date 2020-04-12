@@ -1,3 +1,8 @@
+:host {
+  width: 100%;
+  height: 100%;
+}
+
 .locations {
   .location {
     stroke-opacity: 1;
@@ -14,6 +19,12 @@
     &.start {
       stroke-width: 0;
       cursor: default;
+    }
+
+    &.disabled {
+      stroke-width: 0 !important;
+      cursor: default !important;
+      fill: none; /* make it possible to select element underneath */
     }
   }
 

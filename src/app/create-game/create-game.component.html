@@ -1,19 +1,19 @@
 <h2>Create Game</h2>
 
 <div *ngIf="inviting">
-  <button (click)="this.inviting = false">Back</button>
+  <button class="btn btn-secondary" (click)="this.inviting = false">Back</button>
   <app-select-user (select)="addUser($event)"></app-select-user>
 </div>
 
 <div *ngIf="!inviting">
   <form>
     <div>
-      <button (click)="this.inviting = true">Invite</button>
+      <button class="btn btn-primary" (click)="this.inviting = true">Invite</button>
 
       <ul>
         <li *ngFor="let user of invitedUsers">
           {{user.username}}
-          <button (click)="uninvite(user)">Uninvite</button>
+          <button class="btn btn-outline-secondary" (click)="uninvite(user)">Uninvite</button>
         </li>
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {combineLatest, Observable, ReplaySubject} from 'rxjs';
-import {filter, flatMap, map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {Observable, ReplaySubject} from 'rxjs';
+import {flatMap, switchMap, take} from 'rxjs/operators';
 import {Action, Game, PossibleMove, State} from '../model';
 import {EventService} from '../event.service';
 import {GameService} from '../game.service';
@@ -37,6 +37,12 @@ export class GameComponent implements OnInit {
           this.refreshState();
         }
       });
+  }
+
+  start() {
+    this.game
+      .pipe(take(1), flatMap(game => this.gameService.start(game.id)))
+      .subscribe(game => this.game.next(game));
   }
 
   perform(action: Action) {

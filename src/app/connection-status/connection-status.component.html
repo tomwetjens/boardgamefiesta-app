@@ -1,0 +1,7 @@
+<div *ngIf="(eventService.connected | async) as connected; else loading">
+  <span class="text-success">connected</span>
+</div>
+
+<ng-template #loading>
+  <span class="text-danger">connecting...</span>
+</ng-template>

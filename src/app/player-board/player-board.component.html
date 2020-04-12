@@ -1,41 +1,138 @@
-balance: {{playerState.balance}}
-
-Hand:
-<div class="hand">
-  <form>
-    <label *ngFor="let card of playerState.hand">
-      <app-card [card]="card"></app-card>
-      <input type="checkbox" *ngIf="checkboxes"/>
-    </label>
-    <button *ngIf="checkboxes" (click)="confirm()">OK</button>
-  </form>
+<div class="row no-gutters">
+  <div class="col-8">
+    <span [className]="'color '+ playerState.player.color"></span> {{playerState.player.user.username}}
+  </div>
+  <div class="col-4">
+    <span class="balance">$ {{playerState.balance}}</span>
+  </div>
 </div>
+<div class="row no-gutters">
+  <div class="hand" *ngIf="playerState.hand">
+    <form>
+      <label *ngFor="let card of playerState.hand">
+        <app-card [card]="card" (click)="clickCard(card)"></app-card>
+        <input type="checkbox" *ngIf="checkboxes"/>
+      </label>
+      <button *ngIf="checkboxes" (click)="confirm()">OK</button>
+    </form>
+  </div>
 
-<div>
-  AUX_GAIN_DOLLAR
-  <button [disabled]="!canPerform('SINGLE_AUX_ACTION')" (click)="performSingle('AUX_GAIN_DOLLAR')">1x</button>
-  <button [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_GAIN_DOLLAR', 2)"
-          (click)="performDouble('AUX_GAIN_DOLLAR')">2x
-  </button>
-</div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 800 448"
+    style="width:100%; height:100%">
+    <image [attr.href]="'/assets/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'" x="0" y="0" height="446" width="800"></image>
 
-<div>
-  AUX_DRAW_CARD_TO_DISCARD_CARD
-  <button [disabled]="!canPerform('SINGLE_AUX_ACTION') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD')"
-          (click)="performSingle('AUX_DRAW_CARD_TO_DISCARD_CARD')">1x
-  </button>
-  <button [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)"
-          (click)="performDouble('AUX_DRAW_CARD_TO_DISCARD_CARD')">2x
-  </button>
-</div>
 
-<div>
-  AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT
-  <button [disabled]="!canPerform('SINGLE_AUX_ACTION') || !hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')"
-          (click)="performSingle('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')">1x
-  </button>
-  <button
-    [disabled]="!canPerform('SINGLE_OR_DOUBLE_AUX_ACTION') || !hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT', 2)"
-    (click)="performDouble('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')">2x
-  </button>
+    <rect id="aux-dollar"
+          class="action"
+          x="13"
+          y="41"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('GAIN_1_DOLLAR')}"
+          (click)="clickAuxiliaryAction('GAIN_1_DOLLAR')"/>
+
+    <rect id="aux-dollar-2"
+          class="action"
+          x="111"
+          y="41"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('GAIN_2_DOLLARS')}"
+          (click)="clickAuxiliaryAction('GAIN_2_DOLLARS')"/>
+
+    <rect id="aux-draw"
+          class="action"
+          x="13"
+          y="120"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')}"
+          (click)="clickAuxiliaryAction('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')"/>
+
+    <rect id="aux-draw-2"
+          class="action"
+          x="112"
+          y="120"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')}"
+          (click)="clickAuxiliaryAction('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')"/>
+
+    <rect id="aux-move-engine-backwards"
+          class="action"
+          x="13"
+          y="204"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERT')}"
+          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERT')"/>
+
+    <rect id="aux-move-engine-backwards-2"
+          class="action"
+          x="114"
+          y="204"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTS')}"
+          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTS')"/>
+
+    <rect id="aux-move-engine-forward"
+          class="action"
+          x="13"
+          y="288"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD')}"
+          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD')"/>
+
+    <rect id="aux-move-engine-forward-2"
+          class="action"
+          x="114"
+          y="288"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD')}"
+          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD')"/>
+
+    <rect id="aux-remove-card"
+          class="action"
+          x="13"
+          y="368"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')}"
+          (click)="clickAuxiliaryAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')"/>
+
+    <rect id="aux-remove-card-2"
+          class="action"
+          x="114"
+          y="368"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !actions.includes('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')}"
+          (click)="clickAuxiliaryAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')"/>
+  </svg>
 </div>

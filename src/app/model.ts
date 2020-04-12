@@ -110,7 +110,12 @@ export interface ObjectiveCard {
 
 export type Card = ObjectiveCard | CattleCard;
 
-export type PlayerColor = 'YELLOW' | 'RED' | 'BLUE' | 'WHITE';
+export enum PlayerColor {
+  YELLOW = 'YELLOW',
+  RED = 'RED',
+  BLUE = 'BLUE',
+  WHITE = 'WHITE'
+}
 
 export enum Unlockable {
   CERT_LIMIT_6 = 'CERT_LIMIT_6',
@@ -126,7 +131,6 @@ export enum Unlockable {
 }
 
 export interface Player {
-  readonly name: string;
   readonly color: PlayerColor;
   readonly user: User;
 }
@@ -149,24 +153,32 @@ export interface Space {
   readonly index: number;
 }
 
-export type StationMaster = 'PERM_CERT_POINTS_FOR_EACH_2_CERTS'
-  | 'PERM_CERT_POINTS_FOR_EACH_2_HAZARDS'
-  | 'PERM_CERT_POINTS_FOR_TEEPEE_PAIRS'
-  | 'REMOVE_HAZARD_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS'
-  | 'GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER';
+export enum StationMaster {
+  PERM_CERT_POINTS_FOR_EACH_2_CERTS = 'PERM_CERT_POINTS_FOR_EACH_2_CERTS',
+  PERM_CERT_POINTS_FOR_EACH_2_HAZARDS = 'PERM_CERT_POINTS_FOR_EACH_2_HAZARDS',
+  PERM_CERT_POINTS_FOR_TEEPEE_PAIRS = 'PERM_CERT_POINTS_FOR_TEEPEE_PAIRS',
+  REMOVE_HAZARD_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS = 'REMOVE_HAZARD_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS',
+  GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER = 'GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER'
+}
 
 export interface Station {
-  readonly players: string[];
+  readonly players: PlayerColor[];
   readonly stationMaster?: StationMaster;
   readonly worker?: Worker;
 }
 
 export interface RailroadTrack {
-  readonly players: { [playerName: string]: Space };
+  readonly players: { [color in PlayerColor]: Space };
   readonly stations: Station[];
 }
 
-export type LocationType = 'START' | 'BUILDING' | 'HAZARD' | 'TEEPEE' | 'KANSAS_CITY';
+export enum LocationType {
+  START = 'START',
+  BUILDING = 'BUILDING',
+  HAZARD = 'HAZARD',
+  TEEPEE = 'TEEPEE',
+  KANSAS_CITY = 'KANSAS_CITY'
+}
 
 export interface Location {
   readonly name: string;
@@ -194,8 +206,8 @@ export interface State {
   readonly foresights: Foresights;
   readonly jobMarket: JobMarket;
   readonly objectiveCards: ObjectiveCard[];
-  readonly otherPlayers: { [playerName: string]: PlayerState };
-  readonly players: { [playerName: string]: Player };
+  readonly otherPlayers: { [color in PlayerColor]: PlayerState };
+  readonly players: { [color in PlayerColor]: Player };
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
   readonly expires: string;
@@ -210,6 +222,7 @@ export interface User {
 export interface GamePlayer {
   readonly user: User;
   readonly status: 'INVITED' | 'ACCEPTED' | 'REJECTED';
+  readonly color: PlayerColor;
 }
 
 export interface Game {
@@ -240,5 +253,5 @@ export interface CreateGameRequest {
 export interface PossibleMove {
   cost: number;
   steps: string[];
-  playerFees: { [key: string]: number };
+  playerFees: { player: Player; cost: number }[];
 }

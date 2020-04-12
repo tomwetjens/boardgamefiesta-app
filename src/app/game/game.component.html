@@ -17,11 +17,37 @@
       </li>
     </ul>
   </div>
+
+
+  <form class="form-inline">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm">
+          <app-connection-status></app-connection-status>
+        </div>
+      </div>
+    </div>
+  </form>
 </nav>
 
-<app-messages></app-messages>
+<ng-container *ngIf="game | async as game">
+  <ng-container *ngIf="game.status === 'STARTED'; else notStarted">
+    <app-board [game]="game"
+               [state]="state | async"
+               (action)="perform($event)">
+    </app-board>
+  </ng-container>
 
-<app-board [game]="game | async"
-           [state]="state | async"
-           (action)="perform($event)">
-</app-board>
+  <ng-template #notStarted>
+    <!-- TODO Confirm dialog when not all players have accepted -->
+    <button class="btn btn-primary" *ngIf="game.startable" (click)="start()">Start</button>
+
+    <ul>
+      <li>{{game.currentPlayer.username}}</li>
+      <li *ngFor="let player of game.otherPlayers">
+        {{player.user.username}}
+        {{player.status}}
+      </li>
+    </ul>
+  </ng-template>
+</ng-container>

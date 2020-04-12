@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LobbyComponent } from './lobby.component';
+import { ConnectionStatusComponent } from './connection-status.component';
 
-describe('LobbyComponent', () => {
-  let component: LobbyComponent;
-  let fixture: ComponentFixture<LobbyComponent>;
+describe('ConnectionStatusComponent', () => {
+  let component: ConnectionStatusComponent;
+  let fixture: ComponentFixture<ConnectionStatusComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LobbyComponent ]
+      declarations: [ ConnectionStatusComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LobbyComponent);
+    fixture = TestBed.createComponent(ConnectionStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

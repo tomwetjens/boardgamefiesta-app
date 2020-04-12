@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Action, ActionType, PlayerState, Unlockable} from '../model';
+import {Action, ActionType, Card, PlayerState, Unlockable} from '../model';
 
 @Component({
   selector: 'app-player-board',
@@ -9,10 +9,12 @@ import {Action, ActionType, PlayerState, Unlockable} from '../model';
 export class PlayerBoardComponent implements OnInit {
 
   @Input() playerState: PlayerState;
-  @Input() actions: ActionType[];
+  @Input() actions: ActionType[] = [];
   @Input() selectedAction: ActionType;
 
   @Output() action = new EventEmitter<Action>();
+
+  selectedCards: Card[] = [];
 
   constructor() {
   }
@@ -22,6 +24,10 @@ export class PlayerBoardComponent implements OnInit {
 
   get checkboxes(): boolean {
     return this.selectedAction && this.selectedAction.includes('DISCARD_PAIR');
+  }
+
+  clickAuxiliaryAction(action: ActionType) {
+    this.action.emit({type: action});
   }
 
   unlock(type: Unlockable) {
@@ -92,6 +98,33 @@ export class PlayerBoardComponent implements OnInit {
     if (this.selectedAction.startsWith('DISCARD_PAIR')) {
       // TODO CHeck if pair
       this.action.emit({type: this.selectedAction, cards: this.playerState.hand});
+    }
+  }
+
+  clickCard(card: Card) {
+    const index = this.selectedCards.indexOf(card);
+
+    if (index < 0) {
+      this.selectedCards.push(card);
+    } else {
+      this.selectedCards.splice(index, 1);
+    }
+
+    if (this.actions.includes('DISCARD_2_CARDS')) {
+      if (this.selectedCards.length === 2) {
+        this.action.emit({type: 'DISCARD_2_CARDS', cards: this.selectedCards});
+        this.selectedCards = [];
+      }
+    } else if (this.actions.includes('DISCARD_3_CARDS')) {
+      if (this.selectedCards.length === 3) {
+        this.action.emit({type: 'DISCARD_3_CARDS', cards: this.selectedCards});
+        this.selectedCards = [];
+      }
+    } else if (this.actions.includes('DISCARD_1_CARD')) {
+      if (this.selectedCards.length === 1) {
+        this.action.emit({type: 'DISCARD_1_CARD', cards: this.selectedCards});
+        this.selectedCards = [];
+      }
     }
   }
 }

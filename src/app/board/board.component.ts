@@ -38,14 +38,8 @@ export class BoardComponent implements OnInit {
           }), err => this.selectedAction = null);
         break;
 
-      case 'REMOVE_HAZARD':
-      case 'REMOVE_HAZARD_FOR_FREE':
-        this.selectedAction = actionType;
-        break;
-
       default:
-        // Assume no further selection necessary for these actions
-        this.action.emit({type: actionType});
+        this.selectedAction = actionType;
         break;
     }
   }
