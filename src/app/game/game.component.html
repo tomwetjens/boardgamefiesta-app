@@ -1,36 +1,53 @@
-<nav class="bg-dark container-fluid">
-  <div class="row">
-    <div class="col-3">
-      <a class="btn btn-secondary" [routerLink]="['/']">Back</a>
+<nav class="navbar navbar-expand-lg fixed-top bg-dark justify-content-between">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="btn btn-secondary" [routerLink]="['/']" i18n>Back</a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-primary" (click)="endTurn()" i18n>End Turn</a>
+    </li>
+  </ul>
+
+  <ng-container *ngIf="state | async as state">
+    <div class="actions">
+      <ng-container *ngIf="!selectedAction">
+      <span *ngFor="let actionType of state.actions">
+        <ng-container [ngSwitch]="actionType">
+          <span *ngSwitchDefault><button class="btn btn-secondary" (click)="selectAction(actionType)">{{actionType}}</button></span>
+        </ng-container>
+      </span>
+      </ng-container>
+      <ng-container *ngIf="selectedAction">
+        <ng-container [ngSwitch]="selectedAction">
+          <span *ngSwitchCase="'MOVE'" i18n>Move cattleman</span>
+          <span *ngSwitchCase="'SINGLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
+          <span *ngSwitchCase="'SINGLE_OR_DOUBLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
+          <span *ngSwitchCase="'DISCARD_1_CARD'" i18n>Discard 1 card</span>
+          <span *ngSwitchCase="'DISCARD_2_CARDS'" i18n>Discard 2 cards</span>
+          <span *ngSwitchCase="'DISCARD_3_CARDS'" i18n>Discard 3 cards</span>
+          <span *ngSwitchCase="'TRADE_WITH_INDIANS'" i18n>Take a teepee</span>
+          <span *ngSwitchDefault>Unknown action selected</span>
+        </ng-container>
+      </ng-container>
     </div>
 
-    <div class="col-6">
-      <div *ngIf="state | async as state">
-        <ul class="navbar-nav">
-          <li class="nav-item" *ngIf="state.turn">
-            <button class="btn btn-secondary" (click)="endTurn()">End Turn</button>
-          </li>
-          <li class="nav-item" *ngIf="state.turn">
-            Your Turn ({{state.expires | fromNow:1000}} remaining)
-          </li>
-
-          <li class="nav-item" *ngIf="!state.turn">
-            waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow:1000}} remaining)
-          </li>
-        </ul>
+    <div class="form-inline">
+      <div *ngIf="state.turn">
+        Your Turn ({{state.expires | fromNow:1000}} remaining)
       </div>
-    </div>
-
-    <div class="col-3">
+      <div *ngIf="!state.turn">
+        waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow:1000}} remaining)
+      </div>
       <app-connection-status></app-connection-status>
     </div>
-  </div>
+  </ng-container>
 </nav>
 
-<ng-container *ngIf="game | async as game">
+<div class="main" *ngIf="game | async as game">
   <ng-container *ngIf="game.status === 'STARTED'; else notStarted">
     <app-board [game]="game"
                [state]="state | async"
+               [selectedAction]="selectedAction"
                (action)="perform($event)">
     </app-board>
   </ng-container>
@@ -47,4 +64,4 @@
       </li>
     </ul>
   </ng-template>
-</ng-container>
+</div>

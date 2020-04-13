@@ -1,5 +1,7 @@
 :host {
-  position: absolute;
-  left: 50%;
-  top: 0;
+  width: 100%;
+}
+
+ngb-toast {
+  margin: auto;
 }

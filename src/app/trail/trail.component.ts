@@ -1,5 +1,5 @@
 import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, City, Game, Hazard, PlayerColor, PossibleDelivery, PossibleMove, State} from '../model';
+import {Action, ActionType, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, State} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
@@ -119,8 +119,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
             this.possibleMoves = possibleMoves;
           }
         });
-    } else if (this.selectedAction === 'REMOVE_HAZARD') {
+    } else if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
       this.action.emit({type: this.selectedAction, hazard: this.state.trail.locations[name].hazard});
+    } else if (this.selectedAction === 'TRADE_WITH_INDIANS') {
+      this.action.emit({type: this.selectedAction, reward: this.state.trail.locations[name].reward});
     }
   }
 
@@ -141,6 +143,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     this.showPossibleMoves();
 
     // TODO Refresh hazards after state changed
+    while (this.hazardsElement.nativeElement.firstChild) {
+      this.renderer.removeChild(this.hazardsElement.nativeElement, this.hazardsElement.nativeElement.firstChild);
+    }
+
     for (const name of Object.keys(this.state.trail.locations)) {
       const location = this.state.trail.locations[name];
 
@@ -161,7 +167,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         buildingElement.nativeElement.setAttribute('transform', 'translate(' + x + ',' + y + ')');
       } else if (location.hazard) {
         // TODO Differentiate to points and hand color
-        const id = location.hazard.type.toLowerCase();
+        const id = location.hazard.type.toString().toLowerCase() + (location.hazard.hands === 'GREEN' ? 'Green' : 'Black');
 
         const g = this.renderer.createElement('g', 'http://www.w3.org/2000/svg');
         const x = locationElement.getAttribute('x');
@@ -171,6 +177,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
         this.renderer.setProperty(g, 'innerHTML', '<use xlink:href="#' + id + '"/>');
         this.renderer.listen(g, 'click', () => this.clickHazard(location.hazard));
+
+        console.log(location.hazard.type.toString().toLowerCase(), 'add hazard element ', id, ' at ' , location.name);
       } else if (location.teepee) {
         const id = location.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue';
 
@@ -180,6 +188,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         this.renderer.setAttribute(g, 'transform', 'translate(' + x + ',' + y + ')');
         this.renderer.appendChild(this.hazardsElement.nativeElement, g);
 
+        console.log('add teepee element ', id, ' at ' , location.name);
         this.renderer.setProperty(g, 'innerHTML', '<use xlink:href="#' + id + '"/>');
       }
     }
@@ -335,7 +344,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         ngbModalRef.componentInstance.playerState = this.state.player;
 
         fromPromise(ngbModalRef.result)
-          .subscribe(({certificates, unlock}) => this.action.emit({type: 'DELIVER_TO_CITY', city, certificates, unlock}));
+          .subscribe(({certificates}) => this.action.emit({type: 'DELIVER_TO_CITY', city, certificates}));
       }
     }
   }
@@ -346,7 +355,32 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     }
   }
 
-  canMoveTo(name: string) {
-    return true;
+  canClick(name: string) {
+    const location = this.state.trail.locations[name];
+    return location &&
+      (this.selectedAction === 'MOVE' ? this.canMoveTo(location)
+        : this.selectedAction === 'PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN' || this.selectedAction === 'PLACE_BUILDING_FOR_2_DOLLARS_PER_CRAFTSMAN' ? this.canPlaceBuilding(location)
+          : this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE' ? this.canRemoveHazard(location)
+            : this.selectedAction === 'TRADE_WITH_INDIANS' ? this.canTakeTeepee(location)
+              : false);
+  }
+
+  private canMoveTo(location: Location): boolean {
+    return !!location.building || !!location.hazard || !!location.teepee;
+  }
+
+  private canPlaceBuilding(location: Location): boolean {
+    return location.type === 'BUILDING' && !location.building;
+  }
+
+  private canRemoveHazard(location: Location): boolean {
+    return !!location.hazard;
+  }
+
+  private canTakeTeepee(location: Location): boolean {
+    if (!!location.teepee) {
+      console.log('can take teepee at ', location.name);
+    }
+    return !!location.teepee;
   }
 }

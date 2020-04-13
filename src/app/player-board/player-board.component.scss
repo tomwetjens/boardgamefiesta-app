@@ -2,44 +2,6 @@
   width: 100%;
 }
 
-:host(.AUX_GAIN_DOLLAR-1) {
-  .AUX_GAIN_DOLLAR-1 .unlocked {
-    display: block;
-  }
-
-  .AUX_GAIN_DOLLAR-1 .locked {
-    display: none;
-  }
-}
-
-:host(.AUX_DRAW_CARD_TO_DISCARD_CARD-1) {
-  .AUX_DRAW_CARD_TO_DISCARD_CARD-1 .unlocked {
-    display: block;
-  }
-
-  .AUX_DRAW_CARD_TO_DISCARD_CARD-1 .locked {
-    display: none;
-  }
-}
-
-:host(.AUX_DRAW_CARD_TO_DISCARD_CARD-2) {
-  .AUX_DRAW_CARD_TO_DISCARD_CARD-2 .unlocked {
-    display: block;
-  }
-
-  .AUX_DRAW_CARD_TO_DISCARD_CARD-2 .locked {
-    display: none;
-  }
-}
-
-.unlocked {
-  display: none;
-}
-
-.aux-action {
-  cursor: pointer;
-}
-
 .color {
   display: inline-block;
   width: 16px;
@@ -62,6 +24,25 @@
   }
 }
 
+.cert-marker {
+
+  stroke-width: 3;
+  stroke: white;
+  cursor: pointer;
+
+  &:hover {
+    stroke: black;
+  }
+
+  &.disabled {
+    stroke: none;
+    cursor: default;
+  }
+
+  &.unlocked {
+    display: none;
+  }
+}
 
 .player-board {
   width: 800px;

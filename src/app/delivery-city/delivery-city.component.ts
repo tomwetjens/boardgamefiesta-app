@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PlayerState, PossibleDelivery, Unlockable} from '../model';
+import {PlayerState, PossibleDelivery} from '../model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -20,8 +20,12 @@ export class DeliveryCityComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  confirm(certificates: number, unlock: Unlockable) {
-    console.log('confirm: ', {certificates, unlock});
-    this.ngbActiveModal.close({certificates, unlock});
+  confirm() {
+    this.ngbActiveModal.close({certificates: this.certificates});
+  }
+
+  get reward(): number {
+    console.log(this.possibleDelivery.reward);
+    return this.possibleDelivery.reward + (this.certificates - this.possibleDelivery.certificates);
   }
 }

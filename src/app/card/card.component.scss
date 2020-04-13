@@ -10,6 +10,22 @@
   background-size: contain;
   background-position: center;
 
+  position: relative;
+
+  .points {
+    position: absolute;
+    left: 16px;
+    top: 76px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
+
   &.back {
     background-image: url(../../assets/cards/back.jpg);
   }
@@ -17,6 +33,11 @@
   &.BLACK_ANGUS {
     background-color: black;
     background-image: url(../../assets/cards/black_angus.jpg);
+  }
+
+  &.BROWN_SWISS {
+    background-color: black;
+    background-image: url(../../assets/cards/brown_swiss.jpg);
   }
 
   &.DUTCH_BELT {

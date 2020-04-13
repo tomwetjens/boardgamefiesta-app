@@ -4,6 +4,11 @@ export type Points = number;
 export type CattleType = string;
 export type BreedingValue = number;
 
+export enum DiscColor {
+  WHITE,
+  BLACK
+}
+
 export interface CattleCard {
   readonly breedingValue: BreedingValue;
   readonly points: Points;
@@ -30,8 +35,8 @@ export type ActionType = 'CHOOSE_FORESIGHTS'
   | 'DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS'
   | 'REMOVE_2_CARDS'
   | 'DELIVER_TO_CITY'
-  | 'SINGLE_AUX_ACTION'
-  | 'SINGLE_OR_DOUBLE_AUX_ACTION'
+  | 'SINGLE_AUXILIARY_ACTION'
+  | 'SINGLE_OR_DOUBLE_AUXILIARY_ACTION'
   | 'PLACE_BUILDING_FOR_2_DOLLARS_PER_CRAFTSMAN'
   | 'DISCARD_1_GUERNSEY'
   | 'MOVE_ENGINE_2_OR_3_FORWARD'
@@ -61,17 +66,18 @@ export type ActionType = 'CHOOSE_FORESIGHTS'
   | 'PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN'
   | 'GAIN_1_CERT'
   | 'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'
-  | 'UNLOCK_CERT_LIMIT_TO_4'
-  | 'UNLOCK_CERT_LIMIT_TO_6'
-  | 'UNLOCK_EXTRA_CARD'
-  | 'UNLOCK_EXTRA_STEP_DOLLARS'
-  | 'UNLOCK_EXTRA_STEP_POINTS';
+  | 'UNLOCK_WHITE'
+  | 'UNLOCK_BLACK_OR_WHITE';
 
 export type Teepee = 'BLUE' | 'GREEN';
 
 export type Worker = 'COWBOY' | 'CRAFTSMAN' | 'ENGINEER';
 
-export type HazardType = 'FLOOD' | 'DROUGHT' | 'ROCKFALL';
+export enum HazardType {
+  FLOOD = 'FLOOD',
+  DROUGHT = 'DROUGHT',
+  ROCKFALL = 'ROCKFALL'
+}
 
 export type Hands = 'GREEN' | 'BLACK' | 'BOTH';
 
@@ -119,7 +125,7 @@ export enum PlayerColor {
 
 export enum Unlockable {
   CERT_LIMIT_6 = 'CERT_LIMIT_6',
-  CERT_LIMIT_4 = 'CERT_LIMIT_6',
+  CERT_LIMIT_4 = 'CERT_LIMIT_4',
   EXTRA_STEP_DOLLARS = 'EXTRA_STEP_DOLLARS',
   EXTRA_STEP_POINTS = 'EXTRA_STEP_POINTS',
   EXTRA_CARD = 'EXTRA_CARD',
@@ -274,5 +280,5 @@ export interface PossibleMove {
 export interface PossibleDelivery {
   city: City;
   certificates: number;
-  cost: number;
+  reward: number;
 }

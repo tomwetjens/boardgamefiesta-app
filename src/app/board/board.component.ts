@@ -13,34 +13,17 @@ export class BoardComponent implements OnInit {
 
   @Input() game: Game;
   @Input() state: State;
+  @Input() selectedAction: ActionType;
 
   @Output() action = new EventEmitter<Action>();
 
-  selectedAction: ActionType;
-
-  constructor(private ngbModal: NgbModal) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  chooseAction(actionType: ActionType) {
-    switch (actionType) {
-      case 'DISCARD_PAIR_TO_GAIN_4_DOLLARS':
-        const modalRef = this.ngbModal.open(HandSelectComponent);
-        modalRef.componentInstance.hand = this.state.player.hand;
-        modalRef.componentInstance.mode = 'DISCARD';
-        modalRef.componentInstance.pair = true;
-        fromPromise(modalRef.result)
-          .subscribe(cards => this.action.emit({
-            type: actionType,
-            cattleType: (cards[0] as CattleCard).type
-          }), err => this.selectedAction = null);
-        break;
-
-      default:
-        this.selectedAction = actionType;
-        break;
-    }
+  perform(action: Action) {
+    this.action.emit(action);
   }
 }

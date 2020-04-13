@@ -6,10 +6,16 @@
 </div>
 <div class="modal-body">
   <form>
+    <p>
     Certificates:
     <input type="number" [(ngModel)]="certificates" [min]="possibleDelivery.certificates" [max]="playerState.certificates" [step]="1" name="certificates"/>
     Max {{playerState.certificates}}
+    </p>
+    <p>
+      Gives you $ {{reward}}
+    </p>
   </form>
 </div>
 <div class="modal-footer">
+  <button class="btn btn-primary" (click)="confirm()">Deliver to {{possibleDelivery.city}}</button>
 </div>

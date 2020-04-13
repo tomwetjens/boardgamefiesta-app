@@ -1,8 +1,10 @@
-<ngb-toast *ngFor="let toastrMessage of toastrMessages"
-           [header]="toastrMessage.header"
-           [className]="toastrMessage.type"
-           [autohide]="toastrMessage.autohide"
-           [delay]="toastrMessage.delay"
-           (hide)="hide(toastrMessage)">
-  <span i18n>{{toastrMessage.text}}</span>
-</ngb-toast>
+<div class="fixed-top">
+  <ngb-toast *ngFor="let toastrMessage of toastrMessages"
+             [header]="toastrMessage.header"
+             [className]="toastrMessage.type"
+             [autohide]="toastrMessage.autohide"
+             [delay]="toastrMessage.delay"
+             (hide)="hide(toastrMessage)">
+    <span i18n>{{toastrMessage.text}}</span>
+  </ngb-toast>
+</div>

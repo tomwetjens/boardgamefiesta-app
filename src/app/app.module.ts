@@ -25,6 +25,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {GameListComponent} from './game-list/game-list.component';
 import {LayoutComponent} from './layout/layout.component';
 import { CardStackComponent } from './card-stack/card-stack.component';
+import { CattleMarketComponent } from './cattle-market/cattle-market.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CardStackComponent } from './card-stack/card-stack.component';
     NavbarComponent,
     GameListComponent,
     LayoutComponent,
-    CardStackComponent
+    CardStackComponent,
+    CattleMarketComponent
   ],
   imports: [
     BrowserModule,

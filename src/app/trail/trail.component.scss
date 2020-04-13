@@ -7,13 +7,13 @@
   .location {
     stroke-opacity: 1;
     stroke: #ffffff;
-    stroke-width: 0.6;
+    stroke-width: 2;
     fill: rgb(0, 0, 0, 0.1);
 
     cursor: pointer;
 
     &:hover {
-      stroke: red;
+      stroke: black;
     }
 
     &.start {
@@ -50,14 +50,14 @@
   .city {
     stroke-opacity: 1;
     stroke: #ffffff;
-    stroke-width: 0.6;
+    stroke-width: 2;
     fill: none;
     fill: rgb(0, 0, 0, 0.01);
 
     cursor: pointer;
 
     &:hover {
-      stroke: red;
+      stroke: black;
     }
 
     &.disabled {
@@ -71,12 +71,12 @@
   * {
     stroke-opacity: 1;
     stroke: #ffffff;
-    stroke-width: 0.6;
+    stroke-width: 2;
 
     cursor: pointer;
 
     &:hover {
-      stroke: red;
+      stroke: black;
     }
   }
 
@@ -110,9 +110,16 @@
 .foresights {
   stroke-opacity: 1;
   stroke: #ffffff;
-  stroke-width: 0.6;
+  stroke-width: 2;
   fill: rgb(0, 0, 0, 0.1);
 
+  * {
+    cursor: pointer;
+  }
+
+  *:hover {
+    stroke: black;
+  }
 
   &.disabled {
     * {

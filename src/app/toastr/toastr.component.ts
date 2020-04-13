@@ -20,8 +20,7 @@ export class ToastrComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.toastrService.messages
       .pipe(
-        takeUntil(this.destroyed),
-        distinctUntilChanged((a, b) => a.text === b.text))
+        takeUntil(this.destroyed)) //  TODO debounce or distinct?
       .subscribe(toastrMessage => {
         this.ngZone.run(() => this.toastrMessages.push(toastrMessage));
       });

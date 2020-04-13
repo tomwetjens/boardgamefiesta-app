@@ -22,8 +22,161 @@
     version="1.1"
     viewBox="0 0 800 448"
     style="width:100%; height:100%"
-  class="player-board" [class]="'' + playerState.player.color">
+    class="player-board" [class]="'' + playerState.player.color">
     <image [attr.href]="'/assets/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'" x="0" y="0" height="446" width="800"></image>
+
+    <circle id="aux-dollar-2-disc"
+            class="cert-marker"
+            cx="138"
+            cy="67"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_GAIN_DOLLAR', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_GAIN_DOLLAR')"/>
+
+    <circle id="aux-draw-2-disc"
+            class="cert-marker"
+            cx="140"
+            cy="146"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_DRAW_CARD_TO_DISCARD_CARD')"/>
+
+    <circle id="aux-move-engine-backwards-disc"
+            class="cert-marker"
+            cx="42"
+            cy="230"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')"/>
+
+    <circle id="aux-move-engine-backwards-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="230"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')"/>
+
+    <circle id="aux-move-engine-forward-disc"
+            class="cert-marker"
+            cx="42"
+            cy="314"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_PAY_TO_MOVE_ENGINE_FORWARD'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_PAY_TO_MOVE_ENGINE_FORWARD')"/>
+
+    <circle id="aux-move-engine-forward-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="314"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_PAY_TO_MOVE_ENGINE_FORWARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_PAY_TO_MOVE_ENGINE_FORWARD')"/>
+
+    <circle id="aux-remove-card-disc"
+            class="cert-marker"
+            cx="42"
+            cy="394"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD')"/>
+
+    <circle id="aux-remove-card-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="396"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD')"/>
+
+    <rect id="cert_marker_0" *ngIf="playerState.certificates === 0"
+          class="cert-marker"
+          x="744"
+          y="158"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_1" *ngIf="playerState.certificates === 1"
+          class="cert-marker"
+          x="744"
+          y="198"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_2" *ngIf="playerState.certificates === 2"
+          class="cert-marker"
+          x="744"
+          y="239"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_3" *ngIf="playerState.certificates === 3"
+          class="cert-marker"
+          x="744"
+          y="280"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_4" *ngIf="playerState.certificates === 4"
+          class="cert-marker"
+          x="744"
+          y="328"
+          width="30"
+          height="30"/>
+
+    <rect id="cert_marker_6" *ngIf="playerState.certificates === 6"
+          class="cert-marker"
+          x="744"
+          y="389"
+          width="30"/>
+
+    <circle id="step-limit-dollars-disc"
+            class="cert-marker"
+            cx="282"
+            cy="70"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_STEP_DOLLARS'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_STEP_DOLLARS')"/>
+
+    <circle id="step-limit-points-disc"
+            class="cert-marker"
+            cx="342"
+            cy="70"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_STEP_POINTS'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_STEP_POINTS')"/>
+
+    <circle id="extra-card-1-disc"
+            class="cert-marker"
+            cx="674"
+            cy="72"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_CARD'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_CARD')"/>
+
+    <circle id="extra-card-2-disc"
+            class="cert-marker"
+            cx="758"
+            cy="72"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_CARD', 2), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_CARD')"/>
+
+    <circle id="cert-limit-4-disc"
+            class="cert-marker"
+            cx="761"
+            cy="346"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_4'), disabled: !canUnlockBlack}"
+            (click)="unlock('CERT_LIMIT_4')"/>
+
+    <circle id="cert-limit-6-disc"
+            class="cert-marker"
+            cx="761"
+            cy="404"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_6'), disabled: !canUnlockBlack}"
+            (click)="unlock('CERT_LIMIT_6')"/>
 
     <rect id="aux-dollar"
           class="action"
@@ -134,47 +287,5 @@
           width="54"
           [ngClass]="{disabled: !actions.includes('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')}"
           (click)="clickAuxiliaryAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')"/>
-
-    <rect id="cert_marker_0" *ngIf="playerState.certificates === 0"
-          class="cert-marker"
-          x="744"
-          y="158"
-          width="30"
-          height="30"></rect>
-
-    <rect id="cert_marker_1" *ngIf="playerState.certificates === 1"
-          class="cert-marker"
-          x="744"
-          y="198"
-          width="30"
-          height="30"></rect>
-
-    <rect id="cert_marker_2" *ngIf="playerState.certificates === 2"
-          class="cert-marker"
-          x="744"
-          y="239"
-          width="30"
-          height="30"></rect>
-
-    <rect id="cert_marker_3" *ngIf="playerState.certificates === 3"
-          class="cert-marker"
-          x="744"
-          y="280"
-          width="30"
-          height="30"></rect>
-
-    <rect id="cert_marker_4" *ngIf="playerState.certificates === 4"
-          class="cert-marker"
-          x="744"
-          y="328"
-          width="30"
-          height="30"></rect>
-
-    <rect id="cert_marker_6" *ngIf="playerState.certificates === 6"
-          class="cert-marker"
-          x="744"
-          y="389"
-          width="30"
-          height="30"></rect>
   </svg>
 </div>
