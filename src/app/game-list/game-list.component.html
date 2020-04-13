@@ -15,10 +15,10 @@
       <div *ngIf="game.game.status === 'STARTED'">
         with  {{game.otherPlayers}}, started {{game.game.started | date}}
         <div *ngIf="!game.game.turn">
-          waiting for {{game.game.currentPlayer.username}} ({{game.game.expires | fromNow}} remaining)
+          waiting for {{game.game.currentPlayer.username}} ({{game.game.expires | fromNow:60000}} remaining)
         </div>
         <div *ngIf="game.game.turn">
-          your turn ({{game.game.expires | fromNow}} remaining)
+          your turn ({{game.game.expires | fromNow:60000}} remaining)
         </div>
       </div>
     </div>

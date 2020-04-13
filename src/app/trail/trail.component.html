@@ -46,9 +46,12 @@
     <image id="engineer" href="/assets/engineer.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
     <image id="teepeeGreen" href="/assets/teepee_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
     <image id="teepeeBlue" href="/assets/teepee_blue.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
-    <image id="flood" href="/assets/flood.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
-    <image id="drought" href="/assets/drought.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
-    <image id="rockfall" href="/assets/rockfall.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="floodBlack" href="/assets/flood_black.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="floodGreen" href="/assets/flood_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="droughtBlack" href="/assets/drought_black.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="droughtGreen" href="/assets/drought_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="rockfallBlack" href="/assets/rockfall_black.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    <image id="rockfallGreen" href="/assets/rockfall_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
   </defs>
   <g>
     <image href="/assets/board.png" x="0" y="0" height="800" width="800"></image>
@@ -128,7 +131,7 @@
       </g>
     </g>
 
-    <g id="cities" class="cities" [ngClass]="{disabled:!canSelectCity}">
+    <g id="cities" class="cities">
       <rect id="city-KANSAS_CITY"
             class="city"
             x="121"
@@ -137,7 +140,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('KANSAS_CITY')"/>
+            (click)="clickCity('KANSAS_CITY')" [ngClass]="{disabled:!canSelectCity('KANSAS_CITY')}"/>
       <rect id="city-TOPEKA"
             class="city"
             x="184"
@@ -146,7 +149,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('TOPEKA')"/>
+            (click)="clickCity('TOPEKA')" [ngClass]="{disabled:!canSelectCity('TOPEKA')}"/>
       <rect id="city-WICHITA"
             class="city"
             x="279"
@@ -155,7 +158,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('WICHITA')"/>
+            (click)="clickCity('WICHITA')" [ngClass]="{disabled:!canSelectCity('WICHITA')}"/>
       <rect id="city-COLORADO_SPRINGS"
             class="city"
             x="343"
@@ -164,7 +167,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('COLORADO_SPRINGS')"/>
+            (click)="clickCity('COLORADO_SPRINGS')" [ngClass]="{disabled:!canSelectCity('COLORADO_SPRINGS')}"/>
       <rect id="city-SANTA_FE"
             class="city"
             x="406"
@@ -173,7 +176,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SANTA_FE')"/>
+            (click)="clickCity('SANTA_FE')" [ngClass]="{disabled:!canSelectCity('SANTA_FE')}"/>
       <rect id="city-ALBUQUERQUE"
             class="city"
             x="469"
@@ -182,7 +185,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('ALBUQUERQUE')"/>
+            (click)="clickCity('ALBUQUERQUE')" [ngClass]="{disabled:!canSelectCity('ALBUQUERQUE')}"/>
       <rect id="city-EL_PASO"
             class="city"
             x="532"
@@ -191,7 +194,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('EL_PASO')"/>
+            (click)="clickCity('EL_PASO')" [ngClass]="{disabled:!canSelectCity('EL_PASO')}"/>
       <rect id="city-SAN_DIEGO"
             class="city"
             x="595"
@@ -200,7 +203,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SAN_DIEGO')"/>
+            (click)="clickCity('SAN_DIEGO')" [ngClass]="{disabled:!canSelectCity('SAN_DIEGO')}"/>
       <rect id="city-SACRAMENTO"
             class="city"
             x="659"
@@ -209,7 +212,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SACRAMENTO')"/>
+            (click)="clickCity('SACRAMENTO')" [ngClass]="{disabled:!canSelectCity('SACRAMENTO')}"/>
       <rect id="city-SAN_FRANCISCO"
             class="city"
             x="722"
@@ -218,7 +221,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SAN_FRANCISCO')"/>
+            (click)="clickCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
     </g>
 
     <g #neutralBuildings transform="translate(130,-133)" class="buildings">

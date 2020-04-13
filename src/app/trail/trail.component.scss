@@ -59,10 +59,8 @@
     &:hover {
       stroke: red;
     }
-  }
 
-  &.disabled {
-    .city {
+    &.disabled {
       stroke-width: 0 !important;
       cursor: default !important;
     }

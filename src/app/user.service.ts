@@ -1,24 +1,20 @@
 import {Injectable} from '@angular/core';
 import {User} from './model';
-import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
+import {Observable, of, ReplaySubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {OAuthService} from 'angular-oauth2-oidc';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, take} from 'rxjs/operators';
+import {fromPromise} from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private idToken = new ReplaySubject<any>(1);
-
-  loggedIn = new BehaviorSubject<boolean>(false);
-  currentUser: Observable<User>;
-
   constructor(private httpClient: HttpClient, private oauthService: OAuthService) {
     this.currentUser = this.idToken.pipe(switchMap(idToken => {
-      if (!idToken) {
+      if (!idToken || !this.oauthService.hasValidIdToken()) {
         return of(null);
       }
       return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + idToken.sub);
@@ -30,12 +26,19 @@ export class UserService {
     });
 
     this.oauthService.configure(environment.auth);
-    this.oauthService.tryLogin();
     this.oauthService.setupAutomaticSilentRefresh();
 
-    this.loggedIn.next(this.oauthService.hasValidAccessToken());
-    this.idToken.next(this.oauthService.getIdentityClaims());
+    fromPromise(this.oauthService.tryLogin())
+      .subscribe(result => {
+        this.loggedIn.next(this.oauthService.hasValidAccessToken());
+        this.idToken.next(this.oauthService.getIdentityClaims());
+      });
   }
+
+  private idToken = new ReplaySubject<any>(1);
+  loggedIn = new ReplaySubject<boolean>(1);
+
+  currentUser: Observable<User>;
 
   login() {
     this.oauthService.initLoginFlow();
@@ -47,5 +50,9 @@ export class UserService {
 
   findByUsername(username: string): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.apiBaseUrl + '/users', {params: {username}});
+  }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable().pipe(take(1));
   }
 }

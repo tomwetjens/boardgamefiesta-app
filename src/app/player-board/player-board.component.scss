@@ -40,47 +40,77 @@
   cursor: pointer;
 }
 
-.hand {
-  & > app-card {
-    display: inline-block;
-    margin: 4px;
-  }
-}
-
 .color {
   display: inline-block;
   width: 16px;
   height: 16px;
-  &.RED {background-color: red;}
-  &.BLUE {background-color: blue;}
-  &.YELLOW {background-color: yellow;}
-  &.WHITE {background-color: white;}
+
+  &.RED {
+    background-color: red;
+  }
+
+  &.BLUE {
+    background-color: blue;
+  }
+
+  &.YELLOW {
+    background-color: yellow;
+  }
+
+  &.WHITE {
+    background-color: white;
+  }
 }
 
 
 .player-board {
   width: 800px;
   height: 446px;
-  &.BLUE {   background-image: url(../../assets/player_board_blue.jpg); }
-  &.RED {   background-image: url(../../assets/player_board_red.jpg); }
-  &.YELLOW {   background-image: url(../../assets/player_board_yellow.jpg); }
-  &.WHITE {   background-image: url(../../assets/player_board_white.jpg); }
+
+  &.BLUE {
+    .cert-marker {
+      fill: blue;
+    }
+  }
+
+  &.RED {
+    .cert-marker {
+      fill: red;
+    }
+  }
+
+  &.YELLOW {
+    .cert-marker {
+      fill: yellow;
+    }
+  }
+
+  &.WHITE {
+    .cert-marker {
+      fill: white;
+    }
+  }
+}
+
+.discard-pile {
+  margin-left: 40px;
+  opacity: 0.5;
 }
 
 .action {
   stroke-opacity: 1;
   stroke: #ffffff;
   stroke-width: 2;
-  fill: none;
   fill: rgb(0, 0, 0, 0.01);
 
   cursor: pointer;
 
-  &.disabled{
+  &.disabled {
     cursor: default;
     stroke: none;
+
     &:hover {
-      stroke:none;
+      stroke: none;
     }
   }
 

@@ -19,7 +19,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(currentUser => {
-      this.title.setTitle('GWT: ' + currentUser.username);
+      if (currentUser) {
+        this.title.setTitle('GWT: ' + currentUser.username);
+      } else {
+        this.title.setTitle('GWT');
+      }
     });
   }
 

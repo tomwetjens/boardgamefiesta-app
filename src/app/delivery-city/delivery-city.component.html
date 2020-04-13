@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">Deliver to {{possibleDelivery.city}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,10 +7,8 @@
 <div class="modal-body">
   <form>
     Certificates:
-    <input type="number" [(ngModel)]="certificates" [min]="0" [max]="playerState.certificates" [step]="1" name="certificates"/>
+    <input type="number" [(ngModel)]="certificates" [min]="possibleDelivery.certificates" [max]="playerState.certificates" [step]="1" name="certificates"/>
     Max {{playerState.certificates}}
-
-    <button *ngFor="let unlockable of unlockables" (click)="confirm(certificates, unlockable)">{{unlockable}}</button>
   </form>
 </div>
 <div class="modal-footer">

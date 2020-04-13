@@ -10,6 +10,10 @@
   background-size: contain;
   background-position: center;
 
+  &.back {
+    background-image: url(../../assets/cards/back.jpg);
+  }
+
   &.BLACK_ANGUS {
     background-color: black;
     background-image: url(../../assets/cards/black_angus.jpg);

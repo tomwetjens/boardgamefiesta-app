@@ -1,0 +1,26 @@
+:host {
+  position: relative;
+  line-height: 120px;
+}
+
+app-card {
+  float:left;
+
+  @for $i from 2 through 100 {
+    &:nth-child(#{$i}) {
+      margin-left: -78px;
+    }
+  }
+}
+
+.size {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+
+  text-align: center;
+  vertical-align: middle;
+
+  color: #ffffff;
+}

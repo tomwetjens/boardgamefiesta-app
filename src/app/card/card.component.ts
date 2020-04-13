@@ -17,7 +17,7 @@ export class CardComponent implements OnInit {
   }
 
   get type(): 'CATTLE' | 'OBJECTIVE' {
-    return this.card && 'breedingValue' in this.card ? 'CATTLE' : 'OBJECTIVE';
+    return this.card ? ('breedingValue' in this.card ? 'CATTLE' : 'OBJECTIVE') : null;
   }
 
   get cattleCard(): CattleCard {
@@ -30,7 +30,7 @@ export class CardComponent implements OnInit {
 
   @HostBinding('class')
   get className(): string {
-    return this.type === 'CATTLE' ? this.cattleCard.type : 'OBJECTIVE';
+    return this.type ? (this.type === 'CATTLE' ? this.cattleCard.type : 'OBJECTIVE') : 'back';
   }
 
 }

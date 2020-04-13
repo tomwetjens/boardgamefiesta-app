@@ -143,7 +143,8 @@ export interface PlayerState {
   readonly engineers: number;
   readonly certificates: number;
   readonly hand: Card[];
-  // TODO
+  readonly discardPile: Card[];
+  readonly drawStackSize: number;
 
   readonly unlocked: { [key in Unlockable]: number };
 }
@@ -167,8 +168,22 @@ export interface Station {
   readonly worker?: Worker;
 }
 
+export enum City {
+  KANSAS_CITY = 'KANSAS_CITY',
+  TOPEKA = 'TOPEKA',
+  WICHITA = 'WICHITA',
+  COLORADO_SPRINGS = 'COLORADO_SPRINGS',
+  SANTA_FE = 'SANTA_FE',
+  ALBUQUERQUE = 'ALBUQUERQUE',
+  EL_PASO = 'EL_PASO',
+  SAN_DIEGO = 'SAN_DIEGO',
+  SACRAMENTO = 'SACRAMENTO',
+  SAN_FRANCISCO = 'SAN_FRANCISCO'
+}
+
 export interface RailroadTrack {
   readonly players: { [color in PlayerColor]: Space };
+  readonly cities: { [city in City]: PlayerColor[] };
   readonly stations: Station[];
 }
 
@@ -254,4 +269,10 @@ export interface PossibleMove {
   cost: number;
   steps: string[];
   playerFees: { player: Player; cost: number }[];
+}
+
+export interface PossibleDelivery {
+  city: City;
+  certificates: number;
+  cost: number;
 }

@@ -11,7 +11,6 @@ import {PlayerBoardComponent} from './player-board/player-board.component';
 import {HomeComponent} from './home/home.component';
 import {BoardComponent} from './board/board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {OtherPlayerComponent} from './other-player/other-player.component';
 import {CreateGameComponent} from './create-game/create-game.component';
 import {SelectUserComponent} from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
@@ -25,6 +24,7 @@ import {ConnectionStatusComponent} from './connection-status/connection-status.c
 import {NavbarComponent} from './navbar/navbar.component';
 import {GameListComponent} from './game-list/game-list.component';
 import {LayoutComponent} from './layout/layout.component';
+import { CardStackComponent } from './card-stack/card-stack.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import {LayoutComponent} from './layout/layout.component';
     PlayerBoardComponent,
     HomeComponent,
     BoardComponent,
-    OtherPlayerComponent,
     CreateGameComponent,
     SelectUserComponent,
     ToastrComponent,
@@ -45,7 +44,8 @@ import {LayoutComponent} from './layout/layout.component';
     ConnectionStatusComponent,
     NavbarComponent,
     GameListComponent,
-    LayoutComponent
+    LayoutComponent,
+    CardStackComponent
   ],
   imports: [
     BrowserModule,
