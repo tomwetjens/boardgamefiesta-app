@@ -1,4 +1,6 @@
-export const environment = {
+import {Environment} from './environment.model';
+
+export const environment: Environment = {
   production: true,
   apiBaseUrl: 'https://gwt-api.wetjens.com',
   wsBaseUrl: 'wss://gwt-api.wetjens.com',
@@ -11,6 +13,6 @@ export const environment = {
     scope: 'openid profile',
     oidc: true,
     redirectUri: window.location.origin,
-    postLogoutRedirectUri: '/'
+    postLogoutRedirectUri: 'https://gwt.auth.eu-west-1.amazoncognito.com/logout?client_id=39334dh8ifidq5dpmnch2vnopr&logout_uri=' + window.location.origin
   }
 };
