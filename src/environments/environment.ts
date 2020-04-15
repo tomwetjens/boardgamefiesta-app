@@ -19,7 +19,7 @@ export const environment: Environment = {
     scope: 'openid profile',
     oidc: true,
     redirectUri: window.location.origin,
-    postLogoutRedirectUri: 'https://gwt-test.auth.eu-west-1.amazoncognito.com/logout?client_id=376e8rt8oopbqs5k5h2mnvl0nl&logout_uri=' + window.location.origin
+    logoutUrl: 'https://gwt-test.auth.eu-west-1.amazoncognito.com/logout?client_id=376e8rt8oopbqs5k5h2mnvl0nl&logout_uri=' + window.location.origin
   }
 };
 
