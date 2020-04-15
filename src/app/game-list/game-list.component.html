@@ -9,7 +9,7 @@
           with  {{game.otherPlayers}}, not started yet
         </div>
         <div *ngIf="!game.game.accepted">
-          invited by  {{game.game.owner.username}}}
+          invited by  {{game.game.owner.username}}
         </div>
       </div>
       <div *ngIf="game.game.status === 'STARTED'">

@@ -51,6 +51,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @ViewChild('F') private neutralBuildingF !: ElementRef<Element>;
   @ViewChild('G') private neutralBuildingG !: ElementRef<Element>;
 
+  private neutralBuildingElements: { [name: string]: ElementRef };
+
   @ViewChild('foresight00') private foresight00 !: ElementRef<Element>;
   @ViewChild('foresight01') private foresight01 !: ElementRef<Element>;
   @ViewChild('foresight02') private foresight02 !: ElementRef<Element>;
@@ -59,6 +61,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @ViewChild('foresight12') private foresight12 !: ElementRef<Element>;
 
   @ViewChild('hazards') private hazardsElement !: ElementRef<Element>;
+
+  hazards: { x: string, y: string, hazard: Hazard }[];
+  foresights: any[][];
 
   constructor(private renderer: Renderer2,
               private gameService: GameService,
@@ -74,10 +79,16 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     if (changes.selectedAction) {
       this.actionSelected();
     }
+
+    if (changes.state) {
+      this.positionNeutralBuildings();
+      this.updateHazards();
+      this.updateForesights();
+      this.positionRanchers();
+    }
   }
 
   private actionSelected() {
-    console.log(this.selectedAction);
     if (this.selectedAction === 'DELIVER_TO_CITY') {
       this.gameService.getPossibleDeliveries(this.game.id)
         .subscribe(possibleDeliveries => this.possibleDeliveries = possibleDeliveries);
@@ -91,12 +102,23 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       YELLOW: this.yellowElement,
       WHITE: this.whiteElement
     };
+
+    this.neutralBuildingElements = {
+      A: this.neutralBuildingA,
+      B: this.neutralBuildingB,
+      C: this.neutralBuildingC,
+      D: this.neutralBuildingD,
+      E: this.neutralBuildingE,
+      F: this.neutralBuildingF,
+      G: this.neutralBuildingG
+    };
+
+    this.positionNeutralBuildings();
+    this.positionRanchers();
   }
 
   clickLocation(name: string) {
     this.selected = name;
-
-    console.log('clickLocation: ', {name});
 
     if (this.state.actions.includes('MOVE')) {
       // TODO Determine and send whole path
@@ -134,94 +156,43 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   ngAfterContentChecked(): void {
-
+    this.updateHazards();
   }
 
   ngAfterViewChecked(): void {
-    this.syncPlayerLocations();
-
-    this.showPossibleMoves();
-
-    // TODO Refresh hazards after state changed
-    while (this.hazardsElement.nativeElement.firstChild) {
-      this.renderer.removeChild(this.hazardsElement.nativeElement, this.hazardsElement.nativeElement.firstChild);
-    }
-
-    for (const name of Object.keys(this.state.trail.locations)) {
-      const location = this.state.trail.locations[name];
-
-      const locationElement = this.getLocationElement(name);
-
-      if (location.building) {
-        const buildingElement = location.building === 'A' ? this.neutralBuildingA
-          : location.building === 'B' ? this.neutralBuildingB
-            : location.building === 'C' ? this.neutralBuildingC
-              : location.building === 'D' ? this.neutralBuildingD
-                : location.building === 'E' ? this.neutralBuildingE
-                  : location.building === 'F' ? this.neutralBuildingF
-                    : location.building === 'G' ? this.neutralBuildingG : null;
-
-        const x = locationElement.getAttribute('x');
-        const y = locationElement.getAttribute('y');
-
-        buildingElement.nativeElement.setAttribute('transform', 'translate(' + x + ',' + y + ')');
-      } else if (location.hazard) {
-        // TODO Differentiate to points and hand color
-        const id = location.hazard.type.toString().toLowerCase() + (location.hazard.hands === 'GREEN' ? 'Green' : 'Black');
-
-        const g = this.renderer.createElement('g', 'http://www.w3.org/2000/svg');
-        const x = locationElement.getAttribute('x');
-        const y = locationElement.getAttribute('y');
-        this.renderer.setAttribute(g, 'transform', 'translate(' + x + ',' + y + ')');
-        this.renderer.appendChild(this.hazardsElement.nativeElement, g);
-
-        this.renderer.setProperty(g, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-        this.renderer.listen(g, 'click', () => this.clickHazard(location.hazard));
-
-        console.log(location.hazard.type.toString().toLowerCase(), 'add hazard element ', id, ' at ' , location.name);
-      } else if (location.teepee) {
-        const id = location.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue';
-
-        const g = this.renderer.createElement('g', 'http://www.w3.org/2000/svg');
-        const x = locationElement.getAttribute('x');
-        const y = locationElement.getAttribute('y');
-        this.renderer.setAttribute(g, 'transform', 'translate(' + x + ',' + y + ')');
-        this.renderer.appendChild(this.hazardsElement.nativeElement, g);
-
-        console.log('add teepee element ', id, ' at ' , location.name);
-        this.renderer.setProperty(g, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-      }
-    }
-
-    const foresightElements = [
-      [this.foresight00, this.foresight01, this.foresight02],
-      [this.foresight10, this.foresight11, this.foresight12]
-    ];
-
-    for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
-      for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
-        const tile = this.state.foresights.choices[columnIndex][rowIndex];
-
-        const foresightElement = foresightElements[rowIndex][columnIndex];
-        if (tile) {
-          let id;
-          if (tile.type === 'HAZARD') {
-            // TODO Differentiate to points and hand color
-            id = tile.hazard.type.toLowerCase() + (tile.hazard.hands === 'GREEN' ? 'Green' : 'Black');
-            this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-          } else {
-            id = tile.type === 'TEEPEE' ? (tile.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue')
-              : tile.worker.toLowerCase();
-            this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-          }
-        } else {
-          this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '');
-        }
-      }
-    }
+    // const foresightElements = [
+    //   [this.foresight00, this.foresight01, this.foresight02],
+    //   [this.foresight10, this.foresight11, this.foresight12]
+    // ];
+    //
+    // for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
+    //   for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+    //     const tile = this.state.foresights.choices[columnIndex][rowIndex];
+    //
+    //     const foresightElement = foresightElements[rowIndex][columnIndex];
+    //     if (tile) {
+    //       let id;
+    //       if (tile.type === 'HAZARD') {
+    //         // TODO Differentiate to points and hand color
+    //         id = tile.hazard.type.toLowerCase() + (tile.hazard.hands === 'GREEN' ? 'Green' : 'Black');
+    //         this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
+    //       } else {
+    //         id = tile.type === 'TEEPEE' ? (tile.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue')
+    //           : tile.worker.toLowerCase();
+    //         this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
+    //       }
+    //     } else {
+    //       this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '');
+    //     }
+    //   }
+    // }
   }
 
-  private syncPlayerLocations() {
+  private positionRanchers() {
+    if (!this.rancherElements) {
+      return;
+    }
+
     const playersByLocation: { [key: string]: PlayerColor[] } = {};
     for (const color of Object.keys(this.state.trail.playerLocations)) {
       const location = this.state.trail.playerLocations[color];
@@ -311,19 +282,18 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return this.selectedAction === 'CHOOSE_FORESIGHTS';
   }
 
-  get canSelectLocation(): boolean {
-    return this.state.actions.includes('MOVE');
-  }
-
   get canSelectHazard(): boolean {
-    return ['REMOVE_HAZARD', 'REMOVE_HAZARD_FOR_FREE'].includes(this.selectedAction);
+    return ['MOVE', 'REMOVE_HAZARD', 'REMOVE_HAZARD_FOR_FREE'].includes(this.selectedAction);
   }
 
-  clickForesight(rowIndex: number, columnIndex: number) {
-    console.log('clickForesight', {rowIndex, columnIndex});
+  get canSelectTeepee(): boolean {
+    return ['MOVE', 'TRADE_WITH_INDIANS'].includes(this.selectedAction);
+  }
+
+  selectForesight(rowIndex: number, columnIndex: number) {
+    console.log('selectForesight: ', rowIndex, columnIndex);
 
     if (this.selectedAction === 'CHOOSE_FORESIGHTS') {
-      console.log(this.selectedForesights);
       this.selectedForesights.splice(columnIndex, 0, rowIndex);
 
       if (this.selectedForesights.length === 3) {
@@ -349,20 +319,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     }
   }
 
-  clickHazard(hazard: Hazard) {
-    if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
-      this.action.emit({type: this.selectedAction, hazard});
-    }
-  }
-
-  canClick(name: string) {
+  canSelectLocation(name: string) {
     const location = this.state.trail.locations[name];
-    return location &&
-      (this.selectedAction === 'MOVE' ? this.canMoveTo(location)
-        : this.selectedAction === 'PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN' || this.selectedAction === 'PLACE_BUILDING_FOR_2_DOLLARS_PER_CRAFTSMAN' ? this.canPlaceBuilding(location)
-          : this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE' ? this.canRemoveHazard(location)
-            : this.selectedAction === 'TRADE_WITH_INDIANS' ? this.canTakeTeepee(location)
-              : false);
+    return location && ((this.selectedAction === 'MOVE' && this.canMoveTo(location)) ||
+      (['PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN', 'PLACE_BUILDING_FOR_2_DOLLARS_PER_CRAFTSMAN'].includes(this.selectedAction) && this.canPlaceBuilding(location)));
   }
 
   private canMoveTo(location: Location): boolean {
@@ -373,14 +333,61 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return location.type === 'BUILDING' && !location.building;
   }
 
-  private canRemoveHazard(location: Location): boolean {
-    return !!location.hazard;
+  selectTeepee(reward: number) {
+    if (this.selectedAction === 'TRADE_WITH_INDIANS') {
+      this.action.emit({type: this.selectedAction, reward});
+    }
   }
 
-  private canTakeTeepee(location: Location): boolean {
-    if (!!location.teepee) {
-      console.log('can take teepee at ', location.name);
+  private positionNeutralBuildings() {
+    if (!this.neutralBuildingElements) {
+      return;
     }
-    return !!location.teepee;
+
+    for (const name of Object.keys(this.state.trail.locations)) {
+      const location = this.state.trail.locations[name];
+
+      const locationElement = this.getLocationElement(name);
+
+      if (location.building && this.neutralBuildingElements[location.building]) {
+        const buildingElement = this.neutralBuildingElements[location.building];
+
+        const x = locationElement.getAttribute('x');
+        const y = locationElement.getAttribute('y');
+
+        buildingElement.nativeElement.setAttribute('transform', 'translate(' + x + ',' + y + ')');
+      }
+    }
   }
+
+  private updateHazards() {
+    if (!this.locationsElement) {
+      return;
+    }
+
+    this.hazards = Object.keys(this.state.trail.locations)
+      .filter(name => this.state.trail.locations[name].hazard)
+      .map(name => {
+        const locationElement = this.getLocationElement(name);
+        const hazard = this.state.trail.locations[name].hazard;
+
+        return {
+          x: locationElement.getAttribute('x'),
+          y: locationElement.getAttribute('y'),
+          hazard
+        };
+      });
+  }
+
+  selectHazard(hazard: Hazard) {
+    if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
+      this.action.emit({type: this.selectedAction, hazard});
+    }
+  }
+
+  private updateForesights() {
+    this.foresights = this.state.foresights.choices
+      .map(column => column.map(tile => tile.worker || tile.teepee || tile.hazard.type + '_' + tile.hazard.hands));
+  }
+
 }

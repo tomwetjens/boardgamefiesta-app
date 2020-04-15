@@ -67,25 +67,6 @@
   }
 }
 
-.hazards {
-  * {
-    stroke-opacity: 1;
-    stroke: #ffffff;
-    stroke-width: 2;
-
-    cursor: pointer;
-
-    &:hover {
-      stroke: black;
-    }
-  }
-
-  &.disabled {
-    * {
-      cursor: default;
-    }
-  }
-}
 
 .ranchers {
 
@@ -126,5 +107,21 @@
       stroke-width: 0;
       cursor: default;
     }
+  }
+}
+
+.worker, .hazard, .teepee {
+  fill: rgb(0, 0, 0, 0.1);
+  stroke: #ffffff;
+  stroke-width: 2;
+  cursor: pointer;
+
+  &:hover {
+    stroke: black;
+  }
+
+  &.disabled {
+    stroke: none;
+    cursor: default;
   }
 }

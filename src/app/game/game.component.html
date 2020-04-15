@@ -3,9 +3,11 @@
     <li class="nav-item">
       <a class="btn btn-secondary" [routerLink]="['/']" i18n>Back</a>
     </li>
-    <li class="nav-item">
-      <a class="btn btn-primary" (click)="endTurn()" i18n>End Turn</a>
-    </li>
+    <ng-container *ngIf="state | async as state">
+      <li class="nav-item">
+        <a class="btn btn-primary" *ngIf="state.turn" (click)="endTurn()" i18n>End Turn</a>
+      </li>
+    </ng-container>
   </ul>
 
   <ng-container *ngIf="state | async as state">
@@ -19,7 +21,7 @@
       </ng-container>
       <ng-container *ngIf="selectedAction">
         <ng-container [ngSwitch]="selectedAction">
-          <span *ngSwitchCase="'MOVE'" i18n>Move cattleman</span>
+          <span *ngSwitchCase="'MOVE'" i18n>Move your cattleman</span>
           <span *ngSwitchCase="'SINGLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
           <span *ngSwitchCase="'SINGLE_OR_DOUBLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
           <span *ngSwitchCase="'DISCARD_1_CARD'" i18n>Discard 1 card</span>
@@ -33,10 +35,10 @@
 
     <div class="form-inline">
       <div *ngIf="state.turn">
-        Your Turn ({{state.expires | fromNow:1000}} remaining)
+        Your Turn ({{state.expires | fromNow}} remaining)
       </div>
       <div *ngIf="!state.turn">
-        waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow:1000}} remaining)
+        waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow}} remaining)
       </div>
       <app-connection-status></app-connection-status>
     </div>
@@ -53,11 +55,14 @@
   </ng-container>
 
   <ng-template #notStarted>
+    {{game.status}}
+
     <!-- TODO Confirm dialog when not all players have accepted -->
-    <button class="btn btn-primary" *ngIf="game.startable" (click)="start()">Start</button>
+    <button class="btn btn-primary" [disabled]="!game.startable" (click)="start()">Start</button>
+    <span *ngIf="!game.startable">You cannot start the game</span>
+    <span *ngIf="game.startable">You can start the game (even if not all players have accepted)</span>
 
     <ul>
-      <li>{{game.currentPlayer.username}}</li>
       <li *ngFor="let player of game.otherPlayers">
         {{player.user.username}}
         {{player.status}}

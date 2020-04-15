@@ -26,11 +26,9 @@ export type ActionType = 'CHOOSE_FORESIGHTS'
   | 'DRAW_3_CARDS_THEN_DISCARD_3_CARDS'
   | 'GAIN_1_DOLLAR'
   | 'DISCARD_1_DUTCH_BELT'
-  | 'DISCARD_1_CARD'
-  | 'DISCARD_2_CARDS'
-  | 'DISCARD_3_CARDS'
+  | 'DISCARD_CARD'
   | 'DISCARD_PAIR_TO_GAIN_4_DOLLARS'
-  | 'DRAW_2_CARDS_THEN_DISCARD_2_CARDS'
+  | 'DRAW_CARD'
   | 'PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD'
   | 'DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS'
   | 'REMOVE_2_CARDS'
@@ -106,6 +104,7 @@ export interface JobMarketRow {
 
 export interface JobMarket {
   readonly rows: JobMarketRow[];
+  readonly columns: number;
 }
 
 export interface ObjectiveCard {
@@ -215,7 +214,7 @@ export interface Trail {
   readonly kansasCity: Location;
   readonly start: Location;
   readonly locations: { [name: string]: Location };
-  readonly teepeeLocations: Location[];
+  readonly teepeeLocations: { [name: string]: Location };
   readonly playerLocations: { [color in PlayerColor]: string };
 }
 

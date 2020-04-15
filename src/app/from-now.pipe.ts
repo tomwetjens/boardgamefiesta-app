@@ -14,7 +14,7 @@ export class FromNowPipe implements PipeTransform, OnDestroy {
 
   private timer: Subscription;
 
-  transform(value: string, autoUpdatePeriod: number = 1000): unknown {
+  transform(value: string, autoUpdatePeriod: number = 5000): unknown {
     if (value) {
       if (!this.timer) {
         this.timer = timer(0, autoUpdatePeriod)

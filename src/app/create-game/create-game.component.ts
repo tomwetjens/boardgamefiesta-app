@@ -20,7 +20,6 @@ export class CreateGameComponent implements OnInit {
   }
 
   addUser(user: User) {
-    console.log('invite:', user);
     if (this.invitedUsers.find(invitedUser => invitedUser.id === user.id)) {
       return;
     }
@@ -31,7 +30,6 @@ export class CreateGameComponent implements OnInit {
   }
 
   uninvite(user: User) {
-    console.log('uninvite:', user);
     const index = this.invitedUsers.findIndex(invitedUser => invitedUser.id === user.id);
     if (index < 0) {
       return;

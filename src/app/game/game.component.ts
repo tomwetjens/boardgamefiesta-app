@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, ReplaySubject} from 'rxjs';
-import {flatMap, switchMap, take} from 'rxjs/operators';
+import {filter, flatMap, switchMap, take} from 'rxjs/operators';
 import {Action, ActionType, CattleCard, Game, PossibleMove, State} from '../model';
 import {EventService} from '../event.service';
 import {GameService} from '../game.service';
@@ -34,22 +34,20 @@ export class GameComponent implements OnInit {
       .pipe(flatMap(params => this.gameService.get(params.id)))
       .subscribe(game => this.game.next(game));
 
-    this.game.subscribe(() => this.refreshState());
+    this.game
+      .pipe(filter(game => game.status !== 'NEW'))
+      .subscribe(() => this.refreshState());
 
     this.eventService.events
       .subscribe(event => {
-        console.log('GameComponent: event=', event);
-
         if (event.type === 'STATE_CHANGED') {
           this.refreshState();
         }
       });
 
     this.state.subscribe(state => {
-      console.log(state.turn, state.actions);
       if (state.turn && state.actions.length === 1) {
         this.selectedAction = state.actions[0];
-        console.log(this.selectedAction);
       }
     });
   }

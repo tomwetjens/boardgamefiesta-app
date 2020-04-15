@@ -12,17 +12,12 @@
             (click)="clickCard(card)">
   </app-card>
 
-  <app-card-stack class="discard-pile" [cards]="playerState.discardPile"></app-card-stack>
-
   <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"></app-card-stack>
+
+  <app-card-stack class="discard-pile" [cards]="playerState.discardPile"></app-card-stack>
 </div>
 <div class="row no-gutters">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    version="1.1"
-    viewBox="0 0 800 448"
-    style="width:100%; height:100%"
-    class="player-board" [class]="'' + playerState.player.color">
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board" [class]="'' + playerState.player.color">
     <image [attr.href]="'/assets/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'" x="0" y="0" height="446" width="800"></image>
 
     <circle id="aux-dollar-2-disc"
@@ -208,8 +203,8 @@
           ry="4"
           height="54"
           width="54"
-          [ngClass]="{disabled: !actions.includes('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')}"
-          (click)="clickAuxiliaryAction('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')"/>
+          [ngClass]="{disabled: !actions.includes('DRAW_CARD')}"
+          (click)="clickAuxiliaryAction('DRAW_CARD')"/>
 
     <rect id="aux-draw-2"
           class="action"

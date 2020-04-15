@@ -25,7 +25,6 @@ export class DeliveryCityComponent implements OnInit {
   }
 
   get reward(): number {
-    console.log(this.possibleDelivery.reward);
     return this.possibleDelivery.reward + (this.certificates - this.possibleDelivery.certificates);
   }
 }

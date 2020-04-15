@@ -30,7 +30,6 @@ export class EventService {
         closeObserver: {next: () => this.connected.next(false)}
       })
         .pipe(retry())),
-      tap(message => console.log('websocket message:', message)),
       catchError(err => {
         this.connected.next(false);
         return throwError(err);
