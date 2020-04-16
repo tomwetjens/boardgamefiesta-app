@@ -46,7 +46,7 @@ export class GameComponent implements OnInit {
       });
 
     this.state.subscribe(state => {
-      if (state.turn && state.actions.length === 1 && ['MOVE', 'DISCARD_CARD'].includes(state.actions[0])) {
+      if (state.turn && state.actions.length === 1 && ['MOVE', 'DISCARD_CARD', 'CHOOSE_FORESIGHTS', 'DELIVER_TO_CITY'].includes(state.actions[0])) {
         this.selectedAction = state.actions[0];
       }
     });

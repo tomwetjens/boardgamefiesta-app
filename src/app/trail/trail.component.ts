@@ -406,6 +406,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private canMoveTo(location: Location): boolean {
+    if (location.name === 'KANSAS_CITY') {
+      return true;
+    }
     return !!location.building || !!location.hazard || !!location.teepee;
   }
 
