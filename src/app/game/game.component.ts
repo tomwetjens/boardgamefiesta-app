@@ -46,7 +46,7 @@ export class GameComponent implements OnInit {
       });
 
     this.state.subscribe(state => {
-      if (state.turn && state.actions.length === 1) {
+      if (state.turn && state.actions.length === 1 && ['MOVE', 'DISCARD_CARD'].includes(state.actions[0])) {
         this.selectedAction = state.actions[0];
       }
     });
@@ -62,8 +62,8 @@ export class GameComponent implements OnInit {
     this.game
       .pipe(take(1), flatMap(game => this.gameService.perform(game.id, action)))
       .subscribe(state => {
-        this.state.next(state);
         this.selectedAction = null;
+        this.state.next(state);
       });
   }
 
@@ -74,6 +74,8 @@ export class GameComponent implements OnInit {
   }
 
   selectAction(actionType: ActionType) {
+    console.log('selectAction: ', actionType);
+
     this.state.pipe(take(1))
       .subscribe(state => {
         switch (actionType) {
@@ -89,14 +91,26 @@ export class GameComponent implements OnInit {
               }), err => this.selectedAction = null);
             break;
 
+          case 'DISCARD_1_DUTCH_BELT':
+          case 'GAIN_2_DOLLARS':
+          case 'GAIN_1_DOLLAR':
+          case 'GAIN_1_CERTIFICATE':
+          case 'DRAW_CARD':
+          case 'DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES':
+          case 'DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS':
+          case 'DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE':
+          case 'DISCARD_1_GUERNSEY':
+          case 'DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS':
+          case 'DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS':
           case 'SINGLE_AUXILIARY_ACTION':
           case 'SINGLE_OR_DOUBLE_AUXILIARY_ACTION':
-          case 'TRADE_WITH_INDIANS':
-            this.selectedAction = actionType;
+          case 'UPGRADE_STATION':
+          case 'DISCARD_1_DUTCH_BELT_TO_GAIN_2_DOLLARS':
+            this.perform({type: actionType});
             break;
 
           default:
-            this.perform({type: actionType});
+            this.selectedAction = actionType;
             break;
         }
       });
@@ -109,4 +123,7 @@ export class GameComponent implements OnInit {
       .subscribe(state => this.state.next(state));
   }
 
+  cancelAction() {
+    this.selectedAction = null;
+  }
 }

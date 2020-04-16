@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {OAuthModule, OAuthStorage} from 'angular-oauth2-oidc';
 
 import {AppRoutingModule} from './app-routing.module';

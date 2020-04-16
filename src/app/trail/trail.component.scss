@@ -110,7 +110,7 @@
   }
 }
 
-.worker, .hazard, .teepee {
+.worker, .hazard, .teepee, .space {
   fill: rgb(0, 0, 0, 0.1);
   stroke: #ffffff;
   stroke-width: 2;
@@ -123,5 +123,41 @@
   &.disabled {
     stroke: none;
     cursor: default;
+  }
+}
+
+.station {
+  rect {
+    fill: rgb(0, 0, 0, 0.1);
+    stroke: #ffffff;
+    stroke-width: 2;
+    cursor: pointer;
+
+    &:hover {
+      stroke: black;
+    }
+  }
+
+  &.disabled {
+    rect {
+      display: none;
+    }
+  }
+}
+
+.engine {
+  stroke: none;
+
+  &.BLUE {
+    fill: blue;
+  }
+  &.RED {
+    fill: red;
+  }
+  &.YELLOW {
+    fill: yellow;
+  }
+  &.WHITE {
+    fill: white;
   }
 }

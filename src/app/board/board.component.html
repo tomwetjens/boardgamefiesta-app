@@ -7,7 +7,7 @@
                  (action)="perform($event)">
       </app-trail>
 
-      <app-cattle-market [cattleMarket]="state.cattleMarket"></app-cattle-market>
+      <app-cattle-market [cattleMarket]="state.cattleMarket" [selectedAction]="selectedAction" (action)="perform($event)"></app-cattle-market>
     </div>
     <div class="col-4">
       <app-player-board [playerState]="state.player"

@@ -1,1 +1,4 @@
-<app-card *ngFor="let card of cards" [card]="card"></app-card>
+<app-card *ngFor="let card of cards"
+          [card]="card"
+          [ngClass]="{disabled:!canSelectCard(card)}"
+          (click)="selectCard(card)"></app-card>

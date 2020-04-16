@@ -8,6 +8,7 @@
 </div>
 <div class="row no-gutters hand" *ngIf="playerState.hand">
   <app-card *ngFor="let card of playerState.hand"
+            [ngClass]="{disabled:!canSelectCard(card)}"
             [card]="card"
             (click)="clickCard(card)">
   </app-card>
@@ -214,8 +215,8 @@
           ry="4"
           height="54"
           width="54"
-          [ngClass]="{disabled: !actions.includes('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')}"
-          (click)="clickAuxiliaryAction('DRAW_2_CARDS_THEN_DISCARD_2_CARDS')"/>
+          [ngClass]="{disabled: !actions.includes('DRAW_CARD')}"
+          (click)="clickAuxiliaryAction('DRAW_CARD')"/>
 
     <rect id="aux-move-engine-backwards"
           class="action"
@@ -225,8 +226,8 @@
           ry="4"
           height="54"
           width="54"
-          [ngClass]="{disabled: !actions.includes('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERT')}"
-          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERT')"/>
+          [ngClass]="{disabled: !actions.includes('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE')}"
+          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE')"/>
 
     <rect id="aux-move-engine-backwards-2"
           class="action"
@@ -236,8 +237,8 @@
           ry="4"
           height="54"
           width="54"
-          [ngClass]="{disabled: !actions.includes('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTS')}"
-          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTS')"/>
+          [ngClass]="{disabled: !actions.includes('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES')}"
+          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES')"/>
 
     <rect id="aux-move-engine-forward"
           class="action"

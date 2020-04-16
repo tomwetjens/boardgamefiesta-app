@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CattleCard, CattleMarket} from '../model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Action, ActionType, CattleCard, CattleMarket} from '../model';
 
 @Component({
   selector: 'app-cattle-market',
@@ -9,6 +9,9 @@ import {CattleCard, CattleMarket} from '../model';
 export class CattleMarketComponent implements OnInit {
 
   @Input() cattleMarket: CattleMarket;
+  @Input() selectedAction: ActionType;
+
+  @Output() action = new EventEmitter<Action>();
 
   constructor() {
   }
@@ -18,5 +21,18 @@ export class CattleMarketComponent implements OnInit {
 
   get cards(): CattleCard[] {
     return this.cattleMarket.cards.sort((a, b) => b.breedingValue - a.breedingValue);
+  }
+
+  canSelectCard(card: CattleCard) {
+    // TODO Determine possible buys
+    return ['BUY_CATTLE'].includes(this.selectedAction);
+  }
+
+  selectCard(card: CattleCard) {
+    console.log('selectCard: ', card);
+    if (this.selectedAction === 'BUY_CATTLE') {
+      // TODO Add card to selected cards
+      this.action.emit({type: this.selectedAction, cattleCards: [card]});
+    }
   }
 }

@@ -41,10 +41,6 @@
       <rect rx="8" ry="8" width="68.08" height="66.49"/>
     </clipPath>
 
-    <clipPath id="tokenclip">
-      <circle r="33" cx="33" cy="33"/>
-    </clipPath>
-
     <g id="COWBOY">
       <image id="cowboy" href="/assets/cowboy.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
       <rect height="39" width="33" rx="6" ry="6"/>
@@ -88,6 +84,18 @@
     <g id="ROCKFALL_GREEN">
       <image href="/assets/rockfall_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
       <rect x="0" y="0" width="33" height="39" rx="6" ry="6"/>
+    </g>
+
+    <clipPath id="tokenclip">
+      <circle r="15" cx="15" cy="15"/>
+    </clipPath>
+
+    <g id="jobMarketToken">
+      <image href="/assets/job_market_token.jpg" width="30" height="30" clip-path="url(#tokenclip)"/>
+    </g>
+
+    <g id="engine">
+      <rect width="28" height="14" x="2" y="2"/>
     </g>
   </defs>
   <g>
@@ -195,20 +203,39 @@
             (click)="clickCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
     </g>
 
+    <g id="railroad-track" class="railroad-track">
+      <g *ngFor="let space of spaces"
+         [attr.transform]="'translate(' + space.x + ',' + space.y + ') ' + space.transform">
+
+        <use *ngFor="let color of getPlayersAt(space.space); index as i"
+             xlink:href="#engine"
+             [attr.class]="'engine ' + color"
+             [attr.y]="i * 14"/>
+
+        <rect [attr.height]="space.height"
+              [attr.width]="space.width"
+              class="space"
+              [ngClass]="{disabled:!canSelectSpace(space.space)}"
+              (click)="selectSpace(space.space)"/>
+      </g>
+
+      <g *ngFor="let station of state.railroadTrack.stations; index as i" class="station"
+         [attr.transform]="'translate(' + (i < 5 ? (305 + (i * 95)) : (i < 9 ? 722 : 745)) + ',' + (i < 5 ? 95 : (i < 9 ? (127 + ((i-5)*124)) : 700)) + ')'"
+         (click)="selectStation(i)"
+         [ngClass]="{disabled:!canSelectStation(i)}">
+        <rect width="33" height="33" rx="6" ry="6"/>
+      </g>
+    </g>
+
     <g class="job-market">
       <g *ngFor="let row of state.jobMarket.rows; index as rowIndex">
         <use *ngFor="let worker of row.workers; index as columnIndex" [attr.xlink:href]="'#' + worker"
-             class="worker"
-             [attr.x]="9 + (state.jobMarket.columns * 33) + (columnIndex * 33)"
+             class="worker" [ngClass]="{disabled:!canSelectWorker(worker)}"
+             [attr.x]="9 + (state.jobMarket.rowLimit * 33) + (columnIndex * 33)"
              [attr.y]="277 + (rowIndex * 39)"/>
       </g>
 
-      <image href="/assets/job_market_token.jpg"
-             x="130"
-             [attr.y]="277 + (state.jobMarket.rows.length - 1) * 39"
-             width="39"
-             height="39"
-             clip-path="url(#tokenclip)"/>
+      <use xlink:href="#jobMarketToken" x="110" [attr.y]="280 + (state.jobMarket.currentRowIndex * 39)"/>
     </g>
 
     <g #neutralBuildings transform="translate(130,-133)" class="buildings">
@@ -247,7 +274,6 @@
     </g>
 
     <g #locations transform="translate(130,-133)" class="locations">
-
       <rect id="KANSAS_CITY"
             class="location"
             x="00.69"
@@ -256,7 +282,8 @@
             ry="2"
             height="30"
             width="42"
-            (click)="clickLocation('KANSAS_CITY')" [ngClass]="{disabled:!canSelectLocation('KANSAS_CITY')}"/>
+            [ngClass]="{disabled:!canSelectLocation('KANSAS_CITY')}"
+            (click)="clickLocation('KANSAS_CITY')"/>
 
       <rect id="START"
             class="location"
@@ -264,6 +291,7 @@
             y="875"
             height="30"
             width="44"
+            [ngClass]="{disabled:!canSelectLocation('START')}"
             (click)="clickLocation('START')"/>
 
       <g class="hazardLocations" #hazardLocations>
@@ -360,14 +388,14 @@
              id="G" (click)="clickLocation('G')" [ngClass]="{disabled:!canSelectLocation('G')}"/>
       </g>
 
-      <g ref-ranchers="" class="ranchers">
+      <g #ranchers class="ranchers">
         <use xlink:href="#rancher" ref-red="" class="red"></use>
         <use xlink:href="#rancher" ref-blue="" class="blue"></use>
         <use xlink:href="#rancher" ref-yellow="" class="yellow"></use>
         <use xlink:href="#rancher" ref-white="" class="white"></use>
       </g>
 
-      <g ref-possiblemoves="" class="possible-moves"></g>
+      <g #possiblemoves class="possible-moves"></g>
     </g>
   </g>
 </svg>

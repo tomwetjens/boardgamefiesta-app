@@ -24,6 +24,7 @@ export class BoardComponent implements OnInit {
   }
 
   perform(action: Action) {
+    console.log('perform:', action);
     this.action.emit(action);
   }
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Action, ActionType, Card, PlayerState, Unlockable} from '../model';
+import {Action, ActionType, Card, PlayerState} from '../model';
 
 @Component({
   selector: 'app-player-board',
@@ -47,21 +47,9 @@ export class PlayerBoardComponent implements OnInit {
       this.selectedCards.splice(index, 1);
     }
 
-    if (this.actions.includes('DISCARD_2_CARDS')) {
-      if (this.selectedCards.length === 2) {
-        this.action.emit({type: 'DISCARD_2_CARDS', cards: this.selectedCards});
-        this.selectedCards = [];
-      }
-    } else if (this.actions.includes('DISCARD_3_CARDS')) {
-      if (this.selectedCards.length === 3) {
-        this.action.emit({type: 'DISCARD_3_CARDS', cards: this.selectedCards});
-        this.selectedCards = [];
-      }
-    } else if (this.actions.includes('DISCARD_1_CARD')) {
-      if (this.selectedCards.length === 1) {
-        this.action.emit({type: 'DISCARD_1_CARD', cards: this.selectedCards});
-        this.selectedCards = [];
-      }
+    if (this.selectedAction === 'DISCARD_CARD') {
+      this.action.emit({type: this.selectedAction, card});
+      this.selectedCards = [];
     }
   }
 
@@ -69,5 +57,9 @@ export class PlayerBoardComponent implements OnInit {
     if (this.selectedAction === 'UNLOCK_WHITE' || this.selectedAction === 'UNLOCK_BLACK_OR_WHITE') {
       this.action.emit({type: this.selectedAction, unlock});
     }
+  }
+
+  canSelectCard(card: Card) {
+    return ['DISCARD_CARD'].includes(this.selectedAction);
   }
 }

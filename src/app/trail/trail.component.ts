@@ -1,10 +1,25 @@
 import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, State} from '../model';
+import {Action, ActionType, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {ToastrService} from '../toastr.service';
+
+const SELECT_SPACE_ACTIONS = [
+  'MOVE_ENGINE_1_FORWARD',
+  'MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS',
+  'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD',
+  'MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS',
+  'MOVE_ENGINE_2_OR_3_FORWARD',
+  'MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS',
+  'MOVE_ENGINE_AT_MOST_2_FORWARD',
+  'MOVE_ENGINE_AT_MOST_3_FORWARD',
+  'MOVE_ENGINE_AT_MOST_4_FORWARD',
+  'MOVE_ENGINE_AT_MOST_5_FORWARD',
+  'MOVE_ENGINE_FORWARD',
+  'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'
+];
 
 @Component({
   selector: 'app-trail',
@@ -65,10 +80,75 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   hazards: { x: string, y: string, hazard: Hazard }[];
   foresights: any[][];
 
+  spaces: {
+    space: { number?: number; turnout?: number };
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    transform?: string;
+  }[];
+
+  engines: { [playerColor in PlayerColor]: { x: string; y: string; } };
+
+  stations: {}[];
+
   constructor(private renderer: Renderer2,
               private gameService: GameService,
               private ngbModal: NgbModal,
               private toastrService: ToastrService) {
+    this.spaces = Array(19).fill(0)
+      .map((_, index) => ({
+        space: {number: index, turnout: null},
+        x: 164 + index * 31.7,
+        y: 54,
+        width: 31.7,
+        height: 19,
+        transform: ''
+      }))
+      .concat(Array(5).fill(0)
+        .map((_, index) => ({
+          space: {number: null, turnout: index},
+          x: 303 + index * 95,
+          y: 73,
+          width: 36,
+          height: 18,
+          transform: ''
+        })))
+      .concat({
+        space: {number: 19, turnout: null},
+        x: 761,
+        y: 64,
+        width: 20,
+        height: 30.9,
+        transform: 'rotate(-45 761 64)'
+      })
+      .concat(Array(19).fill(0)
+        .map((_, index) => ({
+          space: {number: 20 + index, turnout: null},
+          x: 777,
+          y: 82 + (index * 30.9),
+          width: 20,
+          height: 30.9,
+          transform: ''
+        })))
+      .concat(Array(4).fill(0)
+        .map((_, index) => ({
+          space: {number: null, turnout: 5 + index},
+          x: 759,
+          y: 126 + index * 124,
+          width: 18,
+          height: 36,
+          transform: ''
+        })))
+      .concat({
+        space: {number: 39, turnout: null},
+        x: 731,
+        y: 666,
+        width: 46,
+        height: 30.9,
+        transform: ''
+      });
   }
 
   ngOnInit(): void {
@@ -390,4 +470,36 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       .map(column => column.map(tile => tile.worker || tile.teepee || tile.hazard.type + '_' + tile.hazard.hands));
   }
 
+  selectStation(index: number) {
+    console.log('selectStation: ', index);
+    // TODO
+  }
+
+  canSelectStation(index: number) {
+    return ['DOWNGRADE_STATION'].includes(this.selectedAction);
+  }
+
+  selectSpace(space: Space) {
+    console.log('selectSpace: ', space);
+
+    if (SELECT_SPACE_ACTIONS.includes(this.selectedAction)) {
+      this.action.emit({type: this.selectedAction, to: space});
+    }
+  }
+
+  canSelectSpace(space: Space) {
+    return SELECT_SPACE_ACTIONS.includes(this.selectedAction);
+  }
+
+  getPlayersAt(space: Space): string[] {
+    return Object.keys(PlayerColor).filter(color => this.isPlayerAt(color as PlayerColor, space));
+  }
+
+  private isPlayerAt(color: PlayerColor, space: Space): boolean {
+    return this.state.railroadTrack.players[color] && (this.state.railroadTrack.players[color].number === space.number || this.state.railroadTrack.players[color].turnout === space.turnout);
+  }
+
+  canSelectWorker(worker: Worker): boolean {
+    return ['HIRE_WORKER', 'HIRE_SECOND_WORKER', 'HIRE_CHEAP_WORKER'].includes(this.selectedAction);
+  }
 }

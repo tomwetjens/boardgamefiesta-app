@@ -39,14 +39,14 @@ export type ActionType = 'CHOOSE_FORESIGHTS'
   | 'DISCARD_1_GUERNSEY'
   | 'MOVE_ENGINE_2_OR_3_FORWARD'
   | 'REMOVE_HAZARD_FOR_FREE'
-  | 'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTS'
+  | 'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES'
   | 'GAIN_OBJECTIVE_CARD'
   | 'UPGRADE_STATION'
   | 'APPOINT_STATION_MASTER'
   | 'PLAY_OBJECTIVE_CARD'
-  | 'DISCARD_1_JERSEY_TO_GAIN_2_CERTS'
+  | 'DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES'
   | 'REMOVE_HAZARD'
-  | 'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERT'
+  | 'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE'
   | 'MOVE'
   | 'REMOVE_1_CARD'
   | 'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD'
@@ -58,14 +58,15 @@ export type ActionType = 'CHOOSE_FORESIGHTS'
   | 'GAIN_2_DOLLARS'
   | 'BUY_CATTLE'
   | 'TRADE_WITH_INDIANS'
-  | 'DISCARD_1_JERSEY_TO_GAIN_1_CERT'
+  | 'DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE'
   | 'DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS'
   | 'MOVE_ENGINE_FORWARD'
   | 'PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN'
-  | 'GAIN_1_CERT'
+  | 'GAIN_1_CERTIFICATE'
   | 'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'
   | 'UNLOCK_WHITE'
-  | 'UNLOCK_BLACK_OR_WHITE';
+  | 'UNLOCK_BLACK_OR_WHITE'
+  | 'DISCARD_1_DUTCH_BELT_TO_GAIN_2_DOLLARS';
 
 export type Teepee = 'BLUE' | 'GREEN';
 
@@ -104,7 +105,8 @@ export interface JobMarketRow {
 
 export interface JobMarket {
   readonly rows: JobMarketRow[];
-  readonly columns: number;
+  readonly rowLimit: number;
+  readonly currentRowIndex: number;
 }
 
 export interface ObjectiveCard {
@@ -155,8 +157,8 @@ export interface PlayerState {
 }
 
 export interface Space {
-  readonly type: 'NORMAL' | 'TURNOUT';
-  readonly index: number;
+  readonly number?: number;
+  readonly turnout?: number;
 }
 
 export enum StationMaster {
