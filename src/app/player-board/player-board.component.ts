@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Action, ActionType, Card, PlayerState} from '../model';
+import {Action, ActionType, Card, PlayerState, State} from '../model';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 
 @Component({
   selector: 'app-player-board',
@@ -8,6 +10,7 @@ import {Action, ActionType, Card, PlayerState} from '../model';
 })
 export class PlayerBoardComponent implements OnInit {
 
+  @Input() state: State;
   @Input() playerState: PlayerState;
   @Input() actions: ActionType[] = [];
   @Input() selectedAction: ActionType;
@@ -16,14 +19,14 @@ export class PlayerBoardComponent implements OnInit {
 
   selectedCards: Card[] = [];
 
-  constructor() {
+  constructor(private ngbModal: NgbModal) {
   }
 
   ngOnInit(): void {
   }
 
-  clickAuxiliaryAction(action: ActionType) {
-    this.action.emit({type: action});
+  clickAuxiliaryAction(action: string) {
+    this.action.emit({type: action as ActionType});
   }
 
   hasUnlocked(unlockable: string, atLeast: number = 1): boolean {
@@ -31,11 +34,11 @@ export class PlayerBoardComponent implements OnInit {
   }
 
   get canUnlockWhite(): boolean {
-    return this.selectedAction === 'UNLOCK_WHITE' || this.selectedAction === 'UNLOCK_BLACK_OR_WHITE';
+    return this.selectedAction === ActionType.UNLOCK_WHITE || this.selectedAction === ActionType.UNLOCK_BLACK_OR_WHITE;
   }
 
   get canUnlockBlack(): boolean {
-    return this.selectedAction === 'UNLOCK_BLACK_OR_WHITE';
+    return this.selectedAction === ActionType.UNLOCK_BLACK_OR_WHITE;
   }
 
   clickCard(card: Card) {
@@ -61,5 +64,14 @@ export class PlayerBoardComponent implements OnInit {
 
   canSelectCard(card: Card) {
     return ['DISCARD_CARD'].includes(this.selectedAction);
+  }
+
+  canSelectAction(actionType: string) {
+    return this.state.actions.includes(actionType as ActionType);
+  }
+
+  showBuildings() {
+    const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
+    ngbModalRef.componentInstance.playerState = this.playerState;
   }
 }

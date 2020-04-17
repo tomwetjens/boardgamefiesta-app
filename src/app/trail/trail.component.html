@@ -85,6 +85,21 @@
       <image href="/assets/rockfall_green.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
       <rect x="0" y="0" width="33" height="39" rx="6" ry="6"/>
     </g>
+    <g id="GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER">
+      <image href="/assets/point_per_worker.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS">
+      <image href="/assets/points_per_2_objective_cards.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="PERM_CERT_POINTS_FOR_EACH_2_HAZARDS">
+      <image href="/assets/points_per_pair_hazards.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="PERM_CERT_POINTS_FOR_TEEPEE_PAIRS">
+      <image href="/assets/points_per_pair_teepees.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="PERM_CERT_POINTS_FOR_EACH_2_CERTS">
+      <image href="/assets/points_per_2_certs.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
 
     <clipPath id="tokenclip">
       <circle r="15" cx="15" cy="15"/>
@@ -102,15 +117,159 @@
     <image href="/assets/board.png" x="0" y="0" height="800" width="800"></image>
 
     <g id="foresights" transform="translate(20,194)" class="foresights" [ngClass]="{disabled:!canChooseForesights}">
-      <use x="0" [attr.xlink:href]="'#' + foresights[2][0]" class="foresight" (click)="selectForesight(0,2)"/>
-      <use x="34" [attr.xlink:href]="'#' + foresights[1][0]" (click)="selectForesight(0,1)"/>
-      <use x="68" [attr.xlink:href]="'#' + foresights[0][0]" (click)="selectForesight(0,0)"/>
-      <use x="0" y="40" [attr.xlink:href]="'#' + foresights[2][1]" class="foresight" (click)="selectForesight(1,2)"/>
-      <use x="34" y="40" [attr.xlink:href]="'#' + foresights[1][1]" (click)="selectForesight(1,1)"/>
-      <use x="68" y="40" [attr.xlink:href]="'#' + foresights[0][1]" (click)="selectForesight(1,0)"/>
+      <use x="0" [attr.xlink:href]="'#' + foresights[2][0]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(2,0), otherSelected: isForesightSelected(2,1)}"
+           (click)="selectForesight(0,2)"/>
+      <use x="34" [attr.xlink:href]="'#' + foresights[1][0]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(1,0), otherSelected: isForesightSelected(1,1)}"
+           (click)="selectForesight(0,1)"/>
+      <use x="68" [attr.xlink:href]="'#' + foresights[0][0]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(0,0), otherSelected: isForesightSelected(0,1)}"
+           (click)="selectForesight(0,0)"/>
+
+      <use x="0" y="40" [attr.xlink:href]="'#' + foresights[2][1]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(2,1), otherSelected: isForesightSelected(2,0)}"
+           (click)="selectForesight(1,2)"/>
+      <use x="34" y="40" [attr.xlink:href]="'#' + foresights[1][1]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(1,1), otherSelected: isForesightSelected(1,0)}"
+           (click)="selectForesight(1,1)"/>
+      <use x="68" y="40" [attr.xlink:href]="'#' + foresights[0][1]"
+           class="foresight" [ngClass]="{selected:isForesightSelected(0,1), otherSelected: isForesightSelected(0,0)}"
+           (click)="selectForesight(1,0)"/>
     </g>
 
     <g id="cities" class="cities">
+      <circle *ngFor="let color of state.railroadTrack.cities['KANSAS_CITY']; index as i"
+              [class]="'disc ' + color"
+              cx="147"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['TOPEKA']; index as i"
+              [class]="'disc ' + color"
+              cx="210"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['WICHITA']; index as i"
+              [class]="'disc ' + color"
+              cx="305"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['COLORADO_SPRINGS']; index as i"
+              [class]="'disc ' + color"
+              cx="368"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['SANTA_FE']; index as i"
+              [class]="'disc ' + color"
+              cx="431"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['ALBUQUERQUE']; index as i"
+              [class]="'disc ' + color"
+              cx="495"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['EL_PASO']; index as i"
+              [class]="'disc ' + color"
+              cx="558"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['SAN_DIEGO']; index as i"
+              [class]="'disc ' + color"
+              cx="621"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <circle *ngFor="let color of state.railroadTrack.cities['SACRAMENTO']; index as i"
+              [class]="'disc ' + color"
+              cx="684"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <!-- SAN_FRANCISCO -->
+      <circle *ngFor="let color of state.railroadTrack.cities['SAN_FRANCISCO']; index as i"
+              [class]="'disc ' + color"
+              cx="748"
+              [attr.cy]="17 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 0 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[0].players; index as i"
+              [class]="'disc ' + color"
+              cx="322"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 1 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[1].players; index as i"
+              [class]="'disc ' + color"
+              cx="416"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 2 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[2].players; index as i"
+              [class]="'disc ' + color"
+              cx="510"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 3 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[3].players; index as i"
+              [class]="'disc ' + color"
+              cx="606"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 4 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[4].players; index as i"
+              [class]="'disc ' + color"
+              cx="701"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 5 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[5].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="144 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 6 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[6].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="266 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 7 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[7].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="390 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 8 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[8].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="514 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 9 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[9].players; index as i"
+              [class]="'disc ' + color"
+              cx="762"
+              [attr.cy]="715 - (i * 4)"
+              r="11"/>
+
       <rect id="city-KANSAS_CITY"
             class="city"
             x="121"
@@ -119,7 +278,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('KANSAS_CITY')" [ngClass]="{disabled:!canSelectCity('KANSAS_CITY')}"/>
+            (click)="selectCity('KANSAS_CITY')" [ngClass]="{disabled:!canSelectCity('KANSAS_CITY')}"/>
       <rect id="city-TOPEKA"
             class="city"
             x="184"
@@ -128,7 +287,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('TOPEKA')" [ngClass]="{disabled:!canSelectCity('TOPEKA')}"/>
+            (click)="selectCity('TOPEKA')" [ngClass]="{disabled:!canSelectCity('TOPEKA')}"/>
       <rect id="city-WICHITA"
             class="city"
             x="279"
@@ -137,7 +296,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('WICHITA')" [ngClass]="{disabled:!canSelectCity('WICHITA')}"/>
+            (click)="selectCity('WICHITA')" [ngClass]="{disabled:!canSelectCity('WICHITA')}"/>
       <rect id="city-COLORADO_SPRINGS"
             class="city"
             x="343"
@@ -146,7 +305,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('COLORADO_SPRINGS')" [ngClass]="{disabled:!canSelectCity('COLORADO_SPRINGS')}"/>
+            (click)="selectCity('COLORADO_SPRINGS')" [ngClass]="{disabled:!canSelectCity('COLORADO_SPRINGS')}"/>
       <rect id="city-SANTA_FE"
             class="city"
             x="406"
@@ -155,7 +314,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SANTA_FE')" [ngClass]="{disabled:!canSelectCity('SANTA_FE')}"/>
+            (click)="selectCity('SANTA_FE')" [ngClass]="{disabled:!canSelectCity('SANTA_FE')}"/>
       <rect id="city-ALBUQUERQUE"
             class="city"
             x="469"
@@ -164,7 +323,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('ALBUQUERQUE')" [ngClass]="{disabled:!canSelectCity('ALBUQUERQUE')}"/>
+            (click)="selectCity('ALBUQUERQUE')" [ngClass]="{disabled:!canSelectCity('ALBUQUERQUE')}"/>
       <rect id="city-EL_PASO"
             class="city"
             x="532"
@@ -173,7 +332,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('EL_PASO')" [ngClass]="{disabled:!canSelectCity('EL_PASO')}"/>
+            (click)="selectCity('EL_PASO')" [ngClass]="{disabled:!canSelectCity('EL_PASO')}"/>
       <rect id="city-SAN_DIEGO"
             class="city"
             x="595"
@@ -182,7 +341,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SAN_DIEGO')" [ngClass]="{disabled:!canSelectCity('SAN_DIEGO')}"/>
+            (click)="selectCity('SAN_DIEGO')" [ngClass]="{disabled:!canSelectCity('SAN_DIEGO')}"/>
       <rect id="city-SACRAMENTO"
             class="city"
             x="659"
@@ -191,7 +350,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SACRAMENTO')" [ngClass]="{disabled:!canSelectCity('SACRAMENTO')}"/>
+            (click)="selectCity('SACRAMENTO')" [ngClass]="{disabled:!canSelectCity('SACRAMENTO')}"/>
       <rect id="city-SAN_FRANCISCO"
             class="city"
             x="722"
@@ -200,10 +359,55 @@
             ry="2"
             height="50"
             width="52"
-            (click)="clickCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
+            (click)="selectCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
     </g>
 
     <g id="railroad-track" class="railroad-track">
+      <use *ngIf="state.railroadTrack.stations[0].stationMaster"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[0].stationMaster"
+           [attr.x]="271"
+           [attr.y]="86"/>
+      <use *ngIf="state.railroadTrack.stations[0].worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[0].worker" class="worker disabled"
+           [attr.x]="271"
+           [attr.y]="86"/>
+
+      <use *ngIf="state.railroadTrack.stations[1].stationMaster"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[1].stationMaster"
+           [attr.x]="365.5"
+           [attr.y]="86"/>
+      <use *ngIf="state.railroadTrack.stations[1].worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[1].worker" class="worker disabled"
+           [attr.x]="365.5"
+           [attr.y]="86"/>
+
+      <use *ngIf="state.railroadTrack.stations[2].stationMaster"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[2].stationMaster"
+           [attr.x]="460"
+           [attr.y]="86"/>
+      <use *ngIf="state.railroadTrack.stations[2].worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[2].worker" class="worker disabled"
+           [attr.x]="460"
+           [attr.y]="86"/>
+
+      <use *ngIf="state.railroadTrack.stations[3].stationMaster"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[3].stationMaster"
+           [attr.x]="555"
+           [attr.y]="86"/>
+      <use *ngIf="state.railroadTrack.stations[3].worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[3].worker" class="worker disabled"
+           [attr.x]="555"
+           [attr.y]="86"/>
+
+      <use *ngIf="state.railroadTrack.stations[4].stationMaster"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[4].stationMaster"
+           [attr.x]="650"
+           [attr.y]="86"/>
+      <use *ngIf="state.railroadTrack.stations[4].worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[4].worker" class="worker disabled"
+           [attr.x]="650"
+           [attr.y]="86"/>
+
       <g *ngFor="let space of spaces"
          [attr.transform]="'translate(' + space.x + ',' + space.y + ') ' + space.transform">
 
@@ -262,7 +466,13 @@
       </g>
     </g>
 
-    <g #playerBuildings transform="translate(130,-133)"></g>
+    <g transform="translate(130,-133)">
+      <image *ngFor="let playerBuilding of playerBuildings"
+             width="68.058" height="66.48"
+             [attr.x]="playerBuilding.x"
+             [attr.y]="playerBuilding.y"
+             [attr.href]="'/assets/buildings/' + playerBuilding.building.name + '_' + playerBuilding.building.player.toString().toLowerCase() + '.jpg'"/>
+    </g>
 
     <g id="hazards" transform="translate(130,-133)" class="hazards">
       <use *ngFor="let hazard of hazards" [attr.x]="hazard.x"
@@ -283,7 +493,7 @@
             height="30"
             width="42"
             [ngClass]="{disabled:!canSelectLocation('KANSAS_CITY')}"
-            (click)="clickLocation('KANSAS_CITY')"/>
+            (click)="selectLocation('KANSAS_CITY')"/>
 
       <rect id="START"
             class="location"
@@ -292,41 +502,41 @@
             height="30"
             width="44"
             [ngClass]="{disabled:!canSelectLocation('START')}"
-            (click)="clickLocation('START')"/>
+            (click)="selectLocation('START')"/>
 
       <g class="hazardLocations" #hazardLocations>
-        <use xlink:href="#hazardLocation" class="location hazard" y="833.6133355" x="358.7880323" id="FLOOD-4" (click)="clickLocation('FLOOD-4')" [ngClass]="{disabled:!canSelectLocation('FLOOD-4')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="840.0237323" x="408.931151" id="FLOOD-3" (click)="clickLocation('FLOOD-3')" [ngClass]="{disabled:!canSelectLocation('FLOOD-3')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="839.6482039" x="460.3764905" id="FLOOD-2" (click)="clickLocation('FLOOD-2')" [ngClass]="{disabled:!canSelectLocation('FLOOD-2')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="844.154348" x="511.4463578" id="FLOOD-1" (click)="clickLocation('FLOOD-1')" [ngClass]="{disabled:!canSelectLocation('FLOOD-1')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="751.4024862" x="60.07891838" id="DROUGHT-1" (click)="clickLocation('DROUGHT-1')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-1')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="693.1979165" x="54.82173996" id="DROUGHT-2" (click)="clickLocation('DROUGHT-2')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-2')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="637.2463205" x="63.45855315" id="DROUGHT-3" (click)="clickLocation('DROUGHT-3')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-3')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="581.6703091" x="67.58920257" id="DROUGHT-4" (click)="clickLocation('DROUGHT-4')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-4')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="417.9463335" x="534.352691" id="ROCKFALL-1" (click)="clickLocation('ROCKFALL-1')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-1')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="365.7499091" x="540.3609206" id="ROCKFALL-2" (click)="clickLocation('ROCKFALL-2')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-2')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="313.5535409" x="539.2343916" id="ROCKFALL-3" (click)="clickLocation('ROCKFALL-3')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-3')}"/>
-        <use xlink:href="#hazardLocation" class="location hazard" y="265.94122686" x="505.4014015" id="ROCKFALL-4" (click)="clickLocation('ROCKFALL-4')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-4')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="833.6133355" x="358.7880323" id="FLOOD-4" (click)="selectLocation('FLOOD-4')" [ngClass]="{disabled:!canSelectLocation('FLOOD-4')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="840.0237323" x="408.931151" id="FLOOD-3" (click)="selectLocation('FLOOD-3')" [ngClass]="{disabled:!canSelectLocation('FLOOD-3')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="839.6482039" x="460.3764905" id="FLOOD-2" (click)="selectLocation('FLOOD-2')" [ngClass]="{disabled:!canSelectLocation('FLOOD-2')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="844.154348" x="511.4463578" id="FLOOD-1" (click)="selectLocation('FLOOD-1')" [ngClass]="{disabled:!canSelectLocation('FLOOD-1')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="751.4024862" x="60.07891838" id="DROUGHT-1" (click)="selectLocation('DROUGHT-1')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-1')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="693.1979165" x="54.82173996" id="DROUGHT-2" (click)="selectLocation('DROUGHT-2')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-2')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="637.2463205" x="63.45855315" id="DROUGHT-3" (click)="selectLocation('DROUGHT-3')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-3')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="581.6703091" x="67.58920257" id="DROUGHT-4" (click)="selectLocation('DROUGHT-4')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-4')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="417.9463335" x="534.352691" id="ROCKFALL-1" (click)="selectLocation('ROCKFALL-1')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-1')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="365.7499091" x="540.3609206" id="ROCKFALL-2" (click)="selectLocation('ROCKFALL-2')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-2')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="313.5535409" x="539.2343916" id="ROCKFALL-3" (click)="selectLocation('ROCKFALL-3')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-3')}"/>
+        <use xlink:href="#hazardLocation" class="location hazard" y="265.94122686" x="505.4014015" id="ROCKFALL-4" (click)="selectLocation('ROCKFALL-4')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-4')}"/>
       </g>
 
       <g class="teepeeLocations" #teepeeLocations>
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-1'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-1'].teepee" y="665.6374365" x="235.67607971" (click)="selectTeepee(1)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="665.6374365" x="235.67607971" id="TEEPEE-1" (click)="clickLocation('TEEPEE-1')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-1')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="665.6374365" x="235.67607971" id="TEEPEE-1" (click)="selectLocation('TEEPEE-1')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-1')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-2'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-2'].teepee" y="671.4180561" x="277.50137016" (click)="selectTeepee(2)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="671.4180561" x="277.50137016" id="TEEPEE-2" (click)="clickLocation('TEEPEE-2')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-2')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="671.4180561" x="277.50137016" id="TEEPEE-2" (click)="selectLocation('TEEPEE-2')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-2')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-4'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-4'].teepee" y="680.8059289" x="321.4364901" (click)="selectTeepee(4)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="680.8059289" x="321.4364901" id="TEEPEE-4" (click)="clickLocation('TEEPEE-4')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-4')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="680.8059289" x="321.4364901" id="TEEPEE-4" (click)="selectLocation('TEEPEE-4')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-4')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-6'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-6'].teepee" y="683.7798081" x="364.1911178" (click)="selectTeepee(6)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="683.7798081" x="364.1911178" id="TEEPEE-6" (click)="clickLocation('TEEPEE-6')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-6')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="683.7798081" x="364.1911178" id="TEEPEE-6" (click)="selectLocation('TEEPEE-6')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-6')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-8'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-8'].teepee" y="686.7536873" x="405.4587778" (click)="selectTeepee(8)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="686.7536873" x="405.4587778" id="TEEPEE-8" (click)="clickLocation('TEEPEE-8')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-8')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="686.7536873" x="405.4587778" id="TEEPEE-8" (click)="selectLocation('TEEPEE-8')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-8')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-10'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-10'].teepee" y="683.77978" x="448.2134055" (click)="selectTeepee(10)" [ngClass]="{disabled:!canSelectTeepee}"/>
-        <use xlink:href="#teepeeLocation" class="location teepee" y="683.77978" x="448.2134055" id="TEEPEE-10" (click)="clickLocation('TEEPEE-10')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-10')}"/>
+        <use xlink:href="#teepeeLocation" class="location teepee" y="683.77978" x="448.2134055" id="TEEPEE-10" (click)="selectLocation('TEEPEE-10')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-10')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE--1'].teepee" [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE--1'].teepee" y="621.0992737" x="352.2437003" (click)="selectTeepee(-1)" [ngClass]="{disabled:!canSelectTeepee}"/>
 
@@ -336,56 +546,56 @@
       </g>
 
       <g class="buildingLocations" #buildingLocations>
-        <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="clickLocation('FLOOD-RISK-2')" [ngClass]="{disabled:!canSelectLocation('FLOOD-RISK-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="clickLocation('FLOOD-RISK-1')" [ngClass]="{disabled:!canSelectLocation('FLOOD-RISK-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="clickLocation('A-1')" [ngClass]="{disabled:!canSelectLocation('A-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="clickLocation('A-2')" [ngClass]="{disabled:!canSelectLocation('A-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="clickLocation('A-3')" [ngClass]="{disabled:!canSelectLocation('A-3')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="clickLocation('B-1')" [ngClass]="{disabled:!canSelectLocation('B-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="clickLocation('B-2')" [ngClass]="{disabled:!canSelectLocation('B-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="clickLocation('B-3')" [ngClass]="{disabled:!canSelectLocation('B-3')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="clickLocation('DROUGHT-RISK-1')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-RISK-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="clickLocation('C-2-1')" [ngClass]="{disabled:!canSelectLocation('C-2-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="clickLocation('INDIAN-TRADE-RISK-1')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="clickLocation('INDIAN-TRADE-RISK-2')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="clickLocation('C-1-1')" [ngClass]="{disabled:!canSelectLocation('C-1-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="clickLocation('C-1-2')" [ngClass]="{disabled:!canSelectLocation('C-1-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="clickLocation('E-1')" [ngClass]="{disabled:!canSelectLocation('E-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="clickLocation('E-2')" [ngClass]="{disabled:!canSelectLocation('E-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="clickLocation('F-2')" [ngClass]="{disabled:!canSelectLocation('F-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="clickLocation('ROCKFALL-RISK-1')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-RISK-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="clickLocation('ROCKFALL-RISK-2')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-RISK-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="clickLocation('F-1')" [ngClass]="{disabled:!canSelectLocation('F-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="clickLocation('G-2')" [ngClass]="{disabled:!canSelectLocation('G-2')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="clickLocation('G-1')" [ngClass]="{disabled:!canSelectLocation('G-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="809.0254702" x="188.73680282" id="FLOOD-RISK-2" (click)="selectLocation('FLOOD-RISK-2')" [ngClass]="{disabled:!canSelectLocation('FLOOD-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="811.6807797" x="271.05055994" id="FLOOD-RISK-1" (click)="selectLocation('FLOOD-RISK-1')" [ngClass]="{disabled:!canSelectLocation('FLOOD-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="747.4228799" x="406.4700125" id="A-1" (click)="selectLocation('A-1')" [ngClass]="{disabled:!canSelectLocation('A-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="737.3328443" x="317.2525125" id="A-2" (click)="selectLocation('A-2')" [ngClass]="{disabled:!canSelectLocation('A-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="727.2427244" x="226.97290837" id="A-3" (click)="selectLocation('A-3')" [ngClass]="{disabled:!canSelectLocation('A-3')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="706.0005013" x="119.16841328" id="B-1" (click)="selectLocation('B-1')" [ngClass]="{disabled:!canSelectLocation('B-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="selectLocation('B-2')" [ngClass]="{disabled:!canSelectLocation('B-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="selectLocation('B-3')" [ngClass]="{disabled:!canSelectLocation('B-3')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="selectLocation('DROUGHT-RISK-1')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="selectLocation('C-2-1')" [ngClass]="{disabled:!canSelectLocation('C-2-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="selectLocation('INDIAN-TRADE-RISK-1')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="selectLocation('INDIAN-TRADE-RISK-2')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="selectLocation('C-1-1')" [ngClass]="{disabled:!canSelectLocation('C-1-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="selectLocation('C-1-2')" [ngClass]="{disabled:!canSelectLocation('C-1-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="selectLocation('E-1')" [ngClass]="{disabled:!canSelectLocation('E-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="selectLocation('E-2')" [ngClass]="{disabled:!canSelectLocation('E-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="selectLocation('F-2')" [ngClass]="{disabled:!canSelectLocation('F-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="271.59625913" x="417.6222" id="ROCKFALL-RISK-1" (click)="selectLocation('ROCKFALL-RISK-1')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-RISK-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="269.47201434" x="328.9357338" id="ROCKFALL-RISK-2" (click)="selectLocation('ROCKFALL-RISK-2')" [ngClass]="{disabled:!canSelectLocation('ROCKFALL-RISK-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="282.7484382" x="157.93550767" id="F-1" (click)="selectLocation('F-1')" [ngClass]="{disabled:!canSelectLocation('F-1')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="268.40990459" x="60.22112124" id="G-2" (click)="selectLocation('G-2')" [ngClass]="{disabled:!canSelectLocation('G-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="346.4752199" x="28.88877824" id="G-1" (click)="selectLocation('G-1')" [ngClass]="{disabled:!canSelectLocation('G-1')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="498.19"
              y="755.45"
-             id="A" (click)="clickLocation('A')" [ngClass]="{disabled:!canSelectLocation('A')}"/>
+             id="A" (click)="selectLocation('A')" [ngClass]="{disabled:!canSelectLocation('A')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="96.13"
              y="808.49"
-             id="B" (click)="clickLocation('B')" [ngClass]="{disabled:!canSelectLocation('B')}"/>
+             id="B" (click)="selectLocation('B')" [ngClass]="{disabled:!canSelectLocation('B')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="224.84"
              y="467.64"
-             id="C" (click)="clickLocation('C')" [ngClass]="{disabled:!canSelectLocation('C')}"/>
+             id="C" (click)="selectLocation('C')" [ngClass]="{disabled:!canSelectLocation('C')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="400.62"
              y="520.10"
-             id="D" (click)="clickLocation('D')" [ngClass]="{disabled:!canSelectLocation( 'D')}"/>
+             id="D" (click)="selectLocation('D')" [ngClass]="{disabled:!canSelectLocation( 'D')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="496.22"
              y="474.98"
-             id="E" (click)="clickLocation('E')" [ngClass]="{disabled:!canSelectLocation('E')}"/>
+             id="E" (click)="selectLocation('E')" [ngClass]="{disabled:!canSelectLocation('E')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="242.904"
              y="296.001"
-             id="F" (click)="clickLocation('F')" [ngClass]="{disabled:!canSelectLocation('F')}"/>
+             id="F" (click)="selectLocation('F')" [ngClass]="{disabled:!canSelectLocation('F')}"/>
         <use xlink:href="#neutralBuildingLocation" class="location building neutral"
              x="119.69"
              y="377.80"
-             id="G" (click)="clickLocation('G')" [ngClass]="{disabled:!canSelectLocation('G')}"/>
+             id="G" (click)="selectLocation('G')" [ngClass]="{disabled:!canSelectLocation('G')}"/>
       </g>
 
       <g #ranchers class="ranchers">

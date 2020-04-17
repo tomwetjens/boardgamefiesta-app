@@ -40,7 +40,8 @@ export class CreateGameComponent implements OnInit {
 
   create() {
     this.gameService.create({
-      inviteUserIds: this.invitedUsers.map(user => user.id)
+      inviteUserIds: this.invitedUsers.map(user => user.id),
+      beginner: this.beginner
     })
       .subscribe(game => console.log(game));
   }

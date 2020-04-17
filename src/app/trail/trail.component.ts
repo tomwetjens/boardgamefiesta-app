@@ -1,10 +1,11 @@
 import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State} from '../model';
+import {Action, ActionType, Building, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {ToastrService} from '../toastr.service';
+import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 
 const SELECT_SPACE_ACTIONS = [
   'MOVE_ENGINE_1_FORWARD',
@@ -32,9 +33,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @Input() state: State;
   @Input() selectedAction: ActionType;
 
+  window = window;
+
   selected: string;
   possibleMoves: PossibleMove[];
-  selectedForesights: number[] = [];
   possibleDeliveries: PossibleDelivery[];
 
   @Output() action = new EventEmitter<Action>();
@@ -79,6 +81,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   hazards: { x: string, y: string, hazard: Hazard }[];
   foresights: any[][];
+  selectedForesights: number[] = [null, null, null];
 
   spaces: {
     space: { number?: number; turnout?: number };
@@ -92,6 +95,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   engines: { [playerColor in PlayerColor]: { x: string; y: string; } };
 
   stations: {}[];
+  playerBuildings: { building: Building; x: string; y: string }[];
 
   constructor(private renderer: Renderer2,
               private gameService: GameService,
@@ -164,6 +168,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       this.positionNeutralBuildings();
       this.updateHazards();
       this.updateForesights();
+      this.updatePlayerBuildings();
       this.positionRanchers();
     }
   }
@@ -197,34 +202,50 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     this.positionRanchers();
   }
 
-  clickLocation(name: string) {
-    this.selected = name;
+  selectLocation(name: string) {
+    switch (this.selectedAction) {
+      case ActionType.MOVE:
+        if (this.state.trail.playerLocations[this.state.player.player.color]) {
+          this.gameService.getPossibleMoves(this.game.id, name)
+            .subscribe(possibleMoves => {
+              if (possibleMoves.length === 0) {
+                console.error('no possible moves');
+                this.toastrService.error('Cannot move to selected location');
+                return;
+              }
 
-    if (this.state.actions.includes('MOVE')) {
-      // TODO Determine and send whole path
+              possibleMoves.sort((a, b) => a.cost - b.cost);
 
+              if (possibleMoves[0].cost === 0 || possibleMoves.length === 1) {
+                this.possibleMoves = [];
+                this.action.emit({type: ActionType.MOVE, steps: possibleMoves[0].steps});
+              } else {
+                this.possibleMoves = possibleMoves;
+              }
+            });
+        } else {
+          // First move, can go anywhere
+          this.action.emit({type: ActionType.MOVE, steps: [name]});
+        }
+        break;
 
-      this.gameService.getPossibleMoves(this.game.id, name)
-        .subscribe(possibleMoves => {
-          if (possibleMoves.length === 0) {
-            console.error('no possible moves');
-            this.toastrService.error('Cannot move to selected location');
-            return;
-          }
+      case ActionType.REMOVE_HAZARD:
+      case ActionType.REMOVE_HAZARD_FOR_FREE:
+        this.action.emit({type: this.selectedAction, hazard: this.state.trail.locations[name].hazard});
+        break;
 
-          possibleMoves.sort((a, b) => a.cost - b.cost);
+      case ActionType.TRADE_WITH_INDIANS:
+        this.action.emit({type: this.selectedAction, reward: this.state.trail.locations[name].reward});
+        break;
 
-          if (possibleMoves[0].cost === 0 || possibleMoves.length === 1) {
-            this.possibleMoves = [];
-            this.action.emit({type: 'MOVE', steps: possibleMoves[0].steps});
-          } else {
-            this.possibleMoves = possibleMoves;
-          }
+      case ActionType.PLACE_BUILDING:
+      case ActionType.PLACE_CHEAP_BUILDING:
+        const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
+        ngbModalRef.componentInstance.playerState = this.state.player;
+        fromPromise(ngbModalRef.result).subscribe(building => {
+          this.action.emit({type: this.selectedAction, location: name, building});
         });
-    } else if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
-      this.action.emit({type: this.selectedAction, hazard: this.state.trail.locations[name].hazard});
-    } else if (this.selectedAction === 'TRADE_WITH_INDIANS') {
-      this.action.emit({type: this.selectedAction, reward: this.state.trail.locations[name].reward});
+        break;
     }
   }
 
@@ -237,6 +258,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   ngAfterContentChecked(): void {
     this.updateHazards();
+    this.updatePlayerBuildings();
   }
 
   ngAfterViewChecked(): void {
@@ -354,7 +376,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectCity(city: string): boolean {
-    return this.state.actions.includes('DELIVER_TO_CITY') &&
+    return this.state.actions.includes(ActionType.DELIVER_TO_CITY) &&
       this.possibleDeliveries && this.possibleDeliveries.some(pd => pd.city === city as City);
   }
 
@@ -373,36 +395,47 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   selectForesight(rowIndex: number, columnIndex: number) {
     console.log('selectForesight: ', rowIndex, columnIndex);
 
-    if (this.selectedAction === 'CHOOSE_FORESIGHTS') {
-      this.selectedForesights.splice(columnIndex, 0, rowIndex);
+    if (this.selectedAction === ActionType.CHOOSE_FORESIGHTS) {
+      if (this.selectedForesights[columnIndex] === rowIndex) {
+        this.selectedForesights[columnIndex] = null;
+      } else {
+        this.selectedForesights[columnIndex] = rowIndex;
+      }
 
-      if (this.selectedForesights.length === 3) {
-        this.action.emit({type: 'CHOOSE_FORESIGHTS', choices: this.selectedForesights});
-        this.selectedForesights = [];
+      console.log('selectedForesights: ', this.selectedForesights);
+
+      if (this.selectedForesights[0] !== null && this.selectedForesights[1] !== null && this.selectedForesights[2] !== null) {
+        this.action.emit({type: ActionType.CHOOSE_FORESIGHTS, choices: this.selectedForesights});
+        this.selectedForesights = [null, null, null];
       }
     }
   }
 
-  clickCity(city: string) {
-    if (this.selectedAction === 'DELIVER_TO_CITY') {
+  selectCity(city: string) {
+    if (this.selectedAction === ActionType.DELIVER_TO_CITY && this.possibleDeliveries) {
       const possibleDelivery = this.possibleDeliveries.find(pd => pd.city === city as City);
 
       if (possibleDelivery) {
-        const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);
+        if (this.state.player.certificates <= possibleDelivery.certificates) {
+          this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates: possibleDelivery.certificates});
+        } else {
+          const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);
 
-        ngbModalRef.componentInstance.possibleDelivery = possibleDelivery;
-        ngbModalRef.componentInstance.playerState = this.state.player;
+          ngbModalRef.componentInstance.possibleDelivery = possibleDelivery;
+          ngbModalRef.componentInstance.playerState = this.state.player;
 
-        fromPromise(ngbModalRef.result)
-          .subscribe(({certificates}) => this.action.emit({type: 'DELIVER_TO_CITY', city, certificates}));
+          fromPromise(ngbModalRef.result)
+            .subscribe(({certificates}) => this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates}));
+        }
       }
     }
   }
 
   canSelectLocation(name: string) {
     const location = this.state.trail.locations[name];
-    return location && ((this.selectedAction === 'MOVE' && this.canMoveTo(location)) ||
-      (['PLACE_BUILDING_FOR_1_DOLLAR_PER_CRAFTSMAN', 'PLACE_BUILDING_FOR_2_DOLLARS_PER_CRAFTSMAN'].includes(this.selectedAction) && this.canPlaceBuilding(location)));
+    return location && ((this.selectedAction === ActionType.MOVE && this.canMoveTo(location)) ||
+      ([ActionType.PLACE_CHEAP_BUILDING,
+        ActionType.PLACE_BUILDING].includes(this.selectedAction) && this.canPlaceBuilding(location)));
   }
 
   private canMoveTo(location: Location): boolean {
@@ -432,8 +465,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
       const locationElement = this.getLocationElement(name);
 
-      if (location.building && this.neutralBuildingElements[location.building]) {
-        const buildingElement = this.neutralBuildingElements[location.building];
+      if (location.building && this.neutralBuildingElements[location.building.name]) {
+        const buildingElement = this.neutralBuildingElements[location.building.name];
 
         const x = locationElement.getAttribute('x');
         const y = locationElement.getAttribute('y');
@@ -503,6 +536,32 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectWorker(worker: Worker): boolean {
-    return ['HIRE_WORKER', 'HIRE_SECOND_WORKER', 'HIRE_CHEAP_WORKER'].includes(this.selectedAction);
+    return [ActionType.HIRE_WORKER, ActionType.HIRE_SECOND_WORKER, ActionType.HIRE_CHEAP_WORKER].includes(this.selectedAction);
+  }
+
+  isForesightSelected(columnIndex: number, rowIndex: number): boolean {
+    return this.selectedForesights[columnIndex] === rowIndex;
+  }
+
+  private updatePlayerBuildings() {
+    if (!this.locationsElement) {
+      return;
+    }
+
+    this.playerBuildings = Object.keys(this.state.trail.locations)
+      .filter(name => this.state.trail.locations[name].building)
+      .filter(name => this.state.trail.locations[name].building.player)
+      .map(name => {
+        const locationElement = this.getLocationElement(name);
+        const building = this.state.trail.locations[name].building;
+
+        return {
+          x: locationElement.getAttribute('x'),
+          y: locationElement.getAttribute('y'),
+          building
+        };
+      });
+
+    console.log('playerBuildings:', this.playerBuildings);
   }
 }

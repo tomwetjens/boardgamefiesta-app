@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Action, CreateGameRequest, Game, PossibleDelivery, PossibleMove, State} from './model';
+import {Action, CreateGameRequest, Game, PossibleBuy, PossibleDelivery, PossibleMove, State} from './model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -54,5 +54,9 @@ export class GameService {
 
   getPossibleDeliveries(id: string): Observable<PossibleDelivery[]> {
     return this.httpClient.get<PossibleDelivery[]>(environment.apiBaseUrl + '/games/' + id + '/state/possible-deliveries');
+  }
+
+  getPossibleBuys(id: string): Observable<PossibleBuy[]> {
+    return this.httpClient.get<PossibleBuy[]>(environment.apiBaseUrl + '/games/' + id + '/state/possible-buys');
   }
 }

@@ -7,17 +7,20 @@
                  (action)="perform($event)">
       </app-trail>
 
-      <app-cattle-market [cattleMarket]="state.cattleMarket" [selectedAction]="selectedAction" (action)="perform($event)"></app-cattle-market>
+      <app-cattle-market [game]="game"
+                         [cattleMarket]="state.cattleMarket"
+                         [selectedAction]="selectedAction"
+                         (action)="perform($event)"></app-cattle-market>
     </div>
     <div class="col-4">
-      <app-player-board [playerState]="state.player"
+      <app-player-board [state]="state" [playerState]="state.player"
                         [actions]="state.actions"
                         [selectedAction]="selectedAction"
                         (action)="perform($event)">
       </app-player-board>
 
       <div *ngFor="let player of state.otherPlayers | keyvalue">
-        <app-player-board [playerState]="player.value">
+        <app-player-board [state]="state" [playerState]="player.value">
         </app-player-board>
       </div>
     </div>

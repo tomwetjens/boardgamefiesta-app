@@ -89,17 +89,17 @@
 }
 
 .foresights {
-  stroke-opacity: 1;
-  stroke: #ffffff;
-  stroke-width: 2;
-  fill: rgb(0, 0, 0, 0.1);
-
   * {
     cursor: pointer;
-  }
 
-  *:hover {
-    stroke: black;
+    stroke-opacity: 1;
+    stroke: #ffffff;
+    stroke-width: 2;
+    fill: rgb(0, 0, 0, 0.1);
+
+    &:hover {
+      stroke: black;
+    }
   }
 
   &.disabled {
@@ -107,6 +107,15 @@
       stroke-width: 0;
       cursor: default;
     }
+  }
+}
+
+.foresight {
+  &.selected {
+    stroke: black;
+  }
+  &.otherSelected {
+    opacity: 0.8;
   }
 }
 
@@ -145,18 +154,21 @@
   }
 }
 
-.engine {
+.engine, .disc {
   stroke: none;
 
   &.BLUE {
     fill: blue;
   }
+
   &.RED {
     fill: red;
   }
+
   &.YELLOW {
     fill: yellow;
   }
+
   &.WHITE {
     fill: white;
   }

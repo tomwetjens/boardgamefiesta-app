@@ -32,6 +32,8 @@
           <span *ngSwitchCase="'BUY_CATTLE'" i18n>Buy cattle</span>
           <span *ngSwitchCase="'CHOOSE_FORESIGHTS'" i18n>Choose foresights</span>
           <span *ngSwitchCase="'DELIVER_TO_CITY'" i18n>Choose city</span>
+          <span *ngSwitchCase="'UNLOCK_WHITE'" i18n>Choose a disc to place on city</span>
+          <span *ngSwitchCase="'UNLOCK_BLACK_OR_WHITE'" i18n>Choose a disc to place on city</span>
           <span *ngSwitchDefault>Unknown action selected: {{selectedAction}}</span>
         </ng-container>
         <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel</button>

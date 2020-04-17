@@ -19,4 +19,12 @@ app-card {
     cursor: default;
     border-color: white;
   }
+
+  &.selected {
+    border-color: green;
+  }
+
+  &.notAvailable {
+    opacity: 0.8;
+  }
 }

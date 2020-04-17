@@ -24,7 +24,4 @@ export class DeliveryCityComponent implements OnInit {
     this.ngbActiveModal.close({certificates: this.certificates});
   }
 
-  get reward(): number {
-    return this.possibleDelivery.reward + (this.certificates - this.possibleDelivery.certificates);
-  }
 }
