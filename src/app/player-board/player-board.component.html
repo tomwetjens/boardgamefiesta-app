@@ -1,11 +1,19 @@
 <div class="row no-gutters">
   <div class="col-4">
-    <span [className]="'color '+ playerState.player.color"></span> {{playerState.player.user.username}}
+    <span [className]="'color '+ playerState.player.color"></span>
+    <img [src]="playerState.player.user.avatarUrl" class="avatar"/>
+    {{playerState.player.user.username}}
   </div>
   <div class="col-4">
     <span class="balance">$ {{playerState.balance}}</span>
   </div>
   <div class="col-4">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 165 39">
+      <use *ngFor="let stationMaster of playerState.stationMasters; index as i"
+           [attr.xlink:href]="'#' + stationMaster"
+           [attr.x]="0 + (i * 33)"
+           [attr.y]="0"/>
+    </svg>
     <button class="btn btn-secondary" (click)="showBuildings()">Buildings</button>
   </div>
 </div>
@@ -22,6 +30,23 @@
 </div>
 <div class="row no-gutters">
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board" [class]="'' + playerState.player.color">
+    <defs>
+      <clipPath id="tileclip">
+        <rect rx="6" ry="6" width="33" height="39"/>
+      </clipPath>
+      <g id="COWBOY">
+        <image id="cowboy" href="/assets/cowboy.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+      <g id="CRAFTSMAN">
+        <image href="/assets/craftsman.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+      <g id="ENGINEER">
+        <image href="/assets/engineer.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+    </defs>
     <image [attr.href]="'/assets/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
            x="0" y="0"
            height="446" width="800"/>
@@ -30,6 +55,24 @@
            [attr.href]="'/assets/' + state.playerOrder.length + 'p_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
            x="197" y="12"
            height="110" width="259"/>
+
+    <use xlink:href="#COWBOY" *ngFor="let cowboy of cowboys; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="71" [ngClass]="{disabled:!canSelectCowboy(i)}"
+         (click)="selectCowboy(i)"/>
+
+    <use xlink:href="#CRAFTSMAN" *ngFor="let craftsman of craftsmen; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="113" [ngClass]="{disabled:!canSelectCraftsman(i)}"
+         (click)="selectCraftsman(i)"/>
+
+    <use xlink:href="#ENGINEER" *ngFor="let engineer of engineers; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="155" [ngClass]="{disabled:!canSelectEngineer(i)}"
+         (click)="selectEngineer(i)"/>
 
     <rect id="cert_marker_0" *ngIf="playerState.certificates === 0"
           class="cert-marker"
@@ -113,7 +156,7 @@
           ry="4"
           height="54"
           width="54"
-          [ngClass]="{disabled: !canSelectAction('DRAW_CARD')}"
+          [ngClass]="{disabled: !canSelectAction('DRAW_CARD') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)}"
           (click)="clickAuxiliaryAction('DRAW_CARD')"/>
 
     <rect id="aux-move-engine-backwards"

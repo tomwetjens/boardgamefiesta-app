@@ -1,5 +1,5 @@
 import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, Building, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State} from '../model';
+import {Action, ActionType, Building, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State, Worker} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
@@ -19,7 +19,11 @@ const SELECT_SPACE_ACTIONS = [
   'MOVE_ENGINE_AT_MOST_4_FORWARD',
   'MOVE_ENGINE_AT_MOST_5_FORWARD',
   'MOVE_ENGINE_FORWARD',
-  'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'
+  'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS',
+  'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE',
+  'PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD',
+  'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES',
+  'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'
 ];
 
 @Component({
@@ -393,16 +397,12 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectForesight(rowIndex: number, columnIndex: number) {
-    console.log('selectForesight: ', rowIndex, columnIndex);
-
     if (this.selectedAction === ActionType.CHOOSE_FORESIGHTS) {
       if (this.selectedForesights[columnIndex] === rowIndex) {
         this.selectedForesights[columnIndex] = null;
       } else {
         this.selectedForesights[columnIndex] = rowIndex;
       }
-
-      console.log('selectedForesights: ', this.selectedForesights);
 
       if (this.selectedForesights[0] !== null && this.selectedForesights[1] !== null && this.selectedForesights[2] !== null) {
         this.action.emit({type: ActionType.CHOOSE_FORESIGHTS, choices: this.selectedForesights});
@@ -507,17 +507,16 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectStation(index: number) {
-    console.log('selectStation: ', index);
-    // TODO
+    if (this.selectedAction === ActionType.DOWNGRADE_STATION) {
+      this.action.emit({type: this.selectedAction, station: index});
+    }
   }
 
   canSelectStation(index: number) {
-    return ['DOWNGRADE_STATION'].includes(this.selectedAction);
+    return [ActionType.DOWNGRADE_STATION].includes(this.selectedAction) && this.state.railroadTrack.stations[index].players.includes(this.state.player.player.color);
   }
 
   selectSpace(space: Space) {
-    console.log('selectSpace: ', space);
-
     if (SELECT_SPACE_ACTIONS.includes(this.selectedAction)) {
       this.action.emit({type: this.selectedAction, to: space});
     }
@@ -535,8 +534,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return this.state.railroadTrack.players[color] && (this.state.railroadTrack.players[color].number === space.number || this.state.railroadTrack.players[color].turnout === space.turnout);
   }
 
-  canSelectWorker(worker: Worker): boolean {
-    return [ActionType.HIRE_WORKER, ActionType.HIRE_SECOND_WORKER, ActionType.HIRE_CHEAP_WORKER].includes(this.selectedAction);
+  canSelectWorker(rowIndex: number): boolean {
+    if (![ActionType.HIRE_WORKER, ActionType.HIRE_SECOND_WORKER, ActionType.HIRE_CHEAP_WORKER].includes(this.selectedAction)) {
+      return false;
+    }
+    return rowIndex < this.state.jobMarket.currentRowIndex;
   }
 
   isForesightSelected(columnIndex: number, rowIndex: number): boolean {
@@ -562,6 +564,15 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         };
       });
 
-    console.log('playerBuildings:', this.playerBuildings);
+  }
+
+  selectWorker(worker: Worker) {
+    switch (this.selectedAction) {
+      case ActionType.HIRE_WORKER:
+      case ActionType.HIRE_SECOND_WORKER:
+      case ActionType.HIRE_CHEAP_WORKER:
+        this.action.emit({type: this.selectedAction, worker});
+        break;
+    }
   }
 }

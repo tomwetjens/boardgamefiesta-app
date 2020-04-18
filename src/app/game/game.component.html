@@ -32,8 +32,25 @@
           <span *ngSwitchCase="'BUY_CATTLE'" i18n>Buy cattle</span>
           <span *ngSwitchCase="'CHOOSE_FORESIGHTS'" i18n>Choose foresights</span>
           <span *ngSwitchCase="'DELIVER_TO_CITY'" i18n>Choose city</span>
-          <span *ngSwitchCase="'UNLOCK_WHITE'" i18n>Choose a disc to place on city</span>
-          <span *ngSwitchCase="'UNLOCK_BLACK_OR_WHITE'" i18n>Choose a disc to place on city</span>
+          <span *ngSwitchCase="'UNLOCK_WHITE'" i18n>Choose a disc to remove from player board</span>
+          <span *ngSwitchCase="'UNLOCK_BLACK_OR_WHITE'" i18n>Choose a disc to remove from player board</span>
+          <span *ngSwitchCase="'TAKE_OBJECTIVE_CARD'" i18n>Choose objective card</span>
+          <span *ngSwitchCase="'DISCARD_PAIR_TO_GAIN_4_DOLLARS'" i18n>Discard pair to gain 4 dollars</span>
+          <span *ngSwitchCase="'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE'" i18n>Move engine 1 backwards to gain 1 certificate, but pay 1 dollar</span>
+          <span *ngSwitchCase="'PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD'" i18n>Move engine 1 forward but pay 1 dollar</span>
+          <span *ngSwitchCase="'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES'" i18n>Move engine 2 backwards to gain 2 certificates, but pay 2 dollars</span>
+          <span *ngSwitchCase="'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'" i18n>Move engine 2 forward but pay 2 dollars</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS'" i18n>Move engine 1 backwards to gain 3 dollars</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD'" i18n>Move engine 1 backwards to remove 1 card</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS'" i18n>Move engine 2 backwards to remove 2 cards</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_2_OR_3_FORWARD'" i18n>Move engine 2 or 3 forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS'" i18n>Move engine at least 1 backwards and gain 3 dollars</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_FORWARD'" i18n>Move engine forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_2_FORWARD'" i18n>Move engine at most 2 forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_3_FORWARD'" i18n>Move engine at most 3 forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_4_FORWARD'" i18n>Move engine at most 4 forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_5_FORWARD'" i18n>Move engine at most 5 forward</span>
+          <span *ngSwitchCase="'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'" i18n>Move engine forward up to number of buildings in the woods</span>
           <span *ngSwitchDefault>Unknown action selected: {{selectedAction}}</span>
         </ng-container>
         <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel</button>

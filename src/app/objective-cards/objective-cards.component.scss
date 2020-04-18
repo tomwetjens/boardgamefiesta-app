@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+}
+
+app-card {
+  display: inline-block;
+  float:right;
+
+  margin-right: 2px;
+  border: 3px solid #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    border-color: black;
+  }
+
+  &.disabled {
+    stroke: none;
+    cursor: default;
+    border-color: white;
+  }
+
+  &.selected {
+    border-color: green;
+  }
+
+  &.notAvailable {
+    opacity: 0.8;
+  }
+}

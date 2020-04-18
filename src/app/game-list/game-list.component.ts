@@ -4,7 +4,11 @@ import {map} from 'rxjs/operators';
 import {Game} from '../model';
 import {Router} from '@angular/router';
 import {ReplaySubject} from 'rxjs';
-import {GameItem} from '../home/home.component';
+
+export interface GameItem {
+  game: Game;
+  otherPlayers: string;
+}
 
 @Component({
   selector: 'app-game-list',

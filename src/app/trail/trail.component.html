@@ -434,12 +434,13 @@
     <g class="job-market">
       <g *ngFor="let row of state.jobMarket.rows; index as rowIndex">
         <use *ngFor="let worker of row.workers; index as columnIndex" [attr.xlink:href]="'#' + worker"
-             class="worker" [ngClass]="{disabled:!canSelectWorker(worker)}"
+             class="worker" [ngClass]="{disabled:!canSelectWorker(rowIndex)}"
              [attr.x]="9 + (state.jobMarket.rowLimit * 33) + (columnIndex * 33)"
-             [attr.y]="277 + (rowIndex * 39)"/>
+             [attr.y]="316 + (rowIndex * 39)"
+             (click)="selectWorker(worker)"/>
       </g>
 
-      <use xlink:href="#jobMarketToken" x="110" [attr.y]="280 + (state.jobMarket.currentRowIndex * 39)"/>
+      <use xlink:href="#jobMarketToken" x="110" [attr.y]="319 + (state.jobMarket.currentRowIndex * 39)"/>
     </g>
 
     <g #neutralBuildings transform="translate(130,-133)" class="buildings">

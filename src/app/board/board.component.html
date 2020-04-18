@@ -11,6 +11,9 @@
                          [cattleMarket]="state.cattleMarket"
                          [selectedAction]="selectedAction"
                          (action)="perform($event)"></app-cattle-market>
+
+      <app-objective-cards [objectiveCards]="state.objectiveCards" [selectedAction]="selectedAction" (action)="perform($event)">
+      </app-objective-cards>
     </div>
     <div class="col-4">
       <app-player-board [state]="state" [playerState]="state.player"

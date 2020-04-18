@@ -5,7 +5,8 @@
 .color {
   display: inline-block;
   width: 16px;
-  height: 16px;
+  height: 48px;
+  float: left;
 
   &.RED {
     background-color: red;
@@ -117,5 +118,21 @@ app-card {
     stroke: none;
     cursor: default;
     border-color: white;
+  }
+}
+
+.worker {
+  fill: rgb(0, 0, 0, 0.1);
+  stroke: #ffffff;
+  stroke-width: 2;
+  cursor: pointer;
+
+  &:hover {
+    stroke: black;
+  }
+
+  &.disabled {
+    stroke: none;
+    cursor: default;
   }
 }

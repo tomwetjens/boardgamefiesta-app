@@ -2,27 +2,49 @@
   <h2 i18n>My Games</h2>
 
   <div *ngFor="let game of games | async" class="game" (click)="openGame(game.game)">
-    <div>
-      Great Western Trail
-      <div *ngIf="game.game.status !== 'STARTED'">
-        <div *ngIf="game.game.accepted" i18n>
-          with  {{game.otherPlayers}}, not started yet
-        </div>
-        <div *ngIf="!game.game.accepted" i18n>
-          invited by  {{game.game.owner.username}}
-        </div>
+    <div class="row">
+      <div class="col-2">
+        <img src="../../assets/box.jpg" class="box"/>
       </div>
-      <div *ngIf="game.game.status === 'STARTED'">
-        with  {{game.otherPlayers}}, started {{game.game.started | date}}
-        <div *ngIf="!game.game.turn">
-          waiting for {{game.game.currentPlayer.username}} ({{game.game.expires | fromNow:60000}} remaining)
-        </div>
-        <div *ngIf="game.game.turn">
-          your turn ({{game.game.expires | fromNow:60000}} remaining)
+      <div class="col-6">
+        <p>
+          Great Western Trail,
+          <span *ngIf="game.game.status === 'STARTED'">
+            started {{game.game.started | date}}
+          </span>
+          <ng-container *ngIf="game.game.status !== 'STARTED'">
+            <span *ngIf="game.game.accepted" i18n>
+              not started
+            </span>
+            <span *ngIf="!game.game.accepted" i18n>
+              invited by  {{game.game.owner.username}}
+            </span>
+          </ng-container>
+        </p>
+        <p>
+          <button *ngIf="!game.game.accepted" (click)="accept(game.game)" i18n>Accept</button>
+          <button *ngIf="!game.game.accepted" (click)="reject(game.game)" i18n>Reject</button>
+          <ng-container *ngIf="game.game.status === 'STARTED'">
+            <span *ngIf="!game.game.turn">
+              waiting for {{game.game.currentPlayer.username}} ({{game.game.expires | fromNow:60000}} remaining)
+            </span>
+              <span *ngIf="game.game.turn">
+              your turn ({{game.game.expires | fromNow:60000}} remaining)
+            </span>
+          </ng-container>
+          <ng-container *ngIf="game.game.status === 'NEW'">
+            <span *ngIf="!game.game.turn">
+              waiting for players to accept
+            </span>
+          </ng-container>
+        </p>
+      </div>
+      <div class="col-4">
+        <div class="player" *ngFor="let otherPlayer of game.game.otherPlayers">
+          <img [src]="otherPlayer.user.avatarUrl" class="avatar"/>
+          <div>{{otherPlayer.user.username}}</div>
         </div>
       </div>
     </div>
-    <button *ngIf="!game.game.accepted" (click)="accept(game.game)" i18n>Accept</button>
-    <button *ngIf="!game.game.accepted" (click)="reject(game.game)" i18n>Reject</button>
   </div>
 </div>

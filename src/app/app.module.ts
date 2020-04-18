@@ -27,6 +27,7 @@ import {LayoutComponent} from './layout/layout.component';
 import { CardStackComponent } from './card-stack/card-stack.component';
 import { CattleMarketComponent } from './cattle-market/cattle-market.component';
 import { PlayerBuildingsComponent } from './player-buildings/player-buildings.component';
+import { ObjectiveCardsComponent } from './objective-cards/objective-cards.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PlayerBuildingsComponent } from './player-buildings/player-buildings.co
     LayoutComponent,
     CardStackComponent,
     CattleMarketComponent,
-    PlayerBuildingsComponent
+    PlayerBuildingsComponent,
+    ObjectiveCardsComponent
   ],
   imports: [
     BrowserModule,

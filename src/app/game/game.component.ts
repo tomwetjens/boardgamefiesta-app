@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, ReplaySubject} from 'rxjs';
+import {ReplaySubject} from 'rxjs';
 import {filter, flatMap, switchMap, take} from 'rxjs/operators';
-import {Action, ActionType, Game, PossibleMove, State} from '../model';
+import {Action, ActionType, Game, State} from '../model';
 import {EventService} from '../event.service';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -55,6 +55,8 @@ export class GameComponent implements OnInit {
     this.state.subscribe(state => {
       if (state.turn && state.actions.length === 1 && AUTO_SELECTED_ACTIONS.includes(state.actions[0])) {
         this.selectedAction = state.actions[0];
+      } else {
+        this.selectedAction = null;
       }
     });
   }
@@ -81,8 +83,6 @@ export class GameComponent implements OnInit {
   }
 
   selectAction(actionType: ActionType) {
-    console.log('selectAction: ', actionType);
-
     this.state.pipe(take(1))
       .subscribe(state => {
         switch (actionType) {

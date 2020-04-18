@@ -19,11 +19,10 @@
     color: white;
     font-size: 10px;
     font-weight: bold;
-    text-shadow:
-      -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-      1px 1px 0 #000;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
   }
 
   &.back {
@@ -73,5 +72,90 @@
   &.TEXAS_LONGHORN {
     background-color: purple;
     background-image: url(../../assets/cards/texas_longhorn.jpg)
+  }
+
+  &.GAIN_2_DOLLARS_4_H_H {
+    background-image: url(../../assets/cards/2_4hh.jpg)
+  }
+
+  &.GAIN_2_DOLLARS_3_3_3_B {
+    background-image: url(../../assets/cards/2_333b.jpg)
+  }
+
+  &.GAIN_2_DOLLARS_B_BLUE_BLUE {
+    background-image: url(../../assets/cards/2_bblbl.jpg)
+  }
+
+  &.GAIN_2_DOLLARS_B_GREEN_BLUE {
+    background-image: url(../../assets/cards/2_bgbl.jpg)
+  }
+
+  &.GAIN_2_DOLLARS_S_S_H {
+    background-image: url(../../assets/cards/2_ssh.jpg)
+  }
+
+  &.SINGLE_OR_DOUBLE_AUXILIARY_ACTION_SAN_FRANCISCO {
+    background-image: url(../../assets/cards/aux_sf.jpg)
+  }
+
+  &.DRAW_CARD_5_H {
+    background-image: url(../../assets/cards/draw_5h.jpg)
+  }
+
+  &.DRAW_CARD_3_3_3_S {
+    background-image: url(../../assets/cards/draw_333s.jpg)
+  }
+
+  &.DRAW_CARD_B_B_H {
+    background-image: url(../../assets/cards/draw_bbh.jpg)
+  }
+
+  &.DRAW_CARD_S_GREEN_BLUE {
+    background-image: url(../../assets/cards/draw_sgbl.jpg)
+  }
+  &.DRAW_CARD_S_GREEN_GREEN{
+    background-image: url(../../assets/cards/draw_sgg.jpg)
+  }
+  &.ENGINE_4_4_S_GREEN{
+    background-image: url(../../assets/cards/engine_44sg.jpg)
+  }
+  &.ENGINE_3_4_5{
+    background-image: url(../../assets/cards/engine_345.jpg)
+  }
+  &.ENGINE_B_B_GREEN_GREEN{
+    background-image: url(../../assets/cards/engine_bbgg.jpg)
+  }
+  &.ENGINE_B_BLUE_H_H{
+    background-image: url(../../assets/cards/engine_bblhh.jpg)
+  }
+  &.ENGINE_S_S_H_H{
+    background-image: url(../../assets/cards/engine_sshh.jpg)
+  }
+  &.MOVE_3_4_H_H{
+    background-image: url(../../assets/cards/move_34hh.jpg)
+  }
+  &.MOVE_3_4_5{
+    background-image: url(../../assets/cards/move_345.jpg)
+  }
+  &.MOVE_B_B_H_H{
+    background-image: url(../../assets/cards/move_bbhh.jpg)
+  }
+  &.MOVE_S_S_B_B{
+    background-image: url(../../assets/cards/move_ssbb.jpg)
+  }
+  &.MOVE_S_S_BLUE_BLUE{
+    background-image: url(../../assets/cards/move_ssblbl.jpg)
+  }
+  &.START_3_4_B {
+    background-image: url(../../assets/cards/start_34b.jpg)
+  }
+  &.START_B_B_H {
+    background-image: url(../../assets/cards/start_bbh.jpg)
+  }
+  &.START_BLUE_H_H {
+    background-image: url(../../assets/cards/start_blhh.jpg)
+  }
+  &.START_S_S_GREEN {
+    background-image: url(../../assets/cards/start_ssg.jpg)
   }
 }

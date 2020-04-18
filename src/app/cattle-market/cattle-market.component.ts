@@ -70,9 +70,6 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   selectCard(card: CattleCard) {
-    console.log('selectCard: ', card);
-
-
     if (this.selectedAction === ActionType.BUY_CATTLE) {
       const index = this.selectedCards.indexOf(card);
 

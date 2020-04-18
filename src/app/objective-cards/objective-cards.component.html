@@ -1,0 +1,4 @@
+<app-card *ngFor="let card of objectiveCards"
+          [card]="card"
+          [ngClass]="{disabled:!canSelectCard(card)}"
+          (click)="selectCard(card)"></app-card>

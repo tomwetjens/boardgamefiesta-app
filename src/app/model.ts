@@ -177,6 +177,7 @@ export interface ObjectiveCard {
   readonly tasks: Task[];
   readonly points: Points;
   readonly penalty: Points;
+  readonly action: ActionType;
 }
 
 export type Card = ObjectiveCard | CattleCard;
@@ -218,6 +219,7 @@ export interface PlayerState {
   readonly drawStackSize: number;
   readonly unlocked: { [key in Unlockable]: number };
   readonly buildings: string[];
+  readonly stationMasters: StationMaster[];
 }
 
 export interface Space {
@@ -309,6 +311,8 @@ export interface State {
 export interface User {
   readonly id: string;
   readonly username: string;
+  readonly lastSeen: string;
+  readonly avatarUrl: string;
 }
 
 export interface GamePlayer {

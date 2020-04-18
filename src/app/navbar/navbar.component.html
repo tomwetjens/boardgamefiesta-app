@@ -18,15 +18,18 @@
   <form class="form-inline">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm">
+        <div class="col-3">
           <app-connection-status></app-connection-status>
         </div>
-        <div class="col-sm">
-          <div *ngIf="userService.currentUser | async as user">
+        <ng-container *ngIf="userService.currentUser | async as user">
+          <div class="col-3">
+            <img [src]="user.avatarUrl" class="avatar"/>
+          </div>
+          <div class="col-3">
             {{user.username}}
           </div>
-        </div>
-        <div clas="col-sm">
+        </ng-container>
+        <div clas="col-3">
           <button class="btn btn-secondary" *ngIf="userService.loggedIn | async" (click)="logout()">logout</button>
         </div>
       </div>
