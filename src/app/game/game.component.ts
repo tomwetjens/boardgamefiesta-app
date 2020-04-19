@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ReplaySubject} from 'rxjs';
-import {filter, flatMap, switchMap, take} from 'rxjs/operators';
-import {Action, ActionType, Game, State} from '../model';
+import {ReplaySubject, Subject} from 'rxjs';
+import {flatMap, switchMap, take, takeUntil} from 'rxjs/operators';
+import {Action, ActionType, EventType, Game, State} from '../model';
 import {EventService} from '../event.service';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AudioService} from '../audio.service';
+import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -22,7 +24,9 @@ const AUTO_SELECTED_ACTIONS = [
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy, OnChanges {
+
+  private destroyed = new Subject();
 
   game = new ReplaySubject<Game>(1);
   state = new ReplaySubject<State>(1);
@@ -32,44 +36,85 @@ export class GameComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private gameService: GameService,
               private eventService: EventService,
-              private ngbModal: NgbModal) {
+              private ngbModal: NgbModal,
+              private audioService: AudioService) {
 
   }
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(flatMap(params => this.gameService.get(params.id)))
-      .subscribe(game => this.game.next(game));
+    this.refreshGame();
 
     this.game
-      .pipe(filter(game => game.status !== 'NEW'))
-      .subscribe(() => this.refreshState());
-
-    this.eventService.events
-      .subscribe(event => {
-        if (event.type === 'STATE_CHANGED') {
+      .pipe(
+        takeUntil(this.destroyed))
+      .subscribe(game => {
+        if (game.status !== 'NEW') {
           this.refreshState();
+        }
+
+        if (game.status === 'ENDED') {
+          const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
+          ngbModalRef.componentInstance.game = game;
         }
       });
 
-    this.state.subscribe(state => {
-      if (state.turn && state.actions.length === 1 && AUTO_SELECTED_ACTIONS.includes(state.actions[0])) {
-        this.selectedAction = state.actions[0];
-      } else {
-        this.selectedAction = null;
-      }
-    });
+    this.eventService.events
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(event => {
+        switch (event.type) {
+          case EventType.ACCEPTED:
+          case EventType.REJECTED:
+          case EventType.STARTED:
+          case EventType.ENDED:
+            this.refreshGame();
+            break;
+
+          case EventType.STATE_CHANGED:
+            this.refreshState();
+            break;
+        }
+      });
+
+    this.state
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(state => {
+        if (state.turn && state.actions.length === 1 && AUTO_SELECTED_ACTIONS.includes(state.actions[0])) {
+          this.selectedAction = state.actions[0];
+        } else {
+          this.selectedAction = null;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.next(true);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
+  private refreshGame() {
+    this.route.params
+      .pipe(switchMap(params => this.gameService.get(params.id)))
+      .subscribe(game => this.game.next(game));
   }
 
   start() {
     this.game
-      .pipe(take(1), flatMap(game => this.gameService.start(game.id)))
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        flatMap(game => this.gameService.start(game.id)))
       .subscribe(game => this.game.next(game));
   }
 
   perform(action: Action) {
     this.game
-      .pipe(take(1), flatMap(game => this.gameService.perform(game.id, action)))
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        flatMap(game => this.gameService.perform(game.id, action)))
       .subscribe(state => {
         this.selectedAction = null;
         this.state.next(state);
@@ -78,12 +123,17 @@ export class GameComponent implements OnInit {
 
   endTurn() {
     this.game
-      .pipe(take(1), flatMap(game => this.gameService.endTurn(game.id)))
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        flatMap(game => this.gameService.endTurn(game.id)))
       .subscribe(state => this.state.next(state));
   }
 
   selectAction(actionType: ActionType) {
-    this.state.pipe(take(1))
+    this.state.pipe(
+      takeUntil(this.destroyed),
+      take(1))
       .subscribe(state => {
         switch (actionType) {
           case ActionType.DISCARD_1_DUTCH_BELT_TO_GAIN_2_DOLLARS:
@@ -100,6 +150,17 @@ export class GameComponent implements OnInit {
           case ActionType.DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS:
           case ActionType.SINGLE_AUXILIARY_ACTION:
           case ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION:
+          case ActionType.DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES:
+          case ActionType.DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS:
+          case ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS:
+          case ActionType.DISCARD_1_JERSEY_TO_MOVE_ENGINE_1_FORWARD:
+          case ActionType.DISCARD_2_GUERNSEY_TO_GAIN_4_DOLLARS:
+          case ActionType.DRAW_2_CATTLE_CARDS:
+          case ActionType.GAIN_1_DOLLAR_PER_BUILDING_IN_WOODS:
+          case ActionType.GAIN_1_DOLLAR_PER_ENGINEER:
+          case ActionType.GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR:
+          case ActionType.GAIN_4_DOLLARS:
+          case ActionType.MAX_CERTIFICATES:
           case ActionType.UPGRADE_STATION:
             this.perform({type: actionType});
             break;
@@ -113,6 +174,7 @@ export class GameComponent implements OnInit {
 
   private refreshState() {
     this.game.pipe(
+      takeUntil(this.destroyed),
       take(1),
       switchMap(game => this.gameService.getState(game.id)))
       .subscribe(state => this.state.next(state));
@@ -121,4 +183,5 @@ export class GameComponent implements OnInit {
   cancelAction() {
     this.selectedAction = null;
   }
+
 }

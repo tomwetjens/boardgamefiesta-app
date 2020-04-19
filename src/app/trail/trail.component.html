@@ -419,7 +419,7 @@
         <rect [attr.height]="space.height"
               [attr.width]="space.width"
               class="space"
-              [ngClass]="{disabled:!canSelectSpace(space.space)}"
+              [ngClass]="{disabled:!canSelectSpace(space.space), selected:isSpaceSelected(space.space)}"
               (click)="selectSpace(space.space)"/>
       </g>
 

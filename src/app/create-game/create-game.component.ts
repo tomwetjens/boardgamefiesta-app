@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../model';
 import {GameService} from '../game.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-game',
@@ -13,13 +14,15 @@ export class CreateGameComponent implements OnInit {
   inviting = false;
   beginner = false;
 
-  constructor(private gameService: GameService) {
+  constructor(private router: Router, private gameService: GameService) {
   }
 
   ngOnInit(): void {
   }
 
   addUser(user: User) {
+    console.log('addUser:',user);
+
     if (this.invitedUsers.find(invitedUser => invitedUser.id === user.id)) {
       return;
     }
@@ -43,7 +46,7 @@ export class CreateGameComponent implements OnInit {
       inviteUserIds: this.invitedUsers.map(user => user.id),
       beginner: this.beginner
     })
-      .subscribe(game => console.log(game));
+      .subscribe(game => this.router.navigate(['/']));
   }
 
   get valid(): boolean {

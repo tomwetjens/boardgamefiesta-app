@@ -74,6 +74,7 @@ export enum ActionType {
   MOVE_3_FORWARD = 'MOVE_3_FORWARD',
   MOVE_3_FORWARD_WITHOUT_FEES = 'MOVE_3_FORWARD_WITHOUT_FEES',
   MOVE_4_FORWARD = 'MOVE_4_FORWARD',
+  MOVE_ENGINE_1_FORWARD = 'MOVE_ENGINE_1_FORWARD',
   MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS = 'MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS',
   MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD = 'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD',
   MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS = 'MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS',
@@ -92,8 +93,7 @@ export enum ActionType {
   PLACE_BUILDING = 'PLACE_BUILDING',
   PLACE_CHEAP_BUILDING = 'PLACE_CHEAP_BUILDING',
   PLAY_OBJECTIVE_CARD = 'PLAY_OBJECTIVE_CARD',
-  REMOVE_1_CARD = 'REMOVE_1_CARD',
-  REMOVE_2_CARDS = 'REMOVE_2_CARDS',
+  REMOVE_CARD = 'REMOVE_CARD',
   REMOVE_HAZARD = 'REMOVE_HAZARD',
   REMOVE_HAZARD_FOR_5_DOLLARS = 'REMOVE_HAZARD_FOR_5_DOLLARS',
   REMOVE_HAZARD_FOR_FREE = 'REMOVE_HAZARD_FOR_FREE',
@@ -319,12 +319,15 @@ export interface GamePlayer {
   readonly user: User;
   readonly status: 'INVITED' | 'ACCEPTED' | 'REJECTED';
   readonly color: PlayerColor;
+  readonly score?: number;
+  readonly winner?: boolean;
 }
 
 export interface Game {
   readonly id: string;
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
+  readonly player: GamePlayer;
   readonly otherPlayers: GamePlayer[];
   readonly created: string;
   readonly started: string;
@@ -363,4 +366,19 @@ export interface PossibleBuy {
   cost: number;
   cowboysNeeded: number;
   breedingValues: number[];
+}
+
+export enum EventType {
+  STARTED = 'STARTED',
+  ENDED = 'ENDED',
+  INVITED = 'INVITED',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+  STATE_CHANGED = 'STATE_CHANGED'
+}
+
+export interface Event {
+  readonly type: EventType;
+  readonly gameId: string;
+  readonly userId?: string;
 }

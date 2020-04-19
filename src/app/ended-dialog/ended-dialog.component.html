@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Ended</h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Player</th>
+      <th scope="col">Score</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let player of players">
+      <th scope="row">{{player.user.username}}</th>
+      <td>{{player.score}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+</div>

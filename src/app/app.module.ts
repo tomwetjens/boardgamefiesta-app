@@ -28,6 +28,7 @@ import { CardStackComponent } from './card-stack/card-stack.component';
 import { CattleMarketComponent } from './cattle-market/cattle-market.component';
 import { PlayerBuildingsComponent } from './player-buildings/player-buildings.component';
 import { ObjectiveCardsComponent } from './objective-cards/objective-cards.component';
+import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ObjectiveCardsComponent } from './objective-cards/objective-cards.compo
     CardStackComponent,
     CattleMarketComponent,
     PlayerBuildingsComponent,
-    ObjectiveCardsComponent
+    ObjectiveCardsComponent,
+    EndedDialogComponent
   ],
   imports: [
     BrowserModule,

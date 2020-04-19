@@ -11,7 +11,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 165 39">
       <use *ngFor="let stationMaster of playerState.stationMasters; index as i"
            [attr.xlink:href]="'#' + stationMaster"
-           [attr.x]="0 + (i * 33)"
+           [attr.x]="(i * 33)"
            [attr.y]="0"/>
     </svg>
     <button class="btn btn-secondary" (click)="showBuildings()">Buildings</button>
@@ -21,7 +21,7 @@
   <app-card *ngFor="let card of playerState.hand"
             [ngClass]="{disabled:!canSelectCard(card)}"
             [card]="card"
-            (click)="clickCard(card)">
+            (click)="selectCard(card)">
   </app-card>
 
   <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"></app-card-stack>

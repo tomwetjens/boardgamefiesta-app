@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
 import {Action, ActionType, Building, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State, Worker} from '../model';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -6,38 +6,54 @@ import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {ToastrService} from '../toastr.service';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
+import {AudioService} from '../audio.service';
 
 const SELECT_SPACE_ACTIONS = [
-  'MOVE_ENGINE_1_FORWARD',
-  'MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS',
-  'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD',
-  'MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS',
-  'MOVE_ENGINE_2_OR_3_FORWARD',
-  'MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS',
-  'MOVE_ENGINE_AT_MOST_2_FORWARD',
-  'MOVE_ENGINE_AT_MOST_3_FORWARD',
-  'MOVE_ENGINE_AT_MOST_4_FORWARD',
-  'MOVE_ENGINE_AT_MOST_5_FORWARD',
-  'MOVE_ENGINE_FORWARD',
-  'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS',
-  'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE',
-  'PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD',
-  'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES',
-  'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'
+  ActionType.MOVE_ENGINE_1_FORWARD,
+  ActionType.MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS,
+  ActionType.MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD,
+  ActionType.MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS,
+  ActionType.MOVE_ENGINE_2_OR_3_FORWARD,
+  ActionType.MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS,
+  ActionType.MOVE_ENGINE_AT_MOST_2_FORWARD,
+  ActionType.MOVE_ENGINE_AT_MOST_3_FORWARD,
+  ActionType.MOVE_ENGINE_AT_MOST_4_FORWARD,
+  ActionType.MOVE_ENGINE_AT_MOST_5_FORWARD,
+  ActionType.MOVE_ENGINE_FORWARD,
+  ActionType.MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS,
+  ActionType.PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE,
+  ActionType.PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD,
+  ActionType.PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES,
+  ActionType.PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD,
+  ActionType.EXTRAORDINARY_DELIVERY
 ];
+
+const MOVE_ACTIONS = [
+  ActionType.MOVE,
+  ActionType.MOVE_1_FORWARD,
+  ActionType.MOVE_2_FORWARD,
+  ActionType.MOVE_3_FORWARD,
+  ActionType.MOVE_3_FORWARD_WITHOUT_FEES,
+  ActionType.MOVE_4_FORWARD
+];
+
+const BUILD_ACTIONS = [ActionType.PLACE_CHEAP_BUILDING,
+  ActionType.PLACE_BUILDING];
+
+const HAZARD_ACTIONS = [ActionType.REMOVE_HAZARD, ActionType.REMOVE_HAZARD_FOR_FREE, ActionType.REMOVE_HAZARD_FOR_5_DOLLARS];
+
+const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_INDIANS];
 
 @Component({
   selector: 'app-trail',
   templateUrl: './trail.component.html',
   styleUrls: ['./trail.component.scss']
 })
-export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnChanges {
+export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecked, OnChanges {
 
   @Input() game: Game;
   @Input() state: State;
   @Input() selectedAction: ActionType;
-
-  window = window;
 
   selected: string;
   possibleMoves: PossibleMove[];
@@ -101,10 +117,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   stations: {}[];
   playerBuildings: { building: Building; x: string; y: string }[];
 
+  private selectedSpace: Space;
+
   constructor(private renderer: Renderer2,
               private gameService: GameService,
               private ngbModal: NgbModal,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private audioService: AudioService) {
     this.spaces = Array(19).fill(0)
       .map((_, index) => ({
         space: {number: index, turnout: null},
@@ -174,13 +193,30 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       this.updateForesights();
       this.updatePlayerBuildings();
       this.positionRanchers();
+
+      const current = changes.state.currentValue as State;
+      const previous = changes.state.previousValue as State;
+
+      if (current && previous) {
+        for (const color of Object.keys(PlayerColor)) {
+          const currentSpace = current.railroadTrack.players[color] as Space;
+          const previousSpace = previous.railroadTrack.players[color] as Space;
+
+          if (currentSpace && (currentSpace.number !== previousSpace.number || currentSpace.turnout !== previousSpace.turnout)) {
+            this.audioService.playSound('train');
+          }
+        }
+      }
     }
   }
 
   private actionSelected() {
-    if (this.selectedAction === 'DELIVER_TO_CITY') {
+    this.selectedSpace = null;
+
+    if ([ActionType.DELIVER_TO_CITY].includes(this.selectedAction)) {
       this.gameService.getPossibleDeliveries(this.game.id)
         .subscribe(possibleDeliveries => this.possibleDeliveries = possibleDeliveries);
+
     }
   }
 
@@ -213,7 +249,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           this.gameService.getPossibleMoves(this.game.id, name)
             .subscribe(possibleMoves => {
               if (possibleMoves.length === 0) {
-                console.error('no possible moves');
                 this.toastrService.error('Cannot move to selected location');
                 return;
               }
@@ -222,24 +257,15 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
               if (possibleMoves[0].cost === 0 || possibleMoves.length === 1) {
                 this.possibleMoves = [];
-                this.action.emit({type: ActionType.MOVE, steps: possibleMoves[0].steps});
+                this.moveTo(possibleMoves[0].steps);
               } else {
                 this.possibleMoves = possibleMoves;
               }
             });
         } else {
           // First move, can go anywhere
-          this.action.emit({type: ActionType.MOVE, steps: [name]});
+          this.moveTo([name]);
         }
-        break;
-
-      case ActionType.REMOVE_HAZARD:
-      case ActionType.REMOVE_HAZARD_FOR_FREE:
-        this.action.emit({type: this.selectedAction, hazard: this.state.trail.locations[name].hazard});
-        break;
-
-      case ActionType.TRADE_WITH_INDIANS:
-        this.action.emit({type: this.selectedAction, reward: this.state.trail.locations[name].reward});
         break;
 
       case ActionType.PLACE_BUILDING:
@@ -247,10 +273,21 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
         ngbModalRef.componentInstance.playerState = this.state.player;
         fromPromise(ngbModalRef.result).subscribe(building => {
+          this.audioService.playSound('building');
           this.action.emit({type: this.selectedAction, location: name, building});
         });
         break;
     }
+  }
+
+  private moveTo(steps: string[]) {
+    if (steps[steps.length - 1] === 'KANSAS_CITY') {
+      this.audioService.playSound('auction');
+    } else {
+      this.audioService.playSound('move');
+    }
+
+    this.action.emit({type: ActionType.MOVE, steps});
   }
 
   getLocationElement(name: string): Element | null {
@@ -263,35 +300,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   ngAfterContentChecked(): void {
     this.updateHazards();
     this.updatePlayerBuildings();
-  }
-
-  ngAfterViewChecked(): void {
-    // const foresightElements = [
-    //   [this.foresight00, this.foresight01, this.foresight02],
-    //   [this.foresight10, this.foresight11, this.foresight12]
-    // ];
-    //
-    // for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
-    //   for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
-    //     const tile = this.state.foresights.choices[columnIndex][rowIndex];
-    //
-    //     const foresightElement = foresightElements[rowIndex][columnIndex];
-    //     if (tile) {
-    //       let id;
-    //       if (tile.type === 'HAZARD') {
-    //         // TODO Differentiate to points and hand color
-    //         id = tile.hazard.type.toLowerCase() + (tile.hazard.hands === 'GREEN' ? 'Green' : 'Black');
-    //         this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-    //       } else {
-    //         id = tile.type === 'TEEPEE' ? (tile.teepee === 'GREEN' ? 'teepeeGreen' : 'teepeeBlue')
-    //           : tile.worker.toLowerCase();
-    //         this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '<use xlink:href="#' + id + '"/>');
-    //       }
-    //     } else {
-    //       this.renderer.setProperty(foresightElement.nativeElement, 'innerHTML', '');
-    //     }
-    //   }
-    // }
   }
 
   private positionRanchers() {
@@ -380,20 +388,27 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectCity(city: string): boolean {
-    return this.state.actions.includes(ActionType.DELIVER_TO_CITY) &&
-      this.possibleDeliveries && this.possibleDeliveries.some(pd => pd.city === city as City);
+    switch (this.selectedAction) {
+      case ActionType.DELIVER_TO_CITY:
+        return this.possibleDeliveries
+          && this.possibleDeliveries.some(pd => pd.city === city as City);
+      case ActionType.EXTRAORDINARY_DELIVERY:
+        return !!this.selectedSpace;
+      default:
+        return false;
+    }
   }
 
   get canChooseForesights(): boolean {
-    return this.selectedAction === 'CHOOSE_FORESIGHTS';
+    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS;
   }
 
   get canSelectHazard(): boolean {
-    return ['MOVE', 'REMOVE_HAZARD', 'REMOVE_HAZARD_FOR_FREE'].includes(this.selectedAction);
+    return HAZARD_ACTIONS.includes(this.selectedAction);
   }
 
   get canSelectTeepee(): boolean {
-    return ['MOVE', 'TRADE_WITH_INDIANS'].includes(this.selectedAction);
+    return TEEPEE_ACTIONS.includes(this.selectedAction);
   }
 
   selectForesight(rowIndex: number, columnIndex: number) {
@@ -402,6 +417,16 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         this.selectedForesights[columnIndex] = null;
       } else {
         this.selectedForesights[columnIndex] = rowIndex;
+
+        const choice = this.state.foresights.choices[columnIndex][rowIndex];
+
+        if (choice.worker) {
+          this.audioService.playSound(choice.worker.toLowerCase());
+        } else if (choice.hazard) {
+          this.audioService.playSound(choice.hazard.type.toLowerCase());
+        } else if (choice.teepee) {
+          this.audioService.playSound('indians');
+        }
       }
 
       if (this.selectedForesights[0] !== null && this.selectedForesights[1] !== null && this.selectedForesights[2] !== null) {
@@ -412,30 +437,42 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectCity(city: string) {
-    if (this.selectedAction === ActionType.DELIVER_TO_CITY && this.possibleDeliveries) {
-      const possibleDelivery = this.possibleDeliveries.find(pd => pd.city === city as City);
+    switch (this.selectedAction) {
+      case ActionType.DELIVER_TO_CITY:
+        if (this.possibleDeliveries) {
+          const possibleDelivery = this.possibleDeliveries.find(pd => pd.city === city as City);
 
-      if (possibleDelivery) {
-        if (this.state.player.certificates <= possibleDelivery.certificates) {
-          this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates: possibleDelivery.certificates});
-        } else {
-          const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);
+          if (possibleDelivery) {
+            if (this.state.player.certificates <= possibleDelivery.certificates) {
+              this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates: possibleDelivery.certificates});
+            } else {
+              const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);
 
-          ngbModalRef.componentInstance.possibleDelivery = possibleDelivery;
-          ngbModalRef.componentInstance.playerState = this.state.player;
+              ngbModalRef.componentInstance.possibleDelivery = possibleDelivery;
+              ngbModalRef.componentInstance.playerState = this.state.player;
 
-          fromPromise(ngbModalRef.result)
-            .subscribe(({certificates}) => this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates}));
+              fromPromise(ngbModalRef.result)
+                .subscribe(({certificates}) => this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates}));
+            }
+          }
         }
-      }
+        break;
+
+      case ActionType.EXTRAORDINARY_DELIVERY:
+        if (this.selectedSpace) {
+          this.action.emit({type: this.selectedAction, city, to: this.selectedSpace});
+        }
+        break;
     }
   }
 
   canSelectLocation(name: string) {
     const location = this.state.trail.locations[name];
-    return location && ((this.selectedAction === ActionType.MOVE && this.canMoveTo(location)) ||
-      ([ActionType.PLACE_CHEAP_BUILDING,
-        ActionType.PLACE_BUILDING].includes(this.selectedAction) && this.canPlaceBuilding(location)));
+    return location && (
+      (MOVE_ACTIONS.includes(this.selectedAction) && this.canMoveTo(location))
+      || (BUILD_ACTIONS.includes(this.selectedAction) && this.canPlaceBuilding(location))
+      || (this.selectedAction === ActionType.USE_ADJACENT_BUILDING && !!location.building) // TODO Only allow selecting adjacent buildings
+    );
   }
 
   private canMoveTo(location: Location): boolean {
@@ -450,8 +487,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectTeepee(reward: number) {
-    if (this.selectedAction === 'TRADE_WITH_INDIANS') {
+    if (this.selectedAction === ActionType.TRADE_WITH_INDIANS) {
       this.action.emit({type: this.selectedAction, reward});
+      this.audioService.playSound('indians');
     }
   }
 
@@ -496,9 +534,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectHazard(hazard: Hazard) {
-    if (this.selectedAction === 'REMOVE_HAZARD' || this.selectedAction === 'REMOVE_HAZARD_FOR_FREE') {
-      this.action.emit({type: this.selectedAction, hazard});
+    if (!this.canSelectHazard) {
+      return;
     }
+    this.action.emit({type: this.selectedAction, hazard});
+    this.audioService.playSound(hazard.type.toLowerCase());
   }
 
   private updateForesights() {
@@ -507,23 +547,44 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectStation(index: number) {
-    if (this.selectedAction === ActionType.DOWNGRADE_STATION) {
-      this.action.emit({type: this.selectedAction, station: index});
+    if (!this.canSelectStation(index)) {
+      return;
     }
+    this.action.emit({type: this.selectedAction, station: index});
   }
 
   canSelectStation(index: number) {
-    return [ActionType.DOWNGRADE_STATION].includes(this.selectedAction) && this.state.railroadTrack.stations[index].players.includes(this.state.player.player.color);
+    switch (this.selectedAction) {
+      case ActionType.UPGRADE_ANY_STATION_BEHIND_ENGINE:
+        return !this.state.railroadTrack.stations[index].players.includes(this.state.player.player.color);
+      case ActionType.DOWNGRADE_STATION:
+        return this.state.railroadTrack.stations[index].players.includes(this.state.player.player.color);
+      default:
+        return false;
+    }
   }
 
   selectSpace(space: Space) {
-    if (SELECT_SPACE_ACTIONS.includes(this.selectedAction)) {
-      this.action.emit({type: this.selectedAction, to: space});
+    if (!this.canSelectSpace(space)) {
+      return;
+    }
+    switch (this.selectedAction) {
+      case ActionType.EXTRAORDINARY_DELIVERY:
+        // Remember space, because player has to select city next
+        this.selectedSpace = space;
+        break;
+
+      default:
+        this.action.emit({type: this.selectedAction, to: space});
     }
   }
 
   canSelectSpace(space: Space) {
     return SELECT_SPACE_ACTIONS.includes(this.selectedAction);
+  }
+
+  isSpaceSelected(space: Space): boolean {
+    return this.selectedSpace === space;
   }
 
   getPlayersAt(space: Space): string[] {

@@ -8,6 +8,6 @@
 
 <ul>
   <li *ngFor="let user of users | async">
-    {{user.username}} <button (click)="select.emit(user)">Select</button>
+    {{user.username}} <button class="btn btn-secondary" (click)="selectUser.emit(user)">Select</button>
   </li>
 </ul>

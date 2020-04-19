@@ -20,8 +20,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  newGame() {
-    this.router.navigate(['/create']);
-  }
-
 }

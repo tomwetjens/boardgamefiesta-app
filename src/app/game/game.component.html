@@ -22,12 +22,10 @@
       <ng-container *ngIf="selectedAction">
         <ng-container [ngSwitch]="selectedAction">
           <span *ngSwitchCase="'DISCARD_CARD'" i18n>Discard a card</span>
+          <span *ngSwitchCase="'REMOVE_CARD'" i18n>Remove a card</span>
           <span *ngSwitchCase="'MOVE'" i18n>Move your cattleman</span>
           <span *ngSwitchCase="'SINGLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
           <span *ngSwitchCase="'SINGLE_OR_DOUBLE_AUXILIARY_ACTION'" i18n>Select auxiliary action</span>
-          <span *ngSwitchCase="'DISCARD_1_CARD'" i18n>Discard 1 card</span>
-          <span *ngSwitchCase="'DISCARD_2_CARDS'" i18n>Discard 2 cards</span>
-          <span *ngSwitchCase="'DISCARD_3_CARDS'" i18n>Discard 3 cards</span>
           <span *ngSwitchCase="'TRADE_WITH_INDIANS'" i18n>Take a teepee</span>
           <span *ngSwitchCase="'BUY_CATTLE'" i18n>Buy cattle</span>
           <span *ngSwitchCase="'CHOOSE_FORESIGHTS'" i18n>Choose foresights</span>
@@ -51,7 +49,7 @@
           <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_4_FORWARD'" i18n>Move engine at most 4 forward</span>
           <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_5_FORWARD'" i18n>Move engine at most 5 forward</span>
           <span *ngSwitchCase="'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'" i18n>Move engine forward up to number of buildings in the woods</span>
-          <span *ngSwitchDefault>Unknown action selected: {{selectedAction}}</span>
+          <span *ngSwitchDefault>{{selectedAction}}</span>
         </ng-container>
         <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel</button>
       </ng-container>
@@ -70,15 +68,16 @@
 </nav>
 
 <div class="main" *ngIf="game | async as game">
-  <ng-container *ngIf="game.status === 'STARTED'; else notStarted">
+  <ng-container *ngIf="game.status === 'STARTED' || game.status === 'ENDED'">
     <app-board [game]="game"
                [state]="state | async"
                [selectedAction]="selectedAction"
-               (action)="perform($event)">
+               (action)="perform($event)"
+               (selectAction)="selectAction($event)">
     </app-board>
   </ng-container>
 
-  <ng-template #notStarted>
+  <ng-container *ngIf="game.status === 'NEW'">
     {{game.status}}
 
     <!-- TODO Confirm dialog when not all players have accepted -->
@@ -92,5 +91,5 @@
         {{player.status}}
       </li>
     </ul>
-  </ng-template>
+  </ng-container>
 </div>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Action, ActionType, CattleCard, CattleMarket, Game, PossibleBuy} from '../model';
 import {GameService} from '../game.service';
+import {AudioService} from '../audio.service';
 
 @Component({
   selector: 'app-cattle-market',
@@ -24,11 +25,11 @@ export class CattleMarketComponent implements OnInit, OnChanges {
     return this.selectedCards.length > 0;
   }
 
-  get canBuy():boolean {
+  get canBuy(): boolean {
     return this.selectedAction === ActionType.BUY_CATTLE;
   }
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private audioService: AudioService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +42,17 @@ export class CattleMarketComponent implements OnInit, OnChanges {
           .subscribe(possibleBuys => this.possibleBuys = possibleBuys);
       } else {
         this.possibleBuys = null;
+      }
+    }
+
+    if (changes.cattleMarket) {
+      const current = changes.cattleMarket.currentValue as CattleMarket;
+      const previous = changes.cattleMarket.previousValue as CattleMarket;
+
+      if (current && previous){
+        if (current.cards.length !== previous.cards.length) {
+          this.audioService.playSound('cow');
+        }
       }
     }
   }
@@ -70,7 +82,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   selectCard(card: CattleCard) {
-    if (this.selectedAction === ActionType.BUY_CATTLE) {
+    if (this.canSelectCard(card)) {
       const index = this.selectedCards.indexOf(card);
 
       if (index < 0) {

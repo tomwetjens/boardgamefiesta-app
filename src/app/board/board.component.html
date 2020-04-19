@@ -19,7 +19,8 @@
       <app-player-board [state]="state" [playerState]="state.player"
                         [actions]="state.actions"
                         [selectedAction]="selectedAction"
-                        (action)="perform($event)">
+                        (action)="perform($event)"
+                        (selectAction)="selectAction.emit($event)">
       </app-player-board>
 
       <div *ngFor="let player of state.otherPlayers | keyvalue">

@@ -1,26 +1,41 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Action, ActionType, CattleCard, Game, State} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {HandSelectComponent} from '../hand-select/hand-select.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import {AudioService} from '../audio.service';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnChanges {
 
   @Input() game: Game;
   @Input() state: State;
   @Input() selectedAction: ActionType;
 
   @Output() action = new EventEmitter<Action>();
+  @Output() selectAction = new EventEmitter<ActionType>();
 
-  constructor() {
+  constructor(private audioService: AudioService) {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.state) {
+      const currentState = changes.state.currentValue as State;
+      const previousState = changes.state.previousValue as State;
+
+      if (currentState && previousState) {
+        if (currentState.turn && !previousState.turn) {
+          this.audioService.playSound('alert');
+        }
+      }
+    }
   }
 
   perform(action: Action) {

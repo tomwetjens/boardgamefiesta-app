@@ -15,7 +15,7 @@ export class SelectUserComponent implements OnInit {
   searching: boolean;
   users = new ReplaySubject<User[]>();
 
-  @Output() select = new EventEmitter<User>();
+  @Output() selectUser = new EventEmitter<User>();
 
   constructor(private userService: UserService) {
   }

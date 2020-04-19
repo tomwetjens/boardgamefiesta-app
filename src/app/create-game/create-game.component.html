@@ -2,7 +2,7 @@
 
 <div *ngIf="inviting">
   <button class="btn btn-secondary" (click)="this.inviting = false">Back</button>
-  <app-select-user (select)="addUser($event)"></app-select-user>
+  <app-select-user (selectUser)="addUser($event)"></app-select-user>
 </div>
 
 <div *ngIf="!inviting">
@@ -25,7 +25,7 @@
     </div>
 
     <div>
-      <button (click)="create()" [disabled]="!valid">Create</button>
+      <button class="btn btn-primary" (click)="create()" [disabled]="!valid">Create</button>
     </div>
   </form>
 </div>
