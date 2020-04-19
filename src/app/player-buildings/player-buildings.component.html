@@ -1,13 +1,12 @@
 <div class="modal-header">
-  <h4 class="modal-title">Player Buildings</h4>
+  <h4 class="modal-title">{{playerState.player.user.username}}'s Buildings Available</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <button *ngFor="let playerBuilding of playerState.buildings" class="building"
+  <button *ngFor="let playerBuilding of playerState.buildings" [class]="'building ' + playerState.player.color.toString().toLowerCase() + '-' + playerBuilding.toLowerCase()"
           (click)="confirm(playerBuilding)">
-    <img [src]="'/assets/buildings/' + playerBuilding + '_' + playerState.player.color.toString().toLowerCase() + '.jpg'"/>
   </button>
 </div>
 <div class="modal-footer">

@@ -1,20 +1,18 @@
 <div class="row no-gutters">
-  <div class="col-4">
+  <div class="col-2">
     <span [className]="'color '+ playerState.player.color"></span>
     <img [src]="playerState.player.user.avatarUrl" class="avatar"/>
     {{playerState.player.user.username}}
   </div>
-  <div class="col-4">
-    <span class="balance">$ {{playerState.balance}}</span>
+  <div class="col-1">
+    <span class="balance">{{playerState.balance}}</span>
   </div>
-  <div class="col-4">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 165 39">
-      <use *ngFor="let stationMaster of playerState.stationMasters; index as i"
-           [attr.xlink:href]="'#' + stationMaster"
-           [attr.x]="(i * 33)"
-           [attr.y]="0"/>
-    </svg>
-    <button class="btn btn-secondary" (click)="showBuildings()">Buildings</button>
+  <div class="col-3">
+    <button class="btn btn-secondary btn-buildings" (click)="showBuildings()" title="Available Buildings"></button>
+    <button class="btn btn-secondary btn-objectives" (click)="showObjectives()" title="Objectives"></button>
+  </div>
+  <div class="col-6">
+    <app-station-master *ngFor="let stationMaster of playerState.stationMasters" [stationMaster]="stationMaster"></app-station-master>
   </div>
 </div>
 <div class="row no-gutters hand" *ngIf="playerState.hand">

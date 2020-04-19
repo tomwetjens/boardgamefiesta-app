@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{playerState.player.user.username}}'s Objectives</h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <app-card *ngFor="let card of playerState.objectives" [card]="card"></app-card>
+
+  <app-hazard *ngFor="let hazard of playerState.hazards" [hazard]="hazard"></app-hazard>
+
+  <app-teepee *ngFor="let teepee of playerState.teepees" [teepee]="teepee"></app-teepee>
+</div>
+<div class="modal-footer">
+</div>

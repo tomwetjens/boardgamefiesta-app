@@ -2,7 +2,7 @@ export type Dollars = number;
 export type Points = number;
 
 export enum CattleType {
-  DUTCH_BELT= 'DUTCH_BELT',
+  DUTCH_BELT = 'DUTCH_BELT',
   BLACK_ANGUS = 'BLACK_ANGUS',
   GUERNSEY = 'GUERNSEY',
   JERSEY = 'JERSEY',
@@ -220,6 +220,9 @@ export interface PlayerState {
   readonly unlocked: { [key in Unlockable]: number };
   readonly buildings: string[];
   readonly stationMasters: StationMaster[];
+  readonly hazards: Hazard[];
+  readonly teepees: Teepee[];
+  readonly objectives: ObjectiveCard[];
 }
 
 export interface Space {

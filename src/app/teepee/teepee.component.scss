@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  width: 56px;
+  height: 68px;
+  border-radius: 8px;
+  background-size: cover;
+
+  &.GREEN {
+    background-image: url('../../assets/teepee_green.jpg');
+  }
+  &.BLUE {
+    background-image: url('../../assets/teepee_blue.jpg');
+  }
+}

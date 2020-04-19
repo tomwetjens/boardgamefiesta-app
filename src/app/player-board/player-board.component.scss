@@ -121,7 +121,7 @@ app-card {
   }
 }
 
-.worker {
+.worker, .hazard, .teepee {
   fill: rgb(0, 0, 0, 0.1);
   stroke: #ffffff;
   stroke-width: 2;
@@ -135,4 +135,47 @@ app-card {
     stroke: none;
     cursor: default;
   }
+}
+
+.btn-buildings {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  background-image: url('../../assets/icons/building.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+}
+
+.btn-objectives {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  background-image: url('../../assets/icons/objectives.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+}
+
+.balance {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  font-weight: bold;
+  color: #ffffff;
+  background-image: url('../../assets/icons/dollar.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  text-align: center;
+  vertical-align: top;
+  line-height: 20px;
+  font-size: 16px;
+  vertical-align: middle;
+  line-height: 30px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
 }

@@ -29,6 +29,10 @@ import { CattleMarketComponent } from './cattle-market/cattle-market.component';
 import { PlayerBuildingsComponent } from './player-buildings/player-buildings.component';
 import { ObjectiveCardsComponent } from './objective-cards/objective-cards.component';
 import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
+import { ObjectivesDialogComponent } from './objectives-dialog/objectives-dialog.component';
+import { HazardComponent } from './hazard/hazard.component';
+import { TeepeeComponent } from './teepee/teepee.component';
+import { StationMasterComponent } from './station-master/station-master.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
     CattleMarketComponent,
     PlayerBuildingsComponent,
     ObjectiveCardsComponent,
-    EndedDialogComponent
+    EndedDialogComponent,
+    ObjectivesDialogComponent,
+    HazardComponent,
+    TeepeeComponent,
+    StationMasterComponent
   ],
   imports: [
     BrowserModule,

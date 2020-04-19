@@ -3,6 +3,7 @@ import {Action, ActionType, Card, CattleCard, CattleType, PlayerState, State, Wo
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../audio.service';
+import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.component';
 
 @Component({
   selector: 'app-player-board',
@@ -155,6 +156,11 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
 
   showBuildings() {
     const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
+    ngbModalRef.componentInstance.playerState = this.playerState;
+  }
+
+  showObjectives() {
+    const ngbModalRef = this.ngbModal.open(ObjectivesDialogComponent);
     ngbModalRef.componentInstance.playerState = this.playerState;
   }
 

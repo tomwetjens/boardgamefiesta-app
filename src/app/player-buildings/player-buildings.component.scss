@@ -1,0 +1,24 @@
+.building {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
+  padding: 0;
+  margin: 2px;
+  border-radius: 8px;
+
+  background-size: cover;
+
+  $sides: a, b;
+  $colors: blue, red, yellow, white;
+
+  @for $i from 1 through 10 {
+    @each $side in $sides {
+      @each $color in $colors {
+        &.#{$color}-#{$i}#{$side} {
+          background-image: url('../../assets/buildings/#{$i}#{$side}_#{$color}.jpg');
+        }
+      }
+    }
+  }
+}
