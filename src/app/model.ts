@@ -316,6 +316,7 @@ export interface User {
   readonly username: string;
   readonly lastSeen: string;
   readonly avatarUrl: string;
+  readonly language: string;
 }
 
 export interface GamePlayer {

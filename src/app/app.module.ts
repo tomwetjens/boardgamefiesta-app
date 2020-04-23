@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {OAuthModule, OAuthStorage} from 'angular-oauth2-oidc';
+import {TranslateModule} from '@ngx-translate/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -24,15 +25,15 @@ import {ConnectionStatusComponent} from './connection-status/connection-status.c
 import {NavbarComponent} from './navbar/navbar.component';
 import {GameListComponent} from './game-list/game-list.component';
 import {LayoutComponent} from './layout/layout.component';
-import { CardStackComponent } from './card-stack/card-stack.component';
-import { CattleMarketComponent } from './cattle-market/cattle-market.component';
-import { PlayerBuildingsComponent } from './player-buildings/player-buildings.component';
-import { ObjectiveCardsComponent } from './objective-cards/objective-cards.component';
-import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
-import { ObjectivesDialogComponent } from './objectives-dialog/objectives-dialog.component';
-import { HazardComponent } from './hazard/hazard.component';
-import { TeepeeComponent } from './teepee/teepee.component';
-import { StationMasterComponent } from './station-master/station-master.component';
+import {CardStackComponent} from './card-stack/card-stack.component';
+import {CattleMarketComponent} from './cattle-market/cattle-market.component';
+import {PlayerBuildingsComponent} from './player-buildings/player-buildings.component';
+import {ObjectiveCardsComponent} from './objective-cards/objective-cards.component';
+import {EndedDialogComponent} from './ended-dialog/ended-dialog.component';
+import {ObjectivesDialogComponent} from './objectives-dialog/objectives-dialog.component';
+import {HazardComponent} from './hazard/hazard.component';
+import {TeepeeComponent} from './teepee/teepee.component';
+import {StationMasterComponent} from './station-master/station-master.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,9 @@ import { StationMasterComponent } from './station-master/station-master.componen
     HttpClientModule,
     FormsModule,
     OAuthModule.forRoot(),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en'
+    }),
     AppRoutingModule,
     NgbModule
   ],
