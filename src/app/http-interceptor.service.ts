@@ -26,7 +26,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(catchError(response => {
       if (response.status >= 400 && response.status < 500) {
         // TODO Handle 4xx with code
-        const message = (response.error && response.error.message) || response.statusText;
+        const message = response.error.errorCode || response.statusText;
         this.toastrService.error(message);
       } else if (response.status === 502 || response.status === 503) {
         // TODO Handle 503 from backend

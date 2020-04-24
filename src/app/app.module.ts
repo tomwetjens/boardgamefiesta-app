@@ -34,6 +34,7 @@ import {ObjectivesDialogComponent} from './objectives-dialog/objectives-dialog.c
 import {HazardComponent} from './hazard/hazard.component';
 import {TeepeeComponent} from './teepee/teepee.component';
 import {StationMasterComponent} from './station-master/station-master.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {StationMasterComponent} from './station-master/station-master.component'
     ObjectivesDialogComponent,
     HazardComponent,
     TeepeeComponent,
-    StationMasterComponent
+    StationMasterComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,
