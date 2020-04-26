@@ -171,6 +171,18 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
       });
   }
 
+  skipAction() {
+    this.game
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        switchMap(game => this.gameService.skip(game.id)))
+      .subscribe(state => {
+        this.selectedAction = null;
+        this.state.next(state);
+      });
+  }
+
   endTurn() {
     this.state
       .pipe(
@@ -249,4 +261,5 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
   private canPerformFreeAction(state: State) {
     return state.actions.some(action => FREE_ACTIONS.includes(action));
   }
+
 }

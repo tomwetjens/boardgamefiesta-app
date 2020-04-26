@@ -40,6 +40,10 @@ export class GameService {
     return this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + id + '/perform', action);
   }
 
+  skip(id: string): Observable<State> {
+    return this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + id + '/skip', null);
+  }
+
   endTurn(id: string): Observable<State> {
     return this.httpClient.post<State>(environment.apiBaseUrl + '/games/' + id + '/end-turn', null);
   }
@@ -59,4 +63,5 @@ export class GameService {
   getPossibleBuys(id: string): Observable<PossibleBuy[]> {
     return this.httpClient.get<PossibleBuy[]>(environment.apiBaseUrl + '/games/' + id + '/state/possible-buys');
   }
+
 }

@@ -100,6 +100,14 @@
     &:hover {
       stroke: black;
     }
+
+    &.selected {
+      stroke: black;
+    }
+
+    &.otherSelected {
+      opacity: 0.8;
+    }
   }
 
   &.disabled {
@@ -108,16 +116,19 @@
       cursor: default;
     }
   }
+
+  .points {
+    fill: white !important;
+    stroke: white !important;
+    stroke-width: 0 !important;
+    font-size: 8px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000;
+  }
 }
 
 .foresight {
-  &.selected {
-    stroke: black;
-  }
 
-  &.otherSelected {
-    opacity: 0.8;
-  }
 }
 
 .worker, .hazard, .teepee, .space {
@@ -133,6 +144,13 @@
   &.disabled {
     stroke: none;
     cursor: default;
+  }
+
+  .points {
+    fill: white;
+    font-size: 8px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000;
   }
 }
 

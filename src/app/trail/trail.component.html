@@ -117,25 +117,43 @@
     <image href="/assets/board.png" x="0" y="0" height="800" width="800"></image>
 
     <g id="foresights" transform="translate(20,194)" class="foresights" [ngClass]="{disabled:!canChooseForesights}">
-      <use x="0" [attr.xlink:href]="'#' + foresights[2][0]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(2,0), otherSelected: isForesightSelected(2,1)}"
-           (click)="selectForesight(0,2)"/>
-      <use x="34" [attr.xlink:href]="'#' + foresights[1][0]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(1,0), otherSelected: isForesightSelected(1,1)}"
-           (click)="selectForesight(0,1)"/>
-      <use x="68" [attr.xlink:href]="'#' + foresights[0][0]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(0,0), otherSelected: isForesightSelected(0,1)}"
-           (click)="selectForesight(0,0)"/>
+      <g transform="translate(0,0)">
+        <use [attr.xlink:href]="'#' + foresights[2][0].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(2,0), otherSelected: isForesightSelected(2,1)}"
+             (click)="selectForesight(0,2)"/>
+        <text *ngIf="foresights[2][0].points" x="18" y="30" class="points">{{foresights[2][0].points}}</text>
+      </g>
+      <g transform="translate(34,0)">
+        <use [attr.xlink:href]="'#' + foresights[1][0].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(1,0), otherSelected: isForesightSelected(1,1)}"
+             (click)="selectForesight(0,1)"/>
+        <text *ngIf="foresights[1][0].points" x="18" y="30" class="points">{{foresights[1][0].points}}</text>
+      </g>
+      <g transform="translate(68,0)">
+        <use [attr.xlink:href]="'#' + foresights[0][0].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(0,0), otherSelected: isForesightSelected(0,1)}"
+             (click)="selectForesight(0,0)"/>
+        <text *ngIf="foresights[0][0].points" x="18" y="30" class="points">{{foresights[0][0].points}}</text>
+      </g>
 
-      <use x="0" y="40" [attr.xlink:href]="'#' + foresights[2][1]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(2,1), otherSelected: isForesightSelected(2,0)}"
-           (click)="selectForesight(1,2)"/>
-      <use x="34" y="40" [attr.xlink:href]="'#' + foresights[1][1]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(1,1), otherSelected: isForesightSelected(1,0)}"
-           (click)="selectForesight(1,1)"/>
-      <use x="68" y="40" [attr.xlink:href]="'#' + foresights[0][1]"
-           class="foresight" [ngClass]="{selected:isForesightSelected(0,1), otherSelected: isForesightSelected(0,0)}"
-           (click)="selectForesight(1,0)"/>
+      <g transform="translate(0,40)">
+        <use [attr.xlink:href]="'#' + foresights[2][1].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(2,1), otherSelected: isForesightSelected(2,0)}"
+             (click)="selectForesight(1,2)"/>
+        <text *ngIf="foresights[2][1].points" x="18" y="30" class="points">{{foresights[2][1].points}}</text>
+      </g>
+      <g transform="translate(34,40)">
+        <use [attr.xlink:href]="'#' + foresights[1][1].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(1,1), otherSelected: isForesightSelected(1,0)}"
+             (click)="selectForesight(1,1)"/>
+        <text *ngIf="foresights[1][1].points" x="18" y="30" class="points">{{foresights[1][1].points}}</text>
+      </g>
+      <g transform="translate(68,40)">
+        <use [attr.xlink:href]="'#' + foresights[0][1].href"
+             class="foresight" [ngClass]="{selected:isForesightSelected(0,1), otherSelected: isForesightSelected(0,0)}"
+             (click)="selectForesight(1,0)"/>
+        <text *ngIf="foresights[0][1].points" x="18" y="30" class="points">{{foresights[0][1].points}}</text>
+      </g>
     </g>
 
     <g id="cities" class="cities">
@@ -476,12 +494,13 @@
     </g>
 
     <g id="hazards" transform="translate(130,-133)" class="hazards">
-      <use *ngFor="let hazard of hazards" [attr.x]="hazard.x"
-           class="hazard"
-           [attr.y]="hazard.y"
-           [attr.xlink:href]="'#' + hazard.hazard.type + '_' + hazard.hazard.hands"
-           [ngClass]="{disabled:!canSelectHazard}"
-           (click)="selectHazard(hazard.hazard)"/>
+      <g *ngFor="let hazard of hazards" class="hazard"
+         [ngClass]="{disabled:!canSelectHazard}"
+         [attr.transform]="'translate(' + hazard.x + ',' + hazard.y + ')'">
+        <use [attr.xlink:href]="'#' + hazard.hazard.type + '_' + hazard.hazard.hands"
+             (click)="selectHazard(hazard.hazard)"/>
+        <text x="18" y="30" class="points">{{hazard.hazard.points}}</text>
+      </g>
     </g>
 
     <g #locations transform="translate(130,-133)" class="locations">

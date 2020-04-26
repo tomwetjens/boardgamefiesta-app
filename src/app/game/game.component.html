@@ -57,7 +57,10 @@
           <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_4_FORWARD'">Move engine at most 4 forward</span>
           <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_5_FORWARD'">Move engine at most 5 forward</span>
           <span *ngSwitchCase="'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'">Move engine forward up to number of buildings in the woods</span>
-          <span *ngSwitchCase="'APPOINT_STATION_MASTER'">Appoint one of your workers to be station master</span>
+          <span *ngSwitchCase="'APPOINT_STATION_MASTER'">
+            Appoint one of your workers to be station master
+            <button class="btn btn-secondary" (click)="skipAction()">Skip</button>
+          </span>
           <span *ngSwitchCase="'ADD_1_OBJECTIVE_CARD_TO_HAND'">Choose an objective card to add to your hand</span>
           <span *ngSwitchCase="'DISCARD_1_OBJECTIVE_CARD_TO_GAIN_2_CERTIFICATES'">Discard an objective card to gain 2 certificates</span>
           <span *ngSwitchCase="'HIRE_WORKER'">Choose a worker from the job market to buy</span>

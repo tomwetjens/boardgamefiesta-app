@@ -6,10 +6,13 @@
 </div>
 <div class="modal-body">
   <form>
+    <p *ngIf="possibleDelivery.certificates > 0">
+      You must spend at least {{possibleDelivery.certificates}} certificates to deliver to {{possibleDelivery.city}}.
+    </p>
     <p>
-    Certificates:
-    <input type="number" [(ngModel)]="certificates" [min]="possibleDelivery.certificates" [max]="playerState.certificates" [step]="1" name="certificates"/>
-    Max {{playerState.certificates}}
+      Spend certificates:
+      <input type="number" [(ngModel)]="certificates" [min]="possibleDelivery.certificates" [max]="playerState.certificates" [step]="1" name="certificates"/>
+      Max {{playerState.certificates}}
     </p>
   </form>
 </div>

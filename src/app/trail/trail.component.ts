@@ -137,6 +137,11 @@ interface PossibleMoveElement {
   lines: PossibleMoveLine[];
 }
 
+interface ForesightItem {
+  href: string;
+  points?: number;
+}
+
 @Component({
   selector: 'app-trail',
   templateUrl: './trail.component.html',
@@ -189,7 +194,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private possibleDeliveries: PossibleDelivery[];
 
   hazards: HazardElement[];
-  foresights: any[][];
+  foresights: ForesightItem[][];
   selectedForesights: number[] = [null, null, null];
   spaces = SPACES;
   playerBuildings: PlayerBuildingElement[];
@@ -270,6 +275,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   selectLocation(name: string) {
     switch (this.selectedAction) {
       case ActionType.MOVE:
+      case ActionType.MOVE_1_FORWARD:
+      case ActionType.MOVE_2_FORWARD:
+      case ActionType.MOVE_3_FORWARD:
+      case ActionType.MOVE_3_FORWARD_WITHOUT_FEES:
+      case ActionType.MOVE_4_FORWARD:
         if (this.state.trail.playerLocations[this.state.player.player.color]) {
           this.gameService.getPossibleMoves(this.game.id, name)
             .subscribe(possibleMoves => {
@@ -279,7 +289,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               }
 
               if (possibleMoves.length === 1) {
-                this.moveTo(possibleMoves[0].steps);
+                this.performMove(possibleMoves[0].steps);
               } else {
                 this.possibleMoves = possibleMoves;
                 this.updatePossibleMoves();
@@ -287,7 +297,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
             });
         } else {
           // First move, can go anywhere
-          this.moveTo([name]);
+          this.performMove([name]);
         }
         break;
 
@@ -303,7 +313,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     }
   }
 
-  private moveTo(steps: string[]) {
+  private performMove(steps: string[]) {
     this.possibleMoves = [];
     this.updatePossibleMoves();
 
@@ -313,7 +323,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       this.audioService.playSound('move');
     }
 
-    this.action.emit({type: ActionType.MOVE, steps});
+    this.action.emit({type: this.selectedAction, steps});
   }
 
   getLocationElement(name: string): Element | null {
@@ -561,7 +571,18 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   private updateForesights() {
     this.foresights = this.state.foresights.choices
-      .map(column => column.map(tile => tile.worker || tile.teepee || tile.hazard.type + '_' + tile.hazard.hands));
+      .map(column => column.map(tile => {
+        if (tile.worker) {
+          return {href: tile.worker};
+        } else if (tile.teepee) {
+          return {href: tile.teepee};
+        } else {
+          return {
+            href: tile.hazard.type + '_' + tile.hazard.hands,
+            points: tile.hazard.points
+          };
+        }
+      }));
   }
 
   selectStation(index: number) {
@@ -657,6 +678,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectPossibleMove(possibleMove: PossibleMove) {
-    this.moveTo(possibleMove.steps);
+    this.performMove(possibleMove.steps);
   }
 }

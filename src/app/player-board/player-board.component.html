@@ -1,5 +1,5 @@
 <div class="row no-gutters">
-  <div class="col-2">
+  <div class="col-3">
     <span [className]="'color '+ playerState.player.color"></span>
     <img [src]="playerState.player.user.avatarUrl" class="avatar"/>
     {{playerState.player.user.username}}
@@ -7,7 +7,7 @@
   <div class="col-1">
     <span class="balance">{{playerState.balance}}</span>
   </div>
-  <div class="col-3">
+  <div class="col-2">
     <button class="btn btn-secondary btn-buildings" (click)="showBuildings()" title="Available Buildings"></button>
     <button class="btn btn-secondary btn-objectives" (click)="showObjectives()" title="Objectives"></button>
   </div>
