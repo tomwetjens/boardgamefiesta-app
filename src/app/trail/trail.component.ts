@@ -40,9 +40,102 @@ const MOVE_ACTIONS = [
 const BUILD_ACTIONS = [ActionType.PLACE_CHEAP_BUILDING,
   ActionType.PLACE_BUILDING];
 
-const HAZARD_ACTIONS = [ActionType.REMOVE_HAZARD, ActionType.REMOVE_HAZARD_FOR_FREE, ActionType.REMOVE_HAZARD_FOR_5_DOLLARS];
+const HAZARD_ACTIONS = [
+  ActionType.REMOVE_HAZARD,
+  ActionType.REMOVE_HAZARD_FOR_FREE,
+  ActionType.REMOVE_HAZARD_FOR_5_DOLLARS
+];
 
 const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_INDIANS];
+
+interface SpaceElement {
+  space: Space;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  transform?: string;
+}
+
+const SPACES: SpaceElement[] = Array(19).fill(0)
+  .map((_, index) => ({
+    space: {number: index, turnout: null},
+    x: 164 + index * 31.7,
+    y: 54,
+    width: 31.7,
+    height: 19,
+    transform: ''
+  }))
+  .concat(Array(5).fill(0)
+    .map((_, index) => ({
+      space: {number: null, turnout: index},
+      x: 303 + index * 95,
+      y: 73,
+      width: 36,
+      height: 18,
+      transform: ''
+    })))
+  .concat({
+    space: {number: 19, turnout: null},
+    x: 761,
+    y: 64,
+    width: 20,
+    height: 30.9,
+    transform: 'rotate(-45 761 64)'
+  })
+  .concat(Array(19).fill(0)
+    .map((_, index) => ({
+      space: {number: 20 + index, turnout: null},
+      x: 777,
+      y: 82 + (index * 30.9),
+      width: 20,
+      height: 30.9,
+      transform: ''
+    })))
+  .concat(Array(4).fill(0)
+    .map((_, index) => ({
+      space: {number: null, turnout: 5 + index},
+      x: 759,
+      y: 126 + index * 124,
+      width: 18,
+      height: 36,
+      transform: ''
+    })))
+  .concat({
+    space: {number: 39, turnout: null},
+    x: 731,
+    y: 666,
+    width: 46,
+    height: 30.9,
+    transform: ''
+  });
+
+interface PlayerBuildingElement {
+  building: Building;
+  x: string;
+  y: string;
+}
+
+interface HazardElement {
+  x: string;
+  y: string;
+  hazard: Hazard;
+}
+
+const COLORS = ['green', 'purple', 'brown', 'orange'];
+
+interface PossibleMoveLine {
+  x1: any;
+  y1: any;
+  x2: any;
+  y2: any;
+}
+
+interface PossibleMoveElement {
+  possibleMove: PossibleMove;
+  color: string;
+  lines: PossibleMoveLine[];
+}
 
 @Component({
   selector: 'app-trail',
@@ -54,10 +147,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @Input() game: Game;
   @Input() state: State;
   @Input() selectedAction: ActionType;
-
-  selected: string;
-  possibleMoves: PossibleMove[];
-  possibleDeliveries: PossibleDelivery[];
 
   @Output() action = new EventEmitter<Action>();
 
@@ -76,9 +165,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private whiteElement !: ElementRef<Element>;
 
   private rancherElements: { [playerColor in PlayerColor]: ElementRef };
-
-  @ViewChild('possiblemoves')
-  private possibleMovesElement !: ElementRef<Element>;
 
   @ViewChild('A') private neutralBuildingA !: ElementRef<Element>;
   @ViewChild('B') private neutralBuildingB !: ElementRef<Element>;
@@ -99,23 +185,15 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   @ViewChild('hazards') private hazardsElement !: ElementRef<Element>;
 
-  hazards: { x: string, y: string, hazard: Hazard }[];
+  private possibleMoves: PossibleMove[];
+  private possibleDeliveries: PossibleDelivery[];
+
+  hazards: HazardElement[];
   foresights: any[][];
   selectedForesights: number[] = [null, null, null];
-
-  spaces: {
-    space: { number?: number; turnout?: number };
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    transform?: string;
-  }[];
-
-  engines: { [playerColor in PlayerColor]: { x: string; y: string; } };
-
-  stations: {}[];
-  playerBuildings: { building: Building; x: string; y: string }[];
+  spaces = SPACES;
+  playerBuildings: PlayerBuildingElement[];
+  possibleMoveElements: PossibleMoveElement[];
 
   private selectedSpace: Space;
 
@@ -124,58 +202,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               private ngbModal: NgbModal,
               private toastrService: ToastrService,
               private audioService: AudioService) {
-    this.spaces = Array(19).fill(0)
-      .map((_, index) => ({
-        space: {number: index, turnout: null},
-        x: 164 + index * 31.7,
-        y: 54,
-        width: 31.7,
-        height: 19,
-        transform: ''
-      }))
-      .concat(Array(5).fill(0)
-        .map((_, index) => ({
-          space: {number: null, turnout: index},
-          x: 303 + index * 95,
-          y: 73,
-          width: 36,
-          height: 18,
-          transform: ''
-        })))
-      .concat({
-        space: {number: 19, turnout: null},
-        x: 761,
-        y: 64,
-        width: 20,
-        height: 30.9,
-        transform: 'rotate(-45 761 64)'
-      })
-      .concat(Array(19).fill(0)
-        .map((_, index) => ({
-          space: {number: 20 + index, turnout: null},
-          x: 777,
-          y: 82 + (index * 30.9),
-          width: 20,
-          height: 30.9,
-          transform: ''
-        })))
-      .concat(Array(4).fill(0)
-        .map((_, index) => ({
-          space: {number: null, turnout: 5 + index},
-          x: 759,
-          y: 126 + index * 124,
-          width: 18,
-          height: 36,
-          transform: ''
-        })))
-      .concat({
-        space: {number: 39, turnout: null},
-        x: 731,
-        y: 666,
-        width: 46,
-        height: 30.9,
-        transform: ''
-      });
   }
 
   ngOnInit(): void {
@@ -216,7 +242,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     if ([ActionType.DELIVER_TO_CITY].includes(this.selectedAction)) {
       this.gameService.getPossibleDeliveries(this.game.id)
         .subscribe(possibleDeliveries => this.possibleDeliveries = possibleDeliveries);
-
     }
   }
 
@@ -253,13 +278,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
                 return;
               }
 
-              possibleMoves.sort((a, b) => a.cost - b.cost);
-
-              if (possibleMoves[0].cost === 0 || possibleMoves.length === 1) {
-                this.possibleMoves = [];
+              if (possibleMoves.length === 1) {
                 this.moveTo(possibleMoves[0].steps);
               } else {
                 this.possibleMoves = possibleMoves;
+                this.updatePossibleMoves();
               }
             });
         } else {
@@ -281,6 +304,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private moveTo(steps: string[]) {
+    this.possibleMoves = [];
+    this.updatePossibleMoves();
+
     if (steps[steps.length - 1] === 'KANSAS_CITY') {
       this.audioService.playSound('auction');
     } else {
@@ -338,60 +364,52 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     }
   }
 
-  private showPossibleMoves() {
-    while (this.possibleMovesElement.nativeElement.firstChild != null) {
-      this.renderer.removeChild(this.possibleMovesElement.nativeElement, this.possibleMovesElement.nativeElement.firstChild);
+  private updatePossibleMoves() {
+    if (!this.possibleMoves) {
+      this.possibleMoveElements = null;
     }
 
-    if (this.possibleMoves) {
-      const colors = ['green', 'purple', 'brown', 'orange'];
+    let colorIndex = 0;
 
-      let colorIndex = 0;
-      for (const possibleMove of this.possibleMoves) {
+    this.possibleMoveElements = this.possibleMoves.map(possibleMove => {
+      const cur = this.state.trail.playerLocations[this.state.player.player.color];
 
-        const cur = this.state.trail.playerLocations[this.state.player.player.color];
+      let prev = cur;
+      let prevLocationElement = this.getLocationElement(prev);
 
-        let prev = cur;
-        let prevLocationElement = this.getLocationElement(prev);
+      const lines = possibleMove.steps.map(step => {
+        const locationElement = this.getLocationElement(step);
 
-        for (const step of possibleMove.steps) {
-          const locationElement = this.getLocationElement(step);
-
-          if (!locationElement) {
-            console.warn('Step in possible move not found in SVG: ' + step);
-          }
-
-          const rect = this.renderer.createElement('rect', 'http://www.w3.org/2000/svg');
-          this.renderer.setAttribute(rect, 'x', locationElement.getAttribute('x'));
-          this.renderer.setAttribute(rect, 'y', locationElement.getAttribute('y'));
-          this.renderer.setAttribute(rect, 'width', '3');
-          this.renderer.setAttribute(rect, 'height', '3');
-          this.renderer.setAttribute(rect, 'fill', colors[colorIndex]);
-
-          const line = this.renderer.createElement('line', 'http://www.w3.org/2000/svg');
-          this.renderer.setAttribute(line, 'x1', prevLocationElement.getAttribute('x'));
-          this.renderer.setAttribute(line, 'y1', prevLocationElement.getAttribute('y'));
-          this.renderer.setAttribute(line, 'x2', locationElement.getAttribute('x'));
-          this.renderer.setAttribute(line, 'y2', locationElement.getAttribute('y'));
-          this.renderer.setAttribute(line, 'stroke-width', '3');
-          this.renderer.setAttribute(line, 'stroke', colors[colorIndex]);
-
-          this.renderer.appendChild(this.possibleMovesElement.nativeElement, line);
-
-          prev = step;
-          prevLocationElement = locationElement;
+        if (!locationElement) {
+          console.warn('Step in possible move not found in SVG: ' + step);
+          return;
         }
 
-        colorIndex++;
-      }
-    }
+        const line = {
+          x1: parseFloat(prevLocationElement.getAttribute('x')) + 12,
+          y1: parseFloat(prevLocationElement.getAttribute('y')) + 12,
+          x2: parseFloat(locationElement.getAttribute('x')) + 12,
+          y2: parseFloat(locationElement.getAttribute('y')) + 12
+        };
+
+        prev = step;
+        prevLocationElement = locationElement;
+
+        return line;
+      });
+
+      return {
+        possibleMove,
+        color: COLORS[colorIndex++],
+        lines
+      };
+    });
   }
 
   canSelectCity(city: string): boolean {
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
-        return this.possibleDeliveries
-          && this.possibleDeliveries.some(pd => pd.city === city as City);
+        return this.possibleDeliveries && this.possibleDeliveries.some(pd => pd.city === city as City);
       case ActionType.EXTRAORDINARY_DELIVERY:
         return !!this.selectedSpace;
       default:
@@ -592,7 +610,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private isPlayerAt(color: PlayerColor, space: Space): boolean {
-    return this.state.railroadTrack.players[color] && (this.state.railroadTrack.players[color].number === space.number || this.state.railroadTrack.players[color].turnout === space.turnout);
+    return this.state.railroadTrack.players[color] && (this.state.railroadTrack.players[color].number === space.number
+      || this.state.railroadTrack.players[color].turnout === space.turnout);
   }
 
   canSelectWorker(rowIndex: number): boolean {
@@ -635,5 +654,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         this.action.emit({type: this.selectedAction, worker});
         break;
     }
+  }
+
+  selectPossibleMove(possibleMove: PossibleMove) {
+    this.moveTo(possibleMove.steps);
   }
 }

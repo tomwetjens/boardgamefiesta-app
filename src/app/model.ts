@@ -357,7 +357,7 @@ export interface CreateGameRequest {
 export interface PossibleMove {
   cost: number;
   steps: string[];
-  playerFees: { player: Player; cost: number }[];
+  playerFees: { player: Player; fee: number }[];
 }
 
 export interface PossibleDelivery {

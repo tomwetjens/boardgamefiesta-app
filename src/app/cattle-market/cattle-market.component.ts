@@ -49,7 +49,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
       const current = changes.cattleMarket.currentValue as CattleMarket;
       const previous = changes.cattleMarket.previousValue as CattleMarket;
 
-      if (current && previous){
+      if (current && previous) {
         if (current.cards.length !== previous.cards.length) {
           this.audioService.playSound('cow');
         }
@@ -82,16 +82,14 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   selectCard(card: CattleCard) {
-    if (this.canSelectCard(card)) {
-      const index = this.selectedCards.indexOf(card);
+    const index = this.selectedCards.indexOf(card);
 
-      if (index < 0) {
-        if (this.canSelectCard(card)) {
-          this.selectedCards.push(card);
-        }
-      } else {
-        this.selectedCards.splice(index, 1);
+    if (index < 0) {
+      if (this.canSelectCard(card)) {
+        this.selectedCards.push(card);
       }
+    } else {
+      this.selectedCards.splice(index, 1);
     }
   }
 

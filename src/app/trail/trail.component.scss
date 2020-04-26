@@ -114,6 +114,7 @@
   &.selected {
     stroke: black;
   }
+
   &.otherSelected {
     opacity: 0.8;
   }
@@ -174,3 +175,8 @@
   }
 }
 
+.possible-move {
+  line {
+    cursor: pointer;
+  }
+}

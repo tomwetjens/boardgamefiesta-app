@@ -15,7 +15,7 @@
   @for $i from 1 through 10 {
     @each $side in $sides {
       @each $color in $colors {
-        &.#{$color}-#{$i}#{$side} {
+        &.#{"" + $color}-#{$i}#{$side} {
           background-image: url('../../assets/buildings/#{$i}#{$side}_#{$color}.jpg');
         }
       }

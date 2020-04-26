@@ -16,6 +16,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   @Input() playerState: PlayerState;
   @Input() actions: ActionType[] = [];
   @Input() selectedAction: ActionType;
+  @Input() readonly = false;
 
   @Output() action = new EventEmitter<Action>();
   @Output() selectAction = new EventEmitter<ActionType>();
@@ -151,7 +152,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   canSelectAction(actionType: string) {
-    return this.state.actions.includes(actionType as ActionType);
+    return !this.readonly && this.state.actions.includes(actionType as ActionType);
   }
 
   showBuildings() {

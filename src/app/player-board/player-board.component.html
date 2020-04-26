@@ -73,42 +73,42 @@
          (click)="selectEngineer(i)"/>
 
     <rect id="cert_marker_0" *ngIf="playerState.certificates === 0"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="158"
           width="30"
           height="30"></rect>
 
     <rect id="cert_marker_1" *ngIf="playerState.certificates === 1"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="198"
           width="30"
           height="30"></rect>
 
     <rect id="cert_marker_2" *ngIf="playerState.certificates === 2"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="239"
           width="30"
           height="30"></rect>
 
     <rect id="cert_marker_3" *ngIf="playerState.certificates === 3"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="280"
           width="30"
           height="30"></rect>
 
     <rect id="cert_marker_4" *ngIf="playerState.certificates === 4"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="328"
           width="30"
           height="30"/>
 
     <rect id="cert_marker_6" *ngIf="playerState.certificates === 6"
-          class="cert-marker"
+          class="cert-marker disabled"
           x="744"
           y="389"
           width="30"/>
@@ -324,7 +324,7 @@
             cx="761"
             cy="346"
             r="25"
-            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_4'), disabled: !canUnlockBlack}"
+            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_4'), disabled: !canUnlockWhite}"
             (click)="unlock('CERT_LIMIT_4')"/>
 
     <circle id="cert-limit-6-disc"
