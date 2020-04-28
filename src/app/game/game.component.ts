@@ -228,7 +228,7 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
           case ActionType.DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS:
           case ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS:
           case ActionType.DISCARD_1_JERSEY_TO_MOVE_ENGINE_1_FORWARD:
-          case ActionType.DISCARD_2_GUERNSEY_TO_GAIN_4_DOLLARS:
+          case ActionType.DISCARD_1_GUERNSEY_TO_GAIN_4_DOLLARS:
           case ActionType.DRAW_2_CATTLE_CARDS:
           case ActionType.GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS:
           case ActionType.GAIN_1_DOLLAR_PER_ENGINEER:
