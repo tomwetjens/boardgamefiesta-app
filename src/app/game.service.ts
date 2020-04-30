@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Action, CreateGameRequest, Game, PossibleBuy, PossibleDelivery, PossibleMove, State} from './model';
+import {Action, CreateGameRequest, Game, LogEntry, PossibleBuy, PossibleDelivery, PossibleMove, State} from './model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -64,4 +64,7 @@ export class GameService {
     return this.httpClient.get<PossibleBuy[]>(environment.apiBaseUrl + '/games/' + id + '/state/possible-buys');
   }
 
+  getLog(id: string, date: Date): Observable<LogEntry[]> {
+    return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/games/' + id + '/log', {params: {since: date.toISOString()}});
+  }
 }

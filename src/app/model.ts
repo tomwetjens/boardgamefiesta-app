@@ -386,3 +386,10 @@ export interface Event {
   readonly gameId: string;
   readonly userId?: string;
 }
+
+export interface LogEntry {
+  timestamp: string;
+  user: User;
+  type: string;
+  values: any[];
+}
