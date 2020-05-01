@@ -631,7 +631,7 @@
           <ng-template #popoverContent>
             This route costs ${{possibleMove.possibleMove.cost}}.
             <ng-container *ngFor="let playerFee of possibleMove.possibleMove.playerFees">
-              {{playerFee.player.user.username}} gets ${{playerFee.fee}}
+              {{playerFee.player.user ? playerFee.player.user.username : 'Computer (' + playerFee.player.color + ')'}} gets ${{playerFee.fee}}
             </ng-container>
           </ng-template>
           <line *ngFor="let line of possibleMove.lines"

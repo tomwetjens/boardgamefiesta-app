@@ -319,8 +319,14 @@ export interface User {
   readonly language: string;
 }
 
+export enum PlayerType {
+  USER = 'USER',
+  COMPUTER = 'COMPUTER'
+}
+
 export interface GamePlayer {
-  readonly user: User;
+  readonly type: PlayerType;
+  readonly user?: User;
   readonly status: 'INVITED' | 'ACCEPTED' | 'REJECTED';
   readonly color: PlayerColor;
   readonly score?: number;
@@ -337,8 +343,8 @@ export interface Game {
   readonly started: string;
   readonly ended: string;
   readonly expires: string;
-  readonly turn: boolean;
-  readonly currentPlayer: User;
+  readonly turn?: boolean;
+  readonly currentPlayer?: GamePlayer;
   readonly owner: User;
   readonly startable: boolean;
 }
@@ -352,6 +358,7 @@ export interface Action {
 export interface CreateGameRequest {
   inviteUserIds: string[];
   beginner: boolean;
+  numberOfPlayers: number;
 }
 
 export interface PossibleMove {

@@ -1,6 +1,6 @@
 <ol>
   <li *ngFor="let logEntry of logEntries" [ngSwitch]="logEntry.type">
-    {{logEntry.timestamp | date:'mediumTime'}} {{logEntry.user.username}}: {{logEntry.type}} {{logEntry.values | json}}
+    {{logEntry.timestamp | date:'mediumTime'}} {{logEntry.user ? logEntry.user.username : '??' }}: {{logEntry.type}} {{logEntry.values | json}}
     <ng-container *ngSwitchCase="'ACTION'" [ngSwitch]="logEntry.values[0]">
 
     </ng-container>

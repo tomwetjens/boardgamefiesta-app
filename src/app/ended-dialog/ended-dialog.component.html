@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let player of players">
-      <th scope="row">{{player.user.username}}</th>
+      <th scope="row">{{player.user ? player.user.username : 'Computer'}} ({{player.color}})</th>
       <td>{{player.score}}</td>
     </tr>
     </tbody>

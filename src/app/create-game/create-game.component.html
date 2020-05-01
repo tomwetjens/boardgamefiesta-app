@@ -8,7 +8,7 @@
 <div *ngIf="!inviting">
   <form>
     <div>
-      <button class="btn btn-primary" (click)="this.inviting = true">Invite</button>
+      <button class="btn btn-primary" [disabled]="!canInvite" (click)="this.inviting = true">Invite</button>
 
       <ul>
         <li *ngFor="let user of invitedUsers">
@@ -19,7 +19,17 @@
     </div>
 
     <div>
-      Neutral buildings:
+      Number of players
+      <input type="number" name="numberOfPlayers"
+             [(ngModel)]="numberOfPlayers"
+             [min]="minNumberOfPlayers"
+             max="4"
+             step="1"
+             [value]="numberOfPlayers"/>
+    </div>
+
+    <div>
+      Mode:
       <input type="radio" [(ngModel)]="beginner" [value]="true" id="beginner" name="beginner">Beginner
       <input type="radio" [(ngModel)]="beginner" [value]="false" id="notBeginner" name="beginner">Randomize
     </div>

@@ -96,6 +96,7 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
     this.eventService.events
       .pipe(takeUntil(this.destroyed))
       .subscribe(event => {
+        console.log('event: ', {event});
         switch (event.type) {
           case EventType.ACCEPTED:
           case EventType.REJECTED:

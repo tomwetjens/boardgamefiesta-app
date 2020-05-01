@@ -318,6 +318,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     this.updatePossibleMoves();
 
     if (steps[steps.length - 1] === 'KANSAS_CITY') {
+      // TODO Play this sound for all players
       this.audioService.playSound('auction');
     } else {
       this.audioService.playSound('move');

@@ -13,6 +13,7 @@ export class CreateGameComponent implements OnInit {
   invitedUsers: User[] = [];
   inviting = false;
   beginner = false;
+  numberOfPlayers = 2;
 
   constructor(private router: Router, private gameService: GameService) {
   }
@@ -20,14 +21,21 @@ export class CreateGameComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addUser(user: User) {
-    console.log('addUser:',user);
+  get canInvite(): boolean {
+    return this.invitedUsers.length < 3;
+  }
 
+  get minNumberOfPlayers(): number {
+    return this.invitedUsers.length + 1;
+  }
+
+  addUser(user: User) {
     if (this.invitedUsers.find(invitedUser => invitedUser.id === user.id)) {
       return;
     }
 
     this.invitedUsers.push(user);
+    this.numberOfPlayers = Math.max(this.numberOfPlayers, this.minNumberOfPlayers);
 
     this.inviting = false;
   }
@@ -42,18 +50,20 @@ export class CreateGameComponent implements OnInit {
   }
 
   create() {
-    this.gameService.create({
+    const request = {
       inviteUserIds: this.invitedUsers.map(user => user.id),
-      beginner: this.beginner
-    })
+      beginner: this.beginner,
+      numberOfPlayers: this.numberOfPlayers
+    };
+
+    console.log('create:', {request});
+
+    this.gameService.create(request)
       .subscribe(game => this.router.navigate(['/']));
   }
 
   get valid(): boolean {
-    return this.invitedUsers.length > 0;
+    return true;
   }
 
-  invite() {
-    this.inviting = true;
-  }
 }

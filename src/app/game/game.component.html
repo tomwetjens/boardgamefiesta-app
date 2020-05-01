@@ -83,7 +83,7 @@
         Your Turn ({{state.expires | fromNow}} remaining)
       </div>
       <div *ngIf="!state.turn">
-        waiting for {{state.currentPlayer.user.username}} ({{state.expires | fromNow}} remaining)
+        waiting for {{state.currentPlayer.user ? state.currentPlayer.user.username : 'Computer'}} ({{state.currentPlayer.color}}) ({{state.expires | fromNow}} remaining)
       </div>
       <app-connection-status></app-connection-status>
     </div>
@@ -109,7 +109,7 @@
 
     <ul>
       <li *ngFor="let player of game.otherPlayers">
-        {{player.user.username}}
+        {{player.user ? player.user.username : 'Computer'}}
         {{player.status}}
       </li>
     </ul>

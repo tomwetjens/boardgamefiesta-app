@@ -1,8 +1,8 @@
 <div class="row no-gutters">
   <div class="col-3">
     <span [className]="'color '+ playerState.player.color"></span>
-    <img [src]="playerState.player.user.avatarUrl" class="avatar"/>
-    {{playerState.player.user.username}}
+    <img *ngIf="playerState.player.user" [src]="playerState.player.user.avatarUrl" class="avatar"/>
+    {{playerState.player.user ? playerState.player.user.username : 'Computer'}}
   </div>
   <div class="col-1">
     <span class="balance">{{playerState.balance}}</span>
