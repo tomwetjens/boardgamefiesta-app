@@ -3,6 +3,8 @@
     <span [className]="'color '+ playerState.player.color"></span>
     <img *ngIf="playerState.player.user" [src]="playerState.player.user.avatarUrl" class="avatar"/>
     {{playerState.player.user ? playerState.player.user.username : 'Computer'}}
+
+    <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"/>
   </div>
   <div class="col-1">
     <span class="balance">{{playerState.balance}}</span>

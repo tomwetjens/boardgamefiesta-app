@@ -1,0 +1,19 @@
+.player {
+  font-weight: bold;
+
+  &.RED {
+    color: red;
+  }
+
+  &.BLUE {
+    color: blue;
+  }
+
+  &.YELLOW {
+    color: yellow;
+  }
+
+  &.WHITE {
+    color: white;
+  }
+}

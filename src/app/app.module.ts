@@ -74,7 +74,8 @@ import { LogComponent } from './log/log.component';
     FormsModule,
     OAuthModule.forRoot(),
     TranslateModule.forRoot({
-      defaultLanguage: 'en'
+      defaultLanguage: 'en',
+      useDefaultLang: true
     }),
     AppRoutingModule,
     NgbModule
