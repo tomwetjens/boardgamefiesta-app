@@ -40,7 +40,7 @@ export class CardComponent implements OnInit {
         case null:
           prefix = 'START';
           break;
-          
+
         case ActionType.GAIN_2_DOLLARS:
         case ActionType.DRAW_CARD:
         case ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION:

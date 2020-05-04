@@ -18,6 +18,7 @@ export class DeliveryCityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.certificates = this.possibleDelivery.certificates;
   }
 
   confirm() {

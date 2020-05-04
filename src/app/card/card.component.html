@@ -1,9 +1,22 @@
-<div *ngIf="type === 'CATTLE'">
-  <div *ngIf="cattleCard.points" class="points">
-    {{cattleCard.points}}
+<ng-container [ngSwitch]="type">
+  <div *ngSwitchCase="'CATTLE'"
+       style="width:100%;height:100%"
+       [ngbPopover]="'This is a ' + cattleCard.type + ' cattle card with breeding value ' + cattleCard.breedingValue + ' and worth  '+ cattleCard.points + ' points.'"
+       popoverTitle="Cattle Card"
+       placement="top"
+       triggers="mouseenter:mouseleave"
+       container="body">
+    <div *ngIf="cattleCard.points" class="points">
+      {{cattleCard.points}}
+    </div>
   </div>
-</div>
+  <div *ngSwitchCase="'OBJECTIVE'"
+       style="width:100%;height:100%"
+       [ngbPopover]="'This is an Objective Card that requires the player to complete ' + objectiveCard.tasks + ' to get ' + objectiveCard.points + ' points. When played the player may ' + objectiveCard.action + '. If the objectives are not completed, the player will lose ' + objectiveCard.penalty + ' points.'"
+       popoverTitle="Objective Card"
+       placement="top"
+       triggers="mouseenter:mouseleave"
+       container="body">
+  </div>
+</ng-container>
 
-<div *ngIf="type === 'OBJECTIVE'">
-
-</div>

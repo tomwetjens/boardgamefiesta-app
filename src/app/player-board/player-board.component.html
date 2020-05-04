@@ -1,19 +1,58 @@
 <div class="row no-gutters">
-  <div class="col-3">
+  <div class="col-4">
     <span [className]="'color '+ playerState.player.color"></span>
     <img *ngIf="playerState.player.user" [src]="playerState.player.user.avatarUrl" class="avatar"/>
     {{playerState.player.user ? playerState.player.user.username : 'Computer'}}
 
-    <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"/>
+    <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
+         [ngbPopover]="'Waiting for player to perform action.'"
+         popoverTitle="Waiting for player"
+         placement="bottom"
+         triggers="mouseenter:mouseleave"
+         container="body"/>
   </div>
-  <div class="col-1">
-    <span class="balance">{{playerState.balance}}</span>
-  </div>
-  <div class="col-2">
+  <div class="col-8">
+    <ng-template #balancePopover>
+      Current balance in dollars.
+    </ng-template>
+    <span class="balance"
+          [ngbPopover]="balancePopover"
+          popoverTitle="Balance"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.balance}}
+    </span>
+    <ng-template #handValuePopover>
+      The breeding values of each <strong>different</strong> type of cattle that you have in hand is counted towards your total breeding value.
+      This means each type is counted only once, no matter how many cards of that type you have.
+    </ng-template>
+    <span *ngIf="playerState.handValue" class="hand-value"
+          [ngbPopover]="handValuePopover"
+          popoverTitle="Total breeding value"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.handValue}}
+    </span>
+    <ng-template #certificatesPopover>
+      The total number of certificates, both <strong>temporary</strong> certificates as indicated by the marker on the player's board,
+      as any <strong>permanent</strong> certificates the player may have acquired through station master tiles.
+    </ng-template>
+    <span class="certificates"
+          [ngbPopover]="certificatesPopover"
+          popoverTitle="Number of certificates"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.certificates}}
+    </span>
     <button class="btn btn-secondary btn-buildings" (click)="showBuildings()" title="Available Buildings"></button>
     <button class="btn btn-secondary btn-objectives" (click)="showObjectives()" title="Objectives"></button>
   </div>
-  <div class="col-6">
+</div>
+<div class="row no-gutters" *ngIf="playerState.stationMasters.length > 0">
+  <div class="col-12">
     <app-station-master *ngFor="let stationMaster of playerState.stationMasters" [stationMaster]="stationMaster"></app-station-master>
   </div>
 </div>
@@ -24,9 +63,27 @@
             (click)="selectCard(card)">
   </app-card>
 
-  <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"></app-card-stack>
+  <ng-template #drawStackPopover>
+    The stack of cards from which new cards are drawn and added to your hand.
+    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
+  </ng-template>
+  <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
+                  [ngbPopover]="drawStackPopover"
+                  popoverTitle="Draw stack"
+                  placement="bottom"
+                  triggers="mouseenter:mouseleave"
+                  container="body"></app-card-stack>
 
-  <app-card-stack class="discard-pile" [cards]="playerState.discardPile"></app-card-stack>
+  <ng-template #discardPilePopover>
+    The cards that have been discarded.
+    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
+  </ng-template>
+  <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
+                  [ngbPopover]="discardPilePopover"
+                  popoverTitle="Draw stack"
+                  placement="bottom"
+                  triggers="mouseenter:mouseleave"
+                  container="body"></app-card-stack>
 </div>
 <div class="row no-gutters">
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board" [class]="'' + playerState.player.color">
@@ -74,42 +131,42 @@
          [attr.y]="155" [ngClass]="{disabled:!canSelectEngineer(i)}"
          (click)="selectEngineer(i)"/>
 
-    <rect id="cert_marker_0" *ngIf="playerState.certificates === 0"
+    <rect id="cert_marker_0" *ngIf="playerState.tempCertificates === 0"
           class="cert-marker disabled"
           x="744"
           y="158"
           width="30"
           height="30"></rect>
 
-    <rect id="cert_marker_1" *ngIf="playerState.certificates === 1"
+    <rect id="cert_marker_1" *ngIf="playerState.tempCertificates === 1"
           class="cert-marker disabled"
           x="744"
           y="198"
           width="30"
           height="30"></rect>
 
-    <rect id="cert_marker_2" *ngIf="playerState.certificates === 2"
+    <rect id="cert_marker_2" *ngIf="playerState.tempCertificates === 2"
           class="cert-marker disabled"
           x="744"
           y="239"
           width="30"
           height="30"></rect>
 
-    <rect id="cert_marker_3" *ngIf="playerState.certificates === 3"
+    <rect id="cert_marker_3" *ngIf="playerState.tempCertificates === 3"
           class="cert-marker disabled"
           x="744"
           y="280"
           width="30"
           height="30"></rect>
 
-    <rect id="cert_marker_4" *ngIf="playerState.certificates === 4"
+    <rect id="cert_marker_4" *ngIf="playerState.tempCertificates === 4"
           class="cert-marker disabled"
           x="744"
           y="328"
           width="30"
           height="30"/>
 
-    <rect id="cert_marker_6" *ngIf="playerState.certificates === 6"
+    <rect id="cert_marker_6" *ngIf="playerState.tempCertificates === 6"
           class="cert-marker disabled"
           x="744"
           y="389"

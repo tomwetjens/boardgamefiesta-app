@@ -214,6 +214,8 @@ export interface PlayerState {
   readonly craftsmen: number;
   readonly engineers: number;
   readonly certificates: number;
+  readonly tempCertificates: number;
+  readonly handValue: number;
   readonly hand: Card[];
   readonly discardPile: Card[];
   readonly drawStackSize: number;
@@ -411,7 +413,10 @@ export enum GWTEventType {
   MAY_DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS = 'MAY_DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS',
   MAY_HIRE_CHEAP_WORKER = 'MAY_HIRE_CHEAP_WORKER',
   MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES = 'MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES',
-  MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS = 'MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS'
+  MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS = 'MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS',
+  GAINS_JOB_MARKET_TOKEN = 'GAINS_JOB_MARKET_TOKEN',
+  EVERY_OTHER_PLAYER_HAS_1_TURN = 'EVERY_OTHER_PLAYER_HAS_1_TURN',
+  ENDS_GAME = 'ENDS_GAME'
 }
 
 export enum CommandType {
