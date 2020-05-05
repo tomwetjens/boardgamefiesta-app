@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, CattleMarket, Game, ObjectiveCard} from '../model';
-import {AudioService} from '../audio.service';
+import {Action, ActionType, ObjectiveCard} from '../model';
 
 const ACTIONS = [ActionType.TAKE_OBJECTIVE_CARD, ActionType.ADD_1_OBJECTIVE_CARD_TO_HAND];
 
@@ -17,14 +16,14 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
   @Output() action = new EventEmitter<Action>();
 
-  constructor(private audioService: AudioService) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.objectiveCards){
+    if (changes.objectiveCards) {
       const current = changes.objectiveCards.currentValue as ObjectiveCard[];
       const previous = changes.objectiveCards.previousValue as ObjectiveCard[];
 

@@ -455,7 +455,7 @@
              class="worker" [ngClass]="{disabled:!canSelectWorker(rowIndex)}"
              [attr.x]="9 + ((4-state.jobMarket.rowLimit) * 33) + (columnIndex * 33)"
              [attr.y]="316 + (rowIndex * 39)"
-             (click)="selectWorker(worker)"/>
+             (click)="selectWorker(rowIndex, worker)"/>
       </g>
 
       <use xlink:href="#jobMarketToken" x="110" [attr.y]="319 + (state.jobMarket.currentRowIndex * 39)"/>
@@ -575,11 +575,11 @@
         <use xlink:href="#buildingLocation" class="location building" y="622.624626" x="135.10008763" id="B-2" (click)="selectLocation('B-2')" [ngClass]="{disabled:!canSelectLocation('B-2')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="548.2767187" x="183.95728225" id="B-3" (click)="selectLocation('B-3')" [ngClass]="{disabled:!canSelectLocation('B-3')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="500.4816535" x="69.24906395" id="DROUGHT-RISK-1" (click)="selectLocation('DROUGHT-RISK-1')" [ngClass]="{disabled:!canSelectLocation('DROUGHT-RISK-1')}"/>
-        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2-1" (click)="selectLocation('C-2-1')" [ngClass]="{disabled:!canSelectLocation('C-2-1')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="641.7426577" x="499.9359515" id="INDIAN-TRADE-RISK-1" (click)="selectLocation('INDIAN-TRADE-RISK-1')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-1')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="564.7382326" x="499.9359515" id="INDIAN-TRADE-RISK-2" (click)="selectLocation('INDIAN-TRADE-RISK-2')" [ngClass]="{disabled:!canSelectLocation('INDIAN-TRADE-RISK-2')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="444.720716" x="314.5971749" id="C-1-1" (click)="selectLocation('C-1-1')" [ngClass]="{disabled:!canSelectLocation('C-1-1')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="437.8169675" x="402.2215173" id="C-1-2" (click)="selectLocation('C-1-2')" [ngClass]="{disabled:!canSelectLocation('C-1-2')}"/>
+        <use xlink:href="#buildingLocation" class="location building" y="533.4071822" x="313.0040454" id="C-2" (click)="selectLocation('C-2')" [ngClass]="{disabled:!canSelectLocation('C-2')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="360.8137507" x="428.7743875" id="E-1" (click)="selectLocation('E-1')" [ngClass]="{disabled:!canSelectLocation('E-1')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="359.751655" x="330.5289195" id="E-2" (click)="selectLocation('E-2')" [ngClass]="{disabled:!canSelectLocation('E-2')}"/>
         <use xlink:href="#buildingLocation" class="location building" y="380.4628443" x="216.35171252" id="F-2" (click)="selectLocation('F-2')" [ngClass]="{disabled:!canSelectLocation('F-2')}"/>

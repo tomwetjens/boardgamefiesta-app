@@ -57,10 +57,6 @@ export class CattleMarketComponent implements OnInit, OnChanges {
     }
   }
 
-  get cards(): CattleCard[] {
-    return this.cattleMarket.cards.sort((a, b) => b.breedingValue - a.breedingValue);
-  }
-
   canSelectCard(card: CattleCard) {
     function containsAllInAnyOrder(arr: number[], elements: number[]) {
       const copy = Object.assign([], arr);

@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-dark justify-content-between">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="btn btn-secondary" [routerLink]="['/']">Back</a>
+      <a class="btn btn-secondary" [routerLink]="['/']">{{'back'|translate}}</a>
     </li>
     <ng-container *ngIf="state | async as state">
       <li class="nav-item">
-        <a class="btn btn-primary" *ngIf="state.turn" (click)="endTurn()">End Turn</a>
-        <button class="btn btn-secondary" *ngIf="state.turn" (click)="skipAction()">Skip</button>
+        <a class="btn btn-primary" *ngIf="state.turn" (click)="endTurn()">{{'endTurn'|translate}}</a>
+        <button class="btn btn-secondary" *ngIf="canSkip(state)" (click)="skipAction()">{{'skip'|translate}}</button>
       </li>
     </ng-container>
   </ul>
@@ -14,73 +14,31 @@
   <ng-container *ngIf="state | async as state">
     <div class="actions">
       <ng-container *ngIf="!selectedAction">
-      <span *ngFor="let actionType of state.actions">
-        <ng-container [ngSwitch]="actionType">
-          <span *ngSwitchDefault><button class="btn btn-secondary" (click)="selectAction(actionType)">{{actionType}}</button></span>
-        </ng-container>
-      </span>
-      </ng-container>
-      <ng-container *ngIf="selectedAction">
-        <ng-container [ngSwitch]="selectedAction">
-          <span *ngSwitchCase="'DISCARD_CARD'">Choose a card to discard</span>
-          <span *ngSwitchCase="'REMOVE_CARD'">Choose a card to remove</span>
-          <span *ngSwitchCase="'MOVE'">Move your cattleman</span>
-          <span *ngSwitchCase="'MOVE_1_FORWARD'">Move your cattleman 1 forward</span>
-          <span *ngSwitchCase="'MOVE_2_FORWARD'">Move your cattleman 2 forward</span>
-          <span *ngSwitchCase="'MOVE_3_FORWARD'">Move your cattleman 3 forward</span>
-          <span *ngSwitchCase="'MOVE_3_FORWARD_WITHOUT_FEES'">Move your cattleman 3 (without paying fees)</span>
-          <span *ngSwitchCase="'MOVE_4_FORWARD'">Move your cattleman 4 forward</span>
-          <span *ngSwitchCase="'SINGLE_AUXILIARY_ACTION'">Select single auxiliary action</span>
-          <span *ngSwitchCase="'SINGLE_OR_DOUBLE_AUXILIARY_ACTION'">Select single or double auxiliary action</span>
-          <span *ngSwitchCase="'TRADE_WITH_INDIANS'">Take a teepee</span>
-          <span *ngSwitchCase="'BUY_CATTLE'">Buy cattle</span>
-          <span *ngSwitchCase="'CHOOSE_FORESIGHTS'">Choose foresights</span>
-          <span *ngSwitchCase="'DELIVER_TO_CITY'">Choose city</span>
-          <span *ngSwitchCase="'UNLOCK_WHITE'">Choose a disc to remove from player board</span>
-          <span *ngSwitchCase="'UNLOCK_BLACK_OR_WHITE'">Choose a disc to remove from player board</span>
-          <span *ngSwitchCase="'TAKE_OBJECTIVE_CARD'">Choose objective card</span>
-          <span *ngSwitchCase="'DISCARD_PAIR_TO_GAIN_3_DOLLARS'">Discard pair to gain 3 dollars</span>
-          <span *ngSwitchCase="'DISCARD_PAIR_TO_GAIN_4_DOLLARS'">Discard pair to gain 4 dollars</span>
-          <span *ngSwitchCase="'DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND'">Discard a cattle card to gain 3 dollars and an objective card</span>
-          <span *ngSwitchCase="'DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE'">Discard a cattle card to gain 1 certificate</span>
-          <span *ngSwitchCase="'PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE'">Move engine 1 backwards to gain 1 certificate, but pay 1 dollar</span>
-          <span *ngSwitchCase="'PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD'">Move engine 1 forward but pay 1 dollar</span>
-          <span *ngSwitchCase="'PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES'">Move engine 2 backwards to gain 2 certificates, but pay 2 dollars</span>
-          <span *ngSwitchCase="'PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD'">Move engine 2 forward but pay 2 dollars</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS'">Move engine 1 backwards to gain 3 dollars</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD'">Move engine 1 backwards to remove 1 card</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS'">Move engine 2 backwards to remove 2 cards</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_2_OR_3_FORWARD'">Move engine 2 or 3 forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS'">Move engine at least 1 backwards and gain 3 dollars</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_FORWARD'">Move engine forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_2_FORWARD'">Move engine at most 2 forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_3_FORWARD'">Move engine at most 3 forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_4_FORWARD'">Move engine at most 4 forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_AT_MOST_5_FORWARD'">Move engine at most 5 forward</span>
-          <span *ngSwitchCase="'MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_BUILDINGS_IN_WOODS'">Move engine forward up to number of buildings in the woods</span>
-          <span *ngSwitchCase="'APPOINT_STATION_MASTER'">
-            Appoint one of your workers to be station master
+        <ng-container *ngIf="!isAuxActions(state)">
+          <span *ngFor="let actionType of state.actions" [ngSwitch]="actionType">
+              <button *ngSwitchDefault
+                      class="btn btn-secondary" (click)="selectAction(actionType)"
+                      ngbPopover="{{'action.' + actionType | translate}}"
+                      placement="bottom"
+                      triggers="mouseenter:mouseleave"
+                      container="body">{{actionType}}</button>
           </span>
-          <span *ngSwitchCase="'ADD_1_OBJECTIVE_CARD_TO_HAND'">Choose an objective card to add to your hand</span>
-          <span *ngSwitchCase="'DISCARD_1_OBJECTIVE_CARD_TO_GAIN_2_CERTIFICATES'">Discard an objective card to gain 2 certificates</span>
-          <span *ngSwitchCase="'HIRE_WORKER'">Choose a worker from the job market to buy</span>
-          <span *ngSwitchCase="'HIRE_SECOND_WORKER'">Choose a worker from the job market to buy (costs $2 more)</span>
-          <span *ngSwitchCase="'HIRE_CHEAP_WORKER'">Choose a worker from the job market to buy (costs $2 less)</span>
-          <span *ngSwitchCase="'PLACE_BUILDING'">Choose a location to place a building (-$2 per craftsman)</span>
-          <span *ngSwitchCase="'PLACE_CHEAP_BUILDING'">Choose a location to place a building (-$1 per craftsmen)</span>
-          <span *ngSwitchCase="'DOWNGRADE_STATION'">Choose a disc to remove from one of your stations</span>
-          <span *ngSwitchCase="'UPGRADE_ANY_STATION_BEHIND_ENGINE'">Choose a station behind your engine to upgrade</span>
-          <span *ngSwitchCase="'USE_ADJACENT_BUILDING'">Choose adjacent building to use</span>
-          <span *ngSwitchCase="'PLAY_OBJECTIVE_CARD'">Choose an objective card to play</span>
-          <span *ngSwitchDefault>{{selectedAction}}</span>
         </ng-container>
+        <ng-container *ngIf="isAuxActions(state)">
+          <!-- Aux actions can be selected on player board, no need to show them here -->
+          Select auxiliary action on player board
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="selectedAction">
+        {{'action.' + selectedAction | translate}}
         <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel</button>
       </ng-container>
     </div>
 
     <div class="form-inline">
       <div *ngIf="state.turn">
-        Your Turn ({{state.expires | fromNow}} remaining)
+        {{'yourTurn' |translate}} ({{state.expires | fromNow}} {{'remaining'|translate}})
       </div>
       <div *ngIf="!state.turn">
         waiting for {{state.currentPlayer.user ? state.currentPlayer.user.username : 'Computer'}} ({{state.currentPlayer.color}}) ({{state.expires | fromNow}} remaining)

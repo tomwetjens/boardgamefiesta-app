@@ -31,7 +31,9 @@
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/moment/min/moment-with-locales.js"
+            ]
           },
           "configurations": {
             "production": {

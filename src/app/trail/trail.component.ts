@@ -46,6 +46,8 @@ const HAZARD_ACTIONS = [
   ActionType.REMOVE_HAZARD_FOR_5_DOLLARS
 ];
 
+const WORKER_ACTIONS = [ActionType.HIRE_WORKER, ActionType.HIRE_WORKER_PLUS_2, ActionType.HIRE_WORKER_MINUS_1, ActionType.HIRE_WORKER_MINUS_2];
+
 const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_INDIANS];
 
 interface SpaceElement {
@@ -364,7 +366,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
         element.nativeElement.setAttribute('style', 'display:block');
 
-        const x = parseInt(locationElement.getAttribute('x'), 10) + index * 4; // offset each one so they all stay visible
+        const x = parseInt(locationElement.getAttribute('x'), 10) + index * 12; // offset each one so they all stay visible
         const y = locationElement.getAttribute('y');
 
         element.nativeElement.setAttribute('x', x);
@@ -497,6 +499,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   canSelectLocation(name: string) {
     const location = this.state.trail.locations[name];
+
+    if (!location) {
+      console.error('Location not found:', name);
+    }
+
     return location && (
       (MOVE_ACTIONS.includes(this.selectedAction) && this.canMoveTo(location))
       || (BUILD_ACTIONS.includes(this.selectedAction) && this.canPlaceBuilding(location))
@@ -512,7 +519,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private canPlaceBuilding(location: Location): boolean {
-    return location.type === 'BUILDING' && !location.building;
+    return location.type === 'BUILDING' && (!location.building || location.building.player === this.state.currentPlayer.color);
   }
 
   selectTeepee(reward: number) {
@@ -637,7 +644,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectWorker(rowIndex: number): boolean {
-    if (![ActionType.HIRE_WORKER, ActionType.HIRE_SECOND_WORKER, ActionType.HIRE_CHEAP_WORKER].includes(this.selectedAction)) {
+    if (!WORKER_ACTIONS.includes(this.selectedAction)) {
       return false;
     }
     return rowIndex < this.state.jobMarket.currentRowIndex;
@@ -668,12 +675,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   }
 
-  selectWorker(worker: Worker) {
+  selectWorker(rowIndex: number, worker: Worker) {
     switch (this.selectedAction) {
       case ActionType.HIRE_WORKER:
-      case ActionType.HIRE_SECOND_WORKER:
-      case ActionType.HIRE_CHEAP_WORKER:
-        this.action.emit({type: this.selectedAction, worker});
+      case ActionType.HIRE_WORKER_PLUS_2:
+      case ActionType.HIRE_WORKER_MINUS_1:
+      case ActionType.HIRE_WORKER_MINUS_2:
+        this.action.emit({type: this.selectedAction, worker, row: rowIndex});
         break;
     }
   }

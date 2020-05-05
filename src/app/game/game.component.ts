@@ -263,4 +263,11 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
     return state.actions.some(action => FREE_ACTIONS.includes(action));
   }
 
+  isAuxActions(state: State) {
+    return state.actions.includes(ActionType.GAIN_1_DOLLAR) && state.actions.includes(ActionType.DRAW_CARD);
+  }
+
+  canSkip(state: State) {
+    return state.turn && state.actions.length === 1 && state.actions[0] !== ActionType.PLAY_OBJECTIVE_CARD;
+  }
 }
