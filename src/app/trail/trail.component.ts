@@ -239,6 +239,61 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
             this.audioService.playSound('train');
           }
         }
+
+        for (const name of Object.keys(current.trail.locations)) {
+          const currentLocation = current.trail.locations[name];
+          const previousLocation = previous.trail.locations[name];
+
+          if (currentLocation.building && previousLocation.building) {
+            if (currentLocation.building.name !== previousLocation.building.name) {
+              // upgrade
+              this.audioService.playSound('building');
+            }
+          } else if (currentLocation.building !== previousLocation.building) {
+            // build
+            this.audioService.playSound('building');
+          }
+
+          if (previousLocation.hazard && !currentLocation.hazard) {
+            this.audioService.playSound(previousLocation.hazard.type.toLowerCase());
+          }
+
+          if (previousLocation.teepee && !currentLocation.teepee) {
+            this.audioService.playSound('indians');
+          }
+        }
+
+        for (const color of Object.keys(PlayerColor)) {
+          const currentLocation = current.trail.playerLocations[color];
+          const previousLocation = previous.trail.playerLocations[color];
+
+          if (currentLocation !== previousLocation) {
+            if (currentLocation === 'KANSAS_CITY') {
+              this.audioService.playSound('auction');
+            } else if (currentLocation !== 'START') {
+              this.audioService.playSound('move');
+            }
+          }
+        }
+
+        for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+          for (let rowIndex = 0; rowIndex < 2; rowIndex++) {
+            const currentTile = current.foresights.choices[columnIndex][rowIndex];
+            const previousTile = previous.foresights.choices[columnIndex][rowIndex];
+
+            if (JSON.stringify(currentTile) !== JSON.stringify(previousTile)) {
+              const choice = previousTile;
+
+              if (choice.worker) {
+                this.audioService.playSound(choice.worker.toLowerCase());
+              } else if (choice.hazard) {
+                this.audioService.playSound(choice.hazard.type.toLowerCase());
+              } else if (choice.teepee) {
+                this.audioService.playSound('indians');
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -308,7 +363,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
         ngbModalRef.componentInstance.playerState = this.state.player;
         fromPromise(ngbModalRef.result).subscribe(building => {
-          this.audioService.playSound('building');
           this.action.emit({type: this.selectedAction, location: name, building});
         });
         break;
@@ -318,13 +372,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private performMove(steps: string[]) {
     this.possibleMoves = [];
     this.updatePossibleMoves();
-
-    if (steps[steps.length - 1] === 'KANSAS_CITY') {
-      // TODO Play this sound for all players
-      this.audioService.playSound('auction');
-    } else {
-      this.audioService.playSound('move');
-    }
 
     this.action.emit({type: this.selectedAction, steps});
   }
@@ -448,16 +495,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
         this.selectedForesights[columnIndex] = null;
       } else {
         this.selectedForesights[columnIndex] = rowIndex;
-
-        const choice = this.state.foresights.choices[columnIndex][rowIndex];
-
-        if (choice.worker) {
-          this.audioService.playSound(choice.worker.toLowerCase());
-        } else if (choice.hazard) {
-          this.audioService.playSound(choice.hazard.type.toLowerCase());
-        } else if (choice.teepee) {
-          this.audioService.playSound('indians');
-        }
       }
 
       if (this.selectedForesights[0] !== null && this.selectedForesights[1] !== null && this.selectedForesights[2] !== null) {
@@ -525,7 +562,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   selectTeepee(reward: number) {
     if (this.selectedAction === ActionType.TRADE_WITH_INDIANS) {
       this.action.emit({type: this.selectedAction, reward});
-      this.audioService.playSound('indians');
     }
   }
 
@@ -574,7 +610,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       return;
     }
     this.action.emit({type: this.selectedAction, hazard});
-    this.audioService.playSound(hazard.type.toLowerCase());
   }
 
   private updateForesights() {

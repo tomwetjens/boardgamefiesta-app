@@ -10,7 +10,7 @@ import {AudioService} from '../audio.service';
 })
 export class CattleMarketComponent implements OnInit, OnChanges {
 
-  private possibleBuys: PossibleBuy[];
+  // private possibleBuys: PossibleBuy[];
 
   @Input() game: Game;
   @Input() cattleMarket: CattleMarket;
@@ -36,14 +36,14 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.selectedAction) {
-      if (this.selectedAction === ActionType.BUY_CATTLE) {
-        this.gameService.getPossibleBuys(this.game.id)
-          .subscribe(possibleBuys => this.possibleBuys = possibleBuys);
-      } else {
-        this.possibleBuys = null;
-      }
-    }
+    // if (changes.selectedAction) {
+    //   if (this.selectedAction === ActionType.BUY_CATTLE) {
+    //     this.gameService.getPossibleBuys(this.game.id)
+    //       .subscribe(possibleBuys => this.possibleBuys = possibleBuys);
+    //   } else {
+    //     this.possibleBuys = null;
+    //   }
+    // }
 
     if (changes.cattleMarket) {
       const current = changes.cattleMarket.currentValue as CattleMarket;
@@ -58,23 +58,24 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   canSelectCard(card: CattleCard) {
-    function containsAllInAnyOrder(arr: number[], elements: number[]) {
-      const copy = Object.assign([], arr);
-      for (const e of elements) {
-        const index = copy.indexOf(e as any);
-        if (index < 0) {
-          return false;
-        }
-        copy.splice(index, 1);
-      }
-      return true;
-    }
+    // function containsAllInAnyOrder(arr: number[], elements: number[]) {
+    //   const copy = Object.assign([], arr);
+    //   for (const e of elements) {
+    //     const index = copy.indexOf(e as any);
+    //     if (index < 0) {
+    //       return false;
+    //     }
+    //     copy.splice(index, 1);
+    //   }
+    //   return true;
+    // }
 
-    return this.selectedAction === ActionType.BUY_CATTLE
-      && this.possibleBuys
-      && this.possibleBuys.length > 0
-      && this.possibleBuys.some(possibleBuy => containsAllInAnyOrder(possibleBuy.breedingValues,
-        this.selectedCards.map(selectedCard => selectedCard.breedingValue).concat(card.breedingValue)));
+    return this.selectedAction === ActionType.BUY_CATTLE;
+    // TODO Only allow selecting combinations that are possible
+      // && this.possibleBuys
+      // && this.possibleBuys.length > 0
+      // && this.possibleBuys.some(possibleBuy => containsAllInAnyOrder(possibleBuy.breedingValues,
+      //   this.selectedCards.map(selectedCard => selectedCard.breedingValue).concat(card.breedingValue)));
   }
 
   selectCard(card: CattleCard) {
