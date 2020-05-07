@@ -79,36 +79,36 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
     })))
   .concat({
     space: {number: 19, turnout: null},
-    x: 761,
-    y: 64,
-    width: 20,
-    height: 30.9,
-    transform: 'rotate(-45 761 64)'
+    x: 776,
+    y: 52,
+    width: 30.9,
+    height: 20,
+    transform: 'rotate(45 0 0)'
   })
   .concat(Array(19).fill(0)
     .map((_, index) => ({
       space: {number: 20 + index, turnout: null},
       x: 777,
-      y: 82 + (index * 30.9),
-      width: 20,
-      height: 30.9,
-      transform: ''
+      y: 112.9 + (index * 30.9),
+      width: 30.9,
+      height: 20,
+      transform: 'rotate(-90 0 0)'
     })))
   .concat(Array(4).fill(0)
     .map((_, index) => ({
       space: {number: null, turnout: 5 + index},
       x: 759,
-      y: 126 + index * 124,
-      width: 18,
-      height: 36,
-      transform: ''
+      y: 162 + index * 124,
+      width: 36,
+      height: 18,
+      transform: 'rotate(-90 0 0)'
     })))
   .concat({
     space: {number: 39, turnout: null},
-    x: 731,
-    y: 666,
+    x: 733,
+    y: 678,
     width: 46,
-    height: 30.9,
+    height: 20,
     transform: ''
   });
 
