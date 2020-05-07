@@ -110,7 +110,7 @@
     "ACTION": {
       "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives {{value2}}",
       "BUY_CATTLE": "buys cattle cards for $ {{value1}}",
-      "DELIVER_TO_CITY": "delivers to {{value1}}",
+      "DELIVER_TO_CITY": "delivers to {{value1}} spending {{value1}} certificates, receiving ${{value3}}",
       "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "discards 1 Black Angus to gain 2 certificates",
       "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS": "discards 1 Black Angus to gain $2",
       "DISCARD_CARD": "discards a card",
