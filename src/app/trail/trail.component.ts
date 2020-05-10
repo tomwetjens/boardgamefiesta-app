@@ -558,7 +558,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private canPlaceBuilding(location: Location): boolean {
-    return location.type === 'BUILDING' && (!location.building || location.building.player === this.state.currentPlayer.color);
+    return location.type === 'BUILDING' && (!location.building || location.building.player.color === this.state.currentPlayer.color);
   }
 
   selectTeepee(reward: number) {

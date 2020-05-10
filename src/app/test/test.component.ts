@@ -4,6 +4,7 @@ import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 const CATTLE_MARKET: CattleMarket = {
+  drawStackSize: 14,
   cards: [
     {type: CattleType.BROWN_SWISS, points: 2, breedingValue: 3},
     {type: CattleType.HOLSTEIN, points: 2, breedingValue: 3},

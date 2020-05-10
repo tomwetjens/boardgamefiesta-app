@@ -359,6 +359,7 @@ export interface GamePlayer {
   readonly type: PlayerType;
   readonly user?: User;
   readonly status: PlayerStatus;
+  readonly color?: PlayerColor;
   readonly score?: {
     categories: { [key: string]: number };
     total: number;
