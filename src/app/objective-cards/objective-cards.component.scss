@@ -15,9 +15,8 @@ app-card-stack {
   }
 
   &.disabled {
-    stroke: none;
+    border: none;
     cursor: default;
-    border-color: white;
   }
 }
 
