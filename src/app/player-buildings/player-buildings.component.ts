@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {PlayerState} from '../model';
+import {Game, PlayerState} from '../model';
 
 @Component({
   selector: 'app-player-buildings',
@@ -9,6 +9,7 @@ import {PlayerState} from '../model';
 })
 export class PlayerBuildingsComponent implements OnInit {
 
+  @Input() game: Game;
   @Input() playerState: PlayerState;
 
   constructor(public ngbActiveModal: NgbActiveModal) { }

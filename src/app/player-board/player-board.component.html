@@ -1,8 +1,8 @@
 <div class="row no-gutters">
   <div class="col-4">
     <span [className]="'color '+ playerState.player.color"></span>
-    <img *ngIf="playerState.player.user" [src]="playerState.player.user.avatarUrl" class="avatar"/>
-    {{playerState.player.user ? playerState.player.user.username : 'Computer'}}
+    <img *ngIf="game.players[playerState.player.name].user" [src]="game.players[playerState.player.name].user.avatarUrl" class="avatar"/>
+    {{game.players[playerState.player.name].user ? game.players[playerState.player.name].user.username : 'Computer'}}
 
     <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
          [ngbPopover]="'Waiting for player to perform action.'"
@@ -108,8 +108,8 @@
            x="0" y="0"
            height="446" width="800"/>
 
-    <image *ngIf="state.playerOrder.length > 2"
-           [attr.href]="'/assets/' + state.playerOrder.length + 'p_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
+    <image *ngIf="state.otherPlayers.length > 1"
+           [attr.href]="'/assets/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
            x="197" y="12"
            height="110" width="259"/>
 

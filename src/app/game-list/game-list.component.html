@@ -26,10 +26,10 @@
           <button *ngIf="!game.game.accepted" (click)="reject(game.game)">Reject</button>
           <ng-container *ngIf="game.game.status === 'STARTED'">
             <span *ngIf="!game.game.turn">
-              waiting for {{game.game.currentPlayer.user ? game.game.currentPlayer.user.username : 'Computer'}} ({{game.game.expires | fromNow:60000}} remaining)
+              waiting for {{game.game.players[game.game.currentPlayer].user ? game.game.players[game.game.currentPlayer].user.username : 'Computer'}}
             </span>
             <span *ngIf="game.game.turn">
-              your turn ({{game.game.expires | fromNow:60000}} remaining)
+              your turn
             </span>
           </ng-container>
           <ng-container *ngIf="game.game.status === 'NEW'">
@@ -41,11 +41,11 @@
       </div>
       <div class="col-4">
         <div class="player" *ngFor="let otherPlayer of game.game.otherPlayers">
-          <ng-container *ngIf="otherPlayer.user">
-            <img [src]="otherPlayer.user.avatarUrl" class="avatar"/>
-            <div>{{otherPlayer.user.username}}</div>
+          <ng-container *ngIf="game.game.players[otherPlayer].user">
+            <img [src]="game.game.players[otherPlayer].user.avatarUrl" class="avatar"/>
+            <div>{{game.game.players[otherPlayer].user.username}}</div>
           </ng-container>
-          <ng-container *ngIf="otherPlayer.user">
+          <ng-container *ngIf="!game.game.players[otherPlayer].user">
             Computer
           </ng-container>
         </div>

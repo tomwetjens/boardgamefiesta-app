@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">{{playerState.player.user ? playerState.player.user.username : 'Computer'}}'s Objectives</h4>
+  <h4 class="modal-title">{{game.players[playerState.player.name].user ? game.players[playerState.player.name].user.username : 'Computer'}}'s Objectives</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>

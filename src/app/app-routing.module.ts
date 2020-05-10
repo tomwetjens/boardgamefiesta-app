@@ -5,6 +5,7 @@ import {GameComponent} from './game/game.component';
 import {HomeComponent} from './home/home.component';
 import {CreateGameComponent} from './create-game/create-game.component';
 import {LayoutComponent} from './layout/layout.component';
+import {TestComponent} from './test/test.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: 'games/:id',
     component: GameComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'test',
+    component: TestComponent
   },
   {
     path: '',

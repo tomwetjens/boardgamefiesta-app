@@ -4,6 +4,8 @@
   "back": "Back",
   "endTurn": "End Turn",
   "skip": "Skip",
+  "waitingFor": "waiting for",
+  "computer": "computer",
   "action": {
     "APPOINT_STATION_MASTER": "",
     "BUY_CATTLE": "",
@@ -187,5 +189,18 @@
       "UNLOCK_WHITE": "removes a disc from player board",
       "DOWNGRADE_STATION": "downgrades a Station"
     }
+  },
+  "score": {
+    "DOLLARS": "Dollars",
+    "CATTLE_CARDS": "Cattle Cards",
+    "OBJECTIVE_CARDS": "Objective Cards",
+    "STATION_MASTERS": "Station Masters",
+    "WORKERS": "Workers",
+    "HAZARDS": "Hazards",
+    "EXTRA_STEP_POINTS": "Extra Step Points",
+    "JOB_MARKET_TOKEN": "Job Market Token",
+    "BUILDINGS": "Buildings",
+    "CITIES": "Cities",
+    "STATIONS": "Stations"
   }
 }

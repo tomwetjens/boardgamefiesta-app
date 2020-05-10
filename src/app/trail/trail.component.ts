@@ -361,7 +361,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       case ActionType.PLACE_BUILDING:
       case ActionType.PLACE_CHEAP_BUILDING:
         const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
-        ngbModalRef.componentInstance.playerState = this.state.player;
+        const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
+        componentInstance.game = this.game;
+        componentInstance.playerState = this.state.player;
         fromPromise(ngbModalRef.result).subscribe(building => {
           this.action.emit({type: this.selectedAction, location: name, building});
         });

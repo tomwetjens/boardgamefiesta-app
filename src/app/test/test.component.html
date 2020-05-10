@@ -1,0 +1,17 @@
+<section>
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Action</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="selectedAction = undefined">None</button>
+      <button ngbDropdownItem (click)="selectedAction = 'BUY_CATTLE'">BUY_CATTLE</button>
+    </div>
+  </div>
+
+  <app-cattle-market [cattleMarket]="cattleMarket" [selectedAction]="selectedAction" (action)="action = $event"></app-cattle-market>
+
+  <p>Action: {{action | json}}</p>
+</section>
+
+<section>
+  <button (click)="openEndedDialog()">Open Ended Dialog</button>
+</section>

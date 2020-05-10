@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PlayerState} from '../model';
+import {Game, PlayerState} from '../model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,6 +9,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ObjectivesDialogComponent implements OnInit {
 
+  @Input() game: Game;
   @Input() playerState: PlayerState;
 
   constructor(public ngbActiveModal: NgbActiveModal) { }

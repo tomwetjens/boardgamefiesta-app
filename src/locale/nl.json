@@ -4,9 +4,11 @@
   "back": "Terug",
   "endTurn": "Beëindig beurt",
   "skip": "Overslaan",
+  "waitingFor": "wachten op",
+  "computer": "computer",
   "action": {
     "APPOINT_STATION_MASTER": "Een stationschef benoemen",
-    "BUY_CATTLE": "Een runderkaart kopen",
+    "BUY_CATTLE": "Een of meerdere runderkaarten kopen",
     "DELIVER_TO_CITY": "Lever aan een stad",
     "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "Leg 1 Black Angus af en zet je certificaatsteen 2 vooruit",
     "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS": "Leg 1 Black Angus af en ontvang 2 dollar",
@@ -177,12 +179,25 @@
       "TAKE_OBJECTIVE_CARD": "kiest een doelkaart uit het aanbod",
       "TRADE_WITH_INDIANS": "handelt met de indianen voor {{value1}} dollar",
       "UPGRADE_ANY_STATION_BEHIND_ENGINE": "waardeert een treinstation op dat zich achter de locomotief bevindt",
-      "UPGRADE_STATION": "waardeert een station",
+      "UPGRADE_STATION": "waardeert een station op",
       "USE_ADJACENT_BUILDING": "voert een lokale actie uit van een aangrenzende gebouwtegel",
       "CHOOSE_FORESIGHTS": "kiest deze vooruitzichten: {{value1}}, {{value2}} en {{value3}}",
       "UNLOCK_BLACK_OR_WHITE": "verwijdert een spelersschijf van zijn/haar spelertableau",
       "UNLOCK_WHITE": "verwijdert een spelersschijf van zijn/haar spelertableau",
       "DOWNGRADE_STATION": "verwijdert een spelersschijf van een opgewaardeerd treinstation"
     }
+  },
+  "score": {
+    "DOLLARS": "Dollars",
+    "CATTLE_CARDS": "Runderkaarten",
+    "OBJECTIVE_CARDS": "Doelkaarten",
+    "STATION_MASTERS": "Stationschef tegels",
+    "WORKERS": "Werker",
+    "HAZARDS": "Rampen",
+    "EXTRA_STEP_POINTS": "Extra stap punten",
+    "JOB_MARKET_TOKEN": "Werker markt",
+    "BUILDINGS": "Gebouwen",
+    "CITIES": "Steden",
+    "STATIONS": "Stations"
   }
 }

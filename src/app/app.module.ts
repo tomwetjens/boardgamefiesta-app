@@ -36,6 +36,7 @@ import {TeepeeComponent} from './teepee/teepee.component';
 import {StationMasterComponent} from './station-master/station-master.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { LogComponent } from './log/log.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { LogComponent } from './log/log.component';
     TeepeeComponent,
     StationMasterComponent,
     MessageDialogComponent,
-    LogComponent
+    LogComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

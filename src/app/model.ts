@@ -204,8 +204,22 @@ export enum Unlockable {
 }
 
 export interface Player {
+  readonly name: string;
   readonly color: PlayerColor;
-  readonly user: User;
+}
+
+export enum ScoreCategory {
+  DOLLARS = 'DOLLARS',
+  CATTLE_CARDS = 'CATTLE_CARDS',
+  OBJECTIVE_CARDS = 'OBJECTIVE_CARDS',
+  STATION_MASTERS = 'STATION_MASTERS',
+  WORKERS = 'WORKERS',
+  HAZARDS = 'HAZARDS',
+  EXTRA_STEP_POINTS = 'EXTRA_STEP_POINTS',
+  JOB_MARKET_TOKEN = 'JOB_MARKET_TOKEN',
+  BUILDINGS = 'BUILDINGS',
+  CITIES = 'CITIES',
+  STATIONS = 'STATIONS'
 }
 
 export interface PlayerState {
@@ -226,6 +240,11 @@ export interface PlayerState {
   readonly hazards: Hazard[];
   readonly teepees: Teepee[];
   readonly objectives: ObjectiveCard[];
+  readonly score?: {
+    categories: { [key in ScoreCategory]: number };
+    total: number;
+    winner: boolean;
+  };
 }
 
 export interface Space {
@@ -306,10 +325,8 @@ export interface State {
   readonly jobMarket: JobMarket;
   readonly objectiveCards: ObjectiveCard[];
   readonly otherPlayers: PlayerState[];
-  readonly playerOrder: PlayerColor[];
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
-  readonly expires: string;
   readonly turn: boolean;
 }
 
@@ -326,12 +343,20 @@ export enum PlayerType {
   COMPUTER = 'COMPUTER'
 }
 
+export enum PlayerStatus {
+  INVITED = 'INVITED',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED'
+}
+
 export interface GamePlayer {
   readonly type: PlayerType;
   readonly user?: User;
-  readonly status: 'INVITED' | 'ACCEPTED' | 'REJECTED';
-  readonly color: PlayerColor;
-  readonly score?: number;
+  readonly status: PlayerStatus;
+  readonly score?: {
+    categories: { [key: string]: number };
+    total: number;
+  };
   readonly winner?: boolean;
 }
 
@@ -339,14 +364,14 @@ export interface Game {
   readonly id: string;
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
-  readonly player: GamePlayer;
-  readonly otherPlayers: GamePlayer[];
+  readonly player: string;
+  readonly otherPlayers: string[];
+  readonly players: { [key: string]: GamePlayer };
   readonly created: string;
   readonly started: string;
   readonly ended: string;
-  readonly expires: string;
   readonly turn?: boolean;
-  readonly currentPlayer?: GamePlayer;
+  readonly currentPlayer?: string;
   readonly owner: User;
   readonly startable: boolean;
 }

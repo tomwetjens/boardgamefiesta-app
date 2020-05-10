@@ -2,7 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Action, ActionType, EventType, Game, State} from '../model';
+import {Action, ActionType, EventType, Game, PlayerStatus, State} from '../model';
 import {EventService} from '../event.service';
 import {GameService} from '../game.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -157,7 +157,8 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private hasInvitedPlayers(game: Game) {
-    return game.otherPlayers.some(player => player.status === 'INVITED');
+    return game.players[game.player].status === PlayerStatus.INVITED
+      || game.otherPlayers.some(name => game.players[name].status === PlayerStatus.INVITED);
   }
 
   perform(action: Action) {

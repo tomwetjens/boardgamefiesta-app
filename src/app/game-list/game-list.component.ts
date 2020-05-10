@@ -66,7 +66,7 @@ export class GameListComponent implements OnInit, OnDestroy {
       .pipe(map(games => games.map(game => ({
         game,
         otherPlayers: game.otherPlayers
-          .map(player => player.user ? player.user.username : 'Computer').join(', ')
+          .map(name => game.players[name].user ? game.players[name].user.username : 'Computer').join(', ')
       }))))
       .subscribe(games => this.games.next(games));
   }

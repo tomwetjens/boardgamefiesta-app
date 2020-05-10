@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Ended</h4>
+  <h4 class="modal-title">Scores</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -8,14 +8,22 @@
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">Player</th>
-      <th scope="col">Score</th>
+      <th scope="col"></th>
+      <th scope="col" *ngFor="let column of columns">
+        <span [class]="column.player.color">{{column.player.user ? column.player.user.username : 'Computer'}}</span>
+      </th>
+    </tr>
+    <tr>
+      <th scope="col">Total</th>
+      <th scope="col" *ngFor="let column of columns">
+        <span [class]="column.player.color">{{column.total}}</span>
+      </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let player of players">
-      <th scope="row">{{player.user ? player.user.username : 'Computer'}} ({{player.color}})</th>
-      <td>{{player.score}}</td>
+    <tr *ngFor="let row of rows">
+      <th scope="row">{{'score.' + row.category|translate}}</th>
+      <td *ngFor="let score of row.scores">{{score}}</td>
     </tr>
     </tbody>
   </table>
