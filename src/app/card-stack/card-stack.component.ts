@@ -10,6 +10,7 @@ export class CardStackComponent implements OnInit {
 
   @Input() cards: Card[];
   @Input() size: number;
+  @Input() emptyType: 'CATTLE' | 'OBJECTIVE';
 
   constructor() {
   }
@@ -21,7 +22,7 @@ export class CardStackComponent implements OnInit {
     if (this.cards) {
       return this.cards;
     }
-    return Array(this.size).fill(null);
+    return Array(Math.min(5, Math.max(1, this.size))).fill(null);
   }
 
 }

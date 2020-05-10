@@ -8,6 +8,7 @@ import {ActionType, Card, CattleCard, ObjectiveCard, Task} from '../model';
 })
 export class CardComponent implements OnInit {
 
+  @Input() emptyType: 'CATTLE' | 'OBJECTIVE';
   @Input() card: Card;
 
   constructor() {
@@ -81,7 +82,7 @@ export class CardComponent implements OnInit {
       })
         .join('_');
     }
-    return 'back';
+    return this.emptyType === 'CATTLE' ? 'back' : 'back_grey';
   }
 
 }

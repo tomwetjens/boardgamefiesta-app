@@ -68,6 +68,7 @@
     Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
   </ng-template>
   <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
+                  [emptyType]="'CATTLE'"
                   [ngbPopover]="drawStackPopover"
                   popoverTitle="Draw stack"
                   placement="bottom"
@@ -79,6 +80,7 @@
     Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
   </ng-template>
   <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
+                  [emptyType]="'CATTLE'"
                   [ngbPopover]="discardPilePopover"
                   popoverTitle="Draw stack"
                   placement="bottom"

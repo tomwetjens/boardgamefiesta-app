@@ -28,6 +28,7 @@ export interface CattleCard {
 
 export interface CattleMarket {
   readonly cards: CattleCard[];
+  readonly drawStackSize: number;
 }
 
 export enum ActionType {
@@ -295,7 +296,7 @@ export enum LocationType {
 
 export interface Building {
   name: string;
-  player?: PlayerColor;
+  player?: Player;
 }
 
 export interface Location {
@@ -316,6 +317,11 @@ export interface Trail {
   readonly playerLocations: { [color in PlayerColor]: string };
 }
 
+export interface ObjectiveCards {
+  readonly available: ObjectiveCard[];
+  readonly drawStackSize: number;
+}
+
 export interface State {
   readonly player: PlayerState;
   readonly currentPlayer: Player;
@@ -323,7 +329,7 @@ export interface State {
   readonly cattleMarket: CattleMarket;
   readonly foresights: Foresights;
   readonly jobMarket: JobMarket;
-  readonly objectiveCards: ObjectiveCard[];
+  readonly objectiveCards: ObjectiveCards;
   readonly otherPlayers: PlayerState[];
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, ObjectiveCard} from '../model';
+import {Action, ActionType, ObjectiveCard, ObjectiveCards} from '../model';
 
 const ACTIONS = [ActionType.TAKE_OBJECTIVE_CARD, ActionType.ADD_1_OBJECTIVE_CARD_TO_HAND];
 
@@ -10,7 +10,7 @@ const ACTIONS = [ActionType.TAKE_OBJECTIVE_CARD, ActionType.ADD_1_OBJECTIVE_CARD
 })
 export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
-  @Input() objectiveCards: ObjectiveCard[];
+  @Input() objectiveCards: ObjectiveCards;
 
   @Input() selectedAction: ActionType;
 
@@ -38,6 +38,16 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
   selectCard(card: ObjectiveCard) {
     if (this.canSelectCard(card)) {
       this.action.emit({type: this.selectedAction, objectiveCard: card});
+    }
+  }
+
+  get canSelectDrawStack(): boolean {
+    return ACTIONS.includes(this.selectedAction);
+  }
+
+  clickDrawStack() {
+    if (this.canSelectDrawStack) {
+      this.action.emit({type: ActionType.TAKE_OBJECTIVE_CARD});
     }
   }
 }

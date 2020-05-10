@@ -485,12 +485,12 @@
       </g>
     </g>
 
-    <g transform="translate(130,-133)">
+    <g id="playerBuildings" transform="translate(130,-133)">
       <image *ngFor="let playerBuilding of playerBuildings"
              width="68.058" height="66.48"
              [attr.x]="playerBuilding.x"
              [attr.y]="playerBuilding.y"
-             [attr.href]="'/assets/buildings/' + playerBuilding.building.name + '_' + playerBuilding.building.player.toString().toLowerCase() + '.jpg'"/>
+             [attr.href]="'/assets/buildings/' + playerBuilding.building.name + '_' + playerBuilding.building.player.color.toString().toLowerCase() + '.jpg'"/>
     </g>
 
     <g id="hazards" transform="translate(130,-133)" class="hazards">

@@ -1,4 +1,8 @@
-<app-card *ngFor="let card of objectiveCards"
+<app-card-stack [emptyType]="'OBJECTIVE'" [size]="objectiveCards.drawStackSize"
+                [ngClass]="{disabled:!canSelectDrawStack}"
+                (click)="clickDrawStack()"></app-card-stack>
+
+<app-card *ngFor="let card of objectiveCards.available"
           [card]="card"
           [ngClass]="{disabled:!canSelectCard(card)}"
           (click)="selectCard(card)"></app-card>
