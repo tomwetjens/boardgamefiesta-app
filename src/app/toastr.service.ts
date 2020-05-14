@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
 export interface ToastrMessage {
-  header: string;
+  header?: string;
   type: 'error' | 'info';
   text: string;
   delay: number;
@@ -20,6 +20,6 @@ export class ToastrService {
   }
 
   error(text: string) {
-    this.messages.next({type: 'error', header: 'Error', text, delay: 3000, autohide: true});
+    this.messages.next({type: 'error', text, delay: 3000, autohide: true});
   }
 }

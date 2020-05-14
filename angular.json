@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootswatch/dist/spacelab/bootstrap.css",
               "src/styles.scss"
             ],
             "scripts": [

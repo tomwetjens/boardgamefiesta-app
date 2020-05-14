@@ -1,1 +1,61 @@
-<app-game-list></app-game-list>
+<section class="container">
+  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary">
+    <strong>{{'game.' + table.game | translate}}</strong>
+
+    <ng-container [ngSwitch]="table.status">
+      <span *ngSwitchCase="'NEW'">
+        {{'notStarted'|translate}}
+        <ng-container [ngSwitch]="table.accepted">
+          <span *ngSwitchCase="true">
+            <button (click)="openTable(table)" class="btn btn-primary">Open</button>
+          </span>
+          <span *ngSwitchCase="false">
+            invited by  {{table.owner.username}}
+            <button (click)="accept(table)" class="btn btn-primary">{{'accept'|translate}}</button>
+            <button (click)="reject(table)" class="btn btn-second">{{'reject'|translate}}</button>
+          </span>
+        </ng-container>
+      </span>
+      <span *ngSwitchCase="'STARTED'">
+        <ng-container [ngSwitch]="table.turn">
+          <span *ngSwitchCase="true">
+            your turn
+          </span>
+          <span *ngSwitchCase="false">
+            {{'waitingFor'|translate}}
+            <span *ngIf="table.players[table.currentPlayer].user">table.players[table.currentPlayer].user.username</span>
+            <span *ngIf="!table.players[table.currentPlayer].user">{{'computer'|translate}}</span>
+          </span>
+        </ng-container>
+        <button (click)="openTable(table)" class="btn btn-primary">Open</button>
+      </span>
+    </ng-container>
+  </div>
+</section>
+
+<section class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+  </div>
+</section>
+
+<section class="container">
+  <h2>{{'games' | translate}}</h2>
+  <div class="row">
+    <div *ngFor="let game of games | async" class="col-3">
+      <div class="card">
+        <img class="card-img-top" src="/assets/games/{{game.id}}/box.jpg" alt="{{'game.' + game.id|translate}}">
+        <div class="card-body">
+          <h5 class="card-title">{{'game.' + game.id | translate}}</h5>
+          <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

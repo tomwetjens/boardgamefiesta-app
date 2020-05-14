@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, CattleMarket, Game, PossibleBuy} from '../model';
-import {GameService} from '../game.service';
+import {Action, ActionType, CattleCard, CattleMarket, Table, PossibleBuy} from '../model';
+import {TableService} from '../table.service';
 import {AudioService} from '../audio.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
 
   // private possibleBuys: PossibleBuy[];
 
-  @Input() game: Game;
+  @Input() table: Table;
   @Input() cattleMarket: CattleMarket;
 
   @Input() selectedAction: ActionType;
@@ -29,7 +29,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
     return this.selectedAction === ActionType.BUY_CATTLE;
   }
 
-  constructor(private gameService: GameService, private audioService: AudioService) {
+  constructor(private tableService: TableService, private audioService: AudioService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // if (changes.selectedAction) {
     //   if (this.selectedAction === ActionType.BUY_CATTLE) {
-    //     this.gameService.getPossibleBuys(this.game.id)
+    //     this.tableService.getPossibleBuys(this.table.id)
     //       .subscribe(possibleBuys => this.possibleBuys = possibleBuys);
     //   } else {
     //     this.possibleBuys = null;

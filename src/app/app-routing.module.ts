@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
-import {GameComponent} from './game/game.component';
+import {TableComponent} from './table/table.component';
 import {HomeComponent} from './home/home.component';
-import {CreateGameComponent} from './create-game/create-game.component';
+import {CreateTableComponent} from './create-table/create-table.component';
 import {LayoutComponent} from './layout/layout.component';
 import {TestComponent} from './test/test.component';
 
 
 const routes: Routes = [
   {
-    path: 'games/:id',
-    component: GameComponent,
+    path: 'table/:id',
+    component: TableComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'create',
-        component: CreateGameComponent,
+        component: CreateTableComponent,
         canActivate: [AuthGuard],
       },
       {

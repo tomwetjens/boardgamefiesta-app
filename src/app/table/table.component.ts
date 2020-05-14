@@ -2,9 +2,9 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Action, ActionType, EventType, Game, PlayerStatus, State} from '../model';
+import {Action, ActionType, EventType, Table, PlayerStatus, State} from '../model';
 import {EventService} from '../event.service';
-import {GameService} from '../game.service';
+import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AudioService} from '../audio.service';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
@@ -55,21 +55,21 @@ const FREE_ACTIONS = [
 
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class GameComponent implements OnInit, OnDestroy, OnChanges {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   private destroyed = new Subject();
 
-  game = new ReplaySubject<Game>(1);
+  table = new ReplaySubject<Table>(1);
   state = new ReplaySubject<State>(1);
 
   selectedAction: ActionType;
 
   constructor(private route: ActivatedRoute,
-              private gameService: GameService,
+              private tableService: TableService,
               private eventService: EventService,
               private ngbModal: NgbModal,
               private audioService: AudioService) {
@@ -77,19 +77,19 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    this.refreshGame();
+    this.refreshTable();
 
-    this.game
+    this.table
       .pipe(
         takeUntil(this.destroyed))
-      .subscribe(game => {
-        if (game.status !== 'NEW') {
+      .subscribe(table => {
+        if (table.status === 'STARTED' || table.status === 'ENDED') {
           this.refreshState();
         }
 
-        if (game.status === 'ENDED') {
+        if (table.status === 'ENDED') {
           const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
-          ngbModalRef.componentInstance.game = game;
+          ngbModalRef.componentInstance.table = table;
         }
       });
 
@@ -102,7 +102,7 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.REJECTED:
           case EventType.STARTED:
           case EventType.ENDED:
-            this.refreshGame();
+            this.refreshTable();
             break;
 
           case EventType.STATE_CHANGED:
@@ -130,43 +130,43 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
 
   }
 
-  private refreshGame() {
+  private refreshTable() {
     this.route.params
-      .pipe(switchMap(params => this.gameService.get(params.id)))
-      .subscribe(game => this.game.next(game));
+      .pipe(switchMap(params => this.tableService.get(params.id)))
+      .subscribe(table => this.table.next(table));
   }
 
   start() {
-    this.game
+    this.table
       .pipe(
         takeUntil(this.destroyed),
         take(1),
-        switchMap(game => {
-          if (this.hasInvitedPlayers(game)) {
+        switchMap(table => {
+          if (this.hasInvitedPlayers(table)) {
             const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
-            ngbModalRef.componentInstance.message = 'Some players have not yet responded. They will not be able to join the game. Do you still want to start the game?';
+            ngbModalRef.componentInstance.message = 'Some players have not yet responded. They will not be able to join the table. Do you still want to start the table?';
             ngbModalRef.componentInstance.confirm = 'START';
             ngbModalRef.componentInstance.cancel = 'WAIT_FOR_PLAYERS';
             return fromPromise(ngbModalRef.result)
-              .pipe(map(() => game));
+              .pipe(map(() => table));
           }
-          return of(game);
+          return of(table);
         }),
-        switchMap(game => this.gameService.start(game.id)))
+        switchMap(table => this.tableService.start(table.id)))
       .subscribe();
   }
 
-  private hasInvitedPlayers(game: Game) {
-    return game.players[game.player].status === PlayerStatus.INVITED
-      || game.otherPlayers.some(name => game.players[name].status === PlayerStatus.INVITED);
+  private hasInvitedPlayers(table: Table) {
+    return table.players[table.player].status === PlayerStatus.INVITED
+      || table.otherPlayers.some(name => table.players[name].status === PlayerStatus.INVITED);
   }
 
   perform(action: Action) {
-    this.game
+    this.table
       .pipe(
         takeUntil(this.destroyed),
         take(1),
-        switchMap(game => this.gameService.perform(game.id, action)))
+        switchMap(table => this.tableService.perform(table.id, action)))
       .subscribe(state => {
         this.selectedAction = null;
         this.state.next(state);
@@ -174,11 +174,11 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   skipAction() {
-    this.game
+    this.table
       .pipe(
         takeUntil(this.destroyed),
         take(1),
-        switchMap(game => this.gameService.skip(game.id)))
+        switchMap(table => this.tableService.skip(table.id)))
       .subscribe(state => {
         this.selectedAction = null;
         this.state.next(state);
@@ -200,9 +200,9 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
           }
           return of(state);
         }),
-        switchMap(() => this.game),
+        switchMap(() => this.table),
         take(1),
-        switchMap(game => this.gameService.endTurn(game.id)))
+        switchMap(table => this.tableService.endTurn(table.id)))
       .subscribe(state => this.state.next(state));
   }
 
@@ -249,10 +249,10 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private refreshState() {
-    this.game.pipe(
+    this.table.pipe(
       takeUntil(this.destroyed),
       take(1),
-      switchMap(game => this.gameService.getState(game.id)))
+      switchMap(table => this.tableService.getState(table.id)))
       .subscribe(state => this.state.next(state));
   }
 
@@ -270,5 +270,23 @@ export class GameComponent implements OnInit, OnDestroy, OnChanges {
 
   canSkip(state: State) {
     return state.turn && state.actions.length === 1 && state.actions[0] !== ActionType.PLAY_OBJECTIVE_CARD;
+  }
+
+  abandon() {
+    this.table
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        switchMap(table => this.tableService.abandon(table.id)))
+      .subscribe();
+  }
+
+  leave() {
+    this.table
+      .pipe(
+        takeUntil(this.destroyed),
+        take(1),
+        switchMap(table => this.tableService.leave(table.id)))
+      .subscribe();
   }
 }

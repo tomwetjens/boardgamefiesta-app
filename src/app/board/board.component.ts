@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, Game, State} from '../model';
+import {Action, ActionType, CattleCard, Table, State} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {HandSelectComponent} from '../hand-select/hand-select.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -12,7 +12,7 @@ import {AudioService} from '../audio.service';
 })
 export class BoardComponent implements OnInit, OnChanges {
 
-  @Input() game: Game;
+  @Input() table: Table;
   @Input() state: State;
   @Input() selectedAction: ActionType;
 

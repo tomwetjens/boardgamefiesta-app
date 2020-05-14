@@ -1,6 +1,6 @@
 import {AfterContentChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, Building, City, Game, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State, Worker} from '../model';
-import {GameService} from '../game.service';
+import {Action, ActionType, Building, City, Table, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State, Worker} from '../model';
+import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -151,7 +151,7 @@ interface ForesightItem {
 })
 export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecked, OnChanges {
 
-  @Input() game: Game;
+  @Input() table: Table;
   @Input() state: State;
   @Input() selectedAction: ActionType;
 
@@ -205,7 +205,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private selectedSpace: Space;
 
   constructor(private renderer: Renderer2,
-              private gameService: GameService,
+              private tableService: TableService,
               private ngbModal: NgbModal,
               private toastrService: ToastrService,
               private audioService: AudioService) {
@@ -302,7 +302,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     this.selectedSpace = null;
 
     if ([ActionType.DELIVER_TO_CITY].includes(this.selectedAction)) {
-      this.gameService.getPossibleDeliveries(this.game.id)
+      this.tableService.getPossibleDeliveries(this.table.id)
         .subscribe(possibleDeliveries => this.possibleDeliveries = possibleDeliveries);
     }
   }
@@ -338,7 +338,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       case ActionType.MOVE_3_FORWARD_WITHOUT_FEES:
       case ActionType.MOVE_4_FORWARD:
         if (this.state.trail.playerLocations[this.state.player.player.color]) {
-          this.gameService.getPossibleMoves(this.game.id, name)
+          this.tableService.getPossibleMoves(this.table.id, name)
             .subscribe(possibleMoves => {
               if (possibleMoves.length === 0) {
                 this.toastrService.error('Cannot move to selected location');
@@ -362,7 +362,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       case ActionType.PLACE_CHEAP_BUILDING:
         const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
         const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
-        componentInstance.game = this.game;
+        componentInstance.table = this.table;
         componentInstance.playerState = this.state.player;
         fromPromise(ngbModalRef.result).subscribe(building => {
           this.action.emit({type: this.selectedAction, location: name, building});

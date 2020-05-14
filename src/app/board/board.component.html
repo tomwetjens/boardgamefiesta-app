@@ -1,7 +1,7 @@
 <div *ngIf="state">
   <div class="row no-gutters align-items-start">
     <div class="col-8">
-      <app-trail [game]="game"
+      <app-trail [table]="table"
                  [state]="state"
                  [selectedAction]="selectedAction"
                  (action)="perform($event)">
@@ -10,13 +10,13 @@
       <app-objective-cards [objectiveCards]="state.objectiveCards" [selectedAction]="selectedAction" (action)="perform($event)">
       </app-objective-cards>
 
-      <app-cattle-market [game]="game"
+      <app-cattle-market [table]="table"
                          [cattleMarket]="state.cattleMarket"
                          [selectedAction]="selectedAction"
                          (action)="perform($event)"></app-cattle-market>
     </div>
     <div class="col-4">
-      <app-player-board [game]="game"
+      <app-player-board [table]="table"
                         [state]="state"
                         [playerState]="state.player"
                         [actions]="state.actions"
@@ -27,11 +27,11 @@
       </app-player-board>
 
       <div *ngFor="let playerState of state.otherPlayers">
-        <app-player-board [game]="game" [state]="state" [playerState]="playerState" [readonly]="true">
+        <app-player-board [table]="table" [state]="state" [playerState]="playerState" [readonly]="true">
         </app-player-board>
       </div>
 
-      <app-log [game]="game"></app-log>
+      <app-log [table]="table"></app-log>
     </div>
   </div>
 </div>

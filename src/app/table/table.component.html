@@ -1,0 +1,102 @@
+<ng-container *ngIf="table | async as table" [ngSwitch]="table.status">
+  <ng-container *ngSwitchCase="'STARTED'">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-between">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-secondary" [routerLink]="['/']">{{'close'|translate}}</a>
+        </li>
+        <ng-container *ngIf="state | async as state">
+          <li class="nav-item">
+            <a class="btn btn-primary" *ngIf="state.turn" (click)="endTurn()">{{'endTurn'|translate}}</a>
+            <button class="btn btn-secondary" *ngIf="canSkip(state)" (click)="skipAction()">{{'skip'|translate}}</button>
+          </li>
+        </ng-container>
+      </ul>
+
+      <ng-container *ngIf="table | async as table">
+        <ng-container *ngIf="state | async as state">
+          <div *ngIf="!state.turn">
+            {{'waitingFor'|translate}}
+            <span *ngIf="table.players[state.currentPlayer.name].user" [class]="state.currentPlayer.color">{{table.players[state.currentPlayer.name].user}}</span>
+            <span *ngIf="!table.players[state.currentPlayer.name].user" [class]="state.currentPlayer.color">{{'computer'|translate}}</span>
+          </div>
+
+          <div class="actions">
+            <ng-container *ngIf="!selectedAction">
+              <ng-container *ngIf="!isAuxActions(state)">
+          <span *ngFor="let actionType of state.actions" [ngSwitch]="actionType">
+              <button *ngSwitchDefault
+                      class="btn btn-secondary" (click)="selectAction(actionType)"
+                      ngbPopover="{{'action.' + actionType | translate}}"
+                      placement="bottom"
+                      triggers="mouseenter:mouseleave"
+                      container="body">{{actionType}}</button>
+          </span>
+              </ng-container>
+              <ng-container *ngIf="isAuxActions(state)">
+                <!-- Aux actions can be selected on player board, no need to show them here -->
+                Select auxiliary action on player board
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="selectedAction">
+              {{'action.' + selectedAction | translate}}
+              <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel</button>
+            </ng-container>
+          </div>
+
+          <div class="form-inline">
+            <div *ngIf="state.turn">
+              {{'yourTurn'|translate}}
+            </div>
+            <app-connection-status></app-connection-status>
+          </div>
+        </ng-container>
+      </ng-container>
+    </nav>
+    <app-board [table]="table"
+               [state]="state | async"
+               [selectedAction]="selectedAction"
+               (action)="perform($event)"
+               (selectAction)="selectAction($event)">
+    </app-board>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <app-navbar></app-navbar>
+
+    <section class="container">
+      <div class="jumbotron">
+        <h5>{{'game.' + table.game|translate}}</h5>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+          <button class="btn btn-primary" (click)="start()">{{'start'|translate}}</button>&nbsp;
+          <button class="btn btn-secondary" (click)="leave()">{{'leave'|translate}}</button>&nbsp;
+          <button class="btn btn-danger" (click)="abandon()">{{'abandon'|translate}}</button>
+        </p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="row">
+        <div class="col-3">
+          {{table.options|json}}
+        </div>
+        <div class="col-9">
+          <div class="row">
+            {{table.players[table.player].user.username}}
+            {{table.players[table.player].status}}
+          </div>
+          <div *ngFor="let player of table.otherPlayers" class="row">
+            {{table.players[player].user ? table.players[player].user.username : 'Computer'}}
+            {{table.players[player].status}}
+          </div>
+          <button class="btn btn-secondary">{{'inviteFriend'|translate}}</button>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</ng-container>
+
+

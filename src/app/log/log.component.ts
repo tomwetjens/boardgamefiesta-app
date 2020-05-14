@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Game, LogEntry} from '../model';
-import {GameService} from '../game.service';
+import {Table, LogEntry} from '../model';
+import {TableService} from '../table.service';
 import {concat, of} from 'rxjs';
 import {EventService} from '../event.service';
 import {concatMap, filter, flatMap, map, tap} from 'rxjs/operators';
@@ -13,11 +13,11 @@ import {fromArray} from 'rxjs/internal/observable/fromArray';
 })
 export class LogComponent implements OnInit {
 
-  @Input() game: Game;
+  @Input() table: Table;
 
   logEntries: LogEntry[] = [];
 
-  constructor(private gameService: GameService, private eventService: EventService) {
+  constructor(private tableService: TableService, private eventService: EventService) {
   }
 
   ngOnInit(): void {
@@ -25,10 +25,10 @@ export class LogComponent implements OnInit {
 
     concat(of(lastRequestedDate),
       this.eventService.events
-        .pipe(filter(event => event.gameId === this.game.id),
+        .pipe(filter(event => event.tableId === this.table.id),
           map(() => lastRequestedDate)))
       .pipe(
-        concatMap(since => this.gameService.getLog(this.game.id, since)),
+        concatMap(since => this.tableService.getLog(this.table.id, since)),
         tap(() => lastRequestedDate = new Date()))
       .subscribe(newLogEntries => {
         Array.prototype.unshift.apply(this.logEntries, newLogEntries);

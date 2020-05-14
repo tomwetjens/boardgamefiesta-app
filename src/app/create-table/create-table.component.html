@@ -1,4 +1,4 @@
-<h2>Create Game</h2>
+<h2>Create Table</h2>
 
 <div *ngIf="inviting">
   <button class="btn btn-secondary" (click)="this.inviting = false">Back</button>
@@ -19,19 +19,9 @@
     </div>
 
     <div>
-      Number of players
-      <input type="number" name="numberOfPlayers"
-             [(ngModel)]="numberOfPlayers"
-             [min]="minNumberOfPlayers"
-             max="4"
-             step="1"
-             [value]="numberOfPlayers"/>
-    </div>
-
-    <div>
       Mode:
-      <input type="radio" [(ngModel)]="beginner" [value]="true" id="beginner" name="beginner">Beginner
-      <input type="radio" [(ngModel)]="beginner" [value]="false" id="notBeginner" name="beginner">Randomize
+      <input type="radio" [(ngModel)]="options.beginner" [value]="true" id="beginner" name="beginner">Beginner
+      <input type="radio" [(ngModel)]="options.beginner" [value]="false" id="notBeginner" name="beginner">Randomize
     </div>
 
     <div>

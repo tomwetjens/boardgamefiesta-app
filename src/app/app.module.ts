@@ -6,13 +6,13 @@ import {TranslateModule} from '@ngx-translate/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {GameComponent} from './game/game.component';
+import {TableComponent} from './table/table.component';
 import {TrailComponent} from './trail/trail.component';
 import {PlayerBoardComponent} from './player-board/player-board.component';
 import {HomeComponent} from './home/home.component';
 import {BoardComponent} from './board/board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {CreateGameComponent} from './create-game/create-game.component';
+import {CreateTableComponent} from './create-table/create-table.component';
 import {SelectUserComponent} from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
 import {ToastrComponent} from './toastr/toastr.component';
@@ -23,7 +23,6 @@ import {DeliveryCityComponent} from './delivery-city/delivery-city.component';
 import {HttpInterceptorService} from './http-interceptor.service';
 import {ConnectionStatusComponent} from './connection-status/connection-status.component';
 import {NavbarComponent} from './navbar/navbar.component';
-import {GameListComponent} from './game-list/game-list.component';
 import {LayoutComponent} from './layout/layout.component';
 import {CardStackComponent} from './card-stack/card-stack.component';
 import {CattleMarketComponent} from './cattle-market/cattle-market.component';
@@ -41,12 +40,12 @@ import { TestComponent } from './test/test.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent,
+    TableComponent,
     TrailComponent,
     PlayerBoardComponent,
     HomeComponent,
     BoardComponent,
-    CreateGameComponent,
+    CreateTableComponent,
     SelectUserComponent,
     ToastrComponent,
     CardComponent,
@@ -55,7 +54,6 @@ import { TestComponent } from './test/test.component';
     DeliveryCityComponent,
     ConnectionStatusComponent,
     NavbarComponent,
-    GameListComponent,
     LayoutComponent,
     CardStackComponent,
     CattleMarketComponent,

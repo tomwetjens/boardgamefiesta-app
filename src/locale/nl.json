@@ -1,12 +1,28 @@
 {
+  "home": "Spellen",
+  "games": "Spellen",
+  "logout": "Afmelden",
+  "accept": "Accepteren",
+  "reject": "Weigeren",
+  "notStarted": "wachten op spelers",
+  "play": "Speel",
   "yourTurn": "Jij bent aan de beurt",
   "close": "Sluiten",
   "remaining": "resterend",
   "back": "Terug",
+  "start": "Spel starten",
+  "inviteFriend": "Vriend uitnodigen",
   "endTurn": "Beëindig beurt",
   "skip": "Overslaan",
   "waitingFor": "wachten op",
   "computer": "computer",
+  "abandon": "Spel weggooien",
+  "leave": "Spel verlaten",
+  "toast": {
+    "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
+    "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
+    "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden."
+  },
   "action": {
     "APPOINT_STATION_MASTER": "Een stationschef benoemen",
     "BUY_CATTLE": "Een of meerdere runderkaarten kopen",

@@ -1,12 +1,31 @@
 {
+  "home": "Play",
+  "games": "Games",
+  "game": {
+    "gwt": "Great Western Trail"
+  },
+  "logout": "Log out",
+  "accept": "Accept",
+  "reject": "Reject",
+  "notStarted": "waiting for players",
+  "play": "Play",
   "yourTurn": "Your Turn",
   "close": "Close",
+  "inviteFriend": "Invite friend",
+  "start": "Start game",
   "remaining": "remaining",
   "back": "Back",
   "endTurn": "End Turn",
   "skip": "Skip",
   "waitingFor": "waiting for",
   "computer": "computer",
+  "abandon": "Abandon",
+  "leave": "Leave",
+  "toast": {
+    "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
+    "MIN_PLAYERS": "You need more players to start the game.",
+    "UNKNOWN_ERROR": "An unknown error occurred."
+  },
   "action": {
     "APPOINT_STATION_MASTER": "",
     "BUY_CATTLE": "",
@@ -88,7 +107,7 @@
     "DOWNGRADE_STATION": ""
   },
   "log": {
-    "CREATE": "creates a new game",
+    "CREATE": "creates a new table",
 
     "SKIP": "skips an action",
     "BEGIN_TURN": "begin turn",
@@ -107,7 +126,7 @@
     "MAY_HIRE_CHEAP_WORKER": "may hire a worker for +$1",
     "MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "may discard 1 Jersey to gain 2 certificates",
     "MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS": "may discard 1 Jersey to gain $4",
-    "ENDS_GAME": "ends game",
+    "ENDS_GAME": "ends table",
     "FILL_UP_CATTLE_MARKET": "cattle market is filled up",
 
     "ACTION": {

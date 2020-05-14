@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../model';
-import {GameService} from '../game.service';
+import {TableService} from '../table.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-create-game',
-  templateUrl: './create-game.component.html',
-  styleUrls: ['./create-game.component.scss']
+  selector: 'app-create-table',
+  templateUrl: './create-table.component.html',
+  styleUrls: ['./create-table.component.scss']
 })
-export class CreateGameComponent implements OnInit {
+export class CreateTableComponent implements OnInit {
 
   invitedUsers: User[] = [];
   inviting = false;
-  beginner = false;
-  numberOfPlayers = 2;
+  options: { [key: string]: number | string | boolean };
 
-  constructor(private router: Router, private gameService: GameService) {
+  constructor(private router: Router, private tableService: TableService) {
   }
 
   ngOnInit(): void {
+    this.options = {beginner: false};
   }
 
   get canInvite(): boolean {
@@ -35,7 +35,6 @@ export class CreateGameComponent implements OnInit {
     }
 
     this.invitedUsers.push(user);
-    this.numberOfPlayers = Math.max(this.numberOfPlayers, this.minNumberOfPlayers);
 
     this.inviting = false;
   }
@@ -51,15 +50,15 @@ export class CreateGameComponent implements OnInit {
 
   create() {
     const request = {
+      name: 'gwt',
       inviteUserIds: this.invitedUsers.map(user => user.id),
-      beginner: this.beginner,
-      numberOfPlayers: this.numberOfPlayers
+      options: this.options
     };
 
     console.log('create:', {request});
 
-    this.gameService.create(request)
-      .subscribe(game => this.router.navigate(['/']));
+    this.tableService.create(request)
+      .subscribe(table => this.router.navigate(['/']));
   }
 
   get valid(): boolean {

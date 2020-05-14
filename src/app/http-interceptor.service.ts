@@ -37,7 +37,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         this.toastrService.error('Unexpected server error: ' + response.statusText);
       } else {
         console.error('Error connecting to server: ' + response.message);
-        this.toastrService.error('Could not connect to server');
+        this.toastrService.error('UNKNOWN_ERROR');
       }
       return throwError(response);
     }));

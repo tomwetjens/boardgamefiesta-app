@@ -1,8 +1,8 @@
 <div class="row no-gutters">
   <div class="col-4">
     <span [className]="'color '+ playerState.player.color"></span>
-    <img *ngIf="game.players[playerState.player.name].user" [src]="game.players[playerState.player.name].user.avatarUrl" class="avatar"/>
-    {{game.players[playerState.player.name].user ? game.players[playerState.player.name].user.username : 'Computer'}}
+    <img *ngIf="table.players[playerState.player.name].user" [src]="table.players[playerState.player.name].user.avatarUrl" class="avatar"/>
+    {{table.players[playerState.player.name].user ? table.players[playerState.player.name].user.username : 'Computer'}}
 
     <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
          [ngbPopover]="'Waiting for player to perform action.'"

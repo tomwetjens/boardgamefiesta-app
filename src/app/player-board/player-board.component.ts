@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, Card, CattleCard, CattleType, Game, PlayerState, State, Worker} from '../model';
+import {Action, ActionType, Card, CattleCard, CattleType, Table, PlayerState, State, Worker} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../audio.service';
@@ -12,7 +12,7 @@ import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.
 })
 export class PlayerBoardComponent implements OnInit, OnChanges {
 
-  @Input() game: Game;
+  @Input() table: Table;
   @Input() state: State;
   @Input() playerState: PlayerState;
   @Input() actions: ActionType[] = [];
@@ -159,14 +159,14 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   showBuildings() {
     const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
     const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
-    componentInstance.game = this.game;
+    componentInstance.table = this.table;
     componentInstance.playerState = this.playerState;
   }
 
   showObjectives() {
     const ngbModalRef = this.ngbModal.open(ObjectivesDialogComponent);
     const componentInstance = ngbModalRef.componentInstance as ObjectivesDialogComponent;
-    componentInstance.game = this.game;
+    componentInstance.table = this.table;
     componentInstance.playerState = this.playerState;
   }
 

@@ -355,7 +355,7 @@ export enum PlayerStatus {
   REJECTED = 'REJECTED'
 }
 
-export interface GamePlayer {
+export interface TablePlayer {
   readonly type: PlayerType;
   readonly user?: User;
   readonly status: PlayerStatus;
@@ -367,13 +367,24 @@ export interface GamePlayer {
   readonly winner?: boolean;
 }
 
-export interface Game {
+export enum TableType {
+  REALTIME = 'REALTIME'
+}
+
+export interface Options {
+  [key: string]: number | string | boolean
+}
+
+export interface Table {
   readonly id: string;
+  readonly game: string;
+  readonly type: TableType;
+  readonly options: Options;
   readonly status: 'NEW' | 'STARTED' | 'ENDED';
   readonly accepted: boolean;
   readonly player: string;
   readonly otherPlayers: string[];
-  readonly players: { [key: string]: GamePlayer };
+  readonly players: { [key: string]: TablePlayer };
   readonly created: string;
   readonly started: string;
   readonly ended: string;
@@ -389,10 +400,11 @@ export interface Action {
   [key: string]: any;
 }
 
-export interface CreateGameRequest {
-  inviteUserIds: string[];
-  beginner: boolean;
-  numberOfPlayers: number;
+export interface CreateTableRequest {
+  game: string;
+  type: TableType;
+  inviteUserIds?: string[];
+  options?: Options;
 }
 
 export interface PossibleMove {
@@ -424,7 +436,7 @@ export enum EventType {
 
 export interface Event {
   readonly type: EventType;
-  readonly gameId: string;
+  readonly tableId: string;
   readonly userId?: string;
 }
 
@@ -461,11 +473,24 @@ export enum CommandType {
   CREATE = 'CREATE'
 }
 
-export type LogEntryType = GWTEventType | CommandType;
+export enum LogEntryType {
+  ACCEPT = 'ACCEPT',
+  REJECT = 'REJECT',
+  START = 'START',
+  INVITE = 'INVITE',
+  PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
+  AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',
+  CREATE = 'CREATE',
+  IN_GAME_EVENT = 'IN_GAME_EVENT'
+}
 
 export interface LogEntry {
   timestamp: string;
-  player: GamePlayer;
+  player: TablePlayer;
   type: LogEntryType;
-  values: any[];
+  parameters: string[];
+}
+
+export interface Game {
+  readonly id: string;
 }
