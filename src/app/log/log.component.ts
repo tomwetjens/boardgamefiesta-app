@@ -5,6 +5,7 @@ import {concat, of} from 'rxjs';
 import {EventService} from '../event.service';
 import {concatMap, filter, flatMap, map, tap} from 'rxjs/operators';
 import {fromArray} from 'rxjs/internal/observable/fromArray';
+import {GameService} from "../game.service";
 
 @Component({
   selector: 'app-log',
@@ -17,7 +18,9 @@ export class LogComponent implements OnInit {
 
   logEntries: LogEntry[] = [];
 
-  constructor(private tableService: TableService, private eventService: EventService) {
+  constructor(private tableService: TableService,
+              private eventService: EventService,
+              public gameService: GameService) {
   }
 
   ngOnInit(): void {

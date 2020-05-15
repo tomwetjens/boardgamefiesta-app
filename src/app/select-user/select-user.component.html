@@ -1,13 +1,24 @@
-<form>
-  <div class="form-group">
-    <label for="text">Username or e-mail</label>
-    <input type="text" class="form-control" id="text" required [(ngModel)]="text" name="text">
-  </div>
-  <button type="submit" class="btn btn-success" (click)="search()">Search</button>
-</form>
+<div class="modal-header">
+  <h4 class="modal-title">Find User</h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="text">Username or e-mail</label>
+      <input type="text" class="form-control" id="text" required [(ngModel)]="text" name="text">
+    </div>
+    <button type="submit" class="btn btn-success" (click)="search()">Search</button>
+  </form>
 
-<ul>
-  <li *ngFor="let user of users | async">
-    {{user.username}} <button class="btn btn-secondary" (click)="selectUser.emit(user)">Select</button>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let user of users | async">
+      {{user.username}}
+      <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">Select</button>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+</div>

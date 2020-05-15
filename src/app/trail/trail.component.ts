@@ -1,6 +1,32 @@
-import {AfterContentChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
-import {Action, ActionType, Building, City, Table, Hazard, Location, PlayerColor, PossibleDelivery, PossibleMove, Space, State, Worker} from '../model';
-import {TableService} from '../table.service';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
+import {
+  Action,
+  ActionType,
+  Building,
+  City,
+  Hazard,
+  Location,
+  PlayerColor,
+  PossibleDelivery,
+  PossibleMove,
+  Space,
+  State,
+  Table,
+  Worker
+} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -193,7 +219,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @ViewChild('hazards') private hazardsElement !: ElementRef<Element>;
 
   private possibleMoves: PossibleMove[];
-  private possibleDeliveries: PossibleDelivery[];
 
   hazards: HazardElement[];
   foresights: ForesightItem[][];
@@ -205,7 +230,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private selectedSpace: Space;
 
   constructor(private renderer: Renderer2,
-              private tableService: TableService,
               private ngbModal: NgbModal,
               private toastrService: ToastrService,
               private audioService: AudioService) {
@@ -300,11 +324,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   private actionSelected() {
     this.selectedSpace = null;
-
-    if ([ActionType.DELIVER_TO_CITY].includes(this.selectedAction)) {
-      this.tableService.getPossibleDeliveries(this.table.id)
-        .subscribe(possibleDeliveries => this.possibleDeliveries = possibleDeliveries);
-    }
   }
 
   ngAfterViewInit(): void {
@@ -338,20 +357,20 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       case ActionType.MOVE_3_FORWARD_WITHOUT_FEES:
       case ActionType.MOVE_4_FORWARD:
         if (this.state.trail.playerLocations[this.state.player.player.color]) {
-          this.tableService.getPossibleMoves(this.table.id, name)
-            .subscribe(possibleMoves => {
-              if (possibleMoves.length === 0) {
-                this.toastrService.error('Cannot move to selected location');
-                return;
-              }
+          const moves = this.state.possibleMoves
+            .filter(possibleMove => possibleMove.to === name);
 
-              if (possibleMoves.length === 1) {
-                this.performMove(possibleMoves[0].steps);
-              } else {
-                this.possibleMoves = possibleMoves;
-                this.updatePossibleMoves();
-              }
-            });
+          if (this.state.possibleMoves.length === 0) {
+            this.toastrService.error('Cannot move to selected location');
+            return;
+          }
+
+          if (moves.length === 1) {
+            this.performMove(moves[0].steps);
+          } else {
+            this.possibleMoves = moves;
+            this.updatePossibleMoves();
+          }
         } else {
           // First move, can go anywhere
           this.performMove([name]);
@@ -471,7 +490,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   canSelectCity(city: string): boolean {
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
-        return this.possibleDeliveries && this.possibleDeliveries.some(pd => pd.city === city as City);
+        return this.state.possibleDeliveries && this.state.possibleDeliveries.some(pd => pd.city === city as City);
       case ActionType.EXTRAORDINARY_DELIVERY:
         return !!this.selectedSpace;
       default:
@@ -509,8 +528,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   selectCity(city: string) {
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
-        if (this.possibleDeliveries) {
-          const possibleDelivery = this.possibleDeliveries.find(pd => pd.city === city as City);
+        if (this.state.possibleDeliveries) {
+          const possibleDelivery = this.state.possibleDeliveries.find(pd => pd.city === city as City);
 
           if (possibleDelivery) {
             if (this.state.player.certificates <= possibleDelivery.certificates) {
@@ -522,7 +541,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               ngbModalRef.componentInstance.playerState = this.state.player;
 
               fromPromise(ngbModalRef.result)
-                .subscribe(({certificates}) => this.action.emit({type: ActionType.DELIVER_TO_CITY, city, certificates}));
+                .subscribe(({certificates}) => this.action.emit({
+                  type: ActionType.DELIVER_TO_CITY,
+                  city,
+                  certificates
+                }));
             }
           }
         }
@@ -551,14 +574,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private canMoveTo(location: Location): boolean {
-    if (location.name === 'KANSAS_CITY') {
-      return true;
-    }
-    return !!location.building || !!location.hazard || !!location.teepee;
+    return this.state.possibleMoves && this.state.possibleMoves.some(pm => pm.to === location.name);
   }
 
   private canPlaceBuilding(location: Location): boolean {
-    return location.type === 'BUILDING' && (!location.building || location.building.player.color === this.state.currentPlayer.color);
+    return location.type === 'BUILDING' && (!location.building || (location.building.player && location.building.player.color === this.state.currentPlayer.color));
   }
 
   selectTeepee(reward: number) {

@@ -334,11 +334,15 @@ export interface State {
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
   readonly turn: boolean;
+  readonly possibleMoves?: PossibleMove[];
+  readonly possibleBuys?: PossibleBuy[];
+  readonly possibleDeliveries?: PossibleDelivery[];
 }
 
 export interface User {
   readonly id: string;
   readonly username: string;
+  readonly email: string;
   readonly lastSeen: string;
   readonly avatarUrl: string;
   readonly language: string;
@@ -408,6 +412,7 @@ export interface CreateTableRequest {
 }
 
 export interface PossibleMove {
+  to: string;
   cost: number;
   steps: string[];
   playerFees: { player: Player; fee: number }[];
@@ -478,6 +483,7 @@ export enum LogEntryType {
   REJECT = 'REJECT',
   START = 'START',
   INVITE = 'INVITE',
+  UNINVITE = 'UNINVITE',
   PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
   AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',
   CREATE = 'CREATE',
@@ -486,7 +492,8 @@ export enum LogEntryType {
 
 export interface LogEntry {
   timestamp: string;
-  player: TablePlayer;
+  player?: TablePlayer;
+  user?: User;
   type: LogEntryType;
   parameters: string[];
 }

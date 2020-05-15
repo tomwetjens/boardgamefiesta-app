@@ -3,6 +3,7 @@ import {User} from '../model';
 import {UserService} from '../user.service';
 import {ReplaySubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-select-user',
@@ -15,9 +16,8 @@ export class SelectUserComponent implements OnInit {
   searching: boolean;
   users = new ReplaySubject<User[]>();
 
-  @Output() selectUser = new EventEmitter<User>();
-
-  constructor(private userService: UserService) {
+  constructor(public ngbActiveModal: NgbActiveModal,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -37,4 +37,5 @@ export class SelectUserComponent implements OnInit {
       .pipe(tap(() => this.searching = false))
       .subscribe(users => this.users.next(users));
   }
+
 }

@@ -1,5 +1,5 @@
 <section class="container">
-  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary">
+  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary" (click)="openTable(table)">
     <strong>{{'game.' + table.game | translate}}</strong>
 
     <ng-container [ngSwitch]="table.status">
@@ -7,19 +7,19 @@
         {{'notStarted'|translate}}
         <ng-container [ngSwitch]="table.accepted">
           <span *ngSwitchCase="true">
-            <button (click)="openTable(table)" class="btn btn-primary">Open</button>
+            <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
           </span>
           <span *ngSwitchCase="false">
             invited by  {{table.owner.username}}
-            <button (click)="accept(table)" class="btn btn-primary">{{'accept'|translate}}</button>
-            <button (click)="reject(table)" class="btn btn-second">{{'reject'|translate}}</button>
+            <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
+            <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>
         </ng-container>
       </span>
       <span *ngSwitchCase="'STARTED'">
         <ng-container [ngSwitch]="table.turn">
           <span *ngSwitchCase="true">
-            your turn
+            {{'yourTurn'|translate}}
           </span>
           <span *ngSwitchCase="false">
             {{'waitingFor'|translate}}
@@ -35,13 +35,10 @@
 
 <section class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4">{{'welcome'|translate}}!</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
   </div>
 </section>
 

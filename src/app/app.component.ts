@@ -25,13 +25,15 @@ export class AppComponent implements OnInit {
     this.translateService.setTranslation('nl', nl);
 
     this.userService.currentUser.subscribe(currentUser => {
+      const appName = this.translateService.instant('appName');
+
       if (currentUser) {
-        this.title.setTitle('Great Western Trail: ' + currentUser.username);
+        this.title.setTitle(appName + ': ' + currentUser.username);
         console.log('setting user language:', currentUser.language);
         this.translateService.use(currentUser.language);
         moment.locale(currentUser.language);
       } else {
-        this.title.setTitle('Great Western Trail');
+        this.title.setTitle(appName);
         console.log('setting default language:', this.translateService.getDefaultLang());
         this.translateService.use(this.translateService.getDefaultLang());
         moment.locale(this.translateService.getDefaultLang());

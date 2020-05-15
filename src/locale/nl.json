@@ -1,9 +1,18 @@
 {
+  "appName": "Board Games",
+  "welcome": "Welkom",
   "home": "Spellen",
   "games": "Spellen",
   "logout": "Afmelden",
   "accept": "Accepteren",
   "reject": "Weigeren",
+  "profile": "Profiel",
+  "about": "Over mij",
+  "preferences": "Voorkeuren",
+  "username": "Gebruikersnaam",
+  "language": "Taal",
+  "email": "E-mail",
+  "save": "Opslaan",
   "notStarted": "wachten op spelers",
   "play": "Speel",
   "yourTurn": "Jij bent aan de beurt",
@@ -11,7 +20,9 @@
   "remaining": "resterend",
   "back": "Terug",
   "start": "Spel starten",
-  "inviteFriend": "Vriend uitnodigen",
+  "open": "Open",
+  "invite": "Speler uitnodigen",
+  "uninvite": "Verwijderen",
   "endTurn": "Beëindig beurt",
   "skip": "Overslaan",
   "waitingFor": "wachten op",
@@ -104,8 +115,12 @@
     "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"
   },
   "log": {
-    "CREATE": "start een nieuw spel",
-
+    "CREATE": "maakt een nieuw spel",
+    "START": "heeft het spel gestart",
+    "INVITE": "heeft {{value1}} uitgenodigd",
+    "ACCEPT": "komt er bij",
+    "REJECT": "heeft de uitnodiging afgeslagen",
+    "UNINVITE": "uninvited {{value1}}",
     "SKIP": "slaat een actie over",
     "BEGIN_TURN": "is nu aan de beurt",
     "END_TURN": "beëindigt beurt",
@@ -123,7 +138,6 @@
     "MAY_HIRE_CHEAP_WORKER": "kan een werker inhuren met korting",
     "MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "kan 1 Jersey afleggen om de certificaatsteen 2 vooruit te zetten",
     "MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS": "kan 1 Jersey afleggen om 4 dollar te ontvangen",
-
     "ACTION": {
       "APPOINT_STATION_MASTER": "benoemt {{value1}} tot stationschef en ontvangt {{value2}}",
       "BUY_CATTLE": "koopt runderkaarten voor {{value1}} dollar",

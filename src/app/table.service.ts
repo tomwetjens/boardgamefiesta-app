@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Action, CreateTableRequest, Table, LogEntry, PossibleBuy, PossibleDelivery, PossibleMove, State} from './model';
+import {Action, CreateTableRequest, LogEntry, State, Table} from './model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -52,18 +52,6 @@ export class TableService {
     return this.httpClient.get<State>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
-  getPossibleMoves(id: string, to: string): Observable<PossibleMove[]> {
-    return this.httpClient.get<PossibleMove[]>(environment.apiBaseUrl + '/tables/' + id + '/state/possible-moves', {params: {to}});
-  }
-
-  getPossibleDeliveries(id: string): Observable<PossibleDelivery[]> {
-    return this.httpClient.get<PossibleDelivery[]>(environment.apiBaseUrl + '/tables/' + id + '/state/possible-deliveries');
-  }
-
-  getPossibleBuys(id: string): Observable<PossibleBuy[]> {
-    return this.httpClient.get<PossibleBuy[]>(environment.apiBaseUrl + '/tables/' + id + '/state/possible-buys');
-  }
-
   getLog(id: string, date: Date): Observable<LogEntry[]> {
     return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {params: {since: date.toISOString()}});
   }
@@ -74,5 +62,13 @@ export class TableService {
 
   leave(id: string) {
     return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/leave', null);
+  }
+
+  invite(id: string, userId: string) {
+    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/invite', {userId});
+  }
+
+  uninvite(id: string, userId: string) {
+    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/uninvite', {userId});
   }
 }

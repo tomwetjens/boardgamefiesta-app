@@ -12,7 +12,6 @@ import {PlayerBoardComponent} from './player-board/player-board.component';
 import {HomeComponent} from './home/home.component';
 import {BoardComponent} from './board/board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {CreateTableComponent} from './create-table/create-table.component';
 import {SelectUserComponent} from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
 import {ToastrComponent} from './toastr/toastr.component';
@@ -33,9 +32,10 @@ import {ObjectivesDialogComponent} from './objectives-dialog/objectives-dialog.c
 import {HazardComponent} from './hazard/hazard.component';
 import {TeepeeComponent} from './teepee/teepee.component';
 import {StationMasterComponent} from './station-master/station-master.component';
-import { MessageDialogComponent } from './message-dialog/message-dialog.component';
-import { LogComponent } from './log/log.component';
-import { TestComponent } from './test/test.component';
+import {MessageDialogComponent} from './message-dialog/message-dialog.component';
+import {LogComponent} from './log/log.component';
+import {TestComponent} from './test/test.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { TestComponent } from './test/test.component';
     PlayerBoardComponent,
     HomeComponent,
     BoardComponent,
-    CreateTableComponent,
     SelectUserComponent,
     ToastrComponent,
     CardComponent,
@@ -66,7 +65,8 @@ import { TestComponent } from './test/test.component';
     StationMasterComponent,
     MessageDialogComponent,
     LogComponent,
-    TestComponent
+    TestComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

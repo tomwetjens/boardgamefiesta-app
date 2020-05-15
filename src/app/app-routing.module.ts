@@ -3,9 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
 import {TableComponent} from './table/table.component';
 import {HomeComponent} from './home/home.component';
-import {CreateTableComponent} from './create-table/create-table.component';
 import {LayoutComponent} from './layout/layout.component';
 import {TestComponent} from './test/test.component';
+import {ProfileComponent} from "./profile/profile.component";
 
 
 const routes: Routes = [
@@ -28,9 +28,9 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'create',
-        component: CreateTableComponent,
-        canActivate: [AuthGuard],
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '**',

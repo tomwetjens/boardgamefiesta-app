@@ -2,7 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Action, ActionType, EventType, Table, PlayerStatus, State} from '../model';
+import {Action, ActionType, EventType, PlayerStatus, State, Table, User} from '../model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import {AudioService} from '../audio.service';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {MessageDialogComponent} from '../message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
+import {SelectUserComponent} from "../select-user/select-user.component";
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -288,5 +289,41 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         take(1),
         switchMap(table => this.tableService.leave(table.id)))
       .subscribe();
+  }
+
+  invite() {
+    this.table.pipe(
+      takeUntil(this.destroyed),
+      take(1),
+      switchMap(table => {
+        const ngbModalRef = this.ngbModal.open(SelectUserComponent);
+        return fromPromise(ngbModalRef.result)
+          .pipe(switchMap(user => this.tableService.invite(table.id, user.id)));
+      }))
+      .subscribe(() => this.refreshTable());
+  }
+
+  uninvite(user: User) {
+    this.table.pipe(
+      takeUntil(this.destroyed),
+      take(1),
+      switchMap(table => this.tableService.uninvite(table.id, user.id)))
+      .subscribe(() => this.refreshTable());
+  }
+
+  accept() {
+    this.table.pipe(
+      takeUntil(this.destroyed),
+      take(1),
+      switchMap(table => this.tableService.accept(table.id)))
+      .subscribe(() => this.refreshTable());
+  }
+
+  reject() {
+    this.table.pipe(
+      takeUntil(this.destroyed),
+      take(1),
+      switchMap(table => this.tableService.reject(table.id)))
+      .subscribe(() => this.refreshTable());
   }
 }
