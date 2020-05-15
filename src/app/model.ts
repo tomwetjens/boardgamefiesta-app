@@ -337,6 +337,7 @@ export interface State {
   readonly possibleMoves?: PossibleMove[];
   readonly possibleBuys?: PossibleBuy[];
   readonly possibleDeliveries?: PossibleDelivery[];
+  readonly possibleSpaces?: Space[];
 }
 
 export interface User {
