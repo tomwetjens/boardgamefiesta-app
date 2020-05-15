@@ -379,12 +379,18 @@ export interface Options {
   [key: string]: number | string | boolean
 }
 
+export enum TableStatus {
+  NEW = 'NEW',
+  STARTED = 'STARTED',
+  ENDED = 'ENDED'
+}
+
 export interface Table {
   readonly id: string;
   readonly game: string;
   readonly type: TableType;
   readonly options: Options;
-  readonly status: 'NEW' | 'STARTED' | 'ENDED';
+  readonly status: TableStatus;
   readonly accepted: boolean;
   readonly player: string;
   readonly otherPlayers: string[];
@@ -434,14 +440,19 @@ export enum EventType {
   STARTED = 'STARTED',
   ENDED = 'ENDED',
   INVITED = 'INVITED',
+  UNINVITED = 'UNINVITED',
   ACCEPTED = 'ACCEPTED',
   REJECTED = 'REJECTED',
-  STATE_CHANGED = 'STATE_CHANGED'
+  STATE_CHANGED = 'STATE_CHANGED',
+  LEFT = 'LEFT',
+  PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
+  AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',
+  ABANDONED = 'ABANDONED'
 }
 
 export interface Event {
   readonly type: EventType;
-  readonly tableId: string;
+  readonly tableId?: string;
   readonly userId?: string;
 }
 

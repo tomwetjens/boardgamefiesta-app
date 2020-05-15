@@ -17,15 +17,12 @@
       <ng-container *ngIf="state | async as state">
         <div *ngIf="!state.turn">
           {{'waitingFor'|translate}}
-          <span *ngIf="table.players[state.currentPlayer.name].user"
-                [class]="state.currentPlayer.color">{{table.players[state.currentPlayer.name].user.username}}</span>
-          <span *ngIf="!table.players[state.currentPlayer.name].user"
-                [class]="state.currentPlayer.color">{{'computer'|translate}}</span>
+          <strong
+            [class]="state.currentPlayer.color">{{table.players[state.currentPlayer.name].user?.username || 'computer'|translate}}</strong>
         </div>
 
         <div class="actions">
           <ng-container *ngIf="!selectedAction">
-            <ng-container *ngIf="!isAuxActions(state)">
           <span *ngFor="let actionType of state.actions" [ngSwitch]="actionType">
               <button *ngSwitchDefault
                       class="btn btn-secondary" (click)="selectAction(actionType)"
@@ -34,24 +31,19 @@
                       triggers="mouseenter:mouseleave"
                       container="body">{{actionType}}</button>
           </span>
-            </ng-container>
-            <ng-container *ngIf="isAuxActions(state)">
-              <!-- Aux actions can be selected on player board, no need to show them here -->
-              Select auxiliary action on player board
-            </ng-container>
           </ng-container>
 
           <ng-container *ngIf="selectedAction">
             {{'action.' + selectedAction | translate}}
-            <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">Cancel
-            </button>
+            <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancelAction()">{{'cancel'|translate}}</button>
           </ng-container>
         </div>
 
         <div class="form-inline">
-          <div *ngIf="state.turn">
+          <span *ngIf="state.turn">
             {{'yourTurn'|translate}}
-          </div>
+          </span>
+          &nbsp;
           <app-connection-status></app-connection-status>
         </div>
       </ng-container>

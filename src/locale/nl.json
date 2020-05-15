@@ -29,6 +29,9 @@
   "computer": "computer",
   "abandon": "Spel weggooien",
   "leave": "Spel verlaten",
+  "connected": "verbonden",
+  "connecting": "verbinding maken...",
+  "cancel": "Annuleren",
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",

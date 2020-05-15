@@ -23,8 +23,7 @@
           </span>
           <span *ngSwitchCase="false">
             {{'waitingFor'|translate}}
-            <span *ngIf="table.players[table.currentPlayer].user">table.players[table.currentPlayer].user.username</span>
-            <span *ngIf="!table.players[table.currentPlayer].user">{{'computer'|translate}}</span>
+            {{table.players[table.currentPlayer].user?.username || 'computer'|translate}}
           </span>
         </ng-container>
         <button (click)="openTable(table)" class="btn btn-primary">Open</button>

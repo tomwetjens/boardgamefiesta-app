@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EventType, Game, Table, TableType} from '../model';
+import {Game, Table, TableType} from '../model';
 import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
@@ -30,13 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.eventService.events
       .pipe(takeUntil(this.destroyed))
       .subscribe(event => {
-        switch (event.type) {
-          case EventType.ACCEPTED:
-          case EventType.REJECTED:
-          case EventType.STARTED:
-          case EventType.ENDED:
-            this.refreshTables();
-            break;
+        if (event.tableId) {
+          this.refreshTables();
         }
       });
 

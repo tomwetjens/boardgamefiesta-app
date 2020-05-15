@@ -2,7 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Action, ActionType, EventType, PlayerStatus, State, Table, User} from '../model';
+import {Action, ActionType, EventType, PlayerStatus, State, Table, TableStatus, User} from '../model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -81,14 +81,13 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     this.refreshTable();
 
     this.table
-      .pipe(
-        takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroyed))
       .subscribe(table => {
-        if (table.status === 'STARTED' || table.status === 'ENDED') {
+        if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState();
         }
 
-        if (table.status === 'ENDED') {
+        if (table.status === TableStatus.ENDED) {
           const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
           ngbModalRef.componentInstance.table = table;
         }
@@ -96,13 +95,19 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
     this.eventService.events
       .pipe(takeUntil(this.destroyed))
+      // TODO Filter on current table
       .subscribe(event => {
-        console.log('event: ', {event});
         switch (event.type) {
           case EventType.ACCEPTED:
           case EventType.REJECTED:
           case EventType.STARTED:
           case EventType.ENDED:
+          case EventType.INVITED:
+          case EventType.UNINVITED:
+          case EventType.PROPOSED_TO_LEAVE:
+          case EventType.AGREED_TO_LEAVE:
+          case EventType.LEFT:
+          case EventType.ABANDONED:
             this.refreshTable();
             break;
 
@@ -263,10 +268,6 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   private canPerformFreeAction(state: State) {
     return state.actions.some(action => FREE_ACTIONS.includes(action));
-  }
-
-  isAuxActions(state: State) {
-    return state.actions.includes(ActionType.GAIN_1_DOLLAR) && state.actions.includes(ActionType.DRAW_CARD);
   }
 
   canSkip(state: State) {

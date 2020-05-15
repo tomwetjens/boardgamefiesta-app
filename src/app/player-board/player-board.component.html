@@ -2,7 +2,7 @@
   <div class="col-4">
     <span [className]="'color '+ playerState.player.color"></span>
     <img *ngIf="table.players[playerState.player.name].user" [src]="table.players[playerState.player.name].user.avatarUrl" class="avatar"/>
-    {{table.players[playerState.player.name].user ? table.players[playerState.player.name].user.username : 'Computer'}}
+    <strong [className]="playerState.player.color">{{table.players[playerState.player.name].user?.username || 'computer'|translate}}</strong>
 
     <img src="../../assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
          [ngbPopover]="'Waiting for player to perform action.'"
