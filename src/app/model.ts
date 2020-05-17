@@ -235,6 +235,7 @@ export interface PlayerState {
   readonly hand: Card[];
   readonly discardPile: Card[];
   readonly drawStackSize: number;
+  readonly handSize: number;
   readonly unlocked: { [key in Unlockable]: number };
   readonly buildings: string[];
   readonly stationMasters: StationMaster[];
@@ -422,6 +423,7 @@ export interface PossibleMove {
   to: string;
   cost: number;
   steps: string[];
+  route: string[];
   playerFees: { player: Player; fee: number }[];
 }
 

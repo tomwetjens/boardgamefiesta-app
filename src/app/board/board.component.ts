@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, Table, State} from '../model';
+import {Action, ActionType, CattleCard, Table, State, PlayerState} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {HandSelectComponent} from '../hand-select/hand-select.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -40,5 +40,9 @@ export class BoardComponent implements OnInit, OnChanges {
 
   perform(action: Action) {
     this.action.emit(action);
+  }
+
+  trackPlayerState(index: number, playerState: PlayerState) {
+    return playerState.player.name;
   }
 }

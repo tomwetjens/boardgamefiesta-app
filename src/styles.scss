@@ -22,3 +22,93 @@ body {
     padding-left: 0;
   }
 }
+
+.popover {
+  &.orange {
+    background-color: orange;
+    .arrow:after {
+      border-top-color: orange;
+    }
+
+    .popover-body {
+      color: black;
+    }
+  }
+
+  &.purple {
+    background-color: purple;
+    .arrow:after {
+      border-top-color: purple;
+    }
+
+    .popover-body {
+      color: white;
+    }
+  }
+
+  &.cyan {
+    background-color: cyan;
+    .arrow:after {
+      border-top-color: cyan;
+    }
+
+    .popover-body {
+      color: black;
+    }
+  }
+
+  &.salmon {
+    background-color: salmon;
+    .arrow:after {
+      border-top-color: salmon;
+    }
+
+    .popover-body {
+      color: black;
+    }
+  }
+
+  &.green {
+    background-color: green;
+    .arrow:after {
+      border-top-color: green;
+    }
+
+    .popover-body {
+      color: white;
+    }
+  }
+
+  &.silver {
+    background-color: silver;
+    .arrow:after {
+      border-top-color: silver;
+    }
+
+    .popover-body {
+      color: black
+    }
+  }
+
+  .popover-body {
+    .RED {
+      color: red;
+      font-weight: bold;
+    }
+
+    .BLUE {
+      color: blue;
+      font-weight: bold;
+    }
+
+    .YELLOW {
+      color: yellow;
+      font-weight: bold;
+    }
+
+    .WHITE {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}

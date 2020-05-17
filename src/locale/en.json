@@ -37,10 +37,14 @@
   "cancel": "Cancel",
   "options": "Options",
   "players": "Players",
+  "buy": "Buy",
+  "gwt.routePopover": "This route costs {{cost}} dollars.",
+  "gwt.playerFee": "gets {{fee}} dollars.",
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "MIN_PLAYERS": "You need more players to start the game.",
-    "UNKNOWN_ERROR": "An unknown error occurred."
+    "UNKNOWN_ERROR": "An unknown error occurred.",
+    "NOT_ENOUGH_COWBOYS": "Not enough cowboys"
   },
   "action": {
     "APPOINT_STATION_MASTER": "Appoint a station master",

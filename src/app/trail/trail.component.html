@@ -691,11 +691,11 @@
         <g *ngFor="let possibleMove of possibleMoveElements; index as i" class="possible-move"
            (click)="selectPossibleMove(possibleMove.possibleMove)">
           <ng-template #popoverContent>
-            This route costs ${{possibleMove.possibleMove.cost}}.
-            <ng-container *ngFor="let playerFee of possibleMove.possibleMove.playerFees">
-              {{playerFee.player.user ? playerFee.player.user.username : 'Computer (' + playerFee.player.color + ')'}}
-              gets ${{playerFee.fee}}
-            </ng-container>
+            {{'gwt.routePopover'|translate:{cost: possibleMove.possibleMove.cost} }}
+            <span *ngFor="let playerFee of possibleMove.possibleMove.playerFees">
+              <span [class]="playerFee.player.color">{{table.players[playerFee.player.name].user?.username || 'computer'|translate}}</span>
+              {{'gwt.playerFee'|translate: {fee: playerFee.fee} }}}
+            </span>
           </ng-template>
           <line *ngFor="let line of possibleMove.lines"
                 [attr.x1]="line.x1"
@@ -708,7 +708,7 @@
                 placement="top"
                 triggers="mouseenter:mouseleave"
                 container="body"
-                [ngbPopover]="popoverContent" popoverTitle="Click to choose route"/>
+                [ngbPopover]="popoverContent" [popoverClass]="possibleMove.color"/>
         </g>
       </g>
     </g>

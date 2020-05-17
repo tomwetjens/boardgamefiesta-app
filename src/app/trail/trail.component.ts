@@ -20,7 +20,6 @@ import {
   Hazard,
   Location,
   PlayerColor,
-  PossibleDelivery,
   PossibleMove,
   Space,
   State,
@@ -150,7 +149,7 @@ interface HazardElement {
   hazard: Hazard;
 }
 
-const COLORS = ['green', 'purple', 'brown', 'orange'];
+const COLORS = ['orange', 'purple', 'cyan', 'salmon', 'green', 'silver'];
 
 interface PossibleMoveLine {
   x1: any;
@@ -453,12 +452,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     let colorIndex = 0;
 
     this.possibleMoveElements = this.possibleMoves.map(possibleMove => {
-      const cur = this.state.trail.playerLocations[this.state.player.player.color];
-
-      let prev = cur;
+      let prev = this.state.trail.playerLocations[this.state.player.player.color];
       let prevLocationElement = this.getLocationElement(prev);
 
-      const lines = possibleMove.steps.map(step => {
+      const lines = possibleMove.route.map((step, index) => {
         const locationElement = this.getLocationElement(step);
 
         if (!locationElement) {
@@ -466,11 +463,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           return;
         }
 
+        const spacingFrom = index > 0 ? colorIndex * 4 : 0;
+        const spacingTo = index < possibleMove.route.length - 1 ? colorIndex * 4 : 0;
         const line = {
-          x1: parseFloat(prevLocationElement.getAttribute('x')) + 12,
-          y1: parseFloat(prevLocationElement.getAttribute('y')) + 12,
-          x2: parseFloat(locationElement.getAttribute('x')) + 12,
-          y2: parseFloat(locationElement.getAttribute('y')) + 12
+          x1: parseFloat(prevLocationElement.getAttribute('x')) + 12 + spacingFrom,
+          y1: parseFloat(prevLocationElement.getAttribute('y')) + 12 + spacingFrom,
+          x2: parseFloat(locationElement.getAttribute('x')) + 12 + spacingTo,
+          y2: parseFloat(locationElement.getAttribute('y')) + 12 + spacingTo
         };
 
         prev = step;

@@ -26,7 +26,7 @@
                         (selectAction)="selectAction.emit($event)">
       </app-player-board>
 
-      <div *ngFor="let playerState of state.otherPlayers">
+      <div *ngFor="let playerState of state.otherPlayers; trackBy: trackPlayerState">
         <app-player-board [table]="table" [state]="state" [playerState]="playerState" [readonly]="true">
         </app-player-board>
       </div>

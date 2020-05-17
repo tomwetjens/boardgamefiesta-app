@@ -1,8 +1,8 @@
-<button class="btn btn-primary" *ngIf="canBuy" [disabled]="!canConfirm" (click)="confirm()">Confirm</button>
-
 <app-card *ngFor="let card of cattleMarket.cards"
           [card]="card"
           [ngClass]="{disabled:!isSelected(card) && !canSelectCard(card), selected:isSelected(card), notAvailable:canBuy && !isSelected(card) && !canSelectCard(card)}"
           (click)="selectCard(card)"></app-card>
 
 <app-card-stack [size]="cattleMarket.drawStackSize" [emptyType]="'CATTLE'"></app-card-stack>
+
+<button class="btn btn-primary" *ngIf="canBuy" [disabled]="!canConfirm" (click)="confirm()">{{'buy'|translate}}</button>

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, Card, CattleCard, CattleType, Table, PlayerState, State, Worker} from '../model';
+import {Action, ActionType, Card, CattleCard, CattleType, PlayerState, State, Table, Worker} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../audio.service';
@@ -46,11 +46,12 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
           this.audioService.playSound('coins');
         }
 
-        if (this.isHandChanged(current.hand, previous.hand)) {
-          this.audioService.playSound('card');
-        }
-
-        if (current.discardPile.length !== previous.discardPile.length) {
+        console.log(current.player.color, 'current handSize=', current.handSize, 'previous handSize=', previous.handSize);
+        if ((current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
+          // Or in case of other player, where hand is not known
+          || current.handSize != previous.handSize
+          // Or when gaining a card
+          || current.discardPile.length != previous.discardPile.length) {
           this.audioService.playSound('card');
         }
 
