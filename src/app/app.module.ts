@@ -36,6 +36,7 @@ import {MessageDialogComponent} from './message-dialog/message-dialog.component'
 import {LogComponent} from './log/log.component';
 import {TestComponent} from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PlayerNameComponent } from './player-name/player-name.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ProfileComponent } from './profile/profile.component';
     MessageDialogComponent,
     LogComponent,
     TestComponent,
-    ProfileComponent
+    ProfileComponent,
+    PlayerNameComponent
   ],
   imports: [
     BrowserModule,

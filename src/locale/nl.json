@@ -35,8 +35,26 @@
   "options": "Opties",
   "players": "Spelers",
   "buy": "Kopen",
-  "gwt.routePopover": "Deze route kost {{cost}} dollar.",
-  "gwt.playerFee": "krijgt {{fee}} dollar.",
+  "gwt": {
+    "popover": {
+      "route": "Deze route kost {{cost}} dollar.",
+      "playerFee": "krijgt {{fee}} dollar.",
+      "cattleCard": "Dit is een {{type}} runderkaart met fokwaarde {{breedingValue}} en is {{points}} punten waard.",
+      "objectiveCard": "Deze doelkaart is {{points}} punten waard. Wanneer je hem speelt mag je: {{action}}. Als je niet alle doelen behaalt, dan krijg je {{penalty}} minpunten."
+    },
+    "cattleType": {
+      "JERSEY": "Jersey",
+      "GUERNSEY": "Guernsey",
+      "BLACK_ANGUS": "Black Angus",
+      "DUTCH_BELT": "Dutch Belt",
+      "HOLSTEIN": "Holstein",
+      "BROWN_SWISS": "Brown Swiss",
+      "AYRSHIRE": "Ayrshire",
+      "WEST_HIGHLAND": "West Highland",
+      "TEXAS_LONGHORN": "Texas Longhorn"
+    }
+  },
+
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",

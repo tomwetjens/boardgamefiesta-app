@@ -38,8 +38,25 @@
   "options": "Options",
   "players": "Players",
   "buy": "Buy",
-  "gwt.routePopover": "This route costs {{cost}} dollars.",
-  "gwt.playerFee": "gets {{fee}} dollars.",
+  "gwt": {
+    "popover": {
+      "route": "This route costs {{cost}} dollars.",
+      "playerFee": "gets {{fee}} dollars.",
+      "cattleCard": "This is a {{type}} cattle card with breeding value {{breedingValue}} and worth {{points}} points.",
+      "objectiveCard": "This is an Objective Card that is worth {{points}} points. When played the player may: {{action}}. If not completed, the player will lose {{penalty}} points."
+    },
+    "cattleType": {
+      "JERSEY": "Jersey",
+      "GUERNSEY": "Guernsey",
+      "BLACK_ANGUS": "Black Angus",
+      "DUTCH_BELT": "Dutch Belt",
+      "HOLSTEIN": "Holstein",
+      "BROWN_SWISS": "Brown Swiss",
+      "AYRSHIRE": "Ayrshire",
+      "WEST_HIGHLAND": "West Highland",
+      "TEXAS_LONGHORN": "Texas Longhorn"
+    }
+  },
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "MIN_PLAYERS": "You need more players to start the game.",
