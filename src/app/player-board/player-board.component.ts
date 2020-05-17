@@ -46,7 +46,6 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
           this.audioService.playSound('coins');
         }
 
-        console.log(current.player.color, 'current handSize=', current.handSize, 'previous handSize=', previous.handSize);
         if ((current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
           // Or in case of other player, where hand is not known
           || current.handSize != previous.handSize
