@@ -48,8 +48,8 @@ export class UserService {
     this.oauthService.logOut();
   }
 
-  findByUsername(username: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(environment.apiBaseUrl + '/users', {params: {username}});
+  find(q: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(environment.apiBaseUrl + '/users', {params: {q}});
   }
 
   isLoggedIn(): Observable<boolean> {

@@ -684,8 +684,15 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectSpace(space: Space) {
-    return SELECT_SPACE_ACTIONS.includes(this.selectedAction);
-      // this.state.possibleSpaces && this.state.possibleSpaces.some(possibleSpace => space.turnout ? possibleSpace.turnout === space.turnout : possibleSpace.number === space.number);
+    return SELECT_SPACE_ACTIONS.includes(this.selectedAction)
+      && this.state.possibleSpaces
+      && this.state.possibleSpaces.some(possibleSpace => {
+        if ('turnout' in possibleSpace) {
+          return possibleSpace.turnout === space.turnout;
+        } else {
+          return possibleSpace.number === space.number;
+        }
+      });
   }
 
   isSpaceSelected(space: Space): boolean {
@@ -746,5 +753,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   selectPossibleMove(possibleMove: PossibleMove) {
     this.performMove(possibleMove.steps);
+  }
+
+  get Math() {
+    return Math;
   }
 }

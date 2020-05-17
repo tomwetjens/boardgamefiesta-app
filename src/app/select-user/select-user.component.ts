@@ -33,7 +33,7 @@ export class SelectUserComponent implements OnInit {
 
     this.searching = true;
 
-    this.userService.findByUsername(this.text)
+    this.userService.find(this.text)
       .pipe(tap(() => this.searching = false))
       .subscribe(users => this.users.next(users));
   }

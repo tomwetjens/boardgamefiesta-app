@@ -1,5 +1,5 @@
 {
-  "appName": "Board Games",
+  "appName": "Board Game Fiesta",
   "welcome": "Welcome",
   "home": "Play",
   "games": "Games",
@@ -35,6 +35,8 @@
   "connected": "connected",
   "connecting": "connecting...",
   "cancel": "Cancel",
+  "options": "Options",
+  "players": "Players",
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "MIN_PLAYERS": "You need more players to start the game.",

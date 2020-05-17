@@ -94,27 +94,42 @@
     <section class="container">
       <div class="row">
         <div class="col-3">
-        </div>
-        <div class="col-9">
-          <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
-            <div class="col-12">
-              <div class="card" *ngIf="table.players[playerId] as player">
-                <div class="card-body">
-                  <p>
-                    <img class="avatar" *ngIf="player.user" [src]="player.user.avatarUrl"/>
-                    {{player.user?.username || 'computer'|translate}}
-                  </p>
-                  {{player.status}}
-                  <ng-container *ngIf="playerId !== table.player">
-                    <button class="btn btn-sm btn-danger"
-                            *ngIf="table.players[table.player].user.id === table.owner.id"
-                            (click)="uninvite(player.user)">{{'uninvite'|translate}}</button>
-                  </ng-container>
-                </div>
-              </div>
+          <div class="card">
+            <div class="card-header">
+              {{'options'|translate}}
+            </div>
+            <div class="card-body">
+
             </div>
           </div>
-          <button class="btn btn-secondary" (click)="invite()">{{'invite'|translate}}</button>
+        </div>
+        <div class="col-9">
+          <div class="card">
+            <div class="card-header">
+              {{'players'|translate}}
+            </div>
+            <div class="card-body">
+              <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
+                <div class="col-12">
+                  <div class="card" *ngIf="table.players[playerId] as player">
+                    <div class="card-body">
+                      <p>
+                        <img class="avatar" *ngIf="player.user" [src]="player.user.avatarUrl"/>
+                        {{player.user?.username || 'computer'|translate}}
+                      </p>
+                      {{player.status}}
+                      <ng-container *ngIf="playerId !== table.player">
+                        <button class="btn btn-sm btn-danger"
+                                *ngIf="table.players[table.player].user.id === table.owner.id"
+                                (click)="uninvite(player.user)">{{'uninvite'|translate}}</button>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-secondary" (click)="invite()">{{'invite'|translate}}</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
