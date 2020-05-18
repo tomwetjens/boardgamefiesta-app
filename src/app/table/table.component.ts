@@ -2,7 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Action, ActionType, EventType, PlayerStatus, State, Table, TableStatus, User} from '../model';
+import {Action, ActionType, EventType, PlayerStatus, State, Table, TablePlayer, TableStatus} from '../model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -304,11 +304,19 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(() => this.refreshTable());
   }
 
-  uninvite(user: User) {
+  addComputer() {
     this.table.pipe(
       takeUntil(this.destroyed),
       take(1),
-      switchMap(table => this.tableService.uninvite(table.id, user.id)))
+      switchMap(table => this.tableService.addComputer(table.id)))
+      .subscribe(() => this.refreshTable());
+  }
+
+  kick(player: TablePlayer) {
+    this.table.pipe(
+      takeUntil(this.destroyed),
+      take(1),
+      switchMap(table => this.tableService.kick(table.id, player.id)))
       .subscribe(() => this.refreshTable());
   }
 

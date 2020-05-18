@@ -362,6 +362,7 @@ export enum PlayerStatus {
 }
 
 export interface TablePlayer {
+  readonly id: string;
   readonly type: PlayerType;
   readonly user?: User;
   readonly status: PlayerStatus;

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game, Table, TableType} from '../model';
+import {Game, Table, TableStatus, TableType} from '../model';
 import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
@@ -36,7 +36,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
 
     this.realtimeTables = this.tables.asObservable()
-      .pipe(map(tables => tables.filter(table => table.type === TableType.REALTIME)));
+      .pipe(map(tables => tables
+        .filter(table => table.type === TableType.REALTIME)
+        .filter(table => table.status === TableStatus.NEW || table.status === TableStatus.STARTED)));
 
     this.refreshGames();
     this.refreshTables();

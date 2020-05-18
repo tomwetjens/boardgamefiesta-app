@@ -68,7 +68,12 @@ export class TableService {
     return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/invite', {userId});
   }
 
-  uninvite(id: string, userId: string) {
-    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/uninvite', {userId});
+  kick(id: string, playerId: string) {
+    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/players/' + playerId + '/kick', null);
   }
+
+  addComputer(id: string) {
+    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/' + id + '/add-computer', null);
+  }
+
 }
