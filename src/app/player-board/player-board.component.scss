@@ -153,7 +153,7 @@ app-card {
   }
 }
 
-.btn-buildings {
+.btn-buildings, .btn-buildings:hover {
   width: 40px;
   height: 40px;
   padding: 4px;
@@ -164,7 +164,7 @@ app-card {
   background-origin: padding-box;
 }
 
-.btn-objectives {
+.btn-objectives, .btn-objectives:hover {
   width: 40px;
   height: 40px;
   padding: 4px;

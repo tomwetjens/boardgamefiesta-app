@@ -11,6 +11,8 @@ import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {MessageDialogComponent} from '../message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {SelectUserComponent} from "../select-user/select-user.component";
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -73,7 +75,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
               private tableService: TableService,
               private eventService: EventService,
               private ngbModal: NgbModal,
-              private audioService: AudioService) {
+              private title: Title,
+              private translateService:TranslateService) {
 
   }
 
@@ -83,6 +86,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     this.table
       .pipe(takeUntil(this.destroyed))
       .subscribe(table => {
+        this.title.setTitle(this.translateService.instant('game.' + table.game));
+
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState();
         }
