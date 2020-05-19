@@ -9,15 +9,9 @@ import {UserService} from '../user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router, public userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  logout() {
-    this.userService.logout();
-
-    this.router.navigate(['/']);
   }
 
 }

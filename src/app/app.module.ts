@@ -20,6 +20,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {GwtModule} from './gwt/gwt.module';
 import {SharedModule} from './shared/shared.module';
 import {InGameNavbarComponent} from './shared/in-game-navbar/in-game-navbar.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
+import { AvatarComponent } from './avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {InGameNavbarComponent} from './shared/in-game-navbar/in-game-navbar.comp
     FromNowPipe,
     NavbarComponent,
     LayoutComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserMenuComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,

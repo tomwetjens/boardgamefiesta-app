@@ -1,0 +1,21 @@
+:host {
+  height: 24px;
+}
+
+.dropdown-toggle {
+  border: none;
+
+  &::after {
+    display: none;
+  }
+
+  position: relative;
+  width: 64px;
+  height: 24px;
+
+  app-avatar {
+    position: absolute;
+    top: 0;
+    right: 8px;
+  }
+}
