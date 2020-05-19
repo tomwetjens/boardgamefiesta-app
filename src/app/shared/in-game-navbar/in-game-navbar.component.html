@@ -3,46 +3,47 @@
     <li class="nav-item">
       <a class="btn btn-secondary" [routerLink]="['/']">{{'close'|translate}}</a>&nbsp;
     </li>
-      <li class="nav-item">
-        <a class="btn btn-danger text-light" *ngIf="table.turn" (click)="endTurn.emit()">{{'endTurn'|translate}}</a>&nbsp;
-        <button class="btn btn-warning" *ngIf="canSkip"
-                (click)="skip.emit()">{{'skip'|translate}}</button>&nbsp;
-      </li>
+    <li class="nav-item">
+      <a class="btn btn-danger text-light" *ngIf="table.turn" (click)="endTurn.emit()">{{'endTurn'|translate}}</a>&nbsp;
+      <button class="btn btn-warning" *ngIf="canSkip" (click)="skip.emit()">{{'skip'|translate}}</button>&nbsp;
+    </li>
   </ul>
 
-  <ng-container *ngIf="state as state">
-    <div *ngIf="!state.turn">
-      {{'waitingFor'|translate}}
-      <strong
-        [class]="state.currentPlayer.color">{{table.players[state.currentPlayer.name].user?.username || 'computer'|translate}}</strong>
-    </div>
+  <div *ngIf="!table.turn">
+    {{'waitingFor'|translate}}
+    <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+  </div>
 
-    <div class="actions">
-      <ng-container *ngIf="!selectedAction">
-          <span *ngFor="let actionType of state.actions" [ngSwitch]="actionType">
-              <button *ngSwitchDefault
-                      class="btn btn-secondary" (click)="perform.emit(actionType)"
-                      ngbPopover="{{'action.' + actionType | translate}}"
-                      placement="bottom"
-                      triggers="mouseenter:mouseleave"
-                      container="body">{{actionType}}</button>
-          </span>
-      </ng-container>
+  <div class="actions">
+    <ng-container *ngIf="!selectedAction">
+      <button *ngFor="let action of actions"
+              class="btn btn-light" (click)="perform.emit(action)"
+              ngbPopover="{{'action.' + action | translate}}"
+              placement="bottom"
+              triggers="mouseenter:mouseleave"
+              container="body">
+        {{table.game + '.actions.buttons.' + action|translate}}
+      </button>
+    </ng-container>
 
-      <ng-container *ngIf="selectedAction">
-        {{'action.' + selectedAction | translate}}
-        <button class="btn btn-secondary" *ngIf="state.actions.length > 1" (click)="cancel.emit()">{{'cancel'|translate}}</button>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="selectedAction">
+      {{'action.' + selectedAction | translate}}
 
-    <div class="form-inline">
-          <span *ngIf="table.turn">
-            {{'yourTurn'|translate}}
+      <button *ngIf="state.actions.length > 1"
+              class="btn btn-secondary"
+              (click)="cancel.emit()">
+        {{'cancel'|translate}}
+      </button>
+    </ng-container>
+  </div>
 
-            <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
-          </span>
-      &nbsp;
-      <app-connection-status></app-connection-status>
-    </div>
-  </ng-container>
+  <div class="form-inline">
+    <span *ngIf="table.turn">
+      {{'yourTurn'|translate}}
+
+      <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
+    </span>
+    &nbsp;
+    <app-connection-status></app-connection-status>
+  </div>
 </nav>
