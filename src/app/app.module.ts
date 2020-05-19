@@ -37,6 +37,7 @@ import {LogComponent} from './log/log.component';
 import {TestComponent} from './test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PlayerNameComponent } from './player-name/player-name.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { PlayerNameComponent } from './player-name/player-name.component';
     LogComponent,
     TestComponent,
     ProfileComponent,
-    PlayerNameComponent
+    PlayerNameComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,

@@ -40,8 +40,10 @@
         </div>
 
         <div class="form-inline">
-          <span *ngIf="state.turn">
+          <span *ngIf="table.turn">
             {{'yourTurn'|translate}}
+
+            <app-timer [date]="table.players[table.player].turnLimit"></app-timer>
           </span>
           &nbsp;
           <app-connection-status></app-connection-status>

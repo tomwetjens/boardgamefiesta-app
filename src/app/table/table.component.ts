@@ -124,6 +124,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
             break;
 
           case EventType.STATE_CHANGED:
+            this.refreshTable();
             this.refreshState();
             break;
         }

@@ -1,0 +1,22 @@
+.text {
+  opacity: 1;
+
+  &.danger {
+    color: red;
+  }
+
+  &.warning {
+    color: orange;
+  }
+
+  &.blink {
+    animation: blinker 1s linear infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
