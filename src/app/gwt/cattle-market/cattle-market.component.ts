@@ -3,6 +3,7 @@ import {Action, ActionType, CattleCard, CattleMarket} from '../model';
 import {TableService} from '../../table.service';
 import {AudioService} from '../../audio.service';
 import {Table} from '../../shared/model';
+import {COW} from "../sounds";
 
 @Component({
   selector: 'app-cattle-market',
@@ -52,7 +53,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
 
       if (current && previous) {
         if (current.cards.length !== previous.cards.length) {
-          this.audioService.playSound('cow');
+          this.audioService.playSound(COW);
         }
       }
     }

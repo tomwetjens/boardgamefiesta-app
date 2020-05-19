@@ -5,55 +5,53 @@
     <strong [className]="playerState.player.color">{{table.players[playerState.player.name].user?.username || 'computer'|translate}}</strong>
 
     <img src="/assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
-         [ngbPopover]="'Waiting for player to perform action.'"
-         popoverTitle="Waiting for player"
+         ngbPopover="{{'popover.waitingForPlayer'|translate}}"
          placement="bottom"
          triggers="mouseenter:mouseleave"
          container="body"/>
   </div>
   <div class="col-8">
-    <ng-template #balancePopover>
-      Current balance in dollars.
-    </ng-template>
     <span class="balance"
-          [ngbPopover]="balancePopover"
-          popoverTitle="Balance"
+          ngbPopover="{{'gwt.popover.balance'|translate}}"
           placement="bottom"
           triggers="mouseenter:mouseleave"
           container="body">
       {{playerState.balance}}
     </span>
-    <ng-template #handValuePopover>
-      The breeding values of each <strong>different</strong> type of cattle that you have in hand is counted towards your total breeding value.
-      This means each type is counted only once, no matter how many cards of that type you have.
-    </ng-template>
     <span *ngIf="playerState.handValue" class="hand-value"
-          [ngbPopover]="handValuePopover"
-          popoverTitle="Total breeding value"
+          ngbPopover="{{'gwt.popover.handValue'|translate}}"
           placement="bottom"
           triggers="mouseenter:mouseleave"
           container="body">
       {{playerState.handValue}}
     </span>
-    <ng-template #certificatesPopover>
-      The total number of certificates, both <strong>temporary</strong> certificates as indicated by the marker on the player's board,
-      as any <strong>permanent</strong> certificates the player may have acquired through station master tiles.
-    </ng-template>
     <span class="certificates"
-          [ngbPopover]="certificatesPopover"
-          popoverTitle="Number of certificates"
+          ngbPopover="{{'gwt.popover.certificates'|translate}}"
           placement="bottom"
           triggers="mouseenter:mouseleave"
           container="body">
       {{playerState.certificates}}
     </span>
-    <button class="btn btn-secondary btn-buildings" (click)="showBuildings()" title="Available Buildings"></button>
-    <button class="btn btn-secondary btn-objectives" (click)="showObjectives()" title="Objectives"></button>
+    <button class="btn btn-secondary btn-buildings"
+            (click)="showBuildings()"
+            title="{{'gwt.buildings'|translate}}"
+            ngbPopover="{{'gwt.popover.buildings'|translate}}"
+            placement="bottom"
+            triggers="mouseenter:mouseleave"
+            container="body"></button>
+    <button class="btn btn-secondary btn-objectives"
+            (click)="showObjectives()"
+            title="{{'gwt.objectives'|translate}}"
+            ngbPopover="{{'gwt.popover.objectives'|translate}}"
+            placement="bottom"
+            triggers="mouseenter:mouseleave"
+            container="body"></button>
   </div>
 </div>
 <div class="row no-gutters" *ngIf="playerState.stationMasters.length > 0">
   <div class="col-12">
-    <app-station-master *ngFor="let stationMaster of playerState.stationMasters" [stationMaster]="stationMaster"></app-station-master>
+    <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
+                        [stationMaster]="stationMaster"></app-station-master>
   </div>
 </div>
 <div class="row no-gutters hand" *ngIf="playerState.hand">
@@ -63,32 +61,23 @@
             (click)="selectCard(card)">
   </app-card>
 
-  <ng-template #drawStackPopover>
-    The stack of cards from which new cards are drawn and added to your hand.
-    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
-  </ng-template>
   <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
-                  [emptyType]="'CATTLE'"
-                  [ngbPopover]="drawStackPopover"
-                  popoverTitle="Draw stack"
+                  emptyType="CATTLE"
+                  ngbPopover="{{'gwt.popover.drawStack'|translate}}"
                   placement="bottom"
                   triggers="mouseenter:mouseleave"
                   container="body"></app-card-stack>
 
-  <ng-template #discardPilePopover>
-    The cards that have been discarded.
-    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
-  </ng-template>
   <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
-                  [emptyType]="'CATTLE'"
-                  [ngbPopover]="discardPilePopover"
-                  popoverTitle="Draw stack"
+                  emptyType="CATTLE"
+                  ngbPopover="{{'gwt.popover.discardPile'|translate}}"
                   placement="bottom"
                   triggers="mouseenter:mouseleave"
                   container="body"></app-card-stack>
 </div>
 <div class="row no-gutters">
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board" [class]="'' + playerState.player.color">
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board"
+       [class]="'' + playerState.player.color">
     <defs>
       <clipPath id="tileclip">
         <rect rx="6" ry="6" width="33" height="39"/>

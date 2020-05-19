@@ -18,6 +18,7 @@ import {
   Building,
   City,
   Hazard,
+  HazardType,
   Location,
   PossibleMove,
   Space,
@@ -31,6 +32,19 @@ import {ToastrService} from '../../toastr.service';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../../audio.service';
 import {PlayerColor, Table} from '../../shared/model';
+import {
+  AUCTION,
+  BUILDING,
+  COWBOY,
+  CRAFTSMAN,
+  DROUGHT,
+  ENGINEER,
+  FLOOD,
+  INDIANS,
+  MOVE,
+  ROCKFALL,
+  TRAIN
+} from "../sounds";
 
 const SELECT_SPACE_ACTIONS = [
   ActionType.MOVE_ENGINE_1_FORWARD,
@@ -70,7 +84,12 @@ const HAZARD_ACTIONS = [
   ActionType.REMOVE_HAZARD_FOR_5_DOLLARS
 ];
 
-const WORKER_ACTIONS = [ActionType.HIRE_WORKER, ActionType.HIRE_WORKER_PLUS_2, ActionType.HIRE_WORKER_MINUS_1, ActionType.HIRE_WORKER_MINUS_2];
+const WORKER_ACTIONS = [
+  ActionType.HIRE_WORKER,
+  ActionType.HIRE_WORKER_PLUS_2,
+  ActionType.HIRE_WORKER_MINUS_1,
+  ActionType.HIRE_WORKER_MINUS_2
+];
 
 const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_INDIANS];
 
@@ -257,8 +276,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const currentSpace = current.railroadTrack.players[color] as Space;
           const previousSpace = previous.railroadTrack.players[color] as Space;
 
-          if (currentSpace && (currentSpace.number !== previousSpace.number || currentSpace.turnout !== previousSpace.turnout)) {
-            this.audioService.playSound('train');
+          if (currentSpace
+            && (currentSpace.number !== previousSpace.number
+              || currentSpace.turnout !== previousSpace.turnout)) {
+            this.audioService.playSound(TRAIN);
           }
         }
 
@@ -269,19 +290,20 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           if (currentLocation.building && previousLocation.building) {
             if (currentLocation.building.name !== previousLocation.building.name) {
               // upgrade
-              this.audioService.playSound('building');
+              this.audioService.playSound(BUILDING);
             }
           } else if (currentLocation.building !== previousLocation.building) {
             // build
-            this.audioService.playSound('building');
+            this.audioService.playSound(BUILDING);
           }
 
           if (previousLocation.hazard && !currentLocation.hazard) {
-            this.audioService.playSound(previousLocation.hazard.type.toLowerCase());
+            this.audioService.playSound(currentLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
+              : currentLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
           }
 
           if (previousLocation.teepee && !currentLocation.teepee) {
-            this.audioService.playSound('indians');
+            this.audioService.playSound(INDIANS);
           }
         }
 
@@ -291,9 +313,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
           if (currentLocation !== previousLocation) {
             if (currentLocation === 'KANSAS_CITY') {
-              this.audioService.playSound('auction');
+              this.audioService.playSound(AUCTION);
             } else if (currentLocation !== 'START') {
-              this.audioService.playSound('move');
+              this.audioService.playSound(MOVE);
             }
           }
         }
@@ -307,11 +329,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               const choice = previousTile;
 
               if (choice.worker) {
-                this.audioService.playSound(choice.worker.toLowerCase());
+                this.audioService.playSound(choice.worker === Worker.COWBOY ? COWBOY
+                  : choice.worker === Worker.CRAFTSMAN ? CRAFTSMAN : ENGINEER);
               } else if (choice.hazard) {
-                this.audioService.playSound(choice.hazard.type.toLowerCase());
+                this.audioService.playSound(choice.hazard.type === HazardType.DROUGHT ? DROUGHT
+                  : choice.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
               } else if (choice.teepee) {
-                this.audioService.playSound('indians');
+                this.audioService.playSound(INDIANS);
               }
             }
           }
@@ -576,7 +600,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private canPlaceBuilding(location: Location): boolean {
-    return location.type === 'BUILDING' && (!location.building || (location.building.player && location.building.player.color === this.state.currentPlayer.color));
+    return location.type === 'BUILDING'
+      && (!location.building
+        || (location.building.player
+          && location.building.player.color === this.state.currentPlayer.color));
   }
 
   selectTeepee(reward: number) {
@@ -756,4 +783,5 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   get Math() {
     return Math;
   }
+
 }

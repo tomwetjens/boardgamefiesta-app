@@ -5,6 +5,7 @@ import {Table} from '../../shared/model';
 import {MessageDialogComponent} from '../../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SOUNDS} from "../sounds";
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -69,6 +70,7 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.audioService.preload(SOUNDS);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,7 +80,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
       if (currentState && previousState) {
         if (currentState.turn && !previousState.turn) {
-          this.audioService.playSound('alert');
+          this.audioService.alert();
         }
       }
 

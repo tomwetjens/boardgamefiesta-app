@@ -5,6 +5,7 @@ import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.com
 import {AudioService} from '../../audio.service';
 import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.component';
 import {Table} from '../../shared/model';
+import {CARD, CERTIFICATE, COINS, COWBOY, CRAFTSMAN, ENGINEER} from "../sounds";
 
 @Component({
   selector: 'app-player-board',
@@ -44,31 +45,31 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
 
       if (current && previous) {
         if (current.balance !== previous.balance) {
-          this.audioService.playSound('coins');
+          this.audioService.playSound(COINS);
         }
 
         if ((current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
           // Or in case of other player, where hand is not known
-          || current.handSize != previous.handSize
+          || current.handSize !== previous.handSize
           // Or when gaining a card
-          || current.discardPile.length != previous.discardPile.length) {
-          this.audioService.playSound('card');
+          || current.discardPile.length !== previous.discardPile.length) {
+          this.audioService.playSound(CARD);
         }
 
         if (current.cowboys > previous.cowboys) {
-          this.audioService.playSound('cowboy');
+          this.audioService.playSound(COWBOY);
         }
         if (current.craftsmen > previous.craftsmen) {
-          this.audioService.playSound('craftsman');
+          this.audioService.playSound(CRAFTSMAN);
         }
         if (current.engineers > previous.engineers) {
-          this.audioService.playSound('engineer');
+          this.audioService.playSound(ENGINEER);
         }
 
         // TODO Sound for removing disc
 
         if (current.certificates > previous.certificates) {
-          this.audioService.playSound('certificate');
+          this.audioService.playSound(CERTIFICATE);
         }
       }
     }

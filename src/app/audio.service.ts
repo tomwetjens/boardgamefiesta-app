@@ -3,24 +3,10 @@ import {Howl} from 'howler';
 import {Observable, Subject} from 'rxjs';
 import {flatMap} from 'rxjs/operators';
 
+const ALERT = '/assets/games/gwt/sounds/alert.mp3';
+
 const SOUNDS = [
-  'alert',
-  'cow',
-  'cowboy',
-  'building',
-  'coins',
-  'flood',
-  'train',
-  'move',
-  'card',
-  'engineer',
-  'craftsman',
-  'indians',
-  'certificate',
-  'auction',
-  'disc',
-  'rockfall',
-  'drought'
+  ALERT
 ];
 
 @Injectable({
@@ -28,17 +14,14 @@ const SOUNDS = [
 })
 export class AudioService {
 
-  sounds = SOUNDS.reduce((map, key) => Object.assign(map, {
-    [key]: new Howl({
-      preload: true,
-      src: ['/assets/sounds/' + key + '.mp3']
-    })
-  }), {});
+  private sounds: { [key: string]: Howl } = {};
 
   private queue = new Subject<string>();
 
   constructor() {
     Howler.autoUnlock = true;
+
+    this.preload(SOUNDS);
 
     this.queue
       .pipe(
@@ -61,7 +44,20 @@ export class AudioService {
       ).subscribe();
   }
 
-  playSound(name: string) {
-    this.queue.next(name);
+  preload(uris: string[]) {
+    uris.forEach(uri => {
+      this.sounds[uri] = new Howl({
+        preload: true,
+        src: [uri]
+      });
+    });
+  }
+
+  playSound(uri: string) {
+    this.queue.next(uri);
+  }
+
+  alert() {
+    this.playSound(ALERT);
   }
 }
