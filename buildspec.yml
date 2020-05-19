@@ -15,4 +15,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: dist/gwt-app
+  base-directory: dist/tomsboardgames-app

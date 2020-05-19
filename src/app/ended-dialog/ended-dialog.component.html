@@ -10,7 +10,7 @@
     <tr>
       <th scope="col"></th>
       <th scope="col" *ngFor="let column of columns">
-        <span [class]="column.player.color">{{column.player.user ? column.player.user.username : 'Computer'}}</span>
+        <span [class]="column.player.color">{{table.players[column.player.name].user?.username || 'computer'|translate|titlecase}}</span>
       </th>
     </tr>
     <tr>

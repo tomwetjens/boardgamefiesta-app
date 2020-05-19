@@ -223,6 +223,11 @@ export enum ScoreCategory {
   STATIONS = 'STATIONS'
 }
 
+export interface Score {
+  categories: { [key in ScoreCategory]: number };
+  total: number;
+}
+
 export interface PlayerState {
   readonly player: Player;
   readonly balance: Dollars;
@@ -242,11 +247,8 @@ export interface PlayerState {
   readonly hazards: Hazard[];
   readonly teepees: Teepee[];
   readonly objectives: ObjectiveCard[];
-  readonly score?: {
-    categories: { [key in ScoreCategory]: number };
-    total: number;
-    winner: boolean;
-  };
+  readonly score?: Score;
+  readonly winner?: boolean;
 }
 
 export interface Space {
@@ -366,11 +368,9 @@ export interface TablePlayer {
   readonly type: PlayerType;
   readonly user?: User;
   readonly status: PlayerStatus;
+  readonly turnLimit?: string;
   readonly color?: PlayerColor;
-  readonly score?: {
-    categories: { [key: string]: number };
-    total: number;
-  };
+  readonly score?: number;
   readonly winner?: boolean;
 }
 

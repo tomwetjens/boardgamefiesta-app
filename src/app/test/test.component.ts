@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Action, CattleMarket, CattleType, PlayerColor, State} from '../model';
+import {Action, CattleMarket, CattleType, PlayerColor} from '../model';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -37,7 +37,8 @@ export class TestComponent implements OnInit {
 
   openEndedDialog() {
     const ngbModalRef = this.ngbModal.open(EndedDialogComponent, {backdrop: true, size: 'lg'});
-    ngbModalRef.componentInstance.state = {
+    const componentInstance = ngbModalRef.componentInstance as EndedDialogComponent;
+    componentInstance.state = {
       player: {
         player: {
           name: 'A',
@@ -57,9 +58,9 @@ export class TestComponent implements OnInit {
             BUILDINGS: 13,
             CITIES: -9,
             STATIONS: 20
-          },
-          winner: true
-        }
+          }
+        },
+        winner: true
       },
       otherPlayers: [
         {
@@ -81,9 +82,9 @@ export class TestComponent implements OnInit {
               BUILDINGS: 7,
               CITIES: 0,
               STATIONS: 0
-            },
-            winner: false
-          }
+            }
+          },
+          winner: false
         },
         {
           player: {
@@ -104,9 +105,9 @@ export class TestComponent implements OnInit {
               BUILDINGS: 7,
               CITIES: 0,
               STATIONS: 0
-            },
-            winner: false
-          }
+            }
+          },
+          winner: false
         },
         {
           player: {
@@ -127,11 +128,11 @@ export class TestComponent implements OnInit {
               BUILDINGS: 13,
               CITIES: -9,
               STATIONS: 20
-            },
-            winner: false
-          }
+            }
+          },
+          winner: false
         }
       ]
-    } as State;
+    } as any;
   }
 }

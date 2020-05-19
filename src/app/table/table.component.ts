@@ -6,13 +6,12 @@ import {Action, ActionType, EventType, PlayerStatus, State, Table, TablePlayer, 
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AudioService} from '../audio.service';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {MessageDialogComponent} from '../message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {SelectUserComponent} from "../select-user/select-user.component";
-import {Title} from "@angular/platform-browser";
-import {TranslateService} from "@ngx-translate/core";
+import {SelectUserComponent} from '../select-user/select-user.component';
+import {Title} from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -76,7 +75,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
               private eventService: EventService,
               private ngbModal: NgbModal,
               private title: Title,
-              private translateService:TranslateService) {
+              private translateService: TranslateService) {
 
   }
 
@@ -93,8 +92,16 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         if (table.status === TableStatus.ENDED) {
-          const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
-          ngbModalRef.componentInstance.table = table;
+          this.state
+            .pipe(
+              takeUntil(this.destroyed),
+              take(1))
+            .subscribe(state => {
+              const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
+              const componentInstance = ngbModalRef.componentInstance as EndedDialogComponent;
+              componentInstance.table = table;
+              componentInstance.state = state;
+            });
         }
       });
 
@@ -178,9 +185,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         takeUntil(this.destroyed),
         take(1),
         switchMap(table => this.tableService.perform(table.id, action)))
-      .subscribe(state => {
-        this.selectedAction = null;
-        this.state.next(state);
+      .subscribe(() => {
+        this.refreshState();
       });
   }
 
@@ -190,9 +196,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         takeUntil(this.destroyed),
         take(1),
         switchMap(table => this.tableService.skip(table.id)))
-      .subscribe(state => {
-        this.selectedAction = null;
-        this.state.next(state);
+      .subscribe(() => {
+        this.refreshState();
       });
   }
 
@@ -214,7 +219,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         switchMap(() => this.table),
         take(1),
         switchMap(table => this.tableService.endTurn(table.id)))
-      .subscribe(state => this.state.next(state));
+      .subscribe(() => this.refreshState());
   }
 
   selectAction(actionType: ActionType) {

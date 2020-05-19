@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Player, ScoreCategory, State} from '../model';
+import {Player, ScoreCategory, State, Table} from '../model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 interface Column {
@@ -20,6 +20,7 @@ interface Row {
 })
 export class EndedDialogComponent implements OnInit, OnChanges {
 
+  @Input() table: Table;
   @Input() state: State;
 
   constructor(public ngbActiveModal: NgbActiveModal) {
@@ -44,7 +45,7 @@ export class EndedDialogComponent implements OnInit, OnChanges {
     return [this.state.player, ...this.state.otherPlayers]
       .map(player => ({
         player: player.player,
-        winner: player.score.winner,
+        winner: player.winner,
         total: player.score.total
       }));
   }
