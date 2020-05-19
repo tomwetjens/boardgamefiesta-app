@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {takeUntil} from 'rxjs/operators';
 import {Subject, Subscription, timer} from 'rxjs';
-import moment from "moment";
+import moment from 'moment';
 
 @Component({
   selector: 'app-timer',

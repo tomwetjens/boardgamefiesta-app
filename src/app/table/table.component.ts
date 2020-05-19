@@ -12,8 +12,6 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {SelectUserComponent} from '../select-user/select-user.component';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
-// TODO Move this to GwtModule
-import {Action, ActionType, State} from '../gwt/model';
 
 @Component({
   selector: 'app-table',
@@ -25,7 +23,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   private destroyed = new Subject();
 
   table = new ReplaySubject<Table>(1);
-  state = new ReplaySubject<State>(1);
+  state = new ReplaySubject<any>(1);
 
   constructor(private route: ActivatedRoute,
               private tableService: TableService,
@@ -125,7 +123,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       || table.otherPlayers.some(name => table.players[name].status === PlayerStatus.INVITED);
   }
 
-  perform(table: Table, action: Action) {
+  perform(table: Table, action: any) {
     this.tableService.perform(table.id, action)
       .subscribe(() => {
         this.refreshState();
@@ -149,7 +147,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       takeUntil(this.destroyed),
       take(1),
       switchMap(table => this.tableService.getState(table.id)))
-      .subscribe(state => this.state.next(state as State));
+      .subscribe(state => this.state.next(state));
   }
 
   abandon(table: Table) {

@@ -8,7 +8,7 @@ import {InGameNavbarComponent} from './in-game-navbar/in-game-navbar.component';
 import {ConnectionStatusComponent} from './connection-status/connection-status.component';
 import {TimerComponent} from './timer/timer.component';
 import {MessageDialogComponent} from './message-dialog/message-dialog.component';
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
