@@ -1,0 +1,37 @@
+:host {
+  display: inline-block;
+  width: 56px;
+  height: 68px;
+  border-radius: 8px;
+  background-size: cover;
+
+  &.FLOOD {
+    &.GREEN {
+      background-image: url('src/assets/games/gwt/flood_green.jpg');
+    }
+
+    &.BLACK {
+      background-image: url('src/assets/games/gwt/flood_black.jpg');
+    }
+  }
+
+  &.DROUGHT {
+    &.GREEN {
+      background-image: url('src/assets/games/gwt/drought_green.jpg');
+    }
+
+    &.BLACK {
+      background-image: url('src/assets/games/gwt/drought_black.jpg');
+    }
+  }
+
+  &.ROCKFALL {
+    &.GREEN {
+      background-image: url('src/assets/games/gwt/rockfall_green.jpg');
+    }
+
+    &.BLACK {
+      background-image: url('src/assets/games/gwt/rockfall_black.jpg');
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {User} from '../model';
+import {User} from '../shared/model';
 import {UserService} from '../user.service';
 import {ReplaySubject} from 'rxjs';
 import {tap} from 'rxjs/operators';

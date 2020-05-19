@@ -1,0 +1,54 @@
+<app-in-game-navbar [table]="table"
+                    [state]="state"
+                    [actions]="state.actions"
+                    [canSkip]="canSkip"
+                    [selectedAction]="selectedAction"
+                    (perform)="selectAction($event)"
+                    (skip)="skip.emit($event)"
+                    (endTurn)="doEndTurn()"
+                    (cancel)="selectedAction = null">
+</app-in-game-navbar>
+
+<div class="row no-gutters align-items-start">
+  <div class="col-8">
+    <app-trail [table]="table"
+               [state]="state"
+               [selectedAction]="selectedAction"
+               (perform)="perform.emit($event)">
+    </app-trail>
+
+    <app-objective-cards [objectiveCards]="state.objectiveCards"
+                         [selectedAction]="selectedAction"
+                         (action)="perform.emit($event)">
+    </app-objective-cards>
+
+    <app-cattle-market [table]="table"
+                       [cattleMarket]="state.cattleMarket"
+                       [selectedAction]="selectedAction"
+                       (perform)="perform.emit($event)">
+    </app-cattle-market>
+  </div>
+  <div class="col-4">
+    <app-player-board [table]="table"
+                      [state]="state"
+                      [playerState]="state.player"
+                      [actions]="state.actions"
+                      [selectedAction]="selectedAction"
+                      [readonly]="false"
+                      (perform)="perform.emit($event)"
+                      (selectAction)="selectAction($event)">
+    </app-player-board>
+
+    <div *ngFor="let playerState of state.otherPlayers; trackBy: trackPlayerState">
+      <app-player-board [table]="table"
+                        [state]="state"
+                        [playerState]="playerState"
+                        [readonly]="true">
+      </app-player-board>
+    </div>
+
+    <app-log [table]="table"></app-log>
+  </div>
+</div>
+
+

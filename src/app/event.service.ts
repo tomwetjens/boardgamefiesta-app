@@ -4,7 +4,7 @@ import {environment} from '../environments/environment';
 import {BehaviorSubject, concat, of, Subject, throwError} from 'rxjs';
 import {catchError, distinctUntilChanged, map, retry, switchMap} from 'rxjs/operators';
 import {OAuthService} from 'angular-oauth2-oidc';
-import {Event} from './model';
+import {Event} from './shared/model';
 
 @Injectable({
   providedIn: 'root'

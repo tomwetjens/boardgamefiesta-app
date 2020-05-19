@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {Action, CreateTableRequest, LogEntry, State, Table} from './model';
+import {CreateTableRequest, LogEntry, Table} from './shared/model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -36,7 +36,7 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/reject', null);
   }
 
-  perform(id: string, action: Action): Observable<void> {
+  perform(id: string, action: any): Observable<void> {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/perform', action);
   }
 
@@ -48,8 +48,8 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/end-turn', null);
   }
 
-  getState(id: string): Observable<State> {
-    return this.httpClient.get<State>(environment.apiBaseUrl + '/tables/' + id + '/state');
+  getState<T>(id: string): Observable<T> {
+    return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
   getLog(id: string, date: Date): Observable<LogEntry[]> {

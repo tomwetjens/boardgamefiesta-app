@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from './model';
+import {User} from './shared/model';
 import {Observable, of, ReplaySubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';

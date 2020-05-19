@@ -4,19 +4,13 @@ import {AuthGuard} from './auth.guard';
 import {TableComponent} from './table/table.component';
 import {HomeComponent} from './home/home.component';
 import {LayoutComponent} from './layout/layout.component';
-import {TestComponent} from './test/test.component';
-import {ProfileComponent} from "./profile/profile.component";
-
+import {ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
   {
     path: 'table/:id',
     component: TableComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'test',
-    component: TestComponent
   },
   {
     path: '',

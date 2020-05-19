@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  width: 56px;
+  height: 68px;
+  border-radius: 8px;
+  background-size: cover;
+
+  &.GREEN {
+    background-image: url('src/assets/games/gwt/teepee_green.jpg');
+  }
+  &.BLUE {
+    background-image: url('src/assets/games/gwt/teepee_blue.jpg');
+  }
+}

@@ -1,0 +1,400 @@
+<div class="row no-gutters">
+  <div class="col-4">
+    <span [className]="'color '+ playerState.player.color"></span>
+    <img *ngIf="table.players[playerState.player.name].user" [src]="table.players[playerState.player.name].user.avatarUrl" class="avatar"/>
+    <strong [className]="playerState.player.color">{{table.players[playerState.player.name].user?.username || 'computer'|translate}}</strong>
+
+    <img src="/assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
+         [ngbPopover]="'Waiting for player to perform action.'"
+         popoverTitle="Waiting for player"
+         placement="bottom"
+         triggers="mouseenter:mouseleave"
+         container="body"/>
+  </div>
+  <div class="col-8">
+    <ng-template #balancePopover>
+      Current balance in dollars.
+    </ng-template>
+    <span class="balance"
+          [ngbPopover]="balancePopover"
+          popoverTitle="Balance"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.balance}}
+    </span>
+    <ng-template #handValuePopover>
+      The breeding values of each <strong>different</strong> type of cattle that you have in hand is counted towards your total breeding value.
+      This means each type is counted only once, no matter how many cards of that type you have.
+    </ng-template>
+    <span *ngIf="playerState.handValue" class="hand-value"
+          [ngbPopover]="handValuePopover"
+          popoverTitle="Total breeding value"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.handValue}}
+    </span>
+    <ng-template #certificatesPopover>
+      The total number of certificates, both <strong>temporary</strong> certificates as indicated by the marker on the player's board,
+      as any <strong>permanent</strong> certificates the player may have acquired through station master tiles.
+    </ng-template>
+    <span class="certificates"
+          [ngbPopover]="certificatesPopover"
+          popoverTitle="Number of certificates"
+          placement="bottom"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      {{playerState.certificates}}
+    </span>
+    <button class="btn btn-secondary btn-buildings" (click)="showBuildings()" title="Available Buildings"></button>
+    <button class="btn btn-secondary btn-objectives" (click)="showObjectives()" title="Objectives"></button>
+  </div>
+</div>
+<div class="row no-gutters" *ngIf="playerState.stationMasters.length > 0">
+  <div class="col-12">
+    <app-station-master *ngFor="let stationMaster of playerState.stationMasters" [stationMaster]="stationMaster"></app-station-master>
+  </div>
+</div>
+<div class="row no-gutters hand" *ngIf="playerState.hand">
+  <app-card *ngFor="let card of playerState.hand"
+            [ngClass]="{disabled:!canSelectCard(card)}"
+            [card]="card"
+            (click)="selectCard(card)">
+  </app-card>
+
+  <ng-template #drawStackPopover>
+    The stack of cards from which new cards are drawn and added to your hand.
+    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
+  </ng-template>
+  <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
+                  [emptyType]="'CATTLE'"
+                  [ngbPopover]="drawStackPopover"
+                  popoverTitle="Draw stack"
+                  placement="bottom"
+                  triggers="mouseenter:mouseleave"
+                  container="body"></app-card-stack>
+
+  <ng-template #discardPilePopover>
+    The cards that have been discarded.
+    Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.
+  </ng-template>
+  <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
+                  [emptyType]="'CATTLE'"
+                  [ngbPopover]="discardPilePopover"
+                  popoverTitle="Draw stack"
+                  placement="bottom"
+                  triggers="mouseenter:mouseleave"
+                  container="body"></app-card-stack>
+</div>
+<div class="row no-gutters">
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 448" style="width:100%; height:100%" class="player-board" [class]="'' + playerState.player.color">
+    <defs>
+      <clipPath id="tileclip">
+        <rect rx="6" ry="6" width="33" height="39"/>
+      </clipPath>
+      <g id="COWBOY">
+        <image id="cowboy" href="/assets/games/gwt/cowboy.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+      <g id="CRAFTSMAN">
+        <image href="/assets/games/gwt/craftsman.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+      <g id="ENGINEER">
+        <image href="/assets/games/gwt/engineer.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+        <rect height="39" width="33" rx="6" ry="6"/>
+      </g>
+    </defs>
+    <image [attr.href]="'/assets/games/gwt/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
+           x="0" y="0"
+           height="446" width="800"/>
+
+    <image *ngIf="state.otherPlayers.length > 1"
+           [attr.href]="'/assets/games/gwt/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
+           x="197" y="12"
+           height="110" width="259"/>
+
+    <use xlink:href="#COWBOY" *ngFor="let cowboy of cowboys; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="71" [ngClass]="{disabled:!canSelectCowboy(i)}"
+         (click)="selectCowboy(i)"/>
+
+    <use xlink:href="#CRAFTSMAN" *ngFor="let craftsman of craftsmen; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="113" [ngClass]="{disabled:!canSelectCraftsman(i)}"
+         (click)="selectCraftsman(i)"/>
+
+    <use xlink:href="#ENGINEER" *ngFor="let engineer of engineers; index as i" class="worker"
+         transform="scale(2.2, 2.2)"
+         [attr.x]="122 + (i * 36.7)"
+         [attr.y]="155" [ngClass]="{disabled:!canSelectEngineer(i)}"
+         (click)="selectEngineer(i)"/>
+
+    <rect id="cert_marker_0" *ngIf="playerState.tempCertificates === 0"
+          class="cert-marker disabled"
+          x="744"
+          y="158"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_1" *ngIf="playerState.tempCertificates === 1"
+          class="cert-marker disabled"
+          x="744"
+          y="198"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_2" *ngIf="playerState.tempCertificates === 2"
+          class="cert-marker disabled"
+          x="744"
+          y="239"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_3" *ngIf="playerState.tempCertificates === 3"
+          class="cert-marker disabled"
+          x="744"
+          y="280"
+          width="30"
+          height="30"></rect>
+
+    <rect id="cert_marker_4" *ngIf="playerState.tempCertificates === 4"
+          class="cert-marker disabled"
+          x="744"
+          y="328"
+          width="30"
+          height="30"/>
+
+    <rect id="cert_marker_6" *ngIf="playerState.tempCertificates === 6"
+          class="cert-marker disabled"
+          x="744"
+          y="389"
+          width="30"
+          height="30"/>
+
+    <rect id="aux-dollar"
+          class="action"
+          x="13"
+          y="41"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('GAIN_1_DOLLAR')}"
+          (click)="clickAuxiliaryAction('GAIN_1_DOLLAR')"/>
+
+    <rect id="aux-dollar-2"
+          class="action"
+          x="111"
+          y="41"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('GAIN_2_DOLLARS')}"
+          (click)="clickAuxiliaryAction('GAIN_2_DOLLARS')"/>
+
+    <rect id="aux-draw"
+          class="action"
+          x="13"
+          y="120"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('DRAW_CARD')}"
+          (click)="clickAuxiliaryAction('DRAW_CARD')"/>
+
+    <rect id="aux-draw-2"
+          class="action"
+          x="112"
+          y="120"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('DRAW_CARD') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)}"
+          (click)="clickAuxiliaryAction('DRAW_CARD')"/>
+
+    <rect id="aux-move-engine-backwards"
+          class="action"
+          x="13"
+          y="204"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE')}"
+          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_AND_MOVE_ENGINE_1_BACKWARDS_TO_GAIN_1_CERTIFICATE')"/>
+
+    <rect id="aux-move-engine-backwards-2"
+          class="action"
+          x="114"
+          y="204"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES')}"
+          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES')"/>
+
+    <rect id="aux-move-engine-forward"
+          class="action"
+          x="13"
+          y="288"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD')}"
+          (click)="clickAuxiliaryAction('PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD')"/>
+
+    <rect id="aux-move-engine-forward-2"
+          class="action"
+          x="114"
+          y="288"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD')}"
+          (click)="clickAuxiliaryAction('PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD')"/>
+
+    <rect id="aux-remove-card"
+          class="action"
+          x="13"
+          y="368"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')}"
+          (click)="clickAuxiliaryAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')"/>
+
+    <rect id="aux-remove-card-2"
+          class="action"
+          x="114"
+          y="368"
+          rx="4"
+          ry="4"
+          height="54"
+          width="54"
+          [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')}"
+          (click)="clickAuxiliaryAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')"/>
+
+    <circle id="aux-dollar-2-disc"
+            class="cert-marker"
+            cx="138"
+            cy="67"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_GAIN_DOLLAR', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_GAIN_DOLLAR')"/>
+
+    <circle id="aux-draw-2-disc"
+            class="cert-marker"
+            cx="140"
+            cy="146"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_DRAW_CARD_TO_DISCARD_CARD')"/>
+
+    <circle id="aux-move-engine-backwards-disc"
+            class="cert-marker"
+            cx="42"
+            cy="230"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')"/>
+
+    <circle id="aux-move-engine-backwards-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="230"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT')"/>
+
+    <circle id="aux-move-engine-forward-disc"
+            class="cert-marker"
+            cx="42"
+            cy="314"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_PAY_TO_MOVE_ENGINE_FORWARD'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_PAY_TO_MOVE_ENGINE_FORWARD')"/>
+
+    <circle id="aux-move-engine-forward-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="314"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_PAY_TO_MOVE_ENGINE_FORWARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_PAY_TO_MOVE_ENGINE_FORWARD')"/>
+
+    <circle id="aux-remove-card-disc"
+            class="cert-marker"
+            cx="42"
+            cy="394"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD'), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD')"/>
+
+    <circle id="aux-remove-card-2-disc"
+            class="cert-marker"
+            cx="142"
+            cy="396"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD', 2), disabled: !canUnlockWhite}"
+            (click)="unlock('AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD')"/>
+
+    <circle id="step-limit-dollars-disc"
+            class="cert-marker"
+            cx="282"
+            cy="70"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_STEP_DOLLARS'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_STEP_DOLLARS')"/>
+
+    <circle id="step-limit-points-disc"
+            class="cert-marker"
+            cx="342"
+            cy="70"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_STEP_POINTS'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_STEP_POINTS')"/>
+
+    <circle id="extra-card-1-disc"
+            class="cert-marker"
+            cx="674"
+            cy="72"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_CARD'), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_CARD')"/>
+
+    <circle id="extra-card-2-disc"
+            class="cert-marker"
+            cx="758"
+            cy="72"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('EXTRA_CARD', 2), disabled: !canUnlockBlack}"
+            (click)="unlock('EXTRA_CARD')"/>
+
+    <circle id="cert-limit-4-disc"
+            class="cert-marker"
+            cx="761"
+            cy="346"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_4'), disabled: !canUnlockWhite}"
+            (click)="unlock('CERT_LIMIT_4')"/>
+
+    <circle id="cert-limit-6-disc"
+            class="cert-marker"
+            cx="761"
+            cy="404"
+            r="25"
+            [ngClass]="{unlocked: hasUnlocked('CERT_LIMIT_6'), disabled: !canUnlockBlack}"
+            (click)="unlock('CERT_LIMIT_6')"/>
+  </svg>
+</div>

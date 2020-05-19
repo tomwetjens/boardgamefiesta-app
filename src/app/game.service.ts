@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Game, LogEntry, LogEntryType} from './model';
+import {Game, LogEntry, LogEntryType} from './shared/model';
 import {Observable} from 'rxjs';
 import {environment} from '../environments/environment';
-import {TranslateService} from "@ngx-translate/core";
-import {GameSpecific} from "./api";
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +39,10 @@ export class GameService {
         }
       default:
         return this.translateService.instant('log.' + logEntry.type, {
-            value1: logEntry.parameters[0],
-            value2: logEntry.parameters[1],
-            value3: logEntry.parameters[2],
-          });
+          value1: logEntry.parameters[0],
+          value2: logEntry.parameters[1],
+          value3: logEntry.parameters[2],
+        });
     }
   }
 }

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game, Table, TableStatus, TableType} from '../model';
+import {Game, Table, TableStatus, TableType} from '../shared/model';
 import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
