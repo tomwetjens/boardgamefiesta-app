@@ -1,10 +1,13 @@
 :host {
+  display: inline-block;
   position: relative;
-  line-height: 120px;
 }
 
 app-card {
   float:left;
+
+  max-width: 100%;
+  max-height: 100%;
 
   @for $i from 2 through 100 {
     &:nth-child(#{$i}) {
@@ -17,7 +20,7 @@ app-card {
   position: absolute;
   top: 0;
   right: 0;
-  width: 80px;
+  width: 100%;
 
   text-align: center;
   vertical-align: middle;

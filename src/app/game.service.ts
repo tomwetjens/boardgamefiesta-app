@@ -18,23 +18,24 @@ export class GameService {
     return this.httpClient.get<Game[]>(environment.apiBaseUrl + '/games');
   }
 
-  translate(logEntry: LogEntry) {
+  translate(game: string, logEntry: LogEntry) {
     switch (logEntry.type) {
       case LogEntryType.IN_GAME_EVENT:
         // TODO Extract this to GWT specific logic
         switch (logEntry.parameters[0]) {
           case 'ACTION':
-            return this.translateService.instant('log.' + logEntry.parameters[0] + '.' + logEntry.parameters[1],
+            return this.translateService.instant('gwt.log.action.' + logEntry.parameters[1],
               {
-                value1: logEntry.parameters[2],
-                value2: logEntry.parameters[3],
+                value1: this.translateValue(logEntry.parameters[2]),
+                value2: this.translateValue(logEntry.parameters[3]),
+                value3: this.translateValue(logEntry.parameters[4])
               });
           default:
-            return this.translateService.instant('log.' + logEntry.parameters[0],
+            return this.translateService.instant('gwt.log.' + logEntry.parameters[0],
               {
-                value1: logEntry.parameters[1],
-                value2: logEntry.parameters[2],
-                value3: logEntry.parameters[3],
+                value1: this.translateValue(logEntry.parameters[1]),
+                value2: this.translateValue(logEntry.parameters[2]),
+                value3: this.translateValue(logEntry.parameters[3])
               });
         }
       default:
@@ -44,5 +45,11 @@ export class GameService {
           value3: logEntry.parameters[2],
         });
     }
+  }
+
+  private translateValue(value: string) {
+    const key = 'gwt.log.values.' + value;
+    const translated = this.translateService.instant(key);
+    return translated !== key ? translated : value;
   }
 }

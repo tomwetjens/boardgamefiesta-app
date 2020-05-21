@@ -1,7 +1,8 @@
 <ng-container *ngIf="table | async as table">
-  <ng-container *ngIf="state | async as state" [ngSwitch]="table.status">
+  <ng-container [ngSwitch]="table.status">
     <ng-container *ngSwitchCase="'STARTED'">
-      <app-board [table]="table"
+      <app-board *ngIf="state | async as state"
+                 [table]="table"
                  [state]="state"
                  (perform)="perform(table, $event)"
                  (skip)="skip(table)"

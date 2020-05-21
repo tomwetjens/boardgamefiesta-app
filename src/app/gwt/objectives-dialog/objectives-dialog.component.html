@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    {{'gwt.objectives'|translate}}
+    {{'gwt.objectivesDialog'|translate}}
   </h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
@@ -12,6 +12,9 @@
   <app-hazard *ngFor="let hazard of playerState.hazards" [hazard]="hazard"></app-hazard>
 
   <app-teepee *ngFor="let teepee of playerState.teepees" [teepee]="teepee"></app-teepee>
+
+  <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
+                      [stationMaster]="stationMaster"></app-station-master>
 </div>
 <div class="modal-footer">
 </div>

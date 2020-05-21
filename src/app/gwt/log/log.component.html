@@ -1,10 +1,9 @@
 <div *ngFor="let logEntry of logEntries" [ngSwitch]="logEntry.type">
   <span class="timestamp">{{logEntry.timestamp | date:'mediumTime'}}</span>&nbsp;
-  <span class="player" [class]="logEntry.player?.color">{{logEntry.player ? (logEntry.player.user?.username || 'computer'|translate) : logEntry.user.username}}:</span>&nbsp;
-  <span *ngSwitchCase="'IN_GAME_EVENT'">
-      {{gameService.translate(logEntry)}}
+  <span class="player" [class]="logEntry.player?.color">
+    {{logEntry.player ? (logEntry.player.user?.username || 'computer'|translate) : logEntry.user.username}}:
   </span>
-  <span *ngSwitchDefault>
-      {{'log.' + logEntry.type | translate:{value1: logEntry.parameters[0] || '', value2: logEntry.parameters[1] || '', value3: logEntry.parameters[2] || ''} }}
-    </span>
+  <span class="message">&nbsp;
+    {{gameService.translate(table.game, logEntry)}}
+  </span>
 </div>

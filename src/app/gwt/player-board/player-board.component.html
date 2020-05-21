@@ -46,12 +46,12 @@
             placement="bottom"
             triggers="mouseenter:mouseleave"
             container="body"></button>
-  </div>
-</div>
-<div class="row no-gutters" *ngIf="playerState.stationMasters.length > 0">
-  <div class="col-12">
-    <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
-                        [stationMaster]="stationMaster"></app-station-master>
+    <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
+                    emptyType="CATTLE"
+                    ngbPopover="{{'gwt.popover.drawStack'|translate}}"
+                    placement="bottom"
+                    triggers="mouseenter:mouseleave"
+                    container="body"></app-card-stack>
   </div>
 </div>
 <div class="row no-gutters hand" *ngIf="playerState.hand">
@@ -60,13 +60,6 @@
             [card]="card"
             (click)="selectCard(card)">
   </app-card>
-
-  <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
-                  emptyType="CATTLE"
-                  ngbPopover="{{'gwt.popover.drawStack'|translate}}"
-                  placement="bottom"
-                  triggers="mouseenter:mouseleave"
-                  container="body"></app-card-stack>
 
   <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
                   emptyType="CATTLE"
