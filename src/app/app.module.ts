@@ -12,16 +12,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SelectUserComponent} from './select-user/select-user.component';
 import {FormsModule} from '@angular/forms';
 import {ToastrComponent} from './toastr/toastr.component';
-import {FromNowPipe} from './from-now.pipe';
 import {HttpInterceptorService} from './http-interceptor.service';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LayoutComponent} from './layout/layout.component';
 import {ProfileComponent} from './profile/profile.component';
 import {GwtModule} from './gwt/gwt.module';
 import {SharedModule} from './shared/shared.module';
-import {InGameNavbarComponent} from './shared/in-game-navbar/in-game-navbar.component';
-import { UserMenuComponent } from './user-menu/user-menu.component';
-import { AvatarComponent } from './avatar/avatar.component';
+import {UserMenuComponent} from './user-menu/user-menu.component';
+import {AvatarComponent} from './avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +28,6 @@ import { AvatarComponent } from './avatar/avatar.component';
     HomeComponent,
     SelectUserComponent,
     ToastrComponent,
-    FromNowPipe,
     NavbarComponent,
     LayoutComponent,
     ProfileComponent,
@@ -54,9 +51,6 @@ import { AvatarComponent } from './avatar/avatar.component';
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
     {provide: OAuthStorage, useFactory: () => localStorage}
-  ],
-  exports: [
-    InGameNavbarComponent
   ],
   bootstrap: [AppComponent]
 })

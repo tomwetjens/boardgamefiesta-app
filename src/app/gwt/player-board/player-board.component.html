@@ -1,8 +1,12 @@
 <div class="row no-gutters">
-  <div class="col-4">
+  <div class="col-4" *ngIf="table.players[playerState.player.name] as player">
     <span [className]="'color '+ playerState.player.color"></span>
-    <img *ngIf="table.players[playerState.player.name].user" [src]="table.players[playerState.player.name].user.avatarUrl" class="avatar"/>
-    <strong [className]="playerState.player.color">{{table.players[playerState.player.name].user?.username || 'computer'|translate}}</strong>
+
+    <img *ngIf="player.user" [src]="player.user.avatarUrl" class="avatar"/>
+
+    <app-player-name [player]="player"></app-player-name>
+
+    <app-rating *ngIf="player.rating" [rating]="player.rating"></app-rating>
 
     <img src="/assets/hourglass.gif" class="hourglass" *ngIf="state.currentPlayer.color === playerState.player.color"
          ngbPopover="{{'popover.waitingForPlayer'|translate}}"

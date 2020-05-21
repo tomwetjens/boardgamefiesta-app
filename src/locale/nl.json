@@ -11,6 +11,7 @@
   "preferences": "Voorkeuren",
   "username": "Gebruikersnaam",
   "language": "Taal",
+  "lastSeen": "Laatst gezien",
   "email": "E-mail",
   "save": "Opslaan",
   "notStarted": "Wachten op spelers",
@@ -35,6 +36,7 @@
   "players": "Spelers",
   "addComputer": "Voeg computer toe",
   "buy": "Kopen",
+  "ago": "geleden",
   "popover": {
     "waitingForPlayer":  "Wachten tot deze speler een actie uitvoert."
   },

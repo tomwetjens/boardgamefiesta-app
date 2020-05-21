@@ -41,6 +41,8 @@
   "popover": {
     "waitingForPlayer": "Waiting for this player to perform an action."
   },
+  "lastSeen": "Last seen",
+  "ago": "ago",
   "gwt": {
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",

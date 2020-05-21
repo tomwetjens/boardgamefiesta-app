@@ -39,6 +39,7 @@ export interface TablePlayer {
   readonly type: PlayerType;
   readonly user?: User;
   readonly status: PlayerStatus;
+  readonly rating?: number;
   readonly turnLimit?: string;
   readonly color?: PlayerColor;
   readonly score?: number;

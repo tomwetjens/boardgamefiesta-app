@@ -1,8 +1,7 @@
 <div *ngFor="let logEntry of logEntries" [ngSwitch]="logEntry.type">
   <span class="timestamp">{{logEntry.timestamp | date:'mediumTime'}}</span>&nbsp;
-  <span class="player" [class]="logEntry.player?.color">
-    {{logEntry.player ? (logEntry.player.user?.username || 'computer'|translate) : logEntry.user.username}}:
-  </span>
+  <app-player-name *ngIf="logEntry.player" [player]="logEntry.player"></app-player-name>
+  <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
   <span class="message">&nbsp;
     {{gameService.translate(table.game, logEntry)}}
   </span>

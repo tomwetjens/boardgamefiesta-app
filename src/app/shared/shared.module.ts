@@ -9,6 +9,11 @@ import {ConnectionStatusComponent} from './connection-status/connection-status.c
 import {TimerComponent} from './timer/timer.component';
 import {MessageDialogComponent} from './message-dialog/message-dialog.component';
 import {RouterModule} from '@angular/router';
+import {UserPopoverComponent} from './user-popover/user-popover.component';
+import {UserNameComponent} from './user-name/user-name.component';
+import {RatingComponent} from './rating/rating.component';
+import {FromNowPipe} from './from-now.pipe';
+import {AgoPipe} from "./ago.pipe";
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import {RouterModule} from '@angular/router';
     PlayerNameComponent,
     InGameNavbarComponent,
     MessageDialogComponent,
-    TimerComponent
+    UserPopoverComponent,
+    TimerComponent,
+    UserNameComponent,
+    RatingComponent,
+    FromNowPipe,
+    AgoPipe
   ],
   imports: [
     CommonModule,
@@ -29,7 +39,11 @@ import {RouterModule} from '@angular/router';
     ConnectionStatusComponent,
     MessageDialogComponent,
     PlayerNameComponent,
-    InGameNavbarComponent
+    InGameNavbarComponent,
+    UserNameComponent,
+    RatingComponent,
+    FromNowPipe,
+    AgoPipe
   ]
 })
 export class SharedModule {
