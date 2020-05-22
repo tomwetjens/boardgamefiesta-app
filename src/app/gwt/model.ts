@@ -328,6 +328,7 @@ export interface State {
   readonly railroadTrack: RailroadTrack;
   readonly trail: Trail;
   readonly turn: boolean;
+  readonly ended: boolean;
   readonly possibleMoves?: PossibleMove[];
   readonly possibleBuys?: PossibleBuy[];
   readonly possibleDeliveries?: PossibleDelivery[];

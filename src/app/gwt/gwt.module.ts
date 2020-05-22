@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {BoardComponent} from './board/board.component';
+import {GwtBoardComponent} from './board/gwt-board.component';
 import {CardComponent} from './card/card.component';
 import {CardStackComponent} from './card-stack/card-stack.component';
 import {CattleMarketComponent} from './cattle-market/cattle-market.component';
@@ -18,11 +18,12 @@ import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {LogComponent} from './log/log.component';
 import {TrailComponent} from './trail/trail.component';
-import {SharedModule} from "../shared/shared.module";
+import {SharedModule} from '../shared/shared.module';
+import {GAME} from '../shared/api';
 
 @NgModule({
   declarations: [
-    BoardComponent,
+    GwtBoardComponent,
     CardComponent,
     CardStackComponent,
     CattleMarketComponent,
@@ -46,7 +47,10 @@ import {SharedModule} from "../shared/shared.module";
     SharedModule
   ],
   exports: [
-    BoardComponent
+    GwtBoardComponent
+  ],
+  providers: [
+    {provide: GAME, useValue: {id: 'gwt', boardComponent: GwtBoardComponent}, multi: true}
   ]
 })
 export class GwtModule {

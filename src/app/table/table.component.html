@@ -1,94 +1,98 @@
 <ng-container *ngIf="table | async as table">
-  <ng-container [ngSwitch]="table.status">
-    <ng-container *ngSwitchCase="'STARTED'">
-      <app-board *ngIf="state | async as state"
-                 [table]="table"
-                 [state]="state"
-                 (perform)="perform(table, $event)"
-                 (skip)="skip(table)"
-                 (endTurn)="endTurn(table)">
-      </app-board>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <app-navbar></app-navbar>
+  <ng-container *ngIf="table.status === 'STARTED' || table.status === 'ENDED'; else lobby">
+    <app-board-factory *ngIf="state | async as state"
+               [table]="table"
+               [state]="state"
+               (perform)="perform(table, $event)"
+               (skip)="skip(table)"
+               (endTurn)="endTurn(table)">
+    </app-board-factory>
+  </ng-container>
+  <ng-template #lobby>
+    <app-navbar></app-navbar>
 
-      <section class="container">
-        <div class="jumbotron">
-          <h5>{{'game.' + table.game|translate}}</h5>
-          <hr class="my-4">
-          <p>
-            <img src="/assets/games/{{table.game}}/box.jpg" class="box"/>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua.
-          </p>
-          <p class="lead">
-            <ng-container [ngSwitch]="table.players[table.player].user.id === table.owner.id">
-              <ng-container *ngSwitchCase="true">
-                <button class="btn btn-lg btn-primary" (click)="start(table)">{{'start'|translate}}</button>&nbsp;
-                <button class="btn btn-sm btn-danger" (click)="abandon(table)">{{'abandon'|translate}}</button>&nbsp;
-              </ng-container>
-              <ng-container *ngSwitchCase="false">
-              </ng-container>
+    <section class="container">
+      <div class="jumbotron">
+        <h5>{{'game.' + table.game|translate}}</h5>
+        <hr class="my-4">
+        <p>
+          <img src="/assets/games/{{table.game}}/box.jpg" class="box"/>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore
+          magna aliqua.
+        </p>
+        <p>
+          {{'table.status.' + table.status|translate}}
+        </p>
+        <p class="lead" *ngIf="table.status === 'NEW'">
+          <ng-container [ngSwitch]="table.players[table.player].user.id === table.owner.id">
+            <ng-container *ngSwitchCase="true">
+              <button class="btn btn-lg btn-primary" (click)="start(table)">{{'start'|translate}}</button>&nbsp;
+              <button class="btn btn-sm btn-danger" (click)="abandon(table)">{{'abandon'|translate}}</button>&nbsp;
             </ng-container>
-
-            <ng-container [ngSwitch]="table.accepted">
-              <ng-container *ngSwitchCase="true">
-                <button class="btn btn-secondary" (click)="leave(table)">{{'leave'|translate}}</button>&nbsp;
-              </ng-container>
-              <ng-container *ngSwitchCase="false">
-                <button class="btn btn-lg btn-success" (click)="accept(table)">{{'accept'|translate}}</button>&nbsp;
-                <button class="btn btn-lg btn-danger" (click)="reject(table)">{{'reject'|translate}}</button>
-              </ng-container>
+            <ng-container *ngSwitchCase="false">
             </ng-container>
-          </p>
-        </div>
-      </section>
+          </ng-container>
 
-      <section class="container">
-        <div class="row">
-          <div class="col-3">
-            <div class="card">
-              <div class="card-header">
-                {{'options'|translate}}
-              </div>
-              <div class="card-body">
+          <ng-container [ngSwitch]="table.accepted">
+            <ng-container *ngSwitchCase="true">
+              <button class="btn btn-secondary" (click)="leave(table)">{{'leave'|translate}}</button>&nbsp;
+            </ng-container>
+            <ng-container *ngSwitchCase="false">
+              <button class="btn btn-lg btn-success" (click)="accept(table)">{{'accept'|translate}}</button>&nbsp;
+              <button class="btn btn-lg btn-danger" (click)="reject(table)">{{'reject'|translate}}</button>
+            </ng-container>
+          </ng-container>
+        </p>
+      </div>
+    </section>
 
-              </div>
+    <section class="container">
+      <div class="row">
+        <div class="col-3">
+          <div class="card">
+            <div class="card-header">
+              {{'options'|translate}}
+            </div>
+            <div class="card-body">
+
             </div>
           </div>
-          <div class="col-9">
-            <div class="card">
-              <div class="card-header">
-                {{'players'|translate}}
-              </div>
-              <div class="card-body">
-                <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
-                  <div class="col-12">
-                    <div class="card" *ngIf="table.players[playerId] as player">
-                      <div class="card-body">
-                        <p>
-                          <img class="avatar" *ngIf="player.user" [src]="player.user.avatarUrl"/>
-                          {{player.user?.username || 'computer'|translate|titlecase}}
-                        </p>
-                        {{player.status}}
-                        <ng-container *ngIf="playerId !== table.player">
-                          <button class="btn btn-sm btn-danger"
-                                  *ngIf="table.players[table.player].user.id === table.owner.id"
-                                  (click)="kick(table, player)">{{'uninvite'|translate}}</button>
-                        </ng-container>
-                      </div>
+        </div>
+        <div class="col-9">
+          <div class="card">
+            <div class="card-header">
+              {{'players'|translate}}
+            </div>
+            <div class="card-body">
+              <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
+                <div class="col-12">
+                  <div class="card" *ngIf="table.players[playerId] as player">
+                    <div class="card-body">
+                      <p>
+                        <img class="avatar" *ngIf="player.user" [src]="player.user.avatarUrl"/>
+                        <app-player-name [player]="player"></app-player-name>
+                        <app-rating *ngIf="player.rating" [rating]="player.rating" title="{{'rating'|translate}}"></app-rating>
+                      </p>
+                      {{'player.status.' + player.status|translate}}
+                      <ng-container *ngIf="table.status === 'NEW' && playerId !== table.player">
+                        <button class="btn btn-sm btn-danger"
+                                *ngIf="table.players[table.player].user.id === table.owner.id"
+                                (click)="kick(table, player)">{{'uninvite'|translate}}</button>
+                      </ng-container>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div *ngIf="table.status === 'NEW'">
                 <button class="btn btn-primary" (click)="invite(table)">{{'invite'|translate}}</button>
                 <button class="btn btn-secondary" (click)="addComputer(table)">{{'addComputer'|translate}}</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </ng-container>
-  </ng-container>
+      </div>
+    </section>
+  </ng-template>
 </ng-container>
 

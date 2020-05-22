@@ -9,7 +9,7 @@
     </li>
   </ul>
 
-  <div *ngIf="!table.turn">
+  <div *ngIf="!table.turn && table.currentPlayer">
     {{'waitingFor'|translate}}
     <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
   </div>

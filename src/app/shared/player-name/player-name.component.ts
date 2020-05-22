@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TablePlayer} from '../model';
 
 @Component({
@@ -14,11 +14,6 @@ export class PlayerNameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  @HostBinding('class')
-  get className(): string {
-    return this.player.color.toString();
   }
 
 }

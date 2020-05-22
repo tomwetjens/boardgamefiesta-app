@@ -1,20 +1,20 @@
 <div class="modal-header">
-  <h4 class="modal-title">Scores</h4>
+  <h4 class="modal-title">{{'gwt.endedDialog'|translate}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <table class="table">
+  <table class="table table-sm">
     <thead>
     <tr>
       <th scope="col"></th>
       <th scope="col" *ngFor="let column of columns">
-        <span [class]="column.player.color">{{table.players[column.player.name].user?.username || 'computer'|translate|titlecase}}</span>
+        <app-player-name [player]="column.player"></app-player-name>
       </th>
     </tr>
     <tr>
-      <th scope="col">Total</th>
+      <th scope="col">{{'gwt.score.total'|translate}}</th>
       <th scope="col" *ngFor="let column of columns">
         <span [class]="column.player.color">{{column.total}}</span>
       </th>
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let row of rows">
-      <th scope="row">{{'score.' + row.category|translate}}</th>
+      <th scope="row">{{'gwt.score.' + row.category|translate}}</th>
       <td *ngFor="let score of row.scores">{{score}}</td>
     </tr>
     </tbody>

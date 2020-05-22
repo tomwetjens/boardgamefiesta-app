@@ -43,9 +43,29 @@
   },
   "lastSeen": "Last seen",
   "ago": "ago",
+  "table": {
+    "status": {
+      "NEW": "Waiting for players",
+      "STARTED": "In progress",
+      "ENDED": "Ended",
+      "ABANDONED": "Abandoned"
+    }
+  },
+  "player": {
+    "status": {
+      "INVITED": "Not yet responded",
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Rejected",
+      "PROPOSED_TO_LEAVE": "Proposes to leave",
+      "AGREED_TO_LEAVE": "Agrees to leave",
+      "LEFT": "Left"
+    }
+  },
+  "rating": "Rating",
   "gwt": {
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
+    "endedDialog": "That's all folks!",
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",
@@ -230,6 +250,20 @@
         "UNLOCK_WHITE": "Remove a disc with white corners from your player board",
         "DOWNGRADE_STATION": "Remove a disc from one of your stations"
       }
+    },
+    "score": {
+      "total": "Score",
+      "DOLLARS": "Dollars",
+      "CATTLE_CARDS": "Cattle Cards",
+      "OBJECTIVE_CARDS": "Objective Cards",
+      "STATION_MASTERS": "Station Masters",
+      "WORKERS": "Workers",
+      "HAZARDS": "Hazards",
+      "EXTRA_STEP_POINTS": "Extra Step Points",
+      "JOB_MARKET_TOKEN": "Job Market Token",
+      "BUILDINGS": "Buildings",
+      "CITIES": "Cities",
+      "STATIONS": "Stations"
     }
   },
   "toast": {
@@ -425,18 +459,5 @@
       "UNLOCK_WHITE": "removes a disc from player board",
       "DOWNGRADE_STATION": "downgrades a Station"
     }
-  },
-  "score": {
-    "DOLLARS": "Dollars",
-    "CATTLE_CARDS": "Cattle Cards",
-    "OBJECTIVE_CARDS": "Objective Cards",
-    "STATION_MASTERS": "Station Masters",
-    "WORKERS": "Workers",
-    "HAZARDS": "Hazards",
-    "EXTRA_STEP_POINTS": "Extra Step Points",
-    "JOB_MARKET_TOKEN": "Job Market Token",
-    "BUILDINGS": "Buildings",
-    "CITIES": "Cities",
-    "STATIONS": "Stations"
   }
 }

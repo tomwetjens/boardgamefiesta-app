@@ -40,9 +40,29 @@
   "popover": {
     "waitingForPlayer":  "Wachten tot deze speler een actie uitvoert."
   },
+  "table": {
+    "status": {
+      "NEW": "Wachten op spelers",
+      "STARTED": "Bezig",
+      "ENDED": "Afgelopen",
+      "ABANDONED": "Afgebroken"
+    }
+  },
+  "player": {
+    "status": {
+      "INVITED": "Nog niet gereageerd",
+      "ACCEPTED": "Geaccepteerd",
+      "REJECTED": "Geweigerd",
+      "PROPOSED_TO_LEAVE": "Stelt voor spel te verlaten",
+      "AGREED_TO_LEAVE": "Akkoord om spel te verlaten",
+      "LEFT": "Spel verlaten"
+    }
+  },
+  "rating": "Spelerniveau",
   "gwt": {
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",
+    "endedDialog": "Het is afgelopen!",
     "popover": {
       "balance": "Dollars die de speler op dit moment heeft.",
       "handValue": "De totale fokwaarde van de verschillende soorten runderkaarten die je in je hand hebt is je handwaarde. Elke soort runderkaart wordt maar één keer geteld, ongeacht hoeveel runderkaarten van die soort je in je hand hebt.",
@@ -326,9 +346,22 @@
         "UPGRADE_STATION": "Waardeer treinstation op",
         "USE_ADJACENT_BUILDING": "Lokale actie van aangrenzend gebouw"
       }
+    },
+    "score": {
+      "total": "Score",
+      "DOLLARS": "Dollars",
+      "CATTLE_CARDS": "Runderkaarten",
+      "OBJECTIVE_CARDS": "Doelkaarten",
+      "STATION_MASTERS": "Stationschef tegels",
+      "WORKERS": "Werker",
+      "HAZARDS": "Rampen",
+      "EXTRA_STEP_POINTS": "Extra stap punten",
+      "JOB_MARKET_TOKEN": "Werker markt",
+      "BUILDINGS": "Gebouwen",
+      "CITIES": "Steden",
+      "STATIONS": "Stations"
     }
   },
-
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
@@ -458,18 +491,5 @@
     "UNLOCK_BLACK_OR_WHITE": "Kies een spelersschijf van je spelertableau",
     "UNLOCK_WHITE": "Kies een spelersschijf met witte hoeken van je spelertableau",
     "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"
-  },
-  "score": {
-    "DOLLARS": "Dollars",
-    "CATTLE_CARDS": "Runderkaarten",
-    "OBJECTIVE_CARDS": "Doelkaarten",
-    "STATION_MASTERS": "Stationschef tegels",
-    "WORKERS": "Werker",
-    "HAZARDS": "Rampen",
-    "EXTRA_STEP_POINTS": "Extra stap punten",
-    "JOB_MARKET_TOKEN": "Werker markt",
-    "BUILDINGS": "Gebouwen",
-    "CITIES": "Steden",
-    "STATIONS": "Stations"
   }
 }

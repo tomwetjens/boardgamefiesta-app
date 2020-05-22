@@ -4,8 +4,10 @@ import {AudioService} from '../../audio.service';
 import {Table} from '../../shared/model';
 import {MessageDialogComponent} from '../../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {SOUNDS} from "../sounds";
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {SOUNDS} from '../sounds';
+import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
+import {BoardComponent} from '../../shared/api';
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -50,17 +52,19 @@ const FREE_ACTIONS = [
 ];
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  selector: 'app-gwt-board',
+  templateUrl: './gwt-board.component.html',
+  styleUrls: ['./gwt-board.component.scss']
 })
-export class BoardComponent implements OnInit, OnChanges {
+export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
+
+  private endedDialog: NgbModalRef;
 
   @Input() table: Table;
+
   @Input() state: State;
 
   selectedAction: ActionType;
-
   @Output() perform = new EventEmitter<Action>();
   @Output() skip = new EventEmitter<void>();
   @Output() endTurn = new EventEmitter<void>();
@@ -71,6 +75,10 @@ export class BoardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.audioService.preload(SOUNDS);
+
+    if (this.state) {
+      this.stateChanged(this.state, undefined);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,18 +86,35 @@ export class BoardComponent implements OnInit, OnChanges {
       const currentState = changes.state.currentValue as State;
       const previousState = changes.state.previousValue as State;
 
-      if (currentState && previousState) {
-        if (currentState.turn && !previousState.turn) {
-          this.audioService.alert();
-        }
-      }
+      this.stateChanged(currentState, previousState);
+    }
+  }
 
-      if (this.state.turn
-        && this.state.actions.length === 1
-        && AUTO_SELECTED_ACTIONS.includes(this.state.actions[0])) {
-        this.selectedAction = this.state.actions[0];
-      } else {
-        this.selectedAction = null;
+  private stateChanged(currentState: State, previousState: State) {
+    if (currentState && previousState) {
+      if (currentState.turn && !previousState.turn) {
+        this.audioService.alert();
+      }
+    }
+
+    if (currentState.turn
+      && currentState.actions.length === 1
+      && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
+      this.selectedAction = currentState.actions[0];
+    } else {
+      this.selectedAction = null;
+    }
+
+    if (currentState.ended) {
+      if (!this.endedDialog) {
+        this.endedDialog = this.ngbModal.open(EndedDialogComponent);
+
+        const componentInstance = this.endedDialog.componentInstance as EndedDialogComponent;
+        componentInstance.table = this.table;
+        componentInstance.state = currentState;
+
+        fromPromise(this.endedDialog.result).subscribe(null, null,
+          () => this.endedDialog = null);
       }
     }
   }

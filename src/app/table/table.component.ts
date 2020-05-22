@@ -1,12 +1,11 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
-import {switchMap, take, takeUntil} from 'rxjs/operators';
+import {skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
 import {EventType, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {EndedDialogComponent} from '../gwt/ended-dialog/ended-dialog.component';
 import {MessageDialogComponent} from '../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {SelectUserComponent} from '../select-user/select-user.component';
@@ -21,11 +20,14 @@ import {TranslateService} from '@ngx-translate/core';
 export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   private destroyed = new Subject();
+  private left = new Subject();
+  private leaving = false;
 
   table = new ReplaySubject<Table>(1);
   state = new ReplaySubject<any>(1);
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private tableService: TableService,
               private eventService: EventService,
               private ngbModal: NgbModal,
@@ -45,23 +47,13 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState();
         }
-
-        if (table.status === TableStatus.ENDED) {
-          this.state
-            .pipe(
-              takeUntil(this.destroyed),
-              take(1))
-            .subscribe(state => {
-              const ngbModalRef = this.ngbModal.open(EndedDialogComponent);
-              const componentInstance = ngbModalRef.componentInstance as EndedDialogComponent;
-              componentInstance.table = table;
-              componentInstance.state = state;
-            });
-        }
       });
 
     this.eventService.events
-      .pipe(takeUntil(this.destroyed))
+      .pipe(
+        takeUntil(this.destroyed),
+        takeUntil(this.left),
+        skipWhile(() => this.leaving))
       // TODO Filter on current table
       .subscribe(event => {
         switch (event.type) {
@@ -145,19 +137,39 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   private refreshState() {
     this.table.pipe(
       takeUntil(this.destroyed),
+      takeUntil(this.left),
+      skipWhile(() => this.leaving),
       take(1),
       switchMap(table => this.tableService.getState(table.id)))
       .subscribe(state => this.state.next(state));
   }
 
   abandon(table: Table) {
+    this.leaving = true;
     this.tableService.abandon(table.id)
-      .subscribe();
+      .subscribe(
+        () => {
+          this.left.next(true);
+          this.router.navigate(['/']);
+        },
+        () => {
+          this.leaving = false;
+          this.refreshTable();
+        });
   }
 
   leave(table: Table) {
+    this.leaving = true;
+
     this.tableService.leave(table.id)
-      .subscribe();
+      .subscribe(
+        () => {
+          this.left.next(true);
+          this.router.navigate(['/']);
+        }, () => {
+          this.leaving = false;
+          this.refreshTable();
+        });
   }
 
   invite(table: Table) {
@@ -184,7 +196,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   reject(table: Table) {
     this.tableService.reject(table.id)
-      .subscribe(() => this.refreshTable());
+      .subscribe(() => this.router.navigate(['/']));
   }
 
 }

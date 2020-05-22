@@ -20,6 +20,7 @@ import {GwtModule} from './gwt/gwt.module';
 import {SharedModule} from './shared/shared.module';
 import {UserMenuComponent} from './user-menu/user-menu.component';
 import {AvatarComponent} from './avatar/avatar.component';
+import { BoardFactoryComponent } from './board/board-factory.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {AvatarComponent} from './avatar/avatar.component';
     LayoutComponent,
     ProfileComponent,
     UserMenuComponent,
-    AvatarComponent
+    AvatarComponent,
+    BoardFactoryComponent
   ],
   imports: [
     BrowserModule,

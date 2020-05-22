@@ -1,10 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Player, Table} from '../../shared/model';
+import {Player, Table, TablePlayer} from '../../shared/model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ScoreCategory, State} from '../model';
 
 interface Column {
-  player: Player;
+  player: TablePlayer;
   winner: boolean;
   total: number;
 }
@@ -44,10 +44,10 @@ export class EndedDialogComponent implements OnInit, OnChanges {
 
   get columns(): Column[] {
     return [this.state.player, ...this.state.otherPlayers]
-      .map(player => ({
-        player: player.player,
-        winner: player.winner,
-        total: player.score.total
+      .map(playerState => ({
+        player: this.table.players[playerState.player.name],
+        winner: playerState.winner,
+        total: playerState.score.total
       }));
   }
 
