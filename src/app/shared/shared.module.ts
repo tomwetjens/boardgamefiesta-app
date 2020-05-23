@@ -13,10 +13,12 @@ import {UserPopoverComponent} from './user-popover/user-popover.component';
 import {UserNameComponent} from './user-name/user-name.component';
 import {RatingComponent} from './rating/rating.component';
 import {FromNowPipe} from './from-now.pipe';
-import {AgoPipe} from "./ago.pipe";
+import {AgoPipe} from './ago.pipe';
+import {AvatarComponent} from './avatar/avatar.component';
 
 @NgModule({
   declarations: [
+    AvatarComponent,
     ConnectionStatusComponent,
     PlayerNameComponent,
     InGameNavbarComponent,
@@ -26,7 +28,7 @@ import {AgoPipe} from "./ago.pipe";
     UserNameComponent,
     RatingComponent,
     FromNowPipe,
-    AgoPipe
+    AgoPipe,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import {AgoPipe} from "./ago.pipe";
     TranslateModule.forChild()
   ],
   exports: [
+    AvatarComponent,
     ConnectionStatusComponent,
     MessageDialogComponent,
     PlayerNameComponent,

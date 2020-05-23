@@ -6,6 +6,10 @@
   "game": {
     "gwt": "Great Western Trail"
   },
+  "findUser": "Find User",
+  "usernameOrEmail": "Username or e-mail",
+  "search": "Search",
+  "select": "Select",
   "profile": "Profile",
   "about": "About",
   "preferences": "Preferences",
@@ -63,6 +67,7 @@
   },
   "rating": "Rating",
   "gwt": {
+    "description": "America in the 19th century: You are a rancher and repeatedly herd your cattle from Texas to Kansas City, from where you send them off by train. This earns you money and victory points. Needless to say: Each time you arrive in Kansas City, you want to have your most valuable cattle in tow. This will not only require that you keep your herd in good shape, but also that you effectively utilize the various buildings along the trail. Success will require that you hire capable staff: Cowboys to improve your herd, craftsmen to build your very own buildings and engineers to manage the important railroad line.\n\nIf you cleverly manage your herd and navigate the opportunities and pitfalls of this great western trail, you surely will gain the most victory points and win the game.",
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
     "endedDialog": "That's all folks!",
@@ -264,13 +269,19 @@
       "BUILDINGS": "Buildings",
       "CITIES": "Cities",
       "STATIONS": "Stations"
+    },
+    "option": {
+      "buildings": "Buildings",
+      "beginner": "Beginner",
+      "randomize": "Randomize"
     }
   },
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "MIN_PLAYERS": "You need more players to start the game.",
     "UNKNOWN_ERROR": "An unknown error occurred.",
-    "NOT_ENOUGH_COWBOYS": "Not enough cowboys"
+    "NOT_ENOUGH_COWBOYS": "Not enough cowboys",
+    "ALREADY_INVITED": "This user is already invited to the table."
   },
   "action": {
     "APPOINT_STATION_MASTER": "Appoint a station master",

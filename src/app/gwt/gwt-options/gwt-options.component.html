@@ -1,0 +1,18 @@
+<form>
+  <div class="form-group">
+    <label for="beginner">{{'gwt.option.buildings'|translate}}</label>
+    <div ngbDropdown>
+      <button class="btn btn-outline-primary" id="beginner" ngbDropdownToggle>
+        {{(this.table.options.beginner ? 'gwt.option.beginner' : 'gwt.option.randomize')|translate}}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="beginner">
+        <button ngbDropdownItem (click)="this.table.options.beginner = true; changeOptions.emit(this.table.options)">
+          {{'gwt.option.beginner'|translate}}
+        </button>
+        <button ngbDropdownItem (click)="this.table.options.beginner = false; changeOptions.emit(this.table.options)">
+          {{'gwt.option.randomize'|translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

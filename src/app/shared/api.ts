@@ -1,5 +1,10 @@
 import {EventEmitter, InjectionToken, Type} from '@angular/core';
-import {Table} from './model';
+import {Options, Table} from './model';
+
+export interface OptionsComponent {
+  table: Table;
+  readonly changeOptions: EventEmitter<Options>;
+}
 
 export interface BoardComponent {
   table: Table;
@@ -13,6 +18,7 @@ export interface BoardComponent {
 export interface GameProvider {
   id: string;
   boardComponent: Type<BoardComponent>;
+  optionsComponent?: Type<OptionsComponent>;
 }
 
 export const GAME = new InjectionToken('GAME');

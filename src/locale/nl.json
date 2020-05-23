@@ -6,6 +6,10 @@
   "logout": "Afmelden",
   "accept": "Accepteren",
   "reject": "Weigeren",
+  "findUser": "Gebruiker vinden",
+  "usernameOrEmail": "Gebruikersnaam of e-mailadres",
+  "search": "Zoeken",
+  "select": "Selecteer",
   "profile": "Profiel",
   "about": "Over mij",
   "preferences": "Voorkeuren",
@@ -60,6 +64,7 @@
   },
   "rating": "Spelerniveau",
   "gwt": {
+    "description": "Strategische runderhandel in het Amerika van de 19e eeuw Uitdagend bordspel vol moeilijke beslissingen en strategische variatie. Drijf jouw kudde runderen van Texas naar Kansas City. Houd je dieren in goede conditie, benut de gebouwen op de route verstandig en huur cowboys, ambachtslieden en ingenieurs in.",
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",
     "endedDialog": "Het is afgelopen!",
@@ -360,12 +365,18 @@
       "BUILDINGS": "Gebouwen",
       "CITIES": "Steden",
       "STATIONS": "Stations"
+    },
+    "option": {
+      "buildings": "Gebouwtegels",
+      "beginner": "Eerste spel",
+      "randomize": "Willekeurig"
     }
   },
   "toast": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
     "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden.",
+    "ALREADY_INVITED": "Deze gebruiker is al uitgenodigd voor deze tafel.",
 
     "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze runderkaarten te kunnen kopen.",
     "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan,",

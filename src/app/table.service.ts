@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, LogEntry, Table} from './shared/model';
+import {CreateTableRequest, LogEntry, Options, Table} from './shared/model';
 import {Observable} from 'rxjs';
+import {ChangeOptionsRequest} from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -76,4 +77,7 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/add-computer', null);
   }
 
+  changeOptions(id: string, request: ChangeOptionsRequest) {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-options', request);
+  }
 }

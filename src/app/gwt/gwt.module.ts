@@ -20,6 +20,7 @@ import {LogComponent} from './log/log.component';
 import {TrailComponent} from './trail/trail.component';
 import {SharedModule} from '../shared/shared.module';
 import {GAME} from '../shared/api';
+import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {GAME} from '../shared/api';
     PlayerBuildingsComponent,
     StationMasterComponent,
     TeepeeComponent,
-    TrailComponent
+    TrailComponent,
+    GwtOptionsComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,15 @@ import {GAME} from '../shared/api';
     GwtBoardComponent
   ],
   providers: [
-    {provide: GAME, useValue: {id: 'gwt', boardComponent: GwtBoardComponent}, multi: true}
+    {
+      provide: GAME,
+      useValue: {
+        id: 'gwt',
+        boardComponent: GwtBoardComponent,
+        optionsComponent: GwtOptionsComponent
+      },
+      multi: true
+    }
   ]
 })
 export class GwtModule {

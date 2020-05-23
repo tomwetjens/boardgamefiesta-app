@@ -2,7 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {ActivatedRoute, Router} from '@angular/router';
 import {of, ReplaySubject, Subject} from 'rxjs';
 import {skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
-import {EventType, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
+import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -67,6 +67,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.AGREED_TO_LEAVE:
           case EventType.LEFT:
           case EventType.ABANDONED:
+          case EventType.KICKED:
+          case EventType.OPTIONS_CHANGED:
             this.refreshTable();
             break;
 
@@ -199,4 +201,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(() => this.router.navigate(['/']));
   }
 
+  changeOptions(table: Table, options: Options) {
+    this.tableService.changeOptions(table.id, {options})
+      .subscribe();
+  }
 }

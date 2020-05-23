@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../shared/model";
+import {User} from '../model';
 
 @Component({
   selector: 'app-avatar',

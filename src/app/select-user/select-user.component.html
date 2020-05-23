@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Find User</h4>
+  <h4 class="modal-title">{{'findUser'|translate}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,18 +7,19 @@
 <div class="modal-body">
   <form>
     <div class="form-group">
-      <label for="text">Username or e-mail</label>
+      <label for="text">{{'usernameOrEmail'|translate}}</label>
       <input type="text" class="form-control" id="text" required [(ngModel)]="text" name="text">
     </div>
-    <button type="submit" class="btn btn-success" (click)="search()">Search</button>
+    <button type="submit" class="btn btn-success" (click)="search()">{{'search'|translate}}</button>
   </form>
 
-  <ul>
-    <li *ngFor="let user of users | async">
-      {{user.username}}
-      <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">Select</button>
-    </li>
-  </ul>
+  <div class="card" *ngFor="let user of users | async">
+    <div class="card-body">
+      <app-avatar [user]="user"></app-avatar>
+      <app-user-name [user]="user"></app-user-name>
+      <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">{{'select'|translate}}</button>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
 </div>
