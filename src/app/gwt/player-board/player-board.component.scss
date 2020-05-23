@@ -2,29 +2,6 @@
   width: 100%;
 }
 
-.color {
-  display: inline-block;
-  width: 16px;
-  height: 48px;
-  float: left;
-
-  &.RED {
-    background-color: red;
-  }
-
-  &.BLUE {
-    background-color: blue;
-  }
-
-  &.YELLOW {
-    background-color: yellow;
-  }
-
-  &.WHITE {
-    background-color: white;
-  }
-}
-
 .cert-marker {
 
   stroke-width: 3;

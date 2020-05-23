@@ -1,8 +1,6 @@
 <div class="row no-gutters">
   <div class="col-4" *ngIf="table.players[playerState.player.name] as player">
-    <span [className]="'color '+ playerState.player.color"></span>
-
-    <img *ngIf="player.user" [src]="player.user.avatarUrl" class="avatar"/>
+    <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
 
     <app-player-name [player]="player"></app-player-name>
 

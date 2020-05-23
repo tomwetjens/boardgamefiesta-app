@@ -1,1 +1,10 @@
-<strong>{{user.username}}</strong>
+<ng-template #userPopover>
+  <app-user-popover [user]="user"></app-user-popover>
+</ng-template>
+<strong [ngbPopover]="userPopover"
+        [popoverTitle]="user.username"
+        placement="bottom-right"
+        triggers="mouseenter:mouseleave"
+        container="body">
+  {{user.username}}
+</strong>

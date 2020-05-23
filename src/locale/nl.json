@@ -122,15 +122,11 @@
       "TEXAS_LONGHORN": "Texas Longhorn"
     },
     "log": {
-      "CREATE": "maakt een nieuw spel",
-      "START": "heeft het spel gestart",
-      "INVITE": "heeft {{value1}} uitgenodigd",
-      "ACCEPT": "komt er bij",
-      "REJECT": "heeft de uitnodiging afgeslagen",
-      "UNINVITE": "uninvited {{value1}}",
       "SKIP": "slaat een actie over",
       "BEGIN_TURN": "is nu aan de beurt",
       "END_TURN": "beëindigt beurt",
+      "EVERY_OTHER_PLAYER_HAS_1_TURN": "elke andere speler heeft nog 1 beurt",
+      "GAINS_JOB_MARKET_TOKEN": "ontvangt het arbeidsmarkt schijfje",
       "PAY_FEE_PLAYER": "betaalt ${{value1}} dollar aan {{value2}}",
       "PAY_FEE_BANK": "betaalt ${{value1}} dollar aan de bank",
       "MAY_DRAW_CATTLE_CARDS": "kan de rundermarkt aanvullen",
@@ -502,5 +498,13 @@
     "UNLOCK_BLACK_OR_WHITE": "Kies een spelersschijf van je spelertableau",
     "UNLOCK_WHITE": "Kies een spelersschijf met witte hoeken van je spelertableau",
     "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"
+  },
+  "log": {
+    "CREATE": "maakt een nieuw spel",
+    "START": "heeft het spel gestart",
+    "INVITE": "heeft {{value1}} uitgenodigd",
+    "ACCEPT": "komt er bij",
+    "REJECT": "heeft de uitnodiging afgeslagen",
+    "UNINVITE": "uninvited {{value1}}"
   }
 }

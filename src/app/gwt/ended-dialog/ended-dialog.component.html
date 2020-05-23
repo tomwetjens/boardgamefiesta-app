@@ -16,7 +16,7 @@
     <tr>
       <th scope="col">{{'gwt.score.total'|translate}}</th>
       <th scope="col" *ngFor="let column of columns">
-        <span [class]="column.player.color">{{column.total}}</span>
+        <strong>{{column.total}}</strong>
       </th>
     </tr>
     </thead>

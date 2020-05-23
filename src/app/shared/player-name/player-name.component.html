@@ -1,17 +1,8 @@
-<strong [class]="player.color">
+<span class="name" [class]="player.color">
 
   <ng-container *ngIf="player.user">
-    <ng-template #userPopover>
-      <app-user-popover [user]="player.user"></app-user-popover>
-    </ng-template>
-    <span [ngbPopover]="userPopover"
-          placement="bottom-right"
-          triggers="mouseenter:mouseleave"
-          container="body"
-          [class]="player.color">
-      <app-user-name *ngIf="player.user" [user]="player.user"></app-user-name>
-    </span>
+    <app-user-name *ngIf="player.user" [user]="player.user"></app-user-name>
   </ng-container>
 
   <ng-container *ngIf="!player.user">{{'computer'|translate}}</ng-container>
-</strong>
+</span>

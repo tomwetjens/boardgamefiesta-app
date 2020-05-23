@@ -3,7 +3,7 @@ import {Howl} from 'howler';
 import {Observable, Subject} from 'rxjs';
 import {flatMap} from 'rxjs/operators';
 
-const ALERT = '/assets/games/gwt/sounds/alert.mp3';
+const ALERT = '/assets/sounds/alert.mp3';
 
 const SOUNDS = [
   ALERT

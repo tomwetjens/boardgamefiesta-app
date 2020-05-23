@@ -19,45 +19,44 @@ import {ProfileComponent} from './profile/profile.component';
 import {GwtModule} from './gwt/gwt.module';
 import {SharedModule} from './shared/shared.module';
 import {UserMenuComponent} from './user-menu/user-menu.component';
-import {AvatarComponent} from './shared/avatar/avatar.component';
-import { BoardFactoryComponent } from './board/board-factory.component';
-import { TableOptionsComponent } from './table-options/table-options.component';
+import {BoardFactoryComponent} from './board/board-factory.component';
+import {TableOptionsComponent} from './table-options/table-options.component';
+import {registerLocaleData} from '@angular/common';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        TableComponent,
-        HomeComponent,
-        SelectUserComponent,
-        ToastrComponent,
-        NavbarComponent,
-        LayoutComponent,
-        ProfileComponent,
-        UserMenuComponent,
-        BoardFactoryComponent,
-        TableOptionsComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        OAuthModule.forRoot(),
-        TranslateModule.forRoot({
-            defaultLanguage: 'en',
-            useDefaultLang: true
-        }),
-        AppRoutingModule,
-        NgbModule,
-        SharedModule,
-        GwtModule
-    ],
-    providers: [
-        {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
-        {provide: OAuthStorage, useFactory: () => localStorage}
-    ],
-    exports: [
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    TableComponent,
+    HomeComponent,
+    SelectUserComponent,
+    ToastrComponent,
+    NavbarComponent,
+    LayoutComponent,
+    ProfileComponent,
+    UserMenuComponent,
+    BoardFactoryComponent,
+    TableOptionsComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    OAuthModule.forRoot(),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      useDefaultLang: true
+    }),
+    AppRoutingModule,
+    NgbModule,
+    SharedModule,
+    GwtModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
+    {provide: OAuthStorage, useFactory: () => localStorage}
+  ],
+  exports: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

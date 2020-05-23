@@ -1,16 +1,21 @@
+.name {
 
-.RED {
-  color: red;
-}
+  text-shadow: 1px 1px 2px #000000;
 
-.BLUE {
-  color: blue;
-}
+  &.RED {
+    color: red;
+  }
 
-.YELLOW {
-  color: yellow;
-}
+  &.BLUE {
+    color: blue;
+  }
 
-.WHITE {
-  color: white;
+  &.YELLOW {
+    color: yellow;
+  }
+
+  &.WHITE {
+    color: white;
+  }
+
 }
