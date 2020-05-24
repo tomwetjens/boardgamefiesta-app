@@ -34,16 +34,16 @@ import {AudioService} from '../../audio.service';
 import {PlayerColor, Table} from '../../shared/model';
 import {
   AUCTION,
-  BUILDING,
+  BUILDING, COLORADO_SPRINGS,
   COWBOY,
   CRAFTSMAN,
-  DROUGHT,
+  DROUGHT, EL_PASO,
   ENGINEER,
   FLOOD,
-  INDIANS,
+  INDIANS, KANSAS_CITY,
   MOVE,
-  ROCKFALL,
-  TRAIN
+  ROCKFALL, SACRAMENTO, SAN_DIEGO, SAN_FRANCISCO, SANTA_FE, STATION, TOPEKA,
+  TRAIN, WELCOME_TO_KANSAS_CITY, WICHITA
 } from '../sounds';
 
 const SELECT_SPACE_ACTIONS = [
@@ -283,6 +283,52 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           }
         }
 
+        for (let i = 0; i < current.railroadTrack.stations.length; i++) {
+          const currentStation = current.railroadTrack.stations[i];
+          const previousStation = previous.railroadTrack.stations[i];
+
+          if (currentStation.players.length > previousStation.players.length) {
+            this.audioService.playSound(STATION);
+          }
+        }
+
+        for (const city of Object.keys(City)) {
+          const currentCity = current.railroadTrack.cities[city];
+          const previousCity = previous.railroadTrack.cities[city];
+
+          if (currentCity.length !== previousCity.length) {
+            switch (city) {
+              case City.KANSAS_CITY:
+                this.audioService.playSound(KANSAS_CITY);
+                break;
+              case City.TOPEKA:
+                this.audioService.playSound(TOPEKA);
+                break;
+              case City.WICHITA:
+                this.audioService.playSound(WICHITA);
+                break;
+              case City.COLORADO_SPRINGS:
+                this.audioService.playSound(COLORADO_SPRINGS);
+                break;
+              case City.SANTA_FE:
+                this.audioService.playSound(SANTA_FE);
+                break;
+              case City.SAN_DIEGO:
+                this.audioService.playSound(SAN_DIEGO);
+                break;
+              case City.EL_PASO:
+                this.audioService.playSound(EL_PASO);
+                break;
+              case City.SACRAMENTO:
+                this.audioService.playSound(SACRAMENTO);
+                break;
+              case City.SAN_FRANCISCO:
+                this.audioService.playSound(SAN_FRANCISCO);
+                break;
+            }
+          }
+        }
+
         for (const name of Object.keys(current.trail.locations)) {
           const currentLocation = current.trail.locations[name];
           const previousLocation = previous.trail.locations[name];
@@ -313,7 +359,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
           if (currentLocation !== previousLocation) {
             if (currentLocation === 'KANSAS_CITY') {
-              this.audioService.playSound(AUCTION);
+              this.audioService.playSound(WELCOME_TO_KANSAS_CITY);
             } else if (currentLocation !== 'START') {
               this.audioService.playSound(MOVE);
             }

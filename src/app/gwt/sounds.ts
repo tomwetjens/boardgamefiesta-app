@@ -14,6 +14,20 @@ export const AUCTION = '/assets/games/gwt/sounds/auction.mp3';
 export const DISC = '/assets/games/gwt/sounds/disc.mp3';
 export const ROCKFALL = '/assets/games/gwt/sounds/rockfall.mp3';
 export const DROUGHT = '/assets/games/gwt/sounds/drought.mp3';
+export const KANSAS_CITY = '/assets/games/gwt/sounds/cities/kansas_city.mp3';
+export const TOPEKA = '/assets/games/gwt/sounds/cities/topeka.mp3';
+export const WICHITA = '/assets/games/gwt/sounds/cities/wichita.mp3';
+export const COLORADO_SPRINGS = '/assets/games/gwt/sounds/cities/colorado_springs.mp3';
+export const SANTA_FE = '/assets/games/gwt/sounds/cities/santa_fe.mp3';
+export const ALBUQUERQUE = '/assets/games/gwt/sounds/cities/albuquerque.mp3';
+export const EL_PASO = '/assets/games/gwt/sounds/cities/el_paso.mp3';
+export const SAN_DIEGO = '/assets/games/gwt/sounds/cities/san_diego.mp3';
+export const SACRAMENTO = '/assets/games/gwt/sounds/cities/sacramento.mp3';
+export const SAN_FRANCISCO = '/assets/games/gwt/sounds/cities/san_francisco.mp3';
+export const OPENING_MUSIC = '/assets/games/gwt/sounds/opening_music.mp3';
+export const SCORE_MUSIC = '/assets/games/gwt/sounds/score_music.mp3';
+export const WELCOME_TO_KANSAS_CITY = '/assets/games/gwt/sounds/welcome_to_kansas_city.mp3';
+export const STATION = '/assets/games/gwt/sounds/stations.mp3';
 
 export const SOUNDS = [
   COW,
@@ -31,5 +45,19 @@ export const SOUNDS = [
   AUCTION,
   DISC,
   ROCKFALL,
-  DROUGHT
+  DROUGHT,
+  KANSAS_CITY,
+  TOPEKA,
+  WICHITA,
+  COLORADO_SPRINGS,
+  SANTA_FE,
+  ALBUQUERQUE,
+  EL_PASO,
+  SAN_DIEGO,
+  SACRAMENTO,
+  SAN_FRANCISCO,
+  OPENING_MUSIC,
+  SCORE_MUSIC,
+  WELCOME_TO_KANSAS_CITY,
+  STATION
 ];

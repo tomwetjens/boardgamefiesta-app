@@ -81,7 +81,9 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   clickAuxiliaryAction(actionType: string) {
-    this.selectAction.emit(actionType as ActionType);
+    if (this.canSelectAction(actionType)) {
+      this.selectAction.emit(actionType as ActionType);
+    }
   }
 
   hasUnlocked(unlockable: string, atLeast: number = 1): boolean {

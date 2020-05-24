@@ -5,7 +5,7 @@ import {Table} from '../../shared/model';
 import {MessageDialogComponent} from '../../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {SOUNDS} from '../sounds';
+import {OPENING_MUSIC, SOUNDS} from '../sounds';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 import {BoardComponent} from '../../shared/api';
 
@@ -95,6 +95,11 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
       if (currentState.turn && !previousState.turn) {
         this.audioService.alert();
       }
+    }
+
+    if (!currentState.trail.playerLocations[currentState.player.player.color]) {
+      // Before player did first move
+      this.audioService.playMusic(OPENING_MUSIC);
     }
 
     if (currentState.turn

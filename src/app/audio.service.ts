@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Howl} from 'howler';
-import {Observable, Subject} from 'rxjs';
-import {flatMap} from 'rxjs/operators';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {distinctUntilChanged, flatMap} from 'rxjs/operators';
 
 const ALERT = '/assets/sounds/alert.mp3';
 
@@ -17,6 +17,7 @@ export class AudioService {
   private sounds: { [key: string]: Howl } = {};
 
   private queue = new Subject<string>();
+  private backgroundMusic: Subscription;
 
   constructor() {
     Howler.autoUnlock = true;
@@ -26,21 +27,8 @@ export class AudioService {
     this.queue
       .pipe(
         // TODO debounce?
-        flatMap(name => new Observable(subscriber => {
-          const sound = this.sounds[name];
-
-          if (!sound) {
-            subscriber.complete();
-            return;
-          }
-
-          sound.once('end', () => subscriber.complete());
-          sound.once('stop', () => subscriber.complete());
-          sound.once('loaderror', () => subscriber.complete());
-          sound.once('playerror', () => subscriber.complete());
-
-          sound.play();
-        }))
+        distinctUntilChanged(),
+        flatMap(name => this.play(name))
       ).subscribe();
   }
 
@@ -59,5 +47,42 @@ export class AudioService {
 
   alert() {
     this.playSound(ALERT);
+  }
+
+  playMusic(uri: string): Observable<void> {
+    if (this.backgroundMusic) {
+      this.stopMusic();
+    }
+
+    this.backgroundMusic = this.play(uri).subscribe();
+
+    return new Observable(() => {
+      return () => this.stopMusic();
+    });
+  }
+
+  private stopMusic() {
+    this.backgroundMusic.unsubscribe();
+    this.backgroundMusic = null;
+  }
+
+  private play(uri: string) {
+    return new Observable(subscriber => {
+      const sound = this.sounds[uri];
+
+      if (!sound) {
+        subscriber.error('not_loaded');
+        return;
+      }
+
+      sound.once('end', () => subscriber.complete());
+      sound.once('stop', () => subscriber.complete());
+      sound.once('loaderror', () => subscriber.error('loaderror'));
+      sound.once('playerror', () => subscriber.error('playerror'));
+
+      sound.play();
+
+      return () => sound.stop();
+    });
   }
 }
