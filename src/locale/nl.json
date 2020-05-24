@@ -142,6 +142,8 @@
       "MAY_HIRE_CHEAP_WORKER": "kan een werker inhuren met korting",
       "MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "kan 1 Jersey afleggen om de certificaatsteen 2 vooruit te zetten",
       "MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS": "kan 1 Jersey afleggen om 4 dollar te ontvangen",
+      "ENDS_GAME": "beëindigt het spel",
+      "FILL_UP_CATTLE_MARKET": "vult de rundermarkt aan",
       "action": {
         "APPOINT_STATION_MASTER": "benoemt {{value1}} tot stationschef en ontvangt {{value2}}",
         "BUY_CATTLE": "koopt runderkaarten voor {{value1}} dollar",

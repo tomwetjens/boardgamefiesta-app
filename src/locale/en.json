@@ -145,7 +145,7 @@
       "MAY_HIRE_CHEAP_WORKER": "may hire a worker for +$1",
       "MAY_DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "may discard 1 Jersey to gain 2 certificates",
       "MAY_DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS": "may discard 1 Jersey to gain $4",
-      "ENDS_GAME": "ends table",
+      "ENDS_GAME": "ends game",
       "FILL_UP_CATTLE_MARKET": "cattle market is filled up",
       "ACTION": {
         "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives {{value2}}",
