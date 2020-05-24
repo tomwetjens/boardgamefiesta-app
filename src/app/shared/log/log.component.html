@@ -2,7 +2,7 @@
   <span class="timestamp">{{logEntry.timestamp | moment:'LT'}}</span>&nbsp;
   <app-player-name *ngIf="logEntry.player" [player]="logEntry.player"></app-player-name>
   <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
-  <span class="message">&nbsp;
-    {{gameService.translate(table.game, logEntry)}}
+  <span class="message">
+    {{translate(logEntry)}}
   </span>
 </div>

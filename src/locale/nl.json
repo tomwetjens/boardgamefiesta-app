@@ -127,8 +127,8 @@
       "END_TURN": "beëindigt beurt",
       "EVERY_OTHER_PLAYER_HAS_1_TURN": "elke andere speler heeft nog 1 beurt",
       "GAINS_JOB_MARKET_TOKEN": "ontvangt het arbeidsmarkt schijfje",
-      "PAY_FEE_PLAYER": "betaalt ${{value1}} dollar aan {{value2}}",
-      "PAY_FEE_BANK": "betaalt ${{value1}} dollar aan de bank",
+      "PAY_FEE_PLAYER": "betaalt {{value1}} dollar aan {{value2}}",
+      "PAY_FEE_BANK": "betaalt {{value1}} dollar aan de bank",
       "MAY_DRAW_CATTLE_CARDS": "kan de rundermarkt aanvullen",
       "MAY_APPOINT_STATION_MASTER": "kan een stationschef benoemen",
       "MUST_TAKE_OBJECTIVE_CARD": "moet een doelkaart uit het aanbod kiezen",
@@ -267,7 +267,13 @@
         "DROUGHT-3": "Droogte 3",
         "DROUGHT-4": "Droogte 4",
         "DROUGHT-RISK-1": "Droogte Risico",
-        "START": "Start"
+        "START": "Start",
+
+        "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Permanent certificaat + 3 punten per 2 certificaten",
+        "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Permanent certificaat + 3 punten per 2 rampen",
+        "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificaat + 3 points per tipipaar",
+        "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Ramptegel verwijderen/handel met Indianen + 3 punten per 2 doelkaarten",
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Ontvang 2 dollar + 1 punt per werker"
       }
     },
     "actions": {
@@ -505,6 +511,10 @@
     "INVITE": "heeft {{value1}} uitgenodigd",
     "ACCEPT": "komt er bij",
     "REJECT": "heeft de uitnodiging afgeslagen",
-    "UNINVITE": "uninvited {{value1}}"
+    "UNINVITE": "uninvited {{value1}}",
+    "KICK": "removed {{value1}}",
+    "LEFT": "left the table",
+    "PROPOSED_TO_LEAVE": "proposes to leave the table together",
+    "AGREED_TO_LEAVE": "agrees to leave the table"
   }
 }

@@ -16,7 +16,6 @@ import {TeepeeComponent} from './teepee/teepee.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
-import {LogComponent} from './log/log.component';
 import {TrailComponent} from './trail/trail.component';
 import {SharedModule} from '../shared/shared.module';
 import {GAME} from '../shared/api';
@@ -31,7 +30,6 @@ import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
     DeliveryCityComponent,
     EndedDialogComponent,
     HazardComponent,
-    LogComponent,
     ObjectiveCardsComponent,
     ObjectivesDialogComponent,
     PlayerBoardComponent,

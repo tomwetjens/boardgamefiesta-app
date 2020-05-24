@@ -228,7 +228,7 @@
         "DOWNGRADE_STATION": "downgrades a Station"
       },
       "values": {
-        "ROCKFALL":  "Rockfall",
+        "ROCKFALL": "Rockfall",
         "DROUGHT": "Drought",
         "FLOOD": "Flood",
         "COWBOY": "Cowboy",
@@ -236,7 +236,6 @@
         "ENGINEER": "Engineer",
         "BLUE": "Blue teepee",
         "GREEN": "Green teepee",
-
         "TOPEKA": "Topeka",
         "WICHITA": "Wichita",
         "COLORADO_SPRINGS": "Colorado Springs",
@@ -246,7 +245,6 @@
         "SAN_DIEGO": "San Diego",
         "SACRAMENTO": "Sacramento",
         "SAN_FRANCISCO": "San Francisco",
-
         "TEEPEE-1": "Teepee 1",
         "TEEPEE-2": "Teepee 2",
         "TEEPEE-4": "Teepee 4",
@@ -273,7 +271,13 @@
         "DROUGHT-3": "Drought 3",
         "DROUGHT-4": "Drought 4",
         "DROUGHT-RISK-1": "Drought Risk",
-        "START": "Start"
+        "START": "Start",
+
+        "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Permanent certificate + 3 points per 2 certificates",
+        "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Permanent certificate + 3 points per 2 hazards",
+        "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificate + 3 points per teepee pair",
+        "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Remove hazard/trade with Indians + 3 points per 2 objective cards",
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Gain $2 + 1 point per worker"
       }
     },
     "actions": {
@@ -470,6 +474,10 @@
     "START": "started the game",
     "INVITE": "invited {{value1}}",
     "ACCEPT": "joined the table",
-    "REJECT": "declined to join the table"
+    "REJECT": "declined to join the table",
+    "KICK": "removed {{value1}}",
+    "LEFT": "left the table",
+    "PROPOSED_TO_LEAVE": "proposes to leave the table together",
+    "AGREED_TO_LEAVE": "agrees to leave the table"
   }
 }

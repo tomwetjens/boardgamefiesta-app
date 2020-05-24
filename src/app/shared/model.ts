@@ -110,6 +110,7 @@ export enum LogEntryType {
   START = 'START',
   INVITE = 'INVITE',
   UNINVITE = 'UNINVITE',
+  KICK = 'KICK',
   PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
   AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',
   CREATE = 'CREATE',
@@ -122,6 +123,7 @@ export interface LogEntry {
   user?: User;
   type: LogEntryType;
   parameters: string[];
+  otherUser?: User;
 }
 
 export interface Game {

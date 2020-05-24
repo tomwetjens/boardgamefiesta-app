@@ -16,6 +16,7 @@ import {FromNowPipe} from './from-now.pipe';
 import {AgoPipe} from './ago.pipe';
 import {AvatarComponent} from './avatar/avatar.component';
 import { MomentPipe } from './moment.pipe';
+import {LogComponent} from "./log/log.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MomentPipe } from './moment.pipe';
     RatingComponent,
     FromNowPipe,
     AgoPipe,
-    MomentPipe
+    MomentPipe,
+    LogComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { MomentPipe } from './moment.pipe';
     RatingComponent,
     FromNowPipe,
     AgoPipe,
-    MomentPipe
+    MomentPipe,
+    LogComponent
   ]
 })
 export class SharedModule {
