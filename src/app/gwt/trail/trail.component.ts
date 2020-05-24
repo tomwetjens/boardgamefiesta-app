@@ -33,17 +33,34 @@ import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.com
 import {AudioService} from '../../audio.service';
 import {PlayerColor, Table} from '../../shared/model';
 import {
-  AUCTION,
-  BUILDING, COLORADO_SPRINGS,
+  BUILDING,
+  BUILDING_A,
+  BUILDING_B,
+  BUILDING_C,
+  BUILDING_D,
+  BUILDING_E,
+  BUILDING_F,
+  BUILDING_G,
+  COLORADO_SPRINGS,
   COWBOY,
   CRAFTSMAN,
-  DROUGHT, EL_PASO,
+  DROUGHT,
+  EL_PASO,
   ENGINEER,
   FLOOD,
-  INDIANS, KANSAS_CITY,
+  INDIANS,
+  KANSAS_CITY,
   MOVE,
-  ROCKFALL, SACRAMENTO, SAN_DIEGO, SAN_FRANCISCO, SANTA_FE, STATION, TOPEKA,
-  TRAIN, WELCOME_TO_KANSAS_CITY, WICHITA
+  ROCKFALL,
+  SACRAMENTO,
+  SAN_DIEGO,
+  SAN_FRANCISCO,
+  SANTA_FE,
+  STATION,
+  TOPEKA,
+  TRAIN,
+  WELCOME_TO_KANSAS_CITY,
+  WICHITA
 } from '../sounds';
 
 const SELECT_SPACE_ACTIONS = [
@@ -362,6 +379,36 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               this.audioService.playSound(WELCOME_TO_KANSAS_CITY);
             } else if (currentLocation !== 'START') {
               this.audioService.playSound(MOVE);
+
+              if (color === this.state.player.player.color) {
+                // current user, play sound of building (if any)
+                const building = current.trail.locations[currentLocation].building;
+                if (building) {
+                  switch (building.name) {
+                    case 'A':
+                      this.audioService.playSound(BUILDING_A);
+                      break;
+                    case 'B':
+                      this.audioService.playSound(BUILDING_B);
+                      break;
+                    case 'C':
+                      this.audioService.playSound(BUILDING_C);
+                      break;
+                    case 'D':
+                      this.audioService.playSound(BUILDING_D);
+                      break;
+                    case 'E':
+                      this.audioService.playSound(BUILDING_E);
+                      break;
+                    case 'F':
+                      this.audioService.playSound(BUILDING_F);
+                      break;
+                    case 'G':
+                      this.audioService.playSound(BUILDING_G);
+                      break;
+                  }
+                }
+              }
             }
           }
         }

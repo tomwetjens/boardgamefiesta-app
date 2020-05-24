@@ -28,6 +28,13 @@ export const OPENING_MUSIC = '/assets/games/gwt/sounds/opening_music.mp3';
 export const SCORE_MUSIC = '/assets/games/gwt/sounds/score_music.mp3';
 export const WELCOME_TO_KANSAS_CITY = '/assets/games/gwt/sounds/welcome_to_kansas_city.mp3';
 export const STATION = '/assets/games/gwt/sounds/stations.mp3';
+export const BUILDING_A = '/assets/games/gwt/sounds/buildings/a.mp3';
+export const BUILDING_B = '/assets/games/gwt/sounds/buildings/b.mp3';
+export const BUILDING_C = '/assets/games/gwt/sounds/buildings/c.mp3';
+export const BUILDING_D = '/assets/games/gwt/sounds/buildings/d.mp3';
+export const BUILDING_E = '/assets/games/gwt/sounds/buildings/e.mp3';
+export const BUILDING_F = '/assets/games/gwt/sounds/buildings/f.mp3';
+export const BUILDING_G = '/assets/games/gwt/sounds/buildings/g.mp3';
 
 export const SOUNDS = [
   COW,
@@ -59,5 +66,12 @@ export const SOUNDS = [
   OPENING_MUSIC,
   SCORE_MUSIC,
   WELCOME_TO_KANSAS_CITY,
-  STATION
+  STATION,
+  BUILDING_A,
+  BUILDING_B,
+  BUILDING_C,
+  BUILDING_D,
+  BUILDING_E,
+  BUILDING_F,
+  BUILDING_G
 ];
