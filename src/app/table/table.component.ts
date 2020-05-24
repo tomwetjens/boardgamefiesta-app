@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {of, ReplaySubject, Subject} from 'rxjs';
-import {skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, of, ReplaySubject, Subject} from 'rxjs';
+import {filter, skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
 import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
@@ -23,8 +23,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   private left = new Subject();
   private leaving = false;
 
-  table = new ReplaySubject<Table>(1);
-  state = new ReplaySubject<any>(1);
+  table = new BehaviorSubject<Table>(undefined);
+  state = new BehaviorSubject<any>(undefined);
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -40,7 +40,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     this.refreshTable();
 
     this.table
-      .pipe(takeUntil(this.destroyed))
+      .pipe(filter(table => !!table), takeUntil(this.destroyed))
       .subscribe(table => {
         this.title.setTitle(this.translateService.instant('game.' + table.game));
 
@@ -63,16 +63,30 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.ENDED:
           case EventType.INVITED:
           case EventType.UNINVITED:
+          case EventType.OPTIONS_CHANGED:
           case EventType.PROPOSED_TO_LEAVE:
           case EventType.AGREED_TO_LEAVE:
-          case EventType.LEFT:
-          case EventType.ABANDONED:
-          case EventType.KICKED:
-          case EventType.OPTIONS_CHANGED:
             this.refreshTable();
             break;
 
+          case EventType.LEFT:
+          case EventType.ABANDONED:
+          case EventType.KICKED:
+            console.log('event: ', event);
+            console.log('self: ', this.table.value.players[this.table.value.player].user.id);
+            if (this.table.value && event.userId === this.table.value.players[this.table.value.player].user.id) {
+              // We are no longer in this table
+              console.log('no longer at table, redirecting');
+              this.router.navigateByUrl('/');
+            } else {
+              console.log('refresh table');
+              // We are still in this table
+              this.refreshTable();
+            }
+            break;
+
           case EventType.STATE_CHANGED:
+            console.log('event:', event);
             this.refreshTable();
             this.refreshState();
             break;

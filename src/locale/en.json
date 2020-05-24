@@ -47,6 +47,7 @@
   },
   "lastSeen": "Last seen",
   "ago": "ago",
+  "menu": "Menu",
   "table": {
     "status": {
       "NEW": "Waiting for players",
@@ -387,7 +388,8 @@
     "MIN_PLAYERS": "You need more players to start the game.",
     "UNKNOWN_ERROR": "An unknown error occurred.",
     "NOT_ENOUGH_COWBOYS": "Not enough cowboys",
-    "ALREADY_INVITED": "This user is already invited to the table."
+    "ALREADY_INVITED": "This user is already invited to the table.",
+    "NOT_PLAYER_IN_GAME": "You are not playing at this table."
   },
   "action": {
     "APPOINT_STATION_MASTER": "Appoint a station master",

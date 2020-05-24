@@ -1,0 +1,8 @@
+<div ngbDropdown placement="bottom-right">
+  <button id="inGameMenu" class="btn dropdown-toggle" ngbDropdownToggle>
+    {{'menu'|translate}}
+  </button>
+  <div ngbDropdownMenu aria-labelledby="inGameMenu" class="dropdown-menu dropdown-menu-right">
+    <button ngbDropdownItem (click)="leave()">{{'leave'|translate}}</button>
+  </div>
+</div>

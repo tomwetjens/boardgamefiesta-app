@@ -17,6 +17,7 @@ import {AgoPipe} from './ago.pipe';
 import {AvatarComponent} from './avatar/avatar.component';
 import { MomentPipe } from './moment.pipe';
 import {LogComponent} from "./log/log.component";
+import { InGameMenuComponent } from './in-game-menu/in-game-menu.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {LogComponent} from "./log/log.component";
     FromNowPipe,
     AgoPipe,
     MomentPipe,
-    LogComponent
+    LogComponent,
+    InGameMenuComponent
   ],
   imports: [
     CommonModule,

@@ -381,6 +381,7 @@
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
     "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden.",
     "ALREADY_INVITED": "Deze gebruiker is al uitgenodigd voor deze tafel.",
+    "NOT_PLAYER_IN_GAME": "Je bent geen speler aan deze tafel.",
 
     "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze runderkaarten te kunnen kopen.",
     "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan,",
