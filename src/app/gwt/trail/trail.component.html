@@ -722,7 +722,7 @@
           <ng-template #popoverContent>
             {{'gwt.popover.route'|translate:{cost: possibleMove.possibleMove.cost} }}
             <ng-container *ngFor="let playerFee of possibleMove.possibleMove.playerFees">
-              <app-player-name [player]="table.players[playerFee.player.name]"></app-player-name>
+              {{table.players[playerFee.player.name].user?.username || ('computer'|translate|titlecase)}}
               {{'gwt.popover.playerFee'|translate: {fee: playerFee.fee} }}
             </ng-container>
           </ng-template>
