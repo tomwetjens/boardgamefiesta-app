@@ -44,7 +44,7 @@ import {
   MOVE,
   ROCKFALL,
   TRAIN
-} from "../sounds";
+} from '../sounds';
 
 const SELECT_SPACE_ACTIONS = [
   ActionType.MOVE_ENGINE_1_FORWARD,
@@ -711,7 +711,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   canSelectSpace(space: Space) {
     return SELECT_SPACE_ACTIONS.includes(this.selectedAction)
       && this.state.possibleSpaces
-      && this.state.possibleSpaces.some(possibleSpace => {
+      && this.state.possibleSpaces[this.selectedAction]
+      && this.state.possibleSpaces[this.selectedAction].some(possibleSpace => {
         if ('turnout' in possibleSpace) {
           return possibleSpace.turnout === space.turnout;
         } else {

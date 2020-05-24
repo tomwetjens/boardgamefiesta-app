@@ -332,7 +332,7 @@ export interface State {
   readonly possibleMoves?: PossibleMove[];
   readonly possibleBuys?: PossibleBuy[];
   readonly possibleDeliveries?: PossibleDelivery[];
-  readonly possibleSpaces?: Space[];
+  readonly possibleSpaces?: { [actionType in ActionType]: Space[] };
 }
 
 export interface Action {
