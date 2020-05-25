@@ -21,6 +21,7 @@
   "accept": "Accept",
   "reject": "Reject",
   "notStarted": "Waiting for players",
+  "owner": "Owner",
   "play": "Play",
   "yourTurn": "Your Turn",
   "close": "Close",

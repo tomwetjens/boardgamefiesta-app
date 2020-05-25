@@ -75,8 +75,12 @@
                         <app-player-name [player]="player"></app-player-name>
                         <app-rating *ngIf="player.rating" [rating]="player.rating" title="{{'rating'|translate}}"></app-rating>
                       </p>
-                      {{'player.status.' + player.status|translate}}
+                      <span *ngIf="player.user?.id === table.owner.id"
+                            class="badge badge-dark">
+                        {{'owner'|translate}}
+                      </span>
                       <ng-container *ngIf="table.status === 'NEW' && playerId !== table.player">
+                        {{'player.status.' + player.status|translate}}
                         <button class="btn btn-sm btn-danger"
                                 *ngIf="table.players[table.player].user.id === table.owner.id"
                                 (click)="kick(table, player)">{{'uninvite'|translate}}</button>
