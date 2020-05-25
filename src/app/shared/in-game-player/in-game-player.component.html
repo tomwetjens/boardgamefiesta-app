@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
+
+    <app-player-name [player]="player"></app-player-name>
+
+    <app-rating *ngIf="player.rating" [rating]="player.rating"></app-rating>
+
+    <img src="/assets/hourglass.gif" class="hourglass" *ngIf="table.currentPlayer === player.id"
+         ngbPopover="{{'popover.waitingForPlayer'|translate}}"
+         placement="bottom"
+         triggers="mouseenter:mouseleave"
+         container="body"/>
+
+    <ng-content select="header"></ng-content>
+  </div>
+  <div class="card-body">
+    <ng-content select="main"></ng-content>
+  </div>
+</div>

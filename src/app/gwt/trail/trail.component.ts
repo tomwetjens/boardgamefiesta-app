@@ -657,7 +657,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               ngbModalRef.componentInstance.playerState = this.state.player;
 
               fromPromise(ngbModalRef.result)
-                .subscribe(({certificates}) => this.perform.emit({
+                .subscribe(certificates => this.perform.emit({
                   type: ActionType.DELIVER_TO_CITY,
                   city,
                   certificates
@@ -829,10 +829,26 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectWorker(rowIndex: number): boolean {
-    if (!WORKER_ACTIONS.includes(this.selectedAction)) {
+    if (!WORKER_ACTIONS.includes(this.selectedAction)
+      || rowIndex >= this.state.jobMarket.currentRowIndex) {
       return false;
     }
-    return rowIndex < this.state.jobMarket.currentRowIndex;
+
+    let cost = this.state.jobMarket.rows[rowIndex].cost;
+
+    switch (this.selectedAction) {
+      case ActionType.HIRE_WORKER_MINUS_1:
+        cost += 1;
+        break;
+      case ActionType.HIRE_WORKER_MINUS_2:
+        cost += 2;
+        break;
+      case ActionType.HIRE_WORKER_PLUS_2:
+        cost -= 2;
+        break;
+    }
+
+    return cost <= this.state.player.balance;
   }
 
   isForesightSelected(columnIndex: number, rowIndex: number): boolean {

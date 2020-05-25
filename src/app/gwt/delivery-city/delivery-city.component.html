@@ -1,5 +1,6 @@
 <div class="modal-header">
-  <h4 class="modal-title">Deliver to {{possibleDelivery.city}}</h4>
+  <h4
+    class="modal-title">{{'gwt.deliverDialog'|translate:{city: 'gwt.log.values.' + possibleDelivery.city|translate} }}</h4>
   <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,15 +8,53 @@
 <div class="modal-body">
   <form>
     <p *ngIf="possibleDelivery.certificates > 0">
-      You must spend at least {{possibleDelivery.certificates}} certificates to deliver to {{possibleDelivery.city}}.
+      {{'gwt.deliverRequiresCertificates'|translate:{
+      atLeast: possibleDelivery.certificates,
+      city: 'gwt.log.values.' + possibleDelivery.city|translate
+    } }}
     </p>
+    <p *ngIf="possibleDelivery.certificates < playerState.certificates">
+      {{'gwt.deliverOptionalCertificates'|translate:{city: 'gwt.log.values.' + possibleDelivery.city|translate} }}
+    </p>
+
     <p>
-      Spend certificates:
-      <input type="number" [(ngModel)]="certificates" [min]="possibleDelivery.certificates" [max]="playerState.certificates" [step]="1" name="certificates"/>
-      Max {{playerState.certificates}}
-    </p>
+      {{'gwt.spendCertificates'|translate}}
+    <table class="table table-sm">
+      <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th [colSpan]="perm.length">{{'gwt.permCertificates'|translate}}</th>
+        <th [colSpan]="both.length">{{'gwt.tempCertificates'|translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td *ngFor="let option of perm" class="text-center">
+          <button class="btn btn-success"
+                  [disabled]="option.perm < possibleDelivery.certificates"
+                  (click)="ngbActiveModal.close(option.perm)">
+            {{option.perm}}
+          </button>
+        </td>
+        <td *ngFor="let option of both" class="text-center">
+          <button class="btn btn-warning"
+                  [disabled]="option.perm + option.temp < possibleDelivery.certificates"
+                  (click)="ngbActiveModal.close(option.perm + option.temp)">
+            -{{option.temp}}
+          </button>
+        </td>
+      </tr>
+      <tr class="thead-dark">
+        <th>{{'gwt.totalCertificates' |translate}}</th>
+        <th *ngFor="let option of perm" class="text-center">
+          <strong>{{option.perm}}</strong>
+        </th>
+        <th *ngFor="let option of both" class="text-center">
+          <strong>{{option.perm + option.temp}}</strong>
+        </th>
+      </tr>
+      </tbody>
+    </table>
   </form>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" (click)="confirm()">Deliver to {{possibleDelivery.city}}</button>
 </div>

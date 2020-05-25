@@ -2,6 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PlayerState, PossibleDelivery} from '../model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+interface Option {
+  perm: number;
+  temp: number;
+}
+
 @Component({
   selector: 'app-delivery-city',
   templateUrl: './delivery-city.component.html',
@@ -12,17 +17,27 @@ export class DeliveryCityComponent implements OnInit {
   @Input() playerState: PlayerState;
   @Input() possibleDelivery: PossibleDelivery;
 
-  certificates = 0;
-
   constructor(public ngbActiveModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {
-    this.certificates = this.possibleDelivery.certificates;
   }
 
-  confirm() {
-    this.ngbActiveModal.close({certificates: this.certificates});
+  get perm(): Option[] {
+    return Array(this.playerState.certificates - this.playerState.tempCertificates + 1)
+      .fill(0)
+      .map((_, index) => index)
+      .map(perm => ({perm, temp: 0}));
+  }
+
+  get both(): Option[] {
+    const perm = this.playerState.certificates - this.playerState.tempCertificates;
+
+    return Array(this.playerState.tempCertificates)
+      .fill(0)
+      .map((_, index) => index + 1)
+      .filter(temp => temp !== 5)
+      .map(temp => ({perm, temp}));
   }
 
 }

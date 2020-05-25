@@ -1,0 +1,24 @@
+.card {
+  margin: 4px;
+  background: lightgrey;
+}
+
+.card-header {
+  padding: 2px;
+  background: none;
+  border: none;
+}
+
+.card-body {
+  padding: 2px;
+  background: none;
+  border: none;
+}
+
+app-player-name {
+  font-size: 1rem;
+}
+
+header {
+  display: inline-block;
+}

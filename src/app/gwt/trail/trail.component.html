@@ -452,8 +452,10 @@
 
     <g class="job-market">
       <g *ngFor="let row of state.jobMarket.rows; index as rowIndex">
-        <use *ngFor="let worker of row.workers; index as columnIndex" [attr.xlink:href]="'#' + worker"
-             class="worker" [ngClass]="{disabled:!canSelectWorker(rowIndex)}"
+        <use *ngFor="let worker of row.workers; index as columnIndex"
+             [attr.xlink:href]="'#' + worker"
+             class="worker"
+             [ngClass]="{disabled:!canSelectWorker(rowIndex)}"
              [attr.x]="9 + ((4-Math.max(state.jobMarket.rowLimit, row.workers.length)) * 33) + (columnIndex * 33)"
              [attr.y]="316 + (rowIndex * 39)"
              (click)="selectWorker(rowIndex, worker)"/>

@@ -18,6 +18,7 @@ import {AvatarComponent} from './avatar/avatar.component';
 import { MomentPipe } from './moment.pipe';
 import {LogComponent} from "./log/log.component";
 import { InGameMenuComponent } from './in-game-menu/in-game-menu.component';
+import { InGamePlayerComponent } from './in-game-player/in-game-player.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { InGameMenuComponent } from './in-game-menu/in-game-menu.component';
     AgoPipe,
     MomentPipe,
     LogComponent,
-    InGameMenuComponent
+    InGameMenuComponent,
+    InGamePlayerComponent
   ],
   imports: [
     CommonModule,
@@ -43,19 +45,20 @@ import { InGameMenuComponent } from './in-game-menu/in-game-menu.component';
     RouterModule,
     TranslateModule.forChild()
   ],
-  exports: [
-    AvatarComponent,
-    ConnectionStatusComponent,
-    MessageDialogComponent,
-    PlayerNameComponent,
-    InGameNavbarComponent,
-    UserNameComponent,
-    RatingComponent,
-    FromNowPipe,
-    AgoPipe,
-    MomentPipe,
-    LogComponent
-  ]
+    exports: [
+        AvatarComponent,
+        ConnectionStatusComponent,
+        MessageDialogComponent,
+        PlayerNameComponent,
+        InGameNavbarComponent,
+        UserNameComponent,
+        RatingComponent,
+        FromNowPipe,
+        AgoPipe,
+        MomentPipe,
+        LogComponent,
+        InGamePlayerComponent
+    ]
 })
 export class SharedModule {
 }
