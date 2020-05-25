@@ -8,12 +8,15 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class MessageDialogComponent implements OnInit {
 
-  @Input() title: string;
-  @Input() message: string;
-  @Input() confirm?: string;
-  @Input() cancel?: string;
+  @Input() type: 'info' | 'confirm' | 'alert' = 'info';
+  @Input() titleKey?: string;
+  @Input() messageKey: string;
 
-  constructor(public ngbActiveModal: NgbActiveModal) { }
+  @Input() confirmKey?: string;
+  @Input() cancelKey?: string;
+
+  constructor(public ngbActiveModal: NgbActiveModal) {
+  }
 
   ngOnInit(): void {
   }

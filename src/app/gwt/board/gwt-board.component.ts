@@ -127,9 +127,11 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
   doEndTurn() {
     if (this.canPerformFreeAction) {
       const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
-      ngbModalRef.componentInstance.message = 'You can still perform actions';
-      ngbModalRef.componentInstance.confirm = 'END_TURN';
-      ngbModalRef.componentInstance.cancel = 'CANCEL';
+      const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+      messageDialogComponent.type = 'confirm';
+      messageDialogComponent.messageKey = 'gwt.confirmEndTurn';
+      messageDialogComponent.confirmKey = 'endTurn';
+      messageDialogComponent.cancelKey = 'cancel';
       fromPromise(ngbModalRef.result).subscribe(() => this.endTurn.emit());
     } else {
       this.endTurn.emit();

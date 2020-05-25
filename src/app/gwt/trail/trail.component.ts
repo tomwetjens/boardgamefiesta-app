@@ -92,7 +92,8 @@ const MOVE_ACTIONS = [
   ActionType.MOVE_4_FORWARD
 ];
 
-const BUILD_ACTIONS = [ActionType.PLACE_CHEAP_BUILDING,
+const BUILD_ACTIONS = [
+  ActionType.PLACE_CHEAP_BUILDING,
   ActionType.PLACE_BUILDING];
 
 const HAZARD_ACTIONS = [
