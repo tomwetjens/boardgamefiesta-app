@@ -22,6 +22,8 @@ import {UserMenuComponent} from './user-menu/user-menu.component';
 import {BoardFactoryComponent} from './board/board-factory.component';
 import {TableOptionsComponent} from './table-options/table-options.component';
 import {registerLocaleData} from '@angular/common';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {registerLocaleData} from '@angular/common';
     ProfileComponent,
     UserMenuComponent,
     BoardFactoryComponent,
-    TableOptionsComponent
+    TableOptionsComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

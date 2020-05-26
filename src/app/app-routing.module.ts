@@ -5,6 +5,8 @@ import {TableComponent} from './table/table.component';
 import {HomeComponent} from './home/home.component';
 import {LayoutComponent} from './layout/layout.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AboutComponent} from "./about/about.component";
+import {ContactComponent} from "./contact/contact.component";
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'about',
+        component: AboutComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
       },
       {
         path: '**',
