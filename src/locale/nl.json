@@ -45,11 +45,15 @@
   "options": "Opties",
   "players": "Spelers",
   "addComputer": "Voeg computer toe",
+  "confirmStart": "Sommige spelers hebben nog niet gereageerd. Wil je het spel starten zonder hen?",
+  "waitForPlayers": "Wachten",
   "buy": "Kopen",
   "ago": "geleden",
   "popover": {
     "waitingForPlayer":  "Wachten tot deze speler een actie uitvoert."
   },
+  "location": "Locatie",
+  "unknown": "Niet opgegeven",
   "table": {
     "status": {
       "NEW": "Wachten op spelers",
@@ -85,7 +89,7 @@
     "popover": {
       "balance": "Dollars die de speler op dit moment heeft.",
       "handValue": "De totale fokwaarde van de verschillende soorten runderkaarten die je in je hand hebt is je handwaarde. Elke soort runderkaart wordt maar één keer geteld, ongeacht hoeveel runderkaarten van die soort je in je hand hebt.",
-      "certificates": "The total number of certificates, both temporary certificates as indicated by the marker on the player's board, as any permanent certificates the player may have acquired through station master tiles.",
+      "certificates": "Het totaal aantal certificaten, zowel tijdelijke certificaten zoals aangegeven op het spelersbord, als permanente certificaten die de speler heeft verzameld via de stationscheftegels.",
       "route": "Deze route kost {{cost}} dollar.",
       "playerFee": "krijgt {{fee}} dollar.",
       "cattleCard": "Dit is een {{type}} runderkaart met fokwaarde {{breedingValue}} en is {{points}} punten waard.",
@@ -396,6 +400,7 @@
     "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden.",
     "ALREADY_INVITED": "Deze gebruiker is al uitgenodigd voor deze tafel.",
     "NOT_PLAYER_IN_GAME": "Je bent geen speler aan deze tafel.",
+    "EXCEEDS_MAX_PLAYERS": "Je hebt het maximum aantal spelers bereikt voor dit spel.",
 
     "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze runderkaarten te kunnen kopen.",
     "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan,",

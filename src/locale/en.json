@@ -47,6 +47,8 @@
   "options": "Options",
   "players": "Players",
   "addComputer": "Add Computer Player",
+  "confirmStart": "Some players have not yet responded. They will not be able to join the game. Do you still want to start the game?",
+  "waitForPlayers": "Wait for players",
   "buy": "Buy",
   "popover": {
     "waitingForPlayer": "Waiting for this player to perform an action."
@@ -54,6 +56,8 @@
   "lastSeen": "Last seen",
   "ago": "ago",
   "menu": "Menu",
+  "location": "Location",
+  "unknown": "Unknown",
   "table": {
     "status": {
       "NEW": "Waiting for players",
@@ -403,7 +407,8 @@
     "UNKNOWN_ERROR": "An unknown error occurred.",
     "NOT_ENOUGH_COWBOYS": "Not enough cowboys",
     "ALREADY_INVITED": "This user is already invited to the table.",
-    "NOT_PLAYER_IN_GAME": "You are not playing at this table."
+    "NOT_PLAYER_IN_GAME": "You are not playing at this table.",
+    "EXCEEDS_MAX_PLAYERS": "You have reached the maximum number of players for this game."
   },
   "action": {
     "APPOINT_STATION_MASTER": "Appoint a station master",

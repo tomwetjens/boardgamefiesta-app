@@ -15,10 +15,11 @@ import {RatingComponent} from './rating/rating.component';
 import {FromNowPipe} from './from-now.pipe';
 import {AgoPipe} from './ago.pipe';
 import {AvatarComponent} from './avatar/avatar.component';
-import { MomentPipe } from './moment.pipe';
-import {LogComponent} from "./log/log.component";
-import { InGameMenuComponent } from './in-game-menu/in-game-menu.component';
-import { InGamePlayerComponent } from './in-game-player/in-game-player.component';
+import {MomentPipe} from './moment.pipe';
+import {LogComponent} from './log/log.component';
+import {InGameMenuComponent} from './in-game-menu/in-game-menu.component';
+import {InGamePlayerComponent} from './in-game-player/in-game-player.component';
+import {LocationIconComponent} from './location-icon/location-icon.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { InGamePlayerComponent } from './in-game-player/in-game-player.component
     MomentPipe,
     LogComponent,
     InGameMenuComponent,
-    InGamePlayerComponent
+    InGamePlayerComponent,
+    LocationIconComponent
   ],
   imports: [
     CommonModule,
@@ -45,20 +47,21 @@ import { InGamePlayerComponent } from './in-game-player/in-game-player.component
     RouterModule,
     TranslateModule.forChild()
   ],
-    exports: [
-        AvatarComponent,
-        ConnectionStatusComponent,
-        MessageDialogComponent,
-        PlayerNameComponent,
-        InGameNavbarComponent,
-        UserNameComponent,
-        RatingComponent,
-        FromNowPipe,
-        AgoPipe,
-        MomentPipe,
-        LogComponent,
-        InGamePlayerComponent
-    ]
+  exports: [
+    AvatarComponent,
+    ConnectionStatusComponent,
+    MessageDialogComponent,
+    PlayerNameComponent,
+    InGameNavbarComponent,
+    UserNameComponent,
+    RatingComponent,
+    FromNowPipe,
+    AgoPipe,
+    MomentPipe,
+    LogComponent,
+    InGamePlayerComponent,
+    LocationIconComponent
+  ]
 })
 export class SharedModule {
 }

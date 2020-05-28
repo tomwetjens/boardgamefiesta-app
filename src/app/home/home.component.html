@@ -1,5 +1,5 @@
 <section class="container">
-  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary" (click)="openTable(table)">
+  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary table">
     <strong>{{'game.' + table.game | translate}}</strong>
 
     <ng-container [ngSwitch]="table.status">
@@ -29,6 +29,10 @@
         <button (click)="openTable(table)" class="btn btn-primary">Open</button>
       </span>
     </ng-container>
+
+    <span class="avatars">
+      <app-avatar *ngFor="let player of otherHumanPlayers(table)" [user]="player.user"></app-avatar>
+    </span>
   </div>
 </section>
 

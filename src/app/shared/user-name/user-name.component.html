@@ -2,7 +2,6 @@
   <app-user-popover [user]="user"></app-user-popover>
 </ng-template>
 <strong [ngbPopover]="userPopover"
-        [popoverTitle]="user.username"
         placement="auto"
         triggers="mouseenter:mouseleave">
   {{user.username}}

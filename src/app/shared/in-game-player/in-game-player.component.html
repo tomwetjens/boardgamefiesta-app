@@ -4,6 +4,8 @@
 
     <app-player-name [player]="player"></app-player-name>
 
+    <app-location-icon *ngIf="player.user?.location" [location]="player.user.location"></app-location-icon>
+    &nbsp;
     <app-rating *ngIf="player.rating" [rating]="player.rating"></app-rating>
 
     <img src="/assets/hourglass.gif" class="hourglass" *ngIf="table.currentPlayer === player.id"

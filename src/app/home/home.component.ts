@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game, Table, TableStatus, TableType} from '../shared/model';
+import {Game, Table, TablePlayer, TableStatus, TableType} from '../shared/model';
 import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
@@ -81,4 +81,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  otherHumanPlayers(table: Table): TablePlayer[] {
+    return table.otherPlayers.map(playerId => table.players[playerId]).filter(player => !!player.user);
+  }
 }

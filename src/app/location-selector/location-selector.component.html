@@ -1,0 +1,14 @@
+<div ngbDropdown>
+  <button class="btn btn-outline-primary" ngbDropdownToggle>
+    <app-location-icon [location]="value"></app-location-icon>
+    {{names[value] || ('unknown'|translate)}}
+  </button>
+  <div ngbDropdownMenu aria-labelledby="location">
+    <button ngbDropdownItem *ngFor="let code of codes"
+            [ngClass]="{active:code == value}"
+            (click)="changeLocation.emit(code)">
+      <app-location-icon [location]="code"></app-location-icon>
+      {{names[code]}}
+    </button>
+  </div>
+</div>

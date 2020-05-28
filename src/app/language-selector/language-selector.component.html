@@ -1,0 +1,10 @@
+<div ngbDropdown>
+  <button class="btn btn-outline-primary" ngbDropdownToggle>{{languages[value].nativeName || ('unknown'|translate)}}</button>
+  <div ngbDropdownMenu>
+    <button ngbDropdownItem *ngFor="let code of codes"
+            [ngClass]="{active:code == value}"
+            (click)="changeLanguage.emit(code)">
+      {{languages[code].nativeName}}
+    </button>
+  </div>
+</div>

@@ -113,9 +113,12 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
     if (this.hasInvitedPlayers(table)) {
       const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
-      ngbModalRef.componentInstance.message = 'Some players have not yet responded. They will not be able to join the table. Do you still want to start the table?';
-      ngbModalRef.componentInstance.confirm = 'START';
-      ngbModalRef.componentInstance.cancel = 'WAIT_FOR_PLAYERS';
+      const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+      messageDialogComponent.type = 'alert';
+      messageDialogComponent.titleKey = 'confirmDialog';
+      messageDialogComponent.messageKey = 'confirmStart';
+      messageDialogComponent.confirmKey = 'start';
+      messageDialogComponent.cancelKey = 'waitForPlayers';
 
       confirm = fromPromise(ngbModalRef.result);
     }

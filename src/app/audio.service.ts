@@ -61,6 +61,10 @@ export class AudioService {
     });
   }
 
+  get isPlayingMusic(): boolean {
+    return !!this.backgroundMusic && !this.backgroundMusic.closed;
+  }
+
   private stopMusic() {
     this.backgroundMusic.unsubscribe();
     this.backgroundMusic = null;

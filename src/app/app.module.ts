@@ -21,9 +21,10 @@ import {SharedModule} from './shared/shared.module';
 import {UserMenuComponent} from './user-menu/user-menu.component';
 import {BoardFactoryComponent} from './board/board-factory.component';
 import {TableOptionsComponent} from './table-options/table-options.component';
-import {registerLocaleData} from '@angular/common';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import {AboutComponent} from './about/about.component';
+import {ContactComponent} from './contact/contact.component';
+import {LocationSelectorComponent} from './location-selector/location-selector.component';
+import {LanguageSelectorComponent} from './language-selector/language-selector.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { ContactComponent } from './contact/contact.component';
     BoardFactoryComponent,
     TableOptionsComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LocationSelectorComponent,
+    LanguageSelectorComponent
   ],
   imports: [
     BrowserModule,

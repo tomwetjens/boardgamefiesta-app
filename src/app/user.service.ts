@@ -55,4 +55,12 @@ export class UserService {
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable().pipe(take(1));
   }
+
+  changeLocation(id: string, location: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-location', {location});
+  }
+
+  changeLanguage(id: string, language: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-language', {language});
+  }
 }

@@ -17,10 +17,11 @@ export interface Options {
 export interface User {
   readonly id: string;
   readonly username: string;
-  readonly email: string;
+  email: string;
   readonly lastSeen: string;
   readonly avatarUrl: string;
-  readonly language: string;
+  language: string;
+  location?: string;
 }
 
 export enum PlayerType {
