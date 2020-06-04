@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{'istanbul.sellGoodsDialog'|translate}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>{{'istanbul.sellGoodsSelect'|translate}}</p>
+  <div class="btn-group btn-group-toggle goods">
+    <label *ngFor="let goodsType of market.demand; index as index"
+           ngbButtonLabel
+           class="btn-primary goods" [class]="goodsType">
+      <input type="checkbox" ngbButton [(ngModel)]="model[index]" [disabled]="!canSelect(index)">
+    </label>
+  </div>
+  <p>{{'istanbul.sellGoodsReward'|translate:{reward: reward} }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success" (click)="ngbActiveModal.close(selectedGoods)"
+          [disabled]="reward === 0">
+    {{'istanbul.sellGoodsConfirm'|translate}}
+  </button>
+</div>

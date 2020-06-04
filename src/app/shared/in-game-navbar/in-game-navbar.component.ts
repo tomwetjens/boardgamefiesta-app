@@ -9,7 +9,6 @@ import {Table} from '../model';
 export class InGameNavbarComponent implements OnInit {
 
   @Input() table: Table;
-  @Input() state: any;
 
   @Input() actions: string[];
   @Input() selectedAction: string;

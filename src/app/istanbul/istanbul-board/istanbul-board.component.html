@@ -1,0 +1,275 @@
+<app-in-game-navbar [table]="table"
+                    [actions]="state.actions"
+                    [canSkip]="canSkip"
+                    [selectedAction]="selectedAction"
+                    (perform)="selectAction($event)"
+                    (skip)="skip.emit($event)"
+                    (endTurn)="endTurn.emit($event)"
+                    (cancel)="selectedAction = null">
+</app-in-game-navbar>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-10">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 3300 2500"
+        style="width:100%; height:100%">
+
+        <defs>
+          <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+            <feDropShadow dx="10" dy="10" stdDeviation="5"
+                          flood-color="black" flood-opacity="0.7"/>
+          </filter>
+
+          <clipPath id="placeClip">
+            <rect rx="20" ry="20" width="800" height="537"/>
+          </clipPath>
+
+          <clipPath id="merchantClip">
+            <circle r="40" cx="0" cy="0"/>
+          </clipPath>
+        </defs>
+
+        <g *ngFor="let places of state.layout; index as x"
+           [attr.transform]="'translate(' + (20 + x * 810) + ',0)'">
+
+          <g *ngFor="let place of places; index as y"
+             [attr.transform]="'translate(0,' + (20 + y * 547) + ')'"
+             class="place"
+             [ngClass]="{selectable:canSelectPlace(x, y)}"
+             (click)="selectPlace(x,y)"
+             filter="url(#dropShadow)">
+
+            <image [attr.href]="'/assets/games/istanbul/places/' + place.number + '.jpg'"
+                   x="0"
+                   y="0"
+                   width="800"
+                   height="537"
+                   clip-path="url(#placeClip)"></image>
+
+            <g [ngSwitch]="place.number">
+              <g *ngSwitchCase="5">
+                <!-- Post Office -->
+                <g transform="translate(89, 316)">
+                  <rect *ngFor="let indicator of place.indicators; index as index"
+                        [attr.x]="index * 100"
+                        [attr.y]="indicator ? 98 : 0"
+                        stroke="black"
+                        stroke-width="2"
+                        rx="4" ry="4"
+                        fill="#DEB887"
+                        width="80"
+                        height="80">
+                  </rect>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="10">
+                <!-- Large market -->
+                <g transform="translate(175,170)" class="demand">
+                  <image href="/assets/games/istanbul/market/large_market.jpg"
+                         width="200"
+                         height="300"></image>
+
+                  <image *ngFor="let goodsType of place.demand; index as index"
+                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                         width="70"
+                         height="70"
+                         [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
+                         [attr.y]="108 + Math.floor((index-1) / 2) * 75"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="11">
+                <!-- Small market -->
+                <g transform="translate(175,170)" class="demand">
+                  <image href="/assets/games/istanbul/market/small_market.jpg"
+                         width="200"
+                         height="300"></image>
+
+                  <image *ngFor="let goodsType of place.demand; index as index"
+                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                         width="70"
+                         height="70"
+                         [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
+                         [attr.y]="108 + Math.floor((index-1) / 2) * 75"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="13">
+                <!-- Sultan's Palace -->
+                <g transform="translate(675,315)" class="rubies">
+                  <image *ngFor="let _ of [].constructor(11 - place.uncovered); index as index"
+                         href="/assets/games/istanbul/ruby.png"
+                         width="80"
+                         height="80"
+                         [attr.x]="index < 2 ? 0 : (index < 9 ? (index - 1) * -91 : -638)"
+                         [attr.y]="index < 2 ? index * 92 : (index < 9 ? 96 : 96 - (index - 8) * 92)"
+                         filter="url(#dropShadow)"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="16">
+                <!-- Gemstone dealer -->
+                <g transform="translate(685,140)" class="rubies">
+                  <image *ngFor="let _ of [].constructor(24 - place.cost); index as index"
+                         href="/assets/games/istanbul/ruby.png"
+                         width="80"
+                         height="80"
+                         [attr.x]="index < 4 ? 0 : (index < 10 ? (index - 3) * -92 : -650)"
+                         [attr.y]="index < 4 ? index * 92 : (index < 10 ? 270 : 270 - (index - 10) * 92)"
+                         filter="url(#dropShadow)"></image>
+                </g>
+              </g>
+            </g>
+
+            <g *ngIf="place.governor" transform="translate(650, 370)">
+              <circle r="40" cx="0" cy="0"
+                      stroke="black" stroke-width="1"
+                      fill="#4b26a8"
+                      filter="url(#dropShadow)"></circle>
+              <image href="/assets/games/istanbul/governor.jpg"
+                     x="-40"
+                     y="-40"
+                     width="80"
+                     height="80"
+                     clip-path="url(#merchantClip)"></image>
+            </g>
+
+            <g *ngIf="place.smuggler" transform="translate(550, 370)">
+              <circle r="40" cx="0" cy="0"
+                      stroke="black" stroke-width="1"
+                      fill="black"
+                      filter="url(#dropShadow)"></circle>
+              <image href="/assets/games/istanbul/smuggler.jpg"
+                     x="-40"
+                     y="-40"
+                     width="80"
+                     height="80"
+                     clip-path="url(#merchantClip)"></image>
+            </g>
+
+            <g transform="translate(120, 140)" class="merchants" *ngIf="place.merchants">
+              <g *ngFor="let merchant of place.merchants; index as merchantIndex" class="merchant"
+                 [attr.transform]="'translate(' + (merchantIndex * 90) + ',0)'">
+
+                <circle *ngFor="let assistant of [].constructor(merchant.assistants); index as assistantIndex"
+                        r="40" cx="0" [attr.cy]="(merchant.assistants - assistantIndex) * 20"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="merchant.color.toLowerCase()"
+                        [attr.filter]="assistantIndex == 0 ? 'url(#dropShadow)' : ''"></circle>
+
+                <!-- Top disc -->
+                <circle r="40" cx="0" cy="0"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="merchant.color.toLowerCase()"
+                        [attr.filter]="merchant.assistants == 0 ? 'url(#dropShadow)' : ''"></circle>
+
+                <!-- Merchant image -->
+                <image [attr.href]="'/assets/games/istanbul/merchants/' + merchant.color.toLowerCase() + '.png'"
+                       x="-35"
+                       y="-35"
+                       width="70"
+                       height="70"
+                       clip-path="url(#merchantClip)"></image>
+              </g>
+            </g>
+
+            <g transform="translate(90, 280)" class="assistants" *ngIf="place.assistants">
+              <g *ngFor="let assistant of place.assistants | keyvalue; index as index">
+                <circle r="30" cx="0" cy="0"
+                        [attr.x]="index * 70"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="assistant.key.toLowerCase()"
+                        filter="url(#dropShadow)"></circle>
+              </g>
+            </g>
+
+            <g transform="translate(20,100)" class="family-members" *ngIf="place.familyMembers">
+              <g *ngFor="let familyMember of place.familyMembers; index as index">
+                <rect width="60" height="60"
+                      [attr.x]="0"
+                      [attr.y]="index * 80"
+                      stroke="black" stroke-width="1"
+                      [attr.fill]="familyMember.toLowerCase()"
+                      filter="url(#dropShadow)"></rect>
+              </g>
+            </g>
+
+            <!-- Selection click box on top-->
+            <rect class="clickbox"
+                  x="3" y="3"
+                  width="794" height="531"
+                  fill="none"
+                  rx="20" ry="20"></rect>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="col-2">
+      <app-in-game-player *ngIf="state.players[table.players[table.player].color] as playerState"
+                          [player]="table.players[table.player]"
+                          [table]="table">
+        <header>
+          <span class="lira">{{playerState.lira}}</span>
+        </header>
+        <main>
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 400 270"
+               style="width:100%">
+
+            <g class="goods">
+              <g *ngFor="let goodsType of goodsTypes; index as index"
+                 [attr.transform]="'translate(20,' + (index * 50) + ')'">
+                <image *ngFor="let _ of [].constructor(playerState.capacity); index as index"
+                       [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                       [attr.x]="index * 50"
+                       class="good"
+                       [class]="{available: (playerState.goods[goodsType] || 0) > index}"
+                       width="40"
+                       height="40"></image>
+
+                <rect *ngFor="let _ of [].constructor(5 - playerState.capacity); index as index"
+                      width="40" height="40" rx="4" ry="4"
+                      stroke="white" stroke-width="1" fill="none"
+                      [attr.x]="(playerState.capacity + index) * 50"></rect>
+              </g>
+            </g>
+
+            <g class="rubies" transform="translate(20, 215)">
+              <image *ngFor="let _ of [].constructor(6); index as index"
+                     href="/assets/games/istanbul/ruby.png"
+                     [attr.x]="index * 50"
+                     class="ruby"
+                     [class]="{available: playerState.rubies > index}"
+                     width="40"
+                     height="40"></image>
+            </g>
+          </svg>
+
+          <div *ngIf="playerState.bonusCards?.length">
+            <button *ngFor="let bonusCard of playerState.bonusCards"
+                    [disabled]="!canSelectBonusCard(bonusCard)"
+                    (click)="selectBonusCard(bonusCard)">
+              {{bonusCard}}
+            </button>
+          </div>
+        </main>
+      </app-in-game-player>
+
+      <app-in-game-player *ngFor="let playerId of table.otherPlayers"
+                          [player]="table.players[playerId]"
+                          [table]="table">
+        <main *ngIf="state.players[table.players[playerId].color] as playerState">
+          <span class="lira">{{playerState.lira}}</span>
+          <span class="capacity">{{playerState.capacity}}/5</span>
+          <span *ngFor="let goodsType of goodsTypes" class="goods" [class]="goodsType">
+            {{playerState.goods[goodsType] || 0}}
+          </span>
+          <span class="rubies">{{playerState.rubies}}/6</span>
+        </main>
+      </app-in-game-player>
+    </div>
+  </div>
+</div>

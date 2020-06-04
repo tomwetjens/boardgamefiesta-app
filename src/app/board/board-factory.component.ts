@@ -60,6 +60,10 @@ export class BoardFactoryComponent implements OnInit, OnChanges, AfterViewInit, 
     setTimeout(() => {
       const provider = this.providers.find(gameProvider => gameProvider.id === this.table.game);
 
+      if (!provider) {
+        throw new Error('Provider not found: ' + this.table.game);
+      }
+
       const factory = this.resolver.resolveComponentFactory(provider.boardComponent);
       this.componentRef = this.container.createComponent(factory);
 

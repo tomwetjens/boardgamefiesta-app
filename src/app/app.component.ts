@@ -6,8 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import moment from 'moment';
 import en from '../locale/en.json';
 import nl from '../locale/nl.json';
-import {Router} from "@angular/router";
-import {filter} from "rxjs/operators";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +43,7 @@ export class AppComponent implements OnInit {
         // Initially set title, and restore title after navigating
         const appName = this.translateService.instant('appName');
         this.title.setTitle(appName);
-      })
+      });
   }
 
 }

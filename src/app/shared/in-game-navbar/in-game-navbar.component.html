@@ -15,10 +15,10 @@
   </div>
 
   <div class="actions">
-    <ng-container *ngIf="!selectedAction">
+    <ng-container *ngIf="table.turn && !selectedAction">
       <button *ngFor="let action of actions"
               class="btn btn-light" (click)="perform.emit(action)"
-              ngbPopover="{{'action.' + action | translate}}"
+              ngbPopover="{{table.game + '.actions.selected.' + action | translate}}"
               placement="bottom"
               triggers="mouseenter:mouseleave"
               container="body">
@@ -26,10 +26,10 @@
       </button>
     </ng-container>
 
-    <ng-container *ngIf="selectedAction">
-      {{'action.' + selectedAction | translate}}
+    <ng-container *ngIf="table.turn && selectedAction">
+      {{table.game + '.actions.selected.' + selectedAction | translate}}
 
-      <button *ngIf="state.actions.length > 1"
+      <button *ngIf="actions.length > 1"
               class="btn btn-secondary"
               (click)="cancel.emit()">
         {{'cancel'|translate}}

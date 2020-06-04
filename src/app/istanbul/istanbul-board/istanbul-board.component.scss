@@ -1,0 +1,90 @@
+.place {
+  &.selectable {
+    .clickbox {
+      fill: black;
+      fill-opacity: 0.001; /* >0, so browser considers it visible across the whole area */
+      stroke: white;
+      stroke-width: 8;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .clickbox {
+        stroke: black;
+      }
+    }
+  }
+}
+
+app-in-game-player {
+  header {
+    display: inline-block;
+  }
+
+  svg {
+    .goods {
+      .good {
+        opacity: 0.25;
+
+        &.available {
+          opacity: 1;
+        }
+      }
+    }
+
+    .rubies {
+      .ruby {
+        opacity: 0.25;
+
+        &.available {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .lira {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-weight: bold;
+    margin: 2px;
+    background-image: url('../../../assets/games/istanbul/lira.png');
+    background-size: cover;
+  }
+
+  .rubies {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    margin: 2px;
+    background-image: url('../../../assets/games/istanbul/ruby.png');
+    background-size: cover;
+  }
+
+  .goods {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    background-size: cover;
+    margin: 2px;
+    &.BLUE { background-image: url('../../../assets/games/istanbul/market/blue.jpg');}
+    &.FABRIC { background-image: url('../../../assets/games/istanbul/market/fabric.jpg');}
+    &.SPICE { background-image: url('../../../assets/games/istanbul/market/spice.jpg');}
+    &.FRUIT { background-image: url('../../../assets/games/istanbul/market/fruit.jpg');}
+  }
+}

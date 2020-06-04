@@ -25,6 +25,7 @@ import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {LocationSelectorComponent} from './location-selector/location-selector.component';
 import {LanguageSelectorComponent} from './language-selector/language-selector.component';
+import {IstanbulModule} from './istanbul/istanbul.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {LanguageSelectorComponent} from './language-selector/language-selector.c
     AppRoutingModule,
     NgbModule,
     SharedModule,
-    GwtModule
+    GwtModule,
+    IstanbulModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
