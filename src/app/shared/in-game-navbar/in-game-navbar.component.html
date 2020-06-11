@@ -18,7 +18,7 @@
     <ng-container *ngIf="table.turn && !selectedAction">
       <button *ngFor="let action of actions"
               class="btn btn-light" (click)="perform.emit(action)"
-              ngbPopover="{{table.game + '.actions.selected.' + action | translate}}"
+              ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
               placement="bottom"
               triggers="mouseenter:mouseleave"
               container="body">
@@ -27,7 +27,7 @@
     </ng-container>
 
     <ng-container *ngIf="table.turn && selectedAction">
-      {{table.game + '.actions.selected.' + selectedAction | translate}}
+      {{table.game + '.actions.instructions.' + selectedAction | translate}}
 
       <button *ngIf="actions.length > 1"
               class="btn btn-secondary"

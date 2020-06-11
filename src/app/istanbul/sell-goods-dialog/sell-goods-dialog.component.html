@@ -8,18 +8,47 @@
 </div>
 <div class="modal-body">
   <p>{{'istanbul.sellGoodsSelect'|translate}}</p>
-  <div class="btn-group btn-group-toggle goods">
-    <label *ngFor="let goodsType of market.demand; index as index"
-           ngbButtonLabel
-           class="btn-primary goods" [class]="goodsType">
-      <input type="checkbox" ngbButton [(ngModel)]="model[index]" [disabled]="!canSelect(index)">
-    </label>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="btn-group btn-group-toggle goods">
+          <label *ngFor="let goodsType of market.demand; index as index"
+                 ngbButtonLabel
+                 class="btn-primary" [class]="goodsType">
+            <input type="checkbox" ngbButton [(ngModel)]="demandModel[index]" [disabled]="!canSelectDemand(index)">
+          </label>
+        </div>
+
+        <p>{{'istanbul.sellGoodsReward'|translate:{reward: rewardForDemand} }}</p>
+
+        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:selectedGoods})"
+                [disabled]="rewardForDemand === 0">
+          {{'istanbul.sellGoodsConfirm'|translate}}
+        </button>
+      </div>
+      <div class="col-6" *ngIf="hasAnyGoodBonusCard">
+        <p>{{'istanbul.sellGoodsBonusCard'|translate}}</p>
+        <img class="bonus-card" src="/assets/games/istanbul/bonus/SMALL_MARKET_ANY_GOOD.jpg"/>
+        <div *ngFor="let goodsType of goodsTypes"
+             class="btn-group btn-group-toggle goods" ngbRadioGroup>
+          <label *ngFor="let _ of [].constructor((playerState.goods[goodsType]||0)+1); index as index"
+                 ngbButtonLabel class="btn-primary" [class]="goodsType">
+            <input ngbButton type="radio" [value]="index"
+                   [checked]="anyGoodsModel[goodsType] === index"
+                   (click)="anyGoodsModel[goodsType] = index"
+                   [disabled]="numberOfSelectedAnyGoods === 5"> {{index}}
+          </label>
+        </div>
+
+        <p>{{'istanbul.sellGoodsReward'|translate:{reward: rewardForAnyGoods} }}</p>
+
+        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:anyGoodsModel, bonusCard: bonusCard})"
+                [disabled]="rewardForAnyGoods === 0">
+          {{'istanbul.sellGoodsConfirmBonusCard'|translate}}
+        </button>
+      </div>
+    </div>
   </div>
-  <p>{{'istanbul.sellGoodsReward'|translate:{reward: reward} }}</p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-success" (click)="ngbActiveModal.close(selectedGoods)"
-          [disabled]="reward === 0">
-    {{'istanbul.sellGoodsConfirm'|translate}}
-  </button>
 </div>

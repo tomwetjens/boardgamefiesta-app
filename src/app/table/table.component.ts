@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, of, ReplaySubject, Subject} from 'rxjs';
-import {filter, skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, of, Subject} from 'rxjs';
+import {bufferCount, filter, skipWhile, switchMap, take, takeUntil, windowCount} from 'rxjs/operators';
 import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
@@ -11,6 +11,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {SelectUserComponent} from '../select-user/select-user.component';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
+import {AudioService} from '../audio.service';
 
 @Component({
   selector: 'app-table',
@@ -32,7 +33,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
               private eventService: EventService,
               private ngbModal: NgbModal,
               private title: Title,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private audioService: AudioService) {
 
   }
 
@@ -46,6 +48,16 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState();
+        }
+      });
+
+    this.table
+      .pipe(bufferCount(2, 1))
+      .subscribe(([previous, current]) => {
+        if (current && previous) {
+          if (current.turn && !previous.turn) {
+            this.audioService.alert();
+          }
         }
       });
 

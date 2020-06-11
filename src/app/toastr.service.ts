@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 export interface ToastrMessage {
   header?: string;
   type: 'error' | 'info';
-  text: string;
+  key: string;
   delay: number;
   autohide: boolean;
 }
@@ -19,7 +19,7 @@ export class ToastrService {
   constructor() {
   }
 
-  error(text: string) {
-    this.messages.next({type: 'error', text, delay: 3000, autohide: true});
+  error(key: string) {
+    this.messages.next({type: 'error', key, delay: 3000, autohide: true});
   }
 }

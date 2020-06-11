@@ -1,5 +1,23 @@
 {
   "istanbul": {
+    "places": {
+      "1": "Wagenmaker",
+      "2": "Zijde Pakhuis",
+      "3": "Specerijen Pakhuis",
+      "4": "Fruit Pakhuis",
+      "5": "Postkantoor",
+      "6": "Karavaanserai",
+      "7": "Fontein",
+      "8": "Zwarte Markt",
+      "9": "Teehuis",
+      "10": "Grote Markt",
+      "11": "Kleine Markt",
+      "12": "Politiebureau",
+      "13": "Paleis van de Sultan",
+      "14": "Kleine Moskee",
+      "15": "Grote Moskee",
+      "16": "Juwelier"
+    },
     "actions": {
       "selected": {
 

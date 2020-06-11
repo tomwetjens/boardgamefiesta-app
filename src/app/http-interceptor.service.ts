@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
 import {catchError} from 'rxjs/operators';
 import {ToastrService} from './toastr.service';
+import {ErrorCode, ErrorResponse} from './model';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -26,8 +27,12 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(catchError(response => {
       if (response.status >= 400 && response.status < 500) {
         // TODO Handle 4xx with code
-        const message = response.error.errorCode || response.statusText;
-        this.toastrService.error(message);
+        const error = response.error as ErrorResponse;
+        if (error.errorCode === ErrorCode.IN_GAME_ERROR) {
+          this.toastrService.error(error.gameId + '.errors.' + error.reasonCode);
+        } else {
+          this.toastrService.error('errors.' + error.errorCode);
+        }
       } else if (response.status === 502 || response.status === 503) {
         // TODO Handle 503 from backend
         // TODO Handle 502 from backend

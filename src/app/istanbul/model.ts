@@ -2,6 +2,11 @@ import {PlayerColor} from '../shared/model';
 
 export enum Action {
   BUY_RUBY = 'BUY_RUBY',
+  BONUS_CARD_BUY_RUBY = 'BONUS_CARD_BUY_RUBY',
+  BONUS_CARD_DELIVER_TO_SULTAN = 'BONUS_CARD_DELIVER_TO_SULTAN',
+  BONUS_CARD_TAKE_5_LIRA = 'BONUS_CARD_TAKE_5_LIRA',
+  BONUS_CARD_GAIN_1_GOOD = 'BONUS_CARD_GAIN_1_GOOD',
+  BONUS_CARD_USE_POST_OFFICE = 'BONUS_CARD_USE_POST_OFFICE',
   BUY_WHEELBARROW_EXTENSION = 'BUY_WHEELBARROW_EXTENSION',
   CATCH_FAMILY_MEMBER_FOR_3_LIRA = 'CATCH_FAMILY_MEMBER_FOR_3_LIRA',
   CATCH_FAMILY_MEMBER_FOR_BONUS_CARD = 'CATCH_FAMILY_MEMBER_FOR_BONUS_CARD',
@@ -83,7 +88,7 @@ export interface Place {
 }
 
 export interface Market extends Place {
-  readonly demand: { [goodsType in GoodsType]: number };
+  readonly demand: GoodsType[];
 }
 
 export interface Caravansary extends Place {

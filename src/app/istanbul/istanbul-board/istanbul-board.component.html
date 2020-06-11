@@ -29,6 +29,10 @@
           <clipPath id="merchantClip">
             <circle r="40" cx="0" cy="0"/>
           </clipPath>
+
+          <clipPath id="mosqueTileClip">
+            <rect rx="20" ry="20" width="270" height="270"/>
+          </clipPath>
         </defs>
 
         <g *ngFor="let places of state.layout; index as x"
@@ -47,6 +51,9 @@
                    width="800"
                    height="537"
                    clip-path="url(#placeClip)"></image>
+
+            <text class="name" x="450" y="58"
+                  text-anchor="middle">{{'istanbul.places.' + place.number|translate}}</text>
 
             <g [ngSwitch]="place.number">
               <g *ngSwitchCase="5">
@@ -107,6 +114,58 @@
                          [attr.x]="index < 2 ? 0 : (index < 9 ? (index - 1) * -91 : -638)"
                          [attr.y]="index < 2 ? index * 92 : (index < 9 ? 96 : 96 - (index - 8) * 92)"
                          filter="url(#dropShadow)"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="14" class="mosque">
+                <!-- Small Mosque -->
+                <g transform="translate(160,185)">
+                  <image *ngIf="place.a"
+                         [attr.href]="'/assets/games/istanbul/mosque/fabric' + place.a + '.jpg'"
+                         width="270"
+                         height="270"
+                         clip-path="url(#mosqueTileClip)"
+                         filter="url(#dropShadow)"></image>
+                  <rect width="270" height="270" rx="20" ry="20"
+                        [ngClass]="{selectable:canSelectMosqueTile('TURN_OR_REROLL_DICE')}"
+                        (click)="selectMosqueTile('TURN_OR_REROLL_DICE')"/>
+                  <g transform="translate(280,0)">
+                    <image *ngIf="place.b"
+                           [attr.href]="'/assets/games/istanbul/mosque/spice' + place.b + '.jpg'"
+                           width="270"
+                           height="270"
+                           clip-path="url(#mosqueTileClip)"
+                           filter="url(#dropShadow)"></image>
+                    <rect width="270" height="270" rx="20" ry="20"
+                          [ngClass]="{selectable:canSelectMosqueTile('PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD')}"
+                          (click)="selectMosqueTile('PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD')"/>
+                  </g>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="15" class="mosque">
+                <!-- Great Mosque -->
+                <g transform="translate(160,185)">
+                  <image *ngIf="place.a"
+                         [attr.href]="'/assets/games/istanbul/mosque/fruit' + place.a + '.jpg'"
+                         width="270"
+                         height="270"
+                         clip-path="url(#mosqueTileClip)"
+                         filter="url(#dropShadow)"></image>
+                  <rect width="270" height="270" rx="20" ry="20"
+                        [ngClass]="{selectable:canSelectMosqueTile('PAY_2_LIRA_TO_RETURN_ASSISTANT')}"
+                        (click)="selectMosqueTile('PAY_2_LIRA_TO_RETURN_ASSISTANT')"/>
+                  <g transform="translate(280,0)">
+                    <image *ngIf="place.b"
+                           [attr.href]="'/assets/games/istanbul/mosque/blue' + place.b + '.jpg'"
+                           width="270"
+                           height="270"
+                           clip-path="url(#mosqueTileClip)"
+                           filter="url(#dropShadow)"></image>
+                    <rect width="270" height="270" rx="20" ry="20"
+                          [ngClass]="{selectable:canSelectMosqueTile('EXTRA_ASSISTANT')}"
+                          (click)="selectMosqueTile('EXTRA_ASSISTANT')"/>
+                  </g>
                 </g>
               </g>
 
@@ -211,17 +270,16 @@
       <app-in-game-player *ngIf="state.players[table.players[table.player].color] as playerState"
                           [player]="table.players[table.player]"
                           [table]="table">
-        <header>
-          <span class="lira">{{playerState.lira}}</span>
-        </header>
         <main>
+          <span class="lira">{{playerState.lira}}</span>
+
           <svg xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 400 270"
                style="width:100%">
 
             <g class="goods">
               <g *ngFor="let goodsType of goodsTypes; index as index"
-                 [attr.transform]="'translate(20,' + (index * 50) + ')'">
+                 [attr.transform]="'translate(0,' + (index * 50) + ')'">
                 <image *ngFor="let _ of [].constructor(playerState.capacity); index as index"
                        [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
                        [attr.x]="index * 50"
@@ -237,7 +295,7 @@
               </g>
             </g>
 
-            <g class="rubies" transform="translate(20, 215)">
+            <g class="rubies" transform="translate(0, 215)">
               <image *ngFor="let _ of [].constructor(6); index as index"
                      href="/assets/games/istanbul/ruby.png"
                      [attr.x]="index * 50"
@@ -248,11 +306,20 @@
             </g>
           </svg>
 
-          <div *ngIf="playerState.bonusCards?.length">
+          <div *ngIf="playerState.mosqueTiles?.length">
+            <div *ngFor="let mosqueTile of playerState.mosqueTiles">
+              {{mosqueTile}}
+            </div>
+          </div>
+
+          <div *ngIf="playerState.bonusCards?.length" class="bonus-cards">
             <button *ngFor="let bonusCard of playerState.bonusCards"
                     [disabled]="!canSelectBonusCard(bonusCard)"
+                    class="btn"
                     (click)="selectBonusCard(bonusCard)">
-              {{bonusCard}}
+              <img src="/assets/games/istanbul/bonus/{{bonusCard}}.jpg" class="bonus-card"
+                   alt="{{'istanbul.bonusCards.' + bonusCard|translate}}"
+                   title="{{'istanbul.bonusCards.' + bonusCard|translate}}"/>
             </button>
           </div>
         </main>

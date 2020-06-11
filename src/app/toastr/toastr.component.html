@@ -5,6 +5,6 @@
              [autohide]="toastrMessage.autohide"
              [delay]="toastrMessage.delay"
              (hide)="hide(toastrMessage)">
-    <span>{{'toast.' + toastrMessage.text | translate}}</span>
+    <span>{{toastrMessage.key | translate}}</span>
   </ngb-toast>
 </div>

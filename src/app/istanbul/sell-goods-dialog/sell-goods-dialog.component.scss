@@ -1,4 +1,6 @@
 .goods {
+  display: block;
+
   .btn-primary {
     width: 32px;
     height: 32px;
@@ -20,5 +22,15 @@
     &.BLUE {
       background-image: url('../../../assets/games/istanbul/market/blue.jpg');
     }
+
+    &.active {
+      border: 2px solid black;
+      border-radius: 4px;
+    }
   }
+}
+
+.bonus-card {
+  width: 200px;
+  height: 124px;
 }

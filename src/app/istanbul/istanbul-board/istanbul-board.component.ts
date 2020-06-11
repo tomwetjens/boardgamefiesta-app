@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
 import {BoardComponent} from '../../shared/api';
-import {Action, BonusCard, Caravansary, GoodsType, Istanbul, Market, PlayerState} from '../model';
+import {Action, BonusCard, Caravansary, GoodsType, Istanbul, Market, MosqueTile, PlayerState} from '../model';
 import {PlayerColor, Table, TablePlayer} from '../../shared/model';
 import {TranslateService} from '@ngx-translate/core';
 import en from '../locale/en.json';
@@ -97,8 +97,10 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
   selectAction(action: string) {
     switch (action as Action) {
       case Action.MOVE:
+      case Action.SEND_FAMILY_MEMBER:
+      case Action.TAKE_MOSQUE_TILE:
         this.selectedAction = action as Action;
-        // Places become selectable
+        // Something becomes selectable
         break;
 
       case Action.DISCARD_BONUS_CARD:
@@ -135,8 +137,8 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
     componentInstance.playerState = this.playerState;
 
     fromPromise(ngbModalRef.result)
-      .subscribe(goods => {
-        this.perform.emit({type: Action.SELL_GOODS, goods});
+      .subscribe(({goods, bonusCard}) => {
+        this.perform.emit({type: Action.SELL_GOODS, goods, bonusCard});
       });
   }
 
@@ -150,11 +152,31 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
   }
 
   canSelectPlace(x: number, y: number): boolean {
-    // TODO Support 0 or 3..4 steps
-    return this.selectedAction === Action.MOVE
-      && this.currentPlace
-      && (x !== this.currentPlace.x || y !== this.currentPlace.y)
-      && Math.abs(this.currentPlace.x - x) + Math.abs(this.currentPlace.y - y) <= 2;
+    if (!this.currentPlace) {
+      return false;
+    }
+
+    switch (this.selectedAction) {
+      case Action.MOVE:
+        let atLeast = 1;
+        let atMost = 2;
+        if (this.playerState.bonusCards.includes(BonusCard.MOVE_0)) {
+          atLeast = 0;
+        }
+        if (this.playerState.bonusCards.includes(BonusCard.MOVE_3_OR_4)) {
+          atMost = 4;
+        }
+
+        const distance = Math.abs(this.currentPlace.x - x) + Math.abs(this.currentPlace.y - y);
+
+        return distance >= atLeast && distance <= atMost;
+
+      case Action.SEND_FAMILY_MEMBER:
+        return x !== this.currentPlace.x || y !== this.currentPlace.y;
+
+      default:
+        return false;
+    }
   }
 
   selectPlace(x: number, y: number) {
@@ -162,7 +184,18 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
       return;
     }
 
-    this.perform.emit({type: this.selectedAction, x, y});
+    const distance = Math.abs(this.currentPlace.x - x) + Math.abs(this.currentPlace.y - y);
+
+    if (distance === 0) {
+      // TODO Confirm play bonus card MOVE_0
+      this.perform.emit({type: this.selectedAction, x, y, bonusCard: BonusCard.MOVE_0});
+    } else if (distance >= 3) {
+      // TODO Confirm play bonus card MOVE_34
+      this.perform.emit({type: this.selectedAction, x, y, bonusCard: BonusCard.MOVE_3_OR_4});
+    } else {
+      // No bonus card needed
+      this.perform.emit({type: this.selectedAction, x, y});
+    }
   }
 
   private take2BonusCards() {
@@ -179,10 +212,10 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
       componentInstance.cancelKey = 'istanbul.takeFromDrawStack';
 
       fromPromise(ngbModalRef.result)
-        .subscribe(() => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, fromCaravansary: true}),
-          () => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, fromCaravansary: false}));
+        .subscribe(() => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: true}),
+          () => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: false}));
     } else {
-      this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, fromCaravansary: false});
+      this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: false});
     }
   }
 
@@ -196,5 +229,18 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
         this.perform.emit({type: this.selectedAction, bonusCard});
         break;
     }
+  }
+
+  canSelectMosqueTile(mosqueTile: string): boolean {
+    return [Action.TAKE_MOSQUE_TILE].includes(this.selectedAction)
+      && !this.playerState.mosqueTiles.includes(mosqueTile as MosqueTile);
+  }
+
+  selectMosqueTile(mosqueTile: string) {
+    if (!this.canSelectMosqueTile(mosqueTile)) {
+      return;
+    }
+
+    this.perform.emit({type: Action.TAKE_MOSQUE_TILE, mosqueTile: mosqueTile as MosqueTile});
   }
 }

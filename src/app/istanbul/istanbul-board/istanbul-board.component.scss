@@ -1,4 +1,12 @@
 .place {
+  .name {
+    font-family: serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    text-transform: uppercase;
+  }
+
   &.selectable {
     .clickbox {
       fill: black;
@@ -10,6 +18,24 @@
 
     &:hover {
       .clickbox {
+        stroke: black;
+      }
+    }
+  }
+}
+
+.mosque {
+  rect {
+    fill: none;
+
+    &.selectable {
+      fill: black;
+      fill-opacity: 0.001; /* >0, so browser considers it visible across the whole area */
+      stroke: white;
+      stroke-width: 8;
+      cursor: pointer;
+
+      &:hover {
         stroke: black;
       }
     }
@@ -82,9 +108,49 @@ app-in-game-player {
     font-weight: bold;
     background-size: cover;
     margin: 2px;
-    &.BLUE { background-image: url('../../../assets/games/istanbul/market/blue.jpg');}
-    &.FABRIC { background-image: url('../../../assets/games/istanbul/market/fabric.jpg');}
-    &.SPICE { background-image: url('../../../assets/games/istanbul/market/spice.jpg');}
-    &.FRUIT { background-image: url('../../../assets/games/istanbul/market/fruit.jpg');}
+
+    &.BLUE {
+      background-image: url('../../../assets/games/istanbul/market/blue.jpg');
+    }
+
+    &.FABRIC {
+      background-image: url('../../../assets/games/istanbul/market/fabric.jpg');
+    }
+
+    &.SPICE {
+      background-image: url('../../../assets/games/istanbul/market/spice.jpg');
+    }
+
+    &.FRUIT {
+      background-image: url('../../../assets/games/istanbul/market/fruit.jpg');
+    }
+  }
+
+  .bonus-cards {
+    button {
+      width: 100px;
+      height: 62px;
+
+      border-radius: 5px;
+      padding: 0;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+
+      img {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+      }
+
+      &:disabled {
+        opacity: 1;
+        border: none;
+      }
+
+      border: 2px solid white;
+
+      &:hover {
+        border-color: black;
+      }
+    }
   }
 }
