@@ -30,6 +30,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(catchError(response => {
       if (response.status === 401) {
         // Unauthorized, must login
+        // TODO If oauth callback is still processing while API request is being made,
+        // this results in request being sent without token leading to infinite redirects
         this.oAuthService.initLoginFlow();
       } else if (response.status >= 400 && response.status < 500 && response.error) {
           const error = response.error as ErrorResponse;
