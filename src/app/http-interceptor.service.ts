@@ -14,7 +14,6 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private router: Router,
               private oAuthService: OAuthService,
-              private userService: UserService,
               private toastrService: ToastrService) {
   }
 
@@ -30,8 +29,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     return next.handle(req).pipe(catchError(response => {
       if (response.status === 401) {
-        // Unauthorized, must (re)login
-        this.userService.initLoginFlow();
+        // Unauthorized, must login
+        this.oAuthService.initLoginFlow();
       } else if (response.status >= 400 && response.status < 500 && response.error) {
           const error = response.error as ErrorResponse;
           if (error.errorCode === ErrorCode.IN_GAME_ERROR) {

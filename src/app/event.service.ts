@@ -14,23 +14,35 @@ export class EventService {
   events = new Subject<Event>();
 
   connected = new BehaviorSubject<boolean>(false);
+  connectedCount = 0;
 
   constructor(private oauthService: OAuthService) {
-    concat(of({}, this.oauthService.events)).pipe(
+    concat(of({}), this.oauthService.events).pipe(
       map(() => this.oauthService.hasValidIdToken() ? this.oauthService.getIdToken() : null),
       distinctUntilChanged(),
       tap(() => console.log('Creating new WebSocket subject')),
-      switchMap(idToken => webSocket({
-        url: environment.wsBaseUrl + '/events' + (!!idToken ? '?token=' + idToken : ''),
-        openObserver: {next: () => this.connected.next(true)},
-        closeObserver: {next: () => this.connected.next(false)}
+      switchMap(token => webSocket({
+        url: environment.wsBaseUrl + '/events' + (!!token ? '?token=' + token : ''),
+        openObserver: {
+          next: () => {
+            this.connectedCount++;
+            this.connected.next(this.connectedCount > 0);
+          }
+        },
+        closeObserver: {
+          next: () => {
+            this.connectedCount--;
+            this.connected.next(this.connectedCount > 0);
+          }
+        }
       })
-        // TODO Better retry
         .pipe(
           tap(msg => console.log('WebSocket message:', msg), err => console.error('WebSocket error:', err)),
+          // TODO Better retry
           retry())),
       catchError(err => {
-        this.connected.next(false);
+        this.connectedCount--;
+        this.connected.next(this.connectedCount > 0);
         return throwError(err);
       }))
       .subscribe(message => this.events.next(message as any));
