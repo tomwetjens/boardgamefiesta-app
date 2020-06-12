@@ -13,11 +13,11 @@
 
     <section class="container">
       <div class="jumbotron">
-        <h5>{{'game.' + table.game|translate}}</h5>
+        <h5>{{'game.' + table.game + '.name'|translate}}</h5>
         <hr class="my-4">
         <p>
           <img src="/assets/games/{{table.game}}/box.jpg" class="box"/>
-          {{table.game + '.description'|translate}}
+          {{'game.' + table.game + '.description'|translate}}
         </p>
         <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>

@@ -20,8 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
-        canActivate: [AuthGuard]
+        component: HomeComponent
       },
       {
         path: 'profile',
@@ -35,6 +34,10 @@ const routes: Routes = [
       {
         path: 'contact',
         component: ContactComponent
+      },
+      {
+        path: 'games',
+        loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
       },
       {
         path: '**',

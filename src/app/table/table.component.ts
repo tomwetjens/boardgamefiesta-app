@@ -44,7 +44,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     this.table
       .pipe(filter(table => !!table), takeUntil(this.destroyed))
       .subscribe(table => {
-        this.title.setTitle(this.translateService.instant('game.' + table.game));
+        this.title.setTitle(this.translateService.instant('game.' + table.game + '.name'));
 
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState();

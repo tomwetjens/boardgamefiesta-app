@@ -40,7 +40,7 @@ export class UserService {
 
   currentUser: Observable<User>;
 
-  login() {
+  initLoginFlow() {
     this.oauthService.initLoginFlow();
   }
 

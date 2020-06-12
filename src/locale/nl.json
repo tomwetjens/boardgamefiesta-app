@@ -1,7 +1,12 @@
 {
   "appName": "Tom's Board Games",
-  "welcome": "Welkom",
-  "home": "Spellen",
+  "home": {
+    "nav": "Spellen",
+    "welcome": "Welkom",
+    "lead": "Play your favorite board games with friends or other players around the world!.",
+    "lead2": "Join the coolest board game community on the web. Start directly from your browser. No downloads or setup necessary.",
+    "startPlayingNow": "Start playing now"
+  },
   "games": "Spellen",
   "logout": "Afmelden",
   "accept": "Accepteren",
@@ -11,6 +16,7 @@
   "search": "Zoeken",
   "select": "Selecteer",
   "profile": "Profiel",
+  "readMore": "Lees meer",
   "about": "Over mij",
   "preferences": "Voorkeuren",
   "username": "Gebruikersnaam",

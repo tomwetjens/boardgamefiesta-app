@@ -1,6 +1,6 @@
-<section class="container">
+<section class="container" *ngIf="loggedIn | async">
   <div *ngFor="let table of realtimeTables | async" class="alert alert-primary table">
-    <strong>{{'game.' + table.game | translate}}</strong>
+    <strong>{{'game.' + table.game + '.name' | translate}}</strong>
 
     <ng-container [ngSwitch]="table.status">
       <span *ngSwitchCase="'NEW'">
@@ -36,13 +36,15 @@
   </div>
 </section>
 
-<section class="container">
+<section class="container" *ngIf="!(loggedIn | async)">
   <div class="jumbotron">
-    <h1 class="display-4">{{'welcome'|translate}}!</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-      et dolore magna aliqua.</p>
+    <h1 class="display-4">{{'home.welcome'|translate}}!</h1>
+    <p class="lead">{{'home.lead'|translate}}</p>
     <hr class="my-4">
-    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p>{{'home.lead2'|translate}}</p>
+    <p>
+      <button class="btn btn-primary btn-lg" (click)="initLoginFlow()">{{'home.startPlayingNow'|translate}}</button>
+    </p>
   </div>
 </section>
 
@@ -52,10 +54,13 @@
     <!-- Split across rows -->
     <div *ngFor="let game of games | async" class="col-3">
       <div class="card">
-        <img class="card-img-top" src="/assets/games/{{game.id}}/box.jpg" alt="{{'game.' + game.id|translate}}">
+        <img class="card-img-top" src="/assets/games/{{game.id}}/box.jpg" alt="{{'game.' + game.id + '.name'|translate}}">
         <div class="card-body">
-          <h5 class="card-title">{{'game.' + game.id | translate}}</h5>
+          <h5 class="card-title">{{'game.' + game.id + '.name' | translate}}</h5>
           <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
+          <span class="ml-2">
+            <a [routerLink]="['games/', game.id]">{{'readMore'|translate}}</a>
+          </span>
         </div>
       </div>
     </div>
@@ -65,7 +70,7 @@
         <img class="card-img-top" src="/assets/games/mombasa/box.jpg" alt="Mombasa">
         <div class="card-body">
           <h5 class="card-title">Mombasa</h5>
-          <button class="btn btn-primary">{{'play'|translate}}</button>
+          <button class="btn btn-primary" disabled>{{'play'|translate}}</button>
         </div>
       </div>
     </div>
@@ -75,7 +80,7 @@
         <img class="card-img-top" src="/assets/games/omg/box.jpg" alt="Oh My Goods">
         <div class="card-body">
           <h5 class="card-title">Oh My Goods</h5>
-          <button class="btn btn-primary">{{'play'|translate}}</button>
+          <button class="btn btn-primary" disabled>{{'play'|translate}}</button>
         </div>
       </div>
     </div>

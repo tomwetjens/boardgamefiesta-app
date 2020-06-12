@@ -1,0 +1,5 @@
+<section class="container" *ngIf="game | async as game">
+  <h1>{{'game.' + game.id + '.name'|translate}}</h1>
+  {{'game.' + game.id + '.description'|translate}}
+  {{game|json}}
+</section>

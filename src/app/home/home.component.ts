@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Game, Table, TablePlayer, TableStatus, TableType} from '../shared/model';
-import {Observable, ReplaySubject, Subject} from 'rxjs';
+import {combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
 import {EventService} from '../event.service';
-import {map, takeUntil} from 'rxjs/operators';
+import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
 import {GameService} from '../game.service';
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-home',
@@ -16,36 +17,46 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject();
 
+  loggedIn: Observable<boolean>;
   games = new ReplaySubject<Game[]>(1);
   tables = new ReplaySubject<Table[]>(1);
   realtimeTables: Observable<Table[]>;
 
   constructor(private router: Router,
+              private userService: UserService,
               private tableService: TableService,
               private eventService: EventService,
               private gameService: GameService) {
+    this.loggedIn = userService.loggedIn;
   }
 
   ngOnInit(): void {
-    this.eventService.events
+    combineLatest([this.userService.loggedIn, this.eventService.events])
       .pipe(takeUntil(this.destroyed))
-      .subscribe(event => {
-        if (event.tableId) {
+      .subscribe(([loggedIn, event]) => {
+        if (loggedIn && event.tableId) {
           this.refreshTables();
         }
       });
 
-    this.realtimeTables = this.tables.asObservable()
+    this.realtimeTables = this.tables
       .pipe(map(tables => tables
         .filter(table => table.type === TableType.REALTIME)
         .filter(table => table.status === TableStatus.NEW || table.status === TableStatus.STARTED)));
 
+    this.userService.loggedIn
+      .pipe(distinctUntilChanged())
+      .subscribe(loggedIn => {
+        if (loggedIn) {
+          this.refreshTables();
+        }
+      });
+
     this.refreshGames();
-    this.refreshTables();
   }
 
   private refreshGames() {
-    this.gameService.get()
+    this.gameService.list()
       .subscribe(games => this.games.next(games));
   }
 
@@ -83,5 +94,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   otherHumanPlayers(table: Table): TablePlayer[] {
     return table.otherPlayers.map(playerId => table.players[playerId]).filter(player => !!player.user);
+  }
+
+  initLoginFlow() {
+    this.userService.initLoginFlow();
   }
 }
