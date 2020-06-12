@@ -7,6 +7,7 @@ import {LayoutComponent} from './layout/layout.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
+import {PrivacyComponent} from "./privacy/privacy.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'contact',
         component: ContactComponent
+      },
+      {
+        path: 'privacy',
+        component: PrivacyComponent
       },
       {
         path: 'games',

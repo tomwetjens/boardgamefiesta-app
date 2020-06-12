@@ -174,6 +174,9 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
       case Action.SEND_FAMILY_MEMBER:
         return x !== this.currentPlace.x || y !== this.currentPlace.y;
 
+      case Action.RETURN_1_ASSISTANT:
+        return this.state.layout[x][y].assistants[this.player.color] > 0;
+
       default:
         return false;
     }
@@ -184,17 +187,34 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
       return;
     }
 
-    const distance = Math.abs(this.currentPlace.x - x) + Math.abs(this.currentPlace.y - y);
+    switch (this.selectedAction) {
+      case Action.MOVE:
+        const distance = Math.abs(this.currentPlace.x - x) + Math.abs(this.currentPlace.y - y);
 
-    if (distance === 0) {
-      // TODO Confirm play bonus card MOVE_0
-      this.perform.emit({type: this.selectedAction, x, y, bonusCard: BonusCard.MOVE_0});
-    } else if (distance >= 3) {
-      // TODO Confirm play bonus card MOVE_34
-      this.perform.emit({type: this.selectedAction, x, y, bonusCard: BonusCard.MOVE_3_OR_4});
-    } else {
-      // No bonus card needed
-      this.perform.emit({type: this.selectedAction, x, y});
+        let bonusCard: BonusCard;
+        if (distance === 0) {
+          bonusCard = BonusCard.MOVE_0;
+        } else if (distance >= 3) {
+          bonusCard = BonusCard.MOVE_3_OR_4;
+        }
+
+        if (bonusCard) {
+          const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+          const componentInstance = ngbModalRef.componentInstance as MessageDialogComponent;
+          componentInstance.type = 'confirm';
+          componentInstance.messageKey = 'istanbul.confirmActionRequiringBonusCard';
+          componentInstance.confirmKey = 'istanbul.perform';
+          fromPromise(ngbModalRef.result).subscribe(() =>
+            this.perform.emit({type: Action.MOVE, x, y, bonusCard}));
+        } else {
+          // No bonus card needed
+          this.perform.emit({type: Action.MOVE, x, y});
+        }
+        break;
+
+      case Action.RETURN_1_ASSISTANT:
+        this.perform.emit({type: Action.MOVE, x, y});
+        break;
     }
   }
 

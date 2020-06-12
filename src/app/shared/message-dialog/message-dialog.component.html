@@ -8,10 +8,10 @@
   {{messageKey|translate}}
 </div>
 <div class="modal-footer">
-  <button *ngIf="confirmKey" (click)="ngbActiveModal.close()" class="btn btn-primary">
+  <button (click)="ngbActiveModal.close()" class="btn btn-primary">
     {{(confirmKey || (type === 'confirm' ? 'confirm' : 'ok'))|translate}}
   </button>
-  <button *ngIf="cancelKey" (click)="ngbActiveModal.dismiss()" class="btn btn-secondary">
+  <button *ngIf="type === 'confirm'" (click)="ngbActiveModal.dismiss()" class="btn btn-secondary">
     {{(cancelKey || 'cancel')|translate}}
   </button>
 </div>

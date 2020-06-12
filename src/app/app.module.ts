@@ -26,6 +26,7 @@ import {ContactComponent} from './contact/contact.component';
 import {LocationSelectorComponent} from './location-selector/location-selector.component';
 import {LanguageSelectorComponent} from './language-selector/language-selector.component';
 import {IstanbulModule} from './istanbul/istanbul.module';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {IstanbulModule} from './istanbul/istanbul.module';
     AboutComponent,
     ContactComponent,
     LocationSelectorComponent,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

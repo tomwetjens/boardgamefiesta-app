@@ -10,6 +10,8 @@
     "sellGoodsConfirmBonusCard": "Play Bonus Card and Sell these Goods",
     "guessDialog": "Guess a number",
     "guessSelect": "Select a number to guess",
+    "confirmActionRequiringBonusCard": "This action requires you to play a Bonus Card. Are you sure?",
+    "perform": "Perform",
     "places": {
       "1": "Wainwright",
       "2": "Fabric Warehouse",
