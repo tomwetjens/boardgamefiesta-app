@@ -17,6 +17,8 @@ export class GameComponent implements OnInit {
 
   game: Observable<Game>;
 
+  screenshots = [];
+
   ngOnInit(): void {
     this.game = this.route.params
       .pipe(switchMap(params => {

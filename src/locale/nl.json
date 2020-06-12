@@ -7,6 +7,9 @@
     "lead2": "Join the coolest board game community on the web. Start directly from your browser. No downloads or setup necessary.",
     "startPlayingNow": "Start playing now"
   },
+  "designers": "Ontwerper(s)",
+  "artists": "Artiest(en)",
+  "publishers": "Uitgever(s)",
   "games": "Spellen",
   "logout": "Afmelden",
   "accept": "Accepteren",
@@ -401,13 +404,6 @@
     }
   },
   "toast": {
-    "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
-    "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
-    "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden.",
-    "ALREADY_INVITED": "Deze gebruiker is al uitgenodigd voor deze tafel.",
-    "NOT_PLAYER_IN_GAME": "Je bent geen speler aan deze tafel.",
-    "EXCEEDS_MAX_PLAYERS": "Je hebt het maximum aantal spelers bereikt voor dit spel.",
-
     "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze runderkaarten te kunnen kopen.",
     "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan,",
     "CANNOT_PERFORM_ACTION": "Je kunt deze actie niet uitvoeren.",
@@ -532,6 +528,16 @@
     "UNLOCK_BLACK_OR_WHITE": "Kies een spelersschijf van je spelertableau",
     "UNLOCK_WHITE": "Kies een spelersschijf met witte hoeken van je spelertableau",
     "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"
+  },
+  "errors": {
+    "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
+    "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
+    "UNKNOWN_ERROR": "Er is een onbekende fout opgetreden.",
+    "ALREADY_INVITED": "Deze gebruiker is al uitgenodigd voor deze tafel.",
+    "NOT_PLAYER_IN_GAME": "Je bent geen speler aan deze tafel.",
+    "EXCEEDS_MAX_PLAYERS": "Je hebt het maximum aantal spelers bereikt voor dit spel.",
+    "NOT_SUPPORTED": "Dit wordt niet ondersteund.",
+    "COMPUTER_NOT_SUPPORTED": "Dit spel ondersteunt geen computer spelers."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",

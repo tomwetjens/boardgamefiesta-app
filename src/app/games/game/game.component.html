@@ -1,5 +1,61 @@
 <section class="container" *ngIf="game | async as game">
-  <h1>{{'game.' + game.id + '.name'|translate}}</h1>
-  {{'game.' + game.id + '.description'|translate}}
-  {{game|json}}
+  <section class="container">
+    <div class="jumbotron">
+      <h5>{{'game.' + game.id + '.name'|translate}}</h5>
+      <hr class="my-4">
+      <p>
+        <img src="/assets/games/{{game.id}}/box.jpg" class="box"/>
+        {{'game.' + game.id + '.description'|translate}}
+      </p>
+
+      <table>
+        <tbody>
+        <tr>
+          <th>{{'designers'|translate}}</th>
+          <td>{{game.designers}}</td>
+        </tr>
+        <tr>
+          <th>{{'artists'|translate}}</th>
+          <td>{{game.artists}}</td>
+        </tr>
+        <tr>
+          <th>{{'publishers'|translate}}</th>
+          <td>{{game.publishers}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <p><a [href]="game.website" target="_blank">Website</a></p>
+    </div>
+  </section>
+
+  <ngb-carousel *ngIf="screenshots">
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="screenshots[0]" alt="Random first slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="screenshots[1]" alt="Random second slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img [src]="screenshots[2]" alt="Random third slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </section>

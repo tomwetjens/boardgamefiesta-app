@@ -129,5 +129,11 @@ export interface LogEntry {
 
 export interface Game {
   readonly id: string;
+  readonly designers: string;
+  readonly artists: string;
+  readonly publishers: string;
+  readonly website: string;
+  readonly minNumberOfPlayers: number;
+  readonly maxNumberOfPlayers: number;
 }
 

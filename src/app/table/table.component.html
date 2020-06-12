@@ -20,6 +20,9 @@
           {{'game.' + table.game + '.description'|translate}}
         </p>
         <p>
+          <a [routerLink]="['/games/', table.game]">{{'readMore'|translate}}</a>
+        </p>
+        <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>
         </p>
         <p class="lead" *ngIf="table.status === 'NEW'">
