@@ -6,7 +6,7 @@ import {TableService} from '../table.service';
 import {EventService} from '../event.service';
 import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
 import {GameService} from '../game.service';
-import {UserService} from "../user.service";
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -23,15 +23,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   realtimeTables: Observable<Table[]>;
 
   constructor(private router: Router,
-              private userService: UserService,
+              private authService: AuthService,
               private tableService: TableService,
               private eventService: EventService,
               private gameService: GameService) {
-    this.loggedIn = userService.loggedIn;
+    this.loggedIn = authService.loggedIn;
   }
 
   ngOnInit(): void {
-    combineLatest([this.userService.loggedIn, this.eventService.events])
+    combineLatest([this.authService.loggedIn, this.eventService.events])
       .pipe(takeUntil(this.destroyed))
       .subscribe(([loggedIn, event]) => {
         if (loggedIn && event.tableId) {
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .filter(table => table.type === TableType.REALTIME)
         .filter(table => table.status === TableStatus.NEW || table.status === TableStatus.STARTED)));
 
-    this.userService.loggedIn
+    this.authService.loggedIn
       .pipe(distinctUntilChanged())
       .subscribe(loggedIn => {
         if (loggedIn) {
@@ -97,6 +97,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initLoginFlow() {
-    this.userService.initLoginFlow();
+    this.authService.initLoginFlow();
   }
 }

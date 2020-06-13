@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserService} from "../user.service";
-import {User} from "../shared/model";
-import {Observable} from "rxjs";
+import {Router} from '@angular/router';
+import {UserService} from '../user.service';
+import {User} from '../shared/model';
+import {Observable} from 'rxjs';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -14,7 +15,8 @@ export class UserMenuComponent implements OnInit {
   user: Observable<User>;
 
   constructor(private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class UserMenuComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout();
+    this.authService.logout();
 
     this.router.navigate(['/']);
   }

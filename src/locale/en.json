@@ -578,13 +578,18 @@
   "errors": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "MIN_PLAYERS": "You need more players to start the game.",
+    "SERVER_NOT_AVAILABLE": "The server is currently not available or too busy.",
+    "UNEXPECTED_SERVER_ERROR": "Unexpected error from server.",
+    "CONNECTION_FAILED": "Could not connect to server. Make sure you are not offline.",
+    "FORBIDDEN": "You are not allowed to perform the requested action or access the requested resource.",
     "UNKNOWN_ERROR": "An unknown error occurred.",
     "NOT_ENOUGH_COWBOYS": "Not enough cowboys",
     "ALREADY_INVITED": "This user is already invited to the table.",
     "NOT_PLAYER_IN_GAME": "You are not playing at this table.",
     "EXCEEDS_MAX_PLAYERS": "You have reached the maximum number of players for this game.",
     "NOT_SUPPORTED": "This not supported.",
-    "COMPUTER_NOT_SUPPORTED": "This game does not support computer players."
+    "COMPUTER_NOT_SUPPORTED": "This game does not support computer players.",
+    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly."
   },
   "log": {
     "CREATE": "created a new table",
