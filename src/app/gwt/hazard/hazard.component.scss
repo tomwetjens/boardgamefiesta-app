@@ -5,6 +5,23 @@
   border-radius: 8px;
   background-size: cover;
 
+  color: #ffffff;
+
+  position: relative;
+
+  .points {
+    position: absolute;
+    left: 35px;
+    top: 38px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  }
+
   &.FLOOD {
     &.GREEN {
       background-image: url('src/assets/games/gwt/flood_green.jpg');

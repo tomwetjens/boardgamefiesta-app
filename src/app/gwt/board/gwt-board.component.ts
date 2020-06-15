@@ -102,6 +102,7 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
       && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
       this.selectedAction = currentState.actions[0];
     } else {
+      console.log('Clearing selected action');
       this.selectedAction = null;
     }
 
@@ -177,6 +178,7 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
         break;
 
       default:
+        console.log('Setting selected action to: ', actionType);
         this.selectedAction = actionType as ActionType;
         break;
     }

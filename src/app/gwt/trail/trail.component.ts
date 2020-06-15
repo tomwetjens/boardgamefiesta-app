@@ -362,8 +362,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           }
 
           if (previousLocation.hazard && !currentLocation.hazard) {
-            this.audioService.playSound(currentLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
-              : currentLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
+            this.audioService.playSound(previousLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
+              : previousLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
           }
 
           if (previousLocation.teepee && !currentLocation.teepee) {

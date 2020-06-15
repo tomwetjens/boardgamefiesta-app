@@ -17,7 +17,6 @@ export class HazardComponent implements OnInit {
 
   @HostBinding('class')
   get className(): string {
-    // TODO points
     return this.hazard.type.toString() + ' ' + this.hazard.hands.toString();
   }
 

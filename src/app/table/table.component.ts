@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, of, Subject} from 'rxjs';
+import {BehaviorSubject, combineLatest, of, Subject} from 'rxjs';
 import {bufferCount, filter, skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
 import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
@@ -61,13 +61,13 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         }
       });
 
-    this.eventService.events
+    combineLatest([this.table, this.eventService.events])
       .pipe(
         takeUntil(this.destroyed),
         takeUntil(this.left),
-        skipWhile(() => this.leaving))
-      // TODO Filter on current table
-      .subscribe(event => {
+        skipWhile(() => this.leaving),
+        filter(([table, event]) => event.tableId === table.id))
+      .subscribe(([table, event]) => {
         switch (event.type) {
           case EventType.ACCEPTED:
           case EventType.REJECTED:
@@ -84,21 +84,16 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.LEFT:
           case EventType.ABANDONED:
           case EventType.KICKED:
-            console.log('event: ', event);
-            console.log('self: ', this.table.value.players[this.table.value.player].user.id);
             if (this.table.value && event.userId === this.table.value.players[this.table.value.player].user.id) {
               // We are no longer in this table
-              console.log('no longer at table, redirecting');
               this.router.navigateByUrl('/');
             } else {
-              console.log('refresh table');
               // We are still in this table
               this.refreshTable();
             }
             break;
 
           case EventType.STATE_CHANGED:
-            console.log('event:', event);
             this.refreshTable();
             this.refreshState();
             break;
