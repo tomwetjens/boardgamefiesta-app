@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject, of, Subject} from 'rxjs';
-import {bufferCount, filter, skipWhile, switchMap, take, takeUntil, windowCount} from 'rxjs/operators';
+import {bufferCount, filter, skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
 import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';

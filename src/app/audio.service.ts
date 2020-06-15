@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Howl} from 'howler';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {distinctUntilChanged, flatMap} from 'rxjs/operators';
+import {concatMap, debounceTime, distinctUntilChanged, flatMap} from 'rxjs/operators';
 
 const ALERT = '/assets/sounds/alert.mp3';
 
@@ -26,9 +26,7 @@ export class AudioService {
 
     this.queue
       .pipe(
-        // TODO debounce?
-        distinctUntilChanged(),
-        flatMap(name => this.play(name))
+        concatMap(name => this.play(name))
       ).subscribe();
   }
 
