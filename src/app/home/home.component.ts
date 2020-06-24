@@ -4,7 +4,7 @@ import {combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
 import {EventService} from '../event.service';
-import {distinctUntilChanged, map, takeUntil} from 'rxjs/operators';
+import {distinctUntilChanged, map, takeUntil, tap} from 'rxjs/operators';
 import {GameService} from '../game.service';
 import {AuthService} from '../auth.service';
 
@@ -32,7 +32,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     combineLatest([this.authService.loggedIn, this.eventService.events])
-      .pipe(takeUntil(this.destroyed))
+      .pipe(
+        takeUntil(this.destroyed),
+        tap(event => console.log('HomeComponent event:', event)))
       .subscribe(([loggedIn, event]) => {
         if (loggedIn && event.tableId) {
           this.refreshTables();
@@ -66,7 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   accept(table: Table) {
     this.tableService.accept(table.id)
-      .subscribe(() => this.refreshTables());
+      .subscribe(() => this.openTable(table));
   }
 
   reject(table: Table) {

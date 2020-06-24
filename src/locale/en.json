@@ -42,6 +42,7 @@
   "close": "Close",
   "invite": "Invite player",
   "uninvite": "Remove",
+  "invitedBy": "Invited by",
   "start": "Start game",
   "open": "Open",
   "back": "Back",

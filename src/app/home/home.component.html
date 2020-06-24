@@ -4,14 +4,15 @@
 
     <ng-container [ngSwitch]="table.status">
       <span *ngSwitchCase="'NEW'">
-        {{'notStarted'|translate}}
         <ng-container [ngSwitch]="table.accepted">
           <span *ngSwitchCase="true">
+            {{'notStarted'|translate}}
             <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
           </span>
           <span *ngSwitchCase="false">
-            invited by  {{table.owner.username}}
+            {{'invitedBy'|translate}} {{table.owner.username}}
             <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
+            &nbsp;
             <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>
         </ng-container>

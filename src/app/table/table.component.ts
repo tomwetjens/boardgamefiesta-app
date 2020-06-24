@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject, combineLatest, of, Subject} from 'rxjs';
-import {bufferCount, filter, skipWhile, switchMap, take, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, of, Subject} from 'rxjs';
+import {bufferCount, filter, skipWhile, switchMap, takeUntil, tap, withLatestFrom} from 'rxjs/operators';
 import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
@@ -39,7 +39,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    this.refreshTable();
+    this.route.params.subscribe(params => this.refreshTable(params.id));
 
     this.table
       .pipe(filter(table => !!table), takeUntil(this.destroyed))
@@ -47,7 +47,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         this.title.setTitle(this.translateService.instant('game.' + table.game + '.name'));
 
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
-          this.refreshState();
+          this.refreshState(table);
         }
       });
 
@@ -61,13 +61,15 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         }
       });
 
-    combineLatest([this.table, this.eventService.events])
+    this.eventService.events
       .pipe(
         takeUntil(this.destroyed),
         takeUntil(this.left),
+        tap(event => console.log('TableComponent event:', event)),
         skipWhile(() => this.leaving),
-        filter(([table, event]) => event.tableId === table.id))
-      .subscribe(([table, event]) => {
+        withLatestFrom(this.table),
+        filter(([event, table]) => event.tableId === table.id))
+      .subscribe(([event, table]) => {
         switch (event.type) {
           case EventType.ACCEPTED:
           case EventType.REJECTED:
@@ -78,7 +80,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.OPTIONS_CHANGED:
           case EventType.PROPOSED_TO_LEAVE:
           case EventType.AGREED_TO_LEAVE:
-            this.refreshTable();
+            this.refreshTable(table.id);
             break;
 
           case EventType.LEFT:
@@ -89,13 +91,17 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
               this.router.navigateByUrl('/');
             } else {
               // We are still in this table
-              this.refreshTable();
+              this.refreshTable(table.id);
             }
             break;
 
+          // TODO Translations
+          // TODO Cart image for player board
+          // TODO BOnus cards caranvasary
+          // TODO Log
+
           case EventType.STATE_CHANGED:
-            this.refreshTable();
-            this.refreshState();
+            this.refreshTable(table.id);
             break;
         }
       });
@@ -109,9 +115,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   }
 
-  private refreshTable() {
-    this.route.params
-      .pipe(switchMap(params => this.tableService.get(params.id)))
+  private refreshTable(id: string) {
+    this.tableService.get(id)
       .subscribe(table => this.table.next(table));
   }
 
@@ -144,29 +149,25 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   perform(table: Table, action: any) {
     this.tableService.perform(table.id, action)
       .subscribe(() => {
-        this.refreshState();
+        this.refreshState(table);
       });
   }
 
   skip(table: Table) {
     this.tableService.skip(table.id)
       .subscribe(() => {
-        this.refreshState();
+        this.refreshState(table);
       });
   }
 
   endTurn(table: Table) {
     this.tableService.endTurn(table.id)
-      .subscribe(() => this.refreshState());
+      .subscribe(() => this.refreshState(table));
   }
 
-  private refreshState() {
-    this.table.pipe(
-      takeUntil(this.destroyed),
-      takeUntil(this.left),
-      skipWhile(() => this.leaving),
-      take(1),
-      switchMap(table => this.tableService.getState(table.id)))
+  private refreshState(table: Table) {
+    console.log('TableComponent refreshing state');
+    this.tableService.getState(table.id)
       .subscribe(state => this.state.next(state));
   }
 
@@ -180,7 +181,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
         },
         () => {
           this.leaving = false;
-          this.refreshTable();
+          this.refreshTable(table.id);
         });
   }
 
@@ -194,7 +195,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           this.router.navigate(['/']);
         }, () => {
           this.leaving = false;
-          this.refreshTable();
+          this.refreshTable(table.id);
         });
   }
 
@@ -202,22 +203,22 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     const ngbModalRef = this.ngbModal.open(SelectUserComponent);
     fromPromise(ngbModalRef.result)
       .pipe(switchMap(user => this.tableService.invite(table.id, user.id)))
-      .subscribe(() => this.refreshTable());
+      .subscribe(() => this.refreshTable(table.id));
   }
 
   addComputer(table: Table) {
     this.tableService.addComputer(table.id)
-      .subscribe(() => this.refreshTable());
+      .subscribe(() => this.refreshTable(table.id));
   }
 
   kick(table: Table, player: TablePlayer) {
     this.tableService.kick(table.id, player.id)
-      .subscribe(() => this.refreshTable());
+      .subscribe(() => this.refreshTable(table.id));
   }
 
   accept(table: Table) {
     this.tableService.accept(table.id)
-      .subscribe(() => this.refreshTable());
+      .subscribe(() => this.refreshTable(table.id));
   }
 
   reject(table: Table) {
