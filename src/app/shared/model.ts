@@ -51,6 +51,11 @@ export enum TableType {
   REALTIME = 'REALTIME'
 }
 
+export enum TableMode {
+  NORMAL = 'NORMAL',
+  TRAINING = 'TRAINING'
+}
+
 export enum TableStatus {
   NEW = 'NEW',
   STARTED = 'STARTED',
@@ -79,6 +84,7 @@ export interface Table {
 export interface CreateTableRequest {
   game: string;
   type: TableType;
+  mode: TableMode;
   inviteUserIds?: string[];
   options?: Options;
 }

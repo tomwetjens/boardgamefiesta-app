@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game, Table, TablePlayer, TableStatus, TableType} from '../shared/model';
+import {Game, Table, TableMode, TablePlayer, TableStatus, TableType} from '../shared/model';
 import {combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
@@ -88,7 +88,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   play(game: Game) {
     this.tableService.create({
       game: game.id,
-      type: TableType.REALTIME
+      type: TableType.REALTIME,
+      mode: TableMode.NORMAL
     }).subscribe(table => {
       this.openTable(table);
     });
