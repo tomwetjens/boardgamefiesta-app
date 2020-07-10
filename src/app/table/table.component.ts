@@ -27,6 +27,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   table = new BehaviorSubject<Table>(undefined);
   state = new BehaviorSubject<any>(undefined);
 
+  hideDescription = true;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private tableService: TableService,
@@ -42,9 +44,12 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     this.route.params.subscribe(params => this.refreshTable(params.id));
 
     this.table
-      .pipe(filter(table => !!table), takeUntil(this.destroyed))
+      .pipe(
+        takeUntil(this.destroyed),
+        filter(table => !!table))
       .subscribe(table => {
-        this.title.setTitle(this.translateService.instant('game.' + table.game + '.name'));
+        const name = this.translateService.instant('game.' + table.game + '.name');
+        this.title.setTitle(name);
 
         if (table.status === TableStatus.STARTED || table.status === TableStatus.ENDED) {
           this.refreshState(table);

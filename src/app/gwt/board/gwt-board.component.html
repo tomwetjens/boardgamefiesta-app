@@ -9,7 +9,7 @@
 </app-in-game-navbar>
 
 <div class="row no-gutters align-items-start">
-  <div class="col-8">
+  <div class="col-md-8 col-sm-12">
     <app-trail [table]="table"
                [state]="state"
                [selectedAction]="selectedAction"
@@ -27,7 +27,7 @@
                        (perform)="perform.emit($event)">
     </app-cattle-market>
   </div>
-  <div class="col-4">
+  <div class="col-md-4 col-sm-12">
     <app-player-board [table]="table"
                       [state]="state"
                       [playerState]="state.player"

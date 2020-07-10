@@ -14,6 +14,7 @@
     },
     "gwt": {
       "name": "Ranchers Of The Old West",
+      "summary": "Herd your cattle through along the trails of the Old West. Inspired by the popular game Great Western Trail.",
       "description": "America in the 19th century: You are a rancher and repeatedly herd your cattle from Texas to Kansas City, from where you send them off by train. This earns you money and victory points. Needless to say: Each time you arrive in Kansas City, you want to have your most valuable cattle in tow. This will not only require that you keep your herd in good shape, but also that you effectively utilize the various buildings along the trail. Success will require that you hire capable staff: Cowboys to improve your herd, craftsmen to build your very own buildings and engineers to manage the important railroad line.\n\nIf you cleverly manage your herd and navigate the opportunities and pitfalls of this great western trail, you surely will gain the most victory points and win the game."
     }
   },
@@ -25,6 +26,7 @@
   "search": "Search",
   "select": "Select",
   "readMore": "Read more",
+  "showLess": "Show less",
   "profile": "Profile",
   "about": "About",
   "preferences": "Preferences",
@@ -105,6 +107,7 @@
     "permCertificates": "Use permanent certificates",
     "tempCertificates": "Spend temporary certificates",
     "totalCertificates": "Total",
+    "totalBreedingValue": "Total breeding value",
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",
@@ -590,7 +593,8 @@
     "EXCEEDS_MAX_PLAYERS": "You have reached the maximum number of players for this game.",
     "NOT_SUPPORTED": "This not supported.",
     "COMPUTER_NOT_SUPPORTED": "This game does not support computer players.",
-    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly."
+    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
+    "NOT_ENOUGH_CRAFTSMEN": "Not enough craftsmen."
   },
   "log": {
     "CREATE": "created a new table",

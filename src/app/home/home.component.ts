@@ -85,9 +85,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(tables => this.tables.next(tables));
   }
 
-  play(game: Game) {
+  play(gameId: string) {
     this.tableService.create({
-      game: game.id,
+      game: gameId,
       type: TableType.REALTIME,
       mode: TableMode.NORMAL
     }).subscribe(table => {

@@ -23,7 +23,7 @@
       <thead class="thead-dark">
       <tr>
         <th></th>
-        <th [colSpan]="perm.length">{{'gwt.permCertificates'|translate}}</th>
+        <th [colSpan]="perm.length" *ngIf="perm.length > 0">{{'gwt.permCertificates'|translate}}</th>
         <th [colSpan]="both.length">{{'gwt.tempCertificates'|translate}}</th>
       </tr>
       </thead>
@@ -46,12 +46,12 @@
         </td>
       </tr>
       <tr class="thead-dark">
-        <th>{{'gwt.totalCertificates' |translate}}</th>
+        <th>{{'gwt.totalBreedingValue' |translate}}</th>
         <th *ngFor="let option of perm" class="text-center">
-          <strong>{{option.perm}}</strong>
+          <strong>{{playerState.handValue + option.perm}}</strong>
         </th>
         <th *ngFor="let option of both" class="text-center">
-          <strong>{{option.perm + option.temp}}</strong>
+          <strong>{{playerState.handValue + option.perm + option.temp}}</strong>
         </th>
       </tr>
       </tbody>

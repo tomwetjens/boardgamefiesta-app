@@ -27,6 +27,7 @@ export class DeliveryCityComponent implements OnInit {
     return Array(this.playerState.certificates - this.playerState.tempCertificates + 1)
       .fill(0)
       .map((_, index) => index)
+      .filter(perm => perm >= this.possibleDelivery.certificates)
       .map(perm => ({perm, temp: 0}));
   }
 
@@ -37,6 +38,7 @@ export class DeliveryCityComponent implements OnInit {
       .fill(0)
       .map((_, index) => index + 1)
       .filter(temp => temp !== 5)
+      .filter(temp => perm + temp >= this.possibleDelivery.certificates)
       .map(temp => ({perm, temp}));
   }
 

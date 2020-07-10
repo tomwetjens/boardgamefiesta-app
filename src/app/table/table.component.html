@@ -1,11 +1,11 @@
 <ng-container *ngIf="table | async as table">
   <ng-container *ngIf="table.status === 'STARTED' || table.status === 'ENDED'; else lobby">
     <app-board-factory *ngIf="state | async as state"
-               [table]="table"
-               [state]="state"
-               (perform)="perform(table, $event)"
-               (skip)="skip(table)"
-               (endTurn)="endTurn(table)">
+                       [table]="table"
+                       [state]="state"
+                       (perform)="perform(table, $event)"
+                       (skip)="skip(table)"
+                       (endTurn)="endTurn(table)">
     </app-board-factory>
   </ng-container>
   <ng-template #lobby>
@@ -16,11 +16,19 @@
         <h5>{{'game.' + table.game + '.name'|translate}}</h5>
         <hr class="my-4">
         <p>
-          <img src="/assets/games/{{table.game}}/box.png" class="box"/>
-          {{'game.' + table.game + '.description'|translate}}
-        </p>
-        <p>
-          <a [routerLink]="['/games/', table.game]">{{'readMore'|translate}}</a>
+          <a [routerLink]="['/games/', table.game]">
+            <img src="/assets/games/{{table.game}}/box.png" class="box" alt="{{'game.' + table.game + '.name'|translate}}"/>
+          </a>
+
+          {{'game.' + table.game + '.summary'|translate}}
+
+          <button type="button" class="btn btn-link" (click)="hideDescription=!hideDescription"
+                  [attr.aria-expanded]="!hideDescription" aria-controls="description">
+            {{(hideDescription ? 'readMore' : 'showLess')|translate}}
+          </button>
+          <span id="description" [ngbCollapse]="hideDescription">
+            {{'game.' + table.game + '.description'|translate}}
+          </span>
         </p>
         <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>
@@ -44,16 +52,16 @@
             </ng-container>
           </ng-container>
 
-<!--          <ng-container *ngIf="table.players[table.player].user.id === table.owner.id">-->
-<!--            <button class="btn btn-secondary" (click)="abandon(table)">{{'abandon'|translate}}</button>&nbsp;-->
-<!--          </ng-container>-->
+          <!--          <ng-container *ngIf="table.players[table.player].user.id === table.owner.id">-->
+          <!--            <button class="btn btn-secondary" (click)="abandon(table)">{{'abandon'|translate}}</button>&nbsp;-->
+          <!--          </ng-container>-->
         </p>
       </div>
     </section>
 
     <section class="container">
       <div class="row">
-        <div class="col-3">
+        <div class="col-md-3 col-sm-12">
           <div class="card">
             <div class="card-header">
               {{'options'|translate}}
@@ -63,7 +71,7 @@
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-md-9 col-sm-12">
           <div class="card">
             <div class="card-header">
               {{'players'|translate}}
@@ -76,7 +84,8 @@
                       <p>
                         <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
                         <app-player-name [player]="player"></app-player-name>
-                        <app-rating *ngIf="player.rating" [rating]="player.rating" title="{{'rating'|translate}}"></app-rating>
+                        <app-rating *ngIf="player.rating" [rating]="player.rating"
+                                    title="{{'rating'|translate}}"></app-rating>
                       </p>
                       <span *ngIf="player.user?.id === table.owner.id"
                             class="badge badge-dark">

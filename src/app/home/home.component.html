@@ -50,38 +50,18 @@
 </section>
 
 <section class="container games">
-  <h2>{{'games' | translate}}</h2>
   <div class="row">
     <!-- Split across rows -->
-    <div *ngFor="let game of games | async" class="col-3">
+    <div class="col-md-3 col-sm-12">
       <div class="card">
-        <img class="card-img-top" src="/assets/games/{{game.id}}/box.png" alt="{{'game.' + game.id + '.name'|translate}}">
+        <img class="card-img-top" src="/assets/games/gwt/box.png" alt="{{'game.gwt.name'|translate}}">
         <div class="card-body">
-          <h5 class="card-title">{{'game.' + game.id + '.name' | translate}}</h5>
-          <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
+          <h5 class="card-title">{{'game.gwt.name' | translate}}</h5>
+          <p class="card-text">{{'game.gwt.summary'| translate}}</p>
+          <button class="btn btn-primary" (click)="play('gwt')">{{'play'|translate}}</button>
           <span class="ml-2">
-            <a [routerLink]="['games/', game.id]">{{'readMore'|translate}}</a>
+            <a [routerLink]="['games/gwt']">{{'readMore'|translate}}</a>
           </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-3">
-      <div class="card">
-        <img class="card-img-top" src="/assets/games/mombasa/box.jpg" alt="Mombasa">
-        <div class="card-body">
-          <h5 class="card-title">Mombasa</h5>
-          <button class="btn btn-primary" disabled>{{'play'|translate}}</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-3">
-      <div class="card">
-        <img class="card-img-top" src="/assets/games/omg/box.jpg" alt="Oh My Goods">
-        <div class="card-body">
-          <h5 class="card-title">Oh My Goods</h5>
-          <button class="btn btn-primary" disabled>{{'play'|translate}}</button>
         </div>
       </div>
     </div>
