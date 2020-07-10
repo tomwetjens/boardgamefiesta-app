@@ -3,11 +3,11 @@
   border: 1px solid #ffffff;
   border-radius: 5px;
   width: 80px;
-  height: 120px;
+  height: 115px;
 
   color: #ffffff;
 
-  background-size: contain;
+  background-size: cover;
   background-position: center;
 
   position: relative;
@@ -26,140 +26,140 @@
   }
 
   &.back {
-    background-image: url(src/assets/games/gwt/cards/back.jpg);
+    background-image: url(src/assets/games/gwt/cards/back.png);
   }
 
   &.back_grey {
-    background-image: url(src/assets/games/gwt/cards/back_grey.jpg);
+    background-image: url(src/assets/games/gwt/cards/back_grey.png);
   }
 
   &.BLACK_ANGUS {
     background-color: black;
-    background-image: url(src/assets/games/gwt/cards/black_angus.jpg);
+    background-image: url(src/assets/games/gwt/cards/black_angus.png);
   }
 
   &.BROWN_SWISS {
-    background-color: black;
-    background-image: url(src/assets/games/gwt/cards/brown_swiss.jpg);
+    background-color: red;
+    background-image: url(src/assets/games/gwt/cards/brown_swiss.png);
   }
 
   &.DUTCH_BELT {
     background-color: green;
-    background-image: url(src/assets/games/gwt/cards/dutch_belt.jpg);
+    background-image: url(src/assets/games/gwt/cards/dutch_belt.png);
   }
 
   &.AYRSHIRE {
     background-color: blue;
-    background-image: url(src/assets/games/gwt/cards/ayrshire.jpg);
+    background-image: url(src/assets/games/gwt/cards/ayrshire.png);
   }
 
   &.GUERNSEY {
     background-color: white;
-    background-image: url(src/assets/games/gwt/cards/guernsey.jpg);
+    background-image: url(src/assets/games/gwt/cards/guernsey.png);
   }
 
   &.JERSEY {
     background-color: grey;
-    background-image: url(src/assets/games/gwt/cards/jersey.jpg);
+    background-image: url(src/assets/games/gwt/cards/jersey.png);
   }
 
   &.HOLSTEIN {
-    background-color: red;
-    background-image: url(src/assets/games/gwt/cards/holstein.jpg);
+    background-color: yellow;
+    background-image: url(src/assets/games/gwt/cards/holstein.png);
   }
 
   &.WEST_HIGHLAND {
     background-color: brown;
-    background-image: url(src/assets/games/gwt/cards/west_highland.jpg);
+    background-image: url(src/assets/games/gwt/cards/west_highland.png);
   }
 
   &.TEXAS_LONGHORN {
     background-color: purple;
-    background-image: url(src/assets/games/gwt/cards/texas_longhorn.jpg)
+    background-image: url(src/assets/games/gwt/cards/texas_longhorn.png);
   }
 
   &.GAIN_2_DOLLARS_4_H_H {
-    background-image: url(src/assets/games/gwt/cards/2_4hh.jpg)
+    background-image: url(src/assets/games/gwt/cards/2_4hh.png);
   }
 
   &.GAIN_2_DOLLARS_3_3_3_B {
-    background-image: url(src/assets/games/gwt/cards/2_333b.jpg)
+    background-image: url(src/assets/games/gwt/cards/2_333b.png);
   }
 
   &.GAIN_2_DOLLARS_B_BLUE_BLUE {
-    background-image: url(src/assets/games/gwt/cards/2_bblbl.jpg)
+    background-image: url(src/assets/games/gwt/cards/2_bblbl.png);
   }
 
   &.GAIN_2_DOLLARS_B_GREEN_BLUE {
-    background-image: url(src/assets/games/gwt/cards/2_bgbl.jpg)
+    background-image: url(src/assets/games/gwt/cards/2_bgbl.png);
   }
 
   &.GAIN_2_DOLLARS_S_S_H {
-    background-image: url(src/assets/games/gwt/cards/2_ssh.jpg)
+    background-image: url(src/assets/games/gwt/cards/2_ssh.png);
   }
 
   &.SINGLE_OR_DOUBLE_AUXILIARY_ACTION_SAN_FRANCISCO {
-    background-image: url(src/assets/games/gwt/cards/aux_sf.jpg)
+    background-image: url(src/assets/games/gwt/cards/aux_sf.png);
   }
 
   &.DRAW_CARD_5_H {
-    background-image: url(src/assets/games/gwt/cards/draw_5h.jpg)
+    background-image: url(src/assets/games/gwt/cards/draw_5h.png);
   }
 
   &.DRAW_CARD_3_3_3_S {
-    background-image: url(src/assets/games/gwt/cards/draw_333s.jpg)
+    background-image: url(src/assets/games/gwt/cards/draw_333s.png);
   }
 
   &.DRAW_CARD_B_B_H {
-    background-image: url(src/assets/games/gwt/cards/draw_bbh.jpg)
+    background-image: url(src/assets/games/gwt/cards/draw_bbh.png);
   }
 
   &.DRAW_CARD_S_GREEN_BLUE {
-    background-image: url(src/assets/games/gwt/cards/draw_sgbl.jpg)
+    background-image: url(src/assets/games/gwt/cards/draw_sgbl.png);
   }
   &.DRAW_CARD_S_GREEN_GREEN{
-    background-image: url(src/assets/games/gwt/cards/draw_sgg.jpg)
+    background-image: url(src/assets/games/gwt/cards/draw_sgg.png);
   }
   &.ENGINE_4_4_S_GREEN{
-    background-image: url(src/assets/games/gwt/cards/engine_44sg.jpg)
+    background-image: url(src/assets/games/gwt/cards/engine_44sg.png);
   }
   &.ENGINE_3_4_5{
-    background-image: url(src/assets/games/gwt/cards/engine_345.jpg)
+    background-image: url(src/assets/games/gwt/cards/engine_345.png);
   }
   &.ENGINE_B_B_GREEN_GREEN{
-    background-image: url(src/assets/games/gwt/cards/engine_bbgg.jpg)
+    background-image: url(src/assets/games/gwt/cards/engine_bbgg.png);
   }
   &.ENGINE_B_BLUE_H_H{
-    background-image: url(src/assets/games/gwt/cards/engine_bblhh.jpg)
+    background-image: url(src/assets/games/gwt/cards/engine_bblhh.png);
   }
   &.ENGINE_S_S_H_H{
-    background-image: url(src/assets/games/gwt/cards/engine_sshh.jpg)
+    background-image: url(src/assets/games/gwt/cards/engine_sshh.png);
   }
   &.MOVE_3_4_H_H{
-    background-image: url(src/assets/games/gwt/cards/move_34hh.jpg)
+    background-image: url(src/assets/games/gwt/cards/move_34hh.png);
   }
   &.MOVE_3_4_5{
-    background-image: url(src/assets/games/gwt/cards/move_345.jpg)
+    background-image: url(src/assets/games/gwt/cards/move_345.png);
   }
   &.MOVE_B_B_H_H{
-    background-image: url(src/assets/games/gwt/cards/move_bbhh.jpg)
+    background-image: url(src/assets/games/gwt/cards/move_bbhh.png);
   }
   &.MOVE_S_S_B_B{
-    background-image: url(src/assets/games/gwt/cards/move_ssbb.jpg)
+    background-image: url(src/assets/games/gwt/cards/move_ssbb.png);
   }
   &.MOVE_S_S_BLUE_BLUE{
-    background-image: url(src/assets/games/gwt/cards/move_ssblbl.jpg)
+    background-image: url(src/assets/games/gwt/cards/move_ssblbl.png);
   }
   &.START_3_4_B {
-    background-image: url(src/assets/games/gwt/cards/start_34b.jpg)
+    background-image: url(src/assets/games/gwt/cards/start_34b.png);
   }
   &.START_B_B_H {
-    background-image: url(src/assets/games/gwt/cards/start_bbh.jpg)
+    background-image: url(src/assets/games/gwt/cards/start_bbh.png);
   }
   &.START_BLUE_H_H {
-    background-image: url(src/assets/games/gwt/cards/start_blhh.jpg)
+    background-image: url(src/assets/games/gwt/cards/start_blhh.png);
   }
   &.START_S_S_GREEN {
-    background-image: url(src/assets/games/gwt/cards/start_ssg.jpg)
+    background-image: url(src/assets/games/gwt/cards/start_ssg.png);
   }
 }

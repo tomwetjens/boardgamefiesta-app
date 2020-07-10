@@ -66,25 +66,25 @@
             <rect rx="6" ry="6" width="33" height="39"/>
           </clipPath>
           <g id="COWBOY">
-            <image id="cowboy" href="/assets/games/gwt/cowboy.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+            <image id="cowboy" href="/assets/games/gwt/cowboy.png" width="33" height="39" clip-path="url(#tileclip)"/>
             <rect height="39" width="33" rx="6" ry="6"/>
           </g>
           <g id="CRAFTSMAN">
-            <image href="/assets/games/gwt/craftsman.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+            <image href="/assets/games/gwt/craftsman.png" width="33" height="39" clip-path="url(#tileclip)"/>
             <rect height="39" width="33" rx="6" ry="6"/>
           </g>
           <g id="ENGINEER">
-            <image href="/assets/games/gwt/engineer.jpg" width="33" height="39" clip-path="url(#tileclip)"/>
+            <image href="/assets/games/gwt/engineer.png" width="33" height="39" clip-path="url(#tileclip)"/>
             <rect height="39" width="33" rx="6" ry="6"/>
           </g>
         </defs>
         <image
-          [attr.href]="'/assets/games/gwt/player_board_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
+          [attr.href]="'/assets/games/gwt/player_board_' + playerState.player.color.toString().toLowerCase() + '.png'"
           x="0" y="0"
           height="446" width="800"/>
 
         <image *ngIf="state.otherPlayers.length > 1"
-               [attr.href]="'/assets/games/gwt/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.jpg'"
+               [attr.href]="'/assets/games/gwt/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.png'"
                x="197" y="12"
                height="110" width="259"/>
 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../game.service";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {Game} from "../../shared/model";
+import {Game, TableMode, TableType} from "../../shared/model";
+import {TableService} from "../../table.service";
 
 @Component({
   selector: 'app-game',
@@ -13,7 +14,9 @@ import {Game} from "../../shared/model";
 export class GameComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-              private gameService: GameService) {}
+              private router: Router,
+              private gameService: GameService,
+              private tableService: TableService) {}
 
   game: Observable<Game>;
 
@@ -25,6 +28,16 @@ export class GameComponent implements OnInit {
         console.log(params);
         return this.gameService.get(params.id);
       }));
+  }
+
+  play(game: Game) {
+    this.tableService.create({
+      game: game.id,
+      type: TableType.REALTIME,
+      mode: TableMode.NORMAL
+    }).subscribe(table => {
+      this.router.navigate(['/table/', table.id]);
+    });
   }
 
 }

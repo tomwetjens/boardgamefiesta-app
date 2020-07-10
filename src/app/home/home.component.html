@@ -55,7 +55,7 @@
     <!-- Split across rows -->
     <div *ngFor="let game of games | async" class="col-3">
       <div class="card">
-        <img class="card-img-top" src="/assets/games/{{game.id}}/box.jpg" alt="{{'game.' + game.id + '.name'|translate}}">
+        <img class="card-img-top" src="/assets/games/{{game.id}}/box.png" alt="{{'game.' + game.id + '.name'|translate}}">
         <div class="card-body">
           <h5 class="card-title">{{'game.' + game.id + '.name' | translate}}</h5>
           <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>

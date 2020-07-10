@@ -16,7 +16,7 @@
     @each $side in $sides {
       @each $color in $colors {
         &.#{"" + $color}-#{$i}#{$side} {
-          background-image: url('/assets/games/gwt/buildings/#{$i}#{$side}_#{$color}.jpg');
+          background-image: url('/assets/games/gwt/buildings/#{$i}#{$side}_#{$color}.png');
         }
       }
     }
