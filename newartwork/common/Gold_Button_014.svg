@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg6783" viewBox="0 0 639.07 605.13" version="1.1">
+  <defs id="defs6785">
+    <filter id="filter4328" color-interpolation-filters="sRGB">
+      <feGaussianBlur id="feGaussianBlur4330" stdDeviation="2.7218253"/>
+    </filter>
+    <linearGradient id="linearGradient6704" y2="550.32" gradientUnits="userSpaceOnUse" y1="384.65" x2="556.59" x1="511.14">
+      <stop id="stop4239" stop-color="#fefe8d" offset="0"/>
+      <stop id="stop4241" stop-color="#fefe8d" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient4310" y2="543.25" gradientUnits="userSpaceOnUse" x2="530.33" y1="374.55" x1="527.3">
+      <stop id="stop4254" stop-color="#fff" offset="0"/>
+      <stop id="stop4256" stop-color="#fff" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient7865" y2="375.56" gradientUnits="userSpaceOnUse" x2="470.73" y1="259.39" x1="474.77">
+      <stop id="stop4316" stop-color="#ae8e00" offset="0"/>
+      <stop id="stop4318" stop-color="#ae8e00" stop-opacity="0" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="layer1" transform="translate(121.93 -27.336)">
+    <g id="g6695" transform="matrix(2.1318 0 0 2.1318 -913.78 -732.28)">
+      <path id="path4322" filter="url(#filter4328)" d="m600.03 438.19-96.356 10.9-45.647 85.555-40.142-88.272-95.473-16.975 71.547-65.455-13.359-96.046 84.36 47.818 87.217-42.385-19.409 95.008z" transform="matrix(1.0313 0 0 1.0144 45.679 91.18)"/>
+      <path id="path4223" d="m600.03 438.19-96.356 10.9-45.647 85.555-40.142-88.272-95.473-16.975 71.547-65.455-13.359-96.046 84.36 47.818 87.217-42.385-19.409 95.008z" fill="#ae8e00" transform="translate(60.609 94.954)"/>
+      <path id="path4225" fill="#755d00" d="m458.56 458.41c-13.485 17.608-32.896 30.917-48.438 46.656l-18.25 16.75c29.781 5.3036 59.564 10.595 89.344 15.906 12.552 27.594 25.123 55.179 37.656 82.781 14.26-26.729 28.521-53.458 42.781-80.188 30.156-3.4313 60.313-6.8535 90.469-10.281-21.02-21.83-42.03-43.69-63.12-65.47 6.0498-29.667 12.123-59.33 18.156-89-27.247 13.223-54.531 26.374-81.719 39.719-26.326-15.054-52.781-29.882-79.125-44.906 4.0833 29.344 8.1667 58.688 12.25 88.031z"/>
+      <path id="path4235" fill="url(#linearGradient6704)" d="m458.56 458.41c-13.485 17.608-32.896 30.917-48.438 46.656l-18.25 16.75c29.781 5.3036 59.564 10.595 89.344 15.906 12.552 27.594 25.123 55.179 37.656 82.781 14.26-26.729 28.521-53.458 42.781-80.188 30.156-3.4313 60.313-6.8535 90.469-10.281-21.02-21.83-42.03-43.69-63.12-65.47 6.0498-29.667 12.123-59.33 18.156-89-27.247 13.223-54.531 26.374-81.719 39.719-26.326-15.054-52.781-29.882-79.125-44.906 4.0833 29.344 8.1667 58.688 12.25 88.031z"/>
+      <path id="path4245" fill="url(#linearGradient6704)" d="m458.56 458.41c-13.485 17.608-32.896 30.917-48.438 46.656l-18.25 16.75c29.781 5.3036 59.564 10.595 89.344 15.906 12.552 27.594 25.123 55.179 37.656 82.781 14.26-26.729 28.521-53.458 42.781-80.188 30.156-3.4313 60.313-6.8535 90.469-10.281-21.02-21.83-42.03-43.69-63.12-65.47 6.0498-29.667 12.123-59.33 18.156-89-27.247 13.223-54.531 26.374-81.719 39.719-26.326-15.054-52.781-29.882-79.125-44.906 4.0833 29.344 8.1667 58.688 12.25 88.031z"/>
+      <path id="path4247" fill="url(#linearGradient4310)" d="m450.44 378c3.6291 26.275 7.2949 52.544 10.969 78.812-6.113 15.059-20.785 23.4-31.75 34.438 57.357 25.942 125.27 25.9 183.53 2.7812-8.0969-11.266-22.194-17.901-26.719-31.625 5.3806-27.178 10.991-54.31 16.469-81.469-25.859 12.636-51.798 25.109-77.594 37.875-24.99-14.398-50.122-28.547-75.188-42.812 0.0937 0.66667 0.1875 1.3333 0.28125 2z"/>
+      <path id="path4312" d="m600.03 438.19-96.356 10.9-45.647 85.555-40.142-88.272-95.473-16.975 71.547-65.455-13.359-96.046 84.36 47.818 87.217-42.385-19.409 95.008z" fill="url(#linearGradient7865)" transform="translate(60.609 94.954)"/>
+    </g>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Gold Button 014</dc:title>
+        <dc:date>2010-10-10T23:55:42</dc:date>
+        <dc:description>Golden Buttons and Banners.</dc:description>
+        <dc:source>http://openclipart.org/detail/89473/gold-button-014-by-inky2010</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>inky2010</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>3D</rdf:li>
+            <rdf:li>banner</rdf:li>
+            <rdf:li>bend</rdf:li>
+            <rdf:li>button</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>gold</rdf:li>
+            <rdf:li>golden</rdf:li>
+            <rdf:li>header</rdf:li>
+            <rdf:li>heading</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>inkscape</rdf:li>
+            <rdf:li>inky2010</rdf:li>
+            <rdf:li>internet</rdf:li>
+            <rdf:li>shadow</rdf:li>
+            <rdf:li>vector</rdf:li>
+            <rdf:li>web</rdf:li>
+            <rdf:li>web page</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

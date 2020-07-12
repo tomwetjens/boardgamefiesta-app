@@ -96,6 +96,7 @@
     }
   },
   "rating": "Spelerniveau",
+  "score": "Score",
   "gwt": {
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",

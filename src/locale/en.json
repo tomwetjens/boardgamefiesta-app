@@ -94,6 +94,7 @@
     }
   },
   "rating": "Rating",
+  "score": "Score",
   "about": {
     "title": "About",
     "text": "This website is maintained by Tom Wetjens. I am a software developer by day and board gamer by night. The idea for this website came during the lockdown due to the Corona virus in 2020. As playing board games with friends in real life was no longer possible, I started looking at other ways.",

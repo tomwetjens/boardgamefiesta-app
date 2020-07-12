@@ -1,18 +1,28 @@
 <div class="card">
   <div class="card-header">
-    <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
+    <div>
+      <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
 
-    <app-player-name [player]="player"></app-player-name>
+      <app-player-name [player]="player"></app-player-name>
 
-    <app-location-icon *ngIf="player.user?.location" [location]="player.user.location"></app-location-icon>
-    &nbsp;
-    <app-rating *ngIf="player.rating" [rating]="player.rating"></app-rating>
+      <app-location-icon *ngIf="player.user?.location" [location]="player.user.location"></app-location-icon>
+      &nbsp;
+      <app-rating *ngIf="player.rating" [rating]="player.rating"></app-rating>
 
-    <img src="/assets/hourglass.gif" class="hourglass" *ngIf="table.currentPlayer === player.id"
-         ngbPopover="{{'popover.waitingForPlayer'|translate}}"
-         placement="bottom"
-         triggers="mouseenter:mouseleave"
-         container="body"/>
+      <img src="/assets/hourglass.gif" class="hourglass" *ngIf="table.currentPlayer === player.id"
+           ngbPopover="{{'popover.waitingForPlayer'|translate}}"
+           placement="bottom"
+           triggers="mouseenter:mouseleave"
+           container="body"/>
+
+      <span class="score"
+           ngbPopover="{{'score'|translate}}"
+           placement="bottom"
+           triggers="mouseenter:mouseleave"
+           container="body">
+        {{player.score}}
+      </span>
+    </div>
 
     <ng-content select="header"></ng-content>
   </div>
