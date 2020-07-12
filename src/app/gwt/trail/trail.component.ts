@@ -12,19 +12,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {
-  Action,
-  ActionType,
-  Building,
-  City,
-  Hazard,
-  HazardType,
-  Location,
-  PossibleMove,
-  Space,
-  State,
-  Worker
-} from '..//model';
+import {Action, ActionType, Building, City, HazardType, Location, PossibleMove, Space, State, Worker} from '..//model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -182,7 +170,7 @@ interface PlayerBuildingElement {
 interface HazardElement {
   x: string;
   y: string;
-  hazard: Hazard;
+  location: Location;
 }
 
 const COLORS = ['orange', 'purple', 'cyan', 'salmon', 'green', 'silver'];
@@ -736,21 +724,20 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       .filter(name => this.state.trail.locations[name].hazard)
       .map(name => {
         const locationElement = this.getLocationElement(name);
-        const hazard = this.state.trail.locations[name].hazard;
 
         return {
           x: locationElement.getAttribute('x'),
           y: locationElement.getAttribute('y'),
-          hazard
+          location: this.state.trail.locations[name]
         };
       });
   }
 
-  selectHazard(hazard: Hazard) {
+  selectHazard(location: Location) {
     if (!this.canSelectHazard) {
       return;
     }
-    this.perform.emit({type: this.selectedAction, hazard});
+    this.perform.emit({type: this.selectedAction, location: location.name});
   }
 
   private updateForesights() {

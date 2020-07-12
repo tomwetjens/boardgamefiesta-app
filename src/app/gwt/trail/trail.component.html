@@ -528,9 +528,9 @@
       <g *ngFor="let hazard of hazards" class="hazard"
          [ngClass]="{disabled:!canSelectHazard}"
          [attr.transform]="'translate(' + hazard.x + ',' + hazard.y + ')'">
-        <use [attr.xlink:href]="'#' + hazard.hazard.type + '_' + hazard.hazard.hands"
-             (click)="selectHazard(hazard.hazard)"/>
-        <text x="18" y="30" class="points">{{hazard.hazard.points}}</text>
+        <use [attr.xlink:href]="'#' + hazard.location.hazard.type + '_' + hazard.location.hazard.hands"
+             (click)="selectHazard(hazard.location)"/>
+        <text x="18" y="30" class="points">{{hazard.location.hazard.points}}</text>
       </g>
     </g>
 
