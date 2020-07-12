@@ -59,8 +59,9 @@
 }
 
 .discard-pile {
-  margin-left: 40px;
-  opacity: 0.5;
+  width: 22px;
+  height: 32px;
+  vertical-align: top;
 }
 
 .action {
@@ -137,6 +138,9 @@ app-card {
   background-position: center;
   background-repeat: no-repeat;
   background-origin: padding-box;
+
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 .balance {

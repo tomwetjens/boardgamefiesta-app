@@ -109,6 +109,7 @@
   "gwt": {
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
+    "discardPileDialog": "Discard Pile",
     "deliverDialog": "Deliver to {{city}}",
     "endedDialog": "That's all folks!",
     "confirmEndTurn": "You can still perform actions. Are you sure you want to end your turn?",

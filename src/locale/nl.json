@@ -99,6 +99,7 @@
   "gwt": {
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",
+    "discardPileDialog": "Aflegstapel",
     "deliverDialog": "Leveren aan {{city}}",
     "endedDialog": "Het is afgelopen!",
     "confirmEndTurn": "Je kunt nog acties uitvoeren. Weet je zeker dat je je beurt wilt beëindigen?",

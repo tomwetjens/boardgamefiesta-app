@@ -6,6 +6,7 @@ import {AudioService} from '../../audio.service';
 import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.component';
 import {Table} from '../../shared/model';
 import {CARD, CERTIFICATE, COINS, COWBOY, CRAFTSMAN, ENGINEER} from "../sounds";
+import {DiscardPileDialogComponent} from "../discard-pile-dialog/discard-pile-dialog.component";
 
 @Component({
   selector: 'app-player-board',
@@ -171,6 +172,12 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
     const ngbModalRef = this.ngbModal.open(ObjectivesDialogComponent);
     const componentInstance = ngbModalRef.componentInstance as ObjectivesDialogComponent;
     componentInstance.table = this.table;
+    componentInstance.playerState = this.playerState;
+  }
+
+  showDiscardPile() {
+    const ngbModalRef = this.ngbModal.open(DiscardPileDialogComponent);
+    const componentInstance = ngbModalRef.componentInstance as DiscardPileDialogComponent;
     componentInstance.playerState = this.playerState;
   }
 

@@ -20,6 +20,7 @@ import {TrailComponent} from './trail/trail.component';
 import {SharedModule} from '../shared/shared.module';
 import {GAME} from '../shared/api';
 import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
+import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
     CardStackComponent,
     CattleMarketComponent,
     DeliveryCityComponent,
+    DiscardPileDialogComponent,
     EndedDialogComponent,
     HazardComponent,
     ObjectiveCardsComponent,
