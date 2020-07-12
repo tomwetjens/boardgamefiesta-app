@@ -28,7 +28,6 @@
   "readMore": "Read more",
   "showLess": "Show less",
   "profile": "Profile",
-  "about": "About",
   "preferences": "Preferences",
   "username": "Username",
   "language": "Language",
@@ -95,6 +94,18 @@
     }
   },
   "rating": "Rating",
+  "about": {
+    "title": "About",
+    "text": "This website is maintained by Tom Wetjens. I am a software developer by day and board gamer by night. The idea for this website came during the lockdown due to the Corona virus in 2020. As playing board games with friends in real life was no longer possible, I started looking at other ways.",
+    "specialThanks": {
+      "title": "Special Thanks",
+      "text": "My wife Sharon for the patience and testing. Gerben, Niels, Erik, Judith, Irene also for testing. Sander for testing and making sound effects and songs."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "text": "This website is maintained by Tom Wetjens. Feel free to contact me about any issues, requests or suggestions. As there is currently no issue tracker yet, please submit any bug reports to my e-mail address."
+  },
   "gwt": {
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
