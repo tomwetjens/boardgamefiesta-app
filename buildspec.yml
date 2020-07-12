@@ -15,4 +15,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: dist/tomsboardgames-app
+  base-directory: dist/boardgamefiesta-app

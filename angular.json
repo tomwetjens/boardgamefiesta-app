@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tomsboardgames-app": {
+    "boardgamefiesta-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tomsboardgames-app",
+            "outputPath": "dist/boardgamefiesta-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,19 +69,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tomsboardgames-app:build",
+            "browserTarget": "boardgamefiesta-app:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tomsboardgames-app:build:production"
+              "browserTarget": "boardgamefiesta-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tomsboardgames-app:build"
+            "browserTarget": "boardgamefiesta-app:build"
           }
         },
         "test": {
@@ -118,15 +118,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tomsboardgames-app:serve"
+            "devServerTarget": "boardgamefiesta-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tomsboardgames-app:serve:production"
+              "devServerTarget": "boardgamefiesta-app:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "tomsboardgames-app"
+  "defaultProject": "boardgamefiesta-app"
 }
