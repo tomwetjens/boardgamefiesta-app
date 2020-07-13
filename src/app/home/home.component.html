@@ -54,7 +54,9 @@
     <!-- Split across rows -->
     <div class="col-md-3 col-sm-12">
       <div class="card">
-        <img class="card-img-top" src="/assets/games/gwt/box.png" alt="{{'game.gwt.name'|translate}}">
+        <a [routerLink]="['games/gwt']">
+          <img class="card-img-top" src="/assets/games/gwt/box.png" alt="{{'game.gwt.name'|translate}}">
+        </a>
         <div class="card-body">
           <h5 class="card-title">{{'game.gwt.name' | translate}}</h5>
           <p class="card-text">{{'game.gwt.summary'| translate}}</p>

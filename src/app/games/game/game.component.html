@@ -1,63 +1,88 @@
-<section class="container" *ngIf="game | async as game">
-  <section class="container">
-    <div class="jumbotron">
-      <h5>{{'game.' + game.id + '.name'|translate}}</h5>
-      <hr class="my-4">
-      <p>
-        <img src="/assets/games/{{game.id}}/box.png" class="box"/>
-        {{'game.' + game.id + '.description'|translate}}
-      </p>
+<div class="container" *ngIf="game | async as game">
+  <div class="jumbotron">
+    <h5>{{'game.' + game.id + '.name'|translate}}</h5>
+    <hr class="my-4">
+    <p>
+      <img src="/assets/games/{{game.id}}/box.png" class="box"/>
+      <span [innerHTML]="'game.' + game.id + '.description'|translate"></span>
+    </p>
+    <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
+  </div>
 
-<!--      <table>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--          <th>{{'designers'|translate}}</th>-->
-<!--          <td>{{game.designers}}</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <th>{{'artists'|translate}}</th>-->
-<!--          <td>{{game.artists}}</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <th>{{'publishers'|translate}}</th>-->
-<!--          <td>{{game.publishers}}</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
+  <section *ngIf="game.id === 'gwt'">
+    <h2>Rules</h2>
+    <p>To be described.</p>
 
-<!--      <p><a [href]="game.website" target="_blank">Website</a></p>-->
+    <h2>Known Issues</h2>
+    <ul>
+      <li>The "computer" player is currently very dumb. It only moves forward 1 step at a time and always delivers to
+        Kansas City.
+      </li>
+    </ul>
 
-      <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
-    </div>
+    <h2>Scoring</h2>
+    <p>
+      While the game is in progress, the score is calculated the same way it is calculated at the end of the game.
+    </p>
+    <p>
+      That means your current balance is counted towards points. Which may cause your score to go down when you spend
+      these dollars.
+    </p>
+    <p>
+      Also any objective cards you have already played, but are not yet completed, may deduct some points from your
+      running score.Of course during the game you still have opportunities to complete these objective cards.
+      <br/><br/>
+      Objective cards that are in your deck, are added to your score if you have completed them already.
+      <br/>
+      <strong>The system automatically figures out what combination of objective cards (committed and optional) gives
+        you the best
+        score.</strong>
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <dl>
+      <dt>When delivering to a city, why is my disc already placed on the city, while I have not picked one yet?</dt>
+      <dd>
+        This has a technical reason. Because of the way the action system is implemented, the system cannot "remember"
+        which city it has to drop the disc on after you have picked it from your player board.
+        That's why it places one immediately on the city, and then asks you to remove one from your player board,
+        instead of moving it.
+      </dd>
+      <dt>When moving my rancher, why does the system ask which route to take, even when it costs more or the same?</dt>
+      <dd>
+        Sometimes you may want to rather pay the bank instead of an opponent.
+        Or you may want to lose some dollars before passing an opponents building, preventing them from receiving money.
+      </dd>
+    </dl>
   </section>
 
-<!--  <ngb-carousel *ngIf="screenshots">-->
-<!--    <ng-template ngbSlide>-->
-<!--      <div class="picsum-img-wrapper">-->
-<!--        <img [src]="screenshots[0]" alt="Random first slide">-->
-<!--      </div>-->
-<!--      <div class="carousel-caption">-->
-<!--        <h3>First slide label</h3>-->
-<!--        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--    <ng-template ngbSlide>-->
-<!--      <div class="picsum-img-wrapper">-->
-<!--        <img [src]="screenshots[1]" alt="Random second slide">-->
-<!--      </div>-->
-<!--      <div class="carousel-caption">-->
-<!--        <h3>Second slide label</h3>-->
-<!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--    <ng-template ngbSlide>-->
-<!--      <div class="picsum-img-wrapper">-->
-<!--        <img [src]="screenshots[2]" alt="Random third slide">-->
-<!--      </div>-->
-<!--      <div class="carousel-caption">-->
-<!--        <h3>Third slide label</h3>-->
-<!--        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--  </ngb-carousel>-->
-</section>
+  <!--  <ngb-carousel *ngIf="screenshots">-->
+  <!--    <ng-template ngbSlide>-->
+  <!--      <div class="picsum-img-wrapper">-->
+  <!--        <img [src]="screenshots[0]" alt="Random first slide">-->
+  <!--      </div>-->
+  <!--      <div class="carousel-caption">-->
+  <!--        <h3>First slide label</h3>-->
+  <!--        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
+  <!--      </div>-->
+  <!--    </ng-template>-->
+  <!--    <ng-template ngbSlide>-->
+  <!--      <div class="picsum-img-wrapper">-->
+  <!--        <img [src]="screenshots[1]" alt="Random second slide">-->
+  <!--      </div>-->
+  <!--      <div class="carousel-caption">-->
+  <!--        <h3>Second slide label</h3>-->
+  <!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+  <!--      </div>-->
+  <!--    </ng-template>-->
+  <!--    <ng-template ngbSlide>-->
+  <!--      <div class="picsum-img-wrapper">-->
+  <!--        <img [src]="screenshots[2]" alt="Random third slide">-->
+  <!--      </div>-->
+  <!--      <div class="carousel-caption">-->
+  <!--        <h3>Third slide label</h3>-->
+  <!--        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
+  <!--      </div>-->
+  <!--    </ng-template>-->
+  <!--  </ngb-carousel>-->
+</div>
