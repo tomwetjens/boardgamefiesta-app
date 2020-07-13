@@ -10,6 +10,36 @@
   </div>
 
   <section *ngIf="game.id === 'gwt'">
+    <ngb-carousel>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img src="/assets/games/gwt/screenshots/screenshot1.jpg" alt="Random first slide">
+        </div>
+        <div class="carousel-caption">
+          <h3>Full graphical board and automated setup</h3>
+          <p>Every part of the game is available in high resolution graphics.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img src="/assets/games/gwt/screenshots/screenshot2.jpg" alt="Random second slide">
+        </div>
+        <div class="carousel-caption">
+          <h3>Beginner game or randomized</h3>
+          <p>Each player has own set of buildings available to build</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img src="/assets/games/gwt/screenshots/screenshot3.jpg" alt="Random third slide">
+        </div>
+        <div class="carousel-caption">
+          <h3>Action system</h3>
+          <p>Sophisticated action system with fully implemented rules, so the system indicates what actions are possible.</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+
     <h2>Rules</h2>
     <p>To be described.</p>
 
@@ -55,44 +85,19 @@
       </dd>
       <dt>Why do I not get to pick which objective cards to use and which ones to ignore?</dt>
       <dd>
-        Objective cards that you have played during your turn are considered "committed" and must be completed in order to gain the points,
-        else you will get a penalty. The objective cards that you still have in your deck are considered optional. If completed, you gain the points,
+        Objective cards that you have played during your turn are considered "committed" and must be completed in order
+        to gain the points,
+        else you will get a penalty. The objective cards that you still have in your deck are considered optional. If
+        completed, you gain the points,
         else they are simply ignored.
         <br/><br/>
-        The system automatically figures out what combination of objective cards (committed and optional) gives you the maximum possible score.
+        The system automatically figures out what combination of objective cards (committed and optional) gives you the
+        maximum possible score.
         <br/>
-        So let's say you have 2 objective cards that both require 2 buildings. If you have only 2 buildings built, the system will count the objective card that gives you the most points (taking penalty into account).
+        So let's say you have 2 objective cards that both require 2 buildings. If you have only 2 buildings built, the
+        system will count the objective card that gives you the most points (taking penalty into account).
       </dd>
     </dl>
   </section>
 
-  <!--  <ngb-carousel *ngIf="screenshots">-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="picsum-img-wrapper">-->
-  <!--        <img [src]="screenshots[0]" alt="Random first slide">-->
-  <!--      </div>-->
-  <!--      <div class="carousel-caption">-->
-  <!--        <h3>First slide label</h3>-->
-  <!--        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>-->
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="picsum-img-wrapper">-->
-  <!--        <img [src]="screenshots[1]" alt="Random second slide">-->
-  <!--      </div>-->
-  <!--      <div class="carousel-caption">-->
-  <!--        <h3>Second slide label</h3>-->
-  <!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--    <ng-template ngbSlide>-->
-  <!--      <div class="picsum-img-wrapper">-->
-  <!--        <img [src]="screenshots[2]" alt="Random third slide">-->
-  <!--      </div>-->
-  <!--      <div class="carousel-caption">-->
-  <!--        <h3>Third slide label</h3>-->
-  <!--        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
-  <!--      </div>-->
-  <!--    </ng-template>-->
-  <!--  </ngb-carousel>-->
 </div>
