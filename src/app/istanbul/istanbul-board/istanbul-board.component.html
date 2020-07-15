@@ -45,7 +45,7 @@
              (click)="selectPlace(x,y)"
              filter="url(#dropShadow)">
 
-            <image [attr.href]="'/assets/games/istanbul/places/' + place.number + '.jpg'"
+            <image [attr.href]="'/assets/games/istanbul/places/' + place.number + '.png'"
                    x="0"
                    y="0"
                    width="800"
@@ -80,7 +80,7 @@
                          height="300"></image>
 
                   <image *ngFor="let goodsType of place.demand; index as index"
-                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.png'"
                          width="70"
                          height="70"
                          [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
@@ -96,7 +96,7 @@
                          height="300"></image>
 
                   <image *ngFor="let goodsType of place.demand; index as index"
-                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                         [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.png'"
                          width="70"
                          height="70"
                          [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
@@ -201,7 +201,7 @@
                       stroke="black" stroke-width="1"
                       fill="black"
                       filter="url(#dropShadow)"></circle>
-              <image href="/assets/games/istanbul/smuggler.jpg"
+              <image href="/assets/games/istanbul/smuggler.png"
                      x="-40"
                      y="-40"
                      width="80"
@@ -281,7 +281,7 @@
               <g *ngFor="let goodsType of goodsTypes; index as index"
                  [attr.transform]="'translate(0,' + (index * 50) + ')'">
                 <image *ngFor="let _ of [].constructor(playerState.capacity); index as index"
-                       [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.jpg'"
+                       [attr.href]="'/assets/games/istanbul/market/' + goodsType.toLowerCase() + '.png'"
                        [attr.x]="index * 50"
                        class="good"
                        [class]="{available: (playerState.goods[goodsType] || 0) > index}"
