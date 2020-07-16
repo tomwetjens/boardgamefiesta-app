@@ -453,44 +453,34 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectLocation(name: string) {
-    switch (this.selectedAction) {
-      case ActionType.MOVE:
-      case ActionType.MOVE_1_FORWARD:
-      case ActionType.MOVE_2_FORWARD:
-      case ActionType.MOVE_3_FORWARD:
-      case ActionType.MOVE_3_FORWARD_WITHOUT_FEES:
-      case ActionType.MOVE_4_FORWARD:
-        if (this.state.trail.playerLocations[this.state.player.player.color]) {
-          const moves = this.state.possibleMoves
-            .filter(possibleMove => possibleMove.to === name);
+    if (MOVE_ACTIONS.includes(this.selectedAction)) {
+      if (this.state.trail.playerLocations[this.state.player.player.color]) {
+        const moves = this.state.possibleMoves
+          .filter(possibleMove => possibleMove.to === name);
 
-          if (this.state.possibleMoves.length === 0) {
-            this.toastrService.error('Cannot move to selected location');
-            return;
-          }
-
-          if (moves.length === 1) {
-            this.performMove(moves[0].steps);
-          } else {
-            this.possibleMoves = moves;
-            this.updatePossibleMoves();
-          }
-        } else {
-          // First move, can go anywhere
-          this.performMove([name]);
+        if (this.state.possibleMoves.length === 0) {
+          this.toastrService.error('Cannot move to selected location');
+          return;
         }
-        break;
 
-      case ActionType.PLACE_BUILDING:
-      case ActionType.PLACE_CHEAP_BUILDING:
-        const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
-        const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
-        componentInstance.table = this.table;
-        componentInstance.playerState = this.state.player;
-        fromPromise(ngbModalRef.result).subscribe(building => {
-          this.perform.emit({type: this.selectedAction, location: name, building});
-        });
-        break;
+        if (moves.length === 1) {
+          this.performMove(moves[0].steps);
+        } else {
+          this.possibleMoves = moves;
+          this.updatePossibleMoves();
+        }
+      } else {
+        // First move, can go anywhere
+        this.performMove([name]);
+      }
+    } else if (BUILD_ACTIONS.includes(this.selectedAction)) {
+      const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
+      const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
+      componentInstance.table = this.table;
+      componentInstance.playerState = this.state.player;
+      fromPromise(ngbModalRef.result).subscribe(building => {
+        this.perform.emit({type: this.selectedAction, location: name, building});
+      });
     }
   }
 
@@ -657,7 +647,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
       case ActionType.EXTRAORDINARY_DELIVERY:
         if (this.selectedSpace) {
-          this.perform.emit({type: this.selectedAction, city, to: this.selectedSpace});
+          this.perform.emit({type: ActionType.EXTRAORDINARY_DELIVERY, city, to: this.selectedSpace});
         }
         break;
     }
