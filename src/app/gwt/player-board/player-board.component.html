@@ -191,8 +191,8 @@
               ry="4"
               height="54"
               width="54"
-              [ngClass]="{disabled: !canSelectAction('DRAW_CARD') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)}"
-              (click)="clickAuxiliaryAction('DRAW_CARD')"/>
+              [ngClass]="{disabled: !canSelectAction('DRAW_2_CARDS') || !hasUnlocked('AUX_DRAW_CARD_TO_DISCARD_CARD', 2)}"
+              (click)="clickAuxiliaryAction('DRAW_2_CARDS')"/>
 
         <rect id="aux-move-engine-backwards"
               class="action"

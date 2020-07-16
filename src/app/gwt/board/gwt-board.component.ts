@@ -21,6 +21,11 @@ const AUTO_SELECTED_ACTIONS = [
 
 const FREE_ACTIONS = [
   ActionType.DRAW_CARD,
+  ActionType.DRAW_2_CARDS,
+  ActionType.DRAW_3_CARDS,
+  ActionType.DRAW_4_CARDS,
+  ActionType.DRAW_5_CARDS,
+  ActionType.DRAW_6_CARDS,
   ActionType.DRAW_2_CATTLE_CARDS,
   ActionType.GAIN_1_CERTIFICATE,
   ActionType.GAIN_1_DOLLAR,
@@ -154,6 +159,11 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
       case ActionType.GAIN_1_DOLLAR:
       case ActionType.GAIN_1_CERTIFICATE:
       case ActionType.DRAW_CARD:
+      case ActionType.DRAW_2_CARDS:
+      case ActionType.DRAW_3_CARDS:
+      case ActionType.DRAW_4_CARDS:
+      case ActionType.DRAW_5_CARDS:
+      case ActionType.DRAW_6_CARDS:
       case ActionType.DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES:
       case ActionType.DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS:
       case ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE:
