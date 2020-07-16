@@ -87,8 +87,8 @@
 
         <image *ngIf="state.otherPlayers.length > 1"
                [attr.href]="'/assets/games/gwt/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.png'"
-               x="197" y="12"
-               height="110" width="259"/>
+               x="179" y="-9"
+               height="150" width="268"/>
 
         <use xlink:href="#COWBOY" *ngFor="let cowboy of cowboys; index as i" class="worker"
              transform="scale(2.2, 2.2)"
