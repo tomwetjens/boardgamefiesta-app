@@ -132,14 +132,3 @@ export interface LogEntry {
   parameters: string[];
   otherUser?: User;
 }
-
-export interface Game {
-  readonly id: string;
-  readonly designers: string;
-  readonly artists: string;
-  readonly publishers: string;
-  readonly website: string;
-  readonly minNumberOfPlayers: number;
-  readonly maxNumberOfPlayers: number;
-}
-

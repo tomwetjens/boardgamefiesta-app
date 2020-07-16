@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {GameService} from "../../game.service";
-import {switchMap} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {Game, TableMode, TableType} from "../../shared/model";
+import {TableMode, TableType} from "../../shared/model";
 import {TableService} from "../../table.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import {Observable} from "rxjs";
+import {map, switchMap} from "rxjs/operators";
+
+interface Game {
+  readonly id: string;
+}
 
 @Component({
   selector: 'app-game',
@@ -15,27 +18,25 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class GameComponent implements OnInit {
 
+  game: Observable<Game>;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private title: Title,
               private translateService: TranslateService,
-              private gameService: GameService,
               private tableService: TableService) {
   }
 
-  game: Observable<Game>;
-
-  screenshots = [];
-
   ngOnInit(): void {
     this.game = this.route.params
-      .pipe(switchMap(params => {
-        const name = this.translateService.instant('game.' + params.id + '.name');
-        if (name) {
-          this.title.setTitle(name);
-        }
-        return this.gameService.get(params.id);
-      }));
+      .pipe(map(params => ({id: params.id})));
+
+    this.game.subscribe(game => {
+      const name = this.translateService.instant('game.' + game.id + '.name');
+      if (name) {
+        this.title.setTitle(name);
+      }
+    });
   }
 
   play(game: Game) {
