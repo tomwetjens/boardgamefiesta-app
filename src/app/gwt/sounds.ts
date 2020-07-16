@@ -8,7 +8,7 @@ export const MOVE = '/assets/games/gwt/sounds/move.mp3';
 export const CARD = '/assets/games/gwt/sounds/card.mp3';
 export const ENGINEER = '/assets/games/gwt/sounds/engineer.mp3';
 export const CRAFTSMAN = '/assets/games/gwt/sounds/craftsman.mp3';
-export const INDIANS = '/assets/games/gwt/sounds/indians.mp3';
+export const TRIBES = '/assets/games/gwt/sounds/tribes.mp3';
 export const CERTIFICATE = '/assets/games/gwt/sounds/certificate.mp3';
 export const AUCTION = '/assets/games/gwt/sounds/auction.mp3';
 export const DISC = '/assets/games/gwt/sounds/disc.mp3';
@@ -47,7 +47,7 @@ export const SOUNDS = [
   CARD,
   ENGINEER,
   CRAFTSMAN,
-  INDIANS,
+  TRIBES,
   CERTIFICATE,
   AUCTION,
   DISC,

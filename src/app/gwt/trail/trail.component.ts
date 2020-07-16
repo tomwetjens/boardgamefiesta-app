@@ -36,7 +36,7 @@ import {
   EL_PASO,
   ENGINEER,
   FLOOD,
-  INDIANS,
+  TRIBES,
   KANSAS_CITY,
   MOVE,
   ROCKFALL,
@@ -97,7 +97,7 @@ const WORKER_ACTIONS = [
   ActionType.HIRE_WORKER_MINUS_2
 ];
 
-const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_INDIANS];
+const TEEPEE_ACTIONS = [ActionType.TRADE_WITH_TRIBES];
 
 interface SpaceElement {
   space: Space;
@@ -355,7 +355,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           }
 
           if (previousLocation.teepee && !currentLocation.teepee) {
-            this.audioService.playSound(INDIANS);
+            this.audioService.playSound(TRIBES);
           }
         }
 
@@ -417,7 +417,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
                 this.audioService.playSound(choice.hazard.type === HazardType.DROUGHT ? DROUGHT
                   : choice.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
               } else if (choice.teepee) {
-                this.audioService.playSound(INDIANS);
+                this.audioService.playSound(TRIBES);
               }
             }
           }
@@ -679,7 +679,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectTeepee(reward: number) {
-    if (this.selectedAction === ActionType.TRADE_WITH_INDIANS) {
+    if (this.selectedAction === ActionType.TRADE_WITH_TRIBES) {
       this.perform.emit({type: this.selectedAction, reward});
     }
   }
