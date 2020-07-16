@@ -15,12 +15,15 @@
            triggers="mouseenter:mouseleave"
            container="body"/>
 
-      <span class="score"
-           ngbPopover="{{'score'|translate}}"
+      <ng-template #scorePopover>
+        <ng-content select="[score]"></ng-content>
+      </ng-template>
+      <span *ngIf="score !== undefined" class="score"
+           [ngbPopover]="scorePopover" [title]="'score'|translate"
            placement="bottom"
            triggers="mouseenter:mouseleave"
            container="body">
-        {{player.score}}
+        {{score}}
       </span>
     </div>
 

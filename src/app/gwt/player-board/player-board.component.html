@@ -1,4 +1,6 @@
-<app-in-game-player [table]="table" [player]="table.players[playerState.player.name]">
+<app-in-game-player [table]="table"
+                    [player]="table.players[playerState.player.name]"
+                    [score]="playerState.score?.total">
   <header>
     <span class="balance"
           ngbPopover="{{'gwt.popover.balance'|translate}}"
@@ -51,6 +53,16 @@
                     triggers="mouseenter:mouseleave"
                     container="body"></app-card-stack>
   </header>
+  <section score>
+    <table class="table table-sm">
+      <tbody>
+      <tr *ngFor="let category of playerState.score.categories | keyvalue">
+        <th scope="row">{{'gwt.score.' + category.key|translate}}</th>
+        <td>{{category.value}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
   <main>
     <div class="row no-gutters hand" *ngIf="playerState.hand">
       <app-card *ngFor="let card of playerState.hand"

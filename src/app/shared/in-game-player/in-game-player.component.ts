@@ -11,6 +11,8 @@ export class InGamePlayerComponent implements OnInit {
   @Input() table: Table;
   @Input() player: TablePlayer;
 
+  @Input() score?: number;
+
   constructor() { }
 
   ngOnInit(): void {
