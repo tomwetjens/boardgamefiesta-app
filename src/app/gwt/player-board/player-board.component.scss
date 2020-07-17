@@ -27,7 +27,7 @@
   height: 446px;
 
   &.BLUE {
-    .cert-marker {
+    .disc, .cert-marker {
       fill: blue;
       stroke: black;
       stroke-width: 1;
@@ -35,7 +35,7 @@
   }
 
   &.RED {
-    .cert-marker {
+    .disc, .cert-marker {
       fill: red;
       stroke: black;
       stroke-width: 1;
@@ -43,7 +43,7 @@
   }
 
   &.YELLOW {
-    .cert-marker {
+    .disc, .cert-marker {
       fill: yellow;
       stroke: black;
       stroke-width: 1;
@@ -51,8 +51,8 @@
   }
 
   &.WHITE {
-    .cert-marker {
-      fill: white;
+    .disc, .cert-marker {
+      fill: #d9d9d9;
       stroke: black;
       stroke-width: 1;
     }
