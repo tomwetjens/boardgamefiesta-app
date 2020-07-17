@@ -29,24 +29,32 @@
   &.BLUE {
     .cert-marker {
       fill: blue;
+      stroke: black;
+      stroke-width: 1;
     }
   }
 
   &.RED {
     .cert-marker {
       fill: red;
+      stroke: black;
+      stroke-width: 1;
     }
   }
 
   &.YELLOW {
     .cert-marker {
       fill: yellow;
+      stroke: black;
+      stroke-width: 1;
     }
   }
 
   &.WHITE {
     .cert-marker {
       fill: white;
+      stroke: black;
+      stroke-width: 1;
     }
   }
 }

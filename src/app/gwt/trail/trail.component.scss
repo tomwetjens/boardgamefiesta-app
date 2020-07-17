@@ -72,18 +72,26 @@
 
   .red {
     fill: red;
+    stroke: black;
+    stroke-width: 1;
   }
 
   .blue {
     fill: blue;
+    stroke: black;
+    stroke-width: 1;
   }
 
   .yellow {
     fill: yellow;
+    stroke: black;
+    stroke-width: 1;
   }
 
   .white {
     fill: white;
+    stroke: black;
+    stroke-width: 1;
   }
 
 }
@@ -179,18 +187,26 @@
 
   &.BLUE {
     fill: blue;
+    stroke: black;
+    stroke-width: 1;
   }
 
   &.RED {
     fill: red;
+    stroke: black;
+    stroke-width: 1;
   }
 
   &.YELLOW {
     fill: yellow;
+    stroke: black;
+    stroke-width: 1;
   }
 
   &.WHITE {
     fill: white;
+    stroke: black;
+    stroke-width: 1;
   }
 }
 
