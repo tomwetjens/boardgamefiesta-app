@@ -172,7 +172,6 @@
       "GAINS_JOB_MARKET_TOKEN": "ontvangt het arbeidsmarkt schijfje",
       "PAY_FEE_PLAYER": "betaalt {{value1}} dollar aan {{value2}}",
       "PAY_FEE_BANK": "betaalt {{value1}} dollar aan de bank",
-      "MAY_DRAW_CATTLE_CARDS": "kan de rundermarkt aanvullen",
       "MAY_APPOINT_STATION_MASTER": "kan een stationschef benoemen",
       "MUST_TAKE_OBJECTIVE_CARD": "moet een doelkaart uit het aanbod kiezen",
       "MAY_REMOVE_BLACK_DISC_INSTEAD_OF_WHITE": "kan een spelersschijf met zwarte hoeken kiezen",
@@ -573,7 +572,7 @@
       "randomize": "Willekeurig"
     },
     "errors": {
-      "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze runderkaarten te kunnen kopen.",
+      "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze actie te kunnen doen.",
       "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan.",
       "CANNOT_PERFORM_ACTION": "Je kunt deze actie niet uitvoeren.",
       "ALREADY_AT_SPACE": "Je staat al op dit vakje.",

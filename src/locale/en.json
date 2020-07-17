@@ -182,7 +182,6 @@
       "GAINS_JOB_MARKET_TOKEN": "gains the job market token",
       "PAY_FEE_PLAYER": "pays a fee of ${{value1}} to {{value2}}",
       "PAY_FEE_BANK": "pays a fee of ${{value1}}",
-      "MAY_DRAW_CATTLE_CARDS": "may draw cattle cards",
       "MAY_APPOINT_STATION_MASTER": "may appoint a station master",
       "MUST_TAKE_OBJECTIVE_CARD": "must take an Objective Card",
       "MAY_REMOVE_BLACK_DISC_INSTEAD_OF_WHITE": "may remove a Black disc instead of a White disc",
@@ -583,7 +582,7 @@
       "randomize": "Randomize"
     },
     "errors": {
-      "NOT_ENOUGH_COWBOYS": "You need more cowbows to buy these cattle cards.",
+      "NOT_ENOUGH_COWBOYS": "You don't have enough cowboys to perform this action.",
       "CANNOT_SKIP_ACTION": "You cannot skip this action.",
       "CANNOT_PERFORM_ACTION": "You cannot perform this action.",
       "ALREADY_AT_SPACE": "You already are at this space.",
