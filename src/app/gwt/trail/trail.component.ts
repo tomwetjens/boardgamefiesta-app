@@ -36,7 +36,6 @@ import {
   EL_PASO,
   ENGINEER,
   FLOOD,
-  TRIBES,
   KANSAS_CITY,
   MOVE,
   ROCKFALL,
@@ -47,6 +46,7 @@ import {
   STATION,
   TOPEKA,
   TRAIN,
+  TRIBES,
   WELCOME_TO_KANSAS_CITY,
   WICHITA
 } from '../sounds';
@@ -481,6 +481,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       fromPromise(ngbModalRef.result).subscribe(building => {
         this.perform.emit({type: this.selectedAction, location: name, building});
       });
+    } else if (ActionType.USE_ADJACENT_BUILDING === this.selectedAction) {
+      this.perform.emit({type: ActionType.USE_ADJACENT_BUILDING, location: name});
     }
   }
 

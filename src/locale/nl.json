@@ -615,7 +615,8 @@
       "STEPS_EXCEED_LIMIT": "Om deze locatie te bereiken moet je meer stappen kunnen zetten dan je op dit moment kan.",
       "WORKERS_EXCEED_LIMIT": "Je kunt niet meer werkers van dit type hebben.",
       "NO_SUCH_PLAYER": "Speler bestaat niet.",
-      "WORKER_NOT_AVAILABLE": "Deze werker is niet beschikbaar."
+      "WORKER_NOT_AVAILABLE": "Deze werker is niet beschikbaar.",
+      "LOCATION_NOT_ADJACENT": "De locatie moet direct grenzen aan je huidige locatie."
     }
   },
   "errors": {

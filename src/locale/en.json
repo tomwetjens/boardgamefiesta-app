@@ -625,7 +625,8 @@
       "STEPS_EXCEED_LIMIT": "This location is not reachable within your current step limit.",
       "WORKERS_EXCEED_LIMIT": "You cannot have more workers of this type.",
       "NO_SUCH_PLAYER": "This player does not exist.",
-      "WORKER_NOT_AVAILABLE": "This worker is not available."
+      "WORKER_NOT_AVAILABLE": "This worker is not available.",
+      "LOCATION_NOT_ADJACENT": "This location is not adjacent to your current location."
     }
   },
   "errors": {
