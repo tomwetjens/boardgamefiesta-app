@@ -48,7 +48,8 @@ export class CardComponent implements OnInit {
           prefix = this.objectiveCard.action.toString();
           break;
         case ActionType.DRAW_3_CARDS: // backward compatibility
-          return ActionType.DRAW_CARD.toString();
+          prefix = ActionType.DRAW_CARD.toString();
+          break;
 
         case ActionType.MOVE_ENGINE_AT_MOST_2_FORWARD:
         case ActionType.MOVE_ENGINE_AT_MOST_3_FORWARD:
