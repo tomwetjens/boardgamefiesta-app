@@ -8,6 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {PrivacyComponent} from "./privacy/privacy.component";
+import {FaqComponent} from "./faq/faq.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'privacy',
         component: PrivacyComponent
+      },
+      {
+        path: 'faq',
+        component: FaqComponent
       },
       {
         path: 'games',
