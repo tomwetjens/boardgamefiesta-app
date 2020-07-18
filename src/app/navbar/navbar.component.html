@@ -3,16 +3,18 @@
     <img src="/assets/logo-min.svg" class="logo"/>
   </a>
 
-  <!--    <ul class="navbar-nav">-->
+      <ul class="navbar-nav mr-auto">
   <!--      <li class="nav-item">-->
   <!--        <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="'active'"-->
   <!--           [routerLinkActiveOptions]="{exact:true}">{{'home'|translate}}</a>-->
   <!--      </li>-->
-  <!--    </ul>-->
+      </ul>
 
-  <app-connection-status></app-connection-status>
+  <div class="form-inline my-2">
 
-  <ul class="navbar-nav">
+    <app-connection-status></app-connection-status>
+
+
     <app-user-menu></app-user-menu>
-  </ul>
+  </div>
 </nav>
