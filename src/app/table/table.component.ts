@@ -122,7 +122,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   private refreshTable(id: string) {
     this.tableService.get(id)
-      .subscribe(table => this.table.next(table));
+      .subscribe(table => this.table.next(table), () => this.router.navigate(['/']));
   }
 
   start(table: Table) {

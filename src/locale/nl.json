@@ -632,7 +632,8 @@
     "EXCEEDS_MAX_PLAYERS": "Je hebt het maximum aantal spelers bereikt voor dit spel.",
     "NOT_SUPPORTED": "Dit wordt niet ondersteund.",
     "COMPUTER_NOT_SUPPORTED": "Dit spel ondersteunt geen computer spelers.",
-    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly."
+    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
+    "RESOURCE_NOT_FOUND": "De gevraagde gegevens zijn niet gevonden."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",

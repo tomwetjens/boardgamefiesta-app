@@ -2,7 +2,7 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, of, throwError} from 'rxjs';
 import {Injectable, Injector} from '@angular/core';
 import {environment} from '../environments/environment';
-import {catchError, defaultIfEmpty, filter, map, switchMap, take, tap} from 'rxjs/operators';
+import {catchError, defaultIfEmpty, filter, map, switchMap, take} from 'rxjs/operators';
 import {ToastrService} from './toastr.service';
 import {ErrorCode, ErrorResponse} from './model';
 import {Router} from '@angular/router';
@@ -49,14 +49,15 @@ export class HttpInterceptorService implements HttpInterceptor {
       } else {
         this.toastrService.error('errors.' + error.errorCode);
       }
+    } else if (response.status === 404) {
+      this.toastrService.error('errors.RESOURCE_NOT_FOUND');
     } else if (response.status === 403) {
       this.toastrService.error('errors.FORBIDDEN');
     } else if (response.status === 502 || response.status === 503) {
       // TODO Handle 503 from backend
       // TODO Handle 502 from backend
       this.toastrService.error('errors.SERVER_NOT_AVAILABLE');
-    } else if (response.status >= 500) {
-      // TODO Handle 500 from backend
+    } else if (response.status >= 400) {
       this.toastrService.error('errors.UNEXPECTED_SERVER_ERROR');
     } else {
       console.error('Error connecting to server: ' + response.message);

@@ -642,7 +642,8 @@
     "EXCEEDS_MAX_PLAYERS": "You have reached the maximum number of players for this game.",
     "NOT_SUPPORTED": "This not supported.",
     "COMPUTER_NOT_SUPPORTED": "This game does not support computer players.",
-    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly."
+    "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
+    "RESOURCE_NOT_FOUND": "The requested resource was not found."
   },
   "log": {
     "CREATE": "created a new table",
