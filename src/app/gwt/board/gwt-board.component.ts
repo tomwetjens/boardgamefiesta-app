@@ -26,7 +26,6 @@ const FREE_ACTIONS = [
   ActionType.DRAW_4_CARDS,
   ActionType.DRAW_5_CARDS,
   ActionType.DRAW_6_CARDS,
-  ActionType.DRAW_2_CATTLE_CARDS,
   ActionType.GAIN_1_CERTIFICATE,
   ActionType.GAIN_1_DOLLAR,
   ActionType.GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS,
