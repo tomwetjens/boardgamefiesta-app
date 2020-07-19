@@ -7,14 +7,18 @@
   </button>
 </div>
 <div class="modal-body">
-  <app-card *ngFor="let card of playerState.objectives" [card]="card"></app-card>
+  <div class="objectives">
+    <app-card *ngFor="let card of playerState.objectives" [card]="card"></app-card>
+  </div>
 
-  <app-hazard *ngFor="let hazard of playerState.hazards" [hazard]="hazard"></app-hazard>
+  <div class="tiles">
+    <app-hazard *ngFor="let hazard of playerState.hazards" [hazard]="hazard"></app-hazard>
 
-  <app-teepee *ngFor="let teepee of playerState.teepees" [teepee]="teepee"></app-teepee>
+    <app-teepee *ngFor="let teepee of playerState.teepees" [teepee]="teepee"></app-teepee>
 
-  <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
-                      [stationMaster]="stationMaster"></app-station-master>
+    <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
+                        [stationMaster]="stationMaster"></app-station-master>
+  </div>
 </div>
 <div class="modal-footer">
 </div>

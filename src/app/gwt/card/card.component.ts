@@ -47,6 +47,7 @@ export class CardComponent implements OnInit {
         case ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION:
           prefix = this.objectiveCard.action.toString();
           break;
+        case ActionType.DRAW_2_CARDS: // backward compatibility
         case ActionType.DRAW_3_CARDS: // backward compatibility
           prefix = ActionType.DRAW_CARD.toString();
           break;
@@ -60,7 +61,6 @@ export class CardComponent implements OnInit {
           prefix = 'MOVE';
           break;
       }
-
       return prefix + '_' + this.objectiveCard.tasks.map(task => {
         switch (task) {
           case Task.BREEDING_VALUE_3:
