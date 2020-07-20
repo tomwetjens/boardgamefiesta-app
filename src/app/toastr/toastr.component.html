@@ -1,10 +1,14 @@
 <div class="fixed-top">
   <ngb-toast *ngFor="let toastrMessage of toastrMessages"
              [header]="toastrMessage.header"
-             [className]="toastrMessage.type === 'error' ? 'bg-danger text-light' : ''"
+             [className]="toastrMessage.type === 'error' ? 'bg-danger text-light' : toastrMessage.type === 'info' ? 'bg-info text-light' : ''"
              [autohide]="toastrMessage.autohide"
              [delay]="toastrMessage.delay"
              (hide)="hide(toastrMessage)">
-    <span>{{toastrMessage.key | translate}}</span>
+
+    <app-player-name *ngIf="toastrMessage.player" [player]="toastrMessage.player"></app-player-name>
+    <app-user-name *ngIf="!toastrMessage.player && toastrMessage.user" [user]="toastrMessage.user"></app-user-name>
+    &nbsp;
+    <span [innerHTML]="toastrMessage.key | translate:toastrMessage.parameters"></span>
   </ngb-toast>
 </div>

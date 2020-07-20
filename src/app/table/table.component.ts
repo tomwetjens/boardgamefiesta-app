@@ -1,8 +1,8 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject, of, Subject} from 'rxjs';
-import {bufferCount, filter, skipWhile, switchMap, takeUntil, tap, withLatestFrom} from 'rxjs/operators';
-import {EventType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
+import {bufferCount, filter, map, skipWhile, switchMap, take, takeUntil, tap, withLatestFrom} from 'rxjs/operators';
+import {EventType, LogEntryType, Options, PlayerStatus, Table, TablePlayer, TableStatus} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,8 @@ import {SelectUserComponent} from '../select-user/select-user.component';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 import {AudioService} from '../audio.service';
+import {ToastrService} from "../toastr.service";
+import {GWTEventType} from "../gwt/model";
 
 @Component({
   selector: 'app-table',
@@ -36,7 +38,8 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
               private ngbModal: NgbModal,
               private title: Title,
               private translateService: TranslateService,
-              private audioService: AudioService) {
+              private audioService: AudioService,
+              private toastrService: ToastrService) {
 
   }
 
@@ -110,6 +113,48 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
             break;
         }
       });
+
+    this.table
+      .pipe(
+        filter(table => !!table),
+        take(1),
+        switchMap(table => this.tableService.log(table.id)
+          .pipe(
+            // Do not show the stuff we already know
+            filter(logEntry => logEntry.player.id !== table.player),
+            // Prevent popping up very old log entries in case of reconnect
+            filter(logEntry => new Date().getTime() - new Date(logEntry.timestamp).getTime() < 6000),
+            map(logEntry => ({logEntry, table})))))
+      .subscribe(({logEntry, table}) => {
+        switch (logEntry.type) {
+          case LogEntryType.IN_GAME_EVENT:
+            switch (logEntry.parameters[0] as GWTEventType) {
+              case GWTEventType.ACTION:
+                this.toastrService.inGameEvent('gwt.log.action.' + logEntry.parameters[1],
+                  {
+                    value1: this.translateValue(table, logEntry.parameters[2]),
+                    value2: this.translateValue(table, logEntry.parameters[3]),
+                    value3: this.translateValue(table, logEntry.parameters[4])
+                  },
+                  logEntry.player, logEntry.user);
+                break;
+            }
+            break;
+        }
+      });
+  }
+
+  // TODO Move this somewhere shared with log component
+  private translateValue(table: Table, value: string): string {
+    const gameSpecificKey = table.game + '.log.values.' + value;
+    const genericKey = 'log.values.' + value;
+
+    let translated = this.translateService.instant(gameSpecificKey);
+    if (translated === gameSpecificKey) {
+      translated = this.translateService.instant(genericKey);
+    }
+
+    return translated !== genericKey ? translated : value;
   }
 
   ngOnDestroy(): void {

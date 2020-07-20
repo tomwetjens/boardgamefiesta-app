@@ -1,16 +1,22 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, LogEntry, Options, Table} from './shared/model';
-import {Observable} from 'rxjs';
+import {CreateTableRequest, EventType, LogEntry, Table} from './shared/model';
+import {concat, Observable, of} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
+import {concatMap, filter, last, map, switchMap, tap} from "rxjs/operators";
+import {EventService} from "./event.service";
+import {fromArray} from "rxjs/internal/observable/fromArray";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableService {
 
-  constructor(private httpClient: HttpClient) {
+  private _logs: Map<string, Observable<LogEntry>> = new Map();
+
+  constructor(private httpClient: HttpClient,
+              private eventService: EventService) {
   }
 
   create(request: CreateTableRequest): Observable<Table> {
@@ -53,8 +59,36 @@ export class TableService {
     return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
+  // TODO Make private in favor of log()
   getLog(id: string, date: Date): Observable<LogEntry[]> {
     return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {params: {since: date.toISOString()}});
+  }
+
+  log(id: string): Observable<LogEntry> {
+    const existing = this._logs.get(id);
+    if (existing) {
+      return existing;
+    } else {
+      let lastRequestedDate = new Date();
+      const created = concat(of(lastRequestedDate), // initial
+        this.eventService.events
+          .pipe(
+            filter(event => event.type === EventType.STATE_CHANGED),
+            filter(event => event.tableId === id),
+            map(() => lastRequestedDate))) // after state change
+        .pipe(
+          switchMap(since => {
+            return this.getLog(id, since)
+              // Make sure log entries are sorted ascending, even if server returns them descending (for now)
+              .pipe(map(response => response.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())));
+          }),
+          tap(logEntries => lastRequestedDate = new Date()),
+          concatMap(logEntries => fromArray(logEntries)));
+
+      this._logs.set(id, created);
+
+      return created;
+    }
   }
 
   abandon(id: string): Observable<void> {
@@ -80,4 +114,6 @@ export class TableService {
   changeOptions(id: string, request: ChangeOptionsRequest) {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-options', request);
   }
+
+
 }
