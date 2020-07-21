@@ -34,10 +34,9 @@
             (click)="showObjectives()"
             title="{{'gwt.objectives'|translate}}"
             ngbPopover="{{'gwt.popover.objectives'|translate}}"
-            placement="bottom"
             triggers="mouseenter:mouseleave"
             container="body"></button>
-    <button class="btn btn-secondary"
+    <button class="btn btn-secondary btn-discard-pile"
             (click)="showDiscardPile()">
       <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
                       emptyType="CATTLE"
@@ -46,12 +45,15 @@
                       triggers="mouseenter:mouseleave"
                       container="body"></app-card-stack>
     </button>
-    <app-card-stack class="draw-stack" [size]="playerState.drawStackSize"
-                    emptyType="CATTLE"
-                    ngbPopover="{{'gwt.popover.drawStack'|translate}}"
-                    placement="bottom"
-                    triggers="mouseenter:mouseleave"
-                    container="body"></app-card-stack>
+    <button class="btn btn-secondary btn-draw-stack"
+            (click)="showDrawStack()" [disabled]="!playerState.drawStack">
+      <app-card-stack class="draw-stack"
+                      [size]="playerState.drawStackSize"
+                      emptyType="CATTLE"
+                      ngbPopover="{{'gwt.popover.drawStack'|translate}}"
+                      triggers="mouseenter:mouseleave"
+                      container="body"></app-card-stack>
+    </button>
   </header>
   <section score>
     <table class="table table-sm">

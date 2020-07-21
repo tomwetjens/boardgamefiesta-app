@@ -111,6 +111,8 @@
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
     "discardPileDialog": "Discard Pile",
+    "drawStackDialog": "Draw Stack",
+    "drawStackRandomized": "These cards are in your draw stack, but they are displayed in a random order. The actual order is only known by the server, so you don't know which you will draw next.",
     "deliverDialog": "Deliver to {{city}}",
     "endedDialog": "That's all folks!",
     "confirmEndTurn": "You can still perform actions. Are you sure you want to end your turn?",

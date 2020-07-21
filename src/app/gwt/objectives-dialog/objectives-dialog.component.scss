@@ -4,7 +4,7 @@
 
   app-card {
     display: inline-block;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
   }
 
   &.completed {
@@ -44,17 +44,17 @@
 app-hazard {
   display: inline-block;
   margin: 4px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
 }
 
 app-teepee {
   display: inline-block;
   margin: 4px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
 }
 
 app-station-master  {
   display: inline-block;
   margin: 4px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
 }

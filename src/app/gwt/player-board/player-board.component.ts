@@ -7,6 +7,7 @@ import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.
 import {Table} from '../../shared/model';
 import {CARD, CERTIFICATE, COINS, COWBOY, CRAFTSMAN, ENGINEER} from "../sounds";
 import {DiscardPileDialogComponent} from "../discard-pile-dialog/discard-pile-dialog.component";
+import {DrawStackDialogComponent} from "../draw-stack-dialog/draw-stack-dialog.component";
 
 @Component({
   selector: 'app-player-board',
@@ -178,6 +179,12 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   showDiscardPile() {
     const ngbModalRef = this.ngbModal.open(DiscardPileDialogComponent);
     const componentInstance = ngbModalRef.componentInstance as DiscardPileDialogComponent;
+    componentInstance.playerState = this.playerState;
+  }
+
+  showDrawStack() {
+    const ngbModalRef = this.ngbModal.open(DrawStackDialogComponent);
+    const componentInstance = ngbModalRef.componentInstance as DrawStackDialogComponent;
     componentInstance.playerState = this.playerState;
   }
 

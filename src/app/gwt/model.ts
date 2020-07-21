@@ -241,6 +241,7 @@ export interface PlayerState {
   readonly hand: Card[];
   readonly discardPile: Card[];
   readonly drawStackSize: number;
+  readonly drawStack?: Card[];
   readonly handSize: number;
   readonly unlocked: { [key in Unlockable]: number };
   readonly buildings: string[];

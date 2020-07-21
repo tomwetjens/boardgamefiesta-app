@@ -101,6 +101,8 @@
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",
     "discardPileDialog": "Aflegstapel",
+    "drawStackDialog": "Trekstapel",
+    "drawStackRandomized": "Deze kaarten zitten in je trekstapel, alleen getoond in een willekeurige volgorde. De echte volgorde is alleen bekend op server, zodat je niet weet welke je als volgende zal trekken.",
     "deliverDialog": "Leveren aan {{city}}",
     "endedDialog": "Het is afgelopen!",
     "confirmEndTurn": "Je kunt nog acties uitvoeren. Weet je zeker dat je je beurt wilt beëindigen?",
