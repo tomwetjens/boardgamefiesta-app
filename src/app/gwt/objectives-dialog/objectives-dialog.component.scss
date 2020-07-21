@@ -1,15 +1,60 @@
-app-card {
-  display: inline-block;
+.objective {
+  position: relative;
+  margin: 4px;
+
+  app-card {
+    display: inline-block;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+  }
+
+  &.completed {
+    app-card {
+      border: 4px green solid;
+    }
+
+    .status {
+      background-image: url('../../../assets/games/gwt/icons/check.png');
+      background-size: cover;
+    }
+  }
+
+  &.notCompleted {
+    app-card {
+      border: 4px red solid;
+    }
+
+    .status {
+      background-image: url('../../../assets/games/gwt/icons/danger.png');
+      background-size: cover;
+    }
+  }
+
+  .status {
+    display: inline-block;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 30px;
+    height: 30px;
+  }
 }
 
 app-hazard {
   display: inline-block;
+  margin: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
 }
 
 app-teepee {
   display: inline-block;
+  margin: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
 }
 
 app-station-master  {
   display: inline-block;
+  margin: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
 }

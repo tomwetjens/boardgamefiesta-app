@@ -2,19 +2,25 @@
   <div *ngSwitchCase="'CATTLE'"
        style="width:100%;height:100%"
        ngbPopover="{{'gwt.popover.cattleCard'|translate:{type:'gwt.cattleType.' + cattleCard.type|translate,breedingValue:cattleCard.breedingValue, points:cattleCard.points} }}"
-       placement="top"
        triggers="mouseenter:mouseleave"
        container="body">
     <div *ngIf="cattleCard.points" class="points">
       {{cattleCard.points}}
     </div>
   </div>
-  <div *ngSwitchCase="'OBJECTIVE'"
-       style="width:100%;height:100%"
-       ngbPopover="{{'gwt.popover.objectiveCard'|translate: {points:objectiveCard.points, action:'action.' + objectiveCard.action|translate, penalty:objectiveCard.penalty} }}"
-       placement="top"
-       triggers="mouseenter:mouseleave"
-       container="body">
-  </div>
+  <ng-container *ngSwitchCase="'OBJECTIVE'">
+    <ng-template #objectiveCardPopover>
+      {{'gwt.popover.objectiveCard'|translate: {
+      points: objectiveCard.points,
+      action: 'gwt.actions.descriptions.' + (objectiveCard.action||'none')|translate,
+      penalty: objectiveCard.penalty
+    } }}
+    </ng-template>
+    <div style="width:100%;height:100%"
+      [ngbPopover]="objectiveCardPopover"
+      triggers="mouseenter:mouseleave"
+      container="body">
+    </div>
+  </ng-container>
 </ng-container>
 

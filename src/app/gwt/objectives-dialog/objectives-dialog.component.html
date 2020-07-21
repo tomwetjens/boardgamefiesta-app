@@ -8,16 +8,26 @@
 </div>
 <div class="modal-body">
   <div class="objectives">
-    <app-card *ngFor="let card of playerState.objectives" [card]="card"></app-card>
+    <span *ngFor="let objective of playerState.objectives" class="objective"
+          [ngClass]="{completed:objective.score > 0, notCompleted:objective.score < 0}">
+      <app-card [card]="objective.objectiveCard"></app-card>
+
+      <span class="status"
+            [ngbPopover]="('gwt.popover.objective.' + (objective.score >= 0 ? 'completed' : 'notCompleted'))|translate:{score:objective.score}"
+            triggers="mouseenter:mouseleave"
+            container="body"></span>
+    </span>
+  </div>
+
+  <div class="stationMasters">
+    <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
+                        [stationMaster]="stationMaster"></app-station-master>
   </div>
 
   <div class="tiles">
     <app-hazard *ngFor="let hazard of playerState.hazards" [hazard]="hazard"></app-hazard>
 
     <app-teepee *ngFor="let teepee of playerState.teepees" [teepee]="teepee"></app-teepee>
-
-    <app-station-master *ngFor="let stationMaster of playerState.stationMasters"
-                        [stationMaster]="stationMaster"></app-station-master>
   </div>
 </div>
 <div class="modal-footer">

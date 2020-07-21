@@ -119,8 +119,19 @@
       "playerFee": "krijgt {{fee}} dollar.",
       "cattleCard": "Dit is een {{type}} runderkaart met fokwaarde {{breedingValue}} en is {{points}} punten waard.",
       "objectiveCard": "Deze doelkaart is {{points}} punten waard. Wanneer je hem speelt mag je: {{action}}. Als je niet alle doelen behaalt, dan krijg je {{penalty}} minpunten.",
+      "objective": {
+        "completed": "Deze doelkaart is behaald en levert {{score}} punten op.",
+        "notCompleted": "Deze doelkaart is (nog) niet behaald en levert {{score}} punten op."
+      },
+      "stationMaster": {
+        "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 certificates.",
+        "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 hazards.",
+        "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Station master tile that gives 1 permanent certificate and 3 points for every pair of blue and green teepees.",
+        "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Station master tile that allows removing a hazard or trading with the tribes and gives 3 points for every 2 committed objective cards.",
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Station master tile that allows gaining 2 dollars and gives 1 point for every worker."
+      },
       "buildings": "View the buildings that are available.",
-      "objectives": "View the objectives that must be completed and the teepees and hazards collected.",
+      "objectives": "Bekijk de doelkaarten die behaald moeten worden en welke tegels verzameld zijn.",
       "drawStack": "The stack of cards from which new cards are drawn and added to your hand. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "discardPile": "The cards that have been discarded. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "building": {
@@ -467,6 +478,7 @@
         "USE_ADJACENT_BUILDING": "Lokale actie van aangrenzend gebouw"
       },
       "descriptions": {
+        "none": "geen extra actie",
         "APPOINT_STATION_MASTER": "Benoem stationschef",
         "BUY_CATTLE": "Koop runderkaarten",
         "DELIVER_TO_CITY": "Lever aan een stad",

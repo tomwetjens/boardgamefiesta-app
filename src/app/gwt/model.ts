@@ -182,6 +182,11 @@ export enum Task {
   SAN_FRANCISCO = 'SAN_FRANCISCO'
 }
 
+export interface Objective {
+  readonly objectiveCard: ObjectiveCard;
+  readonly score: number;
+}
+
 export interface ObjectiveCard {
   readonly tasks: Task[];
   readonly points: Points;
@@ -242,7 +247,7 @@ export interface PlayerState {
   readonly stationMasters: StationMaster[];
   readonly hazards: Hazard[];
   readonly teepees: Teepee[];
-  readonly objectives: ObjectiveCard[];
+  readonly objectives: Objective[];
   readonly score?: Score;
   readonly winner?: boolean;
 }

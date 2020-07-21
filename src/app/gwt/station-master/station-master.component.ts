@@ -16,8 +16,4 @@ export class StationMasterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @HostBinding('class')
-  get className(): string {
-    return this.stationMaster.toString();
-  }
 }

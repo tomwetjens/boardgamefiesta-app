@@ -129,8 +129,19 @@
       "playerFee": "gets {{fee}} dollars.",
       "cattleCard": "This is a {{type}} cattle card with breeding value {{breedingValue}} and worth {{points}} points.",
       "objectiveCard": "This is an Objective Card that is worth {{points}} points. When played the player may: {{action}}. If not completed, the player will lose {{penalty}} points.",
+      "objective": {
+        "completed": "This objective has been completed and scores {{score}} points.",
+        "notCompleted": "This objective has (not yet) been completed and scores {{score}} points."
+      },
+      "stationMaster": {
+        "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 certificates.",
+        "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 hazards.",
+        "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Station master tile that gives 1 permanent certificate and 3 points for every pair of blue and green teepees.",
+        "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Station master tile that allows removing a hazard or trading with the tribes and gives 3 points for every 2 committed objective cards.",
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Station master tile that allows gaining 2 dollars and gives 1 point for every worker."
+      },
       "buildings": "View the buildings that are available.",
-      "objectives": "View the objectives that must be completed and the teepees and hazards collected.",
+      "objectives": "View the objectives that must be completed and the tiles collected.",
       "drawStack": "The stack of cards from which new cards are drawn and added to your hand. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "discardPile": "The cards that have been discarded. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "building": {
@@ -477,6 +488,7 @@
         "USE_ADJACENT_BUILDING": "Use the actions of an adjacent building"
       },
       "descriptions": {
+        "none": "do nothing",
         "APPOINT_STATION_MASTER": "Appoint a station master",
         "BUY_CATTLE": "Buy one or more cattle cards",
         "DELIVER_TO_CITY": "Deliver to a city",

@@ -387,46 +387,69 @@
     </g>
 
     <g id="railroad-track" class="railroad-track">
-      <use *ngIf="state.railroadTrack.stations[0].stationMaster"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[0].stationMaster"
-           [attr.x]="271"
-           [attr.y]="86"/>
+      <g *ngIf="state.railroadTrack.stations[0].stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[0].stationMaster.toString()|translate}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[0].stationMaster"
+             [attr.x]="271"
+             [attr.y]="86"/>
+      </g>
       <use *ngIf="state.railroadTrack.stations[0].worker"
            [attr.xlink:href]="'#' + state.railroadTrack.stations[0].worker" class="worker disabled"
            [attr.x]="271"
            [attr.y]="86"/>
 
-      <use *ngIf="state.railroadTrack.stations[1].stationMaster"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[1].stationMaster"
-           [attr.x]="365.5"
-           [attr.y]="86"/>
+      <g *ngIf="state.railroadTrack.stations[1].stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[1].stationMaster.toString()|translate}}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use
+          [attr.xlink:href]="'#' + state.railroadTrack.stations[1].stationMaster"
+          [attr.x]="365.5"
+          [attr.y]="86"/>
+      </g>
       <use *ngIf="state.railroadTrack.stations[1].worker"
            [attr.xlink:href]="'#' + state.railroadTrack.stations[1].worker" class="worker disabled"
            [attr.x]="365.5"
            [attr.y]="86"/>
 
-      <use *ngIf="state.railroadTrack.stations[2].stationMaster"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[2].stationMaster"
-           [attr.x]="460"
-           [attr.y]="86"/>
+      <g *ngIf="state.railroadTrack.stations[2].stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[2].stationMaster.toString()|translate}}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use
+          [attr.xlink:href]="'#' + state.railroadTrack.stations[2].stationMaster"
+          [attr.x]="460"
+          [attr.y]="86"/>
+      </g>
       <use *ngIf="state.railroadTrack.stations[2].worker"
            [attr.xlink:href]="'#' + state.railroadTrack.stations[2].worker" class="worker disabled"
            [attr.x]="460"
            [attr.y]="86"/>
 
-      <use *ngIf="state.railroadTrack.stations[3].stationMaster"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[3].stationMaster"
-           [attr.x]="555"
-           [attr.y]="86"/>
+      <g *ngIf="state.railroadTrack.stations[3].stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[3].stationMaster.toString()|translate}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[3].stationMaster"
+             [attr.x]="555"
+             [attr.y]="86"/>
+      </g>
       <use *ngIf="state.railroadTrack.stations[3].worker"
            [attr.xlink:href]="'#' + state.railroadTrack.stations[3].worker" class="worker disabled"
            [attr.x]="555"
            [attr.y]="86"/>
 
-      <use *ngIf="state.railroadTrack.stations[4].stationMaster"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[4].stationMaster"
-           [attr.x]="650"
-           [attr.y]="86"/>
+      <g *ngIf="state.railroadTrack.stations[4].stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[4].stationMaster.toString()|translate}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use
+          [attr.xlink:href]="'#' + state.railroadTrack.stations[4].stationMaster"
+          [attr.x]="650"
+          [attr.y]="86"/>
+      </g>
       <use *ngIf="state.railroadTrack.stations[4].worker"
            [attr.xlink:href]="'#' + state.railroadTrack.stations[4].worker" class="worker disabled"
            [attr.x]="650"
