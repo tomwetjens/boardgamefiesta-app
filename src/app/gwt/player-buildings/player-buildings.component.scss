@@ -10,7 +10,7 @@
   background-size: cover;
 
   $sides: a, b;
-  $colors: blue, red, yellow, white;
+  $colors: blue, red, yellow, white, green;
 
   @for $i from 1 through 10 {
     @each $side in $sides {

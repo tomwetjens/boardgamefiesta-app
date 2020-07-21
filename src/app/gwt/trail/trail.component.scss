@@ -94,6 +94,12 @@
     stroke-width: 1;
   }
 
+  .green {
+    fill: green;
+    stroke: black;
+    stroke-width: 1;
+  }
+
 }
 
 .foresights {
@@ -205,6 +211,12 @@
 
   &.WHITE {
     fill: #d9d9d9;
+    stroke: black;
+    stroke-width: 1;
+  }
+
+  &.GREEN {
+    fill: green;
     stroke: black;
     stroke-width: 1;
   }

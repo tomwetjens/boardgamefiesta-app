@@ -219,6 +219,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private yellowElement !: ElementRef<Element>;
   @ViewChild('white')
   private whiteElement !: ElementRef<Element>;
+  @ViewChild('green')
+  private greenElement !: ElementRef<Element>;
 
   private rancherElements: { [playerColor in PlayerColor]: ElementRef };
 
@@ -435,7 +437,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       BLUE: this.blueElement,
       RED: this.redElement,
       YELLOW: this.yellowElement,
-      WHITE: this.whiteElement
+      WHITE: this.whiteElement,
+      GREEN: this.greenElement
     };
 
     this.neutralBuildingElements = {

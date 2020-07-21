@@ -2,7 +2,8 @@ export enum PlayerColor {
   YELLOW = 'YELLOW',
   RED = 'RED',
   BLUE = 'BLUE',
-  WHITE = 'WHITE'
+  WHITE = 'WHITE',
+  GREEN = 'GREEN'
 }
 
 export interface Player {
