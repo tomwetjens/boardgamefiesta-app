@@ -143,7 +143,7 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
   }
 
   get canSkip(): boolean {
-    return this.state.turn && this.state.actions.length === 1 && this.state.actions[0] !== ActionType.PLAY_OBJECTIVE_CARD;
+    return this.state.turn;
   }
 
   get canPerformFreeAction(): boolean {

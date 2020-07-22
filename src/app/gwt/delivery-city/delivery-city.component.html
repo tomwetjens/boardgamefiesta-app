@@ -24,7 +24,7 @@
       <tr>
         <th></th>
         <th [colSpan]="perm.length" *ngIf="perm.length > 0">{{'gwt.permCertificates'|translate}}</th>
-        <th [colSpan]="both.length">{{'gwt.tempCertificates'|translate}}</th>
+        <th [colSpan]="both.length" *ngIf="both.length > 0">{{'gwt.tempCertificates'|translate}}</th>
       </tr>
       </thead>
       <tbody>
