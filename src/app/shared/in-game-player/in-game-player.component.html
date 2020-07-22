@@ -21,7 +21,7 @@
       <span *ngIf="score !== undefined" class="score"
            [ngbPopover]="scorePopover" [title]="'score'|translate"
            placement="bottom"
-           triggers="mouseenter:mouseleave"
+           triggers="mouseenter:mouseleave hover click"
            container="body">
         {{score}}
       </span>
