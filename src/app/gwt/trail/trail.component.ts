@@ -820,13 +820,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
     switch (this.selectedAction) {
       case ActionType.HIRE_WORKER_MINUS_1:
-        cost += 1;
+        cost -= 1;
         break;
       case ActionType.HIRE_WORKER_MINUS_2:
-        cost += 2;
+        cost -= 2;
         break;
       case ActionType.HIRE_WORKER_PLUS_2:
-        cost -= 2;
+        cost += 2;
         break;
     }
 
