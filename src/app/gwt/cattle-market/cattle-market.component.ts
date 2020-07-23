@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, CattleMarket} from '../model';
+import {Action, ActionType, CattleCard, CattleMarket, CostPreference, State} from '../model';
 import {TableService} from '../../table.service';
 import {AudioService} from '../../audio.service';
 import {Table} from '../../shared/model';
@@ -12,10 +12,8 @@ import {COW} from "../sounds";
 })
 export class CattleMarketComponent implements OnInit, OnChanges {
 
-  // private possibleBuys: PossibleBuy[];
-
   @Input() table: Table;
-  @Input() cattleMarket: CattleMarket;
+  @Input() state: State;
 
   @Input() selectedAction: ActionType;
 
@@ -38,15 +36,6 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // if (changes.selectedAction) {
-    //   if (this.selectedAction === ActionType.BUY_CATTLE) {
-    //     this.tableService.getPossibleBuys(this.table.id)
-    //       .subscribe(possibleBuys => this.possibleBuys = possibleBuys);
-    //   } else {
-    //     this.possibleBuys = null;
-    //   }
-    // }
-
     if (changes.cattleMarket) {
       const current = changes.cattleMarket.currentValue as CattleMarket;
       const previous = changes.cattleMarket.previousValue as CattleMarket;
@@ -60,33 +49,26 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   canSelectCard(card: CattleCard) {
-    // function containsAllInAnyOrder(arr: number[], elements: number[]) {
-    //   const copy = Object.assign([], arr);
-    //   for (const e of elements) {
-    //     const index = copy.indexOf(e as any);
-    //     if (index < 0) {
-    //       return false;
-    //     }
-    //     copy.splice(index, 1);
-    //   }
-    //   return true;
-    // }
-
-    return this.selectedAction === ActionType.BUY_CATTLE;
+    return this.canBuy && !this.isSelected(card);
     // TODO Only allow selecting combinations that are possible
-    // && this.possibleBuys
-    // && this.possibleBuys.length > 0
-    // && this.possibleBuys.some(possibleBuy => containsAllInAnyOrder(possibleBuy.breedingValues,
-    //   this.selectedCards.map(selectedCard => selectedCard.breedingValue).concat(card.breedingValue)));
   }
 
   selectCard(card: CattleCard) {
+    if (!this.canSelectCard(card)) {
+      return;
+    }
+
     const index = this.selectedCards.indexOf(card);
 
     if (index < 0) {
-      if (this.canSelectCard(card)) {
-        this.selectedCards.push(card);
+      if (this.selectedCards.length == 2) {
+        this.selectedCards.splice(0, 1);
       }
+      if (this.selectedCards.length > 0 && this.selectedCards[0].breedingValue !== card.breedingValue) {
+        // Not pair
+        this.selectedCards = [];
+      }
+      this.selectedCards.push(card);
     } else {
       this.selectedCards.splice(index, 1);
     }
@@ -97,7 +79,13 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   confirm() {
-    this.perform.emit({type: this.selectedAction, cattleCards: this.selectedCards});
+    this.perform.emit({
+      type: this.selectedAction,
+      cattleCards: this.selectedCards,
+      // TODO Allow user to select cost preference
+      costPreference: CostPreference.CHEAPEST
+    });
+
     this.selectedCards = [];
   }
 }

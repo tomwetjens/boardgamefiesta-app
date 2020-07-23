@@ -66,7 +66,6 @@
   "addComputer": "Add Computer Player",
   "confirmStart": "Some players have not yet responded. They will not be able to join the game. Do you still want to start the game?",
   "waitForPlayers": "Wait for players",
-  "buy": "Buy",
   "popover": {
     "waitingForPlayer": "Waiting for this player to perform an action."
   },
@@ -123,6 +122,10 @@
     "tempCertificates": "Spend temporary certificates",
     "totalCertificates": "Total",
     "totalBreedingValue": "Total breeding value",
+    "cattleMarket": {
+      "select": "Pick a single cattle card or a pair of cattle cards and click confirm.<br/>You can repeat this action as long as you have enough dollars and cowboys.",
+      "buy": "Buy cattle cards"
+    },
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",
@@ -353,7 +356,7 @@
     "actions": {
       "instructions": {
         "APPOINT_STATION_MASTER": "Appoint a station master",
-        "BUY_CATTLE": "Buy one or more cattle cards",
+        "BUY_CATTLE": "Pick one cattle card or a pair from the cattle market",
         "DELIVER_TO_CITY": "Deliver to a city",
         "DISCARD_CARD": "Discard a card",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Discard 1 cattle card to gain 3 dollars and add 1 objective card to your hand",

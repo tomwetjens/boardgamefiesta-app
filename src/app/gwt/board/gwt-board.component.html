@@ -22,7 +22,7 @@
     </app-objective-cards>
 
     <app-cattle-market [table]="table"
-                       [cattleMarket]="state.cattleMarket"
+                       [state]="state"
                        [selectedAction]="selectedAction"
                        (perform)="perform.emit($event)">
     </app-cattle-market>

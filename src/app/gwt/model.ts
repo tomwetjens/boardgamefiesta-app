@@ -369,7 +369,8 @@ export interface PossibleDelivery {
 export interface PossibleBuy {
   cost: number;
   cowboysNeeded: number;
-  breedingValues: number[];
+  breedingValue: number;
+  pair: boolean;
 }
 
 export enum GWTEventType {
@@ -395,4 +396,9 @@ export enum GWTEventType {
   EVERY_OTHER_PLAYER_HAS_1_TURN = 'EVERY_OTHER_PLAYER_HAS_1_TURN',
   ENDS_GAME = 'ENDS_GAME',
   FILL_UP_CATTLE_MARKET = 'FILL_UP_CATTLE_MARKET'
+}
+
+export enum CostPreference {
+  CHEAPEST = 'CHEAPEST',
+  LESS_COWBOYS = 'LESS_COWBOYS'
 }

@@ -1,8 +1,17 @@
-<app-card *ngFor="let card of cattleMarket.cards"
-          [card]="card"
-          [ngClass]="{disabled:!isSelected(card) && !canSelectCard(card), selected:isSelected(card), notAvailable:canBuy && !isSelected(card) && !canSelectCard(card)}"
-          (click)="selectCard(card)"></app-card>
+<div *ngIf="canBuy">
+  <span [innerHTML]="'gwt.cattleMarket.select'|translate"></span>
+  <button class="btn btn-primary" [disabled]="!canConfirm"
+          (click)="confirm()">{{'gwt.cattleMarket.buy'|translate}}</button>
+</div>
 
-<app-card-stack [size]="cattleMarket.drawStackSize" [emptyType]="'CATTLE'"></app-card-stack>
+<div class="cards" [ngClass]="{selecting:selectedCards.length > 0}">
+  <app-card *ngFor="let card of state.cattleMarket.cards"
+            [card]="card"
+            [ngClass]="{
+          disabled:!canSelectCard(card),
+          selected:isSelected(card)
+          }"
+            (click)="selectCard(card)"></app-card>
 
-<button class="btn btn-primary" *ngIf="canBuy" [disabled]="!canConfirm" (click)="confirm()">{{'buy'|translate}}</button>
+  <app-card-stack [size]="state.cattleMarket.drawStackSize" [emptyType]="'CATTLE'"></app-card-stack>
+</div>
