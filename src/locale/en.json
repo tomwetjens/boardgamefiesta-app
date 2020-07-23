@@ -214,7 +214,8 @@
       "FILL_UP_CATTLE_MARKET": "cattle market is filled up",
       "action": {
         "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives {{value2}}",
-        "BUY_CATTLE": "buys cattle cards for $ {{value1}}",
+        "BUY_CATTLE": "buys a {{value2}} ({{value3}}VP) for ${{value1}} and {{value4}} cowboys",
+        "BUY_2_CATTLE": "buys a {{value2}} ({{value3}}VP) and a {{value4}} ({{value5}}VP) for ${{value1}} and {{value6}} cowboys",
         "DELIVER_TO_CITY": "delivers to {{value1}} spending {{value2}} certificates, receiving ${{value3}}",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "discards 1 Black Angus to gain 2 certificates",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS": "discards 1 Black Angus to gain $2",
@@ -350,7 +351,17 @@
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Permanent certificate + 3 points per 2 hazards",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificate + 3 points per teepee pair",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Remove hazard/trade with Tribes + 3 points per 2 objective cards",
-        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Gain $2 + 1 point per worker"
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Gain $2 + 1 point per worker",
+
+        "JERSEY": "Jersey",
+        "GUERNSEY": "Guernsey",
+        "BLACK_ANGUS": "Black Angus",
+        "DUTCH_BELT": "Dutch Belt",
+        "HOLSTEIN": "Holstein",
+        "BROWN_SWISS": "Brown Swiss",
+        "AYRSHIRE": "Ayrshire",
+        "WEST_HIGHLAND": "West Highland",
+        "TEXAS_LONGHORN": "Texas Longhorn"
       }
     },
     "actions": {

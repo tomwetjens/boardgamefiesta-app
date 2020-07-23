@@ -1,10 +1,10 @@
-<div *ngIf="canBuy">
+<div *ngIf="buyingCattle">
   <span [innerHTML]="'gwt.cattleMarket.select'|translate"></span>
   <button class="btn btn-primary" [disabled]="!canConfirm"
           (click)="confirm()">{{'gwt.cattleMarket.buy'|translate}}</button>
 </div>
 
-<div class="cards" [ngClass]="{selecting:selectedCards.length > 0}">
+<div class="cards" [ngClass]="{buying:buyingCattle, selecting:selectedCards.length > 0}">
   <app-card *ngFor="let card of state.cattleMarket.cards"
             [card]="card"
             [ngClass]="{

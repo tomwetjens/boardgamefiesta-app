@@ -127,38 +127,38 @@
         <use [attr.xlink:href]="'#' + foresights[2][0].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(2,0), otherSelected: isForesightSelected(2,1)}"
              (click)="selectForesight(0,2)"/>
-        <text *ngIf="foresights[2][0].points" x="18" y="30" class="points">{{foresights[2][0].points}}</text>
+        <text *ngIf="foresights[2][0].points" x="21" y="33" class="points">{{foresights[2][0].points}}</text>
       </g>
       <g transform="translate(34,0)">
         <use [attr.xlink:href]="'#' + foresights[1][0].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(1,0), otherSelected: isForesightSelected(1,1)}"
              (click)="selectForesight(0,1)"/>
-        <text *ngIf="foresights[1][0].points" x="18" y="30" class="points">{{foresights[1][0].points}}</text>
+        <text *ngIf="foresights[1][0].points" x="21" y="33" class="points">{{foresights[1][0].points}}</text>
       </g>
       <g transform="translate(68,0)">
         <use [attr.xlink:href]="'#' + foresights[0][0].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(0,0), otherSelected: isForesightSelected(0,1)}"
              (click)="selectForesight(0,0)"/>
-        <text *ngIf="foresights[0][0].points" x="18" y="30" class="points">{{foresights[0][0].points}}</text>
+        <text *ngIf="foresights[0][0].points" x="21" y="33" class="points">{{foresights[0][0].points}}</text>
       </g>
 
       <g transform="translate(0,40)">
         <use [attr.xlink:href]="'#' + foresights[2][1].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(2,1), otherSelected: isForesightSelected(2,0)}"
              (click)="selectForesight(1,2)"/>
-        <text *ngIf="foresights[2][1].points" x="18" y="30" class="points">{{foresights[2][1].points}}</text>
+        <text *ngIf="foresights[2][1].points" x="21" y="33" class="points">{{foresights[2][1].points}}</text>
       </g>
       <g transform="translate(34,40)">
         <use [attr.xlink:href]="'#' + foresights[1][1].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(1,1), otherSelected: isForesightSelected(1,0)}"
              (click)="selectForesight(1,1)"/>
-        <text *ngIf="foresights[1][1].points" x="18" y="30" class="points">{{foresights[1][1].points}}</text>
+        <text *ngIf="foresights[1][1].points" x="21" y="33" class="points">{{foresights[1][1].points}}</text>
       </g>
       <g transform="translate(68,40)">
         <use [attr.xlink:href]="'#' + foresights[0][1].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(0,1), otherSelected: isForesightSelected(0,0)}"
              (click)="selectForesight(1,0)"/>
-        <text *ngIf="foresights[0][1].points" x="18" y="30" class="points">{{foresights[0][1].points}}</text>
+        <text *ngIf="foresights[0][1].points" x="21" y="33" class="points">{{foresights[0][1].points}}</text>
       </g>
     </g>
 
@@ -558,7 +558,7 @@
          [attr.transform]="'translate(' + hazard.x + ',' + hazard.y + ')'">
         <use [attr.xlink:href]="'#' + hazard.location.hazard.type + '_' + hazard.location.hazard.hands"
              (click)="selectHazard(hazard.location)"/>
-        <text x="18" y="30" class="points">{{hazard.location.hazard.points}}</text>
+        <text x="21" y="33" class="points">{{hazard.location.hazard.points}}</text>
       </g>
     </g>
 

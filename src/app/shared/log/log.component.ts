@@ -48,7 +48,10 @@ export class LogComponent implements OnInit {
               {
                 value1: this.translateValue(logEntry.parameters[2]),
                 value2: this.translateValue(logEntry.parameters[3]),
-                value3: this.translateValue(logEntry.parameters[4])
+                value3: this.translateValue(logEntry.parameters[4]),
+                value4: this.translateValue(logEntry.parameters[5]),
+                value5: this.translateValue(logEntry.parameters[6]),
+                value6: this.translateValue(logEntry.parameters[7])
               });
           default:
             return this.translateService.instant('gwt.log.' + logEntry.parameters[0],

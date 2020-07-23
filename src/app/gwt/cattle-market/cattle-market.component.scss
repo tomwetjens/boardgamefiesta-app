@@ -28,9 +28,18 @@ app-card-stack {
     }
   }
 
+  &.buying {
+    app-card {
+      &.disabled {
+        border-color: grey;
+        opacity: 0.6;
+      }
+    }
+  }
+
   &.selecting {
     app-card {
-      opacity: 0.6;
+      opacity: 0.7;
 
       &.selected {
         border-color: green;

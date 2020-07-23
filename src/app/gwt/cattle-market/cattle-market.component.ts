@@ -22,10 +22,15 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   selectedCards: CattleCard[] = [];
 
   get canConfirm(): boolean {
-    return this.selectedCards.length > 0;
+    if (this.selectedCards.length === 0) {
+      return false;
+    }
+    return !!this.state.possibleBuys
+      .find(pb => pb.breedingValue === this.selectedCards[0].breedingValue
+        && pb.pair === (this.selectedCards.length === 2));
   }
 
-  get canBuy(): boolean {
+  get buyingCattle(): boolean {
     return this.selectedAction === ActionType.BUY_CATTLE;
   }
 
@@ -49,8 +54,8 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   canSelectCard(card: CattleCard) {
-    return this.canBuy && !this.isSelected(card);
-    // TODO Only allow selecting combinations that are possible
+    return this.buyingCattle
+      && !!this.state.possibleBuys.find(pb => pb.breedingValue === card.breedingValue);
   }
 
   selectCard(card: CattleCard) {
@@ -61,14 +66,16 @@ export class CattleMarketComponent implements OnInit, OnChanges {
     const index = this.selectedCards.indexOf(card);
 
     if (index < 0) {
-      if (this.selectedCards.length == 2) {
+      if (this.selectedCards.length === 2) {
         this.selectedCards.splice(0, 1);
       }
-      if (this.selectedCards.length > 0 && this.selectedCards[0].breedingValue !== card.breedingValue) {
-        // Not pair
-        this.selectedCards = [];
+      if (this.selectedCards.length > 0
+        && (this.selectedCards[0].breedingValue !== card.breedingValue /*Switching breeding values*/
+          || !this.state.possibleBuys.find(pb => pb.breedingValue === card.breedingValue && pb.pair) /*Pair not possible*/)) {
+        this.selectedCards = [card];
+      } else {
+        this.selectedCards.push(card);
       }
-      this.selectedCards.push(card);
     } else {
       this.selectedCards.splice(index, 1);
     }
