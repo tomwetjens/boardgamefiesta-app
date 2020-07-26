@@ -4,9 +4,10 @@
 
 app-card-stack {
   display: inline-block;
+  margin: 2px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
   float:right;
 
-  margin-right: 2px;
   border: 3px solid #ffffff;
   cursor: pointer;
   width: 80px;
@@ -24,9 +25,10 @@ app-card-stack {
 
 app-card {
   display: inline-block;
+  margin: 2px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
   float:right;
 
-  margin-right: 2px;
   border: 3px solid #ffffff;
   cursor: pointer;
 

@@ -115,6 +115,7 @@
       "select": "Kies een runderkaart of een paar en bevestig.<br/>Je kunt daarna meer kaarten kopen zolang je voldoende cowboys en dollar hebt.",
       "buy": "Koop runderkaarten"
     },
+    "buyCattleDialog": "Koop runderkaarten",
     "popover": {
       "balance": "Dollars die de speler op dit moment heeft.",
       "handValue": "De totale fokwaarde van de verschillende soorten runderkaarten die je in je hand hebt is je handwaarde. Elke soort runderkaart wordt maar één keer geteld, ongeacht hoeveel runderkaarten van die soort je in je hand hebt.",

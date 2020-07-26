@@ -126,6 +126,7 @@
       "select": "Pick a single cattle card or a pair of cattle cards and click confirm.<br/>You can repeat this action as long as you have enough dollars and cowboys.",
       "buy": "Buy cattle cards"
     },
+    "buyCattleDialog": "Buy cattle cards",
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",

@@ -1,9 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, CattleCard, CattleMarket, CostPreference, State} from '../model';
+import {Action, ActionType, CattleCard, CattleMarket, PossibleBuy, State} from '../model';
 import {TableService} from '../../table.service';
 import {AudioService} from '../../audio.service';
 import {Table} from '../../shared/model';
 import {COW} from "../sounds";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {BuyCattleDialogComponent} from "../buy-cattle-dialog/buy-cattle-dialog.component";
+import {fromPromise} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-cattle-market',
@@ -26,15 +29,17 @@ export class CattleMarketComponent implements OnInit, OnChanges {
       return false;
     }
     return !!this.state.possibleBuys
-      .find(pb => pb.breedingValue === this.selectedCards[0].breedingValue
-        && pb.pair === (this.selectedCards.length === 2));
+      .find(option => option.breedingValue === this.selectedCards[0].breedingValue
+        && option.pair === (this.selectedCards.length === 2));
   }
 
   get buyingCattle(): boolean {
     return this.selectedAction === ActionType.BUY_CATTLE;
   }
 
-  constructor(private tableService: TableService, private audioService: AudioService) {
+  constructor(private tableService: TableService,
+              private audioService: AudioService,
+              private ngbModal: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -54,8 +59,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   canSelectCard(card: CattleCard) {
-    return this.buyingCattle
-      && !!this.state.possibleBuys.find(pb => pb.breedingValue === card.breedingValue);
+    return this.buyingCattle && this.canBuySingle(card.breedingValue);
   }
 
   selectCard(card: CattleCard) {
@@ -67,16 +71,21 @@ export class CattleMarketComponent implements OnInit, OnChanges {
 
     if (index < 0) {
       if (this.selectedCards.length === 2) {
+        // Max 2 can be selected. Deselect the first one
         this.selectedCards.splice(0, 1);
       }
+
       if (this.selectedCards.length > 0
         && (this.selectedCards[0].breedingValue !== card.breedingValue /*Switching breeding values*/
-          || !this.state.possibleBuys.find(pb => pb.breedingValue === card.breedingValue && pb.pair) /*Pair not possible*/)) {
-        this.selectedCards = [card];
-      } else {
-        this.selectedCards.push(card);
+          || !this.canBuyPair(card.breedingValue) /*Pair not possible*/)) {
+        // Clear earlier selection
+        this.selectedCards = [];
       }
+
+      // Select the card
+      this.selectedCards.push(card);
     } else {
+      // Toggle selected card
       this.selectedCards.splice(index, 1);
     }
   }
@@ -86,13 +95,42 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   confirm() {
+    const options = this.state.possibleBuys
+      .filter(option => option.breedingValue === this.selectedCards[0].breedingValue)
+      .filter(option => option.pair === (this.selectedCards.length === 2))
+      .sort((a, b) => a.cowboys - b.cowboys);
+
+    if (options.length > 1) {
+      const ngbModalRef = this.ngbModal.open(BuyCattleDialogComponent);
+      const componentInstance = ngbModalRef.componentInstance as BuyCattleDialogComponent;
+      componentInstance.cards = this.selectedCards;
+      componentInstance.options = options;
+
+      fromPromise(ngbModalRef.result).subscribe(option => {
+        this.performAction(option);
+      })
+    } else {
+      this.performAction(options[0]);
+    }
+  }
+
+  private performAction(option: PossibleBuy) {
+    console.log('performAction', option);
     this.perform.emit({
       type: this.selectedAction,
       cattleCards: this.selectedCards,
-      // TODO Allow user to select cost preference
-      costPreference: CostPreference.CHEAPEST
+      cowboys: option.cowboys,
+      dollars: option.dollars
     });
 
     this.selectedCards = [];
+  }
+
+  private canBuyPair(breedingValue: number): boolean {
+    return !!this.state.possibleBuys.find(option => option.breedingValue === breedingValue && option.pair);
+  }
+
+  private canBuySingle(breedingValue: number): boolean {
+    return !!this.state.possibleBuys.find(option => option.breedingValue === breedingValue && !option.pair);
   }
 }

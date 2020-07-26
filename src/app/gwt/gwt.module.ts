@@ -22,6 +22,7 @@ import {GAME} from '../shared/api';
 import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
 import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dialog.component';
 import { DrawStackDialogComponent } from './draw-stack-dialog/draw-stack-dialog.component';
+import { BuyCattleDialogComponent } from './buy-cattle-dialog/buy-cattle-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DrawStackDialogComponent } from './draw-stack-dialog/draw-stack-dialog.
     TeepeeComponent,
     TrailComponent,
     GwtOptionsComponent,
-    DrawStackDialogComponent
+    DrawStackDialogComponent,
+    BuyCattleDialogComponent
   ],
   imports: [
     CommonModule,
