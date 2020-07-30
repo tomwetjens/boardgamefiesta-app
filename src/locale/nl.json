@@ -27,13 +27,18 @@
   "select": "Selecteer",
   "readMore": "Lees meer",
   "showLess": "Toon minder",
-  "profile": "Profiel",
-  "about": "Over mij",
-  "preferences": "Voorkeuren",
-  "username": "Gebruikersnaam",
-  "language": "Taal",
-  "email": "E-mail",
-  "save": "Opslaan",
+  "user-menu": {
+    "profile": "Profiel"
+  },
+  "profile": {
+    "about": "Over mij",
+    "preferences": "Voorkeuren",
+    "username": "Gebruikersnaam",
+    "language": "Taal",
+    "email": "E-mail",
+    "save": "Opslaan",
+    "location": "Locatie"
+  },
   "logout": "Afmelden",
   "accept": "Accepteren",
   "reject": "Weigeren",
