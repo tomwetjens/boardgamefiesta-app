@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Howl} from 'howler';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {concatMap, debounceTime, distinctUntilChanged, flatMap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
+import {concatMap, filter, map} from 'rxjs/operators';
+import {DeviceSettingsService} from "./shared/device-settings.service";
 
 const ALERT = '/assets/sounds/alert.mp3';
 
@@ -9,82 +10,202 @@ const SOUNDS = [
   ALERT
 ];
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AudioService {
+const preloaded: { [key: string]: Howl } = {};
 
-  private sounds: { [key: string]: Howl } = {};
+export enum ChannelType {
+  ALERTS = 'ALERTS',
+  EFFECTS = 'EFFECTS',
+  VOICE_OVER = 'VOICE_OVER',
+  MUSIC = 'MUSIC'
+}
 
-  private queue = new Subject<string>();
-  private backgroundMusic: Subscription;
+export class Channel {
+  muted$: BehaviorSubject<boolean>;
+  queue = new Subject<QueuedSound>();
+  playing?: PlayingSound;
 
-  constructor() {
-    Howler.autoUnlock = true;
-
-    this.preload(SOUNDS);
+  constructor(muted: boolean) {
+    this.muted$ = new BehaviorSubject<boolean>(muted);
 
     this.queue
       .pipe(
-        concatMap(name => this.play(name))
+        concatMap(qs => this.play(qs.uri))
       ).subscribe();
   }
 
-  preload(uris: string[]) {
-    uris.forEach(uri => {
-      this.sounds[uri] = new Howl({
-        preload: true,
-        src: [uri]
-      });
-    });
+  get muted(): boolean {
+    return this.muted$.value;
   }
 
-  playSound(uri: string) {
-    this.queue.next(uri);
-  }
-
-  alert() {
-    this.playSound(ALERT);
-  }
-
-  playMusic(uri: string): Observable<void> {
-    if (this.backgroundMusic) {
-      this.stopMusic();
-    }
-
-    this.backgroundMusic = this.play(uri).subscribe();
-
-    return new Observable(() => {
-      return () => this.stopMusic();
-    });
-  }
-
-  get isPlayingMusic(): boolean {
-    return !!this.backgroundMusic && !this.backgroundMusic.closed;
-  }
-
-  private stopMusic() {
-    this.backgroundMusic.unsubscribe();
-    this.backgroundMusic = null;
-  }
-
-  private play(uri: string) {
+  play(uri: string): Observable<void> {
     return new Observable(subscriber => {
-      const sound = this.sounds[uri];
+      const sound = preloaded[uri];
 
       if (!sound) {
         subscriber.error('not_loaded');
         return;
       }
 
-      sound.once('end', () => subscriber.complete());
-      sound.once('stop', () => subscriber.complete());
-      sound.once('loaderror', () => subscriber.error('loaderror'));
-      sound.once('playerror', () => subscriber.error('playerror'));
+      sound.once('end', () => {
+        this.playing = null;
+        subscriber.complete();
+      });
+      sound.once('stop', () => {
+        subscriber.complete();
+        this.playing = null;
+      });
+      sound.once('loaderror', () => {
+        subscriber.error('loaderror');
+        this.playing = null;
+      });
+      sound.once('playerror', () => {
+        subscriber.error('playerror');
+        this.playing = null;
+      });
 
+      this.playing = {sound, subscription: subscriber};
+
+      sound.mute(this.muted);
       sound.play();
 
       return () => sound.stop();
     });
   }
+
+  mute() {
+    this.muted$.next(true);
+
+    if (this.playing) {
+      this.playing.sound.mute(true);
+    }
+  }
+
+  unmute() {
+    this.muted$.next(false);
+
+    if (this.playing) {
+      this.playing.sound.mute(false);
+    }
+  }
+}
+
+interface QueuedSound {
+  uri: string;
+}
+
+interface PlayingSound {
+  sound: Howl;
+  subscription: Subscription;
+}
+
+interface DeviceSettingsAudioChannel {
+  muted?: boolean;
+}
+
+interface DeviceSettingsAudio {
+  muted?: boolean;
+  channels?: { [key in ChannelType]?: DeviceSettingsAudioChannel };
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AudioService {
+
+  channels: { [key in ChannelType]?: Channel } = {};
+
+  constructor(private deviceSettingsService: DeviceSettingsService) {
+    Howler.autoUnlock = true;
+
+    this.preload(SOUNDS);
+
+    this.channels[ChannelType.ALERTS] = new Channel(false);
+    this.channels[ChannelType.EFFECTS] = new Channel(false);
+    this.channels[ChannelType.VOICE_OVER] = new Channel(false);
+    this.channels[ChannelType.MUSIC] = new Channel(false);
+
+    deviceSettingsService.deviceSettings
+      .pipe(
+        filter(deviceSettings => !!deviceSettings),
+        map(deviceSettings => (deviceSettings['audio'] = deviceSettings['audio'] || {}) as DeviceSettingsAudio))
+      .subscribe(deviceSettings => {
+        deviceSettings.channels = deviceSettings.channels || {};
+
+        for (const channelType of Object.keys(this.channels)) {
+          const channel = this.channels[channelType];
+
+          deviceSettings.channels[channelType] = deviceSettings.channels[channelType] || {};
+
+          if (deviceSettings.channels[channelType].muted) {
+            channel.mute();
+          }
+
+          channel.muted$.subscribe(muted => {
+            deviceSettings.channels[channelType].muted = muted;
+            this.deviceSettingsService.save();
+          });
+        }
+      });
+  }
+
+  preload(uris: string[]) {
+    uris.forEach(uri => {
+      preloaded[uri] = new Howl({
+        preload: true,
+        src: [uri]
+      });
+    });
+  }
+
+  alert() {
+    this.channels[ChannelType.ALERTS].play(ALERT).subscribe();
+  }
+
+  playMusic(uri: string): Observable<void> {
+    if (this.channels[ChannelType.MUSIC].playing) {
+      this.stopMusic();
+    }
+
+    this.channels[ChannelType.MUSIC].play(uri).subscribe();
+
+    return new Observable(() => {
+      return () => this.stopMusic();
+    });
+  }
+
+  playEffect(uri: string) {
+    this.channels[ChannelType.EFFECTS].queue.next({uri});
+  }
+
+  playVoiceOver(uri: string) {
+    this.channels[ChannelType.VOICE_OVER].queue.next({uri});
+  }
+
+  get isPlayingMusic(): boolean {
+    return !!this.channels[ChannelType.MUSIC].playing && !this.channels[ChannelType.MUSIC].playing.subscription.closed;
+  }
+
+  private stopMusic() {
+    this.channels[ChannelType.MUSIC].playing.subscription.unsubscribe();
+    this.channels[ChannelType.MUSIC].playing = null;
+  }
+
+  mute() {
+    for (const channelType in this.channels) {
+      this.channels[channelType].mute();
+
+
+    }
+  }
+
+  unmute() {
+    for (const channelType in this.channels) {
+      this.channels[channelType].unmute();
+    }
+  }
+
+  get muted(): boolean {
+    return !Object.keys(this.channels).some(channelType => !this.channels[channelType].muted);
+  }
+
 }

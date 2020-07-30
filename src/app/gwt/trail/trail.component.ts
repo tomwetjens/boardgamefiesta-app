@@ -287,7 +287,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           if (currentSpace
             && (currentSpace.number !== previousSpace.number
               || currentSpace.turnout !== previousSpace.turnout)) {
-            this.audioService.playSound(TRAIN);
+            this.audioService.playEffect(TRAIN);
           }
         }
 
@@ -296,7 +296,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const previousStation = previous.railroadTrack.stations[i];
 
           if (currentStation.players.length > previousStation.players.length) {
-            this.audioService.playSound(STATION);
+            this.audioService.playEffect(STATION);
           }
         }
 
@@ -307,31 +307,31 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           if (currentCity.length !== previousCity.length) {
             switch (city) {
               case City.KANSAS_CITY:
-                this.audioService.playSound(KANSAS_CITY);
+                this.audioService.playVoiceOver(KANSAS_CITY);
                 break;
               case City.TOPEKA:
-                this.audioService.playSound(TOPEKA);
+                this.audioService.playVoiceOver(TOPEKA);
                 break;
               case City.WICHITA:
-                this.audioService.playSound(WICHITA);
+                this.audioService.playVoiceOver(WICHITA);
                 break;
               case City.COLORADO_SPRINGS:
-                this.audioService.playSound(COLORADO_SPRINGS);
+                this.audioService.playVoiceOver(COLORADO_SPRINGS);
                 break;
               case City.SANTA_FE:
-                this.audioService.playSound(SANTA_FE);
+                this.audioService.playVoiceOver(SANTA_FE);
                 break;
               case City.SAN_DIEGO:
-                this.audioService.playSound(SAN_DIEGO);
+                this.audioService.playVoiceOver(SAN_DIEGO);
                 break;
               case City.EL_PASO:
-                this.audioService.playSound(EL_PASO);
+                this.audioService.playVoiceOver(EL_PASO);
                 break;
               case City.SACRAMENTO:
-                this.audioService.playSound(SACRAMENTO);
+                this.audioService.playVoiceOver(SACRAMENTO);
                 break;
               case City.SAN_FRANCISCO:
-                this.audioService.playSound(SAN_FRANCISCO);
+                this.audioService.playVoiceOver(SAN_FRANCISCO);
                 break;
             }
           }
@@ -344,20 +344,20 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           if (currentLocation.building && previousLocation.building) {
             if (currentLocation.building.name !== previousLocation.building.name) {
               // upgrade
-              this.audioService.playSound(BUILDING);
+              this.audioService.playEffect(BUILDING);
             }
           } else if (currentLocation.building !== previousLocation.building) {
             // build
-            this.audioService.playSound(BUILDING);
+            this.audioService.playEffect(BUILDING);
           }
 
           if (previousLocation.hazard && !currentLocation.hazard) {
-            this.audioService.playSound(previousLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
+            this.audioService.playEffect(previousLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
               : previousLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
           }
 
           if (previousLocation.teepee && !currentLocation.teepee) {
-            this.audioService.playSound(TRIBES);
+            this.audioService.playEffect(TRIBES);
           }
         }
 
@@ -367,9 +367,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
           if (currentLocation !== previousLocation) {
             if (currentLocation === 'KANSAS_CITY') {
-              this.audioService.playSound(WELCOME_TO_KANSAS_CITY);
+              this.audioService.playVoiceOver(WELCOME_TO_KANSAS_CITY);
             } else if (currentLocation !== 'START') {
-              this.audioService.playSound(MOVE);
+              this.audioService.playEffect(MOVE);
 
               if (color === this.state.player.player.color) {
                 // current user, play sound of building (if any)
@@ -377,25 +377,25 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
                 if (building) {
                   switch (building.name) {
                     case 'A':
-                      this.audioService.playSound(BUILDING_A);
+                      this.audioService.playVoiceOver(BUILDING_A);
                       break;
                     case 'B':
-                      this.audioService.playSound(BUILDING_B);
+                      this.audioService.playVoiceOver(BUILDING_B);
                       break;
                     case 'C':
-                      this.audioService.playSound(BUILDING_C);
+                      this.audioService.playVoiceOver(BUILDING_C);
                       break;
                     case 'D':
-                      this.audioService.playSound(BUILDING_D);
+                      this.audioService.playVoiceOver(BUILDING_D);
                       break;
                     case 'E':
-                      this.audioService.playSound(BUILDING_E);
+                      this.audioService.playVoiceOver(BUILDING_E);
                       break;
                     case 'F':
-                      this.audioService.playSound(BUILDING_F);
+                      this.audioService.playVoiceOver(BUILDING_F);
                       break;
                     case 'G':
-                      this.audioService.playSound(BUILDING_G);
+                      this.audioService.playVoiceOver(BUILDING_G);
                       break;
                   }
                 }
@@ -413,13 +413,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               const choice = previousTile;
 
               if (choice.worker) {
-                this.audioService.playSound(choice.worker === Worker.COWBOY ? COWBOY
+                this.audioService.playVoiceOver(choice.worker === Worker.COWBOY ? COWBOY
                   : choice.worker === Worker.CRAFTSMAN ? CRAFTSMAN : ENGINEER);
               } else if (choice.hazard) {
-                this.audioService.playSound(choice.hazard.type === HazardType.DROUGHT ? DROUGHT
+                this.audioService.playVoiceOver(choice.hazard.type === HazardType.DROUGHT ? DROUGHT
                   : choice.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
               } else if (choice.teepee) {
-                this.audioService.playSound(TRIBES);
+                this.audioService.playVoiceOver(TRIBES);
               }
             }
           }

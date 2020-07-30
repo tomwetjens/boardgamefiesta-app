@@ -1,8 +1,48 @@
 <div ngbDropdown placement="bottom-right">
-  <button id="inGameMenu" class="btn dropdown-toggle" ngbDropdownToggle>
-    {{'menu'|translate}}
+  <button id="inGameMenu" class="btn dropdown-toggle text-white" ngbDropdownToggle [title]="'menu'|translate">
+    <svg class="bi" width="32" height="32" fill="currentColor">
+      <use xlink:href="/assets/bootstrap-icons.svg#list"/>
+    </svg>
   </button>
   <div ngbDropdownMenu aria-labelledby="inGameMenu" class="dropdown-menu dropdown-menu-right">
-    <button ngbDropdownItem (click)="leave()">{{'leave'|translate}}</button>
+    <div ngbDropdownItem>
+      {{'in-game-menu.sounds'|translate}}
+      <div class="btn-group btn-group-toggle">
+        <button class="btn btn-sm" (click)="toggleChannel('ALERTS')"
+                [ngClass]="{active:!isMuted('ALERTS')}"
+                [title]="('in-game-menu.alerts.' + (isMuted('ALERTS') ? 'unmute':'mute')) |translate">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use [attr.xlink:href]="'/assets/bootstrap-icons.svg#' + (isMuted('ALERTS') ? 'bell' : 'bell-fill')"/>
+          </svg>
+        </button>
+        <button class="btn btn-sm" (click)="toggleChannel('EFFECTS')"
+                [ngClass]="{active:!isMuted('EFFECTS')}"
+                [title]="('in-game-menu.effects.' + (isMuted('EFFECTS') ? 'unmute':'mute')) |translate">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use [attr.xlink:href]="'/assets/bootstrap-icons.svg#' + (isMuted('EFFECTS') ? 'volume-mute' : 'volume-down-fill')"/>
+          </svg>
+        </button>
+        <button class="btn btn-sm" (click)="toggleChannel('VOICE_OVER')"
+                [ngClass]="{active:!isMuted('VOICE_OVER')}"
+                [title]="('in-game-menu.voiceOver.' + (isMuted('VOICE_OVER') ? 'unmute':'mute')) |translate">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use [attr.xlink:href]="'/assets/bootstrap-icons.svg#' + (isMuted('VOICE_OVER') ? 'chat-quote' : 'chat-quote-fill')"/>
+          </svg>
+        </button>
+        <button class="btn btn-sm" (click)="toggleChannel('MUSIC')"
+                [ngClass]="{active:!isMuted('MUSIC')}"
+                [title]="('in-game-menu.music.' + (isMuted('MUSIC') ? 'unmute':'mute')) |translate">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use [attr.xlink:href]="'/assets/bootstrap-icons.svg#' + (isMuted('MUSIC') ? 'file-music' : 'file-music-fill')"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <button ngbDropdownItem class="text-danger" (click)="leave()">
+      <svg class="bi" width="16" height="16" fill="currentColor">
+        <use xlink:href="/assets/bootstrap-icons.svg#x-square-fill"/>
+      </svg>
+      {{'leave'|translate}}
+    </button>
   </div>
 </div>

@@ -47,7 +47,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
 
       if (current && previous) {
         if (current.balance !== previous.balance) {
-          this.audioService.playSound(COINS);
+          this.audioService.playEffect(COINS);
         }
 
         if ((current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
@@ -55,23 +55,23 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
           || current.handSize !== previous.handSize
           // Or when gaining a card
           || current.discardPile.length !== previous.discardPile.length) {
-          this.audioService.playSound(CARD);
+          this.audioService.playEffect(CARD);
         }
 
         if (current.cowboys > previous.cowboys) {
-          this.audioService.playSound(COWBOY);
+          this.audioService.playVoiceOver(COWBOY);
         }
         if (current.craftsmen > previous.craftsmen) {
-          this.audioService.playSound(CRAFTSMAN);
+          this.audioService.playVoiceOver(CRAFTSMAN);
         }
         if (current.engineers > previous.engineers) {
-          this.audioService.playSound(ENGINEER);
+          this.audioService.playVoiceOver(ENGINEER);
         }
 
         // TODO Sound for removing disc
 
         if (current.certificates > previous.certificates) {
-          this.audioService.playSound(CERTIFICATE);
+          this.audioService.playEffect(CERTIFICATE);
         }
       }
     }

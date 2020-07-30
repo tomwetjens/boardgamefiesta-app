@@ -3,8 +3,8 @@ import {Subject} from 'rxjs';
 import {TablePlayer, User} from "./shared/model";
 
 export interface ToastrMessage {
+  className: string;
   header?: string;
-  type: 'error' | 'info';
   key: string;
   parameters?: any;
   delay: number;
@@ -24,18 +24,28 @@ export class ToastrService {
   }
 
   error(key: string, parameters?: any) {
-    this.messages.next({type: 'error', key, parameters, delay: 3000, autohide: true});
+    this.messages.next({className: 'bg-danger text-light', key, parameters, delay: 3000, autohide: true});
   }
 
   inGameEvent(key: string, parameters: any, player: TablePlayer, user?: User) {
     this.messages.next({
-      type: 'info',
+      className: 'bg-info text-light',
       key,
       parameters,
       delay: 2000,
       autohide: true,
       player,
       user
+    });
+  }
+
+  info(key: string) {
+    this.messages.next({
+      className: 'bg-info text-light',
+      key,
+      parameters: null,
+      delay: 2000,
+      autohide: true
     });
   }
 }

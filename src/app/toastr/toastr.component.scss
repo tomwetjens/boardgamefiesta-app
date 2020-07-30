@@ -3,10 +3,17 @@
 }
 
 ngb-toast {
-  margin: auto;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
+}
+
+.fixed-top {
+  // make sure container that holds the toasts does not cover anything unnecessary
+  left: 25%;
+  right: 25%;
 }
 
 .toast {
-  max-width: 60%;
+  width: 100%;
+  max-width: 100%;
   text-align: center;
 }

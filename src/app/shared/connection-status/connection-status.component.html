@@ -1,7 +1,15 @@
-<div *ngIf="(eventService.connected | async) as connected; else loading">
-  <strong class="text-success">{{'connected'|translate}}</strong>
-</div>
+<ng-container *ngIf="(eventService.connected | async) as connected; else loading">
+  <strong [title]="(connected ? 'connected' : 'connecting')|translate">
+    <svg class="bi" [class]="connected ? 'text-success' : 'text-warning'" width="16" height="16" fill="currentColor">
+      <use xlink:href="/assets/bootstrap-icons.svg#circle-fill"/>
+    </svg>
+  </strong>
+</ng-container>
 
 <ng-template #loading>
-  <strong class="text-danger">{{'connecting'|translate}}</strong>
+  <strong [title]="'connecting'|translate">
+    <svg class="bi text-danger" width="16" height="16" fill="currentColor">
+      <use xlink:href="/assets/bootstrap-icons.svg#circle-fill"/>
+    </svg>
+  </strong>
 </ng-template>

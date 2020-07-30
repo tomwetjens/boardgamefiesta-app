@@ -26,8 +26,8 @@ import {ContactComponent} from './contact/contact.component';
 import {LocationSelectorComponent} from './location-selector/location-selector.component';
 import {LanguageSelectorComponent} from './language-selector/language-selector.component';
 import {IstanbulModule} from './istanbul/istanbul.module';
-import { PrivacyComponent } from './privacy/privacy.component';
-import { FaqComponent } from './faq/faq.component';
+import {PrivacyComponent} from './privacy/privacy.component';
+import {FaqComponent} from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,8 @@ import { FaqComponent } from './faq/faq.component';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
-    {provide: OAuthStorage, useFactory: () => localStorage}
+    {provide: OAuthStorage, useFactory: () => localStorage},
+    {provide: 'localStorage', useFactory: () => localStorage},
   ],
   exports: [],
   bootstrap: [AppComponent]

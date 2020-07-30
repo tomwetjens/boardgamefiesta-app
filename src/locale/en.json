@@ -39,6 +39,48 @@
     "save": "Save",
     "location": "Location"
   },
+  "in-game-navbar": {
+    "mute": "Mute",
+    "mutePopover": "Mute all sounds",
+    "unmute": "Unmute",
+    "unmutePopover": "Unmute all sounds"
+  },
+  "in-game-menu": {
+    "sounds": "Sounds",
+    "alerts": {
+      "mute": "Mute alert",
+      "unmute": "Unmute alert"
+    },
+    "effects": {
+      "mute": "Mute sound effects",
+      "unmute": "Unmute sound effects"
+    },
+    "voiceOver": {
+      "mute": "Mute voice over",
+      "unmute": "Unmute voice over"
+    },
+    "music": {
+      "mute": "Mute music",
+      "unmute": "Unmute music"
+    },
+    "confirmLeave": "After leaving the table, you cannot rejoin and continue playing at this table!"
+  },
+  "notifications": {
+    "audio": {
+      "muted": {
+        "ALERTS": "Alert sounds are now muted",
+        "EFFECTS": "Sound effects are now muted",
+        "VOICE_OVER": "Voice overs are now muted",
+        "MUSIC": "Music is now muted"
+      },
+      "unmuted": {
+        "ALERTS": "Alert sounds are no longer muted",
+        "EFFECTS": "Sound effects are no longer muted",
+        "VOICE_OVER": "Voice overs are no longer muted",
+        "MUSIC": "Music is no longer muted"
+      }
+    }
+  },
   "logout": "Log out",
   "accept": "Accept",
   "reject": "Reject",
@@ -52,7 +94,7 @@
   "invitedBy": "Invited by",
   "start": "Start game",
   "open": "Open",
-  "back": "Back",
+  "back": "Start page",
   "endTurn": "End Turn",
   "skip": "Skip",
   "waitingFor": "Waiting for",

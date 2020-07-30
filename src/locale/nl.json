@@ -39,6 +39,48 @@
     "save": "Opslaan",
     "location": "Locatie"
   },
+  "in-game-navbar": {
+    "mute": "Dempen",
+    "mutePopover": "Demp alle geluiden",
+    "unmute": "Dempen opheffen",
+    "unmutePopover": "Dempen van alle geluiden opheffen"
+  },
+  "in-game-menu": {
+    "sounds": "Geluiden",
+    "alerts": {
+      "mute": "Demp aandachtsgeluid",
+      "unmute": "Dempen aandachtsgeluid opheffen"
+    },
+    "effects": {
+      "mute": "Demp geluidseffecten",
+      "unmute": "Dempen geluidseffecten opheffen"
+    },
+    "voiceOver": {
+      "mute": "Demp voice-over",
+      "unmute": "Dempen voice-over opheffen"
+    },
+    "music": {
+      "mute": "Demp muziek",
+      "unmute": "Dempen muziek opheffen"
+    },
+    "confirmLeave": "Als je deze tafel verlaat kan je niet terugkeren en verder spelen aan deze tafel!"
+  },
+  "notifications": {
+    "audio": {
+      "muted": {
+        "ALERTS": "Aandachtsgeluiden zijn nu gedempt",
+        "EFFECTS": "Geluidseffecten zijn nu gedempt",
+        "VOICE_OVER": "Voice-over is nu gedempt",
+        "MUSIC": "Muziek is nu gedempt"
+      },
+      "unmuted": {
+        "ALERTS": "Aandachtsgeluiden zijn nu niet meer gedempt",
+        "EFFECTS": "Geluidseffecten zijn nu niet meer gedempt",
+        "VOICE_OVER": "Voice-over is nu niet meer gedempt",
+        "MUSIC": "Muziek is nu niet meer gedempt"
+      }
+    }
+  },
   "logout": "Afmelden",
   "accept": "Accepteren",
   "reject": "Weigeren",
@@ -52,7 +94,7 @@
   "invitedBy": "Uitgenodigd door",
   "start": "Spel starten",
   "open": "Open",
-  "back": "Terug",
+  "back": "Beginpagina",
   "endTurn": "Beëindig beurt",
   "skip": "Overslaan",
   "waitingFor": "Wachten op",

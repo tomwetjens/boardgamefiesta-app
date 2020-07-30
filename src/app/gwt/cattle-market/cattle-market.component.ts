@@ -52,7 +52,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
 
       if (current && previous) {
         if (current.cards.length !== previous.cards.length) {
-          this.audioService.playSound(COW);
+          this.audioService.playEffect(COW);
         }
       }
     }

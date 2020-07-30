@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Table} from '../model';
+import {AudioService} from "../../audio.service";
 
 @Component({
   selector: 'app-in-game-navbar',
@@ -19,10 +20,22 @@ export class InGameNavbarComponent implements OnInit {
   @Output() endTurn = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  constructor() {
+  constructor(private audioService: AudioService) {
+
+  }
+
+  get muted(): boolean {
+    return this.audioService.muted;
   }
 
   ngOnInit(): void {
   }
 
+  mute() {
+    this.audioService.mute();
+  }
+
+  unmute() {
+    this.audioService.unmute();
+  }
 }
