@@ -738,7 +738,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   private updateForesights() {
     this.foresights = this.state.foresights.choices
       .map(column => column.map(tile => {
-        if (tile.worker) {
+        if (!tile) {
+          return null;
+        } else if (tile.worker) {
           return {href: tile.worker};
         } else if (tile.teepee) {
           return {href: tile.teepee};
