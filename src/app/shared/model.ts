@@ -70,7 +70,7 @@ export interface Table {
   readonly options: Options;
   readonly status: TableStatus;
   readonly accepted: boolean;
-  readonly player: string;
+  readonly player?: string;
   readonly otherPlayers: string[];
   readonly players: { [key: string]: TablePlayer };
   readonly created: string;

@@ -267,7 +267,7 @@
       </svg>
     </div>
     <div class="col-2">
-      <app-in-game-player *ngIf="state.players[table.players[table.player].color] as playerState"
+      <app-in-game-player *ngIf="table.player && state.players[table.players[table.player].color] as playerState"
                           [player]="table.players[table.player]"
                           [table]="table">
         <main>

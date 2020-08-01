@@ -53,9 +53,9 @@ export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.state || changes.table) {
-      this.player = this.table.players[this.table.player];
-      this.playerState = this.state.players[this.player.color];
-      this.currentPlace = this.getCurrentPlace(this.player.color);
+      this.player = this.table.player ? this.table.players[this.table.player] : null;
+      this.playerState = this.player ? this.state.players[this.player.color] : null;
+      this.currentPlace = this.player ? this.getCurrentPlace(this.player.color) : null;
 
       this.autoSelectAction();
     }

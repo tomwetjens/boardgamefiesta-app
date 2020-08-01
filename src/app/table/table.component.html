@@ -34,7 +34,7 @@
           <strong>{{'table.status.' + table.status|translate}}</strong>
         </p>
         <p class="lead" *ngIf="table.status === 'NEW'">
-          <ng-container [ngSwitch]="table.players[table.player].user.id === table.owner.id">
+          <ng-container [ngSwitch]="table.player && table.players[table.player].user.id === table.owner.id">
             <ng-container *ngSwitchCase="true">
               <button class="btn btn-lg btn-success" (click)="start(table)">{{'start'|translate}}</button>&nbsp;
             </ng-container>
@@ -79,7 +79,7 @@
             <div class="card-body">
               <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
                 <div class="col-12">
-                  <div class="card" *ngIf="table.players[playerId] as player">
+                  <div class="card" *ngIf="playerId && table.players[playerId] as player">
                     <div class="card-body">
                       <p>
                         <app-avatar *ngIf="player.user" [user]="player.user"></app-avatar>
@@ -94,7 +94,7 @@
                       <ng-container *ngIf="table.status === 'NEW' && playerId !== table.player">
                         {{'player.status.' + player.status|translate}}
                         <button class="btn btn-sm btn-danger"
-                                *ngIf="table.players[table.player].user.id === table.owner.id"
+                                *ngIf="table.player && table.players[table.player].user.id === table.owner.id"
                                 (click)="kick(table, player)">{{'uninvite'|translate}}</button>
                       </ng-container>
                     </div>

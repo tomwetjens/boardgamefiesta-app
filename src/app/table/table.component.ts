@@ -94,7 +94,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
           case EventType.LEFT:
           case EventType.ABANDONED:
           case EventType.KICKED:
-            if (this.table.value && event.userId === this.table.value.players[this.table.value.player].user.id) {
+            if (this.table.value && (!this.table.value.player || event.userId === this.table.value.players[this.table.value.player].user.id)) {
               // We are no longer in this table
               this.router.navigateByUrl('/');
             } else {
@@ -192,7 +192,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private hasInvitedPlayers(table: Table) {
-    return table.players[table.player].status === PlayerStatus.INVITED
+    return (table.player && table.players[table.player].status === PlayerStatus.INVITED)
       || table.otherPlayers.some(name => table.players[name].status === PlayerStatus.INVITED);
   }
 
