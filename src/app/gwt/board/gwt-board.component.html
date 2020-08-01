@@ -28,7 +28,8 @@
     </app-cattle-market>
   </div>
   <div class="col-md-4 col-sm-12">
-    <app-player-board [table]="table"
+    <app-player-board *ngIf="state.player"
+                      [table]="table"
                       [state]="state"
                       [playerState]="state.player"
                       [actions]="state.actions"

@@ -52,12 +52,14 @@ export class EndedDialogComponent implements OnInit, OnDestroy, OnChanges {
       .map(category => ({
         category: category as ScoreCategory,
         scores: [this.state.player, ...this.state.otherPlayers]
+          .filter(player => !!player)
           .map(player => player.score.categories[category] || 0)
       }));
   }
 
   get columns(): Column[] {
     return [this.state.player, ...this.state.otherPlayers]
+      .filter(player => !!player)
       .map(playerState => ({
         player: this.table.players[playerState.player.name],
         winner: playerState.winner,

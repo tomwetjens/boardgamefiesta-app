@@ -328,7 +328,7 @@ export interface ObjectiveCards {
 }
 
 export interface State {
-  readonly player: PlayerState;
+  readonly player?: PlayerState;
   readonly currentPlayer: Player;
   readonly actions: ActionType[];
   readonly cattleMarket: CattleMarket;
