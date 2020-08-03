@@ -134,7 +134,9 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
                   {
                     value1: this.translateValue(table, logEntry.parameters[2]),
                     value2: this.translateValue(table, logEntry.parameters[3]),
-                    value3: this.translateValue(table, logEntry.parameters[4])
+                    value3: this.translateValue(table, logEntry.parameters[4]),
+                    value4: this.translateValue(table, logEntry.parameters[5]),
+                    value5: this.translateValue(table, logEntry.parameters[6])
                   },
                   logEntry.player, logEntry.user);
                 break;
