@@ -28,11 +28,9 @@ export class AppComponent implements OnInit {
 
     this.userService.currentUser.subscribe(currentUser => {
       if (currentUser) {
-        console.log('setting user language:', currentUser.language);
         this.translateService.use(currentUser.language);
         moment.locale(currentUser.language);
       } else {
-        console.log('setting default language:', this.translateService.getDefaultLang());
         this.translateService.use(this.translateService.getDefaultLang());
         moment.locale(this.translateService.getDefaultLang());
       }

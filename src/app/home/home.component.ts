@@ -30,8 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     combineLatest([this.authService.loggedIn, this.eventService.events])
       .pipe(
-        takeUntil(this.destroyed),
-        tap(event => console.log('HomeComponent event:', event)))
+        takeUntil(this.destroyed))
       .subscribe(([loggedIn, event]) => {
         if (loggedIn && event.tableId) {
           this.refreshTables();
@@ -67,7 +66,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openTable(table: Table) {
-    this.router.navigate(['/table/', table.id]);
+    this.router.navigate([table.game, table.id]);
   }
 
   private refreshTables() {

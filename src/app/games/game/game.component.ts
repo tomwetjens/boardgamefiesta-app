@@ -45,7 +45,7 @@ export class GameComponent implements OnInit {
       type: TableType.REALTIME,
       mode: TableMode.NORMAL
     }).subscribe(table => {
-      this.router.navigate(['/table/', table.id]);
+      this.router.navigate([table.game, table.id]);
     });
   }
 

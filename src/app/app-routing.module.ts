@@ -12,9 +12,15 @@ import {FaqComponent} from "./faq/faq.component";
 
 const routes: Routes = [
   {
-    path: 'table/:id',
+    path: 'gwt/:tableId',
     component: TableComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./gwt/gwt.module').then(m => m.GwtModule)
+      }
+    ]
   },
   {
     path: '',

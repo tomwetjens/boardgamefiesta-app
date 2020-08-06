@@ -61,7 +61,6 @@ import {FaqComponent} from './faq/faq.component';
     AppRoutingModule,
     NgbModule,
     SharedModule,
-    GwtModule,
     IstanbulModule
   ],
   providers: [

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, EventType, LogEntry, Table} from './shared/model';
-import {concat, Observable, of} from 'rxjs';
+import {CreateTableRequest, EventType, LogEntry, Table, TableStatus} from './shared/model';
+import {BehaviorSubject, combineLatest, concat, Observable, of, ReplaySubject} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
-import {concatMap, filter, last, map, switchMap, tap} from "rxjs/operators";
+import {concatMap, distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap} from "rxjs/operators";
 import {EventService} from "./event.service";
 import {fromArray} from "rxjs/internal/observable/fromArray";
 
@@ -15,8 +15,55 @@ export class TableService {
 
   private _logs: Map<string, Observable<LogEntry>> = new Map();
 
+  private _refresh = new BehaviorSubject(true);
+  private _refreshState = new BehaviorSubject(true);
+  private _id = new ReplaySubject<string>(1);
+  table$: Observable<Table>;
+  state$: Observable<any>;
+
   constructor(private httpClient: HttpClient,
               private eventService: EventService) {
+    this.table$ = this._id.pipe(
+      distinctUntilChanged(),
+      switchMap(id => {
+        return combineLatest([
+          this._refresh,
+          this.eventsForTable(id).pipe(
+            startWith({}))
+        ]).pipe(
+          switchMap(() => this.get(id)));
+      }),
+      shareReplay(1));
+
+    this.state$ = this.table$.pipe(
+      distinctUntilChanged((a, b) => a.status !== b.status),
+      filter(table => [TableStatus.STARTED, TableStatus.ENDED].includes(table.status)),
+      switchMap(table => {
+        return combineLatest([
+          this._refreshState,
+          this.eventsForTable(table.id).pipe(
+            startWith({}))
+        ]).pipe(
+          switchMap(() => this.getState(table.id)));
+      }),
+      shareReplay(1));
+  }
+
+  private eventsForTable(id: string) {
+    return this.eventService.events.pipe(
+      filter(event => event.tableId === id));
+  }
+
+  load(id: string) {
+    this._id.next(id);
+  }
+
+  refresh() {
+    this._refresh.next(true);
+  }
+
+  refreshState() {
+    this._refreshState.next(true);
   }
 
   create(request: CreateTableRequest): Observable<Table> {
@@ -114,6 +161,5 @@ export class TableService {
   changeOptions(id: string, request: ChangeOptionsRequest) {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-options', request);
   }
-
 
 }

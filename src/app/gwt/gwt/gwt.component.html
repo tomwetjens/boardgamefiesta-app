@@ -1,0 +1,11 @@
+<ng-container *ngIf="(table$ | async) as table">
+  <ng-container *ngIf="(state$ | async) as state">
+    <app-gwt-board
+      [table]="table"
+      [state]="state"
+      (perform)="perform(table, $event)"
+      (skip)="skip(table)"
+      (endTurn)="endTurn(table)">
+    </app-gwt-board>
+  </ng-container>
+</ng-container>

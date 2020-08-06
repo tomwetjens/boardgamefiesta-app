@@ -23,6 +23,15 @@ import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
 import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dialog.component';
 import { DrawStackDialogComponent } from './draw-stack-dialog/draw-stack-dialog.component';
 import { BuyCattleDialogComponent } from './buy-cattle-dialog/buy-cattle-dialog.component';
+import {RouterModule, Routes} from "@angular/router";
+import { GwtComponent } from './gwt/gwt.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: GwtComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -43,13 +52,15 @@ import { BuyCattleDialogComponent } from './buy-cattle-dialog/buy-cattle-dialog.
     TrailComponent,
     GwtOptionsComponent,
     DrawStackDialogComponent,
-    BuyCattleDialogComponent
+    BuyCattleDialogComponent,
+    GwtComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
     TranslateModule.forChild(),
+    RouterModule.forChild(routes),
     SharedModule
   ],
   exports: [
