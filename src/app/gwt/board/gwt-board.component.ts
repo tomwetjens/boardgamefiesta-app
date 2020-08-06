@@ -19,6 +19,40 @@ const AUTO_SELECTED_ACTIONS = [
   ActionType.DOWNGRADE_STATION
 ];
 
+const DIRECT_ACTIONS = [
+  ActionType.DISCARD_1_DUTCH_BELT_TO_GAIN_2_DOLLARS,
+  ActionType.DISCARD_1_DUTCH_BELT_TO_GAIN_3_DOLLARS,
+  ActionType.GAIN_2_DOLLARS,
+  ActionType.GAIN_1_DOLLAR,
+  ActionType.GAIN_1_CERTIFICATE,
+  ActionType.DRAW_CARD,
+  ActionType.DRAW_2_CARDS,
+  ActionType.DRAW_3_CARDS,
+  ActionType.DRAW_4_CARDS,
+  ActionType.DRAW_5_CARDS,
+  ActionType.DRAW_6_CARDS,
+  ActionType.DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES,
+  ActionType.DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS,
+  ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE,
+  ActionType.DISCARD_1_GUERNSEY,
+  ActionType.DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS,
+  ActionType.DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS,
+  ActionType.SINGLE_AUXILIARY_ACTION,
+  ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION,
+  ActionType.DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES,
+  ActionType.DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS,
+  ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS,
+  ActionType.DISCARD_1_JERSEY_TO_MOVE_ENGINE_1_FORWARD,
+  ActionType.DISCARD_1_GUERNSEY_TO_GAIN_4_DOLLARS,
+  ActionType.DRAW_2_CATTLE_CARDS,
+  ActionType.GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS,
+  ActionType.GAIN_1_DOLLAR_PER_ENGINEER,
+  ActionType.GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR,
+  ActionType.GAIN_4_DOLLARS,
+  ActionType.MAX_CERTIFICATES,
+  ActionType.UPGRADE_STATION
+];
+
 const FREE_ACTIONS = [
   ActionType.DRAW_CARD,
   ActionType.DRAW_2_CARDS,
@@ -151,45 +185,10 @@ export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
   }
 
   selectAction(actionType: string) {
-    switch (actionType as ActionType) {
-      case ActionType.DISCARD_1_DUTCH_BELT_TO_GAIN_2_DOLLARS:
-      case ActionType.DISCARD_1_DUTCH_BELT_TO_GAIN_3_DOLLARS:
-      case ActionType.GAIN_2_DOLLARS:
-      case ActionType.GAIN_1_DOLLAR:
-      case ActionType.GAIN_1_CERTIFICATE:
-      case ActionType.DRAW_CARD:
-      case ActionType.DRAW_2_CARDS:
-      case ActionType.DRAW_3_CARDS:
-      case ActionType.DRAW_4_CARDS:
-      case ActionType.DRAW_5_CARDS:
-      case ActionType.DRAW_6_CARDS:
-      case ActionType.DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES:
-      case ActionType.DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS:
-      case ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE:
-      case ActionType.DISCARD_1_GUERNSEY:
-      case ActionType.DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS:
-      case ActionType.DISCARD_1_JERSEY_TO_GAIN_4_DOLLARS:
-      case ActionType.SINGLE_AUXILIARY_ACTION:
-      case ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION:
-      case ActionType.DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES:
-      case ActionType.DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS:
-      case ActionType.DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS:
-      case ActionType.DISCARD_1_JERSEY_TO_MOVE_ENGINE_1_FORWARD:
-      case ActionType.DISCARD_1_GUERNSEY_TO_GAIN_4_DOLLARS:
-      case ActionType.DRAW_2_CATTLE_CARDS:
-      case ActionType.GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS:
-      case ActionType.GAIN_1_DOLLAR_PER_ENGINEER:
-      case ActionType.GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR:
-      case ActionType.GAIN_4_DOLLARS:
-      case ActionType.MAX_CERTIFICATES:
-      case ActionType.UPGRADE_STATION:
-        this.perform.emit({type: actionType as ActionType});
-        break;
-
-      default:
-        console.log('Setting selected action to: ', actionType);
-        this.selectedAction = actionType as ActionType;
-        break;
+    if (DIRECT_ACTIONS.includes(actionType as ActionType)) {
+      this.perform.emit({type: actionType as ActionType});
+    } else {
+      this.selectedAction = actionType as ActionType;
     }
   }
 }

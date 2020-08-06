@@ -115,7 +115,6 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   private performAction(option: PossibleBuy) {
-    console.log('performAction', option);
     this.perform.emit({
       type: this.selectedAction,
       cattleCards: this.selectedCards,
