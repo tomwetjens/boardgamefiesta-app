@@ -2,6 +2,7 @@
   <span class="timestamp">{{logEntry.timestamp | moment:'LT'}}</span>&nbsp;
   <app-player-name *ngIf="logEntry.player" [player]="logEntry.player"></app-player-name>
   <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
+  &nbsp;
   <span class="message" [ngSwitch]="logEntry.type">
     <ng-container *ngSwitchCase="'IN_GAME_EVENT'">
       <ng-container *ngTemplateOutlet="inGameEventTemplate; context: {$implicit: logEntry}"></ng-container>
