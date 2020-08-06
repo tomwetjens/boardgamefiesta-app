@@ -1,12 +1,13 @@
 <ng-container *ngIf="table | async as table">
   <ng-container *ngIf="table.status === 'STARTED' || table.status === 'ENDED'; else lobby">
-    <app-board-factory *ngIf="state | async as state"
-                       [table]="table"
-                       [state]="state"
-                       (perform)="perform(table, $event)"
-                       (skip)="skip(table)"
-                       (endTurn)="endTurn(table)">
-    </app-board-factory>
+<!--    <app-board-factory *ngIf="state | async as state"-->
+<!--                       [table]="table"-->
+<!--                       [state]="state"-->
+<!--                       (perform)="perform(table, $event)"-->
+<!--                       (skip)="skip(table)"-->
+<!--                       (endTurn)="endTurn(table)">-->
+<!--    </app-board-factory>-->
+    <router-outlet></router-outlet>
   </ng-container>
   <ng-template #lobby>
     <app-navbar></app-navbar>
@@ -76,8 +77,8 @@
             <div class="card-header">
               {{'players'|translate}}
             </div>
-            <div class="card-body">
-              <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row">
+            <div class="card-body players">
+              <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row player">
                 <div class="col-12">
                   <div class="card" *ngIf="playerId && table.players[playerId] as player">
                     <div class="card-body">
