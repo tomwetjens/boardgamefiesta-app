@@ -708,12 +708,12 @@
   "log": {
     "CREATE": "maakt een nieuw spel",
     "START": "heeft het spel gestart",
-    "INVITE": "heeft {{value1}} uitgenodigd",
+    "INVITE": "heeft <strong>{{otherUser}}</strong> uitgenodigd",
     "ACCEPT": "komt er bij",
     "REJECT": "heeft de uitnodiging afgeslagen",
-    "KICK": "removed {{value1}}",
-    "LEFT": "left the table",
-    "PROPOSED_TO_LEAVE": "proposes to leave the table together",
-    "AGREED_TO_LEAVE": "agrees to leave the table"
+    "KICK": "removed <strong>{{otherUser}}</strong>",
+    "LEFT": "verlaat de tafel",
+    "PROPOSED_TO_LEAVE": "stelt voor de tafel te verlaten",
+    "AGREED_TO_LEAVE": "wil ook de tafel verlaten"
   }
 }

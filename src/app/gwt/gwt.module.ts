@@ -24,7 +24,8 @@ import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dia
 import {DrawStackDialogComponent} from './draw-stack-dialog/draw-stack-dialog.component';
 import {BuyCattleDialogComponent} from './buy-cattle-dialog/buy-cattle-dialog.component';
 import {RouterModule, Routes} from "@angular/router";
-import { GwtComponent } from './gwt/gwt.component';
+import {GwtComponent} from './gwt/gwt.component';
+import {LogComponent} from './log/log.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,8 @@ const routes: Routes = [
     GwtOptionsComponent,
     DrawStackDialogComponent,
     BuyCattleDialogComponent,
-    GwtComponent
+    GwtComponent,
+    LogComponent
   ],
   imports: [
     CommonModule,

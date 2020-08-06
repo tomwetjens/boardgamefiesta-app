@@ -1,6 +1,15 @@
-<div *ngFor="let logEntry of logEntries" [ngSwitch]="logEntry.type">
+<div *ngFor="let logEntry of logEntries; trackBy: trackLogEntry">
   <span class="timestamp">{{logEntry.timestamp | moment:'LT'}}</span>&nbsp;
   <app-player-name *ngIf="logEntry.player" [player]="logEntry.player"></app-player-name>
   <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
-  <span class="message" [innerHTML]="translate(logEntry)"></span>
+  <span class="message" [ngSwitch]="logEntry.type">
+    <ng-container *ngSwitchCase="'IN_GAME_EVENT'">
+      <ng-container *ngTemplateOutlet="inGameEventTemplate; context: {$implicit: logEntry}"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ng-container [ngSwitch]="logEntry.type">
+        <span *ngSwitchDefault [innerHTML]="'log.' + logEntry.type|translate:{otherUser:logEntry.otherUser?.username}"></span>
+      </ng-container>
+    </ng-container>
+  </span>
 </div>

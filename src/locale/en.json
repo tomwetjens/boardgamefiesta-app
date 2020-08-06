@@ -725,10 +725,10 @@
   "log": {
     "CREATE": "created a new table",
     "START": "started the game",
-    "INVITE": "invited {{value1}}",
+    "INVITE": "invited <strong>{{otherUser}}</strong>",
     "ACCEPT": "joined the table",
     "REJECT": "declined to join the table",
-    "KICK": "removed {{value1}}",
+    "KICK": "removed <strong>{{otherUser}}</strong>",
     "LEFT": "left the table",
     "PROPOSED_TO_LEAVE": "proposes to leave the table together",
     "AGREED_TO_LEAVE": "agrees to leave the table"
