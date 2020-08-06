@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {OAuthModule, OAuthStorage} from 'angular-oauth2-oidc';
 import {TranslateModule} from '@ngx-translate/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -16,10 +15,8 @@ import {HttpInterceptorService} from './http-interceptor.service';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LayoutComponent} from './layout/layout.component';
 import {ProfileComponent} from './profile/profile.component';
-import {GwtModule} from './gwt/gwt.module';
 import {SharedModule} from './shared/shared.module';
 import {UserMenuComponent} from './user-menu/user-menu.component';
-import {BoardFactoryComponent} from './board/board-factory.component';
 import {TableOptionsComponent} from './table-options/table-options.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
@@ -40,7 +37,6 @@ import {FaqComponent} from './faq/faq.component';
     LayoutComponent,
     ProfileComponent,
     UserMenuComponent,
-    BoardFactoryComponent,
     TableOptionsComponent,
     AboutComponent,
     ContactComponent,
