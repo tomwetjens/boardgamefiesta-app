@@ -48,7 +48,9 @@ export class LogComponent implements OnInit {
               {
                 value1: this.translateValue(logEntry.parameters[2]),
                 value2: this.translateValue(logEntry.parameters[3]),
-                value3: this.translateValue(logEntry.parameters[4]),
+                value3: ['MOVE_TO_PLAYER_BUILDING', 'MOVE_TO_PLAYER_BUILDING_WITHOUT_FEES'].includes(logEntry.parameters[1])
+                  ? this.translatePlayer(this.table.players[logEntry.parameters[4]])
+                  : this.translateValue(logEntry.parameters[4]),
                 value4: this.translateValue(logEntry.parameters[5]),
                 value5: this.translateValue(logEntry.parameters[6]),
                 value6: this.translateValue(logEntry.parameters[7])
