@@ -4,7 +4,6 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   EventEmitter,
-  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -14,7 +13,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {Options, Table} from '../shared/model';
-import {GAME, GameProvider, OptionsComponent} from '../shared/api';
+import {GAME_PROVIDERS, OptionsComponent} from '../shared/api';
 
 @Component({
   selector: 'app-table-options',
@@ -32,8 +31,7 @@ export class TableOptionsComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('container', {read: ViewContainerRef})
   container: ViewContainerRef;
 
-  constructor(private resolver: ComponentFactoryResolver,
-              @Inject(GAME) private providers: GameProvider[]) {
+  constructor(private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
@@ -52,9 +50,9 @@ export class TableOptionsComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const provider = this.providers.find(gameProvider => gameProvider.id === this.table.game);
+    const provider = GAME_PROVIDERS[this.table.game];
 
-    if (provider.optionsComponent) {
+    if (provider && provider.optionsComponent) {
       setTimeout(() => {
         const factory = this.resolver.resolveComponentFactory(provider.optionsComponent);
         this.componentRef = this.container.createComponent(factory);

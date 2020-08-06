@@ -18,11 +18,11 @@ import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {TrailComponent} from './trail/trail.component';
 import {SharedModule} from '../shared/shared.module';
-import {GAME} from '../shared/api';
+import {GAME_PROVIDERS} from '../shared/api';
 import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
 import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dialog.component';
-import { DrawStackDialogComponent } from './draw-stack-dialog/draw-stack-dialog.component';
-import { BuyCattleDialogComponent } from './buy-cattle-dialog/buy-cattle-dialog.component';
+import {DrawStackDialogComponent} from './draw-stack-dialog/draw-stack-dialog.component';
+import {BuyCattleDialogComponent} from './buy-cattle-dialog/buy-cattle-dialog.component';
 import {RouterModule, Routes} from "@angular/router";
 import { GwtComponent } from './gwt/gwt.component';
 
@@ -65,19 +65,15 @@ const routes: Routes = [
   ],
   exports: [
     GwtBoardComponent
-  ],
-  providers: [
-    {
-      provide: GAME,
-      useValue: {
-        id: 'gwt',
-        boardComponent: GwtBoardComponent,
-        optionsComponent: GwtOptionsComponent
-      },
-      multi: true
-    }
   ]
 })
 export class GwtModule {
+
+  constructor() {
+    GAME_PROVIDERS['gwt'] = {
+      id: 'gwt',
+      optionsComponent: GwtOptionsComponent
+    }
+  }
 
 }

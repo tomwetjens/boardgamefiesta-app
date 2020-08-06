@@ -17,8 +17,7 @@ export interface BoardComponent {
 
 export interface GameProvider {
   id: string;
-  boardComponent: Type<BoardComponent>;
   optionsComponent?: Type<OptionsComponent>;
 }
 
-export const GAME = new InjectionToken('GAME');
+export const GAME_PROVIDERS: {[key: string]: GameProvider} = {};
