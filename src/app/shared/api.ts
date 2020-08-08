@@ -1,23 +1,15 @@
-import {EventEmitter, InjectionToken, Type} from '@angular/core';
-import {Options, Table} from './model';
+import {EventEmitter, Type} from '@angular/core';
+import {LogEntry, Options, Table} from './model';
 
 export interface OptionsComponent {
   table: Table;
   readonly changeOptions: EventEmitter<Options>;
 }
 
-export interface BoardComponent {
-  table: Table;
-  state: any;
-  readonly perform: EventEmitter<any>;
-  readonly skip: EventEmitter<void>;
-  readonly endTurn: EventEmitter<void>;
-  readonly canSkip: boolean;
-}
-
 export interface GameProvider {
-  id: string;
   optionsComponent?: Type<OptionsComponent>;
+
+  translate(logEntry: LogEntry, table: Table): string;
 }
 
-export const GAME_PROVIDERS: {[key: string]: GameProvider} = {};
+export const GAME_PROVIDERS: { [key: string]: GameProvider } = {};

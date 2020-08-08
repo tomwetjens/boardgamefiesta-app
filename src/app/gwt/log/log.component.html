@@ -1,8 +1,0 @@
-<app-log [table]="table">
-  <ng-template let-logEntry>
-    <ng-container [ngSwitch]="logEntry.parameters[0]">
-      <span *ngSwitchCase="'ACTION'" [innerHTML]="'gwt.log.action.' + logEntry.parameters[1] | translate:interpolateParams(logEntry)"></span>
-      <span *ngSwitchDefault [innerHTML]="'gwt.log.' + logEntry.parameters[0] | translate:interpolateParams(logEntry)"></span>
-    </ng-container>
-  </ng-template>
-</app-log>

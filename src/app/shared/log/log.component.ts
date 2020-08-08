@@ -1,9 +1,10 @@
-import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LogEntry, Table} from '../model';
 import {TableService} from '../../table.service';
 import {concat, of} from 'rxjs';
 import {EventService} from '../../event.service';
 import {concatMap, filter, map, tap} from 'rxjs/operators';
+import {GAME_PROVIDERS} from "../api";
 
 @Component({
   selector: 'app-log',
@@ -13,8 +14,6 @@ import {concatMap, filter, map, tap} from 'rxjs/operators';
 export class LogComponent implements OnInit {
 
   @Input() table: Table;
-
-  @ContentChild(TemplateRef) inGameEventTemplate: TemplateRef<any>;
 
   logEntries: LogEntry[] = [];
 
@@ -39,5 +38,9 @@ export class LogComponent implements OnInit {
 
   trackLogEntry(index: number, logEntry: LogEntry): any {
     return logEntry.timestamp;
+  }
+
+  translateInGameEvent(logEntry: LogEntry) {
+    return GAME_PROVIDERS[this.table.game].translate(logEntry, this.table);
   }
 }

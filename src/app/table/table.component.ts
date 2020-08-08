@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of, Subject} from 'rxjs';
 import {bufferCount, filter, map, switchMap, take, takeUntil, withLatestFrom} from 'rxjs/operators';
@@ -13,14 +13,14 @@ import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 import {AudioService} from '../audio.service';
 import {ToastrService} from "../toastr.service";
-import {GWTEventType} from "../gwt/model";
+import {GAME_PROVIDERS} from "../shared/api";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, OnDestroy, OnChanges {
+export class TableComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject();
 
@@ -101,43 +101,14 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(({logEntry, table}) => {
         switch (logEntry.type) {
           case LogEntryType.IN_GAME_EVENT:
-            switch (logEntry.parameters[0] as GWTEventType) {
-              case GWTEventType.ACTION:
-                this.toastrService.inGameEvent('gwt.log.action.' + logEntry.parameters[1],
-                  {
-                    value1: this.translateValue(table, logEntry.parameters[2]),
-                    value2: this.translateValue(table, logEntry.parameters[3]),
-                    value3: this.translateValue(table, logEntry.parameters[4]),
-                    value4: this.translateValue(table, logEntry.parameters[5]),
-                    value5: this.translateValue(table, logEntry.parameters[6])
-                  },
-                  logEntry.player, logEntry.user);
-                break;
-            }
+            this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {}, logEntry.player, logEntry.user);
             break;
         }
       });
   }
 
-  // TODO Move this somewhere shared with log component
-  private translateValue(table: Table, value: string): string {
-    const gameSpecificKey = table.game + '.log.values.' + value;
-    const genericKey = 'log.values.' + value;
-
-    let translated = this.translateService.instant(gameSpecificKey);
-    if (translated === gameSpecificKey) {
-      translated = this.translateService.instant(genericKey);
-    }
-
-    return translated !== genericKey ? translated : value;
-  }
-
   ngOnDestroy(): void {
     this.destroyed.next(true);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
   }
 
   start(table: Table) {

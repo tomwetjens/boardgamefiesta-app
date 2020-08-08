@@ -7,7 +7,6 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {OPENING_MUSIC, SOUNDS} from '../sounds';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
-import {BoardComponent} from '../../shared/api';
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
@@ -94,7 +93,7 @@ const FREE_ACTIONS = [
   templateUrl: './gwt-board.component.html',
   styleUrls: ['./gwt-board.component.scss']
 })
-export class GwtBoardComponent implements OnInit, OnChanges, BoardComponent {
+export class GwtBoardComponent implements OnInit, OnChanges {
 
   private endedDialog: NgbModalRef;
 

@@ -25,7 +25,7 @@ import {DrawStackDialogComponent} from './draw-stack-dialog/draw-stack-dialog.co
 import {BuyCattleDialogComponent} from './buy-cattle-dialog/buy-cattle-dialog.component';
 import {RouterModule, Routes} from "@angular/router";
 import {GwtComponent} from './gwt/gwt.component';
-import {LogComponent} from './log/log.component';
+import {GwtProvider} from "./gwt.provider";
 
 const routes: Routes = [
   {
@@ -54,8 +54,7 @@ const routes: Routes = [
     GwtOptionsComponent,
     DrawStackDialogComponent,
     BuyCattleDialogComponent,
-    GwtComponent,
-    LogComponent
+    GwtComponent
   ],
   imports: [
     CommonModule,
@@ -71,11 +70,8 @@ const routes: Routes = [
 })
 export class GwtModule {
 
-  constructor() {
-    GAME_PROVIDERS['gwt'] = {
-      id: 'gwt',
-      optionsComponent: GwtOptionsComponent
-    }
+  constructor(private provider: GwtProvider) {
+    GAME_PROVIDERS['gwt'] = provider;
   }
 
 }

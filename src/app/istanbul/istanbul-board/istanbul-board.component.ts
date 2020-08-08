@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
-import {BoardComponent} from '../../shared/api';
 import {Action, BonusCard, Caravansary, GoodsType, Istanbul, Market, MosqueTile, PlayerState} from '../model';
 import {PlayerColor, Table, TablePlayer} from '../../shared/model';
 import {TranslateService} from '@ngx-translate/core';
@@ -18,7 +17,7 @@ const AUTO_SELECTED_ACTIONS = [Action.MOVE];
   templateUrl: './istanbul-board.component.html',
   styleUrls: ['./istanbul-board.component.scss']
 })
-export class IstanbulBoardComponent implements OnInit, OnChanges, BoardComponent {
+export class IstanbulBoardComponent implements OnInit, OnChanges {
 
   @Input() state: Istanbul;
   @Input() table: Table;
