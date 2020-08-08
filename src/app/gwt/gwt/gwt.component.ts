@@ -4,6 +4,9 @@ import {Observable} from "rxjs";
 import {Table} from "../../shared/model";
 import {TableService} from "../../table.service";
 import {Action, State} from "../model";
+import en from "../locale/en.json";
+import nl from "../locale/nl.json";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-gwt',
@@ -16,7 +19,11 @@ export class GwtComponent implements OnInit {
   state$: Observable<State>;
 
   constructor(private route: ActivatedRoute,
-              private tableService: TableService) {
+              private tableService: TableService,
+              private translateService: TranslateService) {
+    this.translateService.setTranslation('en', en, true);
+    this.translateService.setTranslation('nl', nl, true);
+
     this.table$ = this.tableService.table$;
     this.state$ = this.tableService.state$;
   }
