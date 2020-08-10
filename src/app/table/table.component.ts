@@ -85,26 +85,25 @@ export class TableComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.table
+    this.tableService.log$
       .pipe(
         takeUntil(this.destroyed),
-        filter(table => !!table),
-        take(1),
-        switchMap(table => this.tableService.log(table.id)
-          .pipe(
-            takeUntil(this.destroyed),
-            // Do not show the stuff we already know
-            filter(logEntry => logEntry.player.id !== table.player),
-            // Prevent popping up very old log entries in case of reconnect
-            filter(logEntry => new Date().getTime() - new Date(logEntry.timestamp).getTime() < 6000),
-            map(logEntry => ({logEntry, table})))))
-      .subscribe(({logEntry, table}) => {
-        switch (logEntry.type) {
-          case LogEntryType.IN_GAME_EVENT:
-            this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {}, logEntry.player, logEntry.user);
-            break;
-        }
-      });
+        withLatestFrom(this.table),
+        // Do not show the stuff we already know
+        filter(([logEntry, table]) => logEntry.player.id !== table.player),
+        // Prevent popping up very old log entries in case of reconnect
+        filter(([logEntry]) => new Date().getTime() - new Date(logEntry.timestamp).getTime() < 6000)
+      ).subscribe(([logEntry, table]) => {
+      switch (logEntry.type) {
+        case LogEntryType.IN_GAME_EVENT:
+          this.notifyInGameEvent(table, logEntry);
+          break;
+      }
+    });
+  }
+
+  private notifyInGameEvent(table, logEntry) {
+    this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {}, logEntry.player, logEntry.user);
   }
 
   ngOnDestroy(): void {
