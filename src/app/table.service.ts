@@ -169,7 +169,8 @@ export class TableService {
   }
 
   leave(id: string): Observable<void> {
-    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/leave', null);
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/leave', null)
+      .pipe(tap(() => this.refreshMyActiveTables()));
   }
 
   invite(id: string, userId: string): Observable<void> {

@@ -164,6 +164,8 @@
   },
   "errors": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
+    "EXCEEDS_MAX_ACTIVE_GAMES": "You have reached the maximum number of games you can play simultaneously.",
+    "CANNOT_INVITE_REACHED_MAX_ACTIVE_GAMES": "This user has reached the maximum number of simultaneous games and cannot be invited.",
     "MIN_PLAYERS": "You need more players to start the game.",
     "SERVER_NOT_AVAILABLE": "The server is currently not available or too busy.",
     "UNEXPECTED_SERVER_ERROR": "Unexpected error from server.",

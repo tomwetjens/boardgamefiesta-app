@@ -152,6 +152,8 @@
   "score": "Score",
   "errors": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
+    "EXCEEDS_MAX_ACTIVE_GAMES": "Je hebt het maximum aantal spellen bereikt dat je gelijktijdig kan spelen.",
+    "CANNOT_INVITE_REACHED_MAX_ACTIVE_GAMES": "Deze gebruiker heeft het maximum aantal gelijktijdige spellen bereikt en kan niet uitgenodigd worden.",
     "MIN_PLAYERS": "Je hebt meer spelers nodig om het spel te kunnen starten.",
     "SERVER_NOT_AVAILABLE": "The server is currently not available or too busy.",
     "UNEXPECTED_SERVER_ERROR": "Unexpected error from server.",
