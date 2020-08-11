@@ -158,7 +158,8 @@
     "COMPUTER_NOT_SUPPORTED": "Dit spel ondersteunt geen computer spelers.",
     "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
     "RESOURCE_NOT_FOUND": "De gevraagde gegevens zijn niet gevonden.",
-    "HISTORY_NOT_AVAILABLE": "Er zijn niet genoeg historische gegevens beschikbaar om de vorige actie ongedaan te maken."
+    "HISTORY_NOT_AVAILABLE": "Er zijn niet genoeg historische gegevens beschikbaar om de vorige actie ongedaan te maken.",
+    "CANNOT_UNDO": "De vorige actie kan niet ongedaan gemaakt worden."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",
@@ -169,6 +170,7 @@
     "KICK": "removed <strong>{{otherUser}}</strong>",
     "LEFT": "verlaat de tafel",
     "PROPOSED_TO_LEAVE": "stelt voor de tafel te verlaten",
-    "AGREED_TO_LEAVE": "wil ook de tafel verlaten"
+    "AGREED_TO_LEAVE": "wil ook de tafel verlaten",
+    "UNDO": "maakt de vorige actie ongedaan"
   }
 }

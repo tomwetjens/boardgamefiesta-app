@@ -170,7 +170,8 @@
     "COMPUTER_NOT_SUPPORTED": "This game does not support computer players.",
     "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
     "RESOURCE_NOT_FOUND": "The requested resource was not found.",
-    "HISTORY_NOT_AVAILABLE": "There is not enough historic data available to undo the previous action."
+    "HISTORY_NOT_AVAILABLE": "There is not enough historic data available to undo the previous action.",
+    "CANNOT_UNDO": "The previous action cannot be undone."
   },
   "log": {
     "CREATE": "created a new table",
@@ -181,6 +182,7 @@
     "KICK": "removed <strong>{{otherUser}}</strong>",
     "LEFT": "left the table",
     "PROPOSED_TO_LEAVE": "proposes to leave the table together",
-    "AGREED_TO_LEAVE": "agrees to leave the table"
+    "AGREED_TO_LEAVE": "agrees to leave the table",
+    "UNDO": "undoes the previous action"
   }
 }
