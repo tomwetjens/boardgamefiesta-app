@@ -105,6 +105,7 @@ export class GwtBoardComponent implements OnInit, OnChanges {
   @Output() perform = new EventEmitter<Action>();
   @Output() skip = new EventEmitter<void>();
   @Output() endTurn = new EventEmitter<void>();
+  @Output() undo = new EventEmitter<void>();
 
   constructor(private audioService: AudioService,
               private ngbModal: NgbModal) {
@@ -176,7 +177,7 @@ export class GwtBoardComponent implements OnInit, OnChanges {
   }
 
   get canSkip(): boolean {
-    return this.state.turn;
+    return this.state.turn && this.state.actions.length > 0;
   }
 
   get canPerformFreeAction(): boolean {
@@ -190,4 +191,5 @@ export class GwtBoardComponent implements OnInit, OnChanges {
       this.selectedAction = actionType as ActionType;
     }
   }
+
 }

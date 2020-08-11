@@ -80,6 +80,7 @@ export interface Table {
   readonly currentPlayer?: string;
   readonly owner: User;
   readonly startable: boolean;
+  readonly canUndo?: boolean;
 }
 
 export interface CreateTableRequest {

@@ -1,71 +1,88 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-between">
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="btn btn-secondary" [routerLink]="['/']">
-        <svg class="bi" width="16" height="16" fill="currentColor">
-          <use xlink:href="/assets/bootstrap-icons.svg#arrow-left"/>
-        </svg>
-        {{'back'|translate}}
-      </a>&nbsp;
-    </li>
-    <li class="nav-item">
-      <a class="btn btn-danger text-light" *ngIf="table.turn" (click)="endTurn.emit()">{{'endTurn'|translate}}</a>&nbsp;
-      <button class="btn btn-warning" *ngIf="canSkip" (click)="skip.emit()">{{'skip'|translate}}</button>&nbsp;
-    </li>
-  </ul>
+<div class="sticky-top">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid no-gutters p-0">
+      <div class="col-lg-4 col-md-6 col-sm-8 d-flex justify-content-start">
+        <a class="btn btn-secondary text-nowrap" [routerLink]="['/']">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use xlink:href="/assets/bootstrap-icons.svg#arrow-left"/>
+          </svg>
+          <span class="d-sm-none">{{'back'|translate}}</span>
+        </a>&nbsp;
+        <button class="btn btn-danger text-light text-nowrap"
+                *ngIf="table.turn"
+                (click)="endTurn.emit()">
+          {{'endTurn'|translate}}
+        </button>&nbsp;
+        <button class="btn btn-warning text-nowrap" *ngIf="table.turn"
+                [disabled]="!canSkip"
+                (click)="skip.emit()">
+          {{'skip'|translate}}
+        </button>&nbsp;
+        <button class="btn btn-warning text-nowrap"
+                *ngIf="table.turn && table.canUndo"
+                (click)="undo.emit()" [title]="'undo'|translate">
+          <svg class="bi" width="16" height="16" fill="currentColor">
+            <use xlink:href="/assets/bootstrap-icons.svg#chevron-bar-left"/>
+          </svg>
+          {{'undo'|translate}}
+        </button>&nbsp;
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-2 d-flex justify-content-center">
+        <span *ngIf="table.turn">
+          {{'yourTurn'|translate}}
 
-  <div *ngIf="!table.turn && table.currentPlayer">
-    {{'waitingFor'|translate}}
-    <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+          <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
+        </span>
+        <div *ngIf="!table.turn && table.currentPlayer">
+          {{'waitingFor'|translate}}
+          <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-2 col-sm-2 d-flex justify-content-end align-content-center">
+        <button class="btn btn-sm" *ngIf="!muted" (click)="mute()"
+                [ngbPopover]="'in-game-navbar.mutePopover'|translate"
+                triggers="hover">
+          <svg class="bi text-white" width="24" height="24" fill="currentColor">
+            <use xlink:href="/assets/bootstrap-icons.svg#volume-up-fill"/>
+          </svg>
+        </button>
+        <button class="btn btn-sm" *ngIf="muted" (click)="unmute()"
+                [ngbPopover]="'in-game-navbar.unmutePopover'|translate"
+                triggers="hover">
+          <svg class="bi text-black-50" width="24" height="24" fill="currentColor">
+            <use xlink:href="/assets/bootstrap-icons.svg#volume-mute-fill"/>
+          </svg>
+        </button>
+
+        <app-connection-status></app-connection-status>
+
+        <app-in-game-menu [table]="table"></app-in-game-menu>
+      </div>
+    </div>
+  </nav>
+
+  <div class="action-bar navbar navbar-expand-lg bg-secondary text-light d-flex justify-content-center">
+    <div class="actions d-flex justify-content-center">
+      <ng-container *ngIf="table.turn && !selectedAction">
+        <button *ngFor="let action of actions"
+                class="btn btn-primary text-nowrap" (click)="perform.emit(action)"
+                ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
+                placement="bottom"
+                triggers="mouseenter:mouseleave"
+                container="body">
+          {{table.game + '.actions.buttons.' + action|translate}}
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="table.turn && selectedAction">
+        {{table.game + '.actions.instructions.' + selectedAction | translate}}
+
+        <button *ngIf="actions.length > 1"
+                class="btn btn-primary"
+                (click)="cancel.emit()">
+          {{'cancel'|translate}}
+        </button>
+      </ng-container>
+    </div>
   </div>
-
-  <div class="actions">
-    <ng-container *ngIf="table.turn && !selectedAction">
-      <button *ngFor="let action of actions"
-              class="btn btn-light" (click)="perform.emit(action)"
-              ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
-              placement="bottom"
-              triggers="mouseenter:mouseleave"
-              container="body">
-        {{table.game + '.actions.buttons.' + action|translate}}
-      </button>
-    </ng-container>
-
-    <ng-container *ngIf="table.turn && selectedAction">
-      {{table.game + '.actions.instructions.' + selectedAction | translate}}
-
-      <button *ngIf="actions.length > 1"
-              class="btn btn-secondary"
-              (click)="cancel.emit()">
-        {{'cancel'|translate}}
-      </button>
-    </ng-container>
-  </div>
-
-  <div class="form-inline">
-    <span *ngIf="table.turn">
-      {{'yourTurn'|translate}}
-
-      <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
-    </span>
-
-    <button class="btn btn-sm" *ngIf="!muted" (click)="mute()"
-            [ngbPopover]="'in-game-navbar.mutePopover'|translate"
-            triggers="hover">
-      <svg class="bi text-white" width="24" height="24" fill="currentColor">
-        <use xlink:href="/assets/bootstrap-icons.svg#volume-up-fill"/>
-      </svg>
-    </button>
-    <button class="btn btn-sm" *ngIf="muted" (click)="unmute()"
-            [ngbPopover]="'in-game-navbar.unmutePopover'|translate"
-            triggers="hover">
-      <svg class="bi text-black-50" width="24" height="24" fill="currentColor">
-        <use xlink:href="/assets/bootstrap-icons.svg#volume-mute-fill"/>
-      </svg>
-    </button>
-
-    <app-connection-status></app-connection-status>
-
-    <app-in-game-menu [table]="table"></app-in-game-menu>
-  </div>
-</nav>
+</div>

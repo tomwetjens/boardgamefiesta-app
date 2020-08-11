@@ -5,6 +5,7 @@
                     (perform)="selectAction($event)"
                     (skip)="skip.emit($event)"
                     (endTurn)="doEndTurn()"
+                    (undo)="undo.emit($event)"
                     (cancel)="selectedAction = null">
 </app-in-game-navbar>
 
@@ -27,7 +28,7 @@
                        (perform)="perform.emit($event)">
     </app-cattle-market>
   </div>
-  <div class="col-md-4 col-sm-12">
+  <div class="col-md-4 col-sm-12 player-boards">
     <app-player-board *ngIf="state.player"
                       [table]="table"
                       [state]="state"

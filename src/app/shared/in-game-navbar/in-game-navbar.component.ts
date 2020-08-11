@@ -19,6 +19,7 @@ export class InGameNavbarComponent implements OnInit {
   @Output() skip = new EventEmitter<void>();
   @Output() endTurn = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
+  @Output() undo = new EventEmitter<void>();
 
   constructor(private audioService: AudioService) {
 

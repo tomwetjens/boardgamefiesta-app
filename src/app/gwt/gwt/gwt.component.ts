@@ -45,4 +45,9 @@ export class GwtComponent implements OnInit {
     this.tableService.endTurn(table.id)
       .subscribe(() => this.tableService.refreshState());
   }
+
+  undo(table: Table) {
+    this.tableService.undo(table.id)
+      .subscribe(() => this.tableService.refreshState());
+  }
 }

@@ -97,6 +97,7 @@
   "back": "Start page",
   "endTurn": "End Turn",
   "skip": "Skip",
+  "undo": "Undo",
   "waitingFor": "Waiting for",
   "computer": "Computer",
   "abandon": "Abandon",
@@ -168,7 +169,8 @@
     "NOT_SUPPORTED": "This not supported.",
     "COMPUTER_NOT_SUPPORTED": "This game does not support computer players.",
     "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
-    "RESOURCE_NOT_FOUND": "The requested resource was not found."
+    "RESOURCE_NOT_FOUND": "The requested resource was not found.",
+    "HISTORY_NOT_AVAILABLE": "There is not enough historic data available to undo the previous action."
   },
   "log": {
     "CREATE": "created a new table",

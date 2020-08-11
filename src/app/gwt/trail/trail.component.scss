@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+svg {
+  margin-top: -25px; /* allows discs on cities to extend beyond the element above */
+}
+
 .locations {
   .location {
     stroke-opacity: 1;

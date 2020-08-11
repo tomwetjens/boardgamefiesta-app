@@ -123,6 +123,10 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/end-turn', null);
   }
 
+  undo(id: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/undo', null);
+  }
+
   private getState<T>(id: string): Observable<T> {
     return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
