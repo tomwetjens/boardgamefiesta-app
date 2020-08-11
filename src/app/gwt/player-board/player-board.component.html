@@ -1,4 +1,5 @@
 <app-in-game-player [table]="table"
+                    *ngIf="table.players[playerState.player.name]"
                     [player]="table.players[playerState.player.name]"
                     [score]="playerState.score?.total">
   <header>

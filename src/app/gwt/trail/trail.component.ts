@@ -284,7 +284,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const currentSpace = current.railroadTrack.players[color] as Space;
           const previousSpace = previous.railroadTrack.players[color] as Space;
 
-          if (currentSpace
+          if (currentSpace && previousSpace
             && (currentSpace.number !== previousSpace.number
               || currentSpace.turnout !== previousSpace.turnout)) {
             this.audioService.playEffect(TRAIN);
