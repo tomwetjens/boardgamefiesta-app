@@ -31,7 +31,7 @@ export class EventService {
         },
         closeObserver: {
           next: () => {
-            this.connectedCount--;
+            this.connectedCount = Math.max(0, this.connectedCount - 1);
             this.connected.next(this.connectedCount > 0);
           }
         }
@@ -41,7 +41,7 @@ export class EventService {
           // TODO Better retry
           retry())),
       catchError(err => {
-        this.connectedCount--;
+        this.connectedCount = Math.max(0, this.connectedCount - 1);
         this.connected.next(this.connectedCount > 0);
         return throwError(err);
       }))
