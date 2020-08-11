@@ -7,6 +7,7 @@ import {ChangeOptionsRequest} from './model';
 import {concatMap, distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap} from "rxjs/operators";
 import {EventService} from "./event.service";
 import {fromArray} from "rxjs/internal/observable/fromArray";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,24 @@ export class TableService {
 
   private _refresh = new BehaviorSubject(true);
   private _refreshState = new BehaviorSubject(true);
+  private _refreshMyActiveTables = new BehaviorSubject(true);
   private _id = new ReplaySubject<string>(1);
+
   table$: Observable<Table>;
   state$: Observable<any>;
   log$: Observable<LogEntry>;
+  myActiveTables$: Observable<Table[]>;
 
   constructor(private httpClient: HttpClient,
+              private authService: AuthService,
               private eventService: EventService) {
     this.table$ = this._id.pipe(
       distinctUntilChanged(),
       switchMap(id => {
         return combineLatest([
           this._refresh,
-          this.eventsForTable(id).pipe(
-            startWith({}))
+          this.eventsForTable(id),
+          this.reconnected()
         ]).pipe(
           switchMap(() => this.get(id)));
       }),
@@ -40,8 +45,8 @@ export class TableService {
       switchMap(table => {
         return combineLatest([
           this._refreshState,
-          this.eventsForTable(table.id).pipe(
-            startWith({}))
+          this.eventsForTable(table.id),
+          this.reconnected()
         ]).pipe(
           switchMap(() => this.getState(table.id)));
       }),
@@ -51,9 +56,12 @@ export class TableService {
       distinctUntilChanged(),
       switchMap(id => {
         let lastRequestedDate = new Date(0);
-        return this.eventsForTable(id).pipe(
+        return combineLatest([
+          this.eventsForTable(id),
+          this.reconnected()
+        ]).pipe(
           map(() => lastRequestedDate),
-          startWith(new Date(lastRequestedDate)), // initial
+          startWith(lastRequestedDate), // initial
           switchMap(since => {
             // Request log entries since
             return this.getLog(id, since)
@@ -66,11 +74,30 @@ export class TableService {
           }));
       }),
       shareReplay());
+
+    this.myActiveTables$ = combineLatest([
+      this._refreshMyActiveTables,
+      this.eventService.events,
+      this.reconnected()
+    ]).pipe(
+      map(() => true),
+      startWith(true),
+      switchMap(() => this.find()),
+      shareReplay(1)
+    );
+  }
+
+  private reconnected() {
+    return this.eventService.connected.pipe(
+      distinctUntilChanged(),
+      filter(connected => connected),
+      startWith(true));
   }
 
   private eventsForTable(id: string) {
     return this.eventService.events.pipe(
-      filter(event => event.tableId === id));
+      filter(event => event.tableId === id),
+      startWith({}));
   }
 
   load(id: string) {
@@ -83,6 +110,10 @@ export class TableService {
 
   refreshState() {
     this._refreshState.next(true);
+  }
+
+  refreshMyActiveTables() {
+    this._refreshMyActiveTables.next(true);
   }
 
   create(request: CreateTableRequest): Observable<Table> {

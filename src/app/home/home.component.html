@@ -1,5 +1,5 @@
-<section class="container" *ngIf="loggedIn | async">
-  <div *ngFor="let table of realtimeTables | async" class="alert alert-primary table">
+<section class="container" *ngIf="loggedIn$ | async">
+  <div *ngFor="let table of myActiveTables$ | async" class="alert alert-primary table">
     <strong>{{'game.' + table.game + '.name' | translate}}</strong>
 
     <ng-container [ngSwitch]="table.status">
@@ -37,7 +37,7 @@
   </div>
 </section>
 
-<section class="container" *ngIf="!(loggedIn | async)">
+<section class="container" *ngIf="!(loggedIn$ | async)">
   <div class="jumbotron">
     <h1 class="display-4">{{'home.welcome'|translate}}!</h1>
     <p class="lead">{{'home.lead'|translate}}</p>
