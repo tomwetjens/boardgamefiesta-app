@@ -90,7 +90,7 @@ export class TableComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed),
         withLatestFrom(this.table),
         // Do not show the stuff we already know
-        filter(([logEntry, table]) => logEntry.player.id !== table.player),
+        filter(([logEntry, table]) => !logEntry.player || logEntry.player.id !== table.player),
         // Prevent popping up very old log entries in case of reconnect
         filter(([logEntry]) => new Date().getTime() - new Date(logEntry.timestamp).getTime() < 6000)
       ).subscribe(([logEntry, table]) => {

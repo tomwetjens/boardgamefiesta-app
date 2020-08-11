@@ -1,12 +1,5 @@
 <ng-container *ngIf="table | async as table">
   <ng-container *ngIf="table.status === 'STARTED' || table.status === 'ENDED'; else lobby">
-<!--    <app-board-factory *ngIf="state | async as state"-->
-<!--                       [table]="table"-->
-<!--                       [state]="state"-->
-<!--                       (perform)="perform(table, $event)"-->
-<!--                       (skip)="skip(table)"-->
-<!--                       (endTurn)="endTurn(table)">-->
-<!--    </app-board-factory>-->
     <router-outlet></router-outlet>
   </ng-container>
   <ng-template #lobby>

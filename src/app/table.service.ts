@@ -13,8 +13,6 @@ import {fromArray} from "rxjs/internal/observable/fromArray";
 })
 export class TableService {
 
-  private _logs: Map<string, Observable<LogEntry>> = new Map();
-
   private _refresh = new BehaviorSubject(true);
   private _refreshState = new BehaviorSubject(true);
   private _id = new ReplaySubject<string>(1);
@@ -37,7 +35,7 @@ export class TableService {
       shareReplay(1));
 
     this.state$ = this.table$.pipe(
-      distinctUntilChanged((a, b) => a.status !== b.status),
+      distinctUntilChanged((a, b) => a.status === b.status),
       filter(table => [TableStatus.STARTED, TableStatus.ENDED].includes(table.status)),
       switchMap(table => {
         return combineLatest([
