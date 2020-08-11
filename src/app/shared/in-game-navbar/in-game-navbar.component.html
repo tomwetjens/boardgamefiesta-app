@@ -6,7 +6,7 @@
           <svg class="bi" width="16" height="16" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#arrow-left"/>
           </svg>
-          <span class="d-sm-none">{{'back'|translate}}</span>
+          <span class="d-none d-lg-inline">{{'back'|translate}}</span>
         </a>&nbsp;
         <button class="btn btn-danger text-light text-nowrap"
                 *ngIf="table.turn"
@@ -18,16 +18,16 @@
                 (click)="skip.emit()">
           {{'skip'|translate}}
         </button>&nbsp;
-        <button class="btn btn-warning text-nowrap"
+        <button class="btn btn-secondary text-nowrap"
                 *ngIf="table.turn && table.canUndo"
                 (click)="undo.emit()" [title]="'undo'|translate">
           <svg class="bi" width="16" height="16" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#chevron-bar-left"/>
           </svg>
-          {{'undo'|translate}}
+          <span class="d-none d-md-inline">{{'undo'|translate}}</span>
         </button>&nbsp;
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-2 d-flex justify-content-center">
+      <div class="col-lg-4 col-md-4 d-none d-lg-flex justify-content-center">
         <span *ngIf="table.turn">
           {{'yourTurn'|translate}}
 
@@ -39,14 +39,14 @@
         </div>
       </div>
       <div class="col-lg-4 col-md-2 col-sm-2 d-flex justify-content-end align-content-center">
-        <button class="btn btn-sm" *ngIf="!muted" (click)="mute()"
+        <button class="btn btn-sm d-none d-md-inline-block" *ngIf="!muted" (click)="mute()"
                 [ngbPopover]="'in-game-navbar.mutePopover'|translate"
                 triggers="hover">
           <svg class="bi text-white" width="24" height="24" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#volume-up-fill"/>
           </svg>
         </button>
-        <button class="btn btn-sm" *ngIf="muted" (click)="unmute()"
+        <button class="btn btn-sm d-none d-md-inline-block" *ngIf="muted" (click)="unmute()"
                 [ngbPopover]="'in-game-navbar.unmutePopover'|translate"
                 triggers="hover">
           <svg class="bi text-black-50" width="24" height="24" fill="currentColor">
@@ -54,35 +54,33 @@
           </svg>
         </button>
 
-        <app-connection-status></app-connection-status>
+        <app-connection-status class="d-none d-md-inline-block"></app-connection-status>
 
         <app-in-game-menu [table]="table"></app-in-game-menu>
       </div>
     </div>
   </nav>
 
-  <div class="action-bar navbar navbar-expand-lg bg-secondary text-light d-flex justify-content-center">
-    <div class="actions d-flex justify-content-center">
-      <ng-container *ngIf="table.turn && !selectedAction">
-        <button *ngFor="let action of actions"
-                class="btn btn-primary text-nowrap" (click)="perform.emit(action)"
-                ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
-                placement="bottom"
-                triggers="mouseenter:mouseleave"
-                container="body">
-          {{table.game + '.actions.buttons.' + action|translate}}
-        </button>
-      </ng-container>
+  <div class="action-bar bg-secondary text-light d-flex justify-content-center flex-wrap">
+    <ng-container *ngIf="table.turn && !selectedAction">
+      <button *ngFor="let action of actions"
+              class="btn btn-primary text-nowrap" (click)="perform.emit(action)"
+              ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
+              placement="bottom"
+              triggers="mouseenter:mouseleave"
+              container="body">
+        {{table.game + '.actions.buttons.' + action|translate}}
+      </button>
+    </ng-container>
 
-      <ng-container *ngIf="table.turn && selectedAction">
-        {{table.game + '.actions.instructions.' + selectedAction | translate}}
+    <ng-container *ngIf="table.turn && selectedAction">
+      {{table.game + '.actions.instructions.' + selectedAction | translate}}
 
-        <button *ngIf="actions.length > 1"
-                class="btn btn-primary"
-                (click)="cancel.emit()">
-          {{'cancel'|translate}}
-        </button>
-      </ng-container>
-    </div>
+      <button *ngIf="actions.length > 1"
+              class="btn btn-primary"
+              (click)="cancel.emit()">
+        {{'cancel'|translate}}
+      </button>
+    </ng-container>
   </div>
 </div>
