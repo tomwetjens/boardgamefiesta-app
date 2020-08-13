@@ -1,5 +1,16 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Action, ActionType, Card, CattleCard, CattleType, PlayerState, State, Worker} from '../model';
+import {
+  Action,
+  ActionType,
+  Card,
+  CattleCard,
+  CattleType,
+  isCattleCard,
+  isObjectiveCard,
+  PlayerState,
+  State,
+  Worker
+} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../../audio.service';
@@ -8,9 +19,14 @@ import {Table} from '../../shared/model';
 import {CARD, CERTIFICATE, COINS, COWBOY, CRAFTSMAN, ENGINEER} from "../sounds";
 import {DiscardPileDialogComponent} from "../discard-pile-dialog/discard-pile-dialog.component";
 import {DrawStackDialogComponent} from "../draw-stack-dialog/draw-stack-dialog.component";
+import {bounceOutUpOnLeaveAnimation, flipInYOnEnterAnimation} from "angular-animations";
 
 @Component({
   selector: 'app-player-board',
+  animations: [
+    flipInYOnEnterAnimation(),
+    bounceOutUpOnLeaveAnimation()
+  ],
   templateUrl: './player-board.component.html',
   styleUrls: ['./player-board.component.scss']
 })
@@ -134,28 +150,20 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
         return true;
       case ActionType.DISCARD_1_OBJECTIVE_CARD_TO_GAIN_2_CERTIFICATES:
       case ActionType.PLAY_OBJECTIVE_CARD:
-        return this.isObjectiveCard(card);
+        return isObjectiveCard(card);
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE:
-        return this.isCattleCard(card);
+        return isCattleCard(card);
       case ActionType.DISCARD_PAIR_TO_GAIN_3_DOLLARS:
       case ActionType.DISCARD_PAIR_TO_GAIN_4_DOLLARS:
-        return this.isCattleCard(card) && this.hasPair((card as CattleCard).type);
+        return isCattleCard(card) && this.hasPair((card as CattleCard).type);
       default:
         return false;
     }
   }
 
   private hasPair(cattleType: CattleType) {
-    return this.playerState.hand.filter(card => this.isCattleCard(card) && ((card as CattleCard).type === cattleType)).length > 1;
-  }
-
-  private isCattleCard(card: Card) {
-    return 'breedingValue' in card;
-  }
-
-  private isObjectiveCard(card: Card) {
-    return !this.isCattleCard(card);
+    return this.playerState.hand.filter(card => isCattleCard(card) && ((card as CattleCard).type === cattleType)).length > 1;
   }
 
   canSelectAction(actionType: string) {
@@ -216,6 +224,12 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
     if (this.selectedAction === ActionType.APPOINT_STATION_MASTER) {
       this.perform.emit({type: this.selectedAction, worker: Worker.ENGINEER});
     }
+  }
+
+  trackCardInHand(index: number, card: Card): any {
+    return isObjectiveCard(card)
+      ? card.action + card.points + card.penalty + card.tasks.join('')
+      : card.type + card.points;
   }
 
 }

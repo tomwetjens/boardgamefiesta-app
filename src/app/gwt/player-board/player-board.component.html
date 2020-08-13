@@ -68,10 +68,12 @@
   </section>
   <main>
     <div class="row no-gutters hand" *ngIf="playerState.hand">
-      <app-card *ngFor="let card of playerState.hand"
+      <app-card *ngFor="let card of playerState.hand; trackBy: trackCardInHand"
                 [ngClass]="{disabled:!canSelectCard(card)}"
                 [card]="card"
-                (click)="selectCard(card)">
+                (click)="selectCard(card)"
+                [@flipInYOnEnter]
+                [@bounceOutUpOnLeave]>
       </app-card>
     </div>
     <div class="row no-gutters">

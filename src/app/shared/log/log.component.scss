@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 160px;
+}
+
+.group {
+  width: 100%;
+  padding: 4px;
+
+  .timestamp {
+    width: 100%;
+    text-align: center;
+    margin: 4px 0;
+    font-weight: bolder;
+  }
+
+  .log-entry {
+    width: 100%;
+
+    background-color: lightgrey;
+    border-radius: 0.25rem;
+    margin: 4px 0;
+    padding: 4px;
+
+    .message {
+      margin-left: 3px;
+    }
+  }
+}

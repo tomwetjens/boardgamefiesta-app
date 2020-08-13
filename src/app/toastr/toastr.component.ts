@@ -1,10 +1,14 @@
 import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ToastrMessage, ToastrService} from '../toastr.service';
 import {Subject} from 'rxjs';
-import {distinctUntilChanged, takeUntil, tap} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
+import {fadeInOnEnterAnimation} from "angular-animations";
 
 @Component({
   selector: 'app-toastr',
+  animations: [
+    fadeInOnEnterAnimation({duration: 500})
+  ],
   templateUrl: './toastr.component.html',
   styleUrls: ['./toastr.component.scss']
 })

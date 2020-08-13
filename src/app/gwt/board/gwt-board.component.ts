@@ -98,8 +98,8 @@ export class GwtBoardComponent implements OnInit, OnChanges {
   private endedDialog: NgbModalRef;
 
   @Input() table: Table;
-
   @Input() state: State;
+  @Input() busy: boolean;
 
   selectedAction: ActionType;
   @Output() perform = new EventEmitter<Action>();

@@ -1,9 +1,17 @@
-<div *ngFor="let logEntry of logEntries; trackBy: trackLogEntry">
-  <span class="timestamp">{{logEntry.timestamp | moment:'LT'}}</span>&nbsp;
-  <app-player-name *ngIf="logEntry.player" [player]="table.players[logEntry.player.id] || logEntry.player"></app-player-name>
-  <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
-  <span class="message" [ngSwitch]="logEntry.type">
-    <span *ngSwitchCase="'IN_GAME_EVENT'" [innerHTML]="translateInGameEvent(logEntry)"></span>
-    <span *ngSwitchDefault [innerHTML]="'log.' + logEntry.type|translate:{otherUser:logEntry.otherUser?.username}"></span>
-  </span>
+<div *ngFor="let group of groups$ | async; trackBy: trackGroup" class="group">
+  <div class="timestamp">
+    {{group.logEntries[0].timestamp | moment:'LT'}}
+  </div>
+  <div *ngFor="let logEntry of group.logEntries; trackBy: trackLogEntry" class="log-entry" [@fadeInOnEnter]>
+    <app-player-name *ngIf="logEntry.player"
+                     [player]="table.players[logEntry.player.id] || logEntry.player"></app-player-name>
+
+    <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
+
+    <span class="message" [ngSwitch]="logEntry.type">
+      <span *ngSwitchCase="'IN_GAME_EVENT'" [innerHTML]="translateInGameEvent(logEntry)"></span>
+      <span *ngSwitchDefault
+            [innerHTML]="'log.' + logEntry.type|translate:{otherUser:logEntry.otherUser?.username}"></span>
+    </span>
+  </div>
 </div>

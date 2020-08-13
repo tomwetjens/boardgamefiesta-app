@@ -25,6 +25,7 @@ import {LanguageSelectorComponent} from './language-selector/language-selector.c
 import {IstanbulModule} from './istanbul/istanbul.module';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {FaqComponent} from './faq/faq.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {FaqComponent} from './faq/faq.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     OAuthModule.forRoot(),

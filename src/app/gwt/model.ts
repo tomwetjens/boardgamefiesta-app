@@ -196,6 +196,13 @@ export interface ObjectiveCard {
 
 export type Card = ObjectiveCard | CattleCard;
 
+export function isObjectiveCard(card: Card): card is ObjectiveCard {
+  return 'tasks' in card;
+}
+
+export function isCattleCard(card: Card): card is CattleCard {
+  return 'breedingValue' in card;
+}
 
 export enum Unlockable {
   CERT_LIMIT_6 = 'CERT_LIMIT_6',

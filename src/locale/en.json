@@ -106,6 +106,7 @@
   "skip": "Skip",
   "undo": "Undo",
   "waitingFor": "Waiting for",
+  "busy": "Table is being updated...",
   "computer": "Computer",
   "abandon": "Abandon",
   "leave": "Leave table",

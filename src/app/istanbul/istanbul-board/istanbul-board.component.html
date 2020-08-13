@@ -1,11 +1,7 @@
 <app-in-game-navbar [table]="table"
-                    [actions]="state.actions"
                     [canSkip]="canSkip"
-                    [selectedAction]="selectedAction"
-                    (perform)="selectAction($event)"
                     (skip)="skip.emit($event)"
-                    (endTurn)="endTurn.emit($event)"
-                    (cancel)="selectedAction = null">
+                    (endTurn)="endTurn.emit($event)">
 </app-in-game-navbar>
 
 <div class="container-fluid">

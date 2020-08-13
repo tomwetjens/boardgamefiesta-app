@@ -4,7 +4,8 @@
              [className]="toastrMessage.className"
              [autohide]="toastrMessage.autohide"
              [delay]="toastrMessage.delay"
-             (hide)="hide(toastrMessage)">
+             (hide)="hide(toastrMessage)"
+             [@fadeInOnEnter]>
 
     <app-player-name *ngIf="toastrMessage.player" [player]="toastrMessage.player"></app-player-name>
     <app-user-name *ngIf="!toastrMessage.player && toastrMessage.user" [user]="toastrMessage.user"></app-user-name>

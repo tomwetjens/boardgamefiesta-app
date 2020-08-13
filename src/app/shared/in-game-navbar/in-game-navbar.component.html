@@ -10,16 +10,18 @@
         </a>&nbsp;
         <button class="btn btn-danger text-light text-nowrap"
                 *ngIf="table.turn"
+                [disabled]="busy"
                 (click)="endTurn.emit()">
           {{'endTurn'|translate}}
         </button>&nbsp;
         <button class="btn btn-warning text-nowrap" *ngIf="table.turn"
-                [disabled]="!canSkip"
+                [disabled]="busy || !canSkip"
                 (click)="skip.emit()">
           {{'skip'|translate}}
         </button>&nbsp;
         <button class="btn btn-secondary text-nowrap"
                 *ngIf="table.turn && table.canUndo"
+                [disabled]="busy"
                 (click)="undo.emit()" [title]="'undo'|translate">
           <svg class="bi" width="16" height="16" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#chevron-bar-left"/>
@@ -28,15 +30,20 @@
         </button>&nbsp;
       </div>
       <div class="col-lg-4 col-md-4 d-none d-lg-flex justify-content-center">
-        <span *ngIf="table.turn">
-          {{'yourTurn'|translate}}
-
-          <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
+        <span *ngIf="busy">
+          {{'busy'|translate}}
         </span>
-        <div *ngIf="!table.turn && table.currentPlayer">
-          {{'waitingFor'|translate}}
-          <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
-        </div>
+        <ng-container *ngIf="!busy">
+          <span *ngIf="table.turn">
+            {{'yourTurn'|translate}}
+
+            <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
+          </span>
+          <div *ngIf="!table.turn && table.currentPlayer">
+            {{'waitingFor'|translate}}
+            <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+          </div>
+        </ng-container>
       </div>
       <div class="col-lg-4 col-md-2 col-sm-2 d-flex justify-content-end align-content-center">
         <button class="btn btn-sm d-none d-md-inline-block" *ngIf="!muted" (click)="mute()"
@@ -60,27 +67,4 @@
       </div>
     </div>
   </nav>
-
-  <div class="action-bar bg-secondary text-light d-flex justify-content-center flex-wrap">
-    <ng-container *ngIf="table.turn && !selectedAction">
-      <button *ngFor="let action of actions"
-              class="btn btn-primary text-nowrap" (click)="perform.emit(action)"
-              ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
-              placement="bottom"
-              triggers="mouseenter:mouseleave"
-              container="body">
-        {{table.game + '.actions.buttons.' + action|translate}}
-      </button>
-    </ng-container>
-
-    <ng-container *ngIf="table.turn && selectedAction">
-      {{table.game + '.actions.instructions.' + selectedAction | translate}}
-
-      <button *ngIf="actions.length > 1"
-              class="btn btn-primary"
-              (click)="cancel.emit()">
-        {{'cancel'|translate}}
-      </button>
-    </ng-container>
-  </div>
 </div>

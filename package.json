@@ -22,6 +22,7 @@
     "@angular/router": "~9.1.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "@ngx-translate/core": "^12.1.2",
+    "angular-animations": "0.0.10",
     "angular-oauth2-oidc": "^9.2.0",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.5.0",

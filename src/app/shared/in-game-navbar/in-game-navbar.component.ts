@@ -11,14 +11,13 @@ export class InGameNavbarComponent implements OnInit {
 
   @Input() table: Table;
 
-  @Input() actions: string[];
-  @Input() selectedAction: string;
+  // TODO Should read this from table
   @Input() canSkip: boolean;
 
-  @Output() perform = new EventEmitter<string>();
+  @Input() busy: boolean;
+
   @Output() skip = new EventEmitter<void>();
   @Output() endTurn = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
   @Output() undo = new EventEmitter<void>();
 
   constructor(private audioService: AudioService) {

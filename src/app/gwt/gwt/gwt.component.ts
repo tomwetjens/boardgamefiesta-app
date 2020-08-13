@@ -18,6 +18,8 @@ export class GwtComponent implements OnInit {
   table$: Observable<Table>;
   state$: Observable<State>;
 
+  busy = false;
+
   constructor(private route: ActivatedRoute,
               private tableService: TableService,
               private translateService: TranslateService) {
@@ -32,22 +34,26 @@ export class GwtComponent implements OnInit {
   }
 
   perform(table: Table, action: Action) {
+    this.busy = true;
     this.tableService.perform(table.id, action)
-      .subscribe(() => this.tableService.refreshState());
+      .subscribe(() => this.tableService.refreshState(), () => this.busy = false, () => this.busy = false);
   }
 
   skip(table: Table) {
+    this.busy = true;
     this.tableService.skip(table.id)
-      .subscribe(() => this.tableService.refreshState());
+      .subscribe(() => this.tableService.refreshState(), () => this.busy = false, () => this.busy = false);
   }
 
   endTurn(table: Table) {
+    this.busy = true;
     this.tableService.endTurn(table.id)
-      .subscribe(() => this.tableService.refreshState());
+      .subscribe(() => this.tableService.refreshState(), () => this.busy = false, () => this.busy = false);
   }
 
   undo(table: Table) {
+    this.busy = true;
     this.tableService.undo(table.id)
-      .subscribe(() => this.tableService.refreshState());
+      .subscribe(() => this.tableService.refreshState(), () => this.busy = false, () => this.busy = false);
   }
 }
