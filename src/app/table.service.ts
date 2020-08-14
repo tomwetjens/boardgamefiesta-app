@@ -71,9 +71,9 @@ export class TableService {
                   new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())),
                 concatMap(logEntries => fromArray(logEntries)),
                 tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
-          }));
-      }),
-      shareReplay());
+          }),
+          shareReplay());
+      }));
 
     this.myActiveTables$ = combineLatest([
       this._refreshMyActiveTables,
