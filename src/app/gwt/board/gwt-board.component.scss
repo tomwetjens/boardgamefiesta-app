@@ -14,6 +14,7 @@ app-objective-cards {
 
 .action-bar {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+  top: 50px; /* always show the in game navbar */
   margin-bottom: 8px; /* clear shadow */
   padding: 0.5em;
 
