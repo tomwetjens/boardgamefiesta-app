@@ -154,7 +154,7 @@
              (click)="selectForesight(1,1)"/>
         <text *ngIf="foresights[1][1].points" x="21" y="33" class="points">{{foresights[1][1].points}}</text>
       </g>
-      <g transform="translate(68,40)" *ngIf="foresights[0][0]">
+      <g transform="translate(68,40)" *ngIf="foresights[0][1]">
         <use [attr.xlink:href]="'#' + foresights[0][1].href"
              class="foresight" [ngClass]="{selected:isForesightSelected(0,1), otherSelected: isForesightSelected(0,0)}"
              (click)="selectForesight(1,0)"/>

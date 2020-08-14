@@ -409,7 +409,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
             const currentTile = current.foresights.choices[columnIndex][rowIndex];
             const previousTile = previous.foresights.choices[columnIndex][rowIndex];
 
-            if (JSON.stringify(currentTile) !== JSON.stringify(previousTile)) {
+            if (previousTile && !currentTile) {
               const choice = previousTile;
 
               if (choice.worker) {
