@@ -548,7 +548,8 @@
       "WORKERS_EXCEED_LIMIT": "You cannot have more workers of this type.",
       "NO_SUCH_PLAYER": "This player does not exist.",
       "WORKER_NOT_AVAILABLE": "This worker is not available.",
-      "LOCATION_NOT_ADJACENT": "This location is not adjacent to your current location."
+      "LOCATION_NOT_ADJACENT": "This location is not adjacent to your current location.",
+      "MUST_START_ON_NEUTRAL_BUILDING": "You must start on a neutral building."
     }
   }
 }
