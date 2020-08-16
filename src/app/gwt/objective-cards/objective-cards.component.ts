@@ -47,7 +47,7 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
   clickDrawStack() {
     if (this.canSelectDrawStack) {
-      this.action.emit({type: ActionType.TAKE_OBJECTIVE_CARD});
+      this.action.emit({type: this.selectedAction});
     }
   }
 }
