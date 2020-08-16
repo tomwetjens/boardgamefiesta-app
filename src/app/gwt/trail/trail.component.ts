@@ -12,7 +12,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {Action, ActionType, Building, City, HazardType, Location, PossibleMove, Space, State, Worker} from '..//model';
+import {Action, ActionType, Building, City, HazardType, Location, PossibleMove, Space, State, Worker} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -590,8 +590,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
         return this.state.possibleDeliveries && this.state.possibleDeliveries.some(pd => pd.city === city as City);
-      case ActionType.EXTRAORDINARY_DELIVERY:
-        return !!this.selectedSpace;
       default:
         return false;
     }
@@ -647,12 +645,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
                 }));
             }
           }
-        }
-        break;
-
-      case ActionType.EXTRAORDINARY_DELIVERY:
-        if (this.selectedSpace) {
-          this.perform.emit({type: ActionType.EXTRAORDINARY_DELIVERY, city, to: this.selectedSpace});
         }
         break;
     }
@@ -775,15 +767,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     if (!this.canSelectSpace(space)) {
       return;
     }
-    switch (this.selectedAction) {
-      case ActionType.EXTRAORDINARY_DELIVERY:
-        // Remember space, because player has to select city next
-        this.selectedSpace = space;
-        break;
-
-      default:
-        this.perform.emit({type: this.selectedAction, to: space});
-    }
+    this.perform.emit({type: this.selectedAction, to: space});
   }
 
   canSelectSpace(space: Space) {

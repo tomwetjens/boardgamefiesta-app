@@ -138,7 +138,7 @@
         "DRAW_5_CARDS": "trekt 5 kaarten",
         "DRAW_6_CARDS": "trekt 6 kaarten",
         "DRAW_2_CATTLE_CARDS": "vult de rundermarkt aan met 2 runderkaarten",
-        "EXTRAORDINARY_DELIVERY": "voert een speciale levering uit aan {{value1}}",
+        "EXTRAORDINARY_DELIVERY": "start speciale levering en zet locomotief {{value1}} achteruit",
         "GAIN_1_CERTIFICATE": "zet de certificaatsteen 1 vooruit",
         "GAIN_1_DOLLAR": "ontvangt 1 dollar",
         "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "ontvangt 2 dollar per gebouwtegel in het bos",

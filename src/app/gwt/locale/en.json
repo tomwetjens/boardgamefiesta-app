@@ -138,7 +138,7 @@
         "DRAW_5_CARDS": "draws 5 cards",
         "DRAW_6_CARDS": "draws 6 cards",
         "DRAW_2_CATTLE_CARDS": "adds 2 cattle cards to the cattle market",
-        "EXTRAORDINARY_DELIVERY": "does an extraordinary delivery to {{value1}}",
+        "EXTRAORDINARY_DELIVERY": "starts extraordinary delivery and moves engine {{value1}} backwards",
         "GAIN_1_CERTIFICATE": "gains 1 certificate",
         "GAIN_1_DOLLAR": "gains $1",
         "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "gains $2 per building in the woods",
