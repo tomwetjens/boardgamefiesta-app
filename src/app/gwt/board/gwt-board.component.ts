@@ -177,11 +177,11 @@ export class GwtBoardComponent implements OnInit, OnChanges {
   }
 
   get canSkip(): boolean {
-    return this.state.turn && this.state.actions.length > 0;
+    return this.state.turn && this.state.actions && this.state.actions.length > 0;
   }
 
   get canPerformFreeAction(): boolean {
-    return this.state.actions.some(action => FREE_ACTIONS.includes(action));
+    return this.state.actions && this.state.actions.some(action => FREE_ACTIONS.includes(action));
   }
 
   selectAction(actionType: string) {

@@ -167,7 +167,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   canSelectAction(actionType: string) {
-    return !this.readonly && this.state.actions.includes(actionType as ActionType);
+    return !this.readonly && this.state.actions && this.state.actions.includes(actionType as ActionType);
   }
 
   showBuildings() {
