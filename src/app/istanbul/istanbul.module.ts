@@ -26,6 +26,12 @@ export class IstanbulModule {
 
   constructor(private translateService: TranslateService) {
     GAME_PROVIDERS['istanbul'] = {
+      options: {
+        layoutType: {
+          values: ['SHORT_PATHS', 'LONG_PATHS', 'IN_ORDER', 'RANDOM'],
+          defaultValue: 'RANDOM'
+        }
+      },
       translate: (logEntry, table) => this.translateService.instant('istanbul.log.' + logEntry.parameters[0])
     };
   }

@@ -14,18 +14,19 @@ import {PlayerBuildingsComponent} from './player-buildings/player-buildings.comp
 import {StationMasterComponent} from './station-master/station-master.component';
 import {TeepeeComponent} from './teepee/teepee.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {TrailComponent} from './trail/trail.component';
 import {SharedModule} from '../shared/shared.module';
 import {GAME_PROVIDERS} from '../shared/api';
-import {GwtOptionsComponent} from './gwt-options/gwt-options.component';
 import {DiscardPileDialogComponent} from './discard-pile-dialog/discard-pile-dialog.component';
 import {DrawStackDialogComponent} from './draw-stack-dialog/draw-stack-dialog.component';
 import {BuyCattleDialogComponent} from './buy-cattle-dialog/buy-cattle-dialog.component';
 import {RouterModule, Routes} from "@angular/router";
 import {GwtComponent} from './gwt/gwt.component';
 import {GwtProvider} from "./gwt.provider";
+import en from "./locale/en.json";
+import nl from "./locale/nl.json";
 
 const routes: Routes = [
   {
@@ -51,7 +52,6 @@ const routes: Routes = [
     StationMasterComponent,
     TeepeeComponent,
     TrailComponent,
-    GwtOptionsComponent,
     DrawStackDialogComponent,
     BuyCattleDialogComponent,
     GwtComponent
@@ -70,8 +70,12 @@ const routes: Routes = [
 })
 export class GwtModule {
 
-  constructor(private provider: GwtProvider) {
+  constructor(private provider: GwtProvider,
+              private translateService: TranslateService) {
     GAME_PROVIDERS['gwt'] = provider;
+
+    this.translateService.setTranslation('en', en, true);
+    this.translateService.setTranslation('nl', nl, true);
   }
 
 }

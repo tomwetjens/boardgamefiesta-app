@@ -1,15 +1,18 @@
 import {Injectable} from '@angular/core';
-import {GameProvider} from "../shared/api";
-import {GwtOptionsComponent} from "./gwt-options/gwt-options.component";
+import {GameProvider, Options} from "../shared/api";
 import {TranslateService} from "@ngx-translate/core";
 import {LogEntry, Table, TablePlayer, User} from "../shared/model";
+import {Buildings} from "./model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GwtProvider implements GameProvider {
 
-  optionsComponent = GwtOptionsComponent;
+  options: Options = {
+    buildings: {values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED}
+    // playerOrder: {values: ['RANDOMIZED', 'BIDDING'], defaultValue: 'BIDDING'}
+  };
 
   constructor(private translateService: TranslateService) {
   }

@@ -1,13 +1,16 @@
-import {EventEmitter, Type} from '@angular/core';
-import {LogEntry, Options, Table} from './model';
+import {LogEntry, Table} from './model';
 
-export interface OptionsComponent {
-  table: Table;
-  readonly changeOptions: EventEmitter<Options>;
+export interface Option {
+  values: string[];
+  defaultValue: string;
+}
+
+export interface Options {
+  [key: string]: Option;
 }
 
 export interface GameProvider {
-  optionsComponent?: Type<OptionsComponent>;
+  options: Options;
 
   translate(logEntry: LogEntry, table: Table): string;
 }

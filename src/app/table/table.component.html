@@ -61,7 +61,22 @@
               {{'options'|translate}}
             </div>
             <div class="card-body">
-              <app-table-options [table]="table" (changeOptions)="changeOptions(table, $event)"></app-table-options>
+              <form *ngIf="(provider$ | async) as provider">
+                <div class="form-group" *ngFor="let option of provider.options | keyvalue">
+                  <label [for]="option.key">{{(table.game + '.option.' + option.key + '.label')|translate}}</label>
+                  <div ngbDropdown>
+                    <button class="btn btn-outline-primary" [id]="option.key" ngbDropdownToggle>
+                      {{(table.game + '.option.'+ option.key + '.value.' + (table.options[option.key] || option.value.defaultValue))|translate}}
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button ngbDropdownItem *ngFor="let value of option.value.values"
+                              (click)="table.options[option.key] = value; changeOptions(table, table.options)">
+                        {{(table.game + '.option.' + option.key + '.value.' + value)|translate}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

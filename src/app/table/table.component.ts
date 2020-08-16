@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of, Subject} from 'rxjs';
-import {bufferCount, filter, map, switchMap, take, takeUntil, withLatestFrom} from 'rxjs/operators';
+import {bufferCount, filter, map, switchMap, takeUntil, withLatestFrom} from 'rxjs/operators';
 import {EventType, LogEntryType, Options, PlayerStatus, Table, TablePlayer} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
@@ -13,7 +13,7 @@ import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 import {AudioService} from '../audio.service';
 import {ToastrService} from "../toastr.service";
-import {GAME_PROVIDERS} from "../shared/api";
+import {GAME_PROVIDERS, GameProvider} from "../shared/api";
 
 @Component({
   selector: 'app-table',
@@ -25,6 +25,7 @@ export class TableComponent implements OnInit, OnDestroy {
   private destroyed = new Subject();
 
   table: Observable<Table>;
+  provider$: Observable<GameProvider>;
 
   hideDescription = true;
 
@@ -56,6 +57,9 @@ export class TableComponent implements OnInit, OnDestroy {
         const name = this.translateService.instant('game.' + table.game + '.name');
         this.title.setTitle(name);
       }, () => this.router.navigate(['/']));
+
+    this.provider$ = this.table.pipe(
+      map(table => GAME_PROVIDERS[table.game]));
 
     this.table
       .pipe(bufferCount(2, 1))

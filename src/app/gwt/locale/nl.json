@@ -494,9 +494,20 @@
       "STATIONS": "Stations"
     },
     "option": {
-      "buildings": "Gebouwtegels",
-      "beginner": "Eerste spel",
-      "randomize": "Willekeurig"
+      "buildings": {
+        "label": "Gebouwtegels",
+        "value": {
+          "BEGINNER": "Eerste spel",
+          "RANDOMIZED": "Willekeurig"
+        }
+      },
+      "playerOrder": {
+        "label": "Beurtvolgorde",
+        "value": {
+          "BIDDING": "Bieden",
+          "RANDOMIZED": "Willekeurig"
+        }
+      }
     },
     "errors": {
       "NOT_ENOUGH_COWBOYS": "Je hebt meer cowboys nodig om deze actie te kunnen doen.",

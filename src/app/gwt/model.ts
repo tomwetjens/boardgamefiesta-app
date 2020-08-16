@@ -404,3 +404,18 @@ export enum GWTEventType {
   ENDS_GAME = 'ENDS_GAME',
   FILL_UP_CATTLE_MARKET = 'FILL_UP_CATTLE_MARKET'
 }
+
+export enum Buildings {
+  BEGINNER ='BEGINNER',
+  RANDOMIZED = 'RANDOMIZED'
+}
+
+export enum PlayerOrder {
+  BIDDING ='BIDDING',
+  RANDOMIZED = 'RANDOMIZED'
+}
+
+export interface Options {
+  buildings: Buildings;
+  playerOrder: PlayerOrder;
+}

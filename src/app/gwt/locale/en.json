@@ -499,9 +499,20 @@
       "STATIONS": "Stations"
     },
     "option": {
-      "buildings": "Buildings",
-      "beginner": "Beginner",
-      "randomize": "Randomize"
+      "buildings": {
+        "label": "Buildings",
+        "value": {
+          "BEGINNER": "Beginner",
+          "RANDOMIZED": "Randomize"
+        }
+      },
+      "playerOrder": {
+        "label": "Player Order",
+        "value": {
+          "BIDDING": "Bidding",
+          "RANDOMIZED": "Randomize"
+        }
+      }
     },
     "errors": {
       "NOT_ENOUGH_COWBOYS": "You don't have enough cowboys to perform this action.",

@@ -23,9 +23,6 @@ export class GwtComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private tableService: TableService,
               private translateService: TranslateService) {
-    this.translateService.setTranslation('en', en, true);
-    this.translateService.setTranslation('nl', nl, true);
-
     this.table$ = this.tableService.table$;
     this.state$ = this.tableService.state$;
   }

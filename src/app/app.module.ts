@@ -17,7 +17,6 @@ import {LayoutComponent} from './layout/layout.component';
 import {ProfileComponent} from './profile/profile.component';
 import {SharedModule} from './shared/shared.module';
 import {UserMenuComponent} from './user-menu/user-menu.component';
-import {TableOptionsComponent} from './table-options/table-options.component';
 import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {LocationSelectorComponent} from './location-selector/location-selector.component';
@@ -38,7 +37,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     LayoutComponent,
     ProfileComponent,
     UserMenuComponent,
-    TableOptionsComponent,
     AboutComponent,
     ContactComponent,
     LocationSelectorComponent,
