@@ -141,7 +141,7 @@
         "EXTRAORDINARY_DELIVERY": "starts extraordinary delivery and moves engine {{value1}} backwards",
         "GAIN_1_CERTIFICATE": "gains 1 certificate",
         "GAIN_1_DOLLAR": "gains $1",
-        "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "gains $2 per building in the woods",
+        "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "gains ${{value1}} from buildings in the woods",
         "GAIN_1_DOLLAR_PER_ENGINEER": "gains $1 per engineer",
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "gains 2 certificates and $2 per pair of teepees",
         "GAIN_2_DOLLARS": "gains $2",

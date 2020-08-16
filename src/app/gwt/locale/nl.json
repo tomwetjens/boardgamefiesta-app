@@ -141,7 +141,7 @@
         "EXTRAORDINARY_DELIVERY": "start speciale levering en zet locomotief {{value1}} achteruit",
         "GAIN_1_CERTIFICATE": "zet de certificaatsteen 1 vooruit",
         "GAIN_1_DOLLAR": "ontvangt 1 dollar",
-        "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "ontvangt 2 dollar per gebouwtegel in het bos",
+        "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "ontvangt {{value1}} dollar voor gebouwtegels in het bos",
         "GAIN_1_DOLLAR_PER_ENGINEER": "ontvangt 1 dollar per ingenieur",
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "zet de certificaatsteen 2 vooruit en ontvangt 2 dollar per paar tipitegels",
         "GAIN_2_DOLLARS": "ontvangt 2 dollar",
