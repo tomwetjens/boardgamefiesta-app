@@ -12,18 +12,18 @@
   border-radius: 8px;
 
   &.PERM_CERT_POINTS_FOR_EACH_2_CERTS {
-    background-image: url('src/assets/games/gwt/points_per_2_certs.png');
+    background-image: url('../../../assets/games/gwt/points_per_2_certs.png');
   }
   &.PERM_CERT_POINTS_FOR_EACH_2_HAZARDS {
-    background-image: url('src/assets/games/gwt/points_per_pair_hazards.png');
+    background-image: url('../../../assets/games/gwt/points_per_pair_hazards.png');
   }
   &.PERM_CERT_POINTS_FOR_TEEPEE_PAIRS {
-    background-image: url('src/assets/games/gwt/points_per_pair_teepees.png');
+    background-image: url('../../../assets/games/gwt/points_per_pair_teepees.png');
   }
   &.REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS {
-    background-image: url('src/assets/games/gwt/points_per_2_objective_cards.png');
+    background-image: url('../../../assets/games/gwt/points_per_2_objective_cards.png');
   }
   &.GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER {
-    background-image: url('src/assets/games/gwt/point_per_worker.png');
+    background-image: url('../../../assets/games/gwt/point_per_worker.png');
   }
 }
