@@ -603,7 +603,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   canSelectForesight(columnIndex: number, rowIndex: number): boolean {
-    return (this.selectedAction === ActionType.CHOOSE_FORESIGHT_1 && columnIndex === 0)
+    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS
+      || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_1 && columnIndex === 0)
       || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_2 && columnIndex === 1)
       || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_3 && columnIndex === 2);
   }
