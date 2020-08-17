@@ -608,18 +608,31 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectForesight(rowIndex: number, columnIndex: number) {
-    if (this.selectedAction === ActionType.CHOOSE_FORESIGHTS) {
-      if (this.selectedForesights[columnIndex] === rowIndex) {
-        this.selectedForesights[columnIndex] = null;
-      } else {
-        this.selectedForesights[columnIndex] = rowIndex;
-      }
-
-      if (this.selectedForesights[0] !== null && this.selectedForesights[1] !== null && this.selectedForesights[2] !== null) {
-        this.perform.emit({type: ActionType.CHOOSE_FORESIGHTS, choices: this.selectedForesights});
-        this.selectedForesights = [null, null, null];
-      }
+    if (this.selectedAction !== ActionType.CHOOSE_FORESIGHTS) {
+      return;
     }
+
+    if (this.selectedForesights[columnIndex] === rowIndex) {
+      this.selectedForesights[columnIndex] = null;
+    } else {
+      this.selectedForesights[columnIndex] = rowIndex;
+    }
+
+    if (this.allAvailableForesightsSelected) {
+      this.perform.emit({type: ActionType.CHOOSE_FORESIGHTS, choices: this.selectedForesights});
+      this.selectedForesights = [null, null, null];
+    }
+  }
+
+  private get allAvailableForesightsSelected(): boolean {
+    return (this.selectedForesights[0] !== null || this.isForesightsColumnEmpty(0))
+      && (this.selectedForesights[1] !== null || this.isForesightsColumnEmpty(1))
+      && (this.selectedForesights[2] !== null || this.isForesightsColumnEmpty(2));
+  }
+
+  private isForesightsColumnEmpty(columnIndex: number) {
+    const column = this.state.foresights.choices[columnIndex];
+    return !column[0] && !column[1];
   }
 
   selectCity(city: string) {
