@@ -596,7 +596,10 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   get canChooseForesights(): boolean { // deprecated, can be removed
-    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS;
+    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS
+      || this.selectedAction === ActionType.CHOOSE_FORESIGHT_1
+      || this.selectedAction === ActionType.CHOOSE_FORESIGHT_2
+      || this.selectedAction === ActionType.CHOOSE_FORESIGHT_3;
   }
 
   canSelectForesight(columnIndex: number, rowIndex: number): boolean {

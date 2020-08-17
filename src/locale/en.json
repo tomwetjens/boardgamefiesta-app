@@ -174,7 +174,8 @@
     "TOKEN_VALIDATION_ERROR": "Login failed due to expired token. Make sure your system's clock is set correctly.",
     "RESOURCE_NOT_FOUND": "The requested resource was not found.",
     "HISTORY_NOT_AVAILABLE": "There is not enough historic data available to undo the previous action.",
-    "CANNOT_UNDO": "The previous action cannot be undone."
+    "CANNOT_UNDO": "The previous action cannot be undone.",
+    "GAME_ALREADY_ENDED": "This game is already ended."
   },
   "log": {
     "CREATE": "created a new table",
