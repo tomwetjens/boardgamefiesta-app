@@ -12,6 +12,9 @@ const AUTO_SELECTED_ACTIONS = [
   ActionType.MOVE,
   ActionType.DISCARD_CARD,
   ActionType.CHOOSE_FORESIGHTS,
+  ActionType.CHOOSE_FORESIGHT_1,
+  ActionType.CHOOSE_FORESIGHT_2,
+  ActionType.CHOOSE_FORESIGHT_3,
   ActionType.DELIVER_TO_CITY,
   ActionType.UNLOCK_WHITE,
   ActionType.UNLOCK_BLACK_OR_WHITE,
@@ -152,8 +155,9 @@ export class GwtBoardComponent implements OnInit, OnChanges {
         componentInstance.table = this.table;
         componentInstance.state = currentState;
 
-        fromPromise(this.endedDialog.result).subscribe(null, null,
-          () => this.endedDialog = null);
+        fromPromise(this.endedDialog.result).subscribe({
+          complete: () => this.endedDialog = null
+        });
       }
     }
   }

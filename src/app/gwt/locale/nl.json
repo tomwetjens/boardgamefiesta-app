@@ -193,6 +193,9 @@
         "UPGRADE_STATION": "waardeert een station op",
         "USE_ADJACENT_BUILDING": "voert een lokale actie uit van een aangrenzende gebouwtegel",
         "CHOOSE_FORESIGHTS": "kiest deze vooruitzichten: {{value1}}, {{value2}} en {{value3}}",
+        "CHOOSE_FORESIGHT_1": "Kiest vooruitzicht 1: {{value1}}",
+        "CHOOSE_FORESIGHT_2": "Kiest vooruitzicht 2: {{value1}}",
+        "CHOOSE_FORESIGHT_3": "Kiest vooruitzicht 3: {{value1}}",
         "UNLOCK_BLACK_OR_WHITE": "verwijdert een spelersschijf van zijn/haar spelertableau",
         "UNLOCK_WHITE": "verwijdert een spelersschijf van zijn/haar spelertableau",
         "DOWNGRADE_STATION": "verwijdert een spelersschijf van een opgewaardeerd treinstation"
@@ -307,6 +310,9 @@
         "UPGRADE_STATION": "Waardeer treinstation op",
         "USE_ADJACENT_BUILDING": "Lokale actie van aangrenzend gebouw",
         "CHOOSE_FORESIGHTS": "Kies uit de 3 vooruitzichten",
+        "CHOOSE_FORESIGHT_1": "Kies uit vooruitzichten 1",
+        "CHOOSE_FORESIGHT_2": "Kies uit vooruitzichten 2",
+        "CHOOSE_FORESIGHT_3": "Kies uit vooruitzichten 3",
         "UNLOCK_BLACK_OR_WHITE": "Kies een spelersschijf van je spelertableau",
         "UNLOCK_WHITE": "Kies een spelersschijf met witte hoeken van je spelertableau",
         "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"
@@ -474,6 +480,9 @@
         "UPGRADE_STATION": "Waardeer treinstation op",
         "USE_ADJACENT_BUILDING": "Voer een lokale actie van een aangrenzende gebouwtegel uit",
         "CHOOSE_FORESIGHTS": "Kies de 3 vooruitzichten",
+        "CHOOSE_FORESIGHT_1": "Kies uit vooruitzichten 1",
+        "CHOOSE_FORESIGHT_2": "Kies uit vooruitzichten 2",
+        "CHOOSE_FORESIGHT_3": "Kies uit vooruitzichten 3",
         "UNLOCK_BLACK_OR_WHITE": "Kies een spelersschijf van je spelertableau",
         "UNLOCK_WHITE": "Kies een spelersschijf met witte hoeken van je spelertableau",
         "DOWNGRADE_STATION": "Verwijder een spelersschijf van een opgewaardeerd treinstation"

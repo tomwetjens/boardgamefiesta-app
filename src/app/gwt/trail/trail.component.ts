@@ -247,7 +247,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   hazards: HazardElement[];
   foresights: ForesightItem[][];
-  selectedForesights: number[] = [null, null, null];
+  selectedForesights: number[] = [null, null, null]; // deprecated, can be removed
   spaces = SPACES;
   playerBuildings: PlayerBuildingElement[];
   possibleMoveElements: PossibleMoveElement[];
@@ -595,8 +595,14 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     }
   }
 
-  get canChooseForesights(): boolean {
+  get canChooseForesights(): boolean { // deprecated, can be removed
     return this.selectedAction === ActionType.CHOOSE_FORESIGHTS;
+  }
+
+  canSelectForesight(columnIndex: number, rowIndex: number): boolean {
+    return (this.selectedAction === ActionType.CHOOSE_FORESIGHT_1 && columnIndex === 0)
+      || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_2 && columnIndex === 1)
+      || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_3 && columnIndex === 2);
   }
 
   get canSelectHazard(): boolean {
@@ -609,9 +615,16 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   selectForesight(rowIndex: number, columnIndex: number) {
     if (this.selectedAction !== ActionType.CHOOSE_FORESIGHTS) {
+      if (!this.canSelectForesight(columnIndex, rowIndex)) {
+        return;
+      }
+
+      this.perform.emit({type: this.selectedAction, choice: rowIndex});
+
       return;
     }
 
+    // deprecated, can be removed
     if (this.selectedForesights[columnIndex] === rowIndex) {
       this.selectedForesights[columnIndex] = null;
     } else {

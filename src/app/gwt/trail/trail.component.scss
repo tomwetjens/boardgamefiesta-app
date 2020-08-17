@@ -119,6 +119,11 @@ svg {
       stroke: black;
     }
 
+    &.disabled {
+      stroke-width: 0;
+      cursor: default;
+    }
+
     &.selected {
       stroke: black;
     }
@@ -143,10 +148,6 @@ svg {
     font-weight: bold;
     text-shadow: -1px -1px 0 #000;
   }
-}
-
-.foresight {
-
 }
 
 .worker, .hazard, .teepee, .space {

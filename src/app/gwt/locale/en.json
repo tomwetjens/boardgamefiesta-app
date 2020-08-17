@@ -193,6 +193,9 @@
         "UPGRADE_STATION": "upgrades a Station",
         "USE_ADJACENT_BUILDING": "wants to use actions of an adjacent Building",
         "CHOOSE_FORESIGHTS": "chooses foresights {{value1}}, {{value2}} and {{value3}}",
+        "CHOOSE_FORESIGHT_1": "chooses foresight 1: {{value1}}",
+        "CHOOSE_FORESIGHT_2": "chooses foresight 2: {{value1}}",
+        "CHOOSE_FORESIGHT_3": "chooses foresight 3: {{value1}}",
         "UNLOCK_BLACK_OR_WHITE": "removes a disc from player board",
         "UNLOCK_WHITE": "removes a disc from player board",
         "DOWNGRADE_STATION": "downgrades a Station"
@@ -312,6 +315,9 @@
         "UPGRADE_STATION": "Upgrade station",
         "USE_ADJACENT_BUILDING": "Use the actions of an adjacent building",
         "CHOOSE_FORESIGHTS": "Choose 3 foresights",
+        "CHOOSE_FORESIGHT_1": "Choose foresight 1",
+        "CHOOSE_FORESIGHT_2": "Choose foresight 2",
+        "CHOOSE_FORESIGHT_3": "Choose foresight 3",
         "UNLOCK_BLACK_OR_WHITE": "Remove a disc from your player board",
         "UNLOCK_WHITE": "Remove a disc with white corners from your player board",
         "DOWNGRADE_STATION": "Remove a disc from one of your stations"
@@ -479,6 +485,9 @@
         "UPGRADE_STATION": "Upgrade station",
         "USE_ADJACENT_BUILDING": "Use the actions of an adjacent building",
         "CHOOSE_FORESIGHTS": "Choose 3 foresights",
+        "CHOOSE_FORESIGHT_1": "Choose foresight 1",
+        "CHOOSE_FORESIGHT_2": "Choose foresight 2",
+        "CHOOSE_FORESIGHT_3": "Choose foresight 3",
         "UNLOCK_BLACK_OR_WHITE": "Remove a disc from your player board",
         "UNLOCK_WHITE": "Remove a disc with white corners from your player board",
         "DOWNGRADE_STATION": "Remove a disc from one of your stations"
