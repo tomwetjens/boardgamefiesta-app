@@ -8,6 +8,7 @@ import {concatMap, distinctUntilChanged, filter, map, shareReplay, startWith, sw
 import {EventService} from "./event.service";
 import {fromArray} from "rxjs/internal/observable/fromArray";
 import {AuthService} from "./auth.service";
+import {State} from "./gwt/model";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,10 @@ export class TableService {
           this.eventsForTable(id),
           this.reconnected()
         ]).pipe(
-          switchMap(() => this.get(id)));
+          switchMap(() => this.get(id)),
+          // For each new id, immediately start with an empty value to prevent replaying
+          // the previous table, while it is fetching the new table
+          startWith(null as Table));
       }),
       shareReplay(1));
 
@@ -48,7 +52,10 @@ export class TableService {
           this.eventsForTable(table.id),
           this.reconnected()
         ]).pipe(
-          switchMap(() => this.getState(table.id)));
+          switchMap(() => this.getState(table.id)),
+          // For each new table, immediately start with an empty value to prevent replaying
+          // the state of the previous table, while it is fetching the state of the new table
+          startWith(null as State));
       }),
       shareReplay(1));
 

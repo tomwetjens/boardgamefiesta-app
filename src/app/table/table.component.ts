@@ -42,12 +42,14 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
+    this.table = this.route.params.pipe(
       takeUntil(this.destroyed),
-      map(({tableId}) => tableId)
-    ).subscribe(id => this.tableService.load(id));
-
-    this.table = this.tableService.table$;
+      switchMap(({tableId}) => {
+        // Make sure Table id is set before switching to Observable
+        this.tableService.load(tableId);
+        return this.tableService.table$;
+      })
+    );
 
     this.table
       .pipe(
