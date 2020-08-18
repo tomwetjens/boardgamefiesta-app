@@ -156,6 +156,7 @@ export class GwtBoardComponent implements OnInit, OnChanges {
         componentInstance.state = currentState;
 
         fromPromise(this.endedDialog.result).subscribe({
+          error: () => this.endedDialog = null,
           complete: () => this.endedDialog = null
         });
       }
