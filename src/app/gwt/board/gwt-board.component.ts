@@ -132,7 +132,7 @@ export class GwtBoardComponent implements OnInit, OnChanges {
   }
 
   private stateChanged(currentState: State, previousState: State) {
-    if (currentState.player
+    if (!previousState && currentState.player
       && !currentState.trail.playerLocations[currentState.player.player.color]
       && !this.audioService.isPlayingMusic) {
       // Before player did first move
