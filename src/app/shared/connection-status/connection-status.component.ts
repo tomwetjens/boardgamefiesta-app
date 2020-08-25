@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {EventService} from '../../event.service';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-connection-status',
   templateUrl: './connection-status.component.html',
   styleUrls: ['./connection-status.component.scss']
 })
-export class ConnectionStatusComponent implements OnInit {
+export class ConnectionStatusComponent {
 
-  constructor(public eventService: EventService) { }
+  @Input() connected: boolean;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
 }

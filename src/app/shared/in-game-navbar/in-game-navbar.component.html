@@ -61,7 +61,7 @@
           </svg>
         </button>
 
-        <app-connection-status class="d-none d-md-inline-block"></app-connection-status>
+        <app-connection-status [connected]="connected$ | async" class="d-none d-md-inline-block"></app-connection-status>
 
         <app-in-game-menu [table]="table"></app-in-game-menu>
       </div>

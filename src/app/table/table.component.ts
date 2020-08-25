@@ -73,7 +73,7 @@ export class TableComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.eventService.events
+    this.tableService.events$
       .pipe(
         takeUntil(this.destroyed),
         withLatestFrom(this.table),

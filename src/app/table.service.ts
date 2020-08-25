@@ -1,14 +1,27 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, LogEntry, Table, TableStatus} from './shared/model';
-import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
+import {CreateTableRequest, Event, LogEntry, Table, TableStatus} from './shared/model';
+import {BehaviorSubject, combineLatest, Observable, ReplaySubject, throwError} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
-import {concatMap, distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap} from "rxjs/operators";
-import {EventService} from "./event.service";
+import {
+  catchError,
+  concatMap,
+  distinctUntilChanged,
+  filter,
+  map,
+  retry,
+  shareReplay,
+  startWith,
+  switchMap,
+  tap,
+  share
+} from "rxjs/operators";
 import {fromArray} from "rxjs/internal/observable/fromArray";
 import {AuthService} from "./auth.service";
 import {State} from "./gwt/model";
+import {webSocket} from "rxjs/webSocket";
+import {EventService} from "./event.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +32,10 @@ export class TableService {
   private _refreshState = new BehaviorSubject(true);
   private _refreshMyActiveTables = new BehaviorSubject(true);
   private _id = new ReplaySubject<string>(1);
+  private _connectedCount = 0;
 
+  events$: Observable<Event>;
+  connected$ = new BehaviorSubject<boolean>(false);
   table$: Observable<Table>;
   state$: Observable<any>;
   log$: Observable<LogEntry>;
@@ -28,12 +44,43 @@ export class TableService {
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
               private eventService: EventService) {
+    this.events$ = combineLatest([
+      this.authService.token.pipe(distinctUntilChanged()),
+      this._id.pipe(distinctUntilChanged())
+    ]).pipe(
+      switchMap(([token, id]) => webSocket({
+        url: environment.wsBaseUrl + '/tables/' + id + '/events?token=' + token,
+        openObserver: {
+          next: () => {
+            console.log('Connected to table');
+            this._connectedCount++;
+            this.connected$.next(this._connectedCount > 0);
+          }
+        },
+        closeObserver: {
+          next: () => {
+            console.log('Disconnected from table');
+            this._connectedCount = Math.max(0, this._connectedCount - 1);
+            this.connected$.next(this._connectedCount > 0);
+          }
+        }
+      }).pipe(retry())),
+      catchError(err => {
+        console.error('Error connecting to table', err);
+        this._connectedCount = Math.max(0, this._connectedCount - 1);
+        this.connected$.next(this._connectedCount > 0);
+        return throwError(err);
+      }),
+      map(msg => msg as Event),
+      tap(event => console.log('Table event:', event)),
+      share());
+
     this.table$ = this._id.pipe(
       distinctUntilChanged(),
       switchMap(id => {
         return combineLatest([
           this._refresh,
-          this.eventsForTable(id),
+          this.events$.pipe(startWith({})),
           this.reconnected()
         ]).pipe(
           switchMap(() => this.get(id)),
@@ -49,7 +96,7 @@ export class TableService {
       switchMap(table => {
         return combineLatest([
           this._refreshState,
-          this.eventsForTable(table.id),
+          this.events$.pipe(startWith({})),
           this.reconnected()
         ]).pipe(
           switchMap(() => this.getState(table.id)),
@@ -64,7 +111,7 @@ export class TableService {
       switchMap(id => {
         let lastRequestedDate = new Date(0);
         return combineLatest([
-          this.eventsForTable(id),
+          this.events$.pipe(startWith({})),
           this.reconnected()
         ]).pipe(
           map(() => lastRequestedDate),
@@ -95,16 +142,10 @@ export class TableService {
   }
 
   private reconnected() {
-    return this.eventService.connected.pipe(
+    return this.connected$.pipe(
       distinctUntilChanged(),
       filter(connected => connected),
       startWith(true));
-  }
-
-  private eventsForTable(id: string) {
-    return this.eventService.events.pipe(
-      filter(event => event.tableId === id),
-      startWith({}));
   }
 
   load(id: string) {

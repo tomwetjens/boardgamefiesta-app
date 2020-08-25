@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {UserService} from '../user.service';
+import {Component} from '@angular/core';
+import {Observable} from "rxjs";
+import {EventService} from "../event.service";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor() { }
+  connected$: Observable<boolean>;
 
-  ngOnInit(): void {
+  constructor(private eventService: EventService) {
+    this.connected$ = eventService.connected;
   }
 
 }

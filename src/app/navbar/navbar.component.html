@@ -12,8 +12,7 @@
 
   <div class="form-inline my-2">
 
-    <app-connection-status></app-connection-status>
-
+    <app-connection-status [connected]="connected$ | async"></app-connection-status>
 
     <app-user-menu></app-user-menu>
   </div>

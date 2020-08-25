@@ -1,4 +1,4 @@
-<ng-container *ngIf="(eventService.connected | async) as connected; else loading">
+<ng-container *ngIf="connected; else loading">
   <strong [title]="(connected ? 'connected' : 'connecting')|translate">
     <svg class="bi" [class]="connected ? 'text-success' : 'text-warning'" width="16" height="16" fill="currentColor">
       <use xlink:href="/assets/bootstrap-icons.svg#circle-fill"/>
