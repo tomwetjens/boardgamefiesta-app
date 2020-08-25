@@ -1,5 +1,9 @@
 {
   "gwt": {
+    "bidding": {
+      "position": "#{{position}}",
+      "placeBid": "Bied {{points}}p"
+    },
     "buildingsDialog": "Beschikbare gebouwen",
     "objectivesDialog": "Doelen en tegels",
     "discardPileDialog": "Aflegstapel",
@@ -88,6 +92,7 @@
       "SKIP": "slaat een actie over",
       "BEGIN_TURN": "is nu aan de beurt",
       "END_TURN": "beëindigt beurt",
+      "PLAYER_ORDER": "is speler #{{value1}} en krijgt {{value2}} dollar",
       "EVERY_OTHER_PLAYER_HAS_1_TURN": "elke andere speler heeft nog 1 beurt",
       "GAINS_JOB_MARKET_TOKEN": "ontvangt het arbeidsmarkt schijfje",
       "PAY_FEE_PLAYER": "betaalt {{value1}} dollar aan {{value2}}",
@@ -108,6 +113,7 @@
       "FILL_UP_CATTLE_MARKET": "vult de rundermarkt aan",
       "action": {
         "APPOINT_STATION_MASTER": "benoemt {{value1}} tot stationschef en ontvangt {{value2}}",
+        "PLACE_BID": "biedt {{value1}}p om speler #{{value2}} te worden",
         "BUY_CATTLE": "koopt een {{value2}} ({{value3}}p) voor {{value1}} dollar en {{value4}} cowboys",
         "BUY_2_CATTLE": "koopt een {{value2}} ({{value3}}p) en een {{value4}} ({{value5}}p) voor {{value1}} dollar en {{value6}} cowboys",
         "DELIVER_TO_CITY": "levert aan {{value1}} met {{value2}} certificaten en ontvangt {{value3}} dollar",
@@ -220,7 +226,6 @@
         "SAN_DIEGO": "San Diego",
         "SACRAMENTO": "Sacramento",
         "SAN_FRANCISCO": "San Francisco",
-
         "TEEPEE-1": "Tipi 1",
         "TEEPEE-2": "Tipi 2",
         "TEEPEE-4": "Tipi 4",
@@ -248,7 +253,6 @@
         "DROUGHT-4": "Droogte 4",
         "DROUGHT-RISK-1": "Droogte Risico",
         "START": "Start",
-
         "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Permanent certificaat + 3 punten per 2 certificaten",
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Permanent certificaat + 3 punten per 2 rampen",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificaat + 3 points per tipipaar",
@@ -259,6 +263,7 @@
     "actions": {
       "instructions": {
         "APPOINT_STATION_MASTER": "Benoem stationschef",
+        "PLACE_BID": "Breng een bod uit om de spelersvolgorde te bepalen",
         "BUY_CATTLE": "Kies runderkaarten om te kopen",
         "DELIVER_TO_CITY": "Lever aan een stad",
         "DISCARD_CARD": "Leg een kaart af",
@@ -319,6 +324,7 @@
       },
       "buttons": {
         "APPOINT_STATION_MASTER": "Benoem stationschef",
+        "PLACE_BID": "Bied op spelersvolgorde",
         "BUY_CATTLE": "Koop runderkaarten",
         "DELIVER_TO_CITY": "Lever aan een stad",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "Leg 1 Black Angus voor 2 certificaten",
@@ -400,6 +406,7 @@
       },
       "descriptions": {
         "none": "geen extra actie",
+        "PLACE_BID": "Breng een bod uit om de spelersvolgorde te bepalen",
         "APPOINT_STATION_MASTER": "Benoem stationschef",
         "BUY_CATTLE": "Kies één runderkaart of een paar uit de rundermarkt om te kopen",
         "DELIVER_TO_CITY": "Lever aan een stad",
@@ -490,6 +497,7 @@
     },
     "score": {
       "total": "Score",
+      "BID": "Spelervolgorde bod",
       "DOLLARS": "Dollars",
       "CATTLE_CARDS": "Runderkaarten",
       "OBJECTIVE_CARDS": "Doelkaarten",
@@ -564,7 +572,8 @@
       "NO_SUCH_PLAYER": "Speler bestaat niet.",
       "WORKER_NOT_AVAILABLE": "Deze werker is niet beschikbaar.",
       "LOCATION_NOT_ADJACENT": "De locatie moet direct grenzen aan je huidige locatie.",
-      "MUST_START_ON_NEUTRAL_BUILDING": "Je moet beginnen op een neutraal gebouw."
+      "MUST_START_ON_NEUTRAL_BUILDING": "Je moet beginnen op een neutraal gebouw.",
+      "BID_TOO_LOW": "Je bod is te laag."
     }
   }
 }

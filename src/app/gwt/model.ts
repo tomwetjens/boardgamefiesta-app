@@ -35,6 +35,7 @@ export interface CattleMarket {
 
 export enum ActionType {
   APPOINT_STATION_MASTER = 'APPOINT_STATION_MASTER',
+  PLACE_BID = 'PLACE_BID',
   BUY_CATTLE = 'BUY_CATTLE',
   DELIVER_TO_CITY = 'DELIVER_TO_CITY',
   DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES = 'DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES',
@@ -337,7 +338,22 @@ export interface ObjectiveCards {
   readonly drawStackSize: number;
 }
 
+export enum Status {
+  BIDDING = 'BIDDING',
+  STARTED = 'STARTED',
+  ENDED = 'ENDED'
+}
+
+export interface Bid {
+  player: string;
+  position?: number;
+  points?: number;
+}
+
 export interface State {
+  readonly status: Status;
+  readonly startingObjectiveCards: ObjectiveCard[];
+  readonly bids: Bid[];
   readonly player?: PlayerState;
   readonly currentPlayer: Player;
   readonly actions: ActionType[];

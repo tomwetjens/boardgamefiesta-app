@@ -27,6 +27,7 @@ import {GwtComponent} from './gwt/gwt.component';
 import {GwtProvider} from "./gwt.provider";
 import en from "./locale/en.json";
 import nl from "./locale/nl.json";
+import {BiddingComponent} from './bidding/bidding.component';
 
 const routes: Routes = [
   {
@@ -54,7 +55,8 @@ const routes: Routes = [
     TrailComponent,
     DrawStackDialogComponent,
     BuyCattleDialogComponent,
-    GwtComponent
+    GwtComponent,
+    BiddingComponent
   ],
   imports: [
     CommonModule,

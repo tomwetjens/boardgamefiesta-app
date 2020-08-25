@@ -7,7 +7,7 @@
 </app-in-game-navbar>
 
 <div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
-  <ng-container *ngIf="table.turn && !selectedAction">
+  <div class="actions" *ngIf="table.turn && !selectedAction">
     <button *ngFor="let action of state.actions"
             class="btn btn-primary text-nowrap" (click)="selectAction(action)"
             [disabled]="busy"
@@ -17,17 +17,23 @@
             container="body">
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
-  </ng-container>
+  </div>
 
-  <ng-container *ngIf="table.turn && selectedAction">
-    {{table.game + '.actions.instructions.' + selectedAction | translate}}
+  <p *ngIf="table.turn && selectedAction" class="instruction">
+    <span>{{table.game + '.actions.instructions.' + selectedAction | translate}}</span>
 
     <button *ngIf="state.actions.length > 1"
             class="btn btn-primary"
             (click)="selectedAction = null">
       {{'cancel'|translate}}
     </button>
-  </ng-container>
+  </p>
+
+  <gwt-bidding *ngIf="state.status === 'BIDDING'"
+               [table]="table"
+               [state]="state"
+               (perform)="perform.emit($event)">
+  </gwt-bidding>
 </div>
 
 <div class="row no-gutters align-items-start">

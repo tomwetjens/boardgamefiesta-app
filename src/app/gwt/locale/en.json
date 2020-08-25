@@ -1,5 +1,9 @@
 {
   "gwt": {
+    "bidding": {
+      "position": "#{{position}}",
+      "placeBid": "Bid {{points}} VP"
+    },
     "buildingsDialog": "Available Buildings",
     "objectivesDialog": "Objectives and Tiles",
     "discardPileDialog": "Discard Pile",
@@ -86,8 +90,9 @@
     },
     "log": {
       "SKIP": "skips an action",
-      "BEGIN_TURN": "begin turn",
+      "BEGIN_TURN": "begins turn",
       "END_TURN": "ends turn",
+      "PLAYER_ORDER": "is player #{{value1}} and gets ${{value2}}",
       "EVERY_OTHER_PLAYER_HAS_1_TURN": "every other player has 1 more turn",
       "GAINS_JOB_MARKET_TOKEN": "gains the job market token",
       "PAY_FEE_PLAYER": "pays a fee of ${{value1}} to {{value2}}",
@@ -108,6 +113,7 @@
       "FILL_UP_CATTLE_MARKET": "cattle market is filled up",
       "action": {
         "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives {{value2}}",
+        "PLACE_BID": "bids {{value1}} VP to be player #{{value2}}",
         "BUY_CATTLE": "buys a {{value2}} ({{value3}}VP) for ${{value1}} and {{value4}} cowboys",
         "BUY_2_CATTLE": "buys a {{value2}} ({{value3}}VP) and a {{value4}} ({{value5}}VP) for ${{value1}} and {{value6}} cowboys",
         "DELIVER_TO_CITY": "delivers to {{value1}} spending {{value2}} certificates, receiving ${{value3}}",
@@ -264,6 +270,7 @@
     "actions": {
       "instructions": {
         "APPOINT_STATION_MASTER": "Appoint a station master",
+        "PLACE_BID": "Place your VP bid for turn order",
         "BUY_CATTLE": "Pick one cattle card or a pair from the cattle market",
         "DELIVER_TO_CITY": "Deliver to a city",
         "DISCARD_CARD": "Discard a card",
@@ -324,6 +331,7 @@
       },
       "buttons": {
         "APPOINT_STATION_MASTER": "Appoint a station master",
+        "PLACE_BID": "Bid VP for turn order",
         "BUY_CATTLE": "Buy one or more cattle cards",
         "DELIVER_TO_CITY": "Deliver to a city",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "Discard 1 Black Angus to gain 2 certificates",
@@ -406,6 +414,7 @@
       "descriptions": {
         "none": "do nothing",
         "APPOINT_STATION_MASTER": "Appoint a station master",
+        "PLACE_BID": "Place your VP bid for turn order",
         "BUY_CATTLE": "Buy one or more cattle cards",
         "DELIVER_TO_CITY": "Deliver to a city",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "Discard 1 Black Angus to gain 2 certificates",
@@ -495,6 +504,7 @@
     },
     "score": {
       "total": "Score",
+      "BID": "Turn Order bid",
       "DOLLARS": "Dollars",
       "CATTLE_CARDS": "Cattle Cards",
       "OBJECTIVE_CARDS": "Objective Cards",
@@ -569,7 +579,8 @@
       "NO_SUCH_PLAYER": "This player does not exist.",
       "WORKER_NOT_AVAILABLE": "This worker is not available.",
       "LOCATION_NOT_ADJACENT": "This location is not adjacent to your current location.",
-      "MUST_START_ON_NEUTRAL_BUILDING": "You must start on a neutral building."
+      "MUST_START_ON_NEUTRAL_BUILDING": "You must start on a neutral building.",
+      "BID_TOO_LOW": "Your bid is too low."
     }
   }
 }

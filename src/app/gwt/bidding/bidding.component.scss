@@ -1,0 +1,115 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.turn-order {
+  width: max-content;
+  margin: 8px auto;
+
+  .place {
+    display: inline-block;
+    text-align: center;
+    margin: 0 4px 2px 4px;
+
+    .header {
+      font-weight: bold;
+    }
+  }
+}
+
+table,th,td {
+  border: 1px solid red;
+}
+
+.spots {
+  width: 100%;
+
+  .place {
+    font-weight: bold;
+
+    text-wrap: none;
+  }
+
+  .bid {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 4px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-collapse: separate;
+  }
+
+  .col {
+    padding: 4px;
+    &.place {
+      text-align: right;
+    }
+  }
+
+  .row {
+    margin: 4px 0;
+
+    .header {
+      display: flex;
+      align-items: center;
+      width: 60px;
+    }
+
+    &.position {
+      background-color: lightgrey;
+      border-radius: 0.25rem;
+    }
+
+    .header {
+      .position {
+        display: inline-block;
+      }
+
+      app-card {
+        display: inline-block;
+        width: 40px;
+        height: 62px;
+      }
+    }
+  }
+
+  .points {
+    font-weight: bold;
+    background-image: url('../../../assets/games/gwt/icons/vp.png');
+    background-size: cover;
+    width: 33px;
+    height: 36px;
+    text-align: center;
+    color: red;
+    line-height: 36px;
+    font-size: 14px;
+    margin: auto;
+  }
+
+  .marker {
+    width: 40px;
+
+    &.BLUE {
+      fill: blue;
+    }
+
+    &.RED {
+      fill: red;
+    }
+
+    &.YELLOW {
+      fill: yellow;
+    }
+
+    &.WHITE {
+      fill: #d9d9d9;
+    }
+
+    &.GREEN {
+      fill: green;
+    }
+  }
+
+}

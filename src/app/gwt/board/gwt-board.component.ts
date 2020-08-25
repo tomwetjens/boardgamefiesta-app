@@ -9,6 +9,7 @@ import {OPENING_MUSIC, SOUNDS} from '../sounds';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
 
 const AUTO_SELECTED_ACTIONS = [
+  ActionType.PLACE_BID,
   ActionType.MOVE,
   ActionType.DISCARD_CARD,
   ActionType.CHOOSE_FORESIGHTS,

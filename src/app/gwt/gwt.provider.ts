@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {GameProvider, Options} from "../shared/api";
 import {TranslateService} from "@ngx-translate/core";
 import {LogEntry, Table, TablePlayer, User} from "../shared/model";
-import {Buildings} from "./model";
+import {Buildings, PlayerOrder} from "./model";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ import {Buildings} from "./model";
 export class GwtProvider implements GameProvider {
 
   options: Options = {
-    buildings: {values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED}
-    // playerOrder: {values: ['RANDOMIZED', 'BIDDING'], defaultValue: 'BIDDING'}
+    buildings: {values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
+    playerOrder: {values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED}
   };
 
   constructor(private translateService: TranslateService) {

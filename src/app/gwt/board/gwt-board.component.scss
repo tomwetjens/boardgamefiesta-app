@@ -22,10 +22,18 @@ app-objective-cards {
   .btn {
     margin: 2px;
   }
-}
 
-.actions {
-  button {
-    margin: 4px;
+  .instruction {
+    text-align: center;
+  }
+
+  .actions {
+    text-align: center;
+
+    button {
+      margin: 4px;
+    }
   }
 }
+
+

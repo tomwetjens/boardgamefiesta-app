@@ -1,0 +1,38 @@
+<div class="container spots">
+  <div class="row">
+    <div class="header"></div>
+    <div *ngFor="let points of columns" class="col">
+      <div class="points">
+        {{-points}}
+      </div>
+    </div>
+  </div>
+  <div class="row position" *ngFor="let row of rows">
+    <div class="header">
+      <span class="position text-dark">
+        {{'gwt.bidding.position'|translate:{position: row.position + 1} }}
+      </span>
+      <app-card [card]="state.startingObjectiveCards[row.position]"></app-card>
+    </div>
+    <div class="col" *ngFor="let cell of row.cells">
+      <div class="bid">
+        <button *ngIf="canSelectSpot(row.position, cell)" class="btn btn-primary"
+         (click)="placeBid(row.position, cell)">
+          {{'gwt.bidding.placeBid'|translate:{points: -cell.points, position: row.position + 1} }}
+        </button>
+        <ng-container *ngFor="let player of cell.players">
+          <svg class="marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"
+               [ngClass]="table.players[player].color">
+            <g transform="translate(0,2) scale(1.2)">
+              <g transform="translate(-71.198 -212.35)">
+                <path
+                  d="m90.485 223.21c0-0.0136-0.27529 0-0.27529 0v0.7192c0 0.0931-0.0652 0.17013-0.14562 0.17013h-1.4702c-0.0804 0-0.1456-0.0763-0.1456-0.17013v-0.83213h-0.5536c-0.52861 2.1939-2.8953 1.7353-3.2107 0h-0.74014c-0.5286 2.1939-2.8954 1.7353-3.2107 0h-0.74016c-0.52867 2.1939-2.8954 1.7354-3.2107 0h-5.5846v-1.2616h1.3492v-5.3665h2.7767v-2.0146h-1.2477v-0.91443h6.5318v2.3576h1.7803s-5.55e-4 0-5.55e-4 -0.0136v-1.2284c0-0.13437 0.09299-0.24312 0.20799-0.24312h0.81325c0.11484 0 0.20806 0.10907 0.20806 0.24312v1.2284s-5.56e-4 0-5.56e-4 0.0136h1.2606l0.01522-1.6504c0.27522-0.96451 1.6972-0.94307 2.0091 0l-0.0152 1.6504h2.2965v-3.5437h1.5045v3.5295h0.99813l0.0463 0.0899 5.55e-4 0.45058c0.264 0.51048 0.41651 1.1085 0.41651 1.7481 0 0.63503-0.15002 1.2291-0.41041 1.737l5.56e-4 0.33482h2.0305v1.5941h1.3426v1.2617h-2.0926c1e-3 0.0293 3e-3 0.0585 3e-3 0.0878-0.0375 1.7036-2.4523 2.0334-2.537 0.0225z"/>
+              </g>
+            </g>
+          </svg>
+          <app-player-name class="d-none d-md-block" [player]="table.players[player]"></app-player-name>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
