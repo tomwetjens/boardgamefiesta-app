@@ -222,6 +222,7 @@ export enum Unlockable {
 }
 
 export enum ScoreCategory {
+  BID = 'BID',
   DOLLARS = 'DOLLARS',
   CATTLE_CARDS = 'CATTLE_CARDS',
   OBJECTIVE_CARDS = 'OBJECTIVE_CARDS',
