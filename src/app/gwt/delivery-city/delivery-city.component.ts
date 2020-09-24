@@ -37,7 +37,7 @@ export class DeliveryCityComponent implements OnInit {
     return Array(this.playerState.tempCertificates)
       .fill(0)
       .map((_, index) => index + 1)
-      .filter(temp => temp !== 5)
+      .filter(temp => this.playerState.tempCertificates !== 6 || temp !== 1) // cannot move marker from 6 to 5, only to 4
       .filter(temp => perm + temp >= this.possibleDelivery.certificates)
       .map(temp => ({perm, temp}));
   }
