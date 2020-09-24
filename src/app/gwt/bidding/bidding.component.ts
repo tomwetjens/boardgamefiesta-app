@@ -38,7 +38,9 @@ export class BiddingComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.state) {
       const playerCount = (!!this.state.currentPlayer ? 1 : 0) + this.state.otherPlayers.length;
-      const max = Math.max(...this.state.bids.map(bid => bid.points)) || 0;
+      const max = this.state.bids
+        .map(bid => bid.points || 0)
+        .reduce((prev, cur) => Math.max(prev, cur), 0);
 
       this.columns = Array(Math.max(6, max + playerCount)).fill(null).map((_, index) => index);
 
