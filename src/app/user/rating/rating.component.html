@@ -20,7 +20,8 @@
         </ng-template>
         <app-rating [rating]="rating.rating"
                     [ngbPopover]="ratingDetailsPopover"
-                    triggers="mouseenter:mouseleave"
+                    triggers="mouseenter"
+                    autoClose="outside"
                     container="body">>
         </app-rating>
       </td>

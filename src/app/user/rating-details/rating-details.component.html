@@ -12,9 +12,12 @@
         <app-user-name [user]="delta.user"></app-user-name>
       </td>
       <td>
-        {{delta.delta | number: '1.0-0'}}
+        {{delta.delta | number: '1.0-1'}}
       </td>
     </tr>
     </tbody>
   </table>
+  <a [routerLink]="['/', rating.gameId, rating.tableId]">
+    View table
+  </a>
 </div>

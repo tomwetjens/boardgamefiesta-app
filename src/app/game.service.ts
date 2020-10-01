@@ -6,6 +6,7 @@ import {environment} from "../environments/environment";
 
 export interface Ranking {
   user: User;
+  rating: number;
 }
 
 @Injectable({

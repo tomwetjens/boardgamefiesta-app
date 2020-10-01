@@ -1,7 +1,17 @@
-<ol>
-  <li *ngFor="let ranking of ranking$ | async">
-    <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
-      <app-user-name [user]="ranking.user"></app-user-name>
-    </a>
-  </li>
-</ol>
+<table>
+  <tbody>
+  <tr *ngFor="let ranking of ranking$ | async; index as index">
+    <td>
+      {{(index + 1)}}.
+    </td>
+    <td>
+      <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
+        <app-user-name [user]="ranking.user"></app-user-name>
+      </a>
+    </td>
+    <td>
+      <app-rating [rating]="ranking.rating"></app-rating>
+    </td>
+  </tr>
+  </tbody>
+</table>
