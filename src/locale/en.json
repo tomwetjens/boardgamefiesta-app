@@ -31,6 +31,7 @@
     "profile": "Profile"
   },
   "profile": {
+    "avatar": "Avatar",
     "about": "About me",
     "preferences": "Preferences",
     "username": "Username",

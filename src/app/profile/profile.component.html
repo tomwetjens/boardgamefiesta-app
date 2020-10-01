@@ -5,8 +5,18 @@
       <ng-template ngbNavContent>
         <form>
           <div class="form-group">
+            <label for="avatar">{{'profile.avatar'|translate}}</label>
+            <div id="avatar">
+              <app-avatar [user]="user"></app-avatar>
+              You can upload and change your avatar on <a href="https://gravatar.com">Gravatar.com</a>.<br/>
+              Just use the same e-mail address and it will appear automatically!
+            </div>
+          </div>
+
+          <div class="form-group">
             <label for="username">{{'profile.username'|translate}}</label>
-            <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" required readonly>
+            <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" required
+                   readonly>
           </div>
 
           <div class="form-group">
@@ -16,7 +26,8 @@
 
           <div class="form-group">
             <label for="location">{{'profile.location'|translate}}</label>
-            <app-location-selector id="location" [value]="user.location" (changeLocation)="changeLocation(user, $event)"></app-location-selector>
+            <app-location-selector id="location" [value]="user.location"
+                                   (changeLocation)="changeLocation(user, $event)"></app-location-selector>
           </div>
         </form>
       </ng-template>
@@ -27,7 +38,8 @@
         <form>
           <div class="form-group">
             <label for="language">{{'profile.language'|translate}}</label>
-            <app-language-selector id="language" [value]="user.language" (changeLanguage)="changeLanguage(user, $event)"></app-language-selector>
+            <app-language-selector id="language" [value]="user.language"
+                                   (changeLanguage)="changeLanguage(user, $event)"></app-language-selector>
           </div>
         </form>
       </ng-template>
