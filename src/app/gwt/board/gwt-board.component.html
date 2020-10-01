@@ -17,6 +17,10 @@
             container="body">
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
+
+    <span *ngIf="!state.actions?.length">
+      {{table.game + '.endTurn'|translate}}
+    </span>
   </div>
 
   <p *ngIf="table.turn && selectedAction" class="instruction">

@@ -24,6 +24,7 @@
       "buy": "Buy cattle cards"
     },
     "buyCattleDialog": "Buy cattle cards",
+    "endTurn": "There are no more actions you can perform. End your turn if you are all set.",
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",

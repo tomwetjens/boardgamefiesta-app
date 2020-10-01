@@ -24,6 +24,7 @@
       "buy": "Koop runderkaarten"
     },
     "buyCattleDialog": "Koop runderkaarten",
+    "endTurn": "Je kunt geen andere acties meer uitvoeren. Beëindig je beurt als je klaar bent.",
     "popover": {
       "balance": "Dollars die de speler op dit moment heeft.",
       "handValue": "De totale fokwaarde van de verschillende soorten runderkaarten die je in je hand hebt is je handwaarde. Elke soort runderkaart wordt maar één keer geteld, ongeacht hoeveel runderkaarten van die soort je in je hand hebt.",
