@@ -1,4 +1,4 @@
-<div class="container" *ngIf="game | async as game">
+<div class="container" *ngIf="game$ | async as game">
   <div class="jumbotron">
     <h5>{{'game.' + game.id + '.name'|translate}}</h5>
     <hr class="my-4">
@@ -41,10 +41,12 @@
       </ng-template>
     </ngb-carousel>
 
-    <h2>Top 10 Players</h2>
-    <p>
-      <app-ranking [gameId]="game.id"></app-ranking>
-    </p>
+    <ng-container *ngIf="loggedIn$ | async">
+      <h2>Top 10 Players</h2>
+      <p>
+        <app-ranking [gameId]="game.id"></app-ranking>
+      </p>
+    </ng-container>
 
     <h2>Rules</h2>
     <p>To be described.</p>

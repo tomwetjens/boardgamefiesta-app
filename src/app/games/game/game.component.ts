@@ -6,6 +6,7 @@ import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {Observable} from "rxjs";
 import {map, switchMap} from "rxjs/operators";
+import {AuthService} from "../../auth.service";
 
 interface Game {
   readonly id: string;
@@ -18,20 +19,24 @@ interface Game {
 })
 export class GameComponent implements OnInit {
 
-  game: Observable<Game>;
+  game$: Observable<Game>;
+  loggedIn$: Observable<boolean>;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private title: Title,
+              private authService: AuthService,
               private translateService: TranslateService,
               private tableService: TableService) {
   }
 
   ngOnInit(): void {
-    this.game = this.route.params
+    this.loggedIn$ = this.authService.loggedIn.asObservable();
+
+    this.game$ = this.route.params
       .pipe(map(params => ({id: params.id})));
 
-    this.game.subscribe(game => {
+    this.game$.subscribe(game => {
       const name = this.translateService.instant('game.' + game.id + '.name');
       if (name) {
         this.title.setTitle(name);
