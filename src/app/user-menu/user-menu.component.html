@@ -3,7 +3,7 @@
     <app-avatar [user]="user" [shadow]="true"></app-avatar>
   </button>
   <div ngbDropdownMenu aria-labelledby="userMenu" class="dropdown-menu dropdown-menu-right">
-    <button ngbDropdownItem><strong>{{user.username}}</strong></button>
+    <a [routerLink]="['/user', user.id]" ngbDropdownItem><strong>{{user.username}}</strong></a>
     <a [routerLink]="['/profile']" ngbDropdownItem>{{'user-menu.profile'|translate}}</a>
     <button ngbDropdownItem (click)="logout()">{{'logout'|translate}}</button>
   </div>

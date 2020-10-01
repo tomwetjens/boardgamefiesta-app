@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from './shared/model';
+import {Table, User} from './shared/model';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
@@ -60,5 +60,9 @@ export class UserService {
   getRating(userId: string, tableId: string): Observable<Rating> {
     return this.httpClient.get<Rating[]>(environment.apiBaseUrl + '/users/' + userId + '/ratings', {params: {tableId}})
       .pipe(map(response => response[0]));
+  }
+
+  getTables(userId: string): Observable<Table[]> {
+    return this.httpClient.get<Table[]>(environment.apiBaseUrl + '/users/' + userId + '/tables');
   }
 }

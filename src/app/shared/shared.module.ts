@@ -20,6 +20,7 @@ import {LogComponent} from './log/log.component';
 import {InGameMenuComponent} from './in-game-menu/in-game-menu.component';
 import {InGamePlayerComponent} from './in-game-player/in-game-player.component';
 import {LocationIconComponent} from './location-icon/location-icon.component';
+import { TableSummaryComponent } from './table-summary/table-summary.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {LocationIconComponent} from './location-icon/location-icon.component';
     LogComponent,
     InGameMenuComponent,
     InGamePlayerComponent,
-    LocationIconComponent
+    LocationIconComponent,
+    TableSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -47,21 +49,22 @@ import {LocationIconComponent} from './location-icon/location-icon.component';
     RouterModule,
     TranslateModule.forChild()
   ],
-  exports: [
-    AvatarComponent,
-    ConnectionStatusComponent,
-    MessageDialogComponent,
-    PlayerNameComponent,
-    InGameNavbarComponent,
-    UserNameComponent,
-    RatingComponent,
-    FromNowPipe,
-    AgoPipe,
-    MomentPipe,
-    LogComponent,
-    InGamePlayerComponent,
-    LocationIconComponent
-  ]
+    exports: [
+        AvatarComponent,
+        ConnectionStatusComponent,
+        MessageDialogComponent,
+        PlayerNameComponent,
+        InGameNavbarComponent,
+        UserNameComponent,
+        RatingComponent,
+        FromNowPipe,
+        AgoPipe,
+        MomentPipe,
+        LogComponent,
+        InGamePlayerComponent,
+        LocationIconComponent,
+        TableSummaryComponent
+    ]
 })
 export class SharedModule {
 }

@@ -1,0 +1,17 @@
+<div class="container" *ngIf="user$ | async as user">
+
+  <h1><app-avatar [user]="user"></app-avatar> {{user.username}}</h1>
+
+  <p *ngIf="user.location">
+    {{'location'|translate}}: <app-location-icon [location]="user.location"></app-location-icon>
+  </p>
+
+  <p>
+    {{'language'|translate}}: {{user.language}}
+  </p>
+
+  <h2>Recent activity</h2>
+  <div *ngFor="let table of tables$ | async">
+    <app-table-summary [table]="table"></app-table-summary>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<strong>{{'game.' + table.game + '.name' | translate}}</strong>
+
+<ng-container [ngSwitch]="table.status">
+  <span *ngSwitchCase="'NEW'">
+    created at <a [routerLink]="['/',table.game, table.id]">{{table.created | date: 'long'}}</a>
+  </span>
+  <span *ngSwitchCase="'STARTED'">
+    created at <a [routerLink]="['/',table.game, table.id]">{{table.started | date: 'long'}}</a>
+  </span>
+  <span *ngSwitchCase="'ENDED'">
+    ended at <a [routerLink]="['/',table.game, table.id]">{{table.ended | date: 'long'}}</a>
+  </span>
+</ng-container>
