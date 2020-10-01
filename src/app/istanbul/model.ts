@@ -113,3 +113,10 @@ export interface Istanbul {
   readonly turn: boolean;
   readonly players: { [name: string]: PlayerState };
 }
+
+export enum LayoutType {
+  IN_ORDER = 'IN_ORDER',
+  LONG_PATHS = 'LONG_PATHS',
+  RANDOM = 'RANDOM',
+  SHORT_PATHS = 'SHORT_PATHS'
+}

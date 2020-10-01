@@ -8,31 +8,43 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {GuessDialogComponent} from './guess-dialog/guess-dialog.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {IstanbulProvider} from "./istanbul.provider";
+import en from "./locale/en.json";
+import nl from "./locale/nl.json";
+import {RouterModule, Routes} from "@angular/router";
+import {IstanbulComponent} from './istanbul/istanbul.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: IstanbulComponent
+  }
+];
 
 @NgModule({
-  declarations: [IstanbulBoardComponent, SellGoodsDialogComponent, GuessDialogComponent],
+  declarations: [
+    IstanbulBoardComponent,
+    SellGoodsDialogComponent,
+    GuessDialogComponent,
+    IstanbulComponent
+  ],
   imports: [
     CommonModule,
-    SharedModule,
-    TranslateModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    TranslateModule.forChild(),
+    RouterModule.forChild(routes),
+    SharedModule
   ],
-  exports: [
-    IstanbulBoardComponent
-  ]
+  exports: []
 })
 export class IstanbulModule {
 
-  constructor(private translateService: TranslateService) {
-    GAME_PROVIDERS['istanbul'] = {
-      options: {
-        layoutType: {
-          values: ['SHORT_PATHS', 'LONG_PATHS', 'IN_ORDER', 'RANDOM'],
-          defaultValue: 'RANDOM'
-        }
-      },
-      translate: (logEntry, table) => this.translateService.instant('istanbul.log.' + logEntry.parameters[0])
-    };
+  constructor(private provider: IstanbulProvider,
+              private translateService: TranslateService) {
+    GAME_PROVIDERS['istanbul'] = provider;
+
+    this.translateService.setTranslation('en', en, true);
+    this.translateService.setTranslation('nl', nl, true);
   }
 }

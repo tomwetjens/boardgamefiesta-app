@@ -1,8 +1,26 @@
-<app-in-game-navbar [table]="table"
-                    [canSkip]="canSkip"
-                    (skip)="skip.emit($event)"
-                    (endTurn)="endTurn.emit($event)">
-</app-in-game-navbar>
+<div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
+  <div class="actions" *ngIf="table.turn && !selectedAction">
+    <button *ngFor="let action of state.actions"
+            class="btn btn-primary text-nowrap" (click)="selectAction(action)"
+            [disabled]="busy"
+            ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
+            placement="bottom"
+            triggers="mouseenter:mouseleave"
+            container="body">
+      {{table.game + '.actions.buttons.' + action|translate}}
+    </button>
+  </div>
+
+  <p *ngIf="table.turn && selectedAction" class="instruction">
+    <span>{{table.game + '.actions.instructions.' + selectedAction | translate}}</span>
+
+    <button *ngIf="state.actions.length > 1"
+            class="btn btn-primary"
+            (click)="selectedAction = null">
+      {{'cancel'|translate}}
+    </button>
+  </p>
+</div>
 
 <div class="container-fluid">
   <div class="row no-gutters">
@@ -333,6 +351,8 @@
           <span class="rubies">{{playerState.rubies}}/6</span>
         </main>
       </app-in-game-player>
+
+      <app-log [table]="table"></app-log>
     </div>
   </div>
 </div>

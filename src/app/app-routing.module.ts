@@ -23,6 +23,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'istanbul/:tableId',
+    component: TableComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./istanbul/istanbul.module').then(m => m.IstanbulModule)
+      }
+    ]
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [

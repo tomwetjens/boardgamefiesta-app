@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange,
 import {Action, BonusCard, Caravansary, GoodsType, Istanbul, Market, MosqueTile, PlayerState} from '../model';
 import {PlayerColor, Table, TablePlayer} from '../../shared/model';
 import {TranslateService} from '@ngx-translate/core';
-import en from '../locale/en.json';
-import nl from '../locale/nl.json';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SellGoodsDialogComponent} from '../sell-goods-dialog/sell-goods-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -21,10 +19,9 @@ export class IstanbulBoardComponent implements OnInit, OnChanges {
 
   @Input() state: Istanbul;
   @Input() table: Table;
+  @Input() busy: boolean;
 
-  @Output() endTurn = new EventEmitter<void>();
   @Output() perform = new EventEmitter<any>();
-  @Output() skip = new EventEmitter<void>();
 
   selectedAction: Action;
 
@@ -41,9 +38,6 @@ export class IstanbulBoardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.translateService.setTranslation('en', en, true);
-    this.translateService.setTranslation('nl', nl, true);
-
     this.ngOnChanges({
       table: new SimpleChange(undefined, this.table, true),
       state: new SimpleChange(undefined, this.state, true)
@@ -51,10 +45,13 @@ export class IstanbulBoardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.state || changes.table) {
+    if (this.table) {
       this.player = this.table.player ? this.table.players[this.table.player] : null;
-      this.playerState = this.player ? this.state.players[this.player.color] : null;
-      this.currentPlace = this.player ? this.getCurrentPlace(this.player.color) : null;
+    }
+
+    if (this.player && this.state) {
+      this.playerState = this.state.players[this.player.color];
+      this.currentPlace = this.getCurrentPlace(this.player.color);
 
       this.autoSelectAction();
     }
@@ -87,10 +84,6 @@ export class IstanbulBoardComponent implements OnInit, OnChanges {
     } else if (this.selectedAction) {
       this.selectAction(this.selectedAction);
     }
-  }
-
-  get canSkip(): boolean {
-    return this.state.actions && this.state.actions.length > 0;
   }
 
   selectAction(action: string) {
