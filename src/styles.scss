@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "player-colors";
 
 html {
   margin: 0;
@@ -58,6 +59,7 @@ body {
 .popover {
   &.orange {
     background-color: orange;
+
     .arrow:after {
       border-top-color: orange;
     }
@@ -69,6 +71,7 @@ body {
 
   &.purple {
     background-color: purple;
+
     .arrow:after {
       border-top-color: purple;
     }
@@ -80,6 +83,7 @@ body {
 
   &.cyan {
     background-color: cyan;
+
     .arrow:after {
       border-top-color: cyan;
     }
@@ -91,6 +95,7 @@ body {
 
   &.salmon {
     background-color: salmon;
+
     .arrow:after {
       border-top-color: salmon;
     }
@@ -102,6 +107,7 @@ body {
 
   &.green {
     background-color: green;
+
     .arrow:after {
       border-top-color: green;
     }
@@ -113,6 +119,7 @@ body {
 
   &.silver {
     background-color: silver;
+
     .arrow:after {
       border-top-color: silver;
     }
@@ -155,9 +162,9 @@ body {
     background-color: darkgrey;
     color: black;
 
-    -webkit-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 18px 4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 18px 4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 18px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 18px 4px rgba(0, 0, 0, 0.75);
   }
 
   .modal-header {

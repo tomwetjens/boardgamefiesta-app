@@ -2,7 +2,7 @@
   <app-user-popover [user]="user"></app-user-popover>
 </ng-template>
 <a [routerLink]="['/user', user.id]">
-  <strong [ngbPopover]="userPopover"
+  <strong [ngbPopover]="userPopover" class="name" [class]="color"
           placement="auto"
           container="body"
           triggers="mouseenter:mouseleave hover click">

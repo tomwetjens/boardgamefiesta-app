@@ -1,4 +1,2 @@
-<span class="name" [class]="player.color">
-  <app-user-name *ngIf="player.user" [user]="player.user"></app-user-name>
-  <strong *ngIf="!player.user">{{'computer'|translate}}</strong>
-</span>
+<app-user-name *ngIf="player.user" [user]="player.user" [color]="player.color"></app-user-name>
+<strong *ngIf="!player.user" [class]="player.color">{{'computer'|translate}}</strong>

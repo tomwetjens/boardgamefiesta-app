@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../model';
+import {PlayerColor, User} from '../model';
 
 @Component({
   selector: 'app-user-name',
@@ -9,6 +9,7 @@ import {User} from '../model';
 export class UserNameComponent implements OnInit {
 
   @Input() user: User;
+  @Input() color?: PlayerColor;
 
   constructor() {
   }
