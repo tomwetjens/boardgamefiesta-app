@@ -1,9 +1,11 @@
 <ng-template #userPopover>
   <app-user-popover [user]="user"></app-user-popover>
 </ng-template>
-<strong [ngbPopover]="userPopover"
-        placement="auto"
-        container="body"
-        triggers="mouseenter:mouseleave hover click">
-  {{user.username}}
-</strong>
+<a [routerLink]="['/user', user.id]">
+  <strong [ngbPopover]="userPopover"
+          placement="auto"
+          container="body"
+          triggers="mouseenter:mouseleave hover click">
+    {{user.username}}
+  </strong>
+</a>
