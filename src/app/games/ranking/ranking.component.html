@@ -5,12 +5,12 @@
       {{(index + 1)}}.
     </td>
     <td>
-      <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
-        <app-user-name [user]="ranking.user"></app-user-name>
-      </a>
+      <app-user-name [user]="ranking.user"></app-user-name>
     </td>
     <td>
-      <app-rating [rating]="ranking.rating"></app-rating>
+      <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
+        <app-rating [rating]="ranking.rating"></app-rating>
+      </a>
     </td>
   </tr>
   </tbody>
