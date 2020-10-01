@@ -1,0 +1,30 @@
+<div class="container" *ngIf="user$ | async as user">
+  <h1>{{user.username}}</h1>
+
+  <h2>Ratings for {{'game.' + (gameId$ | async) + '.name' | translate}}</h2>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rating of ratings$ | async">
+      <td>{{rating.timestamp | date:'long'}}</td>
+      <td>
+        <ng-template #ratingDetailsPopover>
+          <user-rating-details [userId]="rating.userId"
+                               [tableId]="rating.tableId"></user-rating-details>
+        </ng-template>
+        <app-rating [rating]="rating.rating"
+                    [ngbPopover]="ratingDetailsPopover"
+                    triggers="mouseenter:mouseleave"
+                    container="body">>
+        </app-rating>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

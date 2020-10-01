@@ -1,0 +1,20 @@
+<div *ngIf="rating$ | async as rating">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Player</th>
+      <th>Delta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let delta of rating.deltas">
+      <td>
+        <app-user-name [user]="delta.user"></app-user-name>
+      </td>
+      <td>
+        {{delta.delta | number: '1.0-0'}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

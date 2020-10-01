@@ -3,8 +3,22 @@ import {User} from './shared/model';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {switchMap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {AuthService} from "./auth.service";
+
+export interface Rating {
+  userId: string;
+  gameId: string;
+  tableId: string;
+  timestamp: string;
+  rating: number;
+  deltas?: RatingDelta[];
+}
+
+export interface RatingDelta {
+  user: User;
+  delta: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +37,10 @@ export class UserService {
     }));
   }
 
+  get(id: string): Observable<User> {
+    return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + id);
+  }
+
   find(q: string): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.apiBaseUrl + '/users', {params: {q}});
   }
@@ -33,5 +51,14 @@ export class UserService {
 
   changeLanguage(id: string, language: string) {
     return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-language', {language});
+  }
+
+  getRatings(gameId: string, userId: string): Observable<Rating[]> {
+    return this.httpClient.get<Rating[]>(environment.apiBaseUrl + '/users/' + userId + '/ratings', {params: {gameId}});
+  }
+
+  getRating(userId: string, tableId: string): Observable<Rating> {
+    return this.httpClient.get<Rating[]>(environment.apiBaseUrl + '/users/' + userId + '/ratings', {params: {tableId}})
+      .pipe(map(response => response[0]));
   }
 }

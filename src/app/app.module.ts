@@ -21,7 +21,6 @@ import {AboutComponent} from './about/about.component';
 import {ContactComponent} from './contact/contact.component';
 import {LocationSelectorComponent} from './location-selector/location-selector.component';
 import {LanguageSelectorComponent} from './language-selector/language-selector.component';
-import {IstanbulModule} from './istanbul/istanbul.module';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {FaqComponent} from './faq/faq.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -56,8 +55,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     }),
     AppRoutingModule,
     NgbModule,
-    SharedModule,
-    IstanbulModule
+    SharedModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},

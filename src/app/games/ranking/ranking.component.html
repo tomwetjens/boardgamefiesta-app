@@ -1,0 +1,7 @@
+<ol>
+  <li *ngFor="let ranking of ranking$ | async">
+    <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
+      <app-user-name [user]="ranking.user"></app-user-name>
+    </a>
+  </li>
+</ol>

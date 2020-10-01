@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
       },
       {
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      },
+      {
         path: '**',
         redirectTo: ''
       }
