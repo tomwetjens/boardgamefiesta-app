@@ -1,8 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {FriendService} from "../../friend.service";
 import {User} from "../../shared/model";
-import {switchMap, takeUntil} from "rxjs/operators";
+import {map, switchMap, takeUntil} from "rxjs/operators";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SelectUserComponent} from "../../select-user/select-user.component";
 import {fromPromise} from "rxjs/internal-compatibility";
@@ -13,13 +13,14 @@ import {AuthService} from "../../auth.service";
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss']
 })
-export class FriendsComponent implements OnInit, OnDestroy {
+export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() userId: string;
 
   private destroyed = new Subject();
 
   friends$: Observable<User[]>;
+  isSelf$: Observable<boolean>;
 
   constructor(private friendService: FriendService,
               private authService: AuthService,
@@ -27,11 +28,24 @@ export class FriendsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.friends$ = this.authService.userId.pipe(
-      switchMap(currentUserId => currentUserId === this.userId
+    this.refresh();
+  }
+
+  private refresh() {
+    this.isSelf$ = this.authService.userId.pipe(
+      map(currentUserId => currentUserId === this.userId));
+
+    this.friends$ = this.isSelf$.pipe(
+      switchMap(isSelf => isSelf
         ? this.friendService.myFriends$
         : this.friendService.friends$(this.userId)),
       takeUntil(this.destroyed));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.userId) {
+      this.refresh();
+    }
   }
 
   ngOnDestroy(): void {
