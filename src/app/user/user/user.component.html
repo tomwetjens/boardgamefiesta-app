@@ -1,0 +1,22 @@
+<div class="container" *ngIf="user$ | async as user">
+
+  <h1>
+    <app-avatar [user]="user"></app-avatar>
+    {{user.username}}
+    <span *ngIf="user.location">
+      <app-location-icon [location]="user.location"></app-location-icon>
+    </span>
+  </h1>
+
+  <p *ngIf="user.language">
+    {{'language'|translate}}: {{user.language}}
+  </p>
+
+  <section>
+    <user-friends [userId]="user.id"></user-friends>
+  </section>
+
+  <section>
+    <user-activity [userId]="user.id"></user-activity>
+  </section>
+</div>

@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TableMode, TableType} from "../../shared/model";
 import {TableService} from "../../table.service";
-import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {Observable} from "rxjs";
-import {map, switchMap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {AuthService} from "../../auth.service";
+import {TitleService} from "../../title.service";
 
 interface Game {
   readonly id: string;
@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private title: Title,
+              private titleService: TitleService,
               private authService: AuthService,
               private translateService: TranslateService,
               private tableService: TableService) {
@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
     this.game$.subscribe(game => {
       const name = this.translateService.instant('game.' + game.id + '.name');
       if (name) {
-        this.title.setTitle(name);
+        this.titleService.setTitle(name);
       }
     });
   }

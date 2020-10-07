@@ -24,6 +24,7 @@ import {LanguageSelectorComponent} from './language-selector/language-selector.c
 import {PrivacyComponent} from './privacy/privacy.component';
 import {FaqComponent} from './faq/faq.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {InvitePlayerComponent} from './invite-player/invite-player.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     LocationSelectorComponent,
     LanguageSelectorComponent,
     PrivacyComponent,
-    FaqComponent
+    FaqComponent,
+    InvitePlayerComponent
   ],
   imports: [
     BrowserModule,

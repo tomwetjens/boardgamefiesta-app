@@ -1,12 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
 import {UserService} from './user.service';
 import {TranslateService} from '@ngx-translate/core';
 import moment from 'moment';
 import en from '../locale/en.json';
 import nl from '../locale/nl.json';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
               private userService: UserService,
-              private translateService: TranslateService,
-              private title: Title,
-              private router: Router) {
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -35,13 +31,6 @@ export class AppComponent implements OnInit {
         moment.locale(this.translateService.getDefaultLang());
       }
     });
-
-    this.router.events
-      .subscribe(event => {
-        // Initially set title, and restore title after navigating
-        const appName = this.translateService.instant('appName');
-        this.title.setTitle(appName);
-      });
   }
 
 }

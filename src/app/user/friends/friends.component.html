@@ -1,0 +1,17 @@
+<h2>Friends</h2>
+<button class="btn btn-primary" (click)="add()">
+  Add friend
+</button>
+<ng-container *ngIf="friends$ | async as friends; else loading">
+  <div *ngFor="let friend of friends">
+    <user-friend [friend]="friend"></user-friend>
+
+    <button class="btn btn-danger" (click)="remove(friend)">
+      Unfriend
+    </button>
+  </div>
+  <p *ngIf="friends.length === 0">No friends added yet.</p>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

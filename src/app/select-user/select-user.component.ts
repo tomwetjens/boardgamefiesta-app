@@ -29,8 +29,6 @@ export class SelectUserComponent implements OnInit {
       return;
     }
 
-    // TODO Find by email
-
     this.searching = true;
 
     this.userService.find(this.text)

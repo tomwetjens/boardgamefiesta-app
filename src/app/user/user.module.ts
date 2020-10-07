@@ -7,6 +7,9 @@ import {RatingComponent} from "./rating/rating.component";
 import {SharedModule} from "../shared/shared.module";
 import {RatingDetailsComponent} from './rating-details/rating-details.component';
 import {ActivityComponent} from './activity/activity.component';
+import {UserComponent} from './user/user.component';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendComponent } from './friend/friend.component';
 
 const routes: Routes = [
   {
@@ -14,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ActivityComponent
+        component: UserComponent
       },
       {
         path: 'rating',
@@ -28,7 +31,10 @@ const routes: Routes = [
   declarations: [
     RatingComponent,
     RatingDetailsComponent,
-    ActivityComponent
+    ActivityComponent,
+    UserComponent,
+    FriendsComponent,
+    FriendComponent
   ],
   imports: [
     CommonModule,

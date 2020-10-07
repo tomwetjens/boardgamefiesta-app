@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {webSocket} from 'rxjs/webSocket';
 import {environment} from '../environments/environment';
-import {BehaviorSubject, concat, of, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, concat, Observable, of, Subject, throwError} from 'rxjs';
 import {catchError, distinctUntilChanged, map, retry, switchMap, tap} from 'rxjs/operators';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {Event} from './shared/model';
@@ -46,5 +46,13 @@ export class EventService {
         return throwError(err);
       }))
       .subscribe(message => this.events.next(message as any));
+  }
+
+  get connected$(): Observable<boolean> {
+    return this.connected.asObservable();
+  }
+
+  get events$(): Observable<Event> {
+    return this.events.asObservable();
   }
 }

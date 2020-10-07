@@ -8,12 +8,12 @@ import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MessageDialogComponent} from '../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {SelectUserComponent} from '../select-user/select-user.component';
-import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
 import {AudioService} from '../audio.service';
 import {ToastrService} from "../toastr.service";
 import {GAME_PROVIDERS, GameProvider} from "../shared/api";
+import {InvitePlayerComponent} from "../invite-player/invite-player.component";
+import {TitleService} from "../title.service";
 
 @Component({
   selector: 'app-table',
@@ -34,7 +34,7 @@ export class TableComponent implements OnInit, OnDestroy {
               private tableService: TableService,
               private eventService: EventService,
               private ngbModal: NgbModal,
-              private title: Title,
+              private titleService: TitleService,
               private translateService: TranslateService,
               private audioService: AudioService,
               private toastrService: ToastrService) {
@@ -57,7 +57,7 @@ export class TableComponent implements OnInit, OnDestroy {
         filter(table => !!table))
       .subscribe(table => {
         const name = this.translateService.instant('game.' + table.game + '.name');
-        this.title.setTitle(name);
+        this.titleService.setTitle(name);
       }, () => this.router.navigate(['/']));
 
     this.provider$ = this.table.pipe(
@@ -153,7 +153,11 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   invite(table: Table) {
-    const ngbModalRef = this.ngbModal.open(SelectUserComponent);
+    const ngbModalRef = this.ngbModal.open(InvitePlayerComponent);
+
+    const componentInstance = ngbModalRef.componentInstance as InvitePlayerComponent;
+    componentInstance.tableId = table.id;
+
     fromPromise(ngbModalRef.result)
       .pipe(switchMap(user => this.tableService.invite(table.id, user.id)))
       .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());

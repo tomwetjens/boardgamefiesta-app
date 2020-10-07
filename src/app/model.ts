@@ -39,3 +39,7 @@ export interface ErrorResponse {
   gameId?: string;
   reasonCode?: string;
 }
+
+export interface AddFriendRequest {
+  userId: string;
+}

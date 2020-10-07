@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'invite'|translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <section>
+    <ng-container *ngIf="suggestions$ | async as suggestions">
+      <div *ngFor="let user of suggestions">
+        <app-avatar [user]="user"></app-avatar>
+        <app-user-name [user]="user"></app-user-name>
+        <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">{{'select'|translate}}</button>
+      </div>
+    </ng-container>
+  </section>
+
+  <section>
+    <h2>{{'findUser'|translate}}</h2>
+    <form>
+      <div class="form-group">
+        <label for="text">{{'usernameOrEmail'|translate}}</label>
+        <input type="text" class="form-control" id="text" required [(ngModel)]="text" name="text">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="search()">{{'search'|translate}}</button>
+    </form>
+
+    <div class="card" *ngFor="let user of users | async">
+      <div class="card-body">
+        <app-avatar [user]="user"></app-avatar>
+        <app-user-name [user]="user"></app-user-name>
+        <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">{{'select'|translate}}</button>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="modal-footer">
+</div>
