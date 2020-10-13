@@ -49,6 +49,7 @@
       "drawStack": "The stack of cards from which new cards are drawn and added to your hand. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "discardPile": "The cards that have been discarded. Whenever the draw stack runs out, any discarded cards are shuffled and this becomes the new draw stack.",
       "building": {
+        "null": "Select this location to place one of your private buildings",
         "A": "Neutral building A<br/><strong>Action:</strong> Discard 1 Guernsey cattle card and gain 2 dollars<br/><strong>Action:</strong> Hire 1 worker<br/><strong>Action:</strong> Hire 1 worker (-2$)",
         "B": "Neutral building B<br/><strong>Action:</strong> Discard 1 Dutch Belt cattle card and gain 2 dollars<br/><strong>Action:</strong> Place one of your own buildings onto a building space on the trail.",
         "C": "Neutral building C<br/><strong>Action:</strong> Move certificate marker one space forward OR gain one objective card<br/><strong>Action:</strong> Move your engine up to as many spaces forward as you have engineers.",
