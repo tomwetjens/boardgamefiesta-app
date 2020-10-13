@@ -1,3 +1,10 @@
+<ng-template #popoverA><span [innerHTML]="'gwt.popover.building.A'|translate"></span></ng-template>
+<ng-template #popoverB><span [innerHTML]="'gwt.popover.building.B'|translate"></span></ng-template>
+<ng-template #popoverC><span [innerHTML]="'gwt.popover.building.C'|translate"></span></ng-template>
+<ng-template #popoverD><span [innerHTML]="'gwt.popover.building.D'|translate"></span></ng-template>
+<ng-template #popoverE><span [innerHTML]="'gwt.popover.building.E'|translate"></span></ng-template>
+<ng-template #popoverF><span [innerHTML]="'gwt.popover.building.F'|translate"></span></ng-template>
+<ng-template #popoverG><span [innerHTML]="'gwt.popover.building.G'|translate"></span></ng-template>
 <ng-template #popoverLocationA><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('A')|translate"></span></ng-template>
 <ng-template #popoverLocationB><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('B')|translate"></span></ng-template>
 <ng-template #popoverLocationC><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('C')|translate"></span></ng-template>
@@ -531,49 +538,49 @@
     <g #neutralBuildings transform="translate(130,-133)" class="buildings">
       <g #A>
         <image href="/assets/games/gwt/a.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationA"
+               [ngbPopover]="popoverA"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #B>
         <image href="/assets/games/gwt/b.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationB"
+               [ngbPopover]="popoverB"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #C>
         <image href="/assets/games/gwt/c.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationC"
+               [ngbPopover]="popoverC"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #D>
         <image href="/assets/games/gwt/d.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationD"
+               [ngbPopover]="popoverD"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #E>
         <image href="/assets/games/gwt/e.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationE"
+               [ngbPopover]="popoverE"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #F>
         <image href="/assets/games/gwt/f.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationF"
+               [ngbPopover]="popoverF"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #G>
         <image href="/assets/games/gwt/g.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
-               [ngbPopover]="popoverLocationG"
+               [ngbPopover]="popoverG"
                placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -589,7 +596,7 @@
              [attr.x]="playerBuilding.x"
              [attr.y]="playerBuilding.y"
              [attr.href]="'/assets/games/gwt/buildings/' + playerBuilding.building.name + '_' + playerBuilding.building.player.color.toString().toLowerCase() + '.png'"
-             [ngbPopover]="popoverPlayerBuilding"
+             [ngbPopover]="popoverA"
              placement="top"
              triggers="mouseenter:mouseleave"
              container="body"/>
