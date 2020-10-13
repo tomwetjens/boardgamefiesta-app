@@ -7,10 +7,18 @@
   </button>
 </div>
 <div class="modal-body">
-  <button *ngFor="let playerBuilding of playerState.buildings"
-          [class]="'building ' + playerState.player.color.toString().toLowerCase() + '-' + playerBuilding.toLowerCase()"
-          (click)="confirm(playerBuilding)">
-  </button>
+  <ng-container *ngFor="let playerBuilding of playerState.buildings">
+    <ng-template #popover>
+      <span [innerHTML]="'gwt.popover.building.' + playerBuilding.toLowerCase()|translate"></span>
+    </ng-template>
+    <button
+      [class]="'building ' + playerState.player.color.toString().toLowerCase() + '-' + playerBuilding.toLowerCase()"
+      (click)="confirm(playerBuilding)"
+      [ngbPopover]="popover"
+      triggers="mouseenter:mouseleave"
+      container="body">
+    </button>
+  </ng-container>
 </div>
 <div class="modal-footer">
 </div>
