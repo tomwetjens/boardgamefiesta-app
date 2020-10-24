@@ -31,6 +31,7 @@ import pt from "./locale/pt.json";
 import {BiddingComponent} from './bidding/bidding.component';
 import {LocationPopoverComponent} from './location-popover/location-popover.component';
 import {BuildingPopoverComponent} from './building-popover/building-popover.component';
+import {HazardPopoverComponent} from './hazard-popover/hazard-popover.component';
 
 const routes: Routes = [
   {
@@ -61,7 +62,8 @@ const routes: Routes = [
     GwtComponent,
     BiddingComponent,
     LocationPopoverComponent,
-    BuildingPopoverComponent
+    BuildingPopoverComponent,
+    HazardPopoverComponent
   ],
   imports: [
     CommonModule,

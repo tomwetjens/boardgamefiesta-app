@@ -208,7 +208,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
 
   @ViewChild('locations') private locationsElement !: ElementRef<Element>;
   @ViewChild('buildingLocations') private buildingLocationElements !: ElementRef<Element>;
-  @ViewChild('hazardLocations') private hazardLocationElements !: ElementRef<Element>;
   @ViewChild('teepeeLocations') private teepeeLocationElements !: ElementRef<Element>;
 
   @ViewChild('red')
@@ -484,6 +483,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       fromPromise(ngbModalRef.result).subscribe(building => {
         this.perform.emit({type: this.selectedAction, location: name, building});
       });
+    } else if (HAZARD_ACTIONS.includes(this.selectedAction)) {
+      this.perform.emit({type: this.selectedAction, location: name});
     } else if (ActionType.USE_ADJACENT_BUILDING === this.selectedAction) {
       this.perform.emit({type: ActionType.USE_ADJACENT_BUILDING, location: name});
     }
@@ -499,7 +500,6 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   getLocationElement(name: string): Element | null {
     return this.locationsElement.nativeElement.children.namedItem(name) ||
       this.buildingLocationElements.nativeElement.children.namedItem(name) ||
-      this.hazardLocationElements.nativeElement.children.namedItem(name) ||
       this.teepeeLocationElements.nativeElement.children.namedItem(name);
   }
 
@@ -529,12 +529,15 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       if (playerLocation) {
         const locationElement = this.getLocationElement(playerLocation);
 
+        const locationX = locationElement.getAttribute('x');
+        const locationY = locationElement.getAttribute('y');
+
         const index = playersByLocation[playerLocation].indexOf(color as PlayerColor);
 
         element.nativeElement.setAttribute('style', 'display:block');
 
-        const x = parseInt(locationElement.getAttribute('x'), 10) + index * 12; // offset each one so they all stay visible
-        const y = locationElement.getAttribute('y');
+        const x = parseInt(locationX, 10) + index * 12; // offset each one so they all stay visible
+        const y = locationY;
 
         element.nativeElement.setAttribute('x', x);
         element.nativeElement.setAttribute('y', y);
@@ -690,6 +693,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return location && (
       (MOVE_ACTIONS.includes(this.selectedAction) && this.canMoveTo(location))
       || (BUILD_ACTIONS.includes(this.selectedAction) && this.canPlaceBuilding(location))
+      || (HAZARD_ACTIONS.includes(this.selectedAction) && !!location.hazard)
       || (this.selectedAction === ActionType.USE_ADJACENT_BUILDING && !!location.building) // TODO Only allow selecting adjacent buildings
     );
   }

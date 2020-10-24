@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Building, Trail} from "../model";
+import {Building, Location, Trail} from "../model";
 import {Table} from "../../shared/model";
 
 @Component({
@@ -11,10 +11,10 @@ export class LocationPopoverComponent implements OnInit, OnChanges {
 
   @Input() table: Table;
   @Input() trail: Trail;
-  @Input() location: string;
+  @Input() name: string;
   @Input() risk = false;
 
-  building?: Building;
+  location?: Location;
 
   constructor() {
   }
@@ -23,9 +23,8 @@ export class LocationPopoverComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.trail && this.location) {
-      const loc = this.trail.locations[this.location];
-      this.building = loc ? loc.building : undefined;
+    if (this.trail && this.name) {
+      this.location = this.trail.locations[this.name];
     }
   }
 

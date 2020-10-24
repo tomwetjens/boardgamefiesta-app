@@ -86,6 +86,11 @@
         "INDIAN-TRADE-RISK-2": "<br/><br/><strong>Risk Action:</strong> Discard 1 Jersey to move your certificate marker 1 space forward and gain 2 dollars",
         "ROCKFALL-RISK-1": "<br/><br/><strong>Risk Action:</strong> Discard a cattle card to move your certificate marker 1 space forward",
         "ROCKFALL-RISK-2": "<br/><br/><strong>Risk Action:</strong> Discard 1 Jersey to move your certificate marker 1 space forward and gain 2 dollars"
+      },
+      "hazard": {
+        "DROUGHT": "<strong>Hazard:</strong> Drought ({{points}} VP)",
+        "ROCKFALL": "<strong>Hazard:</strong> Rockfall ({{points}} VP)",
+        "FLOOD": "<strong>Hazard:</strong> Flood ({{points}} VP)"
       }
     },
     "cattleType": {
