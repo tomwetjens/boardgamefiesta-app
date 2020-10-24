@@ -19,7 +19,7 @@
     </button>
 
     <span *ngIf="!state.actions?.length">
-      {{table.game + '.endTurn'|translate}}
+      {{table.game + '.endTurn'|translate:{secs:autoEndTurnInSecs} }}
     </span>
   </div>
 

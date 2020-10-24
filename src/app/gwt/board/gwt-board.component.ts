@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Action, ActionType, PlayerState, State} from '../model';
 import {AudioService} from '../../audio.service';
 import {Table} from '../../shared/model';
@@ -7,6 +7,8 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {OPENING_MUSIC, SOUNDS} from '../sounds';
 import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
+import {interval, Subject, Subscription} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 const AUTO_SELECTED_ACTIONS = [
   ActionType.PLACE_BID,
@@ -99,9 +101,14 @@ const FREE_ACTIONS = [
   templateUrl: './gwt-board.component.html',
   styleUrls: ['./gwt-board.component.scss']
 })
-export class GwtBoardComponent implements OnInit, OnChanges {
+export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
+
+  private destroyed = new Subject();
 
   private endedDialog: NgbModalRef;
+
+  private autoEndTurnTimer: Subscription;
+  autoEndTurnInSecs: number;
 
   @Input() table: Table;
   @Input() state: State;
@@ -125,6 +132,10 @@ export class GwtBoardComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.destroyed.next(true);
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.state) {
       const currentState = changes.state.currentValue as State;
@@ -142,11 +153,19 @@ export class GwtBoardComponent implements OnInit, OnChanges {
       this.audioService.playMusic(OPENING_MUSIC);
     }
 
-    if (currentState.turn
-      && currentState.actions.length === 1
-      && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
-      this.selectedAction = currentState.actions[0];
+    if (currentState.turn) {
+      if (currentState.actions.length === 1
+        && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
+        this.selectedAction = currentState.actions[0];
+      } else if (currentState.actions.length === 0) {
+        this.selectedAction = null;
+        this.startAutoEndTurnTimer();
+      } else {
+        this.selectedAction = null;
+      }
     } else {
+      this.stopAutoEndTurnTimer();
+
       this.selectedAction = null;
     }
 
@@ -163,6 +182,29 @@ export class GwtBoardComponent implements OnInit, OnChanges {
           complete: () => this.endedDialog = null
         });
       }
+    }
+  }
+
+  private stopAutoEndTurnTimer() {
+    if (this.autoEndTurnTimer && !this.autoEndTurnTimer.closed) {
+      this.autoEndTurnTimer.unsubscribe();
+      this.autoEndTurnTimer = null;
+    }
+  }
+
+  private startAutoEndTurnTimer() {
+    if (!this.autoEndTurnTimer || this.autoEndTurnTimer.closed) {
+      this.autoEndTurnInSecs = 10;
+      this.autoEndTurnTimer = interval(1000)
+        .pipe(takeUntil(this.destroyed))
+        .subscribe(() => {
+          this.autoEndTurnInSecs--;
+          if (this.autoEndTurnInSecs === 0) {
+            this.stopAutoEndTurnTimer();
+
+            this.doEndTurn();
+          }
+        });
     }
   }
 

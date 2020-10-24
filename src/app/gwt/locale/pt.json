@@ -24,7 +24,6 @@
       "buy": "Comprar cartas de gado"
     },
     "buyCattleDialog": "Compre cartas de gado",
-    "endTurn": "Não há mais ações que você possa realizar. Encerre seu turno se estiver tudo pronto.",
     "popover": {
       "balance": "Saldo atual em dólares.",
       "handValue": "Os valores de rendimento de cada tipo diferente de gado que você tenha em mãos são contados em seu valor de rendimento total. Isso significa que cada tipo é contado apenas uma vez, não importa quantas cartas desse tipo você tenha.",
