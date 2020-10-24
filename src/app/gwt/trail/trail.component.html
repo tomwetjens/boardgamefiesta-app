@@ -1,59 +1,110 @@
-<ng-template #popoverA><span [innerHTML]="'gwt.popover.building.A'|translate"></span></ng-template>
-<ng-template #popoverB><span [innerHTML]="'gwt.popover.building.B'|translate"></span></ng-template>
-<ng-template #popoverC><span [innerHTML]="'gwt.popover.building.C'|translate"></span></ng-template>
-<ng-template #popoverD><span [innerHTML]="'gwt.popover.building.D'|translate"></span></ng-template>
-<ng-template #popoverE><span [innerHTML]="'gwt.popover.building.E'|translate"></span></ng-template>
-<ng-template #popoverF><span [innerHTML]="'gwt.popover.building.F'|translate"></span></ng-template>
-<ng-template #popoverG><span [innerHTML]="'gwt.popover.building.G'|translate"></span></ng-template>
-<ng-template #popoverLocationA><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('A')|translate"></span></ng-template>
-<ng-template #popoverLocationB><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('B')|translate"></span></ng-template>
-<ng-template #popoverLocationC><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('C')|translate"></span></ng-template>
-<ng-template #popoverLocationD><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('D')|translate"></span></ng-template>
-<ng-template #popoverLocationE><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('E')|translate"></span></ng-template>
-<ng-template #popoverLocationF><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('F')|translate"></span></ng-template>
-<ng-template #popoverLocationG><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('G')|translate"></span></ng-template>
-<ng-template #popoverLocationG1><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('G-1')|translate"></span></ng-template>
-<ng-template #popoverLocationG2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('G-2')|translate"></span></ng-template>
-<ng-template #popoverLocationA1><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('A-1')|translate"></span></ng-template>
-<ng-template #popoverLocationA2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('A-2')|translate"></span></ng-template>
-<ng-template #popoverLocationA3><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('A-3')|translate"></span></ng-template>
+<ng-template #popoverA>
+  <gwt-building-popover building="A"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverB>
+  <gwt-building-popover building="B"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverC>
+  <gwt-building-popover building="C"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverD>
+  <gwt-building-popover building="D"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverE>
+  <gwt-building-popover building="E"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverF>
+  <gwt-building-popover building="F"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverG>
+  <gwt-building-popover building="G"></gwt-building-popover>
+</ng-template>
+<ng-template #popoverLocationA>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="A"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationB>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="B"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationC>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="C"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationD>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="D"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationE>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="E"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationF>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="F"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationG>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="G"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationG1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="G-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationG2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="G-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationA1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="A-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationA2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="A-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationA3>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="A-3"></gwt-location-popover>
+</ng-template>
 <ng-template #popoverLocationFloodRisk1>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('FLOOD-RISK-1')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.FLOOD-RISK-1'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="FLOOD-RISK-1" [risk]="true"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationFloodRisk2>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('FLOOD-RISK-2')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.FLOOD-RISK-2'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="FLOOD-RISK-2" [risk]="true"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationDroughtRisk1>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('DROUGHT-RISK-1')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.DROUGHT-RISK-1'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="DROUGHT-RISK-1" [risk]="true"></gwt-location-popover>
 </ng-template>
-<ng-template #popoverLocationB1><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('B-1')|translate"></span></ng-template>
-<ng-template #popoverLocationB2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('B-2')|translate"></span></ng-template>
-<ng-template #popoverLocationB3><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('B-3')|translate"></span></ng-template>
-<ng-template #popoverLocationC11><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('C-1-1')|translate"></span></ng-template>
-<ng-template #popoverLocationC12><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('C-1-2')|translate"></span></ng-template>
-<ng-template #popoverLocationC2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('C-2')|translate"></span></ng-template>
-<ng-template #popoverLocationE1><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('E-1')|translate"></span></ng-template>
-<ng-template #popoverLocationE2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('E-2')|translate"></span></ng-template>
-<ng-template #popoverLocationF1><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('F-1')|translate"></span></ng-template>
-<ng-template #popoverLocationF2><span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('F-2')|translate"></span></ng-template>
+<ng-template #popoverLocationB1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="B-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationB2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="B-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationB3>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="B-3"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationC11>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="C-1-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationC12>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="C-1-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationC2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="C-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationE1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="E-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationE2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="E-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationF1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="F-1"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationF2>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="F-2"></gwt-location-popover>
+</ng-template>
 <ng-template #popoverLocationIndianTradeRisk1>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('INDIAN-TRADE-RISK-1')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.INDIAN-TRADE-RISK-1'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="INDIAN-TRADE-RISK-1" [risk]="true"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationIndianTradeRisk2>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('INDIAN-TRADE-RISK-2')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.INDIAN-TRADE-RISK-2'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="INDIAN-TRADE-RISK-2" [risk]="true"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationRockfallRisk1>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('ROCKFALL-RISK-1')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.ROCKFALL-RISK-1'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="ROCKFALL-RISK-1" [risk]="true"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationRockfallRisk2>
-  <span [innerHTML]="'gwt.popover.building.' + getBuildingAtLocation('ROCKFALL-RISK-2')|translate"></span>
-  <span [innerHTML]="'gwt.popover.location.ROCKFALL-RISK-2'|translate"></span>
+  <gwt-location-popover [table]="table" [trail]="state.trail" location="ROCKFALL-RISK-2" [risk]="true"></gwt-location-popover>
 </ng-template>
 
 <svg
@@ -75,7 +126,6 @@
     <g id="neutralBuildingLocation">
       <use xlink:href="#largeRect"/>
     </g>
-
 
     <rect id="smallLocation"
           rx="2.0045242"
@@ -560,49 +610,42 @@
       <g #A>
         <image href="/assets/games/gwt/a.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverA"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #B>
         <image href="/assets/games/gwt/b.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverB"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #C>
         <image href="/assets/games/gwt/c.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverC"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #D>
         <image href="/assets/games/gwt/d.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverD"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #E>
         <image href="/assets/games/gwt/e.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverE"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #F>
         <image href="/assets/games/gwt/f.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverF"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>
       <g #G>
         <image href="/assets/games/gwt/g.png" width="68.058" height="66.48" clip-path="url(#buildingclip)"
                [ngbPopover]="popoverG"
-               placement="top"
                triggers="mouseenter:mouseleave"
                container="body"/>
       </g>

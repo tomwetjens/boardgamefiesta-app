@@ -1,0 +1,8 @@
+<span [innerHTML]="'gwt.popover.building.' + building|translate"></span>
+
+<ng-container *ngIf="color; else neutralBuilding">
+  <img src="/assets/games/gwt/buildings/{{building | lowercase}}_{{color | lowercase}}.png"/>
+</ng-container>
+<ng-template #neutralBuilding>
+  <img src="/assets/games/gwt/{{building | lowercase}}.png"/>
+</ng-template>

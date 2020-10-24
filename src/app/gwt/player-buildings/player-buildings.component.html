@@ -9,7 +9,7 @@
 <div class="modal-body">
   <ng-container *ngFor="let playerBuilding of playerState.buildings">
     <ng-template #popover>
-      <span [innerHTML]="'gwt.popover.building.' + playerBuilding.toLowerCase()|translate"></span>
+      <gwt-building-popover [building]="playerBuilding" [color]="playerState.player.color"></gwt-building-popover>
     </ng-template>
     <button
       [class]="'building ' + playerState.player.color.toString().toLowerCase() + '-' + playerBuilding.toLowerCase()"

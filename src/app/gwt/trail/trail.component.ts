@@ -893,8 +893,4 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return Math;
   }
 
-  getBuildingAtLocation(name: string): string {
-    const location = this.state.trail.locations[name];
-    return location && location.building ? location.building.name : null;
-  }
 }

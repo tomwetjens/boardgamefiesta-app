@@ -28,6 +28,8 @@ import {GwtProvider} from "./gwt.provider";
 import en from "./locale/en.json";
 import nl from "./locale/nl.json";
 import {BiddingComponent} from './bidding/bidding.component';
+import {LocationPopoverComponent} from './location-popover/location-popover.component';
+import {BuildingPopoverComponent} from './building-popover/building-popover.component';
 
 const routes: Routes = [
   {
@@ -56,7 +58,9 @@ const routes: Routes = [
     DrawStackDialogComponent,
     BuyCattleDialogComponent,
     GwtComponent,
-    BiddingComponent
+    BiddingComponent,
+    LocationPopoverComponent,
+    BuildingPopoverComponent
   ],
   imports: [
     CommonModule,
