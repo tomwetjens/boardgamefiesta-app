@@ -27,6 +27,7 @@ import {GwtComponent} from './gwt/gwt.component';
 import {GwtProvider} from "./gwt.provider";
 import en from "./locale/en.json";
 import nl from "./locale/nl.json";
+import pt from "./locale/pt.json";
 import {BiddingComponent} from './bidding/bidding.component';
 import {LocationPopoverComponent} from './location-popover/location-popover.component';
 import {BuildingPopoverComponent} from './building-popover/building-popover.component';
@@ -82,6 +83,7 @@ export class GwtModule {
 
     this.translateService.setTranslation('en', en, true);
     this.translateService.setTranslation('nl', nl, true);
+    this.translateService.setTranslation('pt', pt, true);
   }
 
 }

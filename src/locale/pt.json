@@ -1,0 +1,190 @@
+{
+  "appName": "Board Game Fiesta",
+  "home": {
+    "welcome": "Bem vindo",
+    "lead": "Jogue seus jogos de tabuleiro favoritos com amigos ou outros jogadores ao redor do mundo!.",
+    "lead2": "Junte-se à comunidade de jogos de tabuleiro mais legal da web. Jogue diretamente de seu navegador. Não há downloads ou configuração necessária.",
+    "startPlayingNow": "Comece a jogar agora"
+  },
+  "games": "Jogos",
+  "game": {
+    "istambul": {
+      "name": "Istambul",
+      "description": "O bazar em Istambul é muito movimentado. Os comerciantes e seus assistentes correm pelas vielas estreitas tentando enganar o concorrente. A chave do sucesso está numa boa organização: os assistentes enchem os carrinhos de mão dos armazéns diversos e conduzem-nos rapidamente ao destino certo.\n\nCada comerciante deseja ser o primeiro a obter um certo número de rubis em sua posse. Mova seu assistente para coletar alcatrão e montanha de alcatrão neste jogo estratégico!"
+    },
+    "gwt": {
+      "name": "Ranchers Of The Old West",
+      "summary": "Reúna o seu gado ao longo das trilhas do Velho Oeste. Inspirado no popular jogo Great Western Trail.",
+      "description": "América no século 19: você é um fazendeiro e reúne repetidamente seu gado do Texas a Kansas City, de onde você os envia com sua locomotiva. Isso lhe dá dinheiro e pontos de vitória.<br/>Nem é preciso dizer: Cada vez que você chega a Kansas City, quer entregar seu gado mais valioso. Isso não só exigirá que você mantenha seu rebanho em boa forma, mas também que utilize efetivamente as vários construções ao longo da trilha.<br/>O sucesso exigirá que você contrate uma equipe capacitada: vaqueiros para melhorar seu rebanho, artífices para construir suas próprias construções e engenheiros para administrar a importante linha ferroviária.<br/><br/>Se você manejar seu rebanho com inteligência e navegar pelas oportunidades e as armadilhas desta grande trilha do oeste, você certamente ganhará mais pontos de vitória e vencerá o jogo."
+    }
+  },
+  "findUser": "Encontrar Usuário",
+  "usernameOrEmail": "Nome de usuário ou e-mail",
+  "search": "Pesquisar",
+  "select": "Selecionar",
+  "readMore": "Leia mais",
+  "showLess": "Mostrar menos",
+  "user-menu": {
+    "profile": "Perfil"
+  },
+  "profile": {
+    "avatar": "Avatar",
+    "about": "Sobre mim",
+    "preferences": "Preferências",
+    "username": "Usuário",
+    "language": "Idioma",
+    "email": "E-mail",
+    "save": "Salvar",
+    "location": "Local"
+  },
+  "in-game-navbar": {
+    "mute": "Sem som",
+    "mutePopover": "Silenciar todos os sons",
+    "unmute": "Com som",
+    "unmutePopover": "Ativar todos os sons"
+  },
+  "in-game-menu": {
+    "sounds": "Sons",
+    "alerts": {
+      "mute": "Silenciar alerta",
+      "unmute": "Ativar alerta"
+    },
+    "effects": {
+      "mute": "Silenciar efeitos sonoros",
+      "unmute": "Ativar efeitos sonoros"
+    },
+    "voiceOver": {
+      "mute": "Silenciar voz",
+      "unmute": "Ativar voz"
+    },
+    "music": {
+      "mute": "Silenciar música",
+      "unmute": "Ativar música"
+    },
+    "confirmLeave": "Depois de deixar a mesa, você não poderá voltar e continuar jogando nesta mesa!"
+  },
+  "notifications": {
+    "audio": {
+      "muted": {
+        "ALERTS": "Os sons de alerta estão desativados",
+        "EFFECTS": "Os efeitos sonoros estão desativados",
+        "VOICE_OVER": "As vozes estão desativadas",
+        "MUSIC": "A música está desativada"
+      },
+      "unmuted": {
+        "ALERTS": "Os sons de alerta estão ativados",
+        "EFFECTS": "Os efeitos sonoros estão ativados",
+        "VOICE_OVER": "As vozes estão ativadas",
+        "MUSIC": "A música está ativada"
+      }
+    }
+  },
+  "logout": "Sair",
+  "accept": "Aceitar",
+  "reject": "Rejeitar",
+  "notStarted": "Esperando jogadores",
+  "owner": "Proprietário",
+  "play": "Jogar",
+  "yourTurn": "Sua Jogada",
+  "close": "Fechar",
+  "invite": "Convidar jogador",
+  "uninvite": "Remover",
+  "invitedBy": "Convidado por",
+  "start": "Iniciar o jogo",
+  "open": "Abrir",
+  "back": "Página inicial",
+  "endTurn": "Terminar Jogada",
+  "skip": "Pular",
+  "undo": "Desfazer",
+  "waitingFor": "Esperando pelo",
+  "busy": "A tabela está sendo atualizada...",
+  "computer": "Computador",
+  "abandon": "Abandonar",
+  "leave": "Sair da mesa",
+  "connected": "Conectado",
+  "connecting": "Conectando...",
+  "cancel": "Cancelar",
+  "infoDialog": "Informação",
+  "confirmDialog": "Tem certeza?",
+  "alertDialog": "Alerta!",
+  "confirm": "Confirmar",
+  "ok": "OK",
+  "options": "Opções",
+  "players": "Jogadores",
+  "addComputer": "Adicionar Jogador Computador",
+  "confirmStart": "Alguns jogadores ainda não responderam. Eles não poderão entrar no jogo. Ainda deseja iniciar o jogo?",
+  "waitForPlayers": "Espere pelos jogadores",
+  "popover": {
+    "waitingForPlayer": "Esperando que este jogador execute uma ação."
+  },
+  "lastSeen": "Visto pela última vez",
+  "ago": "atrás",
+  "menu": "Menu",
+  "location": "Local",
+  "unknown": "Desconhecido",
+  "table": {
+    "status": {
+      "NEW": "Esperando jogadores",
+      "STARTED": "Em andamento",
+      "ENDED": "Finalizado",
+      "ABANDONED": "Abandonado"
+    }
+  },
+  "player": {
+    "status": {
+      "INVITED": "Ainda não respondeu",
+      "ACCEPTED": "Aceitou",
+      "REJECTED": "Rejeitou",
+      "PROPOSED_TO_LEAVE": "Quer sair",
+      "AGREED_TO_LEAVE": "Concorda em sair",
+      "LEFT": "Saiu"
+    }
+  },
+  "rating": "Rating",
+  "score": "Pontuação",
+  "about": {
+    "title": "Sobre",
+    "text": "Este site é mantido por Tom Wetjens. Sou desenvolvedor de software durante o dia e jogador de tabuleiro à noite. A ideia para este site surgiu durante a quarentena devido ao Corona virus em 2020. Como jogar jogos de tabuleiro com amigos na vida real não era mais possível, comecei a procurar uma alternativa.",
+    "specialThanks": {
+      "title": "Agradecimentos especiais",
+      "text": "Minha esposa, Sharon, pela paciência e pelos testes. Gerben, Niels, Erik, Judith, Irene também pelos testes. Sander pelos testes e criação dos efeitos sonoros e músicas."
+    }
+  },
+  "contact": {
+    "title": "Contato",
+    "text": "Este site é mantido por Tom Wetjens. Sinta-se à vontade para entrar em contato comigo sobre quaisquer problemas, solicitações ou sugestões. Como ainda não há um rastreador de problema, envie qualquer relatório de problema para meu endereço de e-mail."
+  },
+  "errors": {
+    "EXCEEDS_MAX_REALTIME_GAMES": "Você atingiu o número máximo de jogos em tempo real que pode jogar simultaneamente.",
+    "EXCEEDS_MAX_ACTIVE_GAMES": "Você atingiu o número máximo de jogos que pode jogar simultaneamente.",
+    "CANNOT_INVITE_REACHED_MAX_ACTIVE_GAMES": "Este usuário atingiu o número máximo de jogos simultâneos e não pode ser convidado.",
+    "MIN_PLAYERS": "Você precisa de mais jogadores para iniciar o jogo.",
+    "SERVER_NOT_AVAILABLE": "O servidor não está disponível no momento ou está muito ocupado.",
+    "UNEXPECTED_SERVER_ERROR": "Erro inesperado do servidor.",
+    "CONNECTION_FAILED": "Não foi possível conectar ao servidor. Certifique-se de que você está conectado a internet.",
+    "FORBIDDEN": "Você não tem permissão para executar a ação solicitada ou acessar o recurso solicitado.",
+    "UNKNOWN_ERROR": "Ocorreu um erro desconhecido.",
+    "ALREADY_INVITED": "Este usuário já foi convidado para a mesa.",
+    "NOT_PLAYER_IN_GAME": "Você não está jogando nesta mesa.",
+    "EXCEEDS_MAX_PLAYERS": "Você atingiu o número máximo de jogadores para este jogo.",
+    "NOT_SUPPORTED": "Isso não é compatível.",
+    "COMPUTER_NOT_SUPPORTED": "Este jogo não é compatível com jogadores de computador.",
+    "TOKEN_VALIDATION_ERROR": "O login falhou devido a um token expirado. Certifique-se de que o relógio do seu sistema esteja configurado corretamente.",
+    "RESOURCE_NOT_FOUND": "O recurso solicitado não foi encontrado.",
+    "HISTORY_NOT_AVAILABLE": "Não há dados históricos suficientes disponíveis para desfazer a ação anterior.",
+    "CANNOT_UNDO": "A ação anterior não pode ser desfeita.",
+    "GAME_ALREADY_ENDED": "Este jogo já terminou."
+  },
+  "log": {
+    "CREATE": "criou uma nova tabela",
+    "START": "começou o jogo",
+    "INVITE": "convidou <strong>{{otherUser}}</strong>",
+    "ACCEPT": "juntou-se à mesa",
+    "REJECT": "recusou-se a entrar na mesa",
+    "KICK": "removeu <strong>{{otherUser}}</strong>",
+    "LEFT": "saiu da mesa",
+    "PROPOSED_TO_LEAVE": "propõe para sairmos juntos da mesa",
+    "AGREED_TO_LEAVE": "concorda em sair da mesa",
+    "UNDO": "desfaz a ação anterior"
+  }
+}

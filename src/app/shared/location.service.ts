@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import countries from 'i18n-iso-countries';
 import countriesEN from 'i18n-iso-countries/langs/en.json';
 import countriesNL from 'i18n-iso-countries/langs/nl.json';
+import countriesPT from 'i18n-iso-countries/langs/pt.json';
 import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject} from 'rxjs';
 
 countries.registerLocale(countriesEN);
 countries.registerLocale(countriesNL);
+countries.registerLocale(countriesPT);
 
 @Injectable({
   providedIn: 'root'

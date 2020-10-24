@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import moment from 'moment';
 import en from '../locale/en.json';
 import nl from '../locale/nl.json';
+import pt from '../locale/pt.json';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.translateService.setTranslation('en', en);
     this.translateService.setTranslation('nl', nl);
+    this.translateService.setTranslation('pt', pt);
 
     this.userService.currentUser.subscribe(currentUser => {
       if (currentUser) {
