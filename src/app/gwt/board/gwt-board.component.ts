@@ -156,16 +156,17 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     if (currentState.turn) {
       if (currentState.actions.length === 1
         && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
+        this.stopAutoEndTurnTimer();
         this.selectedAction = currentState.actions[0];
       } else if (currentState.actions.length === 0) {
         this.selectedAction = null;
         this.startAutoEndTurnTimer();
       } else {
+        this.stopAutoEndTurnTimer();
         this.selectedAction = null;
       }
     } else {
       this.stopAutoEndTurnTimer();
-
       this.selectedAction = null;
     }
 
@@ -202,7 +203,10 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
           if (this.autoEndTurnInSecs === 0) {
             this.stopAutoEndTurnTimer();
 
-            this.doEndTurn();
+            // Extra safety check, in case timer was not cancelled in time
+            if (this.state.turn && this.state.actions.length === 0) {
+              this.doEndTurn();
+            }
           }
         });
     }

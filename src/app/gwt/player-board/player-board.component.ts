@@ -70,7 +70,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
           // Or in case of other player, where hand is not known
           || current.handSize !== previous.handSize
           // Or when gaining a card
-          || current.discardPile.length !== previous.discardPile.length) {
+          || current.discardPileSize !== previous.discardPileSize) {
           this.audioService.playEffect(CARD);
         }
 
