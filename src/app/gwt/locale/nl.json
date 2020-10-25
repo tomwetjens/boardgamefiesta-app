@@ -486,6 +486,13 @@
       "STATIONS": "Stations"
     },
     "option": {
+      "mode": {
+        "label": "Modus",
+        "value": {
+          "ORIGINAL": "Origineel",
+          "STRATEGIC": "Strategisch (minder verborgen)"
+        }
+      },
       "buildings": {
         "label": "Gebouwtegels",
         "value": {

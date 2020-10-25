@@ -252,7 +252,9 @@ export interface PlayerState {
   readonly tempCertificates: number;
   readonly handValue: number;
   readonly hand: Card[];
-  readonly discardPile: Card[];
+  readonly discardPile?: Card[];
+  readonly discardPileSize: number;
+  readonly discardPileTop: Card;
   readonly drawStackSize: number;
   readonly drawStack?: Card[];
   readonly handSize: number;
@@ -436,7 +438,13 @@ export enum PlayerOrder {
   RANDOMIZED = 'RANDOMIZED'
 }
 
+export enum Mode {
+  ORIGINAL = 'ORIGINAL',
+  STRATEGIC = 'STRATEGIC'
+}
+
 export interface Options {
+  mode: Mode;
   buildings: Buildings;
   playerOrder: PlayerOrder;
 }

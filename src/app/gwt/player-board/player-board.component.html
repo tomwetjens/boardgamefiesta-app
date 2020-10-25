@@ -37,9 +37,9 @@
             ngbPopover="{{'gwt.popover.objectives'|translate}}"
             triggers="mouseenter:mouseleave"
             container="body"></button>
-    <button class="btn btn-secondary btn-discard-pile"
+    <button class="btn btn-secondary btn-discard-pile" [disabled]="!playerState.discardPile"
             (click)="showDiscardPile()">
-      <app-card-stack class="discard-pile" [cards]="playerState.discardPile"
+      <app-card-stack class="discard-pile" [cards]="playerState.discardPile || (playerState.discardPileTop ? [playerState.discardPileTop] : [])" [size]="playerState.discardPileSize"
                       emptyType="CATTLE"
                       ngbPopover="{{'gwt.popover.discardPile'|translate}}"
                       placement="bottom"
@@ -57,7 +57,7 @@
     </button>
   </header>
   <section score>
-    <table class="table table-sm">
+    <table class="table table-sm" *ngIf="playerState.score !== undefined && playerState.score !== null">
       <tbody>
       <tr *ngFor="let category of playerState.score.categories | keyvalue">
         <th scope="row">{{'gwt.score.' + category.key|translate}}</th>

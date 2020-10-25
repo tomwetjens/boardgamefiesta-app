@@ -18,7 +18,7 @@
       <ng-template #scorePopover>
         <ng-content select="[score]"></ng-content>
       </ng-template>
-      <span *ngIf="score !== undefined" class="score"
+      <span *ngIf="score !== undefined && score !== null" class="score"
            [ngbPopover]="scorePopover" [title]="'score'|translate"
            placement="bottom"
            triggers="mouseenter:mouseleave hover click"
