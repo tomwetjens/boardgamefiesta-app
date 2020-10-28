@@ -195,7 +195,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   private startAutoEndTurnTimer() {
     if (!this.autoEndTurnTimer || this.autoEndTurnTimer.closed) {
-      this.autoEndTurnInSecs = 10;
+      this.autoEndTurnInSecs = 30;
       this.autoEndTurnTimer = interval(1000)
         .pipe(takeUntil(this.destroyed))
         .subscribe(() => {
