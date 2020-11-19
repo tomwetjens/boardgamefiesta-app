@@ -102,8 +102,8 @@
           x="0" y="0"
           height="446" width="800"/>
 
-        <image *ngIf="state.otherPlayers.length > 1"
-               [attr.href]="'/assets/games/gwt/' + (state.otherPlayers.length + 1) + 'p_' + playerState.player.color.toString().toLowerCase() + '.png'"
+        <image *ngIf="playerCount > 2"
+               [attr.href]="'/assets/games/gwt/' + playerCount + 'p_' + playerState.player.color.toString().toLowerCase() + '.png'"
                x="179" y="-9"
                height="150" width="268"/>
 

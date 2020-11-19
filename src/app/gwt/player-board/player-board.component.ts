@@ -46,6 +46,10 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   craftsmen: Worker[] = [];
   engineers: Worker[] = [];
 
+  get playerCount(): number {
+    return this.state.otherPlayers.length + (!!this.state.player ? 1 : 0);
+  }
+
   constructor(private ngbModal: NgbModal, private audioService: AudioService) {
   }
 
