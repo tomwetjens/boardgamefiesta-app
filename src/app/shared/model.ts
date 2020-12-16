@@ -63,13 +63,19 @@ export enum TableStatus {
   ENDED = 'ENDED'
 }
 
+export enum Visibility {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE'
+}
+
 export interface Table {
   readonly id: string;
   readonly game: string;
   readonly type: TableType;
+  readonly visibility: Visibility;
   readonly options: Options;
   readonly status: TableStatus;
-  readonly accepted: boolean;
+  readonly canAccept: boolean;
   readonly player?: string;
   readonly otherPlayers: string[];
   readonly players: { [key: string]: TablePlayer };
@@ -79,8 +85,12 @@ export interface Table {
   readonly turn?: boolean;
   readonly currentPlayer?: string;
   readonly owner: User;
-  readonly startable: boolean;
+  readonly canStart: boolean;
+  readonly canJoin: boolean;
+  readonly canLeave: boolean;
   readonly canUndo?: boolean;
+  readonly minNumberOfPlayers: number;
+  readonly maxNumberOfPlayers: number;
 }
 
 export interface CreateTableRequest {
@@ -99,6 +109,7 @@ export enum EventType {
   ACCEPTED = 'ACCEPTED',
   REJECTED = 'REJECTED',
   STATE_CHANGED = 'STATE_CHANGED',
+  JOINED = 'JOINED',
   LEFT = 'LEFT',
   PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
   AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',

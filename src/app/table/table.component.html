@@ -11,7 +11,8 @@
         <hr class="my-4">
         <p>
           <a [routerLink]="['/games/', table.game]">
-            <img src="/assets/games/{{table.game}}/box.png" class="box" alt="{{'game.' + table.game + '.name'|translate}}"/>
+            <img src="/assets/games/{{table.game}}/box.png" class="box"
+                 alt="{{'game.' + table.game + '.name'|translate}}"/>
           </a>
 
           {{'game.' + table.game + '.summary'|translate}}
@@ -27,29 +28,30 @@
         <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>
         </p>
-        <p class="lead" *ngIf="table.status === 'NEW'">
-          <ng-container [ngSwitch]="table.player && table.players[table.player].user.id === table.owner.id">
-            <ng-container *ngSwitchCase="true">
-              <button class="btn btn-lg btn-success" (click)="start(table)">{{'start'|translate}}</button>&nbsp;
-            </ng-container>
-            <ng-container *ngSwitchCase="false">
-            </ng-container>
-          </ng-container>
+        <ng-container class="lead" *ngIf="table.status === 'NEW'">
+          <p *ngIf="table.canStart">
+            <button class="btn btn-lg btn-success" (click)="start(table)">{{'start'|translate}}</button>&nbsp;
+          </p>
 
-          <ng-container [ngSwitch]="table.accepted">
-            <ng-container *ngSwitchCase="true">
-              <button class="btn btn-danger" (click)="leave(table)">{{'leave'|translate}}</button>&nbsp;
+          <p>
+            {{'table.visibility.' + table.visibility|translate}}
+            <br/>
+            <ng-container *ngIf="table.player && table.players[table.player].user.id == table.owner.id">
+              <button *ngIf="table.visibility == 'PRIVATE'" class="btn btn-lg btn-outline-secondary"
+                      (click)="makePublic(table)">{{'table.makePublic'|translate}}</button>
+              <button *ngIf="table.visibility == 'PUBLIC'" class="btn btn-lg btn-outline-secondary"
+                      (click)="makePrivate(table)">{{'table.makePrivate'|translate}}</button>
             </ng-container>
-            <ng-container *ngSwitchCase="false">
-              <button class="btn btn-lg btn-success" (click)="accept(table)">{{'accept'|translate}}</button>&nbsp;
-              <button class="btn btn-lg btn-danger" (click)="reject(table)">{{'reject'|translate}}</button>
-            </ng-container>
-          </ng-container>
+          </p>
 
-          <!--          <ng-container *ngIf="table.players[table.player].user.id === table.owner.id">-->
-          <!--            <button class="btn btn-secondary" (click)="abandon(table)">{{'abandon'|translate}}</button>&nbsp;-->
-          <!--          </ng-container>-->
-        </p>
+          <button *ngIf="table.canJoin" class="btn btn-success" (click)="join(table)">{{'join'|translate}}</button>
+          <button *ngIf="table.canLeave" class="btn btn-danger" (click)="leave(table)">{{'leave'|translate}}</button>
+
+          <p *ngIf="table.canAccept">
+            <button class="btn btn-lg btn-success" (click)="accept(table)">{{'accept'|translate}}</button>&nbsp;
+            <button class="btn btn-lg btn-danger" (click)="reject(table)">{{'reject'|translate}}</button>
+          </p>
+        </ng-container>
       </div>
     </section>
 
@@ -66,7 +68,7 @@
                   <label [for]="option.key">{{(table.game + '.option.' + option.key + '.label')|translate}}</label>
                   <div ngbDropdown>
                     <button class="btn btn-outline-primary" [id]="option.key" ngbDropdownToggle>
-                      {{(table.game + '.option.'+ option.key + '.value.' + (table.options[option.key] || option.value.defaultValue))|translate}}
+                      {{(table.game + '.option.' + option.key + '.value.' + (table.options[option.key] || option.value.defaultValue))|translate}}
                     </button>
                     <div ngbDropdownMenu>
                       <button ngbDropdownItem *ngFor="let value of option.value.values"
@@ -111,8 +113,10 @@
                 </div>
               </div>
               <div *ngIf="table.status === 'NEW'" class="buttons">
-                <button class="btn btn-primary" (click)="invite(table)">{{'invite'|translate}}</button>&nbsp;
-                <button class="btn btn-secondary" (click)="addComputer(table)">{{'addComputer'|translate}}</button>
+                <ng-container *ngIf="table.player && table.players[table.player].user.id == table.owner.id">
+                  <button class="btn btn-primary" (click)="invite(table)">{{'invite'|translate}}</button>&nbsp;
+                  <button class="btn btn-secondary" (click)="addComputer(table)">{{'addComputer'|translate}}</button>
+                </ng-container>
               </div>
             </div>
           </div>

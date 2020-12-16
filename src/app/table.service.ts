@@ -188,6 +188,14 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/reject', null);
   }
 
+  makePrivate(id: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/private', null);
+  }
+
+  makePublic(id: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/public', null);
+  }
+
   perform(id: string, action: any): Observable<void> {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/perform', action);
   }
@@ -221,6 +229,11 @@ export class TableService {
       .pipe(tap(() => this.refreshMyActiveTables()));
   }
 
+  join(id: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/join', null)
+      .pipe(tap(() => this.refreshMyActiveTables()));
+  }
+
   invite(id: string, userId: string): Observable<void> {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/invite', {userId});
   }
@@ -240,5 +253,4 @@ export class TableService {
   getSuggestedPlayers(id: string): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.apiBaseUrl + '/tables/' + id + '/suggested-players');
   }
-
 }

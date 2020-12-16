@@ -4,12 +4,12 @@
 
     <ng-container [ngSwitch]="table.status">
       <span *ngSwitchCase="'NEW'">
-        <ng-container [ngSwitch]="table.accepted">
-          <span *ngSwitchCase="true">
+        <ng-container [ngSwitch]="table.canAccept">
+          <span *ngSwitchCase="false">
             {{'notStarted'|translate}}
             <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
           </span>
-          <span *ngSwitchCase="false">
+          <span *ngSwitchCase="true">
             {{'invitedBy'|translate}} {{table.owner.username}}
             <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
             &nbsp;
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-<!--    <div class="col-md-3 col-sm-12">-->
+    <div class="col-md-3 col-sm-12">
 <!--      <div class="card">-->
 <!--        <a [routerLink]="['games/istanbul']">-->
 <!--          <img class="card-img-top" src="/assets/games/istanbul/box.png" alt="{{'game.istanbul.name'|translate}}">-->
@@ -82,6 +82,6 @@
 <!--          </span>-->
 <!--        </div>-->
 <!--      </div>-->
-<!--    </div>-->
+    </div>
   </div>
 </section>

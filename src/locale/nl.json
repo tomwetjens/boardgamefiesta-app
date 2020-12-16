@@ -103,6 +103,7 @@
   "busy": "Spel wordt bijgewerkt...",
   "computer": "Computer",
   "abandon": "Spel weggooien",
+  "join": "Aanschuiven bij tafel",
   "leave": "Tafel verlaten",
   "connected": "Verbonden",
   "connecting": "Verbinding maken...",
@@ -131,7 +132,13 @@
       "STARTED": "Bezig",
       "ENDED": "Afgelopen",
       "ABANDONED": "Afgebroken"
-    }
+    },
+    "visibility": {
+      "PRIVATE": "Dit is privétafel. Alleen uitgenodigde spelers kunnen aansluiten.",
+      "PUBLIC": "Deze tafel is open voor iedereen om aan te sluiten."
+    },
+    "makePublic": "Open zetten voor iedereen",
+    "makePrivate": "Privé maken"
   },
   "player": {
     "status": {
@@ -164,7 +171,9 @@
     "RESOURCE_NOT_FOUND": "De gevraagde gegevens zijn niet gevonden.",
     "HISTORY_NOT_AVAILABLE": "Er zijn niet genoeg historische gegevens beschikbaar om de vorige actie ongedaan te maken.",
     "CANNOT_UNDO": "De vorige actie kan niet ongedaan gemaakt worden.",
-    "GAME_ALREADY_ENDED": "Dit spel is al beëindigd."
+    "GAME_ALREADY_ENDED": "Dit spel is al beëindigd.",
+    "NOT_PUBLIC": "Je moet uitgenodigd worden om bij deze tafel te kunnen aanschuiven.",
+    "MUST_BE_OWNER": "Je moet de beheerder van deze tafel zijn."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",
@@ -173,6 +182,7 @@
     "ACCEPT": "komt er bij",
     "REJECT": "heeft de uitnodiging afgeslagen",
     "KICK": "removed <strong>{{otherUser}}</strong>",
+    "JOIN": "komt er bij",
     "LEFT": "verlaat de tafel",
     "PROPOSED_TO_LEAVE": "stelt voor de tafel te verlaten",
     "AGREED_TO_LEAVE": "wil ook de tafel verlaten",

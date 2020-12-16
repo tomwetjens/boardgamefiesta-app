@@ -15,6 +15,10 @@ import {GAME_PROVIDERS, GameProvider} from "../shared/api";
 import {InvitePlayerComponent} from "../invite-player/invite-player.component";
 import {TitleService} from "../title.service";
 
+interface Seat {
+  player?: TablePlayer;
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -186,5 +190,20 @@ export class TableComponent implements OnInit, OnDestroy {
   changeOptions(table: Table, options: Options) {
     this.tableService.changeOptions(table.id, {options})
       .subscribe();
+  }
+
+  join(table: Table) {
+    this.tableService.join(table.id)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  makePublic(table: Table) {
+    this.tableService.makePublic(table.id)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  makePrivate(table: Table) {
+    this.tableService.makePrivate(table.id)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
   }
 }

@@ -83,7 +83,7 @@
   "accept": "Accept",
   "reject": "Reject",
   "notStarted": "Waiting for players",
-  "owner": "Owner",
+  "owner": "Host",
   "play": "Play",
   "yourTurn": "Your Turn",
   "close": "Close",
@@ -100,6 +100,7 @@
   "busy": "Table is being updated...",
   "computer": "Computer",
   "abandon": "Abandon",
+  "join": "Join table",
   "leave": "Leave table",
   "connected": "Connected",
   "connecting": "Connecting...",
@@ -128,7 +129,13 @@
       "STARTED": "In progress",
       "ENDED": "Ended",
       "ABANDONED": "Abandoned"
-    }
+    },
+    "visibility": {
+      "PRIVATE": "This is a private table. Only invited players can join.",
+      "PUBLIC": "This table is open for anyone to join."
+    },
+    "makePublic": "Open for anyone",
+    "makePrivate": "Make private"
   },
   "player": {
     "status": {
@@ -173,7 +180,9 @@
     "RESOURCE_NOT_FOUND": "The requested resource was not found.",
     "HISTORY_NOT_AVAILABLE": "There is not enough historic data available to undo the previous action.",
     "CANNOT_UNDO": "The previous action cannot be undone.",
-    "GAME_ALREADY_ENDED": "This game is already ended."
+    "GAME_ALREADY_ENDED": "This game is already ended.",
+    "NOT_PUBLIC": "You must be invited to join this table.",
+    "MUST_BE_OWNER": "You must be the host of this table."
   },
   "log": {
     "CREATE": "created a new table",
@@ -182,6 +191,7 @@
     "ACCEPT": "joined the table",
     "REJECT": "declined to join the table",
     "KICK": "removed <strong>{{otherUser}}</strong>",
+    "JOIN": "joined the table",
     "LEFT": "left the table",
     "PROPOSED_TO_LEAVE": "proposes to leave the table together",
     "AGREED_TO_LEAVE": "agrees to leave the table",
