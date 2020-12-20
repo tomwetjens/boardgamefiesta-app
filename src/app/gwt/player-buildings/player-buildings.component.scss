@@ -13,7 +13,7 @@
   $sides: a, b;
   $colors: blue, red, yellow, white, green;
 
-  @for $i from 1 through 10 {
+  @for $i from 1 through 13 {
     @each $side in $sides {
       @each $color in $colors {
         &.#{"" + $color}-#{$i}#{$side} {

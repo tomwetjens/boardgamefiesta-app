@@ -1,16 +1,13 @@
 import {LogEntry, Table} from './model';
 
 export interface Option {
+  key: string;
   values: string[] | boolean[];
   defaultValue: string | boolean;
 }
 
-export interface Options {
-  [key: string]: Option;
-}
-
 export interface GameProvider {
-  options: Options;
+  options: Option[];
 
   translate(logEntry: LogEntry, table: Table): string;
 }

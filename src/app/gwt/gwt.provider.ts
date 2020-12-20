@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GameProvider, Options} from "../shared/api";
+import {GameProvider, Option} from "../shared/api";
 import {TranslateService} from "@ngx-translate/core";
 import {LogEntry, Table, TablePlayer, User} from "../shared/model";
 import {Buildings, Mode, PlayerOrder, Variant} from "./model";
@@ -9,13 +9,15 @@ import {Buildings, Mode, PlayerOrder, Variant} from "./model";
 })
 export class GwtProvider implements GameProvider {
 
-  options: Options = {
-    mode: {values: [Mode.ORIGINAL, Mode.STRATEGIC], defaultValue: Mode.ORIGINAL},
-    buildings: {values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
-    playerOrder: {values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
-    variant: {values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
-    stationMasterPromos: {values: [false, true], defaultValue: false}
-  };
+  options: Option[] = [
+    {key: 'mode', values: [Mode.ORIGINAL, Mode.STRATEGIC], defaultValue: Mode.ORIGINAL},
+    {key: 'buildings', values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
+    {key: 'playerOrder', values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
+    {key: 'variant', values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
+    {key: 'stationMasterPromos', values: [false, true], defaultValue: false},
+    {key: 'building11', values: [false, true], defaultValue: false},
+    {key: 'building13', values: [false, true], defaultValue: false}
+  ];
 
   constructor(private translateService: TranslateService) {
   }

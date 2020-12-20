@@ -77,7 +77,11 @@
         "7b": "Building 7b<br/><strong>Action:</strong> Move your engine up to as many spaces forward as you have buildings in the woods",
         "8b": "Building 8b<br/><strong>Action:</strong> Copy the actions of an adjacent building",
         "9b": "Building 9b<br/><strong>Action:</strong> Upgrade any station behind your engine",
-        "10b": "Building 10b<br/><strong>Action:</strong> Gain 4 dollars<br/><strong>Action:</strong> Move your engine up to 4 spaces forward<br/><strong>Action:</strong> Move your cattleman up to 4 steps forward"
+        "10b": "Building 10b<br/><strong>Action:</strong> Gain 4 dollars<br/><strong>Action:</strong> Move your engine up to 4 spaces forward<br/><strong>Action:</strong> Move your cattleman up to 4 steps forward",
+        "11a": "Building 11a<br/><strong>Action:</strong> Remove a hazard for $2",
+        "11b": "Building 11b<br/><strong>Action:</strong> Move your engine up to as many spaces forward as you have removed hazards",
+        "13a": "Building 13a<br/><strong>Action:</strong> Discard 1 Jersey cattle card for a single auxiliary action<br/><strong>Action:</strong> Place one of your own buildings onto a building space on the trail ($1 per craftsman)",
+        "13b": "Building 13a<br/><strong>Action:</strong> Gain 2 dollars per upgraded station<br/><strong>Action:</strong> Perform a single or double auxiliary action"
       },
       "location": {
         "FLOOD-RISK-1": "<br/><br/><strong>Risk Action:</strong> Discard 1 Jersey to move your certificate marker 1 space forward and gain 2 dollars",
@@ -145,6 +149,7 @@
         "DISCARD_1_GUERNSEY": "discards 1 Guernsey to gain $2",
         "DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS": "discards 1 Holstein to gain $10",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE": "discards 1 Jersey to gain 1 certificate",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "discards 1 Jersey for a single auxiliary action",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS": "discards 1 Jersey to gain 1 certificate and $2",
         "DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "discards 1 Jersey to gain 2 certificates",
         "DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS": "discards 1 Jersey to gain $2",
@@ -166,6 +171,7 @@
         "GAIN_2_CERTIFICATES": "gains 2 certificates",
         "GAIN_1_DOLLAR": "gains $1",
         "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "gains ${{value1}} from buildings in the woods",
+        "GAIN_2_DOLLARS_PER_STATION": "gains ${{value1}} from stations",
         "GAIN_1_DOLLAR_PER_ENGINEER": "gains $1 per engineer",
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "gains 2 certificates and $2 per pair of teepees",
         "GAIN_2_DOLLARS": "gains $2",
@@ -208,6 +214,7 @@
         "PLAY_OBJECTIVE_CARD": "plays an Objective Card",
         "REMOVE_CARD": "removes a card",
         "REMOVE_HAZARD": "removes hazard {{value1}} ({{value2}}VP) for ${{value3}}",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "removes hazard {{value1}} ({{value2}}VP) for ${{value3}}",
         "REMOVE_HAZARD_FOR_5_DOLLARS": "removes hazard {{value1}} ({{value2}}VP) for ${{value3}}",
         "REMOVE_HAZARD_FOR_FREE": "removes hazard {{value1}} ({{value2}}VP) for ${{value3}}",
         "SINGLE_AUXILIARY_ACTION": "wants to perform a single auxiliary action",
@@ -333,6 +340,7 @@
         "PLAY_OBJECTIVE_CARD": "Play an objective card",
         "REMOVE_CARD": "Remove a card",
         "REMOVE_HAZARD": "Remove a hazard from the trail",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remove a hazard for 2 dollars",
         "REMOVE_HAZARD_FOR_5_DOLLARS": "Remove a hazard for 5 dollars",
         "REMOVE_HAZARD_FOR_FREE": "Remove a hazard for free",
         "SINGLE_AUXILIARY_ACTION": "Perform a single auxiliary action",
@@ -366,6 +374,7 @@
         "DISCARD_1_GUERNSEY": "Discard 1 Guernsey to gain 2 dollars",
         "DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS": "Discard 1 Holstein to gain 10 dollars",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE": "Discard 1 Jersey to gain 1 certificate",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "Discard 1 Jersey for single auxiliary action",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS": "Discard 1 Jersey to gain 1 certificate and 2 dollars",
         "DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "Discard 1 Jersey to gain 2 certificates",
         "DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS": "Discard 1 Jersey to gain 2 dollars",
@@ -386,6 +395,7 @@
         "GAIN_1_CERTIFICATE": "Gain 1 certificate",
         "GAIN_1_DOLLAR": "Gain 1 dollar",
         "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "Gain 2 dollars per building in the woods",
+        "GAIN_2_DOLLARS_PER_STATION": "Gain 2 dollars per station",
         "GAIN_1_DOLLAR_PER_ENGINEER": "Gain 1 dollar per engineer",
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Gain 2 certificates and 2 dollars per teepee pair",
         "GAIN_2_DOLLARS": "Gain 2 dollars",
@@ -423,6 +433,7 @@
         "PLAY_OBJECTIVE_CARD": "Play an objective card",
         "REMOVE_CARD": "Remove a card",
         "REMOVE_HAZARD": "Remove a hazard from the trail",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remove a hazard for 2 dollars",
         "REMOVE_HAZARD_FOR_5_DOLLARS": "Remove a hazard for 5 dollars",
         "REMOVE_HAZARD_FOR_FREE": "Remove a hazard for free",
         "SINGLE_AUXILIARY_ACTION": "Perform a single auxiliary action",
@@ -450,6 +461,7 @@
         "DISCARD_1_GUERNSEY": "Discard 1 Guernsey to gain 2 dollars",
         "DISCARD_1_HOLSTEIN_TO_GAIN_10_DOLLARS": "Discard 1 Holstein to gain 10 dollars",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE": "Discard 1 Jersey to gain 1 certificate",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "Discard 1 Jersey for a single auxiliary action",
         "DISCARD_1_JERSEY_TO_GAIN_1_CERTIFICATE_AND_2_DOLLARS": "Discard 1 Jersey to gain 1 certificate and 2 dollars",
         "DISCARD_1_JERSEY_TO_GAIN_2_CERTIFICATES": "Discard 1 Jersey to gain 2 certificates",
         "DISCARD_1_JERSEY_TO_GAIN_2_DOLLARS": "Discard 1 Jersey to gain 2 dollars",
@@ -470,6 +482,7 @@
         "GAIN_1_CERTIFICATE": "Gain 1 certificate",
         "GAIN_1_DOLLAR": "Gain 1 dollar",
         "GAIN_2_DOLLARS_PER_BUILDING_IN_WOODS": "Gain 2 dollars per building in the woods",
+        "GAIN_2_DOLLARS_PER_STATION": "Gain 2 dollars per station",
         "GAIN_1_DOLLAR_PER_ENGINEER": "Gain 1 dollar per engineer",
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Gain 2 certificates and 2 dollars per teepee pair",
         "GAIN_2_DOLLARS": "Gain 2 dollars",
@@ -507,6 +520,7 @@
         "PLAY_OBJECTIVE_CARD": "Play an objective card",
         "REMOVE_CARD": "Remove a card",
         "REMOVE_HAZARD": "Remove a hazard from the trail",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remove a hazard for 2 dollars",
         "REMOVE_HAZARD_FOR_5_DOLLARS": "Remove a hazard for 5 dollars",
         "REMOVE_HAZARD_FOR_FREE": "Remove a hazard for free",
         "SINGLE_AUXILIARY_ACTION": "Perform a single auxiliary action",
@@ -571,6 +585,20 @@
       },
       "stationMasterPromos": {
         "label": "Station master promos",
+        "value": {
+          "false": "No",
+          "true": "Yes"
+        }
+      },
+      "building11": {
+        "label": "Building 11",
+        "value": {
+          "false": "No",
+          "true": "Yes"
+        }
+      },
+      "building13": {
+        "label": "Building 13",
         "value": {
           "false": "No",
           "true": "Yes"
