@@ -42,7 +42,8 @@
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 hazards.",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Station master tile that gives 1 permanent certificate and 3 points for every pair of blue and green teepees.",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Station master tile that allows removing a hazard or trading with the tribes and gives 3 points for every 2 committed objective cards.",
-        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Station master tile that allows gaining 2 dollars and gives 1 point for every worker."
+        "TWO_PERM_CERTS": "Station master tile that gives 2 permanent certificates but 0 extra points.",
+        "TWELVE_DOLLARS": "Station master tile that allows gaining 12 dollars but gives 0 extra points."
       },
       "buildings": "View the buildings that are available.",
       "objectives": "View the objectives that must be completed and the tiles collected.",
@@ -169,6 +170,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "gains 2 certificates and $2 per pair of teepees",
         "GAIN_2_DOLLARS": "gains $2",
         "GAIN_4_DOLLARS": "gains $4",
+        "GAIN_12_DOLLARS": "gains $12",
         "HIRE_WORKER_MINUS_1": "hires a {{value1}} +$1",
         "HIRE_WORKER_MINUS_2": "hires a {{value1}} +$2",
         "HIRE_WORKER_PLUS_2": "hires a {{value1}} -$2",
@@ -273,6 +275,8 @@
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificate + 3 points per teepee pair",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Remove hazard/trade with Tribes + 3 points per 2 objective cards",
         "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Gain $2 + 1 point per worker",
+        "TWO_PERM_CERTS": "2 permanent certificates",
+        "TWELVE_DOLLARS": "Gain $12",
         "JERSEY": "Jersey",
         "GUERNSEY": "Guernsey",
         "BLACK_ANGUS": "Black Angus",
@@ -386,6 +390,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Gain 2 certificates and 2 dollars per teepee pair",
         "GAIN_2_DOLLARS": "Gain 2 dollars",
         "GAIN_4_DOLLARS": "Gain 4 dollars",
+        "GAIN_12_DOLLARS": "Gain 12 dollars",
         "HIRE_WORKER_MINUS_1": "Hire a worker (-$1)",
         "HIRE_WORKER_MINUS_2": "Hire a worker (-$2)",
         "HIRE_WORKER_PLUS_2": "Hire a worker (+$2)",
@@ -469,6 +474,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Gain 2 certificates and 2 dollars per teepee pair",
         "GAIN_2_DOLLARS": "Gain 2 dollars",
         "GAIN_4_DOLLARS": "Gain 4 dollars",
+        "GAIN_12_DOLLARS": "Gain 12 dollars",
         "HIRE_WORKER_MINUS_1": "Hire a worker (-$1)",
         "HIRE_WORKER_MINUS_2": "Hire a worker (-$2)",
         "HIRE_WORKER_PLUS_2": "Hire a worker (+$2)",
@@ -561,6 +567,13 @@
         "value": {
           "ORIGINAL": "Original",
           "BALANCED": "Better balanced for 2/3p"
+        }
+      },
+      "stationMasterPromos": {
+        "label": "Station master promos",
+        "value": {
+          "false": "No",
+          "true": "Yes"
         }
       }
     },

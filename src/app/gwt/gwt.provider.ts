@@ -13,7 +13,8 @@ export class GwtProvider implements GameProvider {
     mode: {values: [Mode.ORIGINAL, Mode.STRATEGIC], defaultValue: Mode.ORIGINAL},
     buildings: {values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
     playerOrder: {values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
-    variant: {values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL}
+    variant: {values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
+    stationMasterPromos: {values: [false, true], defaultValue: false}
   };
 
   constructor(private translateService: TranslateService) {

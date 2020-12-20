@@ -42,7 +42,9 @@
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 hazards.",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Station master tile that gives 1 permanent certificate and 3 points for every pair of blue and green teepees.",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Station master tile that allows removing a hazard or trading with the tribes and gives 3 points for every 2 committed objective cards.",
-        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Station master tile that allows gaining 2 dollars and gives 1 point for every worker."
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Station master tile that allows gaining 2 dollars and gives 1 point for every worker.",
+        "TWO_PERM_CERTS": "Station master tile that gives 2 permanent certificates but 0 extra points.",
+        "TWELVE_DOLLARS": "Station master tile that allows gaining 12 dollars but gives 0 extra points."
       },
       "buildings": "View the buildings that are available.",
       "objectives": "Bekijk de doelkaarten die behaald moeten worden en welke tegels verzameld zijn.",
@@ -125,6 +127,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "zet de certificaatsteen 2 vooruit en ontvangt 2 dollar per paar tipitegels",
         "GAIN_2_DOLLARS": "ontvangt 2 dollar",
         "GAIN_4_DOLLARS": "ontvangt 4 dollar",
+        "GAIN_12_DOLLARS": "ontvangt 12 dollar",
         "HIRE_WORKER_MINUS_1": "huurt een {{value1}} in (+$1)",
         "HIRE_WORKER_MINUS_2": "huurt een {{value1}} in (+$2)",
         "HIRE_WORKER_PLUS_2": "huurt een {{value1}} in (-$2)",
@@ -230,7 +233,9 @@
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Permanent certificaat + 3 punten per 2 rampen",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Permanent certificaat + 3 points per tipipaar",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Ramptegel verwijderen/handel met Stammen + 3 punten per 2 doelkaarten",
-        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Ontvang 2 dollar + 1 punt per werker"
+        "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Ontvang 2 dollar + 1 punt per werker",
+        "TWO_PERM_CERTS": "2 permanente certificaten",
+        "TWELVE_DOLLARS": "Ontvang 12 dollar"
       }
     },
     "actions": {
@@ -335,6 +340,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Ontvang 2 certificaten en $2 dollar per tipipaar",
         "GAIN_2_DOLLARS": "Ontvang 2 dollar",
         "GAIN_4_DOLLARS": "Ontvang 4 dollar",
+        "GAIN_12_DOLLARS": "Ontvang 12 dollar",
         "HIRE_WORKER_MINUS_1": "Huur werker in +$1",
         "HIRE_WORKER_MINUS_2": "Huur werker in +$2",
         "HIRE_WORKER_PLUS_2": "Huur werker in -$2",
@@ -418,6 +424,7 @@
         "GAIN_2_CERTIFICATES_AND_2_DOLLARS_PER_TEEPEE_PAIR": "Ontvang 2 certificaten en $2 dollar per tipipaar",
         "GAIN_2_DOLLARS": "Ontvang 2 dollar",
         "GAIN_4_DOLLARS": "Ontvang 4 dollar",
+        "GAIN_12_DOLLARS": "Ontvang 12 dollar",
         "HIRE_WORKER_MINUS_1": "Huur werker in +$1",
         "HIRE_WORKER_MINUS_2": "Huur werker in +$2",
         "HIRE_WORKER_PLUS_2": "Huur werker in -$2",

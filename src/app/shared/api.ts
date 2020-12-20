@@ -1,8 +1,8 @@
 import {LogEntry, Table} from './model';
 
 export interface Option {
-  values: string[];
-  defaultValue: string;
+  values: string[] | boolean[];
+  defaultValue: string | boolean;
 }
 
 export interface Options {
