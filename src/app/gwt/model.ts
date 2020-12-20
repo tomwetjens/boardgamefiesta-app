@@ -442,8 +442,14 @@ export enum Mode {
   STRATEGIC = 'STRATEGIC'
 }
 
+export enum Variant {
+  ORIGINAL = 'ORIGINAL',
+  BALANCED = 'BALANCED'
+}
+
 export interface Options {
   mode: Mode;
   buildings: Buildings;
   playerOrder: PlayerOrder;
+  variant: Variant;
 }

@@ -555,6 +555,13 @@
           "BIDDING": "Bidding",
           "RANDOMIZED": "Randomize"
         }
+      },
+      "variant": {
+        "label": "Variant",
+        "value": {
+          "ORIGINAL": "Original",
+          "BALANCED": "Better balanced for 2/3p"
+        }
       }
     },
     "errors": {

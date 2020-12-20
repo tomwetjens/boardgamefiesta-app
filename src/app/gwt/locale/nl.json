@@ -504,6 +504,13 @@
           "BIDDING": "Bieden",
           "RANDOMIZED": "Willekeurig"
         }
+      },
+      "variant": {
+        "label": "Variant",
+        "value": {
+          "ORIGINAL": "Origineel",
+          "BALANCED": "Beter gebalanceerd voor 2/3p"
+        }
       }
     },
     "errors": {
