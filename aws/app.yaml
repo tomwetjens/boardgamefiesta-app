@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: App for Board Game Fiesta
+Parameters:
+  Environment:
+    Type: String
+Conditions:
+  IsProduction: !Equals [ !Ref Environment, 'prod' ]
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Ref 'AWS::StackName'
+      # TODO Only allow as CloudFront origin instead of public access
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        ErrorDocument: index.html
+        IndexDocument: index.html
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    DependsOn:
+      - Bucket
+    DeletionPolicy: Retain
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Aliases:
+          - !Join [ '', [ !If [ IsProduction, '', !Join [ '', [ !Ref Environment, '.' ] ] ], 'boardgamefiesta.com' ] ]
+          - !Join [ '', [ 'www', !If [ IsProduction, '', !Ref Environment ], '.boardgamefiesta.com' ] ]
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - HEAD
+            - GET
+          Compress: false
+          DefaultTTL: 300
+          ForwardedValues:
+            QueryString: false
+          MaxTTL: 600
+          MinTTL: 0
+          TargetOriginId: S3
+          ViewerProtocolPolicy: redirect-to-https
+        DefaultRootObject: index.html
+        HttpVersion: http2
+        Origins:
+          - Id: S3
+            DomainName: !Sub '${Bucket}.s3-website.${AWS::Region}.amazonaws.com'
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:598172618529:certificate/67df310f-1baf-437f-a48c-a062182be260
+          MinimumProtocolVersion: TLSv1.2_2018
+          SslSupportMethod: sni-only
+
+  ARecord:
+    Type: AWS::Route53::RecordSet
+    DependsOn:
+      - Distribution
+    Properties:
+      HostedZoneName: boardgamefiesta.com.
+      Name: !Join [ '', [ !If [ IsProduction, '', !Join [ '', [ !Ref Environment, '.' ] ] ], 'boardgamefiesta.com' ] ]
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt Distribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2 # CloudFront
+
+  WWWRecord:
+    Type: AWS::Route53::RecordSet
+    DependsOn:
+      - Distribution
+    Properties:
+      HostedZoneName: boardgamefiesta.com.
+      Name: !Join [ '', [ 'www', !If [ IsProduction, '', !Ref Environment ], '.boardgamefiesta.com' ] ]
+      Type: CNAME
+      TTL: 3600
+      ResourceRecords:
+        - !Join [ '', [ !If [ IsProduction, '', !Join [ '', [ !Ref Environment, '.' ] ] ], 'boardgamefiesta.com' ] ]
