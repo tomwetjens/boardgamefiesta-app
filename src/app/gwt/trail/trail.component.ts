@@ -12,7 +12,19 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {Action, ActionType, Building, City, HazardType, Location, PossibleMove, Space, State, Worker} from '../model';
+import {
+  Action,
+  ActionType,
+  Building,
+  City,
+  HazardType,
+  isSpaceEquals,
+  Location,
+  PossibleMove,
+  Space,
+  State, TURNOUTS,
+  Worker
+} from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeliveryCityComponent} from '../delivery-city/delivery-city.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -112,7 +124,7 @@ interface SpaceElement {
 
 const SPACES: SpaceElement[] = Array(19).fill(0)
   .map((_, index) => ({
-    space: {number: index, turnout: null},
+    space: '' + index,
     x: 164 + index * 31.7,
     y: 54,
     width: 31.7,
@@ -121,7 +133,7 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
   }))
   .concat(Array(5).fill(0)
     .map((_, index) => ({
-      space: {number: null, turnout: index},
+      space: TURNOUTS[index] + '.5',
       x: 303 + index * 95,
       y: 73,
       width: 36,
@@ -129,7 +141,7 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
       transform: ''
     })))
   .concat({
-    space: {number: 19, turnout: null},
+    space: '19',
     x: 776,
     y: 52,
     width: 30.9,
@@ -138,7 +150,7 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
   })
   .concat(Array(19).fill(0)
     .map((_, index) => ({
-      space: {number: 20 + index, turnout: null},
+      space: (20 + index) + '',
       x: 777,
       y: 112.9 + (index * 30.9),
       width: 30.9,
@@ -147,7 +159,7 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
     })))
   .concat(Array(4).fill(0)
     .map((_, index) => ({
-      space: {number: null, turnout: 5 + index},
+      space: TURNOUTS[5 + index] + '.5',
       x: 759,
       y: 162 + index * 124,
       width: 36,
@@ -155,7 +167,7 @@ const SPACES: SpaceElement[] = Array(19).fill(0)
       transform: 'rotate(-90 0 0)'
     })))
   .concat({
-    space: {number: 39, turnout: null},
+    space: '39',
     x: 733,
     y: 678,
     width: 46,
@@ -285,9 +297,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const currentSpace = current.railroadTrack.players[color] as Space;
           const previousSpace = previous.railroadTrack.players[color] as Space;
 
-          if (currentSpace && previousSpace
-            && (currentSpace.number !== previousSpace.number
-              || currentSpace.turnout !== previousSpace.turnout)) {
+          if (currentSpace && previousSpace && !isSpaceEquals(currentSpace, previousSpace)) {
             this.audioService.playEffect(TRAIN);
           }
         }
@@ -810,13 +820,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return SELECT_SPACE_ACTIONS.includes(this.selectedAction)
       && this.state.possibleSpaces
       && this.state.possibleSpaces[this.selectedAction]
-      && this.state.possibleSpaces[this.selectedAction].some(possibleSpace => {
-        if ('turnout' in possibleSpace) {
-          return possibleSpace.turnout === space.turnout;
-        } else {
-          return possibleSpace.number === space.number;
-        }
-      });
+      && this.state.possibleSpaces[this.selectedAction].some(possibleSpace => isSpaceEquals(possibleSpace, space));
   }
 
   isSpaceSelected(space: Space): boolean {
@@ -828,8 +832,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private isPlayerAt(color: PlayerColor, space: Space): boolean {
-    return this.state.railroadTrack.players[color] && (this.state.railroadTrack.players[color].number === space.number
-      || this.state.railroadTrack.players[color].turnout === space.turnout);
+    return this.state.railroadTrack.players[color] &&
+      isSpaceEquals(this.state.railroadTrack.players[color], space);
   }
 
   canSelectWorker(rowIndex: number): boolean {
