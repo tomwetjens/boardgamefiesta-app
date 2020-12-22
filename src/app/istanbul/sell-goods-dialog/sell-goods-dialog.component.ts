@@ -32,7 +32,6 @@ export class SellGoodsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.goodsTypes);
   }
 
   canSelectDemand(index: number): boolean {

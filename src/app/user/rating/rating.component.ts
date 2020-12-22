@@ -24,7 +24,6 @@ export class RatingComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId$ = this.route.params.pipe(
-      tap(params => console.log(params)),
       map(({userId}) => userId));
 
     this.gameId$ = this.route.queryParams.pipe(
