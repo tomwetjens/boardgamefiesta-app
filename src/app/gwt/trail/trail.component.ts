@@ -18,7 +18,6 @@ import {
   Building,
   City,
   HazardType,
-  isSpaceEquals,
   Location,
   PossibleMove,
   Space,
@@ -297,7 +296,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const currentSpace = current.railroadTrack.players[color] as Space;
           const previousSpace = previous.railroadTrack.players[color] as Space;
 
-          if (currentSpace && previousSpace && !isSpaceEquals(currentSpace, previousSpace)) {
+          if (currentSpace && previousSpace && currentSpace !== previousSpace) {
             this.audioService.playEffect(TRAIN);
           }
         }
@@ -611,15 +610,13 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   get canChooseForesights(): boolean { // deprecated, can be removed
-    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS
-      || this.selectedAction === ActionType.CHOOSE_FORESIGHT_1
+    return this.selectedAction === ActionType.CHOOSE_FORESIGHT_1
       || this.selectedAction === ActionType.CHOOSE_FORESIGHT_2
       || this.selectedAction === ActionType.CHOOSE_FORESIGHT_3;
   }
 
   canSelectForesight(columnIndex: number, rowIndex: number): boolean {
-    return this.selectedAction === ActionType.CHOOSE_FORESIGHTS
-      || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_1 && columnIndex === 0)
+    return (this.selectedAction === ActionType.CHOOSE_FORESIGHT_1 && columnIndex === 0)
       || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_2 && columnIndex === 1)
       || (this.selectedAction === ActionType.CHOOSE_FORESIGHT_3 && columnIndex === 2);
   }
@@ -633,38 +630,11 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   selectForesight(rowIndex: number, columnIndex: number) {
-    if (this.selectedAction !== ActionType.CHOOSE_FORESIGHTS) {
-      if (!this.canSelectForesight(columnIndex, rowIndex)) {
-        return;
-      }
-
-      this.perform.emit({type: this.selectedAction, choice: rowIndex});
-
+    if (!this.canSelectForesight(columnIndex, rowIndex)) {
       return;
     }
 
-    // deprecated, can be removed
-    if (this.selectedForesights[columnIndex] === rowIndex) {
-      this.selectedForesights[columnIndex] = null;
-    } else {
-      this.selectedForesights[columnIndex] = rowIndex;
-    }
-
-    if (this.allAvailableForesightsSelected) {
-      this.perform.emit({type: ActionType.CHOOSE_FORESIGHTS, choices: this.selectedForesights});
-      this.selectedForesights = [null, null, null];
-    }
-  }
-
-  private get allAvailableForesightsSelected(): boolean {
-    return (this.selectedForesights[0] !== null || this.isForesightsColumnEmpty(0))
-      && (this.selectedForesights[1] !== null || this.isForesightsColumnEmpty(1))
-      && (this.selectedForesights[2] !== null || this.isForesightsColumnEmpty(2));
-  }
-
-  private isForesightsColumnEmpty(columnIndex: number) {
-    const column = this.state.foresights.choices[columnIndex];
-    return !column[0] && !column[1];
+    this.perform.emit({type: this.selectedAction, choice: rowIndex});
   }
 
   selectCity(city: string) {
@@ -820,7 +790,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return SELECT_SPACE_ACTIONS.includes(this.selectedAction)
       && this.state.possibleSpaces
       && this.state.possibleSpaces[this.selectedAction]
-      && this.state.possibleSpaces[this.selectedAction].some(possibleSpace => isSpaceEquals(possibleSpace, space));
+      && this.state.possibleSpaces[this.selectedAction].includes(space);
   }
 
   isSpaceSelected(space: Space): boolean {
@@ -832,8 +802,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   }
 
   private isPlayerAt(color: PlayerColor, space: Space): boolean {
-    return this.state.railroadTrack.players[color] &&
-      isSpaceEquals(this.state.railroadTrack.players[color], space);
+    return this.state.railroadTrack.players[color] === space;
   }
 
   canSelectWorker(rowIndex: number): boolean {

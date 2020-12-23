@@ -119,7 +119,6 @@ export enum ActionType {
   UPGRADE_ANY_STATION_BEHIND_ENGINE = 'UPGRADE_ANY_STATION_BEHIND_ENGINE',
   UPGRADE_STATION = 'UPGRADE_STATION',
   USE_ADJACENT_BUILDING = 'USE_ADJACENT_BUILDING',
-  CHOOSE_FORESIGHTS = 'CHOOSE_FORESIGHTS', // TODO Remove after 18 Sep 2020
   CHOOSE_FORESIGHT_1 = 'CHOOSE_FORESIGHT_1',
   CHOOSE_FORESIGHT_2 = 'CHOOSE_FORESIGHT_2',
   CHOOSE_FORESIGHT_3 = 'CHOOSE_FORESIGHT_3',
@@ -272,40 +271,9 @@ export interface PlayerState {
   readonly winner?: boolean;
 }
 
-/**
- * @deprecated
- */
-export interface SpaceDeprecated {
-  readonly number?: number;
-  readonly turnout?: number;
-}
-
-/**
- * @deprecated
- */
-export function isSpaceDeprecated(space: Space): space is SpaceDeprecated {
-  return !!space && typeof space !== 'string';
-}
-
 export const TURNOUTS = [4, 7, 10, 13, 16, 21, 25, 29, 33];
 
-/**
- * @deprecated
- */
-export function isSpaceEquals(a: Space, b: Space) {
-  if (a === b) {
-    return true;
-  } else if (isSpaceDeprecated(a) && isSpaceDeprecated(b)) {
-    return a.number === b.number || a.turnout === b.turnout;
-  } else if (isSpaceDeprecated(b)) {
-    return typeof b.number === 'number' ? a === b.number + '' : a === TURNOUTS[b.turnout] + '.5';
-  } else if (isSpaceDeprecated(a)) {
-    return typeof a.number === 'number' ? b === a.number + '' : b === TURNOUTS[a.turnout] + '.5';
-  }
-  return false;
-}
-
-export type Space = string | SpaceDeprecated;
+export type Space = string;
 
 export enum StationMaster {
   PERM_CERT_POINTS_FOR_EACH_2_CERTS = 'PERM_CERT_POINTS_FOR_EACH_2_CERTS',
