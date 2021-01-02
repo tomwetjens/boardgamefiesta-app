@@ -693,10 +693,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const possibleDelivery = this.state.possibleDeliveries.find(pd => pd.city === city as City);
 
           if (possibleDelivery) {
-            if (this.state.trail.playerLocations[this.state.player.player.color] === 'KANSAS_CITY') {
-              // Extraordinary delivery
-              this.perform.emit({type: ActionType.DELIVER_TO_CITY, city, certificates: 0});
-            } else if (this.state.player.certificates <= possibleDelivery.certificates) {
+            if (this.state.player.certificates <= possibleDelivery.certificates
+              || this.state.trail.playerLocations[this.state.player.player.color] !== 'KANSAS_CITY' /* Extraordinary delivery */) {
               this.perform.emit({type: ActionType.DELIVER_TO_CITY, city, certificates: possibleDelivery.certificates});
             } else {
               const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);

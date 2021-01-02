@@ -255,7 +255,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get canSkip(): boolean {
-    return this.state.turn && this.state.actions && this.state.actions.length > 0;
+    return this.state.turn && this.actions && this.actions.length > 0;
   }
 
   get canPerformFreeAction(): boolean {
