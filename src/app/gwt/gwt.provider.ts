@@ -9,16 +9,26 @@ import {Buildings, Mode, PlayerOrder, Variant} from "./model";
 })
 export class GwtProvider implements GameProvider {
 
-  options: Option[] = [
-    {key: 'mode', values: [Mode.ORIGINAL, Mode.STRATEGIC], defaultValue: Mode.ORIGINAL},
-    {key: 'buildings', values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
-    {key: 'playerOrder', values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
-    {key: 'variant', values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
-    {key: 'railsToTheNorth', values: [false, true], defaultValue: false},
-    {key: 'stationMasterPromos', values: [false, true], defaultValue: false},
-    {key: 'building11', values: [false, true], defaultValue: false},
-    {key: 'building13', values: [false, true], defaultValue: false}
-  ];
+  getOptions(table: Table): Option[] {
+    const options: Option[] = [
+      {key: 'mode', values: [Mode.ORIGINAL, Mode.STRATEGIC], defaultValue: Mode.ORIGINAL},
+      {key: 'buildings', values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
+      {key: 'playerOrder', values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
+      {key: 'variant', values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
+      {key: 'railsToTheNorth', values: [false, true], defaultValue: false}
+    ];
+
+    if (table.options['railsToTheNorth'] !== true) {
+      Array.prototype.push.apply(options, [
+        {key: 'stationMasterPromos', values: [false, true], defaultValue: false},
+        {key: 'building11', values: [false, true], defaultValue: false}
+      ]);
+    }
+
+    options.push({key: 'building13', values: [false, true], defaultValue: false});
+
+    return options;
+  }
 
   constructor(private translateService: TranslateService) {
   }

@@ -7,7 +7,7 @@ export interface Option {
 }
 
 export interface GameProvider {
-  options: Option[];
+  getOptions(table: Table): Option[];
 
   translate(logEntry: LogEntry, table: Table): string;
 }

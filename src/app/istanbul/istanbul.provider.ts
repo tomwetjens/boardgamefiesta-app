@@ -9,13 +9,15 @@ import {LayoutType} from "./model";
 })
 export class IstanbulProvider implements GameProvider {
 
-  options: Option[] = [
-    {
-      key: 'layoutType',
-      values: [LayoutType.SHORT_PATHS, LayoutType.LONG_PATHS, LayoutType.IN_ORDER, LayoutType.RANDOM],
-      defaultValue: LayoutType.RANDOM
-    }
-  ];
+  getOptions(): Option[] {
+    return [
+      {
+        key: 'layoutType',
+        values: [LayoutType.SHORT_PATHS, LayoutType.LONG_PATHS, LayoutType.IN_ORDER, LayoutType.RANDOM],
+        defaultValue: LayoutType.RANDOM
+      }
+    ];
+  }
 
   constructor(private translateService: TranslateService) {
   }

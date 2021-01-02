@@ -11,7 +11,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {TranslateService} from '@ngx-translate/core';
 import {AudioService} from '../audio.service';
 import {ToastrService} from "../toastr.service";
-import {GAME_PROVIDERS, GameProvider} from "../shared/api";
+import {GAME_PROVIDERS, GameProvider, Option} from "../shared/api";
 import {InvitePlayerComponent} from "../invite-player/invite-player.component";
 import {TitleService} from "../title.service";
 
@@ -205,5 +205,9 @@ export class TableComponent implements OnInit, OnDestroy {
   makePrivate(table: Table) {
     this.tableService.makePrivate(table.id)
       .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  trackOption(index: number, option: Option): any {
+    return option.key;
   }
 }

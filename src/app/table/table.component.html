@@ -62,7 +62,7 @@
             </div>
             <div class="card-body">
               <form *ngIf="(provider$ | async) as provider">
-                <div class="form-group" *ngFor="let option of provider.options">
+                <div class="form-group" *ngFor="let option of provider.getOptions(table); trackBy: trackOption">
                   <label [for]="option.key">{{(table.game + '.option.' + option.key + '.label')|translate}}</label>
                   <div ngbDropdown>
                     <button class="btn btn-outline-primary" [id]="option.key" ngbDropdownToggle>
