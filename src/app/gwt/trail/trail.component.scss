@@ -50,8 +50,27 @@ svg {
   }
 }
 
-.cities {
-  .city {
+.city {
+  stroke-opacity: 1;
+  stroke: #ffffff;
+  stroke-width: 2;
+  fill: none;
+  fill: rgb(0, 0, 0, 0.01);
+
+  cursor: pointer;
+
+  &:hover {
+    stroke: black;
+  }
+
+  &.disabled {
+    stroke-width: 0 !important;
+    cursor: default !important;
+  }
+}
+
+.town {
+  rect {
     stroke-opacity: 1;
     stroke: #ffffff;
     stroke-width: 2;
@@ -71,6 +90,37 @@ svg {
   }
 }
 
+.branchlet {
+  &.BLUE {
+    fill: blue;
+    stroke: black;
+    stroke-width: 0.5;
+  }
+
+  &.RED {
+    fill: red;
+    stroke: black;
+    stroke-width: 0.5;
+  }
+
+  &.YELLOW {
+    fill: yellow;
+    stroke: black;
+    stroke-width: 0.5;
+  }
+
+  &.WHITE {
+    fill: #d9d9d9;
+    stroke: black;
+    stroke-width: 0.5;
+  }
+
+  &.GREEN {
+    fill: green;
+    stroke: black;
+    stroke-width: 0.5;
+  }
+}
 
 .ranchers {
 
@@ -199,31 +249,31 @@ svg {
   &.BLUE {
     fill: blue;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.5;
   }
 
   &.RED {
     fill: red;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.5;
   }
 
   &.YELLOW {
     fill: yellow;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.5;
   }
 
   &.WHITE {
     fill: #d9d9d9;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.5;
   }
 
   &.GREEN {
     fill: green;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.5;
   }
 }
 

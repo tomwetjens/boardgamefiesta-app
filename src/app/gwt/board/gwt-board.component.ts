@@ -14,14 +14,14 @@ const AUTO_SELECTED_ACTIONS = [
   ActionType.PLACE_BID,
   ActionType.MOVE,
   ActionType.DISCARD_CARD,
-  ActionType.CHOOSE_FORESIGHTS,
   ActionType.CHOOSE_FORESIGHT_1,
   ActionType.CHOOSE_FORESIGHT_2,
   ActionType.CHOOSE_FORESIGHT_3,
   ActionType.DELIVER_TO_CITY,
   ActionType.UNLOCK_WHITE,
   ActionType.UNLOCK_BLACK_OR_WHITE,
-  ActionType.DOWNGRADE_STATION
+  ActionType.DOWNGRADE_STATION,
+  ActionType.PLACE_BRANCHLET
 ];
 
 const DIRECT_ACTIONS = [
@@ -58,7 +58,14 @@ const DIRECT_ACTIONS = [
   ActionType.GAIN_4_DOLLARS,
   ActionType.GAIN_12_DOLLARS,
   ActionType.MAX_CERTIFICATES,
-  ActionType.UPGRADE_STATION
+  ActionType.UPGRADE_STATION,
+  ActionType.GAIN_EXCHANGE_TOKEN,
+  ActionType.GAIN_1_DOLLAR_PER_CRAFTSMAN,
+  ActionType.GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL,
+  ActionType.GAIN_2_CERTIFICATES,
+  ActionType.GAIN_3_DOLLARS,
+  ActionType.GAIN_5_DOLLARS,
+  ActionType.UPGRADE_STATION_TOWN
 ];
 
 const FREE_ACTIONS = [
@@ -97,7 +104,15 @@ const FREE_ACTIONS = [
   ActionType.SINGLE_OR_DOUBLE_AUXILIARY_ACTION,
   ActionType.UPGRADE_ANY_STATION_BEHIND_ENGINE,
   ActionType.UPGRADE_STATION,
-  ActionType.USE_ADJACENT_BUILDING
+  ActionType.USE_ADJACENT_BUILDING,
+  ActionType.GAIN_EXCHANGE_TOKEN,
+  ActionType.GAIN_1_DOLLAR_PER_CRAFTSMAN,
+  ActionType.GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL,
+  ActionType.GAIN_2_CERTIFICATES,
+  ActionType.GAIN_3_DOLLARS,
+  ActionType.GAIN_5_DOLLARS,
+  ActionType.UPGRADE_STATION_TOWN,
+  ActionType.TAKE_BREEDING_VALUE_3_CATTLE_CARD
 ];
 
 @Component({
@@ -118,6 +133,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
   @Input() state: State;
   @Input() busy: boolean;
 
+  actions: ActionType[];
   selectedAction: ActionType;
   @Output() perform = new EventEmitter<Action>();
   @Output() skip = new EventEmitter<void>();
@@ -150,6 +166,10 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private stateChanged(currentState: State, previousState: State) {
+    this.actions = currentState.actions
+      ? currentState.actions.filter(action => action !== ActionType.USE_EXCHANGE_TOKEN)
+      : [];
+
     if (!previousState && currentState.player
       && !currentState.trail.playerLocations[currentState.player.player.color]
       && !this.audioService.isPlayingMusic) {
@@ -158,11 +178,11 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (currentState.turn) {
-      if (currentState.actions.length === 1
-        && AUTO_SELECTED_ACTIONS.includes(currentState.actions[0])) {
+      if (this.actions.length === 1
+        && AUTO_SELECTED_ACTIONS.includes(this.actions[0])) {
         this.stopAutoEndTurnTimer();
-        this.selectedAction = currentState.actions[0];
-      } else if (currentState.actions.length === 0) {
+        this.selectedAction = this.actions[0];
+      } else if (this.actions.length === 0) {
         this.selectedAction = null;
         this.startAutoEndTurnTimer();
       } else {

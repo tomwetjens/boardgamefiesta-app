@@ -1,0 +1,4 @@
+<app-station-master *ngFor="let stationMaster of state.railroadTrack.bonusStationMasters"
+                    [stationMaster]="stationMaster"
+                    [ngClass]="{disabled:!canSelect(stationMaster)}"
+                    (click)="selectStationMaster(stationMaster)"></app-station-master>

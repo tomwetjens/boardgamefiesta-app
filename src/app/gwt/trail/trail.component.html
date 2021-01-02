@@ -154,7 +154,7 @@
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   version="1.1"
-  viewBox="0 -20 800 820"
+  [attr.viewBox]="'0 -20 800 ' + (state.railsToTheNorth ? 1015 : 820)"
   style="width:100%; height:100%">
   <defs>
     <rect id="smallLocation"
@@ -244,6 +244,43 @@
     <g id="TWELVE_DOLLARS">
       <image href="/assets/games/gwt/sm/12_dollars.png" width="33" height="39" clip-path="url(#tileclip)"/>
     </g>
+    <g id="PERM_CERT_POINTS_PER_2_STATIONS">
+      <image href="/assets/games/gwt/sm/points_per_2_stations.png" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="GAIN_2_CERTS_POINTS_PER_BUILDING">
+      <image href="/assets/games/gwt/sm/2_certs.png" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS">
+      <image href="/assets/games/gwt/sm/place_branchlet.png" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+    <g id="GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA">
+      <image href="/assets/games/gwt/sm/points_per_area.png" width="33" height="39" clip-path="url(#tileclip)"/>
+    </g>
+
+    <clipPath id="mediumTownTileClip">
+      <rect rx="4" ry="4" width="33" height="33"/>
+    </clipPath>
+
+    <g id="GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD">
+      <image href="/assets/games/gwt/mt/gain5_take3card.png" x="0" y="0" width="33" height="33"
+             clip-path="url(#mediumTownTileClip)"/>
+    </g>
+    <g id="HIRE_WORKER_PLUS_2">
+      <image href="/assets/games/gwt/mt/hire_worker_plus2.png" x="0" y="0" width="33" height="33"
+             clip-path="url(#mediumTownTileClip)"/>
+    </g>
+    <g id="REMOVE_2_CARDS">
+      <image href="/assets/games/gwt/mt/remove_2_cards.png" x="0" y="0" width="33" height="33"
+             clip-path="url(#mediumTownTileClip)"/>
+    </g>
+    <g id="MOVE_ENGINE_3_FORWARD">
+      <image href="/assets/games/gwt/mt/move_engine_3.png" x="0" y="0" width="33" height="33"
+             clip-path="url(#mediumTownTileClip)"/>
+    </g>
+    <g id="PLACE_BUILDING_FOR_FREE">
+      <image href="/assets/games/gwt/mt/place_building_free.png" x="0" y="0" width="33" height="33"
+             clip-path="url(#mediumTownTileClip)"/>
+    </g>
 
     <clipPath id="tokenclip">
       <circle r="15" cx="15" cy="15"/>
@@ -261,10 +298,229 @@
         </g>
       </g>
     </g>
-  </defs>
-  <g>
-    <image href="/assets/games/gwt/board.png" x="0" y="0" height="800" width="800"></image>
 
+    <g id="branchlet">
+      <g transform="scale(0.9)">
+        <g transform="translate(-27.898 -38.148)">
+          <path d="m38.243 38.148-5.1723 2.9476-5.1723 2.9471h2.6091v8.4543h15.376v-8.4543h2.7037l-5.1723-2.9471z"/>
+        </g>
+      </g>
+    </g>
+  </defs>
+  <image href="/assets/games/gwt/board.png" x="0" [attr.y]="state.railsToTheNorth ? 195 : 0" height="800"
+         width="800"></image>
+  <g *ngIf="state.railsToTheNorth">
+    <image href="/assets/games/gwt/rttn.png" x="0" y="0" height="250" width="800"></image>
+
+    <g transform="translate(24.5,65)">
+      <g *ngIf="state.railroadTrack.stations[10]?.stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[10].stationMaster.toString()|translate}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[10].stationMaster"/>
+      </g>
+      <use *ngIf="state.railroadTrack.stations[10]?.worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[10].worker" class="worker disabled"/>
+    </g>
+
+    <g transform="translate(422,95)">
+      <g *ngIf="state.railroadTrack.stations[11]?.stationMaster"
+         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[11].stationMaster.toString()|translate}}"
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[11].stationMaster"/>
+      </g>
+      <use *ngIf="state.railroadTrack.stations[11]?.worker"
+           [attr.xlink:href]="'#' + state.railroadTrack.stations[11].worker" class="worker disabled"/>
+    </g>
+
+    <g *ngFor="let mediumTownTile of mediumTownTiles | keyvalue" class="mediumTownTile"
+       [attr.transform]="'translate(' + mediumTownTile.value.x + ',' + mediumTownTile.value.y + ')'"
+       ngbPopover="{{'gwt.popover.mediumTownTile.' + state.railroadTrack.towns[mediumTownTile.key]?.mediumTownTile.toString()|translate}}"
+       triggers="mouseenter:mouseleave"
+       container="body">
+      <use [attr.xlink:href]="'#' + state.railroadTrack.towns[mediumTownTile.key]?.mediumTownTile"/>
+    </g>
+
+    <circle *ngFor="let color of state.railroadTrack.stations[10].players; index as i" [class]="'disc ' + color"
+            cx="75" [attr.cy]="89 - (i * 4)" r="11"/>
+    <g class="station" [attr.transform]="'translate(59,73)'" [ngClass]="{disabled:!canSelectStation(10)}"
+       (click)="selectStation(10)">
+      <rect width="33" height="33" rx="6" ry="6" x="0" y="0"/>
+    </g>
+
+    <circle *ngFor="let color of state.railroadTrack.stations[11].players; index as i" [class]="'disc ' + color"
+            cx="473" [attr.cy]="120 - (i * 4)" r="11"/>
+    <g class="station" [attr.transform]="'translate(456,104)'" [ngClass]="{disabled:!canSelectStation(11)}"
+       (click)="selectStation(11)">
+      <rect width="33" height="33" rx="6" ry="6" x="0" y="0"/>
+    </g>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['MEMPHIS']; index as i"  [class]="'disc ' + color"
+            cx="140" [attr.cy]="144 - (i * 4)" r="11"/>
+    <rect class="city" x="115" y="127" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('MEMPHIS')" [ngClass]="{disabled:!canSelectCity('MEMPHIS')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['SAN_FRANCISCO']; index as i"  [class]="'disc ' + color"
+            cx="188.5" [attr.cy]="53 - (i * 4)" r="11"/>
+    <rect class="city" x="163" y="35" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['DENVER']; index as i"  [class]="'disc ' + color"
+            cx="336" [attr.cy]="53 - (i * 4)" r="11"/>
+    <rect class="city" x="310" y="35" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('DENVER')" [ngClass]="{disabled:!canSelectCity('DENVER')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['MILWAUKEE']; index as i"  [class]="'disc ' + color"
+            cx="414" [attr.cy]="54 - (i * 4)" r="11"/>
+    <rect class="city" x="388" y="36" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('MILWAUKEE')" [ngClass]="{disabled:!canSelectCity('MILWAUKEE')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['GREEN_BAY']; index as i"  [class]="'disc ' + color"
+            cx="543" [attr.cy]="53 - (i * 4)" r="11"/>
+    <rect class="city" x="517" y="36" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('GREEN_BAY')" [ngClass]="{disabled:!canSelectCity('GREEN_BAY')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['MINNEAPOLIS']; index as i"  [class]="'disc ' + color"
+            cx="695.5" [attr.cy]="54 - (i * 4)" r="11"/>
+    <rect class="city" x="670" y="36" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('MINNEAPOLIS')" [ngClass]="{disabled:!canSelectCity('MINNEAPOLIS')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['MONTREAL']; index as i"  [class]="'disc ' + color"
+            cx="769.5" [attr.cy]="100 - (i * 4)" r="11"/>
+    <rect class="city" x="744" y="82" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('MONTREAL')" [ngClass]="{disabled:!canSelectCity('MONTREAL')}"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['MONTREAL']; index as i"  [class]="'disc ' + color"
+            cx="621" [attr.cy]="150 - (i * 4)" r="11"/>
+    <rect class="city" x="596" y="132" rx="2" ry="2" height="50" width="52"
+          (click)="selectCity('TORONTO')" [ngClass]="{disabled:!canSelectCity('TORONTO')}"/>
+
+    <g *ngFor="let town of towns | keyvalue"
+       [attr.transform]="'translate(' + town.value.x + ',' + town.value.y +')'" class="town">
+      <use *ngFor="let playerColor of state.railroadTrack.towns[town.key]?.branchlets; index as i"
+           xlink:href="#branchlet"
+           [attr.class]="'branchlet ' + playerColor"
+           [attr.x]="0.5 + (i % 2) * 17"
+           [attr.y]="3 + Math.floor(i / 2) * 15"/>
+      <rect x="0" y="0" rx="2" ry="2" height="36" width="36" (click)="selectTown(town.key)"
+            [ngClass]="{disabled:!canSelectTown(town.key)}"/>
+    </g>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['KANSAS_CITY']; index as i"
+            [class]="'disc ' + color"
+            cx="147"
+            [attr.cy]="210 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['COLUMBIA']; index as i"
+            [class]="'disc ' + color"
+            cx="210"
+            [attr.cy]="210 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['ST_LOUIS']; index as i"
+            [class]="'disc ' + color"
+            cx="305.5"
+            [attr.cy]="209.5 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['CHICAGO']; index as i"
+            [class]="'disc ' + color"
+            cx="368.5"
+            [attr.cy]="210 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['DETROIT']; index as i"
+            [class]="'disc ' + color"
+            cx="495"
+            [attr.cy]="209 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['CLEVELAND']; index as i"
+            [class]="'disc ' + color"
+            cx="558.25"
+            [attr.cy]="209 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['PITTSBURGH']; index as i"
+            [class]="'disc ' + color"
+            cx="655"
+            [attr.cy]="209 - (i * 4)"
+            r="11"/>
+
+    <circle *ngFor="let color of state.railroadTrack.cities['NEW_YORK_CITY']; index as i"
+            [class]="'disc ' + color"
+            cx="747.5"
+            [attr.cy]="209 - (i * 4)"
+            r="11"/>
+
+    <rect class="city"
+          x="121"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('KANSAS_CITY')" [ngClass]="{disabled:!canSelectCity('KANSAS_CITY')}"/>
+    <rect class="city"
+          x="183"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('COLUMBIA')" [ngClass]="{disabled:!canSelectCity('COLUMBIA')}"/>
+    <rect class="city"
+          x="279"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('ST_LOUIS')" [ngClass]="{disabled:!canSelectCity('ST_LOUIS')}"/>
+    <rect class="city"
+          x="343"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('CHICAGO')" [ngClass]="{disabled:!canSelectCity('CHICAGO')}"/>
+    <rect class="city"
+          x="470"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('DETROIT')" [ngClass]="{disabled:!canSelectCity('DETROIT')}"/>
+    <rect class="city"
+          x="533"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('CLEVELAND')" [ngClass]="{disabled:!canSelectCity('CLEVELAND')}"/>
+    <rect class="city"
+          x="629"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('PITTSBURGH')" [ngClass]="{disabled:!canSelectCity('PITTSBURGH')}"/>
+    <rect class="city"
+          x="722"
+          y="191"
+          rx="2"
+          ry="2"
+          height="50"
+          width="52"
+          (click)="selectCity('NEW_YORK_CITY')" [ngClass]="{disabled:!canSelectCity('NEW_YORK_CITY')}"/>
+  </g>
+  <g [attr.transform]="'translate(0, ' + (state.railsToTheNorth ? 195 : 0) + ')'">
     <g id="foresights" transform="translate(21.5,195)" class="foresights" [ngClass]="{disabled:!canChooseForesights}">
       <g transform="translate(0,0)" *ngIf="foresights[2][0]">
         <use [attr.xlink:href]="'#' + foresights[2][0].href"
@@ -311,7 +567,7 @@
       </g>
     </g>
 
-    <g id="cities" class="cities">
+    <g id="cities" class="cities" *ngIf="!state.railsToTheNorth">
       <circle *ngFor="let color of state.railroadTrack.cities['KANSAS_CITY']; index as i"
               [class]="'disc ' + color"
               cx="147"
@@ -371,76 +627,6 @@
               [class]="'disc ' + color"
               cx="748"
               [attr.cy]="17 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 0 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[0].players; index as i"
-              [class]="'disc ' + color"
-              cx="322"
-              [attr.cy]="110 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 1 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[1].players; index as i"
-              [class]="'disc ' + color"
-              cx="416"
-              [attr.cy]="110 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 2 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[2].players; index as i"
-              [class]="'disc ' + color"
-              cx="510"
-              [attr.cy]="110 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 3 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[3].players; index as i"
-              [class]="'disc ' + color"
-              cx="606"
-              [attr.cy]="110 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 4 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[4].players; index as i"
-              [class]="'disc ' + color"
-              cx="701"
-              [attr.cy]="110 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 5 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[5].players; index as i"
-              [class]="'disc ' + color"
-              cx="739"
-              [attr.cy]="144 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 6 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[6].players; index as i"
-              [class]="'disc ' + color"
-              cx="739"
-              [attr.cy]="266 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 7 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[7].players; index as i"
-              [class]="'disc ' + color"
-              cx="739"
-              [attr.cy]="390 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 8 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[8].players; index as i"
-              [class]="'disc ' + color"
-              cx="739"
-              [attr.cy]="514 - (i * 4)"
-              r="11"/>
-
-      <!-- Station 9 -->
-      <circle *ngFor="let color of state.railroadTrack.stations[9].players; index as i"
-              [class]="'disc ' + color"
-              cx="762"
-              [attr.cy]="715 - (i * 4)"
               r="11"/>
 
       <rect id="city-KANSAS_CITY"
@@ -536,73 +722,131 @@
     </g>
 
     <g id="railroad-track" class="railroad-track">
-      <g *ngIf="state.railroadTrack.stations[0].stationMaster"
-         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[0].stationMaster.toString()|translate}}"
-         triggers="mouseenter:mouseleave"
-         container="body">
-        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[0].stationMaster"
-             [attr.x]="271"
-             [attr.y]="86"/>
-      </g>
-      <use *ngIf="state.railroadTrack.stations[0].worker"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[0].worker" class="worker disabled"
-           [attr.x]="271"
-           [attr.y]="86"/>
 
-      <g *ngIf="state.railroadTrack.stations[1].stationMaster"
-         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[1].stationMaster.toString()|translate}}"
-         triggers="mouseenter:mouseleave"
-         container="body">
-        <use
-          [attr.xlink:href]="'#' + state.railroadTrack.stations[1].stationMaster"
-          [attr.x]="365.5"
-          [attr.y]="86"/>
-      </g>
-      <use *ngIf="state.railroadTrack.stations[1].worker"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[1].worker" class="worker disabled"
-           [attr.x]="365.5"
-           [attr.y]="86"/>
+      <!-- Station 0 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[0].players; index as i"
+              [class]="'disc ' + color"
+              cx="322"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
 
-      <g *ngIf="state.railroadTrack.stations[2].stationMaster"
-         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[2].stationMaster.toString()|translate}}"
-         triggers="mouseenter:mouseleave"
-         container="body">
-        <use
-          [attr.xlink:href]="'#' + state.railroadTrack.stations[2].stationMaster"
-          [attr.x]="460"
-          [attr.y]="86"/>
-      </g>
-      <use *ngIf="state.railroadTrack.stations[2].worker"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[2].worker" class="worker disabled"
-           [attr.x]="460"
-           [attr.y]="86"/>
+      <!-- Station 1 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[1].players; index as i"
+              [class]="'disc ' + color"
+              cx="416"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
 
-      <g *ngIf="state.railroadTrack.stations[3].stationMaster"
-         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[3].stationMaster.toString()|translate}}"
-         triggers="mouseenter:mouseleave"
-         container="body">
-        <use [attr.xlink:href]="'#' + state.railroadTrack.stations[3].stationMaster"
-             [attr.x]="555"
-             [attr.y]="86"/>
-      </g>
-      <use *ngIf="state.railroadTrack.stations[3].worker"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[3].worker" class="worker disabled"
-           [attr.x]="555"
-           [attr.y]="86"/>
+      <!-- Station 2 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[2].players; index as i"
+              [class]="'disc ' + color"
+              cx="510"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
 
-      <g *ngIf="state.railroadTrack.stations[4].stationMaster"
-         ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[4].stationMaster.toString()|translate}}"
-         triggers="mouseenter:mouseleave"
-         container="body">
-        <use
-          [attr.xlink:href]="'#' + state.railroadTrack.stations[4].stationMaster"
-          [attr.x]="650"
-          [attr.y]="86"/>
+      <!-- Station 3 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[3].players; index as i"
+              [class]="'disc ' + color"
+              cx="606"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 4 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[4].players; index as i"
+              [class]="'disc ' + color"
+              cx="701"
+              [attr.cy]="110 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 5 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[5].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="144 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 6 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[6].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="266 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 7 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[7].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="390 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 8 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[8].players; index as i"
+              [class]="'disc ' + color"
+              cx="739"
+              [attr.cy]="514 - (i * 4)"
+              r="11"/>
+
+      <!-- Station 9 -->
+      <circle *ngFor="let color of state.railroadTrack.stations[9].players; index as i"
+              [class]="'disc ' + color"
+              cx="762"
+              [attr.cy]="715 - (i * 4)"
+              r="11"/>
+
+      <g transform="translate(271,86)">
+        <g *ngIf="state.railroadTrack.stations[0].stationMaster"
+           ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[0].stationMaster.toString()|translate}}"
+           triggers="mouseenter:mouseleave"
+           container="body">
+          <use [attr.xlink:href]="'#' + state.railroadTrack.stations[0].stationMaster"/>
+        </g>
+        <use *ngIf="state.railroadTrack.stations[0].worker"
+             [attr.xlink:href]="'#' + state.railroadTrack.stations[0].worker" class="worker disabled"/>
       </g>
-      <use *ngIf="state.railroadTrack.stations[4].worker"
-           [attr.xlink:href]="'#' + state.railroadTrack.stations[4].worker" class="worker disabled"
-           [attr.x]="650"
-           [attr.y]="86"/>
+
+      <g transform="translate(365.5,86)">
+        <g *ngIf="state.railroadTrack.stations[1].stationMaster"
+           ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[1].stationMaster.toString()|translate}}"
+           triggers="mouseenter:mouseleave"
+           container="body">
+          <use [attr.xlink:href]="'#' + state.railroadTrack.stations[1].stationMaster"/>
+        </g>
+        <use *ngIf="state.railroadTrack.stations[1].worker"
+             [attr.xlink:href]="'#' + state.railroadTrack.stations[1].worker" class="worker disabled"/>
+      </g>
+
+      <g transform="translate(460,86)">
+        <g *ngIf="state.railroadTrack.stations[2].stationMaster"
+           ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[2].stationMaster.toString()|translate}}"
+           triggers="mouseenter:mouseleave"
+           container="body">
+          <use [attr.xlink:href]="'#' + state.railroadTrack.stations[2].stationMaster"/>
+        </g>
+        <use *ngIf="state.railroadTrack.stations[2].worker"
+             [attr.xlink:href]="'#' + state.railroadTrack.stations[2].worker" class="worker disabled"/>
+      </g>
+
+      <g transform="translate(555,86)">
+        <g *ngIf="state.railroadTrack.stations[3].stationMaster"
+           ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[3].stationMaster.toString()|translate}}"
+           triggers="mouseenter:mouseleave"
+           container="body">
+          <use [attr.xlink:href]="'#' + state.railroadTrack.stations[3].stationMaster"/>
+        </g>
+        <use *ngIf="state.railroadTrack.stations[3].worker"
+             [attr.xlink:href]="'#' + state.railroadTrack.stations[3].worker" class="worker disabled"/>
+      </g>
+
+      <g transform="translate(650,86)">
+        <g *ngIf="state.railroadTrack.stations[4].stationMaster"
+           ngbPopover="{{'gwt.popover.stationMaster.' + state.railroadTrack.stations[4].stationMaster.toString()|translate}}"
+           triggers="mouseenter:mouseleave"
+           container="body">
+          <use [attr.xlink:href]="'#' + state.railroadTrack.stations[4].stationMaster"/>
+        </g>
+        <use *ngIf="state.railroadTrack.stations[4].worker"
+             [attr.xlink:href]="'#' + state.railroadTrack.stations[4].worker" class="worker disabled"/>
+      </g>
 
       <g *ngFor="let space of spaces"
          [attr.transform]="'translate(' + space.x + ',' + space.y + ') ' + space.transform">
@@ -707,7 +951,8 @@
             [ngClass]="{disabled:!canSelectLocation('START')}"
             (click)="selectLocation('START')"/>
 
-      <g transform="translate(358.7880323,833.6133355)" *ngIf="state.trail.locations['FLOOD-4']?.hazard as hazard" class="hazard">
+      <g transform="translate(358.7880323,833.6133355)" *ngIf="state.trail.locations['FLOOD-4']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -719,7 +964,8 @@
             (click)="selectLocation('FLOOD-4')"
             [ngbPopover]="popoverLocationFlood4" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(408.931151,840.0237323)" *ngIf="state.trail.locations['FLOOD-3']?.hazard as hazard" class="hazard">
+      <g transform="translate(408.931151,840.0237323)" *ngIf="state.trail.locations['FLOOD-3']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -731,7 +977,8 @@
             (click)="selectLocation('FLOOD-3')"
             [ngbPopover]="popoverLocationFlood3" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(460.3764905,839.6482039)" *ngIf="state.trail.locations['FLOOD-2']?.hazard as hazard" class="hazard">
+      <g transform="translate(460.3764905,839.6482039)" *ngIf="state.trail.locations['FLOOD-2']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -743,7 +990,8 @@
             (click)="selectLocation('FLOOD-2')"
             [ngbPopover]="popoverLocationFlood2" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(511.4463578,844.154348)" *ngIf="state.trail.locations['FLOOD-1']?.hazard as hazard" class="hazard">
+      <g transform="translate(511.4463578,844.154348)" *ngIf="state.trail.locations['FLOOD-1']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -755,7 +1003,8 @@
             (click)="selectLocation('FLOOD-1')"
             [ngbPopover]="popoverLocationFlood1" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(60.07891838,751.4024862)" *ngIf="state.trail.locations['DROUGHT-1']?.hazard as hazard" class="hazard">
+      <g transform="translate(60.07891838,751.4024862)" *ngIf="state.trail.locations['DROUGHT-1']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -767,7 +1016,8 @@
             (click)="selectLocation('DROUGHT-1')"
             [ngbPopover]="popoverLocationDrought1" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(54.82173996,693.1979165)" *ngIf="state.trail.locations['DROUGHT-2']?.hazard as hazard" class="hazard">
+      <g transform="translate(54.82173996,693.1979165)" *ngIf="state.trail.locations['DROUGHT-2']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -779,7 +1029,8 @@
             (click)="selectLocation('DROUGHT-2')"
             [ngbPopover]="popoverLocationDrought2" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(63.45855315,637.2463205)" *ngIf="state.trail.locations['DROUGHT-3']?.hazard as hazard" class="hazard">
+      <g transform="translate(63.45855315,637.2463205)" *ngIf="state.trail.locations['DROUGHT-3']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -791,7 +1042,8 @@
             (click)="selectLocation('DROUGHT-3')"
             [ngbPopover]="popoverLocationDrought3" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(67.58920257,581.6703091)" *ngIf="state.trail.locations['DROUGHT-4']?.hazard as hazard" class="hazard">
+      <g transform="translate(67.58920257,581.6703091)" *ngIf="state.trail.locations['DROUGHT-4']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -803,7 +1055,8 @@
             (click)="selectLocation('DROUGHT-4')"
             [ngbPopover]="popoverLocationDrought4" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(536.352691,417.9463335)" *ngIf="state.trail.locations['ROCKFALL-1']?.hazard as hazard" class="hazard">
+      <g transform="translate(536.352691,417.9463335)" *ngIf="state.trail.locations['ROCKFALL-1']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -815,7 +1068,8 @@
             (click)="selectLocation('ROCKFALL-1')"
             [ngbPopover]="popoverLocationRockfall1" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(540.3609206,365.7499091)" *ngIf="state.trail.locations['ROCKFALL-2']?.hazard as hazard" class="hazard">
+      <g transform="translate(540.3609206,365.7499091)" *ngIf="state.trail.locations['ROCKFALL-2']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -827,7 +1081,8 @@
             (click)="selectLocation('ROCKFALL-2')"
             [ngbPopover]="popoverLocationRockfall2" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(539.2343916,313.5535409)" *ngIf="state.trail.locations['ROCKFALL-3']?.hazard as hazard" class="hazard">
+      <g transform="translate(539.2343916,313.5535409)" *ngIf="state.trail.locations['ROCKFALL-3']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"
@@ -839,7 +1094,8 @@
             (click)="selectLocation('ROCKFALL-3')"
             [ngbPopover]="popoverLocationRockfall3" triggers="mouseenter:mouseleave" container="body"/>
 
-      <g transform="translate(505.4014015,265.94122686)" *ngIf="state.trail.locations['ROCKFALL-4']?.hazard as hazard" class="hazard">
+      <g transform="translate(505.4014015,265.94122686)" *ngIf="state.trail.locations['ROCKFALL-4']?.hazard as hazard"
+         class="hazard">
         <image
           [attr.href]="'/assets/games/gwt/' + hazard.type.toLowerCase() + '_' + hazard.hands.toLowerCase() + '.png'"
           width="33" height="39" clip-path="url(#tileclip)"

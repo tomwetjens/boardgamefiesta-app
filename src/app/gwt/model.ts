@@ -124,7 +124,20 @@ export enum ActionType {
   CHOOSE_FORESIGHT_3 = 'CHOOSE_FORESIGHT_3',
   UNLOCK_BLACK_OR_WHITE = 'UNLOCK_BLACK_OR_WHITE',
   UNLOCK_WHITE = 'UNLOCK_WHITE',
-  DOWNGRADE_STATION = 'DOWNGRADE_STATION'
+  DOWNGRADE_STATION = 'DOWNGRADE_STATION',
+  GAIN_EXCHANGE_TOKEN = 'GAIN_EXCHANGE_TOKEN',
+  GAIN_1_DOLLAR_PER_CRAFTSMAN = 'GAIN_1_DOLLAR_PER_CRAFTSMAN',
+  GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL = 'GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL',
+  GAIN_2_CERTIFICATES = 'GAIN_2_CERTIFICATES',
+  GAIN_3_DOLLARS = 'GAIN_3_DOLLARS',
+  DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET = 'DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET',
+  PLACE_BRANCHLET = 'PLACE_BRANCHLET',
+  UPGRADE_STATION_TOWN = 'UPGRADE_STATION_TOWN',
+  GAIN_5_DOLLARS = 'GAIN_5_DOLLARS',
+  PLACE_BUILDING_FOR_FREE = 'PLACE_BUILDING_FOR_FREE',
+  TAKE_BREEDING_VALUE_3_CATTLE_CARD = 'TAKE_BREEDING_VALUE_3_CATTLE_CARD',
+  USE_EXCHANGE_TOKEN = 'USE_EXCHANGE_TOKEN',
+  TAKE_BONUS_STATION_MASTER = 'TAKE_BONUS_STATION_MASTER'
 }
 
 export enum Teepee {
@@ -222,7 +235,8 @@ export enum Unlockable {
   AUX_DRAW_CARD_TO_DISCARD_CARD = 'AUX_DRAW_CARD_TO_DISCARD_CARD',
   AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT = 'AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT',
   AUX_PAY_TO_MOVE_ENGINE_FORWARD = 'AUX_PAY_TO_MOVE_ENGINE_FORWARD',
-  AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD = 'AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD'
+  AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD = 'AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD',
+  AUX_DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET = 'AUX_DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET'
 }
 
 export enum ScoreCategory {
@@ -269,6 +283,8 @@ export interface PlayerState {
   readonly objectives: Objective[];
   readonly score?: Score;
   readonly winner?: boolean;
+  readonly exchangeTokens?: number;
+  readonly branchlets?: number;
 }
 
 export const TURNOUTS = [4, 7, 10, 13, 16, 21, 25, 29, 33];
@@ -280,7 +296,13 @@ export enum StationMaster {
   PERM_CERT_POINTS_FOR_EACH_2_HAZARDS = 'PERM_CERT_POINTS_FOR_EACH_2_HAZARDS',
   PERM_CERT_POINTS_FOR_TEEPEE_PAIRS = 'PERM_CERT_POINTS_FOR_TEEPEE_PAIRS',
   REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS = 'REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS',
-  GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER = 'GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER'
+  GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER = 'GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER',
+  TWO_PERM_CERTS = 'TWO_PERM_CERTS',
+  TWELVE_DOLLARS = 'TWELVE_DOLLARS',
+  PERM_CERT_POINTS_PER_2_STATIONS = 'PERM_CERT_POINTS_PER_2_STATIONS',
+  GAIN_2_CERTS_POINTS_PER_BUILDING = 'GAIN_2_CERTS_POINTS_PER_BUILDING',
+  PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS = 'PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS',
+  GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA = 'GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA'
 }
 
 export interface Station {
@@ -306,6 +328,21 @@ export interface RailroadTrack {
   readonly players: { [color in PlayerColor]: Space };
   readonly cities: { [city in City]: PlayerColor[] };
   readonly stations: Station[];
+  readonly towns?: { [name: string]: Town };
+  readonly bonusStationMasters?: StationMaster[];
+}
+
+export interface Town {
+  branchlets: PlayerColor[];
+  mediumTownTile?: MediumTownTile;
+}
+
+export enum MediumTownTile {
+  GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD = 'GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD',
+  HIRE_WORKER_PLUS_2 = 'HIRE_WORKER_PLUS_2',
+  REMOVE_2_CARDS = 'REMOVE_2_CARDS',
+  MOVE_ENGINE_3_FORWARD = 'MOVE_ENGINE_3_FORWARD',
+  PLACE_BUILDING_FOR_FREE = 'PLACE_BUILDING_FOR_FREE'
 }
 
 export enum LocationType {
@@ -358,6 +395,7 @@ export interface Bid {
 
 export interface State {
   readonly status: Status;
+  readonly railsToTheNorth: boolean;
   readonly startingObjectiveCards: ObjectiveCard[];
   readonly bids: Bid[];
   readonly player?: PlayerState;
@@ -376,6 +414,7 @@ export interface State {
   readonly possibleBuys?: PossibleBuy[];
   readonly possibleDeliveries?: PossibleDelivery[];
   readonly possibleSpaces?: { [actionType in ActionType]: Space[] };
+  readonly possibleTowns?: { [actionType in ActionType]: string[] };
 }
 
 export interface Action {

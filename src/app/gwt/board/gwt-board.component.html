@@ -8,7 +8,7 @@
 
 <div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
   <div class="actions" *ngIf="table.turn && !selectedAction">
-    <button *ngFor="let action of state.actions"
+    <button *ngFor="let action of actions"
             class="btn btn-primary text-nowrap" (click)="selectAction(action)"
             [disabled]="busy"
             ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
@@ -18,15 +18,15 @@
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
 
-    <span *ngIf="!state.actions?.length">
-      {{table.game + '.endTurn'|translate:{secs:autoEndTurnInSecs} }}
+    <span *ngIf="!actions?.length || actions?.length === 0">
+      {{table.game + '.endTurn'|translate:{secs: autoEndTurnInSecs} }}
     </span>
   </div>
 
   <p *ngIf="table.turn && selectedAction" class="instruction">
     <span>{{table.game + '.actions.instructions.' + selectedAction | translate}}</span>
 
-    <button *ngIf="state.actions.length > 1"
+    <button *ngIf="actions.length > 1"
             class="btn btn-primary"
             (click)="selectedAction = null">
       {{'cancel'|translate}}
@@ -42,6 +42,11 @@
 
 <div class="row no-gutters align-items-start">
   <div class="col-md-8 col-sm-12">
+    <gwt-bonus-station-masters *ngIf="selectedAction === 'TAKE_BONUS_STATION_MASTER'"
+                               [state]="state"
+                               [selectedAction]="selectedAction"
+                               (perform)="perform.emit($event)"></gwt-bonus-station-masters>
+
     <app-trail [table]="table"
                [state]="state"
                [selectedAction]="selectedAction"
@@ -58,6 +63,9 @@
                        [selectedAction]="selectedAction"
                        (perform)="perform.emit($event)">
     </app-cattle-market>
+
+    <gwt-bonus-station-masters [state]="state"
+                               *ngIf="selectedAction !== 'TAKE_BONUS_STATION_MASTER'"></gwt-bonus-station-masters>
   </div>
   <div class="col-md-4 col-sm-12 player-boards">
     <app-player-board *ngIf="state.player"

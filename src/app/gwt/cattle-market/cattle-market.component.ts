@@ -59,11 +59,20 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   }
 
   canSelectCard(card: CattleCard) {
-    return this.buyingCattle && this.canBuySingle(card.breedingValue);
+    return (this.buyingCattle && this.canBuySingle(card.breedingValue))
+      || (this.selectedAction === ActionType.TAKE_BREEDING_VALUE_3_CATTLE_CARD && card.breedingValue === 3);
   }
 
   selectCard(card: CattleCard) {
     if (!this.canSelectCard(card)) {
+      return;
+    }
+
+    if (this.selectedAction === ActionType.TAKE_BREEDING_VALUE_3_CATTLE_CARD) {
+      this.perform.emit({
+        type: this.selectedAction,
+        cattleCard: card
+      });
       return;
     }
 

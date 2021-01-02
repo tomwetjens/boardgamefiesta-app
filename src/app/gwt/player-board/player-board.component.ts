@@ -21,6 +21,11 @@ import {DiscardPileDialogComponent} from "../discard-pile-dialog/discard-pile-di
 import {DrawStackDialogComponent} from "../draw-stack-dialog/draw-stack-dialog.component";
 import {bounceOutUpOnLeaveAnimation, flipInYOnEnterAnimation} from "angular-animations";
 
+interface Branchlet {
+  columnIndex: number;
+  rowIndex: number;
+}
+
 @Component({
   selector: 'app-player-board',
   animations: [
@@ -45,6 +50,14 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   cowboys: Worker[] = [];
   craftsmen: Worker[] = [];
   engineers: Worker[] = [];
+  branchlets: Branchlet[] = [];
+
+  get canUseExchangeToken(): boolean {
+    return this.state
+      && this.state.actions
+      && this.state.actions.includes(ActionType.USE_EXCHANGE_TOKEN)
+      && !!this.playerState.handValue;
+  }
 
   get playerCount(): number {
     return this.state.otherPlayers.length + (!!this.state.player ? 1 : 0);
@@ -57,11 +70,14 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.playerState) {
-      this.cowboys = Array(this.playerState.cowboys - 1).fill(Worker.COWBOY);
-      this.craftsmen = Array(this.playerState.craftsmen - 1).fill(Worker.CRAFTSMAN);
-      this.engineers = Array(this.playerState.engineers - 1).fill(Worker.ENGINEER);
+    this.branchlets = Array(this.playerState.branchlets).fill(null)
+      .map((_, index) => ({columnIndex: 4 - Math.floor(index / 3), rowIndex: 2 - (index % 3)}));
 
+    this.cowboys = Array(this.playerState.cowboys - 1).fill(Worker.COWBOY);
+    this.craftsmen = Array(this.playerState.craftsmen - 1).fill(Worker.CRAFTSMAN);
+    this.engineers = Array(this.playerState.engineers - 1).fill(Worker.ENGINEER);
+
+    if (changes.playerState) {
       const current = changes.playerState.currentValue as PlayerState;
       const previous = changes.playerState.previousValue as PlayerState;
 
@@ -121,6 +137,10 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   selectCard(card: Card) {
+    if (!this.canSelectCard(card)) {
+      return;
+    }
+
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
@@ -134,6 +154,7 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
 
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE:
+      case ActionType.DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET:
       case ActionType.DISCARD_PAIR_TO_GAIN_3_DOLLARS:
       case ActionType.DISCARD_PAIR_TO_GAIN_4_DOLLARS:
         this.perform.emit({type: this.selectedAction, cattleType: (card as CattleCard).type});
@@ -158,6 +179,8 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE:
         return isCattleCard(card);
+      case ActionType.DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET:
+        return isCattleCard(card) && card.breedingValue === 2;
       case ActionType.DISCARD_PAIR_TO_GAIN_3_DOLLARS:
       case ActionType.DISCARD_PAIR_TO_GAIN_4_DOLLARS:
         return isCattleCard(card) && this.hasPair((card as CattleCard).type);
@@ -236,4 +259,9 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
       : card.type + card.points;
   }
 
+  useExchangeToken() {
+    if (this.canUseExchangeToken) {
+      this.perform.emit({type: ActionType.USE_EXCHANGE_TOKEN});
+    }
+  }
 }

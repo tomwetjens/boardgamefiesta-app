@@ -14,6 +14,7 @@ export class GwtProvider implements GameProvider {
     {key: 'buildings', values: [Buildings.BEGINNER, Buildings.RANDOMIZED], defaultValue: Buildings.RANDOMIZED},
     {key: 'playerOrder', values: [PlayerOrder.RANDOMIZED, PlayerOrder.BIDDING], defaultValue: PlayerOrder.RANDOMIZED},
     {key: 'variant', values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
+    {key: 'railsToTheNorth', values: [false, true], defaultValue: false},
     {key: 'stationMasterPromos', values: [false, true], defaultValue: false},
     {key: 'building11', values: [false, true], defaultValue: false},
     {key: 'building13', values: [false, true], defaultValue: false}

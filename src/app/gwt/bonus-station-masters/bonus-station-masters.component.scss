@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+app-station-master  {
+  display: inline-block;
+  margin: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
+
+  border-radius: 8px;
+  border: 2px white solid;
+  cursor: pointer;
+
+  &:hover {
+    border-color: black;
+  }
+
+  &.disabled {
+    border: none;
+    cursor: default;
+  }
+}

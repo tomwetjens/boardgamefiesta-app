@@ -37,13 +37,18 @@
         "completed": "This objective has been completed and scores {{score}} points.",
         "notCompleted": "This objective has (not yet) been completed and scores {{score}} points."
       },
+      "exchangeTokens": "The number of exchange tokens a player has. Click on this icon to use an exchange token at any time.",
       "stationMaster": {
         "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 certificates.",
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 hazards.",
         "PERM_CERT_POINTS_FOR_TEEPEE_PAIRS": "Station master tile that gives 1 permanent certificate and 3 points for every pair of blue and green teepees.",
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Station master tile that allows removing a hazard or trading with the tribes and gives 3 points for every 2 committed objective cards.",
         "TWO_PERM_CERTS": "Station master tile that gives 2 permanent certificates but 0 extra points.",
-        "TWELVE_DOLLARS": "Station master tile that allows gaining 12 dollars but gives 0 extra points."
+        "TWELVE_DOLLARS": "Station master tile that allows gaining 12 dollars but gives 0 extra points.",
+        "PERM_CERT_POINTS_PER_2_STATIONS": "Station master tile that gives 1 permanent certificate and 3 points for every 2 upgraded stations.",
+        "GAIN_2_CERTS_POINTS_PER_BUILDING": "Station master tile that allows you to move the certificate marker up to 2 spaces and gives 2 points for every building.",
+        "PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS": "Station master tile that allows you to place a branchlet and gives 5 points for every 2 exchange tokens.",
+        "GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA": "Station master tile gives an exchange token and 2 points for every area in which you have placed at least 1 branchlet."
       },
       "buildings": "View the buildings that are available.",
       "objectives": "View the objectives that must be completed and the tiles collected.",
@@ -80,6 +85,8 @@
         "10b": "Building 10b<br/><strong>Action:</strong> Gain 4 dollars<br/><strong>Action:</strong> Move your engine up to 4 spaces forward<br/><strong>Action:</strong> Move your cattleman up to 4 steps forward",
         "11a": "Building 11a<br/><strong>Action:</strong> Remove a hazard for $2",
         "11b": "Building 11b<br/><strong>Action:</strong> Move your engine up to as many spaces forward as you have removed hazards",
+        "12a": "Building 12a<br/><strong>Action:</strong> For each bell space on your player board, that is completely cleared, you may move your certificate marker 1 space forward and gain 1 dollar",
+        "12b": "Building 12b<br/><strong>Action:</strong> Gain as many dollars as you have craftsmen<br/><strong>Action:</strong> Place a branchlet",
         "13a": "Building 13a<br/><strong>Action:</strong> Discard 1 Jersey cattle card for a single auxiliary action<br/><strong>Action:</strong> Place one of your own buildings onto a building space on the trail ($1 per craftsman)",
         "13b": "Building 13a<br/><strong>Action:</strong> Gain 2 dollars per upgraded station<br/><strong>Action:</strong> Perform a single or double auxiliary action"
       },
@@ -96,6 +103,13 @@
         "DROUGHT": "<strong>Hazard:</strong> Drought ({{points}} VP)",
         "ROCKFALL": "<strong>Hazard:</strong> Rockfall ({{points}} VP)",
         "FLOOD": "<strong>Hazard:</strong> Flood ({{points}} VP)"
+      },
+      "mediumTownTile": {
+        "GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD": "When you place a branchlet here, you gain 5 dollars or may take a cattle card of breeding value 3 from the cattle market.",
+        "HIRE_WORKER_PLUS_2": "When you place a branchlet here, you may hire a worker (+$2).",
+        "REMOVE_2_CARDS": "When you place a branchlet here, you may remove up to 2 cards from your hand.",
+        "MOVE_ENGINE_3_FORWARD": "When you place a branchlet here, you may move your engine forward up to 3 spaces.",
+        "PLACE_BUILDING_FOR_FREE": "When you place a branchlet here, you may place a building for $0."
       }
     },
     "cattleType": {
@@ -133,7 +147,7 @@
       "ENDS_GAME": "ends game",
       "FILL_UP_CATTLE_MARKET": "cattle market is filled up",
       "action": {
-        "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives {{value2}}",
+        "APPOINT_STATION_MASTER": "appoints {{value1}} to station master and receives station master tile: <strong>{{value2}}</strong>",
         "PLACE_BID": "bids {{value1}} VP to be player #{{value2}}",
         "BUY_CATTLE": "buys a {{value2}} ({{value3}}VP) for ${{value1}} and {{value4}} cowboys",
         "BUY_2_CATTLE": "buys a {{value2}} ({{value3}}VP) and a {{value4}} ({{value5}}VP) for ${{value1}} and {{value6}} cowboys",
@@ -177,10 +191,10 @@
         "GAIN_2_DOLLARS": "gains $2",
         "GAIN_4_DOLLARS": "gains $4",
         "GAIN_12_DOLLARS": "gains $12",
-        "HIRE_WORKER_MINUS_1": "hires a {{value1}} +$1",
-        "HIRE_WORKER_MINUS_2": "hires a {{value1}} +$2",
-        "HIRE_WORKER_PLUS_2": "hires a {{value1}} -$2",
-        "HIRE_WORKER": "hires a {{value1}}",
+        "HIRE_WORKER_MINUS_1": "hires a {{value1}} (-$1) for ${{value2}}",
+        "HIRE_WORKER_MINUS_2": "hires a {{value1}} (-$2) for ${{value2}}",
+        "HIRE_WORKER_PLUS_2": "hires a {{value1}} (+$2) for ${{value2}}",
+        "HIRE_WORKER": "hires a {{value1}} for ${{value2}}",
         "MAX_CERTIFICATES": "gains max certificates",
         "MOVE": "moves cattleman to {{value1}}",
         "MOVE_TO_BUILDING": "moves cattleman to building {{value2}} at location {{value1}}",
@@ -209,8 +223,8 @@
         "PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD": "pays $1 to move engine 1 forward",
         "PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES": "pays $2 and moves engine 2 backwards to gain 2 certificates",
         "PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD": "pays $2 to move engine 2 forward",
-        "PLACE_BUILDING": "places Building {{value1}} on {{value2}}",
-        "PLACE_CHEAP_BUILDING": "places Building {{value1}} on {{value2}}",
+        "PLACE_BUILDING": "places Building {{value1}} on {{value2}} for ${{value3}}",
+        "PLACE_CHEAP_BUILDING": "places Building {{value1}} on {{value2}} for ${{value3}}",
         "PLAY_OBJECTIVE_CARD": "plays an Objective Card",
         "REMOVE_CARD": "removes a card",
         "REMOVE_HAZARD": "removes hazard {{value1}} ({{value2}}VP) for ${{value3}}",
@@ -228,9 +242,21 @@
         "CHOOSE_FORESIGHT_1": "chooses foresight 1: {{value1}}",
         "CHOOSE_FORESIGHT_2": "chooses foresight 2: {{value1}}",
         "CHOOSE_FORESIGHT_3": "chooses foresight 3: {{value1}}",
-        "UNLOCK_BLACK_OR_WHITE": "removes a disc from player board",
-        "UNLOCK_WHITE": "removes a disc from player board",
-        "DOWNGRADE_STATION": "downgrades a Station"
+        "UNLOCK_BLACK_OR_WHITE": "removes a disc from player board: <strong>{{value1}}</strong>",
+        "UNLOCK_WHITE": "removes a disc from player board: <strong>{{value1}}</strong>",
+        "DOWNGRADE_STATION": "downgrades a Station",
+        "USE_EXCHANGE_TOKEN": "uses an exchange token",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "discards a {{value1}} cattle card to place a branchlet",
+        "PLACE_BRANCHLET": "places a branchlet on {{value1}}",
+        "GAIN_EXCHANGE_TOKEN": "gains 1 exchange token",
+        "TAKE_BONUS_STATION_MASTER": "takes bonus station master tile: {{value1}}",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "gains ${{value1}} from craftsmen",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "gains {{value1}} certificates and ${{value1}} from bells",
+        "GAIN_3_DOLLARS": "gains 3 dollars",
+        "GAIN_5_DOLLARS": "gains 5 dollars",
+        "UPGRADE_STATION_TOWN": "upgrades station at {{value1}} for ${{value2}}",
+        "PLACE_BUILDING_FOR_FREE": "places Building {{value1}} on {{value2}} for $0",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "takes a {{value1}} cattle card from the market"
       },
       "values": {
         "ROCKFALL": "Rockfall",
@@ -250,6 +276,20 @@
         "SAN_DIEGO": "San Diego",
         "SACRAMENTO": "Sacramento",
         "SAN_FRANCISCO": "San Francisco",
+        "COLUMBIA": "Columbia",
+        "ST_LOUIS": "St. Louis",
+        "CHICAGO": "Chicago",
+        "DETROIT": "Detroit",
+        "CLEVELAND": "Cleveland",
+        "PITTSBURGH": "Pittsburgh",
+        "NEW_YORK_CITY": "New York City",
+        "MEMPHIS": "Memphis",
+        "DENVER": "Denver",
+        "MILWAUKEE": "Milwaukee",
+        "GREEN_BAY": "Green Bay",
+        "MINNEAPOLIS": "Minneapolis",
+        "TORONTO": "Toronto",
+        "MONTREAL": "Montreal",
         "TEEPEE-1": "Teepee 1",
         "TEEPEE-2": "Teepee 2",
         "TEEPEE-4": "Teepee 4",
@@ -284,6 +324,10 @@
         "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Gain $2 + 1 point per worker",
         "TWO_PERM_CERTS": "2 permanent certificates",
         "TWELVE_DOLLARS": "Gain $12",
+        "PERM_CERT_POINTS_PER_2_STATIONS": "Permanent certificate + 3 points per 2 stations",
+        "GAIN_2_CERTS_POINTS_PER_BUILDING": "Move certificate marker 2 + 2 points per building",
+        "PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS": "Place branchlet + 5 points per 2 exchange tokens",
+        "GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA": "Gain 1 exchange token + 2 points per area with branchlet",
         "JERSEY": "Jersey",
         "GUERNSEY": "Guernsey",
         "BLACK_ANGUS": "Black Angus",
@@ -292,7 +336,26 @@
         "BROWN_SWISS": "Brown Swiss",
         "AYRSHIRE": "Ayrshire",
         "WEST_HIGHLAND": "West Highland",
-        "TEXAS_LONGHORN": "Texas Longhorn"
+        "TEXAS_LONGHORN": "Texas Longhorn",
+        "MEM": "Memphis",
+        "SFO": "San Francisco",
+        "DEN": "Denver",
+        "MIL": "Milwaukee",
+        "GBY": "Green Bay",
+        "TOR": "Toronto",
+        "MIN": "Minneapolis",
+        "MON": "Montreal",
+        "CERT_LIMIT_6": "Certificate limit 6",
+        "CERT_LIMIT_4": "Certificate limit 4",
+        "EXTRA_STEP_DOLLARS": "Extra step ($3)",
+        "EXTRA_STEP_POINTS": "Extra step (3 VP)",
+        "EXTRA_CARD": "Extra card (-$5)",
+        "AUX_GAIN_DOLLAR": "Gain $1",
+        "AUX_DRAW_CARD_TO_DISCARD_CARD": "Draw card and then discard",
+        "AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT": "Pay $1 and move engine 1 backwards to gain 1 certificate",
+        "AUX_PAY_TO_MOVE_ENGINE_FORWARD": "Pay $1 to move engine 1 forward",
+        "AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD": "Move engine backwards to remove card",
+        "AUX_DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Discard '2' cattle card to place branchlet"
       }
     },
     "actions": {
@@ -335,8 +398,8 @@
         "PAY_1_DOLLAR_TO_MOVE_ENGINE_1_FORWARD": "Pay 1 dollar to move your engine 1 forward",
         "PAY_2_DOLLARS_AND_MOVE_ENGINE_2_BACKWARDS_TO_GAIN_2_CERTIFICATES": "Pay 2 dollars and move your engine 2 backwards to gain 2 certificates",
         "PAY_2_DOLLARS_TO_MOVE_ENGINE_2_FORWARD": "Pay 2 dollars to move your engine 2 forward",
-        "PLACE_BUILDING": "Place a building on the trail",
-        "PLACE_CHEAP_BUILDING": "Place a building on the trail (+$1)",
+        "PLACE_BUILDING": "Select a location to place a building on. Then select which building to place.",
+        "PLACE_CHEAP_BUILDING": "Select a location to place a building on. Then select which building to place.",
         "PLAY_OBJECTIVE_CARD": "Play an objective card",
         "REMOVE_CARD": "Remove a card",
         "REMOVE_HAZARD": "Remove a hazard from the trail",
@@ -356,7 +419,12 @@
         "CHOOSE_FORESIGHT_3": "Choose foresight 3",
         "UNLOCK_BLACK_OR_WHITE": "Remove a disc from your player board",
         "UNLOCK_WHITE": "Remove a disc with white corners from your player board",
-        "DOWNGRADE_STATION": "Remove a disc from one of your stations"
+        "DOWNGRADE_STATION": "Remove a disc from one of your stations",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Select a cattle card of breeding value 2 to discard and to place a branchlet",
+        "PLACE_BRANCHLET": "Select a town to place a branchlet on",
+        "PLACE_BUILDING_FOR_FREE": "Select a location to place a building on. Then select which building to place.",
+        "TAKE_BONUS_STATION_MASTER": "Select a bonus station master tile to take it",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Select a card from the cattle market to take it"
       },
       "buttons": {
         "APPOINT_STATION_MASTER": "Appoint a station master",
@@ -442,7 +510,20 @@
         "TRADE_WITH_TRIBES": "Trade with the Tribes",
         "UPGRADE_ANY_STATION_BEHIND_ENGINE": "Upgrade any station that is behind your engine",
         "UPGRADE_STATION": "Upgrade station",
-        "USE_ADJACENT_BUILDING": "Use the actions of an adjacent building"
+        "USE_ADJACENT_BUILDING": "Use the actions of an adjacent building",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Discard '2' cattle card to place branchlet",
+        "PLACE_BUILDING_FOR_FREE": "Place a building on the trail ($0)",
+        "TAKE_BONUS_STATION_MASTER": "Take bonus Station Master tile",
+        "GAIN_EXCHANGE_TOKEN": "Gain 1 exchange token",
+        "USE_EXCHANGE_TOKEN": "Use 1 exchange token",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "Gain $1 per craftsman",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "Gain 1 certificate and $1 per bell",
+        "GAIN_2_CERTIFICATES": "Gain 2 certificates",
+        "GAIN_3_DOLLARS": "Gain 3 dollars",
+        "GAIN_5_DOLLARS": "Gain 5 dollars",
+        "UPGRADE_STATION_TOWN": "Upgrade station",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Take '3' cattle card from market",
+        "PLACE_BRANCHLET": "Place branchlet"
       },
       "descriptions": {
         "none": "do nothing",
@@ -536,7 +617,20 @@
         "CHOOSE_FORESIGHT_3": "Choose foresight 3",
         "UNLOCK_BLACK_OR_WHITE": "Remove a disc from your player board",
         "UNLOCK_WHITE": "Remove a disc with white corners from your player board",
-        "DOWNGRADE_STATION": "Remove a disc from one of your stations"
+        "DOWNGRADE_STATION": "Remove a disc from one of your stations",
+        "TAKE_BONUS_STATION_MASTER": "You may take a bonus station master tile",
+        "GAIN_EXCHANGE_TOKEN": "You gain an additional exchange token",
+        "USE_EXCHANGE_TOKEN": "Use an exchange token to draw up to 2 cards and then discard as many as you drew",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Discard a cattle card of breeding value 2 to place a branchlet on an accessible town",
+        "PLACE_BRANCHLET": "Place a branchlet on an accessible town",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "Gain 1 dollar per craftsman on your player board",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "Move your certificate marker up to 1 space forward and gain 1 dollar per bell icon that is completely cleared on your player board",
+        "GAIN_2_CERTIFICATES": "Move your certificate marker up to 2 spaces forward",
+        "GAIN_3_DOLLARS": "Gain 3 dollars",
+        "GAIN_5_DOLLARS": "Gain 5 dollars",
+        "UPGRADE_STATION_TOWN": "Upgrade the station by removing a disc from your player board and placing it on the station. You have to pay the cost that is displayed next to the station. If there is a station master tile available, you may take it by appointing one of your workers to become the station master.",
+        "PLACE_BUILDING_FOR_FREE": "Place a building on the trail for $0. You still need the amount of craftsmen that is displayed on the building tile.",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Take a cattle card of breeding value 3 from the cattle market for $0"
       }
     },
     "score": {
@@ -583,25 +677,32 @@
           "BALANCED": "Better balanced for 2/3p"
         }
       },
+      "railsToTheNorth": {
+        "label": "Northern Railroad expansion (BETA)",
+        "value": {
+          "false": "No expansion",
+          "true": "Yes, with expansion (BETA)"
+        }
+      },
       "stationMasterPromos": {
         "label": "Station master promos",
         "value": {
-          "false": "No",
-          "true": "Yes"
+          "false": "No station master promos",
+          "true": "Yes, with station master promos"
         }
       },
       "building11": {
         "label": "Building 11",
         "value": {
-          "false": "No",
-          "true": "Yes"
+          "false": "No building 11",
+          "true": "Yes, with building 11"
         }
       },
       "building13": {
         "label": "Building 13",
         "value": {
-          "false": "No",
-          "true": "Yes"
+          "false": "No building 13",
+          "true": "Yes, with building 13"
         }
       }
     },
@@ -652,7 +753,15 @@
       "WORKER_NOT_AVAILABLE": "This worker is not available.",
       "LOCATION_NOT_ADJACENT": "This location is not adjacent to your current location.",
       "MUST_START_ON_NEUTRAL_BUILDING": "You must start on a neutral building.",
-      "BID_TOO_LOW": "Your bid is too low."
+      "BID_TOO_LOW": "Your bid is too low.",
+      "CITY_NOT_ACCESSIBLE": "This city is not accessible from the Kansas City office or any of the towns where you have placed a branchlet.",
+      "ALREADY_PLACED_BRANCHLET": "You already placed a branchlet on this town.",
+      "NOT_ENOUGH_EXCHANGE_TOKENS": "You do not have enough exchange tokens.",
+      "NO_BRANCHLETS": "You do not have any branchlets left to place on a town.",
+      "NO_SUCH_TOWN": "This town does not exist.",
+      "STATION_MASTER_NOT_AVAILABLE": "This station master tile is not available.",
+      "TOWN_NOT_ACCESSIBLE": "This town is not accessible.",
+      "INVALID_CATTLE_TYPE": "This cattle card type is not valid for this action."
     }
   }
 }

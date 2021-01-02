@@ -21,7 +21,8 @@ import {
   Location,
   PossibleMove,
   Space,
-  State, TURNOUTS,
+  State,
+  TURNOUTS,
   Worker
 } from '../model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -82,6 +83,10 @@ const SELECT_SPACE_ACTIONS = [
   ActionType.EXTRAORDINARY_DELIVERY
 ];
 
+const TOWN_ACTIONS = [
+  ActionType.PLACE_BRANCHLET
+];
+
 const MOVE_ACTIONS = [
   ActionType.MOVE,
   ActionType.MOVE_1_FORWARD,
@@ -94,7 +99,9 @@ const MOVE_ACTIONS = [
 
 const BUILD_ACTIONS = [
   ActionType.PLACE_CHEAP_BUILDING,
-  ActionType.PLACE_BUILDING];
+  ActionType.PLACE_BUILDING,
+  ActionType.PLACE_BUILDING_FOR_FREE
+];
 
 const HAZARD_ACTIONS = [
   ActionType.REMOVE_HAZARD,
@@ -206,6 +213,46 @@ interface ForesightItem {
   points?: number;
 }
 
+const TOWNS = {
+  '40': {x: 58, y: 33.5},
+  '41': {x: 454.5, y: 62},
+  '42': {x: 51, y: 144},
+  '43': {x: 1.5, y: 144.5},
+  '44': {x: 9, y: 1.5},
+  '45': {x: 299, y: 142},
+  '46': {x: 240, y: 141},
+  '47': {x: 304.5, y: 93},
+  'MEM': {x: 121.5, y: 95},
+  'SFO': {x: 171, y: 2},
+  'DEN': {x: 317.5, y: 1.5},
+  'MIL': {x: 396, y: 3},
+  '48': {x: 237.5, y: 64.5},
+  '49': {x: 234.5, y: 3},
+  '50': {x: 450, y: 3},
+  'GBY': {x: 525, y: 3},
+  '51': {x: 579, y: 49},
+  '52': {x: 520, y: 91},
+  '53': {x: 616, y: 3},
+  'MIN': {x: 678, y: 3},
+  'TOR': {x: 603.5, y: 99},
+  '54': {x: 647, y: 99},
+  '55': {x: 727.5, y: 3},
+  '56': {x: 477, y: 142},
+  '57': {x: 420.5, y: 142},
+  'MON': {x: 751.5, y: 49},
+  '58': {x: 676, y: 147.5},
+  '59': {x: 726.5, y: 147.5},
+};
+
+const MEDIUM_TOWN_TILES = {
+  '43': {x: 3, y: 114},
+  '46': {x: 240, y: 107},
+  '52': {x: 521, y: 126},
+  '55': {x: 763.5, y: 3},
+  '57': {x: 387.5, y: 142},
+  '59': {x: 762, y: 149}
+};
+
 @Component({
   selector: 'app-trail',
   templateUrl: './trail.component.html',
@@ -261,6 +308,8 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   foresights: ForesightItem[][];
   selectedForesights: number[] = [null, null, null]; // deprecated, can be removed
   spaces = SPACES;
+  towns = TOWNS;
+  mediumTownTiles = MEDIUM_TOWN_TILES;
   playerBuildings: PlayerBuildingElement[];
   possibleMoveElements: PossibleMoveElement[];
 
@@ -314,7 +363,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           const currentCity = current.railroadTrack.cities[city];
           const previousCity = previous.railroadTrack.cities[city];
 
-          if (currentCity.length !== previousCity.length) {
+          if (currentCity && (!previousCity || currentCity.length !== previousCity.length)) {
             switch (city) {
               case City.KANSAS_CITY:
                 this.audioService.playVoiceOver(KANSAS_CITY);
@@ -875,4 +924,16 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     return Math;
   }
 
+  selectTown(name: string) {
+    if (!this.canSelectTown(name)) {
+      return;
+    }
+    this.perform.emit({type: this.selectedAction, town: name});
+  }
+
+  canSelectTown(name: string) {
+    return TOWN_ACTIONS.includes(this.selectedAction)
+      && this.state.possibleTowns
+      && this.state.possibleTowns[this.selectedAction].includes(name);
+  }
 }

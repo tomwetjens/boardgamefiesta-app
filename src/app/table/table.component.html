@@ -15,15 +15,13 @@
                  alt="{{'game.' + table.game + '.name'|translate}}"/>
           </a>
 
-          {{'game.' + table.game + '.summary'|translate}}
+          <span [innerHTML]="'game.' + table.game + '.summary'|translate"></span>
 
           <button type="button" class="btn btn-link" (click)="hideDescription=!hideDescription"
                   [attr.aria-expanded]="!hideDescription" aria-controls="description">
             {{(hideDescription ? 'readMore' : 'showLess')|translate}}
           </button>
-          <span id="description" [ngbCollapse]="hideDescription">
-            {{'game.' + table.game + '.description'|translate}}
-          </span>
+          <span id="description" [ngbCollapse]="hideDescription" [innerHTML]="'game.' + table.game + '.description'|translate"></span>
         </p>
         <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>

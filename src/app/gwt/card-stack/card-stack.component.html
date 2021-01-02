@@ -1,4 +1,4 @@
 <app-card *ngFor="let card of stack; index as i" [card]="card"></app-card>
 
 <app-card *ngIf="!cards || !cards.length" [emptyType]="emptyType"></app-card>
-<span *ngIf="!cards" class="size">{{size}}x</span>
+<span *ngIf="!cards" class="size">{{size}}</span>

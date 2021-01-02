@@ -25,10 +25,12 @@
 .player-board {
   width: 800px;
   height: 446px;
+  margin: 0;
+  background-color: #7b706f;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
 
   &.BLUE {
-    .disc, .cert-marker {
+    .disc, .cert-marker, .branchlet {
       fill: blue;
       stroke: black;
       stroke-width: 1;
@@ -36,7 +38,7 @@
   }
 
   &.RED {
-    .disc, .cert-marker {
+    .disc, .cert-marker, .branchlet {
       fill: red;
       stroke: black;
       stroke-width: 1;
@@ -44,7 +46,7 @@
   }
 
   &.YELLOW {
-    .disc, .cert-marker {
+    .disc, .cert-marker, .branchlet {
       fill: yellow;
       stroke: black;
       stroke-width: 1;
@@ -52,7 +54,7 @@
   }
 
   &.WHITE {
-    .disc, .cert-marker {
+    .disc, .cert-marker, .branchlet {
       fill: #d9d9d9;
       stroke: black;
       stroke-width: 1;
@@ -60,7 +62,7 @@
   }
 
   &.GREEN {
-    .disc, .cert-marker {
+    .disc, .cert-marker, .branchlet {
       fill: green;
       stroke: black;
       stroke-width: 1;
@@ -228,5 +230,36 @@ app-card {
   line-height: 23px;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
   -webkit-text-stroke: 1px black;
+}
+
+.exchangeTokens {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  font-weight: bold;
+  color: #ffffff;
+  background-image: url('../../../assets/games/gwt/icons/exchange_token.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  text-align: center;
+  font-size: 20px;
+  vertical-align: middle;
+  line-height: 23px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+  -webkit-text-stroke: 1px black;
+  margin: 0 4px;
+
+  &.selectable {
+    cursor: pointer;
+    border: 2px #ffffff solid;
+    border-radius: 4px;
+
+    &:hover {
+      border-color: black;
+    }
+  }
 }
 

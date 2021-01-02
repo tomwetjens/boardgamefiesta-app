@@ -32,6 +32,7 @@ import {BiddingComponent} from './bidding/bidding.component';
 import {LocationPopoverComponent} from './location-popover/location-popover.component';
 import {BuildingPopoverComponent} from './building-popover/building-popover.component';
 import {HazardPopoverComponent} from './hazard-popover/hazard-popover.component';
+import { BonusStationMastersComponent } from './bonus-station-masters/bonus-station-masters.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,8 @@ const routes: Routes = [
     BiddingComponent,
     LocationPopoverComponent,
     BuildingPopoverComponent,
-    HazardPopoverComponent
+    HazardPopoverComponent,
+    BonusStationMastersComponent
   ],
   imports: [
     CommonModule,
