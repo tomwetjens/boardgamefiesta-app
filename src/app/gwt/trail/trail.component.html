@@ -391,7 +391,7 @@
     <rect class="city" x="744" y="82" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('MONTREAL')" [ngClass]="{disabled:!canSelectCity('MONTREAL')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['MONTREAL']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['TORONTO']; index as i"  [class]="'disc ' + color"
             cx="621" [attr.cy]="150 - (i * 4)" r="11"/>
     <rect class="city" x="596" y="132" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('TORONTO')" [ngClass]="{disabled:!canSelectCity('TORONTO')}"/>
