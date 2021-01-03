@@ -24,8 +24,15 @@
   "select": "Select",
   "readMore": "Read more",
   "showLess": "Show less",
+  "friends": "Friends",
+  "addFriend": "Add Friend",
+  "removeFriend": "Remove Friend",
+  "noFriends": "No friends added yet.",
+  "language": "Language",
   "user-menu": {
-    "profile": "Profile"
+    "profile": "Profile",
+    "myActivity": "My Activity",
+    "friends": "Friends"
   },
   "profile": {
     "avatar": "Avatar",
@@ -83,6 +90,8 @@
   "accept": "Accept",
   "reject": "Reject",
   "notStarted": "Waiting for players",
+  "createdAt": "created at",
+  "endedAt": "ended at",
   "owner": "Host",
   "play": "Play",
   "yourTurn": "Your Turn",
@@ -123,6 +132,7 @@
   "menu": "Menu",
   "location": "Location",
   "unknown": "Unknown",
+  "recentActivity": "Recent Activity",
   "table": {
     "status": {
       "NEW": "Waiting for players",

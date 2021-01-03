@@ -27,8 +27,15 @@
   "select": "Selecteer",
   "readMore": "Lees meer",
   "showLess": "Toon minder",
+  "friends": "Vrienden",
+  "addFriend": "Vriend toevoegen",
+  "removeFriend": "Vriend verwijderen",
+  "noFriends": "Nog geen vrienden toegevoegd.",
+  "language": "Taal",
   "user-menu": {
-    "profile": "Profiel"
+    "profile": "Profiel",
+    "myActivity": "Mijn Activiteit",
+    "friends": "Vrienden"
   },
   "profile": {
     "avatar": "Avatar",
@@ -86,6 +93,8 @@
   "accept": "Accepteren",
   "reject": "Weigeren",
   "notStarted": "Wachten op spelers",
+  "createdAt": "gemaakt op",
+  "endedAt": "afgelopen op",
   "owner": "Beheerder",
   "play": "Speel",
   "yourTurn": "Jij bent aan de beurt",
@@ -126,6 +135,7 @@
   "menu": "Menu",
   "location": "Locatie",
   "unknown": "Niet opgegeven",
+  "recentActivity": "Recente Activiteit",
   "table": {
     "status": {
       "NEW": "Wachten op spelers",

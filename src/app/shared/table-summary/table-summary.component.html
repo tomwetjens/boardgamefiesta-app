@@ -2,12 +2,12 @@
 
 <ng-container [ngSwitch]="table.status">
   <span *ngSwitchCase="'NEW'">
-    created at <a [routerLink]="['/',table.game, table.id]">{{table.created | date: 'long'}}</a>
+    {{'createdAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.created | moment:'LLL'}}</a>
   </span>
   <span *ngSwitchCase="'STARTED'">
-    created at <a [routerLink]="['/',table.game, table.id]">{{table.started | date: 'long'}}</a>
+    {{'createdAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.started | moment:'LLL'}}</a>
   </span>
   <span *ngSwitchCase="'ENDED'">
-    ended at <a [routerLink]="['/',table.game, table.id]">{{table.ended | date: 'long'}}</a>
+    {{'endedAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.ended | moment:'LLL'}}</a>
   </span>
 </ng-container>
