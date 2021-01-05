@@ -59,7 +59,7 @@
         </a>
         <div class="card-body">
           <h5 class="card-title">{{'game.gwt.name' | translate}}</h5>
-          <p class="card-text">{{'game.gwt.summary'| translate}}</p>
+          <p class="card-text" [innerHTML]="'game.gwt.summary'| translate"></p>
           <button class="btn btn-primary" (click)="play('gwt')">{{'play'|translate}}</button>
           <span class="ml-2">
             <a [routerLink]="['games/gwt']">{{'readMore'|translate}}</a>
