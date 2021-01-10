@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {UserService} from "../../user.service";
 import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
@@ -9,7 +9,7 @@ import {Table, User} from "../../shared/model";
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
-export class ActivityComponent implements OnInit, OnDestroy {
+export class ActivityComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() userId: string;
 
@@ -21,12 +21,22 @@ export class ActivityComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.tables$ = this.userService.getTables(this.userId).pipe(
-      takeUntil(this.destroyed));
+    this.refresh();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.userId) {
+      this.refresh();
+    }
   }
 
   ngOnDestroy(): void {
     this.destroyed.next(true);
+  }
+
+  private refresh() {
+    this.tables$ = this.userService.getTables(this.userId).pipe(
+      takeUntil(this.destroyed));
   }
 
 }

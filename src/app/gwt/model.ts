@@ -180,7 +180,6 @@ export interface Foresights {
 }
 
 export interface JobMarketRow {
-  readonly cattleMarket: boolean;
   readonly cost: Dollars;
   readonly workers: Worker[];
 }
