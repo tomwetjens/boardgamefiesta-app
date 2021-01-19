@@ -41,7 +41,7 @@
 </div>
 
 <div class="row no-gutters align-items-start">
-  <div class="col-md-8 col-sm-12">
+  <div class="col-lg-8 col-md-12 col-sm-12">
     <gwt-bonus-station-masters *ngIf="selectedAction === 'TAKE_BONUS_STATION_MASTER'"
                                [state]="state"
                                [selectedAction]="selectedAction"
@@ -67,7 +67,7 @@
     <gwt-bonus-station-masters [state]="state"
                                *ngIf="selectedAction !== 'TAKE_BONUS_STATION_MASTER'"></gwt-bonus-station-masters>
   </div>
-  <div class="col-md-4 col-sm-12 player-boards">
+  <div class="col-lg-4 col-md-12 col-sm-12 player-boards">
     <app-player-board *ngIf="state.player"
                       [table]="table"
                       [state]="state"
