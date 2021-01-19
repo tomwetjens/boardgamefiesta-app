@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Howl} from 'howler';
+import {Howl, Howler} from 'howler';
 import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {concatMap, filter, map} from 'rxjs/operators';
 import {DeviceSettingsService} from "./shared/device-settings.service";

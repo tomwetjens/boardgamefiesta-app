@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DiscardPileDialogComponent } from './discard-pile-dialog.component';
 
@@ -6,7 +6,7 @@ describe('DiscardPileDialogComponent', () => {
   let component: DiscardPileDialogComponent;
   let fixture: ComponentFixture<DiscardPileDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DiscardPileDialogComponent ]
     })

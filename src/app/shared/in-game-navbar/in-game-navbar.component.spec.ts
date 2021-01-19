@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InGameNavbarComponent } from './in-game-navbar.component';
 
@@ -6,7 +6,7 @@ describe('InGameNavbarComponent', () => {
   let component: InGameNavbarComponent;
   let fixture: ComponentFixture<InGameNavbarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InGameNavbarComponent ]
     })

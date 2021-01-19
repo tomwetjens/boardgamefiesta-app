@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GwtBoardComponent } from './gwt-board.component';
 
@@ -6,7 +6,7 @@ describe('BoardComponent', () => {
   let component: GwtBoardComponent;
   let fixture: ComponentFixture<GwtBoardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GwtBoardComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InGameMenuComponent } from './in-game-menu.component';
 
@@ -6,7 +6,7 @@ describe('InGameMenuComponent', () => {
   let component: InGameMenuComponent;
   let fixture: ComponentFixture<InGameMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InGameMenuComponent ]
     })

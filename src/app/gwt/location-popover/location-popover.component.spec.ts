@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LocationPopoverComponent } from './location-popover.component';
 
@@ -6,7 +6,7 @@ describe('LocationPopoverComponent', () => {
   let component: LocationPopoverComponent;
   let fixture: ComponentFixture<LocationPopoverComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LocationPopoverComponent ]
     })
