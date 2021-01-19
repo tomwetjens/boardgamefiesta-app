@@ -8,12 +8,12 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="105.82653mm"
+   height="105.82653mm"
+   viewBox="0 0 105.82653 105.82653"
    version="1.1"
    id="svg7928"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
    sodipodi:docname="logo-circle.svg">
   <defs
      id="defs7922">
@@ -41,7 +41,7 @@
          id="stop14582" />
     </linearGradient>
     <radialGradient
-       r="34.608"
+       r="34.608002"
        cx="246.83"
        cy="272"
        gradientUnits="userSpaceOnUse"
@@ -56,30 +56,30 @@
     </radialGradient>
     <linearGradient
        y2="100.19"
-       y1="261.15"
-       x2="871.01"
+       y1="261.14999"
+       x2="871.01001"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient14578"
-       x1="836.68"
+       x1="836.67999"
        id="linearGradient14844" />
     <linearGradient
-       y2="503.48"
+       y2="503.48001"
        y1="167.75"
-       x2="687.27"
+       x2="687.27002"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient14578"
        x1="1072.6"
        id="linearGradient14846" />
     <linearGradient
-       y2="473.05"
-       y1="340.43"
+       y2="473.04999"
+       y1="340.42999"
        x2="1047.4"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient14578"
-       x1="822.93"
+       x1="822.92999"
        id="linearGradient14848" />
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter8987">
       <feFlood
@@ -111,7 +111,7 @@
          id="feComposite8985" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter8999">
       <feFlood
@@ -147,9 +147,9 @@
        xlink:href="#linearGradient9099"
        id="radialGradient9101"
        cx="127.85271"
-       cy="58.16512"
+       cy="58.165119"
        fx="127.85271"
-       fy="58.16512"
+       fy="58.165119"
        r="50.767723"
        gradientTransform="matrix(1,0,0,0.23238567,0,44.648379)"
        gradientUnits="userSpaceOnUse" />
@@ -274,12 +274,12 @@
          id="stop4692" />
     </linearGradient>
     <linearGradient
-       y2="25.477"
-       x2="23.574"
+       y2="25.476999"
+       x2="23.573999"
        gradientTransform="matrix(0.86898,-0.3655,0.3655,0.86898,-7.9493,8.537)"
-       y1="19.523"
+       y1="19.523001"
        gradientUnits="userSpaceOnUse"
-       x1="23.45"
+       x1="23.450001"
        id="linearGradient4957">
       <stop
          offset="0"
@@ -292,12 +292,12 @@
          id="stop4660" />
     </linearGradient>
     <linearGradient
-       y2="22.322"
-       x2="29.574"
+       y2="22.322001"
+       x2="29.573999"
        gradientTransform="matrix(0.82042,-0.21882,0.21882,0.82042,-4.1756,5.8937)"
-       y1="31.564"
+       y1="31.563999"
        gradientUnits="userSpaceOnUse"
-       x1="29.849"
+       x1="29.849001"
        id="linearGradient4959">
       <stop
          offset="0"
@@ -325,11 +325,11 @@
          id="stop2869" />
     </radialGradient>
     <linearGradient
-       x1="24.543"
-       x2="18.005"
+       x1="24.542999"
+       x2="18.004999"
        y1="26.968"
        gradientUnits="userSpaceOnUse"
-       y2="9.5672"
+       y2="9.5671997"
        id="linearGradient3281">
       <stop
          offset="0"
@@ -342,8 +342,8 @@
          id="stop4803" />
     </linearGradient>
     <linearGradient
-       x1="27.262"
-       x2="6.417"
+       x1="27.261999"
+       x2="6.4169998"
        y1="12.649"
        gradientUnits="userSpaceOnUse"
        y2="11.386"
@@ -388,8 +388,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0761022"
-     inkscape:cx="111.42111"
-     inkscape:cy="794.8091"
+     inkscape:cx="342.05843"
+     inkscape:cy="182.39771"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -398,7 +398,11 @@
      inkscape:window-height="1016"
      inkscape:window-x="72"
      inkscape:window-y="27"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7925">
     <rdf:RDF>
@@ -414,19 +418,20 @@
   <g
      inkscape:label="Laag 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-1.9204254,-162.03385)">
     <ellipse
        ry="52.913265"
        rx="51.383713"
        cy="214.94711"
-       cx="53.304138"
+       cx="54.89164"
        id="path191"
        style="fill:#3a3a3a;fill-opacity:1;stroke:none;stroke-width:0.672475;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none" />
     <g
        inkscape:export-ydpi="19.23"
        inkscape:export-xdpi="19.23"
        id="g14850-6"
-       transform="matrix(0.26458333,0,0,0.26458333,-172.80859,123.1738)">
+       transform="matrix(0.26458333,0,0,0.26458333,-171.22108,123.1738)">
       <path
          id="path14762-0"
          inkscape:connector-curvature="0"
@@ -753,7 +758,7 @@
     <g
        inkscape:export-ydpi="19.23"
        inkscape:export-xdpi="19.23"
-       transform="matrix(0.30617838,0,0,0.3060712,11.186179,108.99803)"
+       transform="matrix(0.30617838,0,0,0.3060712,12.77368,108.99803)"
        id="g3233">
       <path
          fill="url(#radialGradient5097)"

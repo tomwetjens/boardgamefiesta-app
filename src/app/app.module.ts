@@ -25,6 +25,8 @@ import {PrivacyComponent} from './privacy/privacy.component';
 import {FaqComponent} from './faq/faq.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InvitePlayerComponent} from './invite-player/invite-player.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import {InvitePlayerComponent} from './invite-player/invite-player.component';
     }),
     AppRoutingModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
