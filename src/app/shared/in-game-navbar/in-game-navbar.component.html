@@ -1,7 +1,7 @@
 <div class="sticky-top">
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar sticky-top navbar-dark bg-primary text-light">
     <div class="container-fluid no-gutters p-0">
-      <div class="col-lg-4 col-md-6 col-sm-8 d-flex justify-content-start">
+      <div class="col col-lg-4 col-md-6 col-sm-10 d-flex justify-content-start">
         <a class="btn btn-secondary text-nowrap" [routerLink]="['/']">
           <svg class="bi" width="16" height="16" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#arrow-left"/>
@@ -29,7 +29,7 @@
           <span class="d-none d-md-inline">{{'undo'|translate}}</span>
         </button>&nbsp;
       </div>
-      <div class="col-lg-4 col-md-4 d-none d-lg-flex justify-content-center">
+      <div class="col col-lg-4 col-md-4 d-none d-lg-flex justify-content-center">
         <span *ngIf="busy">
           {{'busy'|translate}}
         </span>
@@ -45,23 +45,23 @@
           </div>
         </ng-container>
       </div>
-      <div class="col-lg-4 col-md-2 col-sm-2 d-flex justify-content-end align-content-center">
-        <button class="btn btn-sm d-none d-md-inline-block" *ngIf="!muted" (click)="mute()"
+      <div class="col col-lg-4 col-md-2 col-sm-2 d-flex justify-content-end align-content-center">
+        <button class="btn btn-sm btn-secondary d-none d-md-inline-block" *ngIf="!muted" (click)="mute()"
                 [ngbPopover]="'in-game-navbar.mutePopover'|translate"
                 triggers="hover">
-          <svg class="bi text-white" width="24" height="24" fill="currentColor">
+          <svg class="bi" width="24" height="24" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#volume-up-fill"/>
           </svg>
         </button>
-        <button class="btn btn-sm d-none d-md-inline-block" *ngIf="muted" (click)="unmute()"
+        <button class="btn btn-sm btn-secondary disabled d-none d-md-inline-block" *ngIf="muted" (click)="unmute()"
                 [ngbPopover]="'in-game-navbar.unmutePopover'|translate"
                 triggers="hover">
-          <svg class="bi text-black-50" width="24" height="24" fill="currentColor">
+          <svg class="bi" width="24" height="24" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#volume-mute-fill"/>
           </svg>
         </button>
 
-        <app-connection-status [connected]="connected$ | async" class="d-none d-md-inline-block"></app-connection-status>
+        <app-connection-status [connected]="connected$ | async" class="d-none d-md-inline-block m-2"></app-connection-status>
 
         <app-in-game-menu [table]="table"></app-in-game-menu>
       </div>

@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Table, TableMode, TablePlayer, TableStatus, TableType} from '../shared/model';
-import {Observable, Subject} from 'rxjs';
+import {Table, TableMode, TablePlayer, TableType} from '../shared/model';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
-import {map, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loggedIn$: Observable<boolean>;
   myActiveTables$: Observable<Table[]>;
+
+  games$ = new BehaviorSubject(['gwt']);
 
   constructor(private router: Router,
               private authService: AuthService,

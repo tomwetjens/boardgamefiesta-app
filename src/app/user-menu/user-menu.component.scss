@@ -1,17 +1,11 @@
-:host {
-  height: 24px;
-}
-
 .dropdown-toggle {
   border: none;
 
   &::after {
-    display: none;
+    display: none; /* hide arrow */
   }
 
   position: relative;
-  width: 64px;
-  height: 24px;
 
   app-avatar {
     position: absolute;

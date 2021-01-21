@@ -1,17 +1,9 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar sticky-top navbar-dark bg-primary">
   <a class="navbar-brand" href="/">
     <img src="/assets/logo-min.svg" class="logo"/>
   </a>
 
-      <ul class="navbar-nav mr-auto">
-  <!--      <li class="nav-item">-->
-  <!--        <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="'active'"-->
-  <!--           [routerLinkActiveOptions]="{exact:true}">{{'home'|translate}}</a>-->
-  <!--      </li>-->
-      </ul>
-
   <div class="form-inline my-2">
-
     <app-connection-status [connected]="connected$ | async"></app-connection-status>
 
     <app-user-menu></app-user-menu>

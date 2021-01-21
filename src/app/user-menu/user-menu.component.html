@@ -1,9 +1,12 @@
 <div *ngIf="user | async as user" ngbDropdown placement="bottom-right">
-  <button id="userMenu" class="btn dropdown-toggle" ngbDropdownToggle>
-    <app-avatar [user]="user" [shadow]="true"></app-avatar>
+  <button id="userMenu" class="navbar-toggler" type="button" ngbDropdownToggle>
+    <span class="navbar-toggler-icon"></span>
   </button>
   <div ngbDropdownMenu aria-labelledby="userMenu" class="dropdown-menu dropdown-menu-right">
-    <a [routerLink]="['/user', user.id]" ngbDropdownItem><strong>{{user.username}}</strong></a>
+    <a [routerLink]="['/user', user.id]" ngbDropdownItem>
+      <app-avatar [user]="user"></app-avatar>
+      <strong>{{user.username}}</strong>
+    </a>
     <a [routerLink]="['/user', user.id]" ngbDropdownItem>{{'user-menu.myActivity'|translate}}</a>
     <a [routerLink]="['/user', user.id]" ngbDropdownItem>{{'user-menu.friends'|translate}}</a>
     <a [routerLink]="['/profile']" ngbDropdownItem>{{'user-menu.profile'|translate}}</a>

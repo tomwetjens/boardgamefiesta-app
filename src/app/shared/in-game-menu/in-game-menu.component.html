@@ -1,8 +1,6 @@
 <div ngbDropdown placement="bottom-right">
-  <button id="inGameMenu" class="btn dropdown-toggle text-white" ngbDropdownToggle [title]="'menu'|translate">
-    <svg class="bi" width="32" height="32" fill="currentColor">
-      <use xlink:href="/assets/bootstrap-icons.svg#list"/>
-    </svg>
+  <button id="inGameMenu" class="navbar-toggler" type="button" ngbDropdownToggle [title]="'menu'|translate">
+    <span class="navbar-toggler-icon"></span>
   </button>
   <div ngbDropdownMenu aria-labelledby="inGameMenu" class="dropdown-menu dropdown-menu-right">
     <div ngbDropdownItem>

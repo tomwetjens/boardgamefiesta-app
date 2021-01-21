@@ -1,0 +1,7 @@
+.dropdown-toggle {
+  border: none;
+
+  &::after {
+    display: none; /* hide arrow */
+  }
+}
