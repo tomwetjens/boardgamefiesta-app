@@ -36,8 +36,6 @@
         <ng-container *ngIf="!busy">
           <span *ngIf="table.turn">
             {{'yourTurn'|translate}}
-
-            <app-timer [end]="table.players[table.player].turnLimit"></app-timer>
           </span>
           <div *ngIf="!table.turn && table.currentPlayer">
             {{'waitingFor'|translate}}
