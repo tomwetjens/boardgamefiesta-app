@@ -1,5 +1,17 @@
 {
   "appName": "Board Game Fiesta",
+  "changeEmailDialog": {
+    "title": "Wijzig e-mailadres",
+    "email": "Nieuw e-mailadres",
+    "submit": "Wijzig e-mailadres"
+  },
+  "changePasswordDialog": {
+    "title": "Wijzig wachtwoord",
+    "password": "Nieuw wachtwoord",
+    "confirmPassword": "Nieuw wachtwoord (nogmaals)",
+    "submit": "Wijzig wachtwoord",
+    "policy": "Minimaal 8 karakters"
+  },
   "home": {
     "welcome": "Welkom",
     "lead": "Play your favorite board games with friends or other players around the world!.",
@@ -36,6 +48,13 @@
     "profile": "Profiel",
     "myActivity": "Mijn Activiteit",
     "friends": "Vrienden"
+  },
+  "user": {
+    "changeEmail": "Wijzig e-mailadres",
+    "emailChanged": "E-mailadres gewijzigd",
+    "changePassword": "Wijzig wachtwoord",
+    "passwordChanged": "Wachtwoord gewijzigd",
+    "password": "Wachtwoord"
   },
   "profile": {
     "avatar": "Avatar",
@@ -183,7 +202,8 @@
     "CANNOT_UNDO": "De vorige actie kan niet ongedaan gemaakt worden.",
     "GAME_ALREADY_ENDED": "Dit spel is al beëindigd.",
     "NOT_PUBLIC": "Je moet uitgenodigd worden om bij deze tafel te kunnen aanschuiven.",
-    "MUST_BE_OWNER": "Je moet de beheerder van deze tafel zijn."
+    "MUST_BE_OWNER": "Je moet de beheerder van deze tafel zijn.",
+    "EMAIL_ALREADY_IN_USE": "Er is al een gebruiker geregistreerd met dit e-mailadres."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",

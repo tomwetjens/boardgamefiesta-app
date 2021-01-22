@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.fixed-top {
+  z-index: 9999;
+}
+
 ngb-toast {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75);
   text-align: center;

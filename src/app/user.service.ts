@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Table, User} from './shared/model';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {AuthService} from "./auth.service";
 
 export interface Rating {
@@ -25,10 +25,15 @@ export interface RatingDelta {
 })
 export class UserService {
 
+  private _refresh = new BehaviorSubject(true);
+
   currentUser: Observable<User>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
-    this.currentUser = this.authService.loggedIn.pipe(switchMap(loggedIn => {
+    this.currentUser = combineLatest([
+      this._refresh,
+      this.authService.loggedIn
+    ]).pipe(switchMap(([_, loggedIn]) => {
       if (!loggedIn) {
         return of(null);
       }
@@ -51,6 +56,15 @@ export class UserService {
 
   changeLanguage(id: string, language: string) {
     return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-language', {language});
+  }
+
+  changeEmail(id: string, email: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-email', {email})
+      .pipe(tap(_ => this._refresh.next(true)));
+  }
+
+  changePassword(id: string, password: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-password', {password});
   }
 
   getRatings(gameId: string, userId: string): Observable<Rating[]> {

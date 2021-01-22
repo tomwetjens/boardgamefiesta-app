@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{'changeEmailDialog.title'|translate}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form #form="ngForm" (ngSubmit)="submit()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="email">{{'changeEmailDialog.email'|translate}}</label>
+      <input type="text" class="form-control" id="email" name="email" #emailField="ngModel" [(ngModel)]="email" required
+             email [notSame]="user.email"
+             [ngClass]="{'is-valid': emailField.touched && emailField.valid, 'is-invalid': emailField.touched && emailField.invalid}"/>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!form.form.valid">{{'changeEmailDialog.submit'|translate}}</button>
+  </div>
+</form>

@@ -10,6 +10,11 @@ import {ActivityComponent} from './activity/activity.component';
 import {UserComponent} from './user/user.component';
 import { FriendsComponent } from './friends/friends.component';
 import { FriendComponent } from './friend/friend.component';
+import { ChangeEmailDialogComponent } from './change-email-dialog/change-email-dialog.component';
+import {FormsModule} from "@angular/forms";
+import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
+import { SameValidator } from './change-password-dialog/same-validator.directive';
+import {NotSameValidator} from "./change-email-dialog/not-same-validator.directive";
 
 const routes: Routes = [
   {
@@ -34,10 +39,15 @@ const routes: Routes = [
     ActivityComponent,
     UserComponent,
     FriendsComponent,
-    FriendComponent
+    FriendComponent,
+    ChangeEmailDialogComponent,
+    ChangePasswordDialogComponent,
+    SameValidator,
+    NotSameValidator
   ],
   imports: [
     CommonModule,
+    FormsModule,
     NgbModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes),

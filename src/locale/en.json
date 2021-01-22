@@ -1,5 +1,17 @@
 {
   "appName": "Board Game Fiesta",
+  "changeEmailDialog": {
+    "title": "Change e-mail address",
+    "email": "Enter new e-mail address",
+    "submit": "Confirm"
+  },
+  "changePasswordDialog": {
+    "title": "Change password",
+    "password": "Enter new password",
+    "confirmPassword": "Enter new password again",
+    "submit": "Confirm",
+    "policy": "Minimum 8 characters"
+  },
   "home": {
     "welcome": "Welcome",
     "lead": "Play your favorite board games with friends or other players around the world!.",
@@ -33,6 +45,13 @@
     "profile": "Profile",
     "myActivity": "My Activity",
     "friends": "Friends"
+  },
+  "user": {
+    "changeEmail": "Change e-mail address",
+    "emailChanged": "E-mail address changed",
+    "changePassword": "Change password",
+    "passwordChanged": "Password changed",
+    "password": "Password"
   },
   "profile": {
     "avatar": "Avatar",
@@ -192,7 +211,8 @@
     "CANNOT_UNDO": "The previous action cannot be undone.",
     "GAME_ALREADY_ENDED": "This game is already ended.",
     "NOT_PUBLIC": "You must be invited to join this table.",
-    "MUST_BE_OWNER": "You must be the host of this table."
+    "MUST_BE_OWNER": "You must be the host of this table.",
+    "EMAIL_ALREADY_IN_USE": "There is already another user registered with this e-mail address."
   },
   "log": {
     "CREATE": "created a new table",
