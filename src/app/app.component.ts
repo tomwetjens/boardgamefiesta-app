@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
 import {TranslateService} from '@ngx-translate/core';
 import moment from 'moment';
+import momentTz from 'moment-timezone';
 import en from '../locale/en.json';
 import nl from '../locale/nl.json';
 import pt from '../locale/pt.json';
@@ -28,9 +29,11 @@ export class AppComponent implements OnInit {
       if (currentUser) {
         this.translateService.use(currentUser.language);
         moment.locale(currentUser.language);
+        moment.tz.setDefault(currentUser.timeZone);
       } else {
         this.translateService.use(this.translateService.getDefaultLang());
         moment.locale(this.translateService.getDefaultLang());
+        moment.tz.setDefault();
       }
     });
   }

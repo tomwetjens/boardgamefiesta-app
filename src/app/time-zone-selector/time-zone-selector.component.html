@@ -1,0 +1,10 @@
+<div ngbDropdown>
+  <button class="btn btn-outline-primary" ngbDropdownToggle>{{value}}</button>
+  <div ngbDropdownMenu>
+    <button ngbDropdownItem *ngFor="let timeZone of timeZones"
+            [ngClass]="{active:timeZone === value}"
+            (click)="changeTimeZone.emit(timeZone)">
+      {{timeZone}}
+    </button>
+  </div>
+</div>

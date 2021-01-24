@@ -31,6 +31,7 @@
     "i18n-iso-countries": "^6.4.0",
     "iso-language-codes": "^1.0.7",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32",
     "rxjs": "~6.6.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -44,6 +45,7 @@
     "@types/jasmine": "^3.6.2",
     "@types/jasminewd2": "~2.0.3",
     "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.30",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.1",
     "jasmine-core": "~3.5.0",

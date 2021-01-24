@@ -25,8 +25,11 @@ export class ProfileComponent implements OnInit {
   }
 
   changeLocation(user: User, location: string) {
-    this.userService.changeLocation(user.id, location)
-      .subscribe(() => user.location = location);
+    this.userService.changeLocation(user.id, location).subscribe();
+  }
+
+  changeTimeZone(user: User, timeZone: string) {
+    this.userService.changeTimeZone(user.id, timeZone).subscribe();
   }
 
   changeLanguage(user: User, language: string) {
@@ -49,4 +52,5 @@ export class ProfileComponent implements OnInit {
     componentInstance.user = user;
     fromPromise(ngbModalRef.result).subscribe();
   }
+
 }

@@ -51,11 +51,18 @@ export class UserService {
   }
 
   changeLocation(id: string, location: string) {
-    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-location', {location});
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-location', {location})
+      .pipe(tap(_ => this._refresh.next(true)));
   }
 
   changeLanguage(id: string, language: string) {
-    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-language', {language});
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-language', {language})
+      .pipe(tap(_ => this._refresh.next(true)));
+  }
+
+  changeTimeZone(id: string, timeZone: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/users/' + id + '/change-time-zone', {timeZone})
+      .pipe(tap(_ => this._refresh.next(true)));
   }
 
   changeEmail(id: string, email: string) {

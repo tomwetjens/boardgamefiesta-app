@@ -23,6 +23,7 @@ export interface User {
   readonly avatarUrl: string;
   language: string;
   location?: string;
+  readonly timeZone: string;
 }
 
 export enum PlayerType {

@@ -51,7 +51,8 @@
     "emailChanged": "E-mail address changed",
     "changePassword": "Change password",
     "passwordChanged": "Password changed",
-    "password": "Password"
+    "password": "Password",
+    "timeZone": "Time zone"
   },
   "profile": {
     "avatar": "Avatar",
@@ -164,7 +165,12 @@
       "PUBLIC": "This table is open for anyone to join."
     },
     "makePublic": "Open for anyone",
-    "makePrivate": "Make private"
+    "makePrivate": "Make private",
+    "type": "Type",
+    "types": {
+      "REALTIME": "Real time",
+      "TURN_BASED": "Turn based"
+    }
   },
   "player": {
     "status": {

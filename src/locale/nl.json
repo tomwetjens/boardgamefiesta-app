@@ -54,7 +54,8 @@
     "emailChanged": "E-mailadres gewijzigd",
     "changePassword": "Wijzig wachtwoord",
     "passwordChanged": "Wachtwoord gewijzigd",
-    "password": "Wachtwoord"
+    "password": "Wachtwoord",
+    "timeZone": "Tijdzone"
   },
   "profile": {
     "avatar": "Avatar",

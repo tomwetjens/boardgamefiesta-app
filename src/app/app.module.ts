@@ -25,8 +25,9 @@ import {PrivacyComponent} from './privacy/privacy.component';
 import {FaqComponent} from './faq/faq.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InvitePlayerComponent} from './invite-player/invite-player.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {ManagePushNotificationsComponent} from './manage-push-notifications/manage-push-notifications.component';
+import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { environment } from '../environments/environment';
     LanguageSelectorComponent,
     PrivacyComponent,
     FaqComponent,
-    InvitePlayerComponent
+    InvitePlayerComponent,
+    TimeZoneSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     NgbModule,
     SharedModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: true})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
