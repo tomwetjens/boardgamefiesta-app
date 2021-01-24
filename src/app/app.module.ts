@@ -26,7 +26,6 @@ import {FaqComponent} from './faq/faq.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InvitePlayerComponent} from './invite-player/invite-player.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {ManagePushNotificationsComponent} from './manage-push-notifications/manage-push-notifications.component';
 import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector.component';
 
 @NgModule({
