@@ -50,7 +50,8 @@ export interface TablePlayer {
 }
 
 export enum TableType {
-  REALTIME = 'REALTIME'
+  REALTIME = 'REALTIME',
+  TURN_BASED = 'TURN_BASED'
 }
 
 export enum TableMode {

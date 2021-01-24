@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of, Subject} from 'rxjs';
 import {bufferCount, filter, map, switchMap, takeUntil, withLatestFrom} from 'rxjs/operators';
-import {EventType, LogEntryType, Options, PlayerStatus, Table, TablePlayer} from '../shared/model';
+import {EventType, LogEntryType, Options, PlayerStatus, Table, TablePlayer, TableType} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +31,7 @@ export class TableComponent implements OnInit, OnDestroy {
   table: Observable<Table>;
   provider$: Observable<GameProvider>;
 
+  types = Object.keys(TableType);
   hideDescription = true;
 
   constructor(private route: ActivatedRoute,
@@ -209,5 +210,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
   trackOption(index: number, option: Option): any {
     return option.key;
+  }
+
+  changeType(table: Table, type: TableType) {
+    this.tableService.changeType(table.id, type)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
   }
 }

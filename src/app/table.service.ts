@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, Event, LogEntry, Table, TableStatus, User} from './shared/model';
+import {CreateTableRequest, Event, LogEntry, Table, TableStatus, TableType, User} from './shared/model';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject, throwError} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
@@ -252,5 +252,9 @@ export class TableService {
 
   getSuggestedPlayers(id: string): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.apiBaseUrl + '/tables/' + id + '/suggested-players');
+  }
+
+  changeType(id: string, type: TableType) {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-type', {type});
   }
 }
