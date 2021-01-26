@@ -21,9 +21,7 @@ export const environment: Environment = {
     redirectUri: window.location.origin,
     timeoutFactor: 0.01,
     logoutUrl: 'https://gwt-test.auth.eu-west-1.amazoncognito.com/logout?client_id=376e8rt8oopbqs5k5h2mnvl0nl&logout_uri=' + window.location.origin
-  },
-
-  serverPublicKey: 'BJgqYxOkVeqrTWZryTnc3zA-VBTESLna7y-5ExPfvDe3VTMVkDTxZ58HwWbjiLFXWGvxxl8bhuSjDXAbL34z_cE'
+  }
 };
 
 /*

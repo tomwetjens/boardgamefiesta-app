@@ -5,5 +5,4 @@ export interface Environment {
   apiBaseUrl: string;
   wsBaseUrl: string;
   auth: AuthConfig;
-  serverPublicKey: string;
 }
