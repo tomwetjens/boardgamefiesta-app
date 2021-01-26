@@ -27,7 +27,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InvitePlayerComponent} from './invite-player/invite-player.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector.component';
-import {ManagePushNotificationsComponent} from "./manage-push-notifications/manage-push-notifications.component";
 
 @NgModule({
   declarations: [
@@ -47,8 +46,7 @@ import {ManagePushNotificationsComponent} from "./manage-push-notifications/mana
     PrivacyComponent,
     FaqComponent,
     InvitePlayerComponent,
-    TimeZoneSelectorComponent,
-    ManagePushNotificationsComponent
+    TimeZoneSelectorComponent
   ],
   imports: [
     BrowserModule,
