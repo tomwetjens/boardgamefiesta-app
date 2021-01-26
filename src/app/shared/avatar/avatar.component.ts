@@ -9,7 +9,6 @@ import {User} from '../model';
 export class AvatarComponent implements OnInit {
 
   @Input() user: User;
-  @Input() shadow = false;
 
   constructor() {
   }

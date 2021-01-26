@@ -3,7 +3,7 @@ import {Table, TableMode, TablePlayer, TableType} from '../shared/model';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
-import {takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loggedIn$: Observable<boolean>;
   myActiveTables$: Observable<Table[]>;
+  myTurnTables$: Observable<Table[]>;
+  waitingTables$: Observable<Table[]>;
 
   games$ = new BehaviorSubject(['gwt']);
 
@@ -27,8 +29,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.myActiveTables$ = this.tableService.myActiveTables$
-      .pipe(takeUntil(this.destroyed));
+    this.myActiveTables$ = this.tableService.myActiveTables$;
+
+    this.myTurnTables$ = this.myActiveTables$.pipe(
+      map(tables => tables.filter(table => !!table.turn))
+    );
+
+    this.waitingTables$ = this.myActiveTables$.pipe(
+      map(tables => tables.filter(table => !table.turn))
+    );
   }
 
   ngOnDestroy(): void {

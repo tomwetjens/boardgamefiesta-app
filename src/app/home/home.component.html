@@ -1,41 +1,63 @@
-<section class="container" *ngIf="loggedIn$ | async">
-  <div *ngFor="let table of myActiveTables$ | async" class="alert alert-primary table">
-    <strong>{{'game.' + table.game + '.name' | translate}}</strong>
+<ng-container *ngIf="loggedIn$ | async">
+  <ng-container *ngIf="(myTurnTables$ | async) as tables">
+    <section class="container" *ngIf="tables.length > 0">
+      <h6>{{'yourTurn'|translate}}</h6>
+      <div *ngFor="let table of tables" class="alert alert-primary table">
+        <strong>{{'game.' + table.game + '.name' | translate}}</strong>
+        &nbsp;
+        <button (click)="openTable(table)" class="btn btn-success">{{'play'|translate}}</button>
 
-    <ng-container [ngSwitch]="table.status">
+        <span class="avatars">
+        <app-avatar *ngFor="let player of otherHumanPlayers(table)" [user]="player.user"></app-avatar>
+      </span>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="(waitingTables$ | async) as tables">
+    <section class="container" *ngIf="tables.length > 0">
+      <h6>{{'yourOtherTables'|translate}}</h6>
+      <div *ngFor="let table of tables" class="alert alert-secondary table">
+        <strong>{{'game.' + table.game + '.name' | translate}}</strong>
+
+        <ng-container [ngSwitch]="table.status">
       <span *ngSwitchCase="'NEW'">
         <ng-container [ngSwitch]="table.canAccept">
           <span *ngSwitchCase="false">
             {{'notStarted'|translate}}
-            <button (click)="openTable(table)" class="btn btn-success">{{'open'|translate}}</button>
+            <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
           </span>
           <span *ngSwitchCase="true">
-            {{'invitedBy'|translate}} {{table.owner.username}}
+            {{'invitedBy'|translate}}&nbsp;<strong>{{table.owner.username}}</strong>&nbsp;
             <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
             &nbsp;
             <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>
         </ng-container>
       </span>
-      <span *ngSwitchCase="'STARTED'">
-        <ng-container [ngSwitch]="table.turn">
-          <span *ngSwitchCase="true">
-            {{'yourTurn'|translate}}
-          </span>
-          <span *ngSwitchCase="false">
-            {{'waitingFor'|translate}}
-            {{table.players[table.currentPlayer].user?.username || 'computer'|translate}}
-          </span>
-        </ng-container>
-        <button (click)="openTable(table)" class="btn btn-success">Open</button>
+          <span *ngSwitchCase="'STARTED'">
+        {{'waitingFor'|translate}}
+            <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+        <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
       </span>
-    </ng-container>
+        </ng-container>
 
-    <span class="avatars">
-      <app-avatar *ngFor="let player of otherHumanPlayers(table)" [user]="player.user"></app-avatar>
+        <span class="avatars">
+      <span *ngFor="let player of otherHumanPlayers(table)">
+        <ng-template #userPopover>
+          <app-user-popover [user]="player.user"></app-user-popover>
+        </ng-template>
+        <app-avatar [user]="player.user"
+                    [ngbPopover]="userPopover"
+                    placement="auto"
+                    container="body"
+                    triggers="mouseenter:mouseleave hover click"></app-avatar>
+      </span>
     </span>
-  </div>
-</section>
+      </div>
+    </section>
+  </ng-container>
+</ng-container>
 
 <section class="container" *ngIf="!(loggedIn$ | async)">
   <div class="jumbotron">

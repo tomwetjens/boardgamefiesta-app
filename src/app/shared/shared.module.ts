@@ -32,6 +32,7 @@ import { TableSummaryComponent } from './table-summary/table-summary.component';
     UserPopoverComponent,
     TimerComponent,
     UserNameComponent,
+
     RatingComponent,
     FromNowPipe,
     AgoPipe,
@@ -63,7 +64,8 @@ import { TableSummaryComponent } from './table-summary/table-summary.component';
         LogComponent,
         InGamePlayerComponent,
         LocationIconComponent,
-        TableSummaryComponent
+        TableSummaryComponent,
+        UserPopoverComponent,
     ]
 })
 export class SharedModule {
