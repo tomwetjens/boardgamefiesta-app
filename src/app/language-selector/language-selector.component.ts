@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {by639_1} from 'iso-language-codes';
 
-const SUPPORTED_LANGUAGES = ['en', 'nl', 'pt'];
+const SUPPORTED_LANGUAGES = ['en', 'it',  'nl', 'pt'];
 
 @Component({
   selector: 'app-language-selector',

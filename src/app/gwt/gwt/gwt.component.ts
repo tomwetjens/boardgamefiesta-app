@@ -4,8 +4,6 @@ import {Observable} from "rxjs";
 import {Table} from "../../shared/model";
 import {TableService} from "../../table.service";
 import {Action, State} from "../model";
-import en from "../locale/en.json";
-import nl from "../locale/nl.json";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({

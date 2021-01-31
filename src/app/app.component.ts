@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import moment from 'moment';
 import momentTz from 'moment-timezone';
 import en from '../locale/en.json';
+import it from '../locale/it.json';
 import nl from '../locale/nl.json';
 import pt from '../locale/pt.json';
 
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateService.setTranslation('en', en);
+    this.translateService.setTranslation('it', it);
     this.translateService.setTranslation('nl', nl);
     this.translateService.setTranslation('pt', pt);
 

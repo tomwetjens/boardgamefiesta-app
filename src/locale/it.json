@@ -1,0 +1,236 @@
+{
+  "appName": "Board Game Fiesta",
+  "changeEmailDialog": {
+    "title": "Cambia indirizzo e-mail",
+    "email": "Inserisci il nuovo indirizzo e-mail",
+    "submit": "Conferma"
+  },
+  "changePasswordDialog": {
+    "title": "Cambia password",
+    "password": "Inserisci la nuova password",
+    "confirmPassword": "Ripeti la nuova password",
+    "submit": "Conferma",
+    "policy": "Minimo 8 caratteri"
+  },
+  "home": {
+    "welcome": "Benvenuto",
+    "lead": "Divertiti con i tuoi giochi da tavolo preferiti con gli amici o altri giocatori da tutto il mondo!",
+    "lead2": "Unisciti alla più divertente community di giochi da tavolo sul web. Comincia direttamente dal tuo browser. Non servono altri download o installazioni.",
+    "startPlayingNow": "Inizia a giocare ora"
+  },
+  "games": "Games",
+  "game": {
+    "istanbul": {
+      "name": "Istanbul",
+      "description": "Het is een drukte van belang op de bazaar in Istanbul. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!"
+    },
+    "gwt": {
+      "name": "Ranchers Of The Old West",
+      "summary": "Trasporta il tuo bestiame lungo le tratte del vecchio West. Ispirato al popolare gioco da tavolo Great Western Trail.<br/><a href=\"https://discord.gg/f5rzXXvU6Z\" target=\"_new\">Unisciti al server Discord</a>",
+      "description": "America nel 19° secolo: Sei il propietario di un ranch e porti ripetutamente il tuo bestiame dal Texas a Kansas City, laddove viene spedito via treno. Questo ti farà guadagnare denaro e punti vittoria.<br/>Inutile aggiungerlo: Ogni volta che arrivi a Kansas City, vuoi avere con te il bestiame di maggior valore. Per far ciò non dovrai solo mantenere la tua mandria in buona forma, ma anche usare in maniera efficace i vari edifici che si trovano lungo la tratta.<br/>Il successo richiederà che tu assuma lo staff più competente: cowboy per migliorare la mandria, artigiani per costruire i tuo edifici privati e ingegneri per gestire l'importante linea ferroviaria.<br/><br/>Se saprai gestire sapientemente la tua mandria, le opportunità e le insidie lungo la grande tratta del West, guadagnerai sicuramente più punti vittoria e vincerai la partita."
+    }
+  },
+  "findUser": "Trova Utente",
+  "usernameOrEmail": "Nome utente o e-mail",
+  "search": "Cerca",
+  "select": "Scegli",
+  "readMore": "Leggi di più",
+  "showLess": "Mostra di meno",
+  "friends": "Amici",
+  "addFriend": "Aggiungi Amico",
+  "removeFriend": "Rimuovi Amico",
+  "noFriends": "Nessuna amico aggiunto finora.",
+  "language": "Lingua",
+  "user-menu": {
+    "profile": "Profilo",
+    "myActivity": "La Mia Attività",
+    "friends": "Amici"
+  },
+  "user": {
+    "changeEmail": "Cambia indirizzo e-mail",
+    "emailChanged": "Indirizzo e-mail cambiato",
+    "changePassword": "Cambia password",
+    "passwordChanged": "Password cambiata",
+    "password": "Password",
+    "timeZone": "Fuso orario"
+  },
+  "profile": {
+    "avatar": "Avatar",
+    "about": "Le mie info",
+    "preferences": "Preferenze",
+    "username": "Nome utente",
+    "language": "Lingua",
+    "email": "E-mail",
+    "save": "Salva",
+    "location": "Località"
+  },
+  "in-game-navbar": {
+    "mute": "Muta",
+    "mutePopover": "Muta tutti i suoni",
+    "unmute": "Ascolta",
+    "unmutePopover": "Ascolta tutti i suoni"
+  },
+  "in-game-menu": {
+    "sounds": "Suoni",
+    "alerts": {
+      "mute": "Muta gli avvisi",
+      "unmute": "Ascolta gli avvisi"
+    },
+    "effects": {
+      "mute": "Muta gli effetti sonori",
+      "unmute": "Ascolta gli effetti sonori"
+    },
+    "voiceOver": {
+      "mute": "Muta le voci",
+      "unmute": "Ascolta le voci"
+    },
+    "music": {
+      "mute": "Muta la musica",
+      "unmute": "Ascolta la musica"
+    },
+    "confirmLeave": "Se lasci il tavolo non potrai riunirti e continuare la partita!"
+  },
+  "notifications": {
+    "audio": {
+      "muted": {
+        "ALERTS": "Gli avvisi sono ora spenti",
+        "EFFECTS": "Gli effetti sonori sono ora spenti",
+        "VOICE_OVER": "Le voci sono ora spente",
+        "MUSIC": "La musica è ora spenta"
+      },
+      "unmuted": {
+        "ALERTS": "Gli avvisi sono ora attivati",
+        "EFFECTS": "Gli effetti sonori sono ora attivati",
+        "VOICE_OVER": "Le voci sono ora attivate",
+        "MUSIC": "La musica è ora attivata"
+      }
+    }
+  },
+  "logout": "Log out",
+  "accept": "Accetta",
+  "reject": "Rifiuta",
+  "notStarted": "In attesa di altri gicoatori",
+  "createdAt": "creato il",
+  "endedAt": "finito il",
+  "owner": "Creatore",
+  "play": "Gioca",
+  "yourTurn": "Il Tuo Turno",
+  "close": "Chiudi",
+  "invite": "Invita giocatore",
+  "uninvite": "Rimuovi",
+  "invitedBy": "Invitato da",
+  "start": "Inizia partita",
+  "open": "Apri",
+  "back": "Pagina iniziale",
+  "endTurn": "Termina Turno",
+  "skip": "Salta",
+  "undo": "Annulla",
+  "waitingFor": "In attesa di",
+  "busy": "Il tavolo è in aggiornamento...",
+  "computer": "Computer",
+  "abandon": "Abbandona",
+  "join": "Unisiciti al tavolo",
+  "leave": "Lascia il tavolo",
+  "connected": "Connesso",
+  "connecting": "Connessione in corso...",
+  "cancel": "Annulla",
+  "infoDialog": "Informazioni",
+  "confirmDialog": "Sei sicuro?",
+  "alertDialog": "Attenzione!",
+  "confirm": "Conferma",
+  "ok": "OK",
+  "options": "Opzioni",
+  "players": "Giocatori",
+  "addComputer": "Aggiungi Giocatore Computer",
+  "confirmStart": "Alcuni giocatori ancora non hanno risposto. Non saranno in grado di unirsi alla partita. Vuoi iniziare lo stesso?",
+  "waitForPlayers": "Aspetta altri giocatori",
+  "popover": {
+    "waitingForPlayer": "In attesa della mossa di questo giocatore."
+  },
+  "lastSeen": "Ultimo login",
+  "ago": "fa",
+  "menu": "Menu",
+  "location": "Località",
+  "unknown": "Sconosciuta",
+  "recentActivity": "Attività Recente",
+  "table": {
+    "status": {
+      "NEW": "In attesa di giocatori",
+      "STARTED": "In corso",
+      "ENDED": "Terminato",
+      "ABANDONED": "Abbandonato"
+    },
+    "visibility": {
+      "PRIVATE": "Questo è un tavolo privato. Solo i giocatori invitati possono unirsi.",
+      "PUBLIC": "Questo tavolo è aperto a tutti."
+    },
+    "makePublic": "Apri a tutti",
+    "makePrivate": "Rendi privato",
+    "type": "Tipo",
+    "types": {
+      "REALTIME": "Tempo reale",
+      "TURN_BASED": "A turni"
+    }
+  },
+  "player": {
+    "status": {
+      "INVITED": "Non ha ancora risposto",
+      "ACCEPTED": "Accettato",
+      "REJECTED": "Rifiutato",
+      "PROPOSED_TO_LEAVE": "Propone di lasciare",
+      "AGREED_TO_LEAVE": "Accetta di lasciare",
+      "LEFT": "Ha lasciato"
+    }
+  },
+  "rating": "Rating",
+  "score": "Punteggio",
+  "about": {
+    "title": "Informazioni",
+    "text": "Questo sito è gestito da Tom Wetjens. Sono uno sviluppatore software di giorno a giocatore da tavolo di notte. L'idea per questo sito mi è venuta durante il lockdown dovuto al Coronavirus nel 2020. Dato che non era più possibile giocare da tavolo con gli amici dal vivo, ho cominciato a cercare altri modi per farlo.",
+    "specialThanks": {
+      "title": "Ringraziamenti Speciali",
+      "text": "Mia moglie Sharon per la pazienza e i test. Ringrazio anche Gerben, Niels, Erik, Judith, Irene per i test. Sander per i test, musiche ed effetti sonori."
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "text": "Questo sito è gestito da Tom Wetjens. Siete liberi di contattarmi riguardo qualsiasi problematica o suggerimento. Dato che al momento non c'è ancora un issue tracker, per favore inviate ogni report di bug al mio indirizzo e-mail."
+  },
+  "errors": {
+    "EXCEEDS_MAX_REALTIME_GAMES": "Hai raggiunto il limite massimo di partite in tempo reale che puoi giocare contemporaneamente.",
+    "EXCEEDS_MAX_ACTIVE_GAMES": "Hai raggiunto il limite massimo di partite che puoi giocare contemporaneamente.",
+    "CANNOT_INVITE_REACHED_MAX_ACTIVE_GAMES": "Questo utente ha raggiunto il limite massimo di partite che può giocare contemporaneamente, perciò non può essere invitato.",
+    "MIN_PLAYERS": "Servono altri giocatori per cominciare la partita.",
+    "SERVER_NOT_AVAILABLE": "Il server al momento non è disponibile.",
+    "UNEXPECTED_SERVER_ERROR": "Errore inatteso dal server.",
+    "CONNECTION_FAILED": "Impossibile connettersi al server. Verifica di essere online.",
+    "FORBIDDEN": "Non puoi eseguire l'azione richiesta o accedere alla risorsa richiesta.",
+    "UNKNOWN_ERROR": "Errore imprevisto.",
+    "ALREADY_INVITED": "Questo utente è già stato invitato al tavolo.",
+    "NOT_PLAYER_IN_GAME": "Non stai giocando in questo tavolo.",
+    "EXCEEDS_MAX_PLAYERS": "Hai raggiunto il numero massimo di giocatori al tavolo per questo gioco.",
+    "NOT_SUPPORTED": "Operazione non supportata.",
+    "COMPUTER_NOT_SUPPORTED": "Questo gioco ancora non supporta giocatori del computer.",
+    "TOKEN_VALIDATION_ERROR": "Login fallito per via del token scaduto. Verifica che il tuo orologio di sistema sia settato correttamente.",
+    "RESOURCE_NOT_FOUND": "La risorsa richiesta non è stata trovata.",
+    "HISTORY_NOT_AVAILABLE": "Non ci sono dati sufficienti nella cronologia per annullare l'ultima azione.",
+    "CANNOT_UNDO": "La mossa precedente non può essere annullata.",
+    "GAME_ALREADY_ENDED": "La partita è già terminata.",
+    "NOT_PUBLIC": "Devi ricevere un invito per unirti al tavolo.",
+    "MUST_BE_OWNER": "Devi essere il creatore del tavolo.",
+    "EMAIL_ALREADY_IN_USE": "Esiste già un utente registrato con questo indirizzo e-mail."
+  },
+  "log": {
+    "CREATE": "ha creato un nuovo tavolo",
+    "START": "ha cominciato la partita",
+    "INVITE": "ha invitato <strong>{{otherUser}}</strong>",
+    "ACCEPT": "si è unito al tavolo",
+    "REJECT": "ha rifiutato di unirsi al tavolo",
+    "KICK": "ha rimosso <strong>{{otherUser}}</strong>",
+    "JOIN": "si è unito al tavolo",
+    "LEFT": "ha lasciato il tavolo",
+    "PROPOSED_TO_LEAVE": "ha proposto di lasciare il tavolo insieme",
+    "AGREED_TO_LEAVE": "è d'accordo a lasciare il tavolo",
+    "UNDO": "annulla la mossa precedente"
+  }
+}
