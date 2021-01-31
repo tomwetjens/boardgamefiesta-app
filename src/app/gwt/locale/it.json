@@ -2,7 +2,7 @@
   "gwt": {
     "bidding": {
       "position": "#{{position}}",
-      "placeBid": "Punta {{punti}} PV"
+      "placeBid": "Punta {{points}} PV"
     },
     "buildingsDialog": "Edifici Disponibili",
     "objectivesDialog": "Obiettivi e Tessere",
@@ -31,8 +31,8 @@
       "certificati": "Il numero massimo di certificati da spendere, che siano temporanei (indicati dal cubo sulla scheda giocatore), oppure permamenti (acquisiti tramite le tessere stazione).",
       "route": "Questa strada costa {{cost}} dollari.",
       "playerFee": "riceve {{fee}} dollari.",
-      "cattleCard": "Questa è una mucca {{type}} del valore di {{breedingValue}} a Kansas e {{punti}} punti.",
-      "objectiveCard": "Questo è un obiettivo del valore di {{punti}} punti. Quando è giocato dalla mano il giocatore può: {{action}}. Se non viene completato, il giocatore perde {{penalty}} punti.",
+      "cattleCard": "Questa è una mucca {{type}} del valore di {{breedingValue}} a Kansas e {{points}} punti.",
+      "objectiveCard": "Questo è un obiettivo del valore di {{points}} punti. Quando è giocato dalla mano il giocatore può: {{action}}. Se non viene completato, il giocatore perde {{penalty}} punti.",
       "objective": {
         "completed": "Questo obiettivo è completato e vale {{score}} punti.",
         "notCompleted": "Questo obiettivo non è ancora stato completato e vale {{score}} punti."
@@ -101,9 +101,9 @@
         "ROCKFALL-RISK-2": "<br/><br/><strong>Azione Rischio:</strong> Scarta 1 mucca Jersey (grigia) per guadagnare 1 certificato e 2 dollari"
       },
       "hazard": {
-        "DROUGHT": "<strong>Ostacolo:</strong> Deserto ({{punti}} PV)",
-        "ROCKFALL": "<strong>Ostacolo:</strong> Frana ({{punti}} PV)",
-        "FLOOD": "<strong>Ostacolo:</strong> Alluvione ({{punti}} PV)"
+        "DROUGHT": "<strong>Ostacolo:</strong> Deserto ({{points}} PV)",
+        "ROCKFALL": "<strong>Ostacolo:</strong> Frana ({{points}} PV)",
+        "FLOOD": "<strong>Ostacolo:</strong> Alluvione ({{points}} PV)"
       },
       "mediumTownTile": {
         "GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD": "Quando costruisci una succursale qui, guadagni 5 dollari oppure prendi una mucca di valore 3 dal mercato bovino.",

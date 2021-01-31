@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ReplaySubject} from 'rxjs';
 
 countries.registerLocale(countriesEN);
+countries.registerLocale(countriesIT);
 countries.registerLocale(countriesNL);
 countries.registerLocale(countriesPT);
 
