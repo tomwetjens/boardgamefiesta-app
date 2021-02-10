@@ -863,7 +863,7 @@
               (click)="selectSpace(space.space)"/>
       </g>
 
-      <g *ngFor="let station of state.railroadTrack.stations; index as i" class="station"
+      <g *ngFor="let e of [].constructor(10); index as i" class="station"
          [attr.transform]="'translate(' + (i < 5 ? (305 + (i * 95)) : (i < 9 ? 722 : 745)) + ',' + (i < 5 ? 95 : (i < 9 ? (127 + ((i-5)*124)) : 700)) + ')'"
          (click)="selectStation(i)"
          [ngClass]="{disabled:!canSelectStation(i)}">
