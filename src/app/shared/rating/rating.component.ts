@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-rating',
@@ -9,10 +10,14 @@ export class RatingComponent implements OnInit {
 
   @Input() rating: number;
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
+  }
+
+  get locale() {
+    return this.translateService.currentLang;
   }
 
 }

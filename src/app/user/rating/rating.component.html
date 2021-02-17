@@ -1,11 +1,28 @@
 <div class="container" *ngIf="user$ | async as user">
-    <h1>{{user.username}}</h1>
+  <h1>{{user.username}}</h1>
 
   <a [routerLink]="['/user', user.id]">
     View activity
   </a>
 
   <h2>Ratings for {{'game.' + (gameId$ | async) + '.name' | translate}}</h2>
+
+  <ngx-charts-line-chart
+    [view]="[800, 400]"
+    [scheme]="{domain:['#ff0000']}"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="false"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Time'"
+    [xAxisTickFormatting]="dateTickFormatting"
+    [yAxisLabel]="'Rating'"
+    [yAxisTickFormatting]="numberTickFormatting(locale)"
+    [timeline]="true"
+    [results]="chartData$ | async"
+    [animations]="false">
+  </ngx-charts-line-chart>
 
   <table class="table">
     <thead>

@@ -8,6 +8,10 @@ import en from '../locale/en.json';
 import it from '../locale/it.json';
 import nl from '../locale/nl.json';
 import pt from '../locale/pt.json';
+import '@angular/common/locales/global/en';
+import '@angular/common/locales/global/it';
+import '@angular/common/locales/global/nl';
+import '@angular/common/locales/global/pt';
 
 @Component({
   selector: 'app-root',

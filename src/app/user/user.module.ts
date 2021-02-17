@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { SameValidator } from './change-password-dialog/same-validator.directive';
 import {NotSameValidator} from "./change-email-dialog/not-same-validator.directive";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     NgbModule,
+    NgxChartsModule,
     TranslateModule.forChild(),
     RouterModule.forChild(routes),
     SharedModule,
