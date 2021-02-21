@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {GameProvider, Option} from "../shared/api";
 import {TranslateService} from "@ngx-translate/core";
-import {LogEntry, Table, TablePlayer, User} from "../shared/model";
-import {Buildings, Mode, PlayerOrder, Variant} from "./model";
+import {LogEntry, PlayerType, Table, TablePlayer, User} from "../shared/model";
+import {Buildings, Difficulty, Mode, PlayerOrder, Variant} from "./model";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,14 @@ export class GwtProvider implements GameProvider {
       {key: 'variant', values: [Variant.ORIGINAL, Variant.BALANCED], defaultValue: Variant.ORIGINAL},
       {key: 'railsToTheNorth', values: [false, true], defaultValue: false}
     ];
+
+    if (table.otherPlayers.some(playerId => table.players[playerId].type === PlayerType.COMPUTER)) {
+      options.push({
+        key: 'difficulty',
+        values: [Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD, Difficulty.VERY_HARD],
+        defaultValue: Difficulty.EASY
+      });
+    }
 
     if (table.options['railsToTheNorth'] !== true) {
       Array.prototype.push.apply(options, [
