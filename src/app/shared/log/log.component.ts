@@ -63,7 +63,7 @@ export class LogComponent implements OnInit {
   }
 
   trackGroup(index: number, group: Group): any {
-    return group.logEntries[group.logEntries.length - 1].timestamp;
+    return index === 0 ? 0 : group.logEntries[group.logEntries.length - 1].timestamp;
   }
 
   translateInGameEvent(logEntry: LogEntry) {
