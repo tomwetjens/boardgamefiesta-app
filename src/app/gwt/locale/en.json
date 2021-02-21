@@ -705,6 +705,15 @@
           "true": "Yes, with expansion (BETA)"
         }
       },
+      "difficulty": {
+        "label": "Difficulty (computer)",
+        "value": {
+          "EASY": "Easy",
+          "MEDIUM": "Medium",
+          "HARD": "Hard",
+          "VERY_HARD": "Very Hard"
+        }
+      },
       "stationMasterPromos": {
         "label": "Station master promos",
         "value": {

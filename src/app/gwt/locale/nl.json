@@ -705,6 +705,15 @@
           "true": "Ja, met uitbreiding (BETA)"
         }
       },
+      "difficulty": {
+        "label": "Moeilijkheid (computer)",
+        "value": {
+          "EASY": "Makkelijk",
+          "MEDIUM": "Gemiddeld",
+          "HARD": "Moeilijk",
+          "VERY_HARD": "Heel moeilijk"
+        }
+      },
       "stationMasterPromos": {
         "label": "Stationschef promos",
         "value": {

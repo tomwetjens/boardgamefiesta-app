@@ -18,6 +18,14 @@ export class GwtProvider implements GameProvider {
       {key: 'railsToTheNorth', values: [false, true], defaultValue: false}
     ];
 
+    if (table.otherPlayers.some(playerId => table.players[playerId].type === PlayerType.COMPUTER)) {
+      options.push({
+        key: 'difficulty',
+        values: [Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD, Difficulty.VERY_HARD],
+        defaultValue: Difficulty.EASY
+      });
+    }
+
     if (table.options['railsToTheNorth'] !== true) {
       Array.prototype.push.apply(options, [
         {key: 'stationMasterPromos', values: [false, true], defaultValue: false},
