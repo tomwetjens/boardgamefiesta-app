@@ -4,6 +4,7 @@
                     [score]="playerState.score?.total">
   <header>
     <span class="balance"
+          *ngIf="table.players[playerState.player.name].type != 'COMPUTER'"
           ngbPopover="{{'gwt.popover.balance'|translate}}"
           placement="bottom"
           triggers="mouseenter:mouseleave"
@@ -18,13 +19,14 @@
       {{playerState.handValue}}
     </span>
     <span class="certificates"
+          *ngIf="table.players[playerState.player.name].type != 'COMPUTER'"
           ngbPopover="{{'gwt.popover.certificates'|translate}}"
           placement="bottom"
           triggers="mouseenter:mouseleave"
           container="body">
       {{playerState.certificates}}
     </span>
-    <span class="exchangeTokens" *ngIf="state.railsToTheNorth"
+    <span class="exchangeTokens" *ngIf="state.railsToTheNorth && table.players[playerState.player.name].type != 'COMPUTER'"
           ngbPopover="{{'gwt.popover.exchangeTokens'|translate}}"
           triggers="mouseenter:mouseleave"
           container="body"
@@ -45,7 +47,9 @@
             ngbPopover="{{'gwt.popover.objectives'|translate}}"
             triggers="mouseenter:mouseleave"
             container="body"></button>
-    <button class="btn btn-secondary btn-discard-pile" [disabled]="!playerState.discardPile"
+    <button class="btn btn-secondary btn-discard-pile"
+            *ngIf="table.players[playerState.player.name].type != 'COMPUTER'"
+            [disabled]="!playerState.discardPile"
             (click)="showDiscardPile()">
       <app-card-stack class="discard-pile"
                       [cards]="playerState.discardPile || (playerState.discardPileTop ? [playerState.discardPileTop] : [])"
@@ -57,6 +61,7 @@
                       container="body"></app-card-stack>
     </button>
     <button class="btn btn-secondary btn-draw-stack"
+            *ngIf="table.players[playerState.player.name].type != 'COMPUTER'"
             (click)="showDrawStack()" [disabled]="!playerState.drawStack">
       <app-card-stack class="draw-stack"
                       [size]="playerState.drawStackSize"

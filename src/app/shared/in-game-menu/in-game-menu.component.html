@@ -36,7 +36,7 @@
         </button>
       </div>
     </div>
-    <button ngbDropdownItem class="text-danger" (click)="leave()">
+    <button ngbDropdownItem class="text-danger" (click)="leave()" *ngIf="table.canLeave">
       <svg class="bi" width="16" height="16" fill="currentColor">
         <use xlink:href="/assets/bootstrap-icons.svg#x-square-fill"/>
       </svg>

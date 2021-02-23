@@ -25,18 +25,8 @@
           <img src="/assets/games/gwt/screenshots/screenshot2.jpg" alt="Random second slide">
         </div>
         <div class="carousel-caption">
-          <h3>Beginner game or randomized</h3>
-          <p>Each player has own set of buildings available to build</p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img src="/assets/games/gwt/screenshots/screenshot3.jpg" alt="Random third slide">
-        </div>
-        <div class="carousel-caption">
-          <h3>Action system</h3>
-          <p>Sophisticated action system with fully implemented rules, so the system indicates what actions are
-            possible.</p>
+          <h3>Northern Railroads expansion</h3>
+          <p>More strategic options with the Northern Railroad expansion.</p>
         </div>
       </ng-template>
     </ngb-carousel>
@@ -51,13 +41,6 @@
     <h2>Rules</h2>
     <p>To be described.</p>
 
-    <h2>Known Issues</h2>
-    <ul>
-      <li>The "computer" player is currently very dumb. It only moves forward 1 step at a time and always delivers to
-        Kansas City.
-      </li>
-    </ul>
-
     <h2>Frequently Asked Questions</h2>
     <dl>
       <dt>What is the 'Better balanced for 2/3p' variant?</dt>
@@ -67,6 +50,26 @@
         <br/>
         The tiles in the Kansas City supply and the cattle cards in the cattle market are adjusted to approximate the
         ratios of a 4 player game.
+      </dd>
+      <dt>What do the difficulty levels (computer) mean? How does the computer play?</dt>
+      <dd>
+        <p>The computer player is inspired by <a
+        href="https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play" target="_new">Garth --
+          Specialized Automa for GWT Solo Play</a>.</p>
+        <ul>
+          <li>Easy: computer automatically makes his first delivery to Wichita / Chicago.</li>
+          <li>Medium: computer starts with 1 employee of his specialization and makes
+          his first delivery to Colorado Springs / Chicago (and will skip Detroit).</li>
+          <li>Hard: computer starts with 2 different random employee tiles and makes his first delivery to
+          Albuquerque / Cleveland.</li>
+          <li>Very Hard: computer starts with 1 employee tile of each type and a 2nd tile of a random type
+          (4 employee tiles total) and makes his first delivery to Albuquerque / Cleveland.</li>
+        </ul>
+        <p>The computer's score is calculated mostly normally. He does not score for money, removing the 3VP
+          disk, or station master tiles. He scores positive points for all objectives, as though they were
+          all completed. When playing with the expansion, if the computer was forced to deliver to San
+          Francisco because he had already delivered to New York City and every available big town,
+          he gains 6 VP for each disk placed there (even if no branchlet was placed there).</p>
       </dd>
       <dt>What is strategic mode?</dt>
       <dd>
