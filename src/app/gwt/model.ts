@@ -284,6 +284,11 @@ export interface PlayerState {
   readonly winner?: boolean;
   readonly exchangeTokens?: number;
   readonly branchlets?: number;
+  readonly automaState?: AutomaState;
+}
+
+export interface AutomaState {
+  specialization: Worker;
 }
 
 export const TURNOUTS = [4, 7, 10, 13, 16, 21, 25, 29, 33];

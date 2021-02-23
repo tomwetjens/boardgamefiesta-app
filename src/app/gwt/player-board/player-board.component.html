@@ -128,17 +128,38 @@
              [attr.y]="71" [ngClass]="{disabled:!canSelectCowboy(i)}"
              (click)="selectCowboy(i)"/>
 
+        <rect *ngIf="playerState.automaState?.specialization == 'COWBOY'"
+              class="cert-marker disabled"
+              x="206"
+              y="201"
+              width="30"
+              height="30"></rect>
+
         <use xlink:href="#CRAFTSMAN" *ngFor="let craftsman of craftsmen; index as i" class="worker"
              transform="scale(2.2, 2.2)"
              [attr.x]="122 + (i * 36.7)"
              [attr.y]="113" [ngClass]="{disabled:!canSelectCraftsman(i)}"
              (click)="selectCraftsman(i)"/>
 
+        <rect *ngIf="playerState.automaState?.specialization == 'CRAFTSMAN'"
+              class="cert-marker disabled"
+              x="206"
+              y="296"
+              width="30"
+              height="30"></rect>
+
         <use xlink:href="#ENGINEER" *ngFor="let engineer of engineers; index as i" class="worker"
              transform="scale(2.2, 2.2)"
              [attr.x]="122 + (i * 36.7)"
              [attr.y]="155" [ngClass]="{disabled:!canSelectEngineer(i)}"
              (click)="selectEngineer(i)"/>
+
+        <rect *ngIf="playerState.automaState?.specialization == 'ENGINEER'"
+              class="cert-marker disabled"
+              x="206"
+              y="386"
+              width="30"
+              height="30"></rect>
 
         <rect id="cert_marker_0" *ngIf="playerState.tempCertificates === 0"
               class="cert-marker disabled"
