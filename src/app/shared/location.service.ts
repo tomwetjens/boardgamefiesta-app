@@ -21,7 +21,9 @@ export class LocationService {
   readonly names = new ReplaySubject<{ [code: string]: string }>(1);
 
   constructor(private translateService: TranslateService) {
-    this.refreshNames(this.translateService.currentLang);
+    if (this.translateService.currentLang) {
+      this.refreshNames(this.translateService.currentLang);
+    }
 
     this.translateService.onLangChange
       .subscribe(event => this.refreshNames(event.lang));
