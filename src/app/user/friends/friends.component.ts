@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@an
 import {Observable, Subject} from "rxjs";
 import {FriendService} from "../../friend.service";
 import {User} from "../../shared/model";
-import {map, switchMap, takeUntil} from "rxjs/operators";
+import {switchMap, takeUntil} from "rxjs/operators";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SelectUserComponent} from "../../select-user/select-user.component";
 import {fromPromise} from "rxjs/internal-compatibility";
@@ -16,11 +16,11 @@ import {AuthService} from "../../auth.service";
 export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() userId: string;
+  @Input() readOnly: boolean;
 
   private destroyed = new Subject();
 
   friends$: Observable<User[]>;
-  isSelf$: Observable<boolean>;
 
   constructor(private friendService: FriendService,
               private authService: AuthService,
@@ -32,14 +32,7 @@ export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private refresh() {
-    this.isSelf$ = this.authService.userId.pipe(
-      map(currentUserId => currentUserId === this.userId));
-
-    this.friends$ = this.isSelf$.pipe(
-      switchMap(isSelf => isSelf
-        ? this.friendService.myFriends$
-        : this.friendService.friends$(this.userId)),
-      takeUntil(this.destroyed));
+    this.friends$ = this.friendService.friends$(this.userId);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

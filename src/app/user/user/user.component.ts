@@ -17,6 +17,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   userId$: Observable<string>;
   user$: Observable<User>;
+  currentUser$: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userId$ = this.route.params.pipe(map(({userId}) => userId));
+
+    this.currentUser$ = this.userService.currentUser;
 
     this.user$ = this.userId$.pipe(
       switchMap(userId => this.userService.get(userId)),

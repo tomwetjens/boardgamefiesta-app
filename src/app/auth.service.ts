@@ -15,7 +15,6 @@ export class AuthService {
 
   loggedIn = new ReplaySubject<boolean>(1);
   token: Observable<string>; // Should not emit until auth flow is completed
-  userId: Observable<string>;
 
   constructor(private oauthService: OAuthService,
               private toastrService: ToastrService) {
@@ -23,8 +22,6 @@ export class AuthService {
       .pipe(
         map(() => this.oauthService.hasValidIdToken() ? this.oauthService.getIdToken() : null),
         distinctUntilChanged());
-
-    this.userId = this.claims.pipe(map(claims => claims.sub));
 
     this.oauthService.events
       .subscribe(event => {

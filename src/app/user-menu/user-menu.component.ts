@@ -13,6 +13,7 @@ import {AuthService} from '../auth.service';
 export class UserMenuComponent implements OnInit {
 
   user: Observable<User>;
+  loggedIn$: Observable<boolean>;
 
   constructor(private router: Router,
               private userService: UserService,
@@ -21,6 +22,7 @@ export class UserMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.currentUser;
+    this.loggedIn$ = this.authService.loggedIn;
   }
 
   logout() {

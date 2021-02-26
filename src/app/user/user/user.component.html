@@ -12,8 +12,8 @@
     {{'language'|translate}}: {{user.language}}
   </p>
 
-  <section>
-    <user-friends [userId]="user.id"></user-friends>
+  <section *ngIf="currentUser$ | async as currentUser">
+    <user-friends [userId]="user.id" [readOnly]="currentUser.id !== user.id"></user-friends>
   </section>
 
   <section>

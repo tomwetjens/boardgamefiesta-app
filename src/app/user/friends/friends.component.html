@@ -1,12 +1,12 @@
 <h2>{{'friends'|translate}}</h2>
-<button class="btn btn-primary" (click)="add()" *ngIf="isSelf$ | async">
+<button class="btn btn-primary" (click)="add()" *ngIf="!readOnly">
   {{'addFriend'|translate}}
 </button>
 <ng-container *ngIf="friends$ | async as friends; else loading">
   <div *ngFor="let friend of friends">
     <user-friend [friend]="friend"></user-friend>
 
-    <button class="btn btn-danger" (click)="remove(friend)" *ngIf="isSelf$ | async">
+    <button class="btn btn-danger" (click)="remove(friend)" *ngIf="!readOnly">
       {{'removeFriend'|translate}}
     </button>
   </div>

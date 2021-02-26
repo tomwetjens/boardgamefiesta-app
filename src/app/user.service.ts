@@ -37,8 +37,7 @@ export class UserService {
       if (!loggedIn) {
         return of(null);
       }
-      return this.authService.userId
-        .pipe(switchMap(userId => this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + userId)));
+      return this.httpClient.get<User>(environment.apiBaseUrl + '/user');
     }));
   }
 
