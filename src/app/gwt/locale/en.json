@@ -12,6 +12,7 @@
     "deliverDialog": "Deliver to {{city}}",
     "endedDialog": "That's all folks!",
     "confirmEndTurn": "You can still perform actions. Are you sure you want to end your turn?",
+    "confirmCannotUndo": "You cannot undo this action. Are you sure you want this?",
     "deliverRequiresCertificates": "You must spend at least {{atLeast}} certificates to deliver to {{city}}.",
     "deliverOptionalCertificates": "Optionally, you may spend additional certificates when delivering to {{city}}, to get a higher payout.",
     "spendCertificates": "Select the number of certificates you want to use:",

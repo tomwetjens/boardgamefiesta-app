@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Action, ActionType, ObjectiveCard, ObjectiveCards} from '../model';
+import {MessageDialogComponent} from "../../shared/message-dialog/message-dialog.component";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 const ACTIONS = [ActionType.TAKE_OBJECTIVE_CARD, ActionType.ADD_1_OBJECTIVE_CARD_TO_HAND];
 
@@ -16,7 +19,7 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
   @Output() action = new EventEmitter<Action>();
 
-  constructor() {
+  constructor(private ngbModal: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -37,8 +40,21 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
   selectCard(card: ObjectiveCard) {
     if (this.canSelectCard(card)) {
-      this.action.emit({type: this.selectedAction, objectiveCard: card});
+      this.confirmCannotUndo().subscribe(() =>
+        this.action.emit({type: this.selectedAction, objectiveCard: card}));
     }
+  }
+
+  private confirmCannotUndo() {
+    const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+
+    const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'gwt.confirmCannotUndo';
+    messageDialogComponent.confirmKey = 'confirm';
+    messageDialogComponent.cancelKey = 'cancel';
+
+    return fromPromise(ngbModalRef.result);
   }
 
   get canSelectDrawStack(): boolean {
@@ -47,7 +63,8 @@ export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
   clickDrawStack() {
     if (this.canSelectDrawStack) {
-      this.action.emit({type: this.selectedAction});
+      this.confirmCannotUndo().subscribe(() =>
+        this.action.emit({type: this.selectedAction}));
     }
   }
 }

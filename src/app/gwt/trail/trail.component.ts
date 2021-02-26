@@ -62,6 +62,7 @@ import {
   WELCOME_TO_KANSAS_CITY,
   WICHITA
 } from '../sounds';
+import {MessageDialogComponent} from "../../shared/message-dialog/message-dialog.component";
 
 const SELECT_SPACE_ACTIONS = [
   ActionType.MOVE_ENGINE_1_FORWARD,
@@ -683,7 +684,29 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       return;
     }
 
-    this.perform.emit({type: this.selectedAction, choice: rowIndex});
+    if (this.state.foresights.choices[columnIndex][rowIndex].worker && this.nextWorkerFillsUpCattleMarket()) {
+      this.confirmCannotUndo().subscribe(() =>
+        this.perform.emit({type: this.selectedAction, choice: rowIndex}));
+    } else {
+      this.perform.emit({type: this.selectedAction, choice: rowIndex});
+    }
+  }
+
+  private confirmCannotUndo() {
+    const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+
+    const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'gwt.confirmCannotUndo';
+    messageDialogComponent.confirmKey = 'confirm';
+    messageDialogComponent.cancelKey = 'cancel';
+
+    return fromPromise(ngbModalRef.result);
+  }
+
+  private nextWorkerFillsUpCattleMarket() {
+    return [5, 8].includes(this.state.jobMarket.currentRowIndex)
+      && this.state.jobMarket.rows[this.state.jobMarket.currentRowIndex].workers.length === this.state.jobMarket.rowLimit - 1;
   }
 
   selectCity(city: string) {

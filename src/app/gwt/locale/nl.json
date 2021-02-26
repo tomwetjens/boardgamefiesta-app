@@ -12,6 +12,7 @@
     "deliverDialog": "Leveren aan {{city}}",
     "endedDialog": "Het is afgelopen!",
     "confirmEndTurn": "Je kunt nog acties uitvoeren. Weet je zeker dat je je beurt wilt beëindigen?",
+    "confirmCannotUndo": "Je kunt deze actie niet ongedaan maken. Weet je zeker dat je dit wilt?",
     "deliverRequiresCertificates": "Je moet tenminste {{atLeast}} certificaten inzetten om te leveren aan {{city}}.",
     "deliverOptionalCertificates": "Optioneel kan je extra certificaten inzetten om een hoger bedrag te ontvangen.",
     "spendCertificates": "Kies het aantal certificaten dat je wilt inzetten:",
