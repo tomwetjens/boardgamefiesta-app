@@ -4,7 +4,7 @@
        ngbPopover="{{'gwt.popover.cattleCard'|translate:{type:'gwt.cattleType.' + cattleCard.type|translate,breedingValue:cattleCard.breedingValue, points:cattleCard.points} }}"
        triggers="mouseenter:mouseleave"
        container="body">
-    <div *ngIf="cattleCard.points" class="points">
+    <div *ngIf="cattleCard.points && showPoints" class="points">
       {{cattleCard.points}}
     </div>
   </div>

@@ -10,6 +10,7 @@ export class CardComponent implements OnInit {
 
   @Input() emptyType: 'CATTLE' | 'OBJECTIVE';
   @Input() card: Card;
+  @Input() showPoints = true;
 
   constructor() {
   }
