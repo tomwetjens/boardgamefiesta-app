@@ -4,12 +4,12 @@
   </button>
   <div ngbDropdownMenu aria-labelledby="userMenu" class="dropdown-menu dropdown-menu-right">
     <ng-container *ngIf="user | async as user">
-      <a [routerLink]="['/user', user.id]" ngbDropdownItem>
+      <a [routerLink]="['/user', user.username]" ngbDropdownItem>
         <app-avatar [user]="user"></app-avatar>
         <strong>{{user.username}}</strong>
       </a>
-      <a [routerLink]="['/user', user.id]" ngbDropdownItem>{{'user-menu.myActivity'|translate}}</a>
-      <a [routerLink]="['/user', user.id]" ngbDropdownItem>{{'user-menu.friends'|translate}}</a>
+      <a [routerLink]="['/user', user.username]" ngbDropdownItem>{{'user-menu.myActivity'|translate}}</a>
+      <a [routerLink]="['/user', user.username]" ngbDropdownItem>{{'user-menu.friends'|translate}}</a>
       <a [routerLink]="['/profile']" ngbDropdownItem>{{'user-menu.profile'|translate}}</a>
     </ng-container>
     <button ngbDropdownItem (click)="logout()">{{'logout'|translate}}</button>

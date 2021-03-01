@@ -15,7 +15,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject();
 
-  userId$: Observable<string>;
+  username$: Observable<string>;
   user$: Observable<User>;
   currentUser$: Observable<User>;
 
@@ -26,12 +26,12 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userId$ = this.route.params.pipe(map(({userId}) => userId));
+    this.username$ = this.route.params.pipe(map(({username}) => username));
 
     this.currentUser$ = this.userService.currentUser;
 
-    this.user$ = this.userId$.pipe(
-      switchMap(userId => this.userService.get(userId)),
+    this.user$ = this.username$.pipe(
+      switchMap(username => this.userService.get(username)),
       takeUntil(this.destroyed));
 
     this.user$.subscribe(user => this.titleService.setTitle(user.username));

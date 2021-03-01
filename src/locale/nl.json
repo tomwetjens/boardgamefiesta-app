@@ -206,7 +206,8 @@
     "GAME_ALREADY_ENDED": "Dit spel is al beëindigd.",
     "NOT_PUBLIC": "Je moet uitgenodigd worden om bij deze tafel te kunnen aanschuiven.",
     "MUST_BE_OWNER": "Je moet de beheerder van deze tafel zijn.",
-    "EMAIL_ALREADY_IN_USE": "Er is al een gebruiker geregistreerd met dit e-mailadres."
+    "EMAIL_ALREADY_IN_USE": "Er is al een gebruiker geregistreerd met dit e-mailadres.",
+    "NOT_FOUND": "De gevraagde gegevens zijn niet gevonden."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",

@@ -41,8 +41,8 @@ export class UserService {
     }));
   }
 
-  get(id: string): Observable<User> {
-    return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + id);
+  get(username: string): Observable<User> {
+    return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + username);
   }
 
   find(q: string): Observable<User[]> {
@@ -84,5 +84,9 @@ export class UserService {
 
   getTables(userId: string): Observable<Table[]> {
     return this.httpClient.get<Table[]>(environment.apiBaseUrl + '/users/' + userId + '/tables');
+  }
+
+  changeUsername(username: string) {
+    return this.httpClient.post(environment.apiBaseUrl + '/user/change-username', {username});
   }
 }

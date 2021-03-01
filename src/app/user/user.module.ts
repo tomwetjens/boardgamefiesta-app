@@ -19,7 +19,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 const routes: Routes = [
   {
-    path: ':userId',
+    path: ':username',
     children: [
       {
         path: '',

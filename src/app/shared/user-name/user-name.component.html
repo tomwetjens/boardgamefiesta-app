@@ -1,7 +1,7 @@
 <ng-template #userPopover>
   <app-user-popover [user]="user"></app-user-popover>
 </ng-template>
-<a [routerLink]="['/user', user.id]">
+<a [routerLink]="['/user', user.username]">
   <strong [ngbPopover]="userPopover" class="name" [class]="color"
           placement="auto"
           container="body"
