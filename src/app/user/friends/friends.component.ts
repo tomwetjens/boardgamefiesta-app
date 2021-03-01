@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Observable} from "rxjs";
 import {FriendService} from "../../friend.service";
 import {User} from "../../shared/model";
-import {switchMap, takeUntil} from "rxjs/operators";
+import {switchMap} from "rxjs/operators";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SelectUserComponent} from "../../select-user/select-user.component";
 import {fromPromise} from "rxjs/internal-compatibility";
@@ -13,12 +13,10 @@ import {AuthService} from "../../auth.service";
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss']
 })
-export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
+export class FriendsComponent implements OnInit, OnChanges {
 
   @Input() userId: string;
   @Input() readOnly: boolean;
-
-  private destroyed = new Subject();
 
   friends$: Observable<User[]>;
 
@@ -32,7 +30,7 @@ export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private refresh() {
-    this.friends$ = this.friendService.friends$(this.userId);
+    this.friends$ = this.friendService.get(this.userId);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,20 +39,16 @@ export class FriendsComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.destroyed.next(true);
-  }
-
   add() {
     const ngbModalRef = this.ngbModal.open(SelectUserComponent);
 
     fromPromise(ngbModalRef.result)
       .pipe(switchMap(user => this.friendService.add(user.id)))
-      .subscribe();
+      .subscribe(() => this.refresh());
   }
 
   remove(friend: User) {
     this.friendService.remove(friend.id)
-      .subscribe();
+      .subscribe(() => this.refresh());
   }
 }
