@@ -8,7 +8,7 @@
       <app-user-name [user]="ranking.user"></app-user-name>
     </td>
     <td>
-      <a [routerLink]="['/user', ranking.user.id, 'rating']" [queryParams]="{game: gameId}">
+      <a [routerLink]="['/user', ranking.user.username, 'rating']" [queryParams]="{game: gameId}">
         <app-rating [rating]="ranking.rating"></app-rating>
       </a>
     </td>
