@@ -15,7 +15,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class RatingComponent implements OnInit {
 
-  userId$: Observable<string>;
+  username$: Observable<string>;
   gameId$: Observable<string>;
 
   user$: Observable<User>;
@@ -29,17 +29,17 @@ export class RatingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId$ = this.route.params.pipe(
-      map(({userId}) => userId));
+    this.username$ = this.route.params.pipe(
+      map(({username}) => username));
 
     this.gameId$ = this.route.queryParams.pipe(
       map(({game}) => game));
 
-    this.user$ = this.userId$.pipe(
-      switchMap(userId => this.userService.get(userId)));
+    this.user$ = this.username$.pipe(
+      switchMap(username => this.userService.get(username)));
 
-    this.ratings$ = combineLatest([this.gameId$, this.userId$]).pipe(
-      switchMap(([gameId, userId]) => this.userService.getRatings(gameId, userId)),
+    this.ratings$ = combineLatest([this.gameId$, this.user$]).pipe(
+      switchMap(([gameId, user]) => this.userService.getRatings(gameId, user.id)),
       shareReplay(1));
 
     this.chartData$ = this.ratings$.pipe(
