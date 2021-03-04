@@ -195,6 +195,9 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (currentState.ended) {
+      this.stopAutoEndTurnTimer();
+      this.selectedAction = null;
+
       if (!this.endedDialog) {
         this.endedDialog = this.ngbModal.open(EndedDialogComponent);
 
