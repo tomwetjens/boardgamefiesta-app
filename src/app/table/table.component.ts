@@ -9,7 +9,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MessageDialogComponent} from '../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {TranslateService} from '@ngx-translate/core';
-import {AudioService} from '../audio.service';
+import {AudioService, DICE} from '../audio.service';
 import {ToastrService} from "../toastr.service";
 import {GAME_PROVIDERS, GameProvider, Option} from "../shared/api";
 import {InvitePlayerComponent} from "../invite-player/invite-player.component";
@@ -74,6 +74,11 @@ export class TableComponent implements OnInit, OnDestroy {
         if (current && previous) {
           if (current.turn && !previous.turn) {
             this.audioService.alert();
+          }
+
+          if (current.otherPlayers.some(a => current.players[a].status === PlayerStatus.ACCEPTED
+            && !previous.otherPlayers.some(b => b === a && previous.players[b].status === PlayerStatus.ACCEPTED))) {
+            this.audioService.playAlert(DICE);
           }
         }
       });

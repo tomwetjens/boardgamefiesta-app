@@ -4,10 +4,12 @@ import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {concatMap, filter, map} from 'rxjs/operators';
 import {DeviceSettingsService} from "./shared/device-settings.service";
 
-const ALERT = '/assets/sounds/alert.mp3';
+export const ALERT = '/assets/sounds/alert.mp3';
+export const DICE = '/assets/sounds/dice.mp3';
 
 const SOUNDS = [
-  ALERT
+  ALERT,
+  DICE
 ];
 
 const preloaded: { [key: string]: Howl } = {};
@@ -158,7 +160,11 @@ export class AudioService {
   }
 
   alert() {
-    this.channels[ChannelType.ALERTS].play(ALERT).subscribe();
+    this.playAlert(ALERT);
+  }
+
+  playAlert(uri: string) {
+    this.channels[ChannelType.ALERTS].play(uri).subscribe();
   }
 
   playMusic(uri: string): Observable<void> {
