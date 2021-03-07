@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@an
 import {UserService} from "../../user.service";
 import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
-import {Table, User} from "../../shared/model";
+import {Table} from "../../shared/model";
 
 @Component({
   selector: 'user-activity',
