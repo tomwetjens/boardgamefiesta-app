@@ -11,7 +11,6 @@
 
       <img src="/assets/hourglass.gif" class="hourglass" *ngIf="table.currentPlayer === player.id"
            ngbPopover="{{'popover.waitingForPlayer'|translate}}"
-           placement="bottom"
            triggers="mouseenter:mouseleave"
            container="body"/>
 
@@ -20,7 +19,6 @@
       </ng-template>
       <span *ngIf="score !== undefined && score !== null" class="score"
            [ngbPopover]="scorePopover" [title]="'score'|translate"
-           placement="bottom"
            triggers="mouseenter:mouseleave hover click"
            container="body">
         {{score}}
