@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {OAuthService} from 'angular-oauth2-oidc';
-import {Observable, ReplaySubject} from 'rxjs';
-import {distinctUntilChanged, map, tap} from 'rxjs/operators';
+import {Observable, of, ReplaySubject} from 'rxjs';
+import {distinctUntilChanged, map, shareReplay, startWith, switchMap, tap} from 'rxjs/operators';
 import {ToastrService} from './toastr.service';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,18 @@ export class AuthService {
   token: Observable<string>; // Should not emit until auth flow is completed
 
   constructor(private oauthService: OAuthService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private router: Router) {
     this.token = this.loggedIn
       .pipe(
+        switchMap(() => this.oauthService.events.pipe(startWith({}))),
         map(() => this.oauthService.hasValidIdToken() ? this.oauthService.getIdToken() : null),
-        distinctUntilChanged());
+        distinctUntilChanged(),
+        tap(() => console.debug('Token expires at', new Date(this.oauthService.getIdTokenExpiration()))),
+        shareReplay(1));
 
     this.oauthService.events
+      .pipe(tap(event => console.debug({event})))
       .subscribe(event => {
         const loggedIn = this.oauthService.hasValidIdToken();
         this.loggedIn.next(loggedIn);
@@ -42,17 +48,35 @@ export class AuthService {
     this.oauthService.setupAutomaticSilentRefresh();
 
     fromPromise(this.oauthService.tryLogin())
-      .subscribe(result => {
+      .pipe(
+        switchMap(() => {
+          if (!this.oauthService.hasValidIdToken()) {
+            // No valid ID token, checking if refresh token is present
+            if (!!this.oauthService.getRefreshToken()) {
+              // Refreshing token with refresh token
+              return fromPromise(this.oauthService.refreshToken());
+            }
+          }
+          return of(null);
+        })
+      )
+      .subscribe(() => {
         const loggedIn = this.oauthService.hasValidIdToken();
         this.loggedIn.next(loggedIn);
 
         const claims = this.oauthService.getIdentityClaims();
         this.claims.next(claims);
+
+        if (loggedIn && this.oauthService.state) {
+          // Returning to URL after login
+          this.router.navigateByUrl(this.oauthService.state);
+        }
       });
   }
 
   initLoginFlow() {
-    this.oauthService.initLoginFlow();
+    const returnUrl = window.location.pathname;
+    this.oauthService.initLoginFlow(returnUrl);
   }
 
   logout() {
