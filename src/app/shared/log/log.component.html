@@ -1,6 +1,6 @@
 <div *ngFor="let group of groups$ | async; trackBy: trackGroup" class="group">
-  <div class="timestamp">
-    {{group.logEntries[0].timestamp | moment:'LT'}}
+  <div class="timestamp" [title]="group.logEntries[0].timestamp | moment:'LLLL'">
+    {{group.logEntries[0].timestamp | logTime}}
   </div>
   <div *ngFor="let logEntry of group.logEntries; trackBy: trackLogEntry" class="log-entry" [@fadeInOnEnter]>
     <app-player-name *ngIf="logEntry.player"

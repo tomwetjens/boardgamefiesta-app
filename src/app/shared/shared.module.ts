@@ -21,6 +21,7 @@ import {InGameMenuComponent} from './in-game-menu/in-game-menu.component';
 import {InGamePlayerComponent} from './in-game-player/in-game-player.component';
 import {LocationIconComponent} from './location-icon/location-icon.component';
 import { TableSummaryComponent } from './table-summary/table-summary.component';
+import { LogTimePipe } from './log/log-time.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TableSummaryComponent } from './table-summary/table-summary.component';
     InGameMenuComponent,
     InGamePlayerComponent,
     LocationIconComponent,
-    TableSummaryComponent
+    TableSummaryComponent,
+    LogTimePipe
   ],
   imports: [
     CommonModule,
