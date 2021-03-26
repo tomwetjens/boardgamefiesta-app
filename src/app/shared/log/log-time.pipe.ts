@@ -6,7 +6,7 @@ import moment from 'moment';
 })
 export class LogTimePipe implements PipeTransform {
 
-  transform(value: Date | number): string {
+  transform(value: Date | number | string): string {
     const str = moment(value).calendar(null, {
       // Only to override locale:
       // sameDay: 'LT',
