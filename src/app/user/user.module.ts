@@ -16,6 +16,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
 import { SameValidator } from './change-password-dialog/same-validator.directive';
 import {NotSameValidator} from "./change-email-dialog/not-same-validator.directive";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { ChangeUsernameDialogComponent } from './change-username-dialog/change-username-dialog.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ const routes: Routes = [
     ChangeEmailDialogComponent,
     ChangePasswordDialogComponent,
     SameValidator,
-    NotSameValidator
+    NotSameValidator,
+    ChangeUsernameDialogComponent
   ],
   imports: [
     CommonModule,

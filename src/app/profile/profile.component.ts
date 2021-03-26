@@ -6,6 +6,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangeEmailDialogComponent} from "../user/change-email-dialog/change-email-dialog.component";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {ChangePasswordDialogComponent} from "../user/change-password-dialog/change-password-dialog.component";
+import {ChangeUsernameDialogComponent} from "../user/change-username-dialog/change-username-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -53,4 +54,10 @@ export class ProfileComponent implements OnInit {
     fromPromise(ngbModalRef.result).subscribe();
   }
 
+  changeUsername(user: User) {
+    const ngbModalRef = this.ngbModal.open(ChangeUsernameDialogComponent);
+    const componentInstance = ngbModalRef.componentInstance as ChangeUsernameDialogComponent;
+    componentInstance.user = user;
+    fromPromise(ngbModalRef.result).subscribe();
+  }
 }

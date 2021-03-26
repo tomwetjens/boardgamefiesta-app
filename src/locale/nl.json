@@ -1,5 +1,10 @@
 {
   "appName": "Board Game Fiesta",
+  "changeUsernameDialog": {
+    "title": "Wijzig gebruikersnaam",
+    "username": "Nieuwe gebruikersnaam",
+    "submit": "Wijzig gebruikersnaam"
+  },
   "changeEmailDialog": {
     "title": "Wijzig e-mailadres",
     "email": "Nieuw e-mailadres",
@@ -50,6 +55,8 @@
     "friends": "Vrienden"
   },
   "user": {
+    "changeUsername": "Wijzig gebruikersnaam",
+    "usernameChanged": "Gebruikersnaam gewijzigd",
     "changeEmail": "Wijzig e-mailadres",
     "emailChanged": "E-mailadres gewijzigd",
     "changePassword": "Wijzig wachtwoord",
@@ -123,7 +130,6 @@
   "close": "Sluiten",
   "invite": "Speler uitnodigen",
   "uninvite": "Verwijderen",
-  "invitedBy": "Uitgenodigd door",
   "start": "Spel starten",
   "open": "Open",
   "back": "Beginpagina",

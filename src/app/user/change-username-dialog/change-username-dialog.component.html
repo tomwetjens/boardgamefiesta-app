@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{'changeUsernameDialog.title'|translate}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form #form="ngForm" (ngSubmit)="submit()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="username">{{'changeUsernameDialog.username'|translate}}</label>
+      <input type="text" class="form-control" id="username" name="username" #usernameFIeld="ngModel" [(ngModel)]="username" required
+             minlength="3" maxlength="20" pattern="[A-Za-z0-9_\-]+"
+             [ngClass]="{'is-valid': usernameFIeld.touched && usernameFIeld.valid, 'is-invalid': usernameFIeld.touched && usernameFIeld.invalid}"/>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+            [disabled]="!form.form.valid || username === user.username">{{'changeUsernameDialog.submit'|translate}}</button>
+  </div>
+</form>

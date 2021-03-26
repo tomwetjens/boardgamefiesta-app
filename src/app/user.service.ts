@@ -87,6 +87,7 @@ export class UserService {
   }
 
   changeUsername(username: string) {
-    return this.httpClient.post(environment.apiBaseUrl + '/user/change-username', {username});
+    return this.httpClient.post(environment.apiBaseUrl + '/user/change-username', {username})
+      .pipe(tap(_ => this._refresh.next(true)));
   }
 }
