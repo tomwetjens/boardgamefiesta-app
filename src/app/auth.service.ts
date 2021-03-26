@@ -29,7 +29,6 @@ export class AuthService {
         shareReplay(1));
 
     this.oauthService.events
-      .pipe(tap(event => console.debug({event})))
       .subscribe(event => {
         const loggedIn = this.oauthService.hasValidIdToken();
         this.loggedIn.next(loggedIn);
