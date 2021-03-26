@@ -38,11 +38,16 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   private handleError(response: HttpErrorResponse): Observable<any> {
+    if (!response.url.startsWith(environment.apiBaseUrl)) {
+      // Not an API error
+      return throwError(response);
+    }
+
     if (response.status === 401) {
       // Unauthorized, must login
       const authService = this.injector.get(AuthService);
       authService.initLoginFlow();
-    } else if (response.status >= 400 && response.status < 500 && response.error) {
+    } else if (response.status >= 400 && response.status < 500 && response.error && response.error.errorCode) {
       const error = response.error as ErrorResponse;
       if (error.errorCode === ErrorCode.IN_GAME_ERROR) {
         this.toastrService.error(error.gameId + '.errors.' + error.reasonCode);
