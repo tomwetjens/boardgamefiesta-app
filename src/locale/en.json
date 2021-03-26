@@ -120,7 +120,6 @@
   "close": "Close",
   "invite": "Invite player",
   "uninvite": "Remove",
-  "invitedBy": "Invited by",
   "start": "Start game",
   "open": "Open",
   "back": "Start page",
@@ -221,6 +220,7 @@
     "NOT_PUBLIC": "You must be invited to join this table.",
     "MUST_BE_OWNER": "You must be the host of this table.",
     "EMAIL_ALREADY_IN_USE": "There is already another user registered with this e-mail address.",
+    "USERNAME_ALREADY_IN_USE": "This username is already taken.",
     "NOT_FOUND": "The requested resource was not found."
   },
   "log": {
