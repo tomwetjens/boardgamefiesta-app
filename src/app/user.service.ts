@@ -41,8 +41,8 @@ export class UserService {
     }));
   }
 
-  get(username: string): Observable<User> {
-    return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + username);
+  get(idOrUsername: string): Observable<User> {
+    return this.httpClient.get<User>(environment.apiBaseUrl + '/users/' + idOrUsername);
   }
 
   find(q: string): Observable<User[]> {

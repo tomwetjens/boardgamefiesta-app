@@ -8,7 +8,10 @@
              [@fadeInOnEnter]>
 
     <app-player-name *ngIf="toastrMessage.player" [player]="toastrMessage.player"></app-player-name>
-    <app-user-name *ngIf="!toastrMessage.player && toastrMessage.user" [user]="toastrMessage.user"></app-user-name>
+    <app-user-name *ngIf="!toastrMessage.player && toastrMessage.user"
+                   [userId]="toastrMessage.user.id"
+                   [username]="toastrMessage.user.username">
+    </app-user-name>
     &nbsp;
     <span [innerHTML]="toastrMessage.key | translate:toastrMessage.parameters"></span>
   </ngb-toast>

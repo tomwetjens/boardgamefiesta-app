@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {TablePlayer, User} from "./shared/model";
+import {TablePlayer} from "./shared/model";
 
 export interface ToastrMessage {
   className: string;
@@ -10,7 +10,10 @@ export interface ToastrMessage {
   delay: number;
   autohide: boolean;
   player?: TablePlayer;
-  user?: User;
+  user?: {
+    id: string;
+    username: string;
+  };
 }
 
 @Injectable({
@@ -27,7 +30,7 @@ export class ToastrService {
     this.messages.next({className: 'bg-danger text-light', key, parameters, delay: 3000, autohide: true});
   }
 
-  inGameEvent(key: string, parameters: any, player: TablePlayer, user?: User) {
+  inGameEvent(key: string, parameters: any, player: TablePlayer, user?: { id: string; username: string }) {
     this.messages.next({
       className: 'bg-info text-light',
       key,

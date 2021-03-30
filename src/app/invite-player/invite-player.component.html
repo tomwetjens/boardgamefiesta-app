@@ -9,7 +9,7 @@
     <ng-container *ngIf="suggestions$ | async as suggestions">
       <div *ngFor="let user of suggestions">
         <app-avatar [user]="user"></app-avatar>
-        <app-user-name [user]="user"></app-user-name>
+        <app-user-name [userId]="user.id" [username]="user.username"></app-user-name>
         <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">{{'select'|translate}}</button>
       </div>
     </ng-container>
@@ -28,7 +28,7 @@
     <div class="card" *ngFor="let user of users | async">
       <div class="card-body">
         <app-avatar [user]="user"></app-avatar>
-        <app-user-name [user]="user"></app-user-name>
+        <app-user-name [userId]="user.id" [username]="user.username"></app-user-name>
         <button class="btn btn-secondary" (click)="ngbActiveModal.close(user)">{{'select'|translate}}</button>
       </div>
     </div>

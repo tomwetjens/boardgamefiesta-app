@@ -45,7 +45,7 @@
         <span class="avatars">
       <span *ngFor="let player of otherHumanPlayers(table)">
         <ng-template #userPopover>
-          <app-user-popover [user]="player.user"></app-user-popover>
+          <app-user-popover [userId]="player.user.id"></app-user-popover>
         </ng-template>
         <app-avatar [user]="player.user"
                     [ngbPopover]="userPopover"

@@ -1,14 +1,16 @@
-<a [routerLink]="['/user', user.username]">
-  <app-avatar [user]="user"></app-avatar>
+<ng-container *ngIf="user$ | async as user">
+  <a [routerLink]="['/user', user.username]">
+    <app-avatar [user]="user"></app-avatar>
 
-  <strong>{{user.username}}</strong>
-</a>
+    <strong>{{user.username}}</strong>
+  </a>
 
-<p *ngIf="user.location">
-  {{'location'|translate}}:
-  <app-location-icon [location]="user.location"></app-location-icon>
-</p>
+  <p *ngIf="user.location">
+    {{'location'|translate}}:
+    <app-location-icon [location]="user.location"></app-location-icon>
+  </p>
 
-<p>
-  {{'language'|translate}}: {{user.language}}
-</p>
+  <p>
+    {{'language'|translate}}: {{user.language}}
+  </p>
+</ng-container>

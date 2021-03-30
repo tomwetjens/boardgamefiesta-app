@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of, Subject} from 'rxjs';
-import {bufferCount, filter, map, switchMap, takeUntil, withLatestFrom} from 'rxjs/operators';
-import {EventType, LogEntryType, Options, PlayerStatus, Table, TablePlayer, TableType} from '../shared/model';
+import {bufferCount, filter, map, switchMap, takeUntil, tap, withLatestFrom} from 'rxjs/operators';
+import {EventType, LogEntry, LogEntryType, Options, PlayerStatus, Table, TablePlayer, TableType} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -106,7 +106,7 @@ export class TableComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed),
         withLatestFrom(this.table),
         // Do not show the stuff we already know
-        filter(([logEntry, table]) => !logEntry.player || logEntry.player.id !== table.player),
+        filter(([logEntry, table]) => table && (!logEntry.player || logEntry.player.id !== table.player)),
         // Prevent popping up very old log entries in case of reconnect
         filter(([logEntry]) => new Date().getTime() - new Date(logEntry.timestamp).getTime() < 6000)
       ).subscribe(([logEntry, table]) => {
@@ -118,8 +118,9 @@ export class TableComponent implements OnInit, OnDestroy {
     });
   }
 
-  private notifyInGameEvent(table, logEntry) {
-    this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {}, logEntry.player, logEntry.user);
+  private notifyInGameEvent(table: Table, logEntry: LogEntry) {
+    this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {},
+      !!logEntry.player ? table.players[logEntry.player.id] : null, logEntry.user);
   }
 
   ngOnDestroy(): void {

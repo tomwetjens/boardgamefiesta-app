@@ -8,7 +8,8 @@ import {PlayerColor, User} from '../model';
 })
 export class UserNameComponent implements OnInit {
 
-  @Input() user: User;
+  @Input() userId: string;
+  @Input() username: string;
   @Input() color?: PlayerColor;
 
   constructor() {

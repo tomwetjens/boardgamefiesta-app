@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {CreateTableRequest, Event, LogEntry, Table, TableStatus, TableType, User} from './shared/model';
-import {BehaviorSubject, combineLatest, Observable, ReplaySubject, throwError} from 'rxjs';
+import {BehaviorSubject, combineLatest, from, Observable, ReplaySubject, throwError} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
   catchError,
@@ -11,13 +11,12 @@ import {
   filter,
   map,
   retry,
+  share,
   shareReplay,
   startWith,
   switchMap,
-  tap,
-  share
+  tap
 } from "rxjs/operators";
-import {fromArray} from "rxjs/internal/observable/fromArray";
 import {AuthService} from "./auth.service";
 import {State} from "./gwt/model";
 import {webSocket} from "rxjs/webSocket";
@@ -38,6 +37,9 @@ export class TableService {
   connected$ = new BehaviorSubject<boolean>(false);
   table$: Observable<Table>;
   state$: Observable<any>;
+  /**
+   * only new log entries as they come in, oldest first
+   */
   log$: Observable<LogEntry>;
   myActiveTables$: Observable<Table[]>;
 
@@ -118,15 +120,14 @@ export class TableService {
           startWith(lastRequestedDate), // initial
           switchMap(since => {
             // Request log entries since
-            return this.getLog(id, since)
+            return this.getLogSince(id, since)
               .pipe(
                 // Make sure log entries are sorted ascending
                 map(logEntries => logEntries.sort((a, b) =>
                   new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())),
-                concatMap(logEntries => fromArray(logEntries)),
+                concatMap(logEntries => from(logEntries)),
                 tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
-          }),
-          shareReplay());
+          }));
       }));
 
     this.myActiveTables$ = combineLatest([
@@ -216,7 +217,7 @@ export class TableService {
     return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
-  private getLog(id: string, date: Date): Observable<LogEntry[]> {
+  private getLogSince(id: string, date: Date): Observable<LogEntry[]> {
     return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {params: {since: date.toISOString()}});
   }
 
@@ -256,5 +257,14 @@ export class TableService {
 
   changeType(id: string, type: TableType) {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-type', {type});
+  }
+
+  getLogBefore(tableId: string, date: Date, limit: number): Observable<LogEntry[]> {
+    return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + tableId + '/log', {
+      params: {
+        before: date.toISOString(),
+        limit: '' + limit
+      }
+    });
   }
 }

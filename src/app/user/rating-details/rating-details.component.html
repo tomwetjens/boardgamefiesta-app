@@ -9,7 +9,7 @@
     <tbody>
     <tr *ngFor="let delta of rating.deltas">
       <td>
-        <app-user-name [user]="delta.user"></app-user-name>
+        <app-user-name [userId]="delta.user.id" [username]="delta.user.username"></app-user-name>
       </td>
       <td>
         {{delta.delta | number: '1.0-1'}}

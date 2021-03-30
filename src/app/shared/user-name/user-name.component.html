@@ -1,10 +1,10 @@
 <ng-template #userPopover>
-  <app-user-popover [user]="user"></app-user-popover>
+  <app-user-popover [userId]="userId"></app-user-popover>
 </ng-template>
-<a [routerLink]="['/user', user.username]">
+<a [routerLink]="['/user', username]">
   <strong [ngbPopover]="userPopover" class="name" [class]="color"
           container="body"
           triggers="mouseenter:mouseleave hover click">
-    {{user.username}}
+    {{username}}
   </strong>
 </a>

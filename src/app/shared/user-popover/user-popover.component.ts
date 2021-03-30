@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../model';
+import {UserService} from "../../user.service";
+import {Observable} from "rxjs";
+import {User} from "../model";
 
 @Component({
   selector: 'app-user-popover',
@@ -8,12 +10,15 @@ import {User} from '../model';
 })
 export class UserPopoverComponent implements OnInit {
 
-  @Input() user: User;
+  @Input() userId: string;
 
-  constructor() {
+  user$: Observable<User>;
+
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.user$ = this.userService.get(this.userId);
   }
 
 }

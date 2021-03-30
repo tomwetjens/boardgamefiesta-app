@@ -143,9 +143,18 @@ export enum LogEntryType {
 
 export interface LogEntry {
   timestamp: string;
-  player?: TablePlayer;
-  user?: User;
+  player?: {
+    id: string;
+    color?: PlayerColor;
+  };
+  user?: {
+    id: string
+    username: string;
+  };
   type: LogEntryType;
   parameters: string[];
-  otherUser?: User;
+  otherUser?: {
+    id: string;
+    username: string;
+  }
 }

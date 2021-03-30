@@ -1,2 +1,5 @@
-<app-user-name *ngIf="player.user" [user]="player.user" [color]="player.color"></app-user-name>
+<app-user-name *ngIf="player.user"
+               [userId]="player.user.id"
+               [username]="player.user.username"
+               [color]="player.color"></app-user-name>
 <strong *ngIf="!player.user" [class]="player.color">{{'computer'|translate}}</strong>

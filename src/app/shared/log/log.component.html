@@ -1,12 +1,15 @@
-<div *ngFor="let group of groups$ | async; trackBy: trackGroup" class="group">
+<div *ngFor="let group of groups; trackBy: trackGroup" class="group">
   <div class="timestamp" [title]="group.logEntries[0].timestamp | moment:'LLLL'">
     {{group.logEntries[0].timestamp | logTime}}
   </div>
   <div *ngFor="let logEntry of group.logEntries; trackBy: trackLogEntry" class="log-entry" [@fadeInOnEnter]>
-    <app-player-name *ngIf="logEntry.player"
-                     [player]="table.players[logEntry.player.id] || logEntry.player"></app-player-name>
+    <app-player-name *ngIf="logEntry.player && table.players[logEntry.player.id]"
+                     [player]="table.players[logEntry.player.id]"></app-player-name>
 
-    <app-user-name *ngIf="!logEntry.player" [user]="logEntry.user"></app-user-name>
+    <app-user-name *ngIf="!logEntry.player || !table.players[logEntry.player.id]"
+                   [userId]="logEntry.user.id"
+                   [username]="logEntry.user.username"
+                   [color]="logEntry.player.color"></app-user-name>
 
     <span class="message" [ngSwitch]="logEntry.type">
       <span *ngSwitchCase="'IN_GAME_EVENT'" [innerHTML]="translateInGameEvent(logEntry)"></span>
@@ -14,4 +17,7 @@
             [innerHTML]="'log.' + logEntry.type|translate:{otherUser:logEntry.otherUser?.username}"></span>
     </span>
   </div>
+</div>
+<div *ngIf="hasMoreLogEntries" class="more">
+  <button class="btn btn-link" (click)="showMore()">{{'showMore'|translate}}</button>
 </div>
