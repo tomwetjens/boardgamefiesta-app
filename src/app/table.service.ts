@@ -120,7 +120,7 @@ export class TableService {
           startWith(lastRequestedDate), // initial
           switchMap(since => {
             // Request log entries since
-            return this.getLogSince(id, since)
+            return this.getLogSince(id, since, 30)
               .pipe(
                 // Make sure log entries are sorted ascending
                 map(logEntries => logEntries.sort((a, b) =>
@@ -217,8 +217,13 @@ export class TableService {
     return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
-  private getLogSince(id: string, date: Date): Observable<LogEntry[]> {
-    return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {params: {since: date.toISOString()}});
+  private getLogSince(id: string, date: Date, limit: number): Observable<LogEntry[]> {
+    return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {
+      params: {
+        since: date.toISOString(),
+        limit: limit + ''
+      }
+    });
   }
 
   abandon(id: string): Observable<void> {
