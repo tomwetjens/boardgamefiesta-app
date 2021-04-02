@@ -9,11 +9,11 @@
 <div class="modal-body">
   <div class="objectives">
     <span *ngFor="let objective of playerState.objectives" class="objective"
-          [ngClass]="{completed:objective.score > 0, notCompleted:objective.score < 0}">
+          [ngClass]="{committed: objective.score !== 0 && objective.committed, completed:objective.score > 0, notCompleted: objective.committed && objective.score <= 0}">
       <app-card [card]="objective.objectiveCard"></app-card>
 
       <span class="status"
-            [ngbPopover]="('gwt.popover.objective.' + (objective.score >= 0 ? 'completed' : 'notCompleted'))|translate:{score:objective.score}"
+            [ngbPopover]="('gwt.popover.objective.' + (objective.score > 0 ? 'completed' : 'notCompleted'))|translate:{score:objective.score}"
             triggers="mouseenter:mouseleave"
             container="body"></span>
     </span>

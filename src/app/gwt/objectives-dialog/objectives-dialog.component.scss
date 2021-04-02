@@ -19,7 +19,7 @@
   }
 
   &.notCompleted {
-    app-card {
+    &.committed app-card {
       border: 4px red solid;
     }
 

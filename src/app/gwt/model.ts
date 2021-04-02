@@ -205,6 +205,7 @@ export enum Task {
 export interface Objective {
   readonly objectiveCard: ObjectiveCard;
   readonly score: number;
+  readonly committed: boolean;
 }
 
 export interface ObjectiveCard {
