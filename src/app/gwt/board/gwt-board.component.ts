@@ -124,7 +124,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   private destroyed = new Subject();
 
-  private endedDialog: NgbModalRef;
+  private dialog: NgbModalRef;
 
   private autoEndTurnTimer: Subscription;
   autoEndTurnInSecs: number;
@@ -153,6 +153,10 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
+    if (this.dialog) {
+      this.dialog.close();
+    }
+
     this.destroyed.next(true);
   }
 
@@ -198,16 +202,16 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
       this.stopAutoEndTurnTimer();
       this.selectedAction = null;
 
-      if (!this.endedDialog) {
-        this.endedDialog = this.ngbModal.open(EndedDialogComponent);
+      if (!this.dialog) {
+        this.dialog = this.ngbModal.open(EndedDialogComponent);
 
-        const componentInstance = this.endedDialog.componentInstance as EndedDialogComponent;
+        const componentInstance = this.dialog.componentInstance as EndedDialogComponent;
         componentInstance.table = this.table;
         componentInstance.state = currentState;
 
-        fromPromise(this.endedDialog.result).subscribe({
-          error: () => this.endedDialog = null,
-          complete: () => this.endedDialog = null
+        fromPromise(this.dialog.result).subscribe({
+          error: () => this.dialog = null,
+          complete: () => this.dialog = null
         });
       }
     }
@@ -241,13 +245,15 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   doEndTurn() {
     if (this.canPerformFreeAction) {
-      const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
-      const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+      this.dialog = this.ngbModal.open(MessageDialogComponent);
+      const messageDialogComponent = this.dialog.componentInstance as MessageDialogComponent;
       messageDialogComponent.type = 'confirm';
       messageDialogComponent.messageKey = 'gwt.confirmEndTurn';
       messageDialogComponent.confirmKey = 'endTurn';
       messageDialogComponent.cancelKey = 'cancel';
-      fromPromise(ngbModalRef.result).subscribe(() => this.endTurn.emit());
+      fromPromise(this.dialog.result).subscribe(() => this.endTurn.emit(),
+        () => this.dialog = null,
+        () => this.dialog = null);
     } else {
       this.endTurn.emit();
     }

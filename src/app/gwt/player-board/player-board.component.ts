@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
   Action,
   ActionType,
@@ -11,7 +11,7 @@ import {
   State,
   Worker
 } from '../model';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PlayerBuildingsComponent} from '../player-buildings/player-buildings.component';
 import {AudioService} from '../../audio.service';
 import {ObjectivesDialogComponent} from '../objectives-dialog/objectives-dialog.component';
@@ -35,7 +35,9 @@ interface Branchlet {
   templateUrl: './player-board.component.html',
   styleUrls: ['./player-board.component.scss']
 })
-export class PlayerBoardComponent implements OnInit, OnChanges {
+export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
+
+  private dialog: NgbModalRef;
 
   @Input() table: Table;
   @Input() state: State;
@@ -67,6 +69,12 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.dialog) {
+      this.dialog.close();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -198,28 +206,28 @@ export class PlayerBoardComponent implements OnInit, OnChanges {
   }
 
   showBuildings() {
-    const ngbModalRef = this.ngbModal.open(PlayerBuildingsComponent);
-    const componentInstance = ngbModalRef.componentInstance as PlayerBuildingsComponent;
+    this.dialog = this.ngbModal.open(PlayerBuildingsComponent);
+    const componentInstance = this.dialog.componentInstance as PlayerBuildingsComponent;
     componentInstance.table = this.table;
     componentInstance.playerState = this.playerState;
   }
 
   showObjectives() {
-    const ngbModalRef = this.ngbModal.open(ObjectivesDialogComponent);
-    const componentInstance = ngbModalRef.componentInstance as ObjectivesDialogComponent;
+    this.dialog = this.ngbModal.open(ObjectivesDialogComponent);
+    const componentInstance = this.dialog.componentInstance as ObjectivesDialogComponent;
     componentInstance.table = this.table;
     componentInstance.playerState = this.playerState;
   }
 
   showDiscardPile() {
-    const ngbModalRef = this.ngbModal.open(DiscardPileDialogComponent);
-    const componentInstance = ngbModalRef.componentInstance as DiscardPileDialogComponent;
+    this.dialog = this.ngbModal.open(DiscardPileDialogComponent);
+    const componentInstance = this.dialog.componentInstance as DiscardPileDialogComponent;
     componentInstance.playerState = this.playerState;
   }
 
   showDrawStack() {
-    const ngbModalRef = this.ngbModal.open(DrawStackDialogComponent);
-    const componentInstance = ngbModalRef.componentInstance as DrawStackDialogComponent;
+    this.dialog = this.ngbModal.open(DrawStackDialogComponent);
+    const componentInstance = this.dialog.componentInstance as DrawStackDialogComponent;
     componentInstance.playerState = this.playerState;
   }
 
