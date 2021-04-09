@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {OAuthModule, OAuthStorage} from 'angular-oauth2-oidc';
 import {TranslateModule} from '@ngx-translate/core';
 import {AppRoutingModule} from './app-routing.module';
@@ -27,6 +27,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {InvitePlayerComponent} from './invite-player/invite-player.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector.component';
+import {GlobalErrorHandler} from "./global-error-handler.service";
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, multi: true, useClass: HttpInterceptorService},
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
     {provide: OAuthStorage, useFactory: () => localStorage},
     {provide: 'localStorage', useFactory: () => localStorage},
   ],

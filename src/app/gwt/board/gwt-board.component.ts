@@ -148,6 +148,13 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.audioService.preload(SOUNDS);
 
     if (this.state) {
+      if (this.state.player
+        && !this.state.trail.playerLocations[this.state.player.player.color]
+        && !this.audioService.isPlayingMusic) {
+        // Before player did first move
+        this.audioService.playMusic(OPENING_MUSIC);
+      }
+
       this.stateChanged(this.state, undefined);
     }
   }
@@ -173,13 +180,6 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.actions = currentState.actions
       ? currentState.actions.filter(action => action !== ActionType.USE_EXCHANGE_TOKEN)
       : [];
-
-    if (!previousState && currentState.player
-      && !currentState.trail.playerLocations[currentState.player.player.color]
-      && !this.audioService.isPlayingMusic) {
-      // Before player did first move
-      this.audioService.playMusic(OPENING_MUSIC);
-    }
 
     if (currentState.turn) {
       if (this.actions.length === 1

@@ -44,7 +44,7 @@ export class Channel {
       const sound = preloaded[uri];
 
       if (!sound) {
-        subscriber.error('not_loaded');
+        subscriber.error(new Error('Sound not loaded: ' + uri));
         return;
       }
 
@@ -56,12 +56,12 @@ export class Channel {
         subscriber.complete();
         this.playing = null;
       });
-      sound.once('loaderror', () => {
-        subscriber.error('loaderror');
+      sound.once('loaderror', msg => {
+        subscriber.error(new Error('loaderror: ' + msg));
         this.playing = null;
       });
-      sound.once('playerror', () => {
-        subscriber.error('playerror');
+      sound.once('playerror', msg => {
+        subscriber.error(new Error('playerror: ' + msg));
         this.playing = null;
       });
 

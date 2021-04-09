@@ -36,7 +36,6 @@ export class EventService {
     concat(of({}), this.oauthService.events).pipe(
       map(() => this.oauthService.hasValidIdToken() ? this.oauthService.getIdToken() : null),
       distinctUntilChanged(),
-      tap(() => console.log('Creating new WebSocket subject')),
       switchMap(token => webSocket({
         url: environment.wsBaseUrl + '/events' + (!!token ? '?token=' + token : ''),
         openObserver: {
@@ -62,7 +61,7 @@ export class EventService {
         }
       })
         .pipe(
-          tap(msg => console.log('WebSocket message:', msg), err => console.error('WebSocket error:', err)),
+          tap({error: err => console.error('WebSocket error:', err)}),
           // TODO Better retry
           retry())),
       catchError(err => {

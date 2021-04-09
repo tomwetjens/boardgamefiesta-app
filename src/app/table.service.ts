@@ -74,7 +74,6 @@ export class TableService {
         return throwError(err);
       }),
       map(msg => msg as Event),
-      tap(event => console.log('Table event:', event)),
       share());
 
     this.table$ = this._id.pipe(
