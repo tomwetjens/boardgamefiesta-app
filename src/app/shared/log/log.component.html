@@ -8,8 +8,7 @@
 
     <app-user-name *ngIf="!logEntry.player || !table.players[logEntry.player.id]"
                    [userId]="logEntry.user.id"
-                   [username]="logEntry.user.username"
-                   [color]="logEntry.player.color"></app-user-name>
+                   [username]="logEntry.user.username"></app-user-name>
 
     <span class="message" [ngSwitch]="logEntry.type">
       <span *ngSwitchCase="'IN_GAME_EVENT'" [innerHTML]="translateInGameEvent(logEntry)"></span>
