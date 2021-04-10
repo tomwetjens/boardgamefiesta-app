@@ -94,7 +94,7 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
           this.audioService.playEffect(COINS);
         }
 
-        if ((current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
+        if ((current.hand && previous.hand && current.hand !== previous.hand && this.isHandChanged(current.hand, previous.hand))
           // Or in case of other player, where hand is not known
           || current.handSize !== previous.handSize
           // Or when gaining a card
@@ -122,8 +122,8 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   private isHandChanged(current: Card[], previous: Card[]) {
-    return current.length !== previous.length ||
-      current.some(a => !previous.find(b => JSON.stringify(a) === JSON.stringify(b)));
+    return current && previous && (current.length !== previous.length ||
+      current.some(a => !previous.find(b => JSON.stringify(a) === JSON.stringify(b))));
   }
 
   clickAuxiliaryAction(actionType: string) {

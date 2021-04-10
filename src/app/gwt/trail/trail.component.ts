@@ -397,66 +397,69 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           }
         }
 
-        for (const name of Object.keys(current.trail.locations)) {
-          const currentLocation = current.trail.locations[name];
-          const previousLocation = previous.trail.locations[name];
+        if (current.trail && current.trail.locations && previous.trail && previous.trail.locations) {
+          for (const name of Object.keys(current.trail.locations)) {
+            const currentLocation = current.trail.locations[name];
+            const previousLocation = previous.trail.locations[name];
 
-          if (currentLocation.building && previousLocation.building) {
-            if (currentLocation.building.name !== previousLocation.building.name) {
-              // upgrade
+            if (currentLocation && currentLocation.building && previousLocation && previousLocation.building) {
+              if (currentLocation.building.name !== previousLocation.building.name) {
+                // upgrade
+                this.audioService.playEffect(BUILDING);
+              }
+            } else if (currentLocation.building !== previousLocation.building) {
+              // build
               this.audioService.playEffect(BUILDING);
             }
-          } else if (currentLocation.building !== previousLocation.building) {
-            // build
-            this.audioService.playEffect(BUILDING);
+
+            if (previousLocation && previousLocation.hazard && currentLocation && !currentLocation.hazard) {
+              this.audioService.playEffect(previousLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
+                : previousLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
+            }
+
+            if (previousLocation && previousLocation.teepee && currentLocation && !currentLocation.teepee) {
+              this.audioService.playEffect(TRIBES);
+            }
           }
 
-          if (previousLocation.hazard && !currentLocation.hazard) {
-            this.audioService.playEffect(previousLocation.hazard.type === HazardType.DROUGHT ? DROUGHT
-              : previousLocation.hazard.type === HazardType.FLOOD ? FLOOD : ROCKFALL);
-          }
+          for (const color of Object.keys(PlayerColor)) {
+            const currentLocation = current.trail.playerLocations[color];
+            const previousLocation = previous.trail.playerLocations[color];
 
-          if (previousLocation.teepee && !currentLocation.teepee) {
-            this.audioService.playEffect(TRIBES);
-          }
-        }
+            if (currentLocation !== previousLocation) {
+              if (currentLocation === 'KANSAS_CITY') {
+                this.audioService.playVoiceOver(WELCOME_TO_KANSAS_CITY);
+              } else if (currentLocation !== 'START') {
+                this.audioService.playEffect(MOVE);
 
-        for (const color of Object.keys(PlayerColor)) {
-          const currentLocation = current.trail.playerLocations[color];
-          const previousLocation = previous.trail.playerLocations[color];
-
-          if (currentLocation !== previousLocation) {
-            if (currentLocation === 'KANSAS_CITY') {
-              this.audioService.playVoiceOver(WELCOME_TO_KANSAS_CITY);
-            } else if (currentLocation !== 'START') {
-              this.audioService.playEffect(MOVE);
-
-              if (color === this.state.player.player.color) {
-                // current user, play sound of building (if any)
-                const building = current.trail.locations[currentLocation].building;
-                if (building) {
-                  switch (building.name) {
-                    case 'A':
-                      this.audioService.playVoiceOver(BUILDING_A);
-                      break;
-                    case 'B':
-                      this.audioService.playVoiceOver(BUILDING_B);
-                      break;
-                    case 'C':
-                      this.audioService.playVoiceOver(BUILDING_C);
-                      break;
-                    case 'D':
-                      this.audioService.playVoiceOver(BUILDING_D);
-                      break;
-                    case 'E':
-                      this.audioService.playVoiceOver(BUILDING_E);
-                      break;
-                    case 'F':
-                      this.audioService.playVoiceOver(BUILDING_F);
-                      break;
-                    case 'G':
-                      this.audioService.playVoiceOver(BUILDING_G);
-                      break;
+                if (this.state && this.state.player && this.state.player.player.color === color) {
+                  // current user, play sound of building (if any)
+                  const location = current.trail.locations[currentLocation];
+                  const building = !!location ? location.building : null;
+                  if (building) {
+                    switch (building.name) {
+                      case 'A':
+                        this.audioService.playVoiceOver(BUILDING_A);
+                        break;
+                      case 'B':
+                        this.audioService.playVoiceOver(BUILDING_B);
+                        break;
+                      case 'C':
+                        this.audioService.playVoiceOver(BUILDING_C);
+                        break;
+                      case 'D':
+                        this.audioService.playVoiceOver(BUILDING_D);
+                        break;
+                      case 'E':
+                        this.audioService.playVoiceOver(BUILDING_E);
+                        break;
+                      case 'F':
+                        this.audioService.playVoiceOver(BUILDING_F);
+                        break;
+                      case 'G':
+                        this.audioService.playVoiceOver(BUILDING_G);
+                        break;
+                    }
                   }
                 }
               }
