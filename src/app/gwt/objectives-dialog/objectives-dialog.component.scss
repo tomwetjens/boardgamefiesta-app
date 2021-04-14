@@ -8,7 +8,7 @@
   }
 
   &.completed {
-    app-card {
+    &.committed app-card {
       border: 4px green solid;
     }
 
