@@ -44,7 +44,12 @@
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Ficha de mestre da estação que permite remover um perigo ou fazer comércio com os índios e dá 3 pontos para cada 2 cartas de objetivo na sua área de objetivos (completos ou não).",
         "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Ficha de mestre da estação que permite ganhar 2 dólares e dá 1 ponto por cada trabalhador na sua ficha de jogador (incluindo aqueles já impressos).",
         "TWO_PERM_CERTS": "Ficha de mestre da estação que dá 2 certificado permanente.",
-        "GAIN_12_DOLLARS": "Ficha de mestre da estação que permite ganhar 12 dólares."
+        "GAIN_12_DOLLARS": "Ficha de mestre da estação que permite ganhar 12 dólares.",
+        "TWELVE_DOLLARS": "Ficha de mestre da estação que permite ganhar 12 dólares, mas dá 0 pontos extras.",
+        "PERM_CERT_POINTS_PER_2_STATIONS": "Ficha de mestre da estação dá 1 certificado permanente e 3 pontos para cada 2 estações aprimoradas.",
+        "GAIN_2_CERTS_POINTS_PER_BUILDING": "Ficha de mestre da estação que permite mover o marcador de certificado até 2 espaços e dá 2 pontos para cada construção.",
+        "PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS": "Ficha de mestre da estação que permite colocar um ramal e dá 5 pontos para cada 2 fichas de troca.",
+        "GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA": "Ficha de mestre da estação dá uma ficha de troca e 2 pontos para cada área em que você tenha colocado pelo menos 1 ramal."
       },
       "buildings": "Veja as construções que estão disponíveis.",
       "objectives": "Veja os objetivos que devem ser cumpridos e as fichas coletadas.",
@@ -57,7 +62,7 @@
         "C": "Construção neutra C<br/><strong>Ação:</strong> Mova o marcador do certificado um espaço à frente OU pegue uma carta de objetivo e coloque em sua pilha de descarte<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços à quantidade de engenheiros possuir",
         "D": "Construção neutra D<br/><strong>Ação:</strong> Faça comércio com os índios OU pague 2 dólares para mover sua locomotiva até 2 espaços à frente<br/><strong> Ação:</strong> Execute um ação auxiliar simples ou dupla",
         "E": "Construção neutra E<br/><strong>Ação:</strong> Descarte 1 carta de gado Black Angus e ganhe 2 dólares<br/><strong>Ação:</strong> Compre cartas de gado do mercado de gado",
-        "F": "Construção neutra F<br/><strong>Ação:</strong> Descarte um par de cartas iguais de gado e ganhe 4 dólares<br/><strong>Ação:</strong> Remova um perigo por 7 dólares" ,
+        "F": "Construção neutra F<br/><strong>Ação:</strong> Descarte um par de cartas iguais de gado e ganhe 4 dólares<br/><strong>Ação:</strong> Remova um perigo por 7 dólares",
         "G": "Construção neutra G<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços à quantidade de engenheiros possuir.<br/><strong>Ação:</strong> Execute um ação auxiliar simples ou dupla",
         "1a": "Construção privativa 1a<br/><strong> Ação:</strong> Ganhe 2 dólares para cada um de seus edifícios privativos localizados nas florestas",
         "2a": "Construção privativa 2a<br/><strong> Ação:</strong> Descarte 1 carta de gado Guernsey e ganhe 4 dólares<br/><strong>Ação:</strong> Compre cartas de gado no mercado de gado",
@@ -78,7 +83,13 @@
         "7b": "Construção privativa 7b<br/><strong> Ação:</strong> Mova sua locomotiva até tantos espaços para frente à quantidade de construções que possui na floresta",
         "8b": "Construção privativa 8b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
         "9b": "Construção privativa 9b<br/><strong> Ação:</strong> Aprimore qualquer estação atrás de sua locomotiva",
-        "10b": "Construção privativa 10b<br/><strong> Ação:</strong> Ganhe 4 dólares<br/><strong>Ação:</strong> Mova sua locomotiva até 4 espaços para frente<br/><strong>Ação:</strong> Mova seu peão até 4 passos para frente"
+        "10b": "Construção privativa 10b<br/><strong> Ação:</strong> Ganhe 4 dólares<br/><strong>Ação:</strong> Mova sua locomotiva até 4 espaços para frente<br/><strong>Ação:</strong> Mova seu peão até 4 passos para frente",
+        "11a": "Construção 11a<br/><strong>Ação:</strong> Remover um perigo por $2",
+        "11b": "Construção 11b<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços quantos os perigos que você tiver removido",
+        "12a": "Construção 12a<br/><strong>Ação:</strong> Para cada espaço de sino em seu quadro de jogadores, que esteja completamente livre, você pode mover seu marcador de certificado 1 espaço para frente e ganhar 1 dólar",
+        "12b": "Construção 12b<br/><strong>Ação:</strong> Ganhe tantos dólares quanto você tem artífices<br/><strong>Ação</strong>: Colocar um ramal",
+        "13a": "Construção 13a<br/><strong>Ação:</strong> Descartar 1 carta de gado de Jersey para uma única ação auxiliar<br/><strong>Ação</strong>: Coloque uma de suas construções privativas trilha ($1 por artífice)",
+        "13b": "Construção 13b<br/><strong>Ação:</strong> Ganhe 2 dólares por estação aprimorada<br/><strong>Ação:</strong> Execute uma ação auxiliar simples ou dupla"
       },
       "location": {
         "FLOOD-RISK-1": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares",
@@ -88,6 +99,19 @@
         "INDIAN-TRADE-RISK-2": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares",
         "ROCKFALL-RISK-1": "<br/><br/><strong>Ação de risco:</strong> Descarte uma carta de gado para mover seu marcador de certificado 1 espaço para frente",
         "ROCKFALL-RISK-2": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares"
+      },
+      "exchangeTokens": "O número de fichas de troca que um jogador tem. Clique neste ícone para usar uma ficha de troca a qualquer momento.",
+      "hazard": {
+        "DROUGHT": "<strong>Perigo:</strong> Seca{{points}} PV)",
+        "ROCKFALL": "<strong>Perigo:</strong> Desmoronamento{{points}} PV{{points}} )",
+        "FLOOD": "<strong>Perigo:</strong> Inundação{{points}} PV{{points}} )"
+      },
+      "mediumTownTile": {
+        "GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD": "Quando você colocar um ramal aqui, você ganha 5 dólares ou pode tirar um carta de gado de valor 3 do mercado de gado.",
+        "HIRE_WORKER_PLUS_2": "Quando você colocar um ramal aqui, você pode contratar um trabalhador (+$2).",
+        "REMOVE_2_CARDS": "Quando você colocar um ramal aqui, você pode retirar até 2 cartas de sua mão.",
+        "MOVE_ENGINE_3_FORWARD": "Quando você colocar um ramal aqui, você pode mover sua locomotiva para frente até 3 espaços.",
+        "PLACE_BUILDING_FOR_FREE": "Quando você colocar um ramal aqui, você pode colocar uma construção privativa ($0 por artífice)."
       }
     },
     "cattleType": {
@@ -128,7 +152,7 @@
         "APPOINT_STATION_MASTER": "designa <strong>{{value1}}</strong> para o mestre da estação e recebe <strong>{{value2}}</strong>",
         "PLACE_BID": "deu lance de <strong>{{value1}}PV </strong> para ser o jogador #<strong>{{value2}}</strong>",
         "BUY_CATTLE": "compra um <strong>{{value2}}</strong> (<strong>{{value3}}PV </strong>) por <strong>${{value1}}</strong> e <strong>{{value4}}</strong> vaqueiros",
-        "BUY_2_CATTLE": "compra um <strong>{{value2}}</strong> (<strong>{{value3}}PV </strong>) e um <strong>{{value4}}</strong> (<strong>{{value5}}PV </strong>) por <strong>${{value1}}</strong> e <strong>{{value6}}</strong> vaqueiros" ,
+        "BUY_2_CATTLE": "compra um <strong>{{value2}}</strong> (<strong>{{value3}}PV </strong>) e um <strong>{{value4}}</strong> (<strong>{{value5}}PV </strong>) por <strong>${{value1}}</strong> e <strong>{{value6}}</strong> vaqueiros",
         "DELIVER_TO_CITY": "entrega a <strong>{{value1}}</strong> gastando <strong>{{value2}}</strong> certificados, recebendo <strong>${{value3}}</strong>",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_CERTIFICATES": "descarta 1 Black Angus para ganhar 2 certificados",
         "DISCARD_1_BLACK_ANGUS_TO_GAIN_2_DOLLARS": "descarta 1 Black Angus para ganhar $2",
@@ -219,9 +243,41 @@
         "CHOOSE_FORESIGHT_3": "escolhe a ficha 3: <strong>{{value1}}</strong>",
         "UNLOCK_BLACK_OR_WHITE": "remove um disco do tabuleiro do jogador",
         "UNLOCK_WHITE": "remove um disco do tabuleiro do jogador",
-        "DOWNGRADE_STATION": "remove o disco de uma estação"
+        "DOWNGRADE_STATION": "remove o disco de uma estação",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "descarta 1 Jersey para uma única ação auxiliar",
+        "GAIN_2_DOLLARS_PER_STATION": "ganha <strong>${{value1}}</strong> das estações",
+        "MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_HAZARDS": "move a locomotiva para frente até o número de perigos removidos: <strong>{{value1}}</strong>",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "remove o perigo <strong>{{value1}}</strong><strong>{{value2}}</strong>) por <strong>${{value3}}</strong>",
+        "USE_EXCHANGE_TOKEN": "usa uma ficha de troca",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "descarta uma carta de gado <strong>{{value1}}</strong> para colocar um ramal",
+        "PLACE_BRANCHLET": "coloca um ramal em <strong>{{value1}}</strong>",
+        "GAIN_EXCHANGE_TOKEN": "ganha 1 ficha de troca",
+        "TAKE_BONUS_STATION_MASTER": "pega a ficha de bônus de mestre da estação: <strong>{{value1}}</strong>",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "ganha <strong>${{value1}}</strong> por artífices",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "ganha <strong>{{value1}}</strong> certificados e <strong>${{value1}}</strong> dos sinos",
+        "GAIN_3_DOLLARS": "ganha 3 dólares",
+        "GAIN_5_DOLLARS": "ganha 5 dólares",
+        "UPGRADE_STATION_TOWN": "aprimora estação na <strong>{{value1}}</strong> por <strong>${{value2}}</strong>",
+        "PLACE_BUILDING_FOR_FREE": "coloca a construção <strong>{{value1}}</strong> no <strong>{{value2}}</strong> por $0",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "pega um carta de gado <strong>{{value1}}</strong> do mercado"
       },
       "values": {
+        "40": "Estação verde",
+        "41": "Estação vermelha",
+        "42": "Sudoeste verde (médio)",
+        "43": "Sul verde",
+        "44": "Noroeste verde (médio)",
+        "45": "Leste roxo",
+        "46": "Oeste roxo (médio)",
+        "47": "Sul azul",
+        "48": "Azul (médio)",
+        "49": "Norte azul",
+        "50": "Leste Milwaukee Vermelho",
+        "51": "Leste Green Bay Vermelho",
+        "52": "Sul Green Bay Vermelho (médio)",
+        "53": "Oeste Minneapolis Vermelho",
+        "54": "Noroeste Toronto Vermelho",
+        "55": "Norte Montreal Vermelho (médio)",
         "ROCKFALL": "Desmoronamento",
         "DROUGHT": "Seca",
         "FLOOD": "Inundação",
@@ -281,7 +337,45 @@
         "BROWN_SWISS": "Brown Swiss",
         "AYRSHIRE": "Ayrshire",
         "WEST_HIGHLAND": "West Highland",
-        "TEXAS_LONGHORN": "Texas Longhorn"
+        "TEXAS_LONGHORN": "Texas Longhorn",
+        "COLUMBIA": "Columbia",
+        "ST_LOUIS": "St. Louis",
+        "CHICAGO": "Chicago",
+        "DETROIT": "Detroit",
+        "CLEVELAND": "Cleveland",
+        "PITTSBURGH": "Pittsburgh",
+        "NEW_YORK_CITY": "New York City",
+        "MEMPHIS": "Memphis",
+        "DENVER": "Denver",
+        "MILWAUKEE": "Milwaukee",
+        "GREEN_BAY": "Green Bay",
+        "MINNEAPOLIS": "Minneapolis",
+        "TORONTO": "Toronto",
+        "MONTREAL": "Montreal",
+        "TWELVE_DOLLARS": "Ganha $12",
+        "PERM_CERT_POINTS_PER_2_STATIONS": "Certificado permanente + 3 pontos por 2 estações",
+        "GAIN_2_CERTS_POINTS_PER_BUILDING": "Mova o marcador de certificado 2 + 2 pontos por construção",
+        "PLACE_BRANCHLET_POINTS_PER_2_EXCHANGE_TOKENS": "Colocar ramal + 5 pontos por 2 fichas de troca",
+        "GAIN_EXCHANGE_TOKEN_POINTS_PER_AREA": "Ganhe 1 ficha de troca + 2 pontos por área com ramal",
+        "MEM": "Memphis",
+        "SFO": "San Francisco",
+        "DEN": "Denver",
+        "MIL": "Milwaukee",
+        "GBY": "Green Bay",
+        "TOR": "Toronto",
+        "MIN": "Minneapolis",
+        "MON": "Montreal",
+        "CERT_LIMIT_6": "Limite do certificado 6",
+        "CERT_LIMIT_4": "Limite do certificado 4",
+        "EXTRA_STEP_DOLLARS": "Passo extra ($3)",
+        "EXTRA_STEP_POINTS": "Passo extra (3 PV)",
+        "EXTRA_CARD": "Carta extra (-$5)",
+        "AUX_GAIN_DOLLAR": "Ganhe $1",
+        "AUX_DRAW_CARD_TO_DISCARD_CARD": "Compre carta e depois descarte",
+        "AUX_MOVE_ENGINE_BACKWARDS_TO_GAIN_CERT": "Pague $1 e mova sua locomotiva 1 espaço para trás para ganhar 1 certificado",
+        "AUX_PAY_TO_MOVE_ENGINE_FORWARD": "Pague $1 para mover sua locomotiva 1 para frente",
+        "AUX_MOVE_ENGINE_BACKWARDS_TO_REMOVE_CARD": "Mova sua locomotiva para trás para retirar uma carta",
+        "AUX_DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Descarte uma carta de gado de valor '2' para colocar um ramal"
       }
     },
     "actions": {
@@ -344,7 +438,14 @@
         "CHOOSE_FORESIGHT_3": "Escolha a ficha 3",
         "UNLOCK_BLACK_OR_WHITE": "Remova um disco do tabuleiro",
         "UNLOCK_WHITE": "Remova um disco com cantos brancos do tabuleiro do jogador",
-        "DOWNGRADE_STATION": "Remova um disco de uma de suas estações"
+        "DOWNGRADE_STATION": "Remova um disco de uma de suas estações",
+        "MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_HAZARDS": "Mova sua locomotiva para frente até o número de perigos que removeu",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remova um perigo por 2 dólares",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Selecione uma carta de gado de valor 2 para colocar um ramal",
+        "PLACE_BRANCHLET": "Selecione uma cidade para colocar um ramal",
+        "PLACE_BUILDING_FOR_FREE": "Selecione um local para colocar uma construção. Em seguida, selecione qual construção colocar.",
+        "TAKE_BONUS_STATION_MASTER": "Selecione uma ficha de bônus de mestre da estação para pegar",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Selecione uma carta do mercado de gado para pegar"
       },
       "buttons": {
         "APPOINT_STATION_MASTER": "Nomear um mestre de estação",
@@ -427,7 +528,24 @@
         "TRADE_WITH_TRIBES": "Fazer comércio com os índios",
         "UPGRADE_ANY_STATION_BEHIND_ENGINE": "Aprimorar qualquer estação que esteja atrás de sua locomotiva",
         "UPGRADE_STATION": "Aprimorar a estação",
-        "USE_ADJACENT_BUILDING": "Usar as ações de um edifício adjacente"
+        "USE_ADJACENT_BUILDING": "Usar as ações de um edifício adjacente",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "Descartar 1 Jersey para uma única ação auxiliar",
+        "GAIN_2_DOLLARS_PER_STATION": "Ganhar 2 dólares por estação",
+        "MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_HAZARDS": "Mover sua locomotiva até o número de perigos que removeu",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remover um perigo por 2 dólares",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Descartar uma carta de gado de valor '2' para colocar uma ramal",
+        "PLACE_BUILDING_FOR_FREE": "Colocar uma construção na trilha ($0)",
+        "TAKE_BONUS_STATION_MASTER": "Pegar uma ficha de bônus de mestre da estação",
+        "GAIN_EXCHANGE_TOKEN": "Ganhar 1 ficha de troca",
+        "USE_EXCHANGE_TOKEN": "Usar 1 ficha de troca",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "Ganhar $1 por artífice",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "Ganhar 1 certificado e $1 por sino",
+        "GAIN_2_CERTIFICATES": "Ganhar 2 certificados",
+        "GAIN_3_DOLLARS": "Ganhar 3 dólares",
+        "GAIN_5_DOLLARS": "Ganhar 5 dólares",
+        "UPGRADE_STATION_TOWN": "Aprimorar a estação",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Pegar uma carta de gado '3' do mercado",
+        "PLACE_BRANCHLET": "Colocar ramal"
       },
       "descriptions": {
         "none": "fazer nada",
@@ -518,7 +636,24 @@
         "CHOOSE_FORESIGHT_3": "Escolha a ficha 3",
         "UNLOCK_BLACK_OR_WHITE": "Remova um disco do tabuleiro",
         "UNLOCK_WHITE": "Remova um disco com cantos brancos do tabuleiro do jogador",
-        "DOWNGRADE_STATION": "Remova um disco de uma de suas estações"
+        "DOWNGRADE_STATION": "Remova um disco de uma de suas estações",
+        "DISCARD_1_JERSEY_FOR_SINGLE_AUXILIARY_ACTION": "Descarte 1 Jersey para uma única ação auxiliar",
+        "GAIN_2_DOLLARS_PER_STATION": "Ganhe 2 dólares por estação",
+        "MOVE_ENGINE_FORWARD_UP_TO_NUMBER_OF_HAZARDS": "Mova sua locomotiva para a frente até o número de perigos que removeu",
+        "REMOVE_HAZARD_FOR_2_DOLLARS": "Remova um perigo por 2 dólares",
+        "TAKE_BONUS_STATION_MASTER": "Pegue uma ficha de bônus de mestre da estação",
+        "GAIN_EXCHANGE_TOKEN": "Você ganha 1 ficha de troca adicional",
+        "USE_EXCHANGE_TOKEN": "Use uma ficha de troca para comprar até 2 cartas e, em seguida, descarte tantas quanto você comprou",
+        "DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET": "Descarte um carta de gado de valor '2' para colocar um ramal em uma cidade acessível",
+        "PLACE_BRANCHLET": "Coloque um ramal em uma cidade acessível",
+        "GAIN_1_DOLLAR_PER_CRAFTSMAN": "Ganhe 1 dólar por artífice em seu tabuleiro de jogador",
+        "GAIN_1_CERTIFICATE_AND_1_DOLLAR_PER_BELL": "Mova seu marcador de certificado até 1 espaço para a frente e ganhe 1 dólar por sino em seu tabuleiro do jogador",
+        "GAIN_2_CERTIFICATES": "Mova seu marcador de certificado para 2 espaços para a frente",
+        "GAIN_3_DOLLARS": "Ganhe 3 dólares",
+        "GAIN_5_DOLLARS": "Ganhe 5 dólares",
+        "UPGRADE_STATION_TOWN": "Aprimore a estação removendo um disco do seu tabuleiro de jogador e coloque na estação. Você tem que pagar o custo que é exibido ao lado da estação. Se houver uma ficha de bônus de mestre da estação disponível, você pode pega-lá nomeando um de seus trabalhadores para se tornar o mestre da estação.",
+        "PLACE_BUILDING_FOR_FREE": "Coloque uma construção na trilha por $0. Você ainda precisa da quantidade de artífices que é exibida na ficha da construção.",
+        "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "Pegue uma carta de gado com valor '3' do mercado de gado por $0"
       }
     },
     "score": {
@@ -549,6 +684,57 @@
         "value": {
           "BIDDING": "Leilão",
           "RANDOMIZED": "Aleatório"
+        }
+      },
+      "mode": {
+        "label": "Modo",
+        "value": {
+          "ORIGINAL": "Original",
+          "STRATEGIC": "Estratégico"
+        }
+      },
+      "variant": {
+        "label": "Variante",
+        "value": {
+          "ORIGINAL": "Original",
+          "BALANCED": "Balanceado"
+        }
+      },
+      "railsToTheNorth": {
+        "label": "Expansão Northern Railroad",
+        "value": {
+          "false": "Sem expansão",
+          "true": "Com expansão"
+        }
+      },
+      "difficulty": {
+        "label": "Dificuldade do Computador",
+        "value": {
+          "EASY": "Fácil",
+          "MEDIUM": "Médio",
+          "HARD": "Difícil",
+          "VERY_HARD": "Muito Difícil"
+        }
+      },
+      "stationMasterPromos": {
+        "label": "Promos de fichas de mestre da estação",
+        "value": {
+          "false": "Não",
+          "true": "Sim"
+        }
+      },
+      "building11": {
+        "label": "Construção 11",
+        "value": {
+          "false": "Não",
+          "true": "Sim"
+        }
+      },
+      "building13": {
+        "label": "Construção 13",
+        "value": {
+          "false": "Não",
+          "true": "Sim"
         }
       }
     },
@@ -599,7 +785,16 @@
       "WORKER_NOT_AVAILABLE": "Este trabalhador não está disponível.",
       "LOCATION_NOT_ADJACENT": "Este local não é adjacente ao seu local atual.",
       "MUST_START_ON_NEUTRAL_BUILDING": "Você deve começar em uma construção neutra.",
-      "BID_TOO_LOW": "Seu lance é muito baixo."
-    }
+      "BID_TOO_LOW": "Seu lance é muito baixo.",
+      "CITY_NOT_ACCESSIBLE": "Esta cidade não é acessível de Kansas City ou de qualquer uma das cidades onde você colocou um ramal.",
+      "ALREADY_PLACED_BRANCHLET": "Você já colocou um ramal nesta cidade.",
+      "NOT_ENOUGH_EXCHANGE_TOKENS": "Você não tem fichas de troca suficientes.",
+      "NO_BRANCHLETS": "Você não tem nenhum ramal para colocar em uma cidade.",
+      "NO_SUCH_TOWN": "Esta cidade não existe.",
+      "STATION_MASTER_NOT_AVAILABLE": "Esta ficha de mestre da estação não está disponível.",
+      "TOWN_NOT_ACCESSIBLE": "Esta cidade não é acessível.",
+      "INVALID_CATTLE_TYPE": "Este tipo de carta de gado não é válido para esta ação."
+    },
+    "confirmCannotUndo": "Você não pode desfazer esta ação. Você tem certeza de que quer isto?"
   }
 }

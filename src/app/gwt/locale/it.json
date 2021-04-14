@@ -111,7 +111,8 @@
         "REMOVE_2_CARDS": "Quando costruisci una succursale qui, puoi scartare fino a 2 carte dalla tua mano.",
         "MOVE_ENGINE_3_FORWARD": "Quando costruisci una succursale qui, puoi muovere il tuo treno avanti fino a 3 spazi.",
         "PLACE_BUILDING_FOR_FREE": "Quando costruisci una succursale qui, puoi giocare un edificio gratis."
-      }
+      },
+      "certificates": "Il numero totale di certificati, sia quelli temporanei indicati dal cubo sulla scheda del giocatore, sia quelli permanenti che un giocatore può aver acquisito tramite le tessere stazione."
     },
     "cattleType": {
       "JERSEY": "Jersey",
@@ -261,6 +262,22 @@
         "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "prende una mucca <strong>{{value1}}</strong> dal mercato bovino"
       },
       "values": {
+        "40": "Stazione verde",
+        "41": "Stazione rossa",
+        "42": "Verde Sud Ovest (medio)",
+        "43": "Verde Sud",
+        "44": "Verde Nord Ovest (medio)",
+        "45": "Viola Est",
+        "46": "Viola Ovest (medio)",
+        "47": "Blu Sud",
+        "48": "Blu (medio)",
+        "49": "Blu Nord",
+        "50": "Rosso Milwaukee Est",
+        "51": "Rosso Verde Bay Est",
+        "52": "Rosso Verde Bay Sud (medio)",
+        "53": "Rosso Minneapolis Ovest",
+        "54": "Rosso Toronto Nord Ovest",
+        "55": "Rosso Montreal Nord (medio)",
         "ROCKFALL": "Frana",
         "DROUGHT": "Deserto",
         "FLOOD": "Alluvione",
@@ -709,6 +726,15 @@
           "false": "Nessun edificio 13",
           "true": "Si, con edificio 13"
         }
+      },
+      "difficulty": {
+        "label": "Difficulty (computer)",
+        "value": {
+          "EASY": "Facile",
+          "MEDIUM": "Media",
+          "HARD": "Difficile",
+          "VERY_HARD": "Molto difficile"
+        }
       }
     },
     "errors": {
@@ -766,7 +792,9 @@
       "NO_SUCH_TOWN": "Questa città non esiste.",
       "STATION_MASTER_NOT_AVAILABLE": "Questa tessera stazione non è disponibile.",
       "TOWN_NOT_ACCESSIBLE": "Questa città non è accessibile.",
-      "INVALID_CATTLE_TYPE": "Questa mucca non è valida per effettuare questa azione."
-    }
+      "INVALID_CATTLE_TYPE": "Questa mucca non è valida per effettuare questa azione.",
+      "NOT_ENOUGH_COWBOYS": "Non hai abbastanza cowboy per svolgere questa azione."
+    },
+    "confirmCannotUndo": "Non puoi annullare questa azione. Sei sicuro di voler procedere?"
   }
 }

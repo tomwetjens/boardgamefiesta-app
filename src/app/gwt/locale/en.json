@@ -675,35 +675,35 @@
         "label": "Mode",
         "value": {
           "ORIGINAL": "Original",
-          "STRATEGIC": "Strategic (less hidden information)"
+          "STRATEGIC": "Strategic (less hidden e.g. running score)"
         }
       },
       "buildings": {
         "label": "Buildings",
         "value": {
-          "BEGINNER": "Beginner",
+          "BEGINNER": "Beginner (only a-side)",
           "RANDOMIZED": "Randomize"
         }
       },
       "playerOrder": {
         "label": "Player Order",
         "value": {
-          "BIDDING": "Bidding",
-          "RANDOMIZED": "Randomize"
+          "BIDDING": "Bidding (VPs)",
+          "RANDOMIZED": "Randomize (original)"
         }
       },
       "variant": {
         "label": "Variant",
         "value": {
           "ORIGINAL": "Original",
-          "BALANCED": "Better balanced for 2/3p"
+          "BALANCED": "Tiles adjusted for 2/3p (to match 4p ratios)"
         }
       },
       "railsToTheNorth": {
-        "label": "Northern Railroad expansion (BETA)",
+        "label": "Northern Railroad expansion",
         "value": {
           "false": "No expansion",
-          "true": "Yes, with expansion (BETA)"
+          "true": "Yes, with expansion"
         }
       },
       "difficulty": {

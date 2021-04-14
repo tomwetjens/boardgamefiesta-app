@@ -182,8 +182,8 @@
     "makePrivate": "Make private",
     "type": "Type",
     "types": {
-      "REALTIME": "Real time",
-      "TURN_BASED": "Turn based"
+      "REALTIME": "Realtime (normal online play)",
+      "TURN_BASED": "Async / PBM (e-mail notification when it's your turn)"
     }
   },
   "player": {
