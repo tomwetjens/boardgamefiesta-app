@@ -52,7 +52,9 @@
     "changePassword": "Cambia password",
     "passwordChanged": "Password cambiata",
     "password": "Password",
-    "timeZone": "Fuso orario"
+    "timeZone": "Fuso orario",
+    "changeUsername": "Cambia nome utente",
+    "usernameChanged": "Nome utente cambiato"
   },
   "profile": {
     "avatar": "Avatar",
@@ -217,7 +219,9 @@
     "GAME_ALREADY_ENDED": "La partita è già terminata.",
     "NOT_PUBLIC": "Devi ricevere un invito per unirti al tavolo.",
     "MUST_BE_OWNER": "Devi essere il creatore del tavolo.",
-    "EMAIL_ALREADY_IN_USE": "Esiste già un utente registrato con questo indirizzo e-mail."
+    "EMAIL_ALREADY_IN_USE": "Esiste già un utente registrato con questo indirizzo e-mail.",
+    "USERNAME_ALREADY_IN_USE": "Questo nome utente non è disponibile.",
+    "NOT_FOUND": "La risorsa richeista non è stata trovata."
   },
   "log": {
     "CREATE": "ha creato un nuovo tavolo",
@@ -231,5 +235,13 @@
     "PROPOSED_TO_LEAVE": "ha proposto di lasciare il tavolo insieme",
     "AGREED_TO_LEAVE": "è d'accordo a lasciare il tavolo",
     "UNDO": "annulla la mossa precedente"
-  }
+  },
+  "changeUsernameDialog": {
+    "title": "Cambia nome utente",
+    "username": "Inserisci il nuovo nome utente",
+    "submit": "Conferma"
+  },
+  "showMore": "Mostra altro",
+  "startedAt": "cominciata il",
+  "yourOtherTables": "Le mie partite"
 }

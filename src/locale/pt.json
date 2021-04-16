@@ -25,7 +25,9 @@
   "readMore": "Leia mais",
   "showLess": "Mostrar menos",
   "user-menu": {
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "myActivity": "Minha Atividade",
+    "friends": "Amigos"
   },
   "profile": {
     "avatar": "Avatar",
@@ -127,6 +129,17 @@
       "STARTED": "Em andamento",
       "ENDED": "Finalizado",
       "ABANDONED": "Abandonado"
+    },
+    "visibility": {
+      "PRIVATE": "Essa é uma mesa privada. Somente jogadores convidados podem entrar.",
+      "PUBLIC": "Essa mesa está aberta para qualquer pessoa entrar."
+    },
+    "makePublic": "Abrir para qualquer pessoa",
+    "makePrivate": "Deixar privado",
+    "type": "Jogo ao vivo",
+    "types": {
+      "REALTIME": "Sim",
+      "TURN_BASED": "Não"
     }
   },
   "player": {
@@ -172,7 +185,12 @@
     "RESOURCE_NOT_FOUND": "O recurso solicitado não foi encontrado.",
     "HISTORY_NOT_AVAILABLE": "Não há dados históricos suficientes disponíveis para desfazer a ação anterior.",
     "CANNOT_UNDO": "A ação anterior não pode ser desfeita.",
-    "GAME_ALREADY_ENDED": "Este jogo já terminou."
+    "GAME_ALREADY_ENDED": "Este jogo já terminou.",
+    "NOT_PUBLIC": "Você deve ser convidado para entrar nessa mesa.",
+    "MUST_BE_OWNER": "Você deve ser o dono dessa mesa.",
+    "EMAIL_ALREADY_IN_USE": "Já existe outro usuário cadastrado com este endereço de e-mail.",
+    "USERNAME_ALREADY_IN_USE": "Este nome de usuário já está em uso.",
+    "NOT_FOUND": "O recurso solicitado não foi encontrado."
   },
   "log": {
     "CREATE": "criou uma nova tabela",
@@ -184,6 +202,46 @@
     "LEFT": "saiu da mesa",
     "PROPOSED_TO_LEAVE": "propõe para sairmos juntos da mesa",
     "AGREED_TO_LEAVE": "concorda em sair da mesa",
-    "UNDO": "desfaz a ação anterior"
-  }
+    "UNDO": "desfaz a ação anterior",
+    "JOIN": "entrou na mesa"
+  },
+  "changeUsernameDialog": {
+    "title": "Alterar nome de usuário",
+    "username": "Digite um novo nome de usuário",
+    "submit": "Confirmar"
+  },
+  "changeEmailDialog": {
+    "title": "Alterar endereço de e-mail",
+    "email": "Digite um novo endereço de e-mail",
+    "submit": "Confirm"
+  },
+  "changePasswordDialog": {
+    "title": "Alterar senha",
+    "password": "Digite a nova senha",
+    "confirmPassword": "Digite a nova senha novamente",
+    "submit": "Confirmar",
+    "policy": "Mínimo de 8 caracteres"
+  },
+  "showMore": "Mostrar Mais",
+  "friends": "Amigos",
+  "addFriend": "Adicionar Amigo",
+  "removeFriend": "Remover Amigo",
+  "noFriends": "Nenhum amigo adicionado.",
+  "language": "Língua",
+  "user": {
+    "changeUsername": "Alterar nome de usuário",
+    "usernameChanged": "Nome de usuário alterado",
+    "changeEmail": "Alterar endereço de e-mail",
+    "emailChanged": "Endereço de e-mail alterado",
+    "changePassword": "Alterar senha",
+    "passwordChanged": "Senha alterada",
+    "password": "Senha",
+    "timeZone": "Fuso horário"
+  },
+  "createdAt": "criado em",
+  "startedAt": "iniciado em",
+  "endedAt": "terminou em",
+  "yourOtherTables": "Minhas mesas",
+  "join": "Entrar na mesa",
+  "recentActivity": "Atividade Recente"
 }
