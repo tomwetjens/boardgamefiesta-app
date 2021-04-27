@@ -36,6 +36,15 @@
         </button>
       </div>
     </div>
+    <div ngbDropdownItem disabled>
+      {{'table.type'|translate}}: {{'table.types.' + table.type|translate}}
+    </div>
+    <div ngbDropdownItem disabled *ngIf="table.status === 'STARTED'">
+      {{'startedAt'|translate}}: {{table.started | moment: 'LLL'}}
+    </div>
+    <div ngbDropdownItem disabled *ngIf="table.status === 'ENDED'">
+      {{'endedAt'|translate}}: {{table.ended | moment: 'LLL'}}
+    </div>
     <button ngbDropdownItem class="text-danger" (click)="leave()" *ngIf="table.canLeave">
       <svg class="bi" width="16" height="16" fill="currentColor">
         <use xlink:href="/assets/bootstrap-icons.svg#x-square-fill"/>

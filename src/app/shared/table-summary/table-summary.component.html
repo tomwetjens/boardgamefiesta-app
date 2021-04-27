@@ -1,4 +1,7 @@
-<strong>{{'game.' + table.game + '.name' | translate}}</strong>
+<a *ngIf="!!username" [routerLink]="['/user', username, 'rating']" [queryParams]="{game:table.game}">
+  <strong>{{'game.' + table.game + '.name' | translate}}</strong>
+</a>
+<strong *ngIf="!username">{{'game.' + table.game + '.name' | translate}}</strong>
 
 <ng-container [ngSwitch]="table.status">
   <span *ngSwitchCase="'NEW'">

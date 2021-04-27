@@ -1,4 +1,4 @@
 <h2>{{'recentActivity'|translate}}</h2>
 <div *ngFor="let table of tables$ | async">
-  <app-table-summary [table]="table"></app-table-summary>
+  <app-table-summary [table]="table" [username]="user.username"></app-table-summary>
 </div>

@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@an
 import {UserService} from "../../user.service";
 import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
-import {Table} from "../../shared/model";
+import {Table, User} from "../../shared/model";
 
 @Component({
   selector: 'user-activity',
@@ -11,7 +11,7 @@ import {Table} from "../../shared/model";
 })
 export class ActivityComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() userId: string;
+  @Input() user: User;
 
   private destroyed = new Subject();
 
@@ -35,7 +35,7 @@ export class ActivityComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private refresh() {
-    this.tables$ = this.userService.getTables(this.userId).pipe(
+    this.tables$ = this.userService.getTables(this.user.id).pipe(
       takeUntil(this.destroyed));
   }
 

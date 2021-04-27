@@ -10,6 +10,11 @@ export class TableSummaryComponent implements OnInit {
 
   @Input() table: Table;
 
+  /**
+   * if specified, generates a link to user activity
+   */
+  @Input() username?: string;
+
   constructor() { }
 
   ngOnInit(): void {

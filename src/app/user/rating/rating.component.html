@@ -35,7 +35,7 @@
     <tr *ngFor="let rating of ratings$ | async">
       <td>
         <a [routerLink]="['/',rating.gameId, rating.tableId]">
-          {{rating.timestamp | date:'long'}}
+          {{rating.timestamp | moment:'LLLL'}}
         </a>
       </td>
       <td>
