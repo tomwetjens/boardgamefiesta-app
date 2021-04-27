@@ -239,8 +239,11 @@
     "timeZone": "Fuso horário"
   },
   "createdAt": "criado em",
+  "created": "criado",
   "startedAt": "iniciado em",
+  "started": "iniciado",
   "endedAt": "terminou em",
+  "ended": "terminou",
   "yourOtherTables": "Minhas mesas",
   "join": "Entrar na mesa",
   "recentActivity": "Atividade Recente"

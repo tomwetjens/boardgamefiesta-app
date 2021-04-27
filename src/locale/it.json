@@ -113,7 +113,9 @@
   "reject": "Rifiuta",
   "notStarted": "In attesa di altri gicoatori",
   "createdAt": "creato il",
+  "created": "creato",
   "endedAt": "finito il",
+  "ended": "finito",
   "owner": "Creatore",
   "play": "Gioca",
   "yourTurn": "Il Tuo Turno",
@@ -243,5 +245,6 @@
   },
   "showMore": "Mostra altro",
   "startedAt": "cominciata il",
+  "started": "cominciata",
   "yourOtherTables": "Le mie partite"
 }

@@ -8,7 +8,7 @@
     {{'createdAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.created | moment:'LLL'}}</a>
   </span>
   <span *ngSwitchCase="'STARTED'">
-    {{'createdAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.started | moment:'LLL'}}</a>
+    {{'startedAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.started | moment:'LLL'}}</a>
   </span>
   <span *ngSwitchCase="'ENDED'">
     {{'endedAt'|translate}} <a [routerLink]="['/',table.game, table.id]">{{table.ended | moment:'LLL'}}</a>

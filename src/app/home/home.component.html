@@ -4,7 +4,7 @@
       <h6>{{'yourTurn'|translate}}</h6>
       <div *ngFor="let table of tables" class="alert alert-primary table">
         <strong>{{'game.' + table.game + '.name' | translate}}</strong>
-        &nbsp;
+        {{'started'|translate}} {{table.started | cal}}.
         <button (click)="openTable(table)" class="btn btn-success">{{'play'|translate}}</button>
 
         <span class="avatars">
@@ -21,25 +21,29 @@
         <strong>{{'game.' + table.game + '.name' | translate}}</strong>
 
         <ng-container [ngSwitch]="table.status">
-      <span *ngSwitchCase="'NEW'">
-        <ng-container [ngSwitch]="table.canAccept">
+          <ng-container *ngSwitchCase="'NEW'">
+            {{'created'|translate}} {{table.started | cal}}.
+            <ng-container [ngSwitch]="table.canAccept">
           <span *ngSwitchCase="false">
             {{'notStarted'|translate}}
             <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
           </span>
-          <span *ngSwitchCase="true">
+              <span *ngSwitchCase="true">
             {{'invitedBy'|translate}}&nbsp;<strong>{{table.owner.username}}</strong>&nbsp;
             <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
             &nbsp;
             <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>
-        </ng-container>
-      </span>
-          <span *ngSwitchCase="'STARTED'">
-        {{'waitingFor'|translate}}
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'STARTED'">
+            <ng-container [ngSwitch]="table.status">
+              {{'started'|translate}} {{table.started | cal}}.
+            </ng-container>
+            <span>{{'waitingFor'|translate}}</span>
             <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
-        <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
-      </span>
+            <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
+          </ng-container>
         </ng-container>
 
         <span class="avatars">

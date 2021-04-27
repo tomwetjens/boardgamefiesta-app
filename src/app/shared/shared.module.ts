@@ -20,8 +20,9 @@ import {LogComponent} from './log/log.component';
 import {InGameMenuComponent} from './in-game-menu/in-game-menu.component';
 import {InGamePlayerComponent} from './in-game-player/in-game-player.component';
 import {LocationIconComponent} from './location-icon/location-icon.component';
-import { TableSummaryComponent } from './table-summary/table-summary.component';
-import { LogTimePipe } from './log/log-time.pipe';
+import {TableSummaryComponent} from './table-summary/table-summary.component';
+import {LogTimePipe} from './log/log-time.pipe';
+import {CalendarPipe} from "./calendar.pipe";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,6 @@ import { LogTimePipe } from './log/log-time.pipe';
     UserPopoverComponent,
     TimerComponent,
     UserNameComponent,
-
     RatingComponent,
     FromNowPipe,
     AgoPipe,
@@ -43,7 +43,8 @@ import { LogTimePipe } from './log/log-time.pipe';
     InGamePlayerComponent,
     LocationIconComponent,
     TableSummaryComponent,
-    LogTimePipe
+    LogTimePipe,
+    CalendarPipe
   ],
   imports: [
     CommonModule,
@@ -52,23 +53,24 @@ import { LogTimePipe } from './log/log-time.pipe';
     RouterModule,
     TranslateModule.forChild()
   ],
-    exports: [
-        AvatarComponent,
-        ConnectionStatusComponent,
-        MessageDialogComponent,
-        PlayerNameComponent,
-        InGameNavbarComponent,
-        UserNameComponent,
-        RatingComponent,
-        FromNowPipe,
-        AgoPipe,
-        MomentPipe,
-        LogComponent,
-        InGamePlayerComponent,
-        LocationIconComponent,
-        TableSummaryComponent,
-        UserPopoverComponent,
-    ]
+  exports: [
+    AvatarComponent,
+    ConnectionStatusComponent,
+    MessageDialogComponent,
+    PlayerNameComponent,
+    InGameNavbarComponent,
+    UserNameComponent,
+    RatingComponent,
+    FromNowPipe,
+    AgoPipe,
+    MomentPipe,
+    LogComponent,
+    InGamePlayerComponent,
+    LocationIconComponent,
+    TableSummaryComponent,
+    UserPopoverComponent,
+    CalendarPipe
+  ]
 })
 export class SharedModule {
 }
