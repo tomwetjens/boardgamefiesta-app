@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, Event, LogEntry, Table, TableStatus, TableType, User} from './shared/model';
-import {BehaviorSubject, combineLatest, from, Observable, ReplaySubject, throwError} from 'rxjs';
+import {CreateTableRequest, Event, EventType, LogEntry, Table, TableStatus, TableType, User} from './shared/model';
+import {BehaviorSubject, combineLatest, from, Observable, ReplaySubject, Subject, throwError} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
   catchError,
-  concatMap,
+  concatMap, debounceTime,
   distinctUntilChanged,
   filter,
   map,
   retry,
   share,
-  shareReplay,
+  shareReplay, skip, skipWhile,
   startWith,
   switchMap,
   tap
@@ -22,16 +22,19 @@ import {State} from "./gwt/model";
 import {webSocket} from "rxjs/webSocket";
 import {EventService} from "./event.service";
 
+const MIN_TIME_BETWEEN_REFRESHES = 800;
+
 @Injectable({
   providedIn: 'root'
 })
 export class TableService {
 
-  private _refresh = new BehaviorSubject(true);
-  private _refreshState = new BehaviorSubject(true);
-  private _refreshMyActiveTables = new BehaviorSubject(true);
+  private _refresh = new Subject();
+  private _refreshState = new Subject();
+  private _refreshMyActiveTables = new Subject();
   private _id = new ReplaySubject<string>(1);
   private _connectedCount = 0;
+  private _reconnected$: Observable<boolean>;
 
   events$: Observable<Event>;
   connected$ = new BehaviorSubject<boolean>(false);
@@ -76,14 +79,22 @@ export class TableService {
       map(msg => msg as Event),
       share());
 
+    this._reconnected$ = this.connected$.pipe(
+      distinctUntilChanged(),
+      filter(connected => connected === true),
+      skip(1), // Skip initial connected
+      debounceTime(1000) // Only emit if reconnected after some time
+    );
+
     this.table$ = this._id.pipe(
       distinctUntilChanged(),
       switchMap(id => {
         return combineLatest([
-          this._refresh,
-          this.events$.pipe(startWith({})),
-          this.reconnected()
+          this._refresh.pipe(startWith(true)), // Always start with a value because of combineLatest
+          this.events$.pipe(startWith({})), // Always start with a value because of combineLatest
+          this._reconnected$.pipe(startWith(true)) // Always start with a value because of combineLatest
         ]).pipe(
+          debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
           switchMap(() => this.get(id)),
           // For each new id, immediately start with an empty value to prevent replaying
           // the previous table, while it is fetching the new table
@@ -96,10 +107,18 @@ export class TableService {
       filter(table => [TableStatus.STARTED, TableStatus.ENDED].includes(table.status)),
       switchMap(table => {
         return combineLatest([
-          this._refreshState,
-          this.events$.pipe(startWith({})),
-          this.reconnected()
+          this._refreshState.pipe(
+            startWith(true) // Always start with a value because of combineLatest
+          ),
+          this.events$.pipe(
+            // Only trigger on interesting events
+            filter(event => [EventType.STATE_CHANGED].includes(event.type)),
+            startWith({}) // Always start with a value because of combineLatest
+          ),
+          this._reconnected$.pipe(
+            startWith(true)) // Always start with a value because of combineLatest
         ]).pipe(
+          debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
           switchMap(() => this.getState(table.id)),
           // For each new table, immediately start with an empty value to prevent replaying
           // the state of the previous table, while it is fetching the state of the new table
@@ -113,10 +132,9 @@ export class TableService {
         let lastRequestedDate = new Date(0);
         return combineLatest([
           this.events$.pipe(startWith({})),
-          this.reconnected()
+          this._reconnected$.pipe(startWith(true))
         ]).pipe(
           map(() => lastRequestedDate),
-          startWith(lastRequestedDate), // initial
           switchMap(since => {
             // Request log entries since
             return this.getLogSince(id, since, 30)
@@ -127,25 +145,20 @@ export class TableService {
                 concatMap(logEntries => from(logEntries)),
                 tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
           }));
-      }));
+      }),
+      shareReplay());
 
     this.myActiveTables$ = combineLatest([
-      this._refreshMyActiveTables,
-      this.eventService.events,
-      this.reconnected()
+      this._refreshMyActiveTables.pipe(startWith(true)),// Always start with a value because of combineLatest
+      this.eventService.events.pipe(startWith({})),// Always start with a value because of combineLatest
+      this._reconnected$.pipe(startWith(true))// Always start with a value because of combineLatest
     ]).pipe(
+      debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
       map(() => true),
       startWith(true),
       switchMap(() => this.find()),
       shareReplay(1)
     );
-  }
-
-  private reconnected() {
-    return this.connected$.pipe(
-      distinctUntilChanged(),
-      filter(connected => connected),
-      startWith(true));
   }
 
   load(id: string) {
@@ -216,10 +229,10 @@ export class TableService {
     return this.httpClient.get<T>(environment.apiBaseUrl + '/tables/' + id + '/state');
   }
 
-  private getLogSince(id: string, date: Date, limit: number): Observable<LogEntry[]> {
+  private getLogSince(id: string, since: Date, limit: number): Observable<LogEntry[]> {
     return this.httpClient.get<LogEntry[]>(environment.apiBaseUrl + '/tables/' + id + '/log', {
       params: {
-        since: date.toISOString(),
+        since: since.toISOString(),
         limit: limit + ''
       }
     });
