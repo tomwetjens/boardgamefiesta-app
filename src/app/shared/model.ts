@@ -145,7 +145,6 @@ export interface LogEntry {
   timestamp: string;
   player?: {
     id: string;
-    color?: PlayerColor;
   };
   user?: {
     id: string
