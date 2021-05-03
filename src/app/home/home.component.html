@@ -22,7 +22,7 @@
 
         <ng-container [ngSwitch]="table.status">
           <ng-container *ngSwitchCase="'NEW'">
-            {{'created'|translate}} {{table.started | cal}}.
+            {{'created'|translate}} {{table.created | cal}}.
             <ng-container [ngSwitch]="table.canAccept">
           <span *ngSwitchCase="false">
             {{'notStarted'|translate}}
