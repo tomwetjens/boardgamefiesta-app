@@ -9,6 +9,7 @@ import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {PrivacyComponent} from "./privacy/privacy.component";
 import {FaqComponent} from "./faq/faq.component";
+import {GameTablesComponent} from "./game-tables/game-tables.component";
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'tables/:gameId',
+        component: GameTablesComponent
       },
       {
         path: '**',

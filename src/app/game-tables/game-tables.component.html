@@ -1,0 +1,22 @@
+<div class="container" *ngIf="gameId$ | async as gameId">
+  <div class="jumbotron">
+    <h5>{{'game.' + gameId + '.name'|translate}}</h5>
+    <hr class="my-4">
+    <p>
+      <img src="/assets/games/{{gameId}}/box.png" class="box"/>
+      <span [innerHTML]="'game.' + gameId + '.description'|translate"></span>
+    </p>
+    <p>
+      <a [routerLink]="['/games/', gameId]">{{'viewGame'|translate}}</a>
+    </p>
+    <button class="btn btn-primary" (click)="createTable(gameId)">{{'createTable'|translate}}</button>
+  </div>
+  <section>
+    <h1>{{'openTables'|translate}}</h1>
+    <app-open-tables [gameId]="gameId"></app-open-tables>
+  </section>
+  <section>
+    <h1>{{'startedTables'|translate}}</h1>
+    <app-started-tables [gameId]="gameId"></app-started-tables>
+  </section>
+</div>

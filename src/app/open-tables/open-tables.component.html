@@ -1,0 +1,7 @@
+<div class="list-group">
+  <app-table-details class="list-group-item list-group-item-success"
+                     *ngFor="let table of tables"
+                     [table]="table">
+  </app-table-details>
+</div>
+<button class="btn btn-link" *ngIf="hasMore" (click)="showMore()">{{'showMore'|translate}}</button>

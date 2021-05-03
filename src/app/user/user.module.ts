@@ -35,28 +35,31 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    RatingComponent,
-    RatingDetailsComponent,
-    ActivityComponent,
-    UserComponent,
-    FriendsComponent,
-    FriendComponent,
-    ChangeEmailDialogComponent,
-    ChangePasswordDialogComponent,
-    SameValidator,
-    NotSameValidator,
-    ChangeUsernameDialogComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    NgbModule,
-    NgxChartsModule,
-    TranslateModule.forChild(),
-    RouterModule.forChild(routes),
-    SharedModule,
-  ]
+    declarations: [
+        RatingComponent,
+        RatingDetailsComponent,
+        ActivityComponent,
+        UserComponent,
+        FriendsComponent,
+        FriendComponent,
+        ChangeEmailDialogComponent,
+        ChangePasswordDialogComponent,
+        SameValidator,
+        NotSameValidator,
+        ChangeUsernameDialogComponent
+    ],
+    exports: [
+        UserComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        NgbModule,
+        NgxChartsModule,
+        TranslateModule.forChild(),
+        RouterModule.forChild(routes),
+        SharedModule,
+    ]
 })
 export class UserModule {
 }

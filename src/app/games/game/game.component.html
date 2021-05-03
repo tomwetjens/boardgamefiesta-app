@@ -6,6 +6,9 @@
       <img src="/assets/games/{{game.id}}/box.png" class="box"/>
       <span [innerHTML]="'game.' + game.id + '.description'|translate"></span>
     </p>
+    <p>
+      <a [routerLink]="['/tables/', game.id]">{{'viewStartedTables'|translate}}</a>
+    </p>
     <button class="btn btn-primary" (click)="play(game)">{{'play'|translate}}</button>
   </div>
 

@@ -28,6 +28,9 @@ import {InvitePlayerComponent} from './invite-player/invite-player.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {TimeZoneSelectorComponent} from './time-zone-selector/time-zone-selector.component';
 import {GlobalErrorHandler} from "./global-error-handler.service";
+import {StartedTablesComponent} from './started-tables/started-tables.component';
+import {OpenTablesComponent} from './open-tables/open-tables.component';
+import {GameTablesComponent} from './game-tables/game-tables.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import {GlobalErrorHandler} from "./global-error-handler.service";
     PrivacyComponent,
     FaqComponent,
     InvitePlayerComponent,
-    TimeZoneSelectorComponent
+    TimeZoneSelectorComponent,
+    StartedTablesComponent,
+    OpenTablesComponent,
+    GameTablesComponent
   ],
   imports: [
     BrowserModule,

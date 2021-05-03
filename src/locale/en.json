@@ -123,11 +123,12 @@
   "accept": "Accept",
   "reject": "Reject",
   "notStarted": "Waiting for players",
-  "createdAt": "created at",
-  "created": "created",
-  "startedAt": "started at",
-  "started": "started",
-  "endedAt": "ended at",
+  "createdAt": "Created at",
+  "created": "Created",
+  "startedAt": "Started at",
+  "started": "Started",
+  "endedAt": "Ended at",
+  "ended": "Ended",
   "owner": "Host",
   "play": "Play",
   "yourTurn": "Your Turn",
@@ -184,9 +185,22 @@
     "makePrivate": "Make private",
     "type": "Type",
     "types": {
-      "REALTIME": "Realtime (normal online play)",
-      "TURN_BASED": "Async / PBM (e-mail notification when it's your turn)"
-    }
+      "REALTIME": "Live",
+      "TURN_BASED": "Async / PBM"
+    },
+    "settings": "Table",
+    "mode": "Mode",
+    "modes": {
+      "NORMAL": "Normal",
+      "PRACTICE": "Practice"
+    },
+    "setMinMaxNumberOfPlayers": "I want to play with this number of players:",
+    "minNumberOfPlayers": "min",
+    "maxNumberOfPlayers": "max",
+    "autoStart": "Auto start when enough players have joined",
+    "emptySeat": "Empty seat",
+    "confirmJoinAutoStart": "The table is set to <strong>automatically start</strong> when enough players have joined. You joining the table will automatically start the game.<br/><br/>Are you sure you want to join this table?",
+    "confirmJoinAndStart": "Join and start"
   },
   "player": {
     "status": {
@@ -212,6 +226,14 @@
     "title": "Contact",
     "text": "This website is maintained by Tom Wetjens. Feel free to contact me about any issues, requests or suggestions. As there is currently no issue tracker yet, please submit any bug reports to my e-mail address."
   },
+  "viewStartedTables": "Check out games in progress",
+  "viewGame": "Read more about this game",
+  "createTable": "Create a new table",
+  "startedTables": "Games in progress",
+  "openTables": "Games that you can join",
+  "minMaxNumberOfPlayers": "{{cur}} players - needs at least <strong>{{min}}</strong> players (at most <strong>{{max}}</strong>)",
+  "playerAtTableBadge": "Playing",
+  "ownerOfTableBadge": "Host",
   "errors": {
     "EXCEEDS_MAX_REALTIME_GAMES": "You have reached the maximum number of realtime games you can play simultaneously.",
     "EXCEEDS_MAX_ACTIVE_GAMES": "You have reached the maximum number of games you can play simultaneously.",

@@ -56,7 +56,7 @@ export enum TableType {
 
 export enum TableMode {
   NORMAL = 'NORMAL',
-  TRAINING = 'TRAINING'
+  PRACTICE = 'PRACTICE'
 }
 
 export enum TableStatus {
@@ -74,6 +74,7 @@ export interface Table {
   readonly id: string;
   readonly game: string;
   readonly type: TableType;
+  readonly mode: TableMode;
   readonly visibility: Visibility;
   readonly options: Options;
   readonly status: TableStatus;
@@ -81,10 +82,15 @@ export interface Table {
   readonly player?: string;
   readonly otherPlayers: string[];
   readonly players: { [key: string]: TablePlayer };
+  readonly numberOfPlayers: number;
   readonly created: string;
   readonly started: string;
   readonly ended: string;
   readonly turn?: boolean;
+  readonly currentPlayers?: string[];
+  /**
+   * @deprecated use currentPlayers instead
+   */
   readonly currentPlayer?: string;
   readonly owner: User;
   readonly canStart: boolean;
@@ -93,6 +99,9 @@ export interface Table {
   readonly canUndo?: boolean;
   readonly minNumberOfPlayers: number;
   readonly maxNumberOfPlayers: number;
+  readonly minNumberOfPlayersGame: number;
+  readonly maxNumberOfPlayersGame: number;
+  readonly autoStart: boolean;
 }
 
 export interface CreateTableRequest {

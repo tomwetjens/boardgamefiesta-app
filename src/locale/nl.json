@@ -121,11 +121,12 @@
   "accept": "Accepteren",
   "reject": "Weigeren",
   "notStarted": "Wachten op spelers",
-  "createdAt": "gemaakt op",
-  "created": "gemaakt",
-  "startedAt": "gestart op",
-  "started": "gestart",
-  "endedAt": "afgelopen op",
+  "createdAt": "Gemaakt op",
+  "created": "Gemaakt",
+  "startedAt": "Gestart op",
+  "started": "Gestart",
+  "endedAt": "Afgelopen op",
+  "ended": "Afgelopen",
   "owner": "Beheerder",
   "play": "Speel",
   "yourTurn": "Jij bent aan de beurt",
@@ -170,16 +171,34 @@
   "table": {
     "status": {
       "NEW": "Wachten op spelers",
-      "STARTED": "Bezig",
-      "ENDED": "Afgelopen",
-      "ABANDONED": "Afgebroken"
+      "STARTED": "Spel is bezig",
+      "ENDED": "Spel is afgelopen",
+      "ABANDONED": "Spel is afgebroken"
     },
     "visibility": {
       "PRIVATE": "Dit is privétafel. Alleen uitgenodigde spelers kunnen aansluiten.",
       "PUBLIC": "Deze tafel is open voor iedereen om aan te sluiten."
     },
     "makePublic": "Open zetten voor iedereen",
-    "makePrivate": "Privé maken"
+    "makePrivate": "Privé maken",
+    "type": "Type",
+    "types": {
+      "REALTIME": "Live",
+      "TURN_BASED": "Async / PBM"
+    },
+    "settings": "Tafel",
+    "mode": "Modus",
+    "modes": {
+      "NORMAL": "Normaal spel",
+      "PRACTICE": "Oefenspel"
+    },
+    "setMinMaxNumberOfPlayers": "Ik wil met dit aantal spelers spelen:",
+    "minNumberOfPlayers": "min",
+    "maxNumberOfPlayers": "max",
+    "autoStart": "Automatisch starten als er genoeg spelers zijn",
+    "emptySeat": "Beschikbare stoel",
+    "confirmJoinAutoStart": "Dit spel is ingesteld om <strong>automatisch te starten</strong> als er genoeg spelers zijn aangeschoven. Als jij aanschuift zal het spel automatisch gestart worden.<br/><br/>Weet je zeker dat je wilt aanschuiven bij deze tafel?",
+    "confirmJoinAndStart": "Aanschuiven en starten"
   },
   "player": {
     "status": {
@@ -193,6 +212,14 @@
   },
   "rating": "Spelerniveau",
   "score": "Score",
+  "viewStartedTables": "Bekijk spellen die bezig zijn",
+  "viewGame": "Meer over dit spel",
+  "createTable": "Maak een nieuwe tafel",
+  "startedTables": "Spellen die bezig zijn",
+  "openTables": "Spellen waar je kan aanschuiven",
+  "minMaxNumberOfPlayers": "{{cur}} spelers - heeft minimaal <strong>{{min}}</strong> spelers nodig (maximaal <strong>{{max}}</strong>)",
+  "playerAtTableBadge": "Speler",
+  "ownerOfTableBadge": "Beheerder",
   "errors": {
     "EXCEEDS_MAX_REALTIME_GAMES": "Je hebt het maximum aantal realtime spellen bereikt dat je gelijktijdig kan spelen.",
     "EXCEEDS_MAX_ACTIVE_GAMES": "Je hebt het maximum aantal spellen bereikt dat je gelijktijdig kan spelen.",

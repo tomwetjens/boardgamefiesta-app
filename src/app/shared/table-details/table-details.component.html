@@ -1,0 +1,52 @@
+<h5 class="card-title">
+  <a [routerLink]="['/games', table.game]"><strong>{{'game.' + table.game + '.name' | translate}}</strong></a>
+  &nbsp;
+  <span class="badge badge-primary"
+        *ngIf="table.player && table.owner.id !== table.players[table.player].user.id">{{'playerAtTableBadge'|translate}}</span>
+  <span class="badge badge-primary"
+        *ngIf="table.player && table.owner.id === table.players[table.player].user.id">{{'ownerOfTableBadge'|translate}}</span>
+</h5>
+<h6 class="card-subtitle mb-2 text-muted">
+  <strong>{{'table.status.' + table.status|translate}}</strong>
+  &#x025B8;
+  <strong>{{'table.types.' + table.type|translate}}</strong>
+  &#x025B8;
+  <ng-container [ngSwitch]="table.status">
+    <ng-container *ngSwitchCase="'NEW'">{{'created'|translate}} {{table.created | cal}}.</ng-container>
+    <ng-container *ngSwitchCase="'STARTED'">{{'started'|translate}} {{table.started | cal}}.</ng-container>
+    <ng-container *ngSwitchCase="'ENDED'">{{'ended'|translate}} {{table.ended | cal}}.</ng-container>
+    <ng-container *ngSwitchCase="'ABANDONED'">
+      <ng-container *ngIf="table.started">{{'started'|translate}} {{table.started|cal}}</ng-container>
+      <ng-container *ngIf="!table.started">{{'created'|translate}} {{table.created|cal}}</ng-container>
+    </ng-container>
+  </ng-container>
+</h6>
+<p>
+  <ng-container [ngSwitch]="table.status">
+    <span *ngSwitchCase="'NEW'"
+          [innerHTML]="'minMaxNumberOfPlayers'|translate:{cur: table.numberOfPlayers, min: table.minNumberOfPlayers, max: table.maxNumberOfPlayers}">
+    </span>
+    <ng-container *ngSwitchDefault>
+      {{table.numberOfPlayers}} {{'players'|translate}}
+    </ng-container>
+  </ng-container>
+</p>
+<ul class="players">
+  <ng-container *ngIf="table.player">
+    <li *ngIf="table.players[table.player].user">
+      <app-avatar [user]="table.players[table.player].user"></app-avatar>
+      <app-user-name [userId]="table.players[table.player].user.id"
+                     [username]="table.players[table.player].user.username"></app-user-name>
+    </li>
+  </ng-container>
+  <ng-container *ngFor="let playerId of table.otherPlayers">
+    <li *ngIf="table.players[playerId].user">
+      <app-avatar [user]="table.players[playerId].user"></app-avatar>
+      <app-user-name [userId]="table.players[playerId].user.id"
+                     [username]="table.players[playerId].user.username"></app-user-name>
+    </li>
+  </ng-container>
+</ul>
+<p>
+  <a class="btn btn-primary" [routerLink]="['/', table.game, table.id]">{{'open'|translate}}</a>
+</p>

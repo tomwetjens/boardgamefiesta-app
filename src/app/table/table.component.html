@@ -21,7 +21,8 @@
                   [attr.aria-expanded]="!hideDescription" aria-controls="description">
             {{(hideDescription ? 'readMore' : 'showLess')|translate}}
           </button>
-          <span id="description" [ngbCollapse]="hideDescription" [innerHTML]="'game.' + table.game + '.description'|translate"></span>
+          <span id="description" [ngbCollapse]="hideDescription"
+                [innerHTML]="'game.' + table.game + '.description'|translate"></span>
         </p>
         <p>
           <strong>{{'table.status.' + table.status|translate}}</strong>
@@ -35,9 +36,9 @@
             {{'table.visibility.' + table.visibility|translate}}
             <br/>
             <ng-container *ngIf="table.player && table.players[table.player].user.id == table.owner.id">
-              <button *ngIf="table.visibility == 'PRIVATE'" class="btn btn-lg btn-outline-secondary"
+              <button *ngIf="table.visibility == 'PRIVATE'" class="btn btn-lg btn-primary"
                       (click)="makePublic(table)">{{'table.makePublic'|translate}}</button>
-              <button *ngIf="table.visibility == 'PUBLIC'" class="btn btn-lg btn-outline-secondary"
+              <button *ngIf="table.visibility == 'PUBLIC'" class="btn btn-lg btn-primary"
                       (click)="makePrivate(table)">{{'table.makePrivate'|translate}}</button>
             </ng-container>
           </p>
@@ -49,6 +50,7 @@
             <button class="btn btn-lg btn-success" (click)="accept(table)">{{'accept'|translate}}</button>&nbsp;
             <button class="btn btn-lg btn-danger" (click)="reject(table)">{{'reject'|translate}}</button>
           </p>
+
         </ng-container>
       </div>
     </section>
@@ -58,11 +60,10 @@
         <div class="col-md-4 col-sm-12">
           <div class="card">
             <div class="card-header">
-              {{'options'|translate}}
+              {{'table.settings'|translate}}
             </div>
             <div class="card-body">
-              <form *ngIf="(provider$ | async) as provider">
-
+              <form>
                 <div class="form-group">
                   <label for="type">{{('table.type')|translate}}</label>
                   <div ngbDropdown>
@@ -70,13 +71,37 @@
                       {{'table.types.' + table.type|translate}}
                     </button>
                     <div ngbDropdownMenu>
-                      <button ngbDropdownItem *ngFor="let type of types" (click)="changeType(table, type)">
+                      <button ngbDropdownItem *ngFor="let type of types" (click)="changeType(table, type)"
+                              [disabled]="!(isOwner$ | async)">
                         {{('table.types.' + type)|translate}}
                       </button>
                     </div>
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="type">{{('table.mode')|translate}}</label>
+                  <div ngbDropdown>
+                    <button class="btn btn-outline-primary" id="mode" ngbDropdownToggle>
+                      {{'table.modes.' + table.mode|translate}}
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button ngbDropdownItem *ngFor="let mode of modes" (click)="changeMode(table, mode)"
+                              [disabled]="!(isOwner$ | async)">
+                        {{('table.modes.' + mode)|translate}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              {{'options'|translate}}
+            </div>
+            <div class="card-body">
+              <form *ngIf="(provider$ | async) as provider">
                 <div class="form-group" *ngFor="let option of provider.getOptions(table); trackBy: trackOption">
                   <label [for]="option.key">{{(table.game + '.option.' + option.key + '.label')|translate}}</label>
                   <div ngbDropdown>
@@ -85,6 +110,7 @@
                     </button>
                     <div ngbDropdownMenu>
                       <button ngbDropdownItem *ngFor="let value of option.values"
+                              [disabled]="!(isOwner$ | async)"
                               (click)="table.options[option.key] = value; changeOptions(table, table.options)">
                         {{(table.game + '.option.' + option.key + '.value.' + value)|translate}}
                       </button>
@@ -98,7 +124,57 @@
         <div class="col-md-8 col-sm-12">
           <div class="card">
             <div class="card-header">
-              {{'players'|translate}}
+              <ng-container [ngSwitch]="(isOwner$ | async)">
+                <ng-container *ngSwitchCase="true">
+                  <form>
+                    <div *ngIf="table.visibility == 'PUBLIC'">
+                      <div class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col-6">
+                          {{'table.setMinMaxNumberOfPlayers'|translate}}
+                        </div>
+                        <div class="col-3">
+                          <div class="input-group">
+                            <div class="input-group-text">{{'table.minNumberOfPlayers'|translate}}</div>
+                            <input id="minNumberOfPlayers" name="minNumberOfPlayers"
+                                   type="number" class="form-control" [min]="table.minNumberOfPlayersGame"
+                                   [(ngModel)]="minNumberOfPlayers" [max]="maxNumberOfPlayers"
+                                   (ngModelChange)="changeMinMaxPlayers(table)"/>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="input-group">
+                            <div class="input-group-text">{{'table.maxNumberOfPlayers'|translate}}</div>
+                            <input id="maxNumberOfPlayers" name="maxNumberOfPlayers"
+                                   type="number" class="form-control" [min]="minNumberOfPlayers"
+                                   [(ngModel)]="maxNumberOfPlayers" [max]="table.maxNumberOfPlayersGame"
+                                   (ngModelChange)="changeMinMaxPlayers(table)"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-cols-lg-auto g-3 align-items-center">
+                      <div class="col-12">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="autoStart" name="autoStart"
+                                 [(ngModel)]="autoStart" (ngModelChange)="changeAutoStart(table)">
+                          <label class="form-check-label" for="autoStart">{{'table.autoStart'|translate}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <p [innerHTML]="'minMaxNumberOfPlayers'|translate:{
+                  cur: table.numberOfPlayers,
+                  min: table.minNumberOfPlayers,
+                  max: table.maxNumberOfPlayers}">
+                  </p>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" disabled [checked]="autoStart">
+                    <label class="form-check-label" for="autoStart">{{'table.autoStart'|translate}}</label>
+                  </div>
+                </ng-container>
+              </ng-container>
             </div>
             <div class="card-body players">
               <div *ngFor="let playerId of [table.player].concat(table.otherPlayers)" class="row player">
@@ -117,18 +193,28 @@
                       </span>
                       <ng-container *ngIf="table.status === 'NEW' && playerId !== table.player">
                         {{'player.status.' + player.status|translate}}
-                        <button class="btn btn-sm btn-danger"
-                                *ngIf="table.player && table.players[table.player].user.id === table.owner.id"
+                        <button class="btn btn-sm btn-danger" *ngIf="isOwner$|async"
                                 (click)="kick(table, player)">{{'uninvite'|translate}}</button>
                       </ng-container>
                     </div>
                   </div>
                 </div>
               </div>
+              <div *ngFor="let _ of [].constructor(emptySeats$ | async)" class="row player">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      {{'table.emptySeat'|translate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div *ngIf="table.status === 'NEW'" class="buttons">
-                <ng-container *ngIf="table.player && table.players[table.player].user.id == table.owner.id">
-                  <button class="btn btn-primary" (click)="invite(table)">{{'invite'|translate}}</button>&nbsp;
-                  <button class="btn btn-secondary" (click)="addComputer(table)">{{'addComputer'|translate}}</button>
+                <ng-container *ngIf="isOwner$ | async">
+                  <button class="btn btn-primary" (click)="invite(table)"
+                          [disabled]="table.numberOfPlayers >= table.maxNumberOfPlayers">{{'invite'|translate}}</button>&nbsp;
+                  <button class="btn btn-secondary" (click)="addComputer(table)"
+                          [disabled]="table.numberOfPlayers >= table.maxNumberOfPlayers">{{'addComputer'|translate}}</button>
                 </ng-container>
               </div>
             </div>

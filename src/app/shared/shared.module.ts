@@ -23,6 +23,7 @@ import {LocationIconComponent} from './location-icon/location-icon.component';
 import {TableSummaryComponent} from './table-summary/table-summary.component';
 import {LogTimePipe} from './log/log-time.pipe';
 import {CalendarPipe} from "./calendar.pipe";
+import {TableDetailsComponent} from "./table-details/table-details.component";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {CalendarPipe} from "./calendar.pipe";
     LocationIconComponent,
     TableSummaryComponent,
     LogTimePipe,
-    CalendarPipe
+    CalendarPipe,
+    TableDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,8 @@ import {CalendarPipe} from "./calendar.pipe";
     LocationIconComponent,
     TableSummaryComponent,
     UserPopoverComponent,
-    CalendarPipe
+    CalendarPipe,
+    TableDetailsComponent
   ]
 })
 export class SharedModule {

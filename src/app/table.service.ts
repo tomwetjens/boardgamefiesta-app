@@ -1,7 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {CreateTableRequest, Event, EventType, LogEntry, Table, TableStatus, TableType, User} from './shared/model';
+import {
+  CreateTableRequest,
+  Event,
+  EventType,
+  LogEntry,
+  Table,
+  TableMode,
+  TableStatus,
+  TableType,
+  User
+} from './shared/model';
 import {BehaviorSubject, combineLatest, from, Observable, ReplaySubject, Subject, throwError} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
@@ -268,12 +278,27 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-options', request);
   }
 
+  changeMinMaxNumberOfPlayers(id: string, minNumberOfPlayers: number, maxNumberOfPlayers: number) {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-min-max-players', {
+      minNumberOfPlayers,
+      maxNumberOfPlayers
+    });
+  }
+
+  changeAutoStart(id: string, autoStart: boolean) {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-auto-start', {autoStart});
+  }
+
   getSuggestedPlayers(id: string): Observable<User[]> {
     return this.httpClient.get<User[]>(environment.apiBaseUrl + '/tables/' + id + '/suggested-players');
   }
 
   changeType(id: string, type: TableType) {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-type', {type});
+  }
+
+  changeMode(id: string, mode: TableMode) {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/change-mode', {mode});
   }
 
   getLogBefore(tableId: string, date: Date, limit: number): Observable<LogEntry[]> {
@@ -284,4 +309,23 @@ export class TableService {
       }
     });
   }
+
+  findStarted(gameId: string, lastEvaluatedTimestamp?: string, lastEvaluatedId?: string): Observable<Table[]> {
+    return this.httpClient.get<Table[]>(environment.apiBaseUrl + '/games/' + gameId + '/started', {
+      params: {
+        lts: lastEvaluatedTimestamp || '',
+        lid: lastEvaluatedId || ''
+      }
+    });
+  }
+
+  findOpen(gameId: string, lastEvaluatedTimestamp?: string, lastEvaluatedId?: string): Observable<Table[]> {
+    return this.httpClient.get<Table[]>(environment.apiBaseUrl + '/games/' + gameId + '/open', {
+      params: {
+        lts: lastEvaluatedTimestamp || '',
+        lid: lastEvaluatedId || ''
+      }
+    });
+  }
+
 }

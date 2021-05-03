@@ -1,11 +1,21 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, of, Subject} from 'rxjs';
-import {bufferCount, filter, map, switchMap, takeUntil, tap, withLatestFrom} from 'rxjs/operators';
-import {EventType, LogEntry, LogEntryType, Options, PlayerStatus, Table, TablePlayer, TableType} from '../shared/model';
+import {bufferCount, filter, finalize, map, switchMap, takeUntil, withLatestFrom} from 'rxjs/operators';
+import {
+  EventType,
+  LogEntry,
+  LogEntryType,
+  Options,
+  PlayerStatus,
+  Table,
+  TableMode,
+  TablePlayer,
+  TableType
+} from '../shared/model';
 import {EventService} from '../event.service';
 import {TableService} from '../table.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MessageDialogComponent} from '../shared/message-dialog/message-dialog.component';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {TranslateService} from '@ngx-translate/core';
@@ -27,12 +37,20 @@ interface Seat {
 export class TableComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject();
+  private dialog: NgbModalRef;
 
   table: Observable<Table>;
   provider$: Observable<GameProvider>;
+  isOwner$: Observable<boolean>;
+  emptySeats$: Observable<number>;
 
   types = Object.keys(TableType);
+  modes = Object.keys(TableMode);
   hideDescription = true;
+
+  minNumberOfPlayers: number;
+  maxNumberOfPlayers: number;
+  autoStart: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -55,6 +73,19 @@ export class TableComponent implements OnInit, OnDestroy {
         return this.tableService.table$;
       })
     );
+
+    this.isOwner$ = this.table.pipe(map(table => table && table.player && table.players[table.player].user.id === table.owner.id));
+    this.emptySeats$ = this.table.pipe(map(table => table ? Math.max(0, table.maxNumberOfPlayers - table.numberOfPlayers) : 0));
+
+    this.table
+      .pipe(
+        takeUntil(this.destroyed),
+        filter(table => !!table))
+      .subscribe(table => {
+        this.minNumberOfPlayers = table.minNumberOfPlayers;
+        this.maxNumberOfPlayers = table.maxNumberOfPlayers;
+        this.autoStart = table.autoStart;
+      });
 
     this.table
       .pipe(
@@ -125,6 +156,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed.next(true);
+
+    if (this.dialog) {
+      this.dialog.close();
+    }
   }
 
   start(table: Table) {
@@ -185,8 +220,24 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   accept(table: Table) {
-    this.tableService.accept(table.id)
-      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+    (table.autoStart && table.minNumberOfPlayers <= table.otherPlayers
+      .map(pid => table.players[pid])
+      .filter(p => p.status === PlayerStatus.ACCEPTED).length + 1
+      ? this.confirmJoinAutoStart()
+      : of(null))
+      .pipe(switchMap(() => this.tableService.accept(table.id)))
+        .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  confirmJoinAutoStart(): Observable<void> {
+    this.dialog = this.ngbModal.open(MessageDialogComponent);
+    const messageDialogComponent = this.dialog.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'table.confirmJoinAutoStart';
+    messageDialogComponent.confirmKey = 'table.confirmJoinAndStart';
+    messageDialogComponent.cancelKey = 'cancel';
+    return fromPromise(this.dialog.result)
+      .pipe(finalize(() => this.dialog = null));
   }
 
   reject(table: Table) {
@@ -200,7 +251,10 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   join(table: Table) {
-    this.tableService.join(table.id)
+    (table.autoStart && table.minNumberOfPlayers <= table.numberOfPlayers + 1
+      ? this.confirmJoinAutoStart()
+      : of(null))
+      .pipe(switchMap(() => this.tableService.join(table.id)))
       .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
   }
 
@@ -222,4 +276,20 @@ export class TableComponent implements OnInit, OnDestroy {
     this.tableService.changeType(table.id, type)
       .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
   }
+
+  changeMode(table: Table, mode: TableMode) {
+    this.tableService.changeMode(table.id, mode)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  changeMinMaxPlayers(table: Table) {
+    this.tableService.changeMinMaxNumberOfPlayers(table.id, this.minNumberOfPlayers, this.maxNumberOfPlayers)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
+  changeAutoStart(table: Table) {
+    this.tableService.changeAutoStart(table.id, this.autoStart)
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+  }
+
 }

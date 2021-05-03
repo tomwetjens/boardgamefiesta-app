@@ -4,9 +4,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  {{messageKey|translate}}
-</div>
+<div class="modal-body" [innerHTML]="messageKey|translate"></div>
 <div class="modal-footer">
   <button (click)="ngbActiveModal.close()" class="btn btn-primary">
     {{(confirmKey || (type === 'confirm' ? 'confirm' : 'ok'))|translate}}
