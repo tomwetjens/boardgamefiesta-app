@@ -140,7 +140,20 @@
     "types": {
       "REALTIME": "Sim",
       "TURN_BASED": "Não"
-    }
+    },
+    "settings": "Mesa",
+    "mode": "Modo",
+    "modes": {
+      "NORMAL": "Normal",
+      "PRACTICE": "Treino"
+    },
+    "setMinMaxNumberOfPlayers": "Quantidade de jogadores:",
+    "minNumberOfPlayers": "min",
+    "maxNumberOfPlayers": "max",
+    "autoStart": "Início automático quando jogadores suficientes tiverem entrado",
+    "emptySeat": "Assento vazio",
+    "confirmJoinAutoStart": "A mesa está configurada para <strong>iniciar automaticamente</strong> quando um número suficiente de jogadores tiver entrado. Ao entrar na mesa, o jogo será iniciado automaticamente.<br/><br/>Tem certeza de que deseja entrar nesta mesa?",
+    "confirmJoinAndStart": "Entre e inicie"
   },
   "player": {
     "status": {
@@ -246,5 +259,13 @@
   "ended": "terminou",
   "yourOtherTables": "Minhas mesas",
   "join": "Entrar na mesa",
-  "recentActivity": "Atividade Recente"
+  "recentActivity": "Atividade Recente",
+  "viewStartedTables": "Confira os jogos em andamento",
+  "viewGame": "Leia mais sobre este jogo",
+  "createTable": "Crie uma nova mesa",
+  "startedTables": "Jogos em andamento",
+  "openTables": "Jogos dos quais você pode participar",
+  "minMaxNumberOfPlayers": "{{cur}} jogadores - precisa de pelo menos <strong>{{min}}</strong> jogadores (no máximo <strong>{{max}}</strong>)",
+  "playerAtTableBadge": "Jogando",
+  "ownerOfTableBadge": "Hospedeiro"
 }
