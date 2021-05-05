@@ -154,9 +154,9 @@ export class TableService {
                   new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())),
                 concatMap(logEntries => from(logEntries)),
                 tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
-          }));
-      }),
-      shareReplay());
+          }),
+          shareReplay());
+      }));
 
     this.myActiveTables$ = combineLatest([
       this._refreshMyActiveTables.pipe(startWith(true)),// Always start with a value because of combineLatest
