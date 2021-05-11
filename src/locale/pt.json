@@ -136,10 +136,10 @@
     },
     "makePublic": "Abrir para qualquer pessoa",
     "makePrivate": "Deixar privado",
-    "type": "Jogo ao vivo",
+    "type": "Tipo",
     "types": {
-      "REALTIME": "Sim",
-      "TURN_BASED": "Não"
+      "REALTIME": "Ao Vivo",
+      "TURN_BASED": "Assíncrono"
     },
     "settings": "Mesa",
     "mode": "Modo",
@@ -264,7 +264,7 @@
   "viewGame": "Leia mais sobre este jogo",
   "createTable": "Crie uma nova mesa",
   "startedTables": "Jogos em andamento",
-  "openTables": "Jogos dos quais você pode participar",
+  "openTables": "Jogos dos quais vo"cê pode participar",
   "minMaxNumberOfPlayers": "{{cur}} jogadores - precisa de pelo menos <strong>{{min}}</strong> jogadores (no máximo <strong>{{max}}</strong>)",
   "playerAtTableBadge": "Jogando",
   "ownerOfTableBadge": "Hospedeiro"

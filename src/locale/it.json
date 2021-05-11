@@ -173,7 +173,20 @@
     "types": {
       "REALTIME": "Tempo reale",
       "TURN_BASED": "A turni"
-    }
+    },
+    "settings": "Tavolo",
+    "mode": "Modalità",
+    "modes": {
+      "NORMAL": "Normale",
+      "PRACTICE": "Allenamento"
+    },
+    "setMinMaxNumberOfPlayers": "Voglio giocare con questo numero di giocatori:",
+    "minNumberOfPlayers": "minimo",
+    "maxNumberOfPlayers": "massimo",
+    "autoStart": "Inizia in automatico quando ci sono abbastanza giocatori",
+    "emptySeat": "Posto libero",
+    "confirmJoinAutoStart": "Il tavolo è settato per <strong>partire automaticamente</strong> quando ci sono abbastanza giocatori. Se ti unisci al tavolo la partita inizierà in maniera automatica.<br/><br/>Sei sicuro di volerti unire a questo tavolo?",
+    "confirmJoinAndStart": "Unisciti e avvia"
   },
   "player": {
     "status": {
@@ -246,5 +259,13 @@
   "showMore": "Mostra altro",
   "startedAt": "cominciata il",
   "started": "cominciata",
-  "yourOtherTables": "Le mie partite"
+  "yourOtherTables": "Le mie partite",
+  "viewStartedTables": "Controlla partite in corso",
+  "viewGame": "Leggi di più su questo gioco",
+  "createTable": "Crea un nuovo tavolo",
+  "startedTables": "Partite in corso",
+  "openTables": "Partite a cui puoi unirti",
+  "minMaxNumberOfPlayers": "{{cur}} giocatori - sono necessari almeno <strong>{{min}}</strong> giocatori (massimo <strong>{{max}}</strong>)",
+  "playerAtTableBadge": "In gioco",
+  "ownerOfTableBadge": "Creatore"
 }
