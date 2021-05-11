@@ -264,7 +264,7 @@
   "viewGame": "Leia mais sobre este jogo",
   "createTable": "Crie uma nova mesa",
   "startedTables": "Jogos em andamento",
-  "openTables": "Jogos dos quais vo"cê pode participar",
+  "openTables": "Jogos dos quais você pode participar",
   "minMaxNumberOfPlayers": "{{cur}} jogadores - precisa de pelo menos <strong>{{min}}</strong> jogadores (no máximo <strong>{{max}}</strong>)",
   "playerAtTableBadge": "Jogando",
   "ownerOfTableBadge": "Hospedeiro"
