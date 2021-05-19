@@ -126,7 +126,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   private dialog: NgbModalRef;
 
-  private autoEndTurnTimer: Subscription;
+  autoEndTurnTimer: Subscription;
   autoEndTurnInSecs: number;
 
   @Input() table: Table;
@@ -279,4 +279,8 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  doUndo() {
+    this.stopAutoEndTurnTimer();
+    this.undo.emit();
+  }
 }

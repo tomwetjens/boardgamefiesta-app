@@ -3,7 +3,7 @@
                     [busy]="busy"
                     (skip)="skip.emit($event)"
                     (endTurn)="doEndTurn()"
-                    (undo)="undo.emit($event)">
+                    (undo)="doUndo()">
 </app-in-game-navbar>
 
 <div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
@@ -18,7 +18,7 @@
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
 
-    <span *ngIf="!actions?.length || actions?.length === 0">
+    <span *ngIf="autoEndTurnTimer">
       {{table.game + '.endTurn'|translate:{secs: autoEndTurnInSecs} }}
     </span>
   </div>
