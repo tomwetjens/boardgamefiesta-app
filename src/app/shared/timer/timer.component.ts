@@ -20,6 +20,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   private timer: Subscription;
 
+  hours: number;
   minutes: number;
   seconds: number;
 
@@ -30,9 +31,11 @@ export class TimerComponent implements OnInit, OnDestroy {
         const now = moment();
         if (now.isBefore(this.end)) {
           const duration = moment.duration(now.diff(moment(this.end)));
+          this.hours = -duration.hours();
           this.minutes = -duration.minutes();
           this.seconds = Math.abs(duration.seconds());
         } else {
+          this.hours = 0;
           this.minutes = 0;
           this.seconds = 0;
         }

@@ -1,15 +1,22 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Table} from '../model';
 import {AudioService} from "../../audio.service";
 import {TableService} from "../../table.service";
-import {Observable} from "rxjs";
+import {Observable, Subject, timer} from "rxjs";
+import moment from "moment";
+import {distinctUntilChanged, map, shareReplay, takeUntil} from "rxjs/operators";
+import {MessageDialogComponent} from "../message-dialog/message-dialog.component";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-in-game-navbar',
   templateUrl: './in-game-navbar.component.html',
   styleUrls: ['./in-game-navbar.component.scss']
 })
-export class InGameNavbarComponent implements OnInit {
+export class InGameNavbarComponent implements OnInit, OnDestroy {
+
+  private destroyed = new Subject();
 
   @Input() table: Table;
 
@@ -24,9 +31,11 @@ export class InGameNavbarComponent implements OnInit {
 
   connected$: Observable<boolean>;
 
+  canKick$: Observable<boolean>;
+
   constructor(private audioService: AudioService,
-              private tableService: TableService) {
-    this.connected$ = this.tableService.connected$;
+              private tableService: TableService,
+              private ngbModal: NgbModal) {
   }
 
   get muted(): boolean {
@@ -34,6 +43,26 @@ export class InGameNavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.connected$ = this.tableService.connected$;
+
+    this.canKick$ = timer(0, 1000)
+      .pipe(
+        takeUntil(this.destroyed),
+        map(() => {
+          if (this.table && this.table.players[this.table.currentPlayer]) {
+            const turnLimit = moment(this.table.players[this.table.currentPlayer].turnLimit);
+            const now = moment();
+            return now.isAfter(turnLimit);
+          }
+          return false;
+        }),
+        distinctUntilChanged(),
+        shareReplay(1)
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.next(true);
   }
 
   mute() {
@@ -42,5 +71,16 @@ export class InGameNavbarComponent implements OnInit {
 
   unmute() {
     this.audioService.unmute();
+  }
+
+  doKick() {
+    const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+    const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'confirmKick';
+    messageDialogComponent.confirmKey = 'kick';
+    messageDialogComponent.cancelKey = 'cancel';
+    fromPromise(ngbModalRef.result)
+      .subscribe(() => this.tableService.kick(this.table.id, this.table.currentPlayer).subscribe());
   }
 }

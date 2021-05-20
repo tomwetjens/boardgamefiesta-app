@@ -143,10 +143,14 @@
   "skip": "Skip",
   "undo": "Undo",
   "waitingFor": "Waiting for",
+  "invitedBy": "Invited by",
   "busy": "Table is being updated...",
   "computer": "Computer",
   "abandon": "Abandon",
   "join": "Join table",
+  "playerNotPlaying": "Is this player not responding?",
+  "kick": "Kick player",
+  "confirmKick": "Are you sure you want to kick this player from the game? This player will <strong>not</strong> be able to rejoin the table later!<br/><br/>The game will continue if there are still enough players left.",
   "leave": "Leave table",
   "connected": "Connected",
   "connecting": "Connecting...",
@@ -258,7 +262,8 @@
     "MUST_BE_OWNER": "You must be the host of this table.",
     "EMAIL_ALREADY_IN_USE": "There is already another user registered with this e-mail address.",
     "USERNAME_ALREADY_IN_USE": "This username is already taken.",
-    "NOT_FOUND": "The requested resource was not found."
+    "NOT_FOUND": "The requested resource was not found.",
+    "CANNOT_KICK": "The player cannot be kicked at this moment. Wait until sufficient time has passed to give the player a chance to respond."
   },
   "log": {
     "CREATE": "created a new table",

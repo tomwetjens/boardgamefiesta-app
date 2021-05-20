@@ -36,10 +36,16 @@
         <ng-container *ngIf="!busy">
           <span *ngIf="table.turn">
             {{'yourTurn'|translate}}
+            <app-timer [end]="table.players[table.currentPlayer].turnLimit"></app-timer>
           </span>
           <div *ngIf="!table.turn && table.currentPlayer">
             {{'waitingFor'|translate}}
             <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
+            <app-timer [end]="table.players[table.currentPlayer].turnLimit"></app-timer>
+            <span *ngIf="canKick$ | async">
+              {{'playerNotPlaying'|translate}}
+              <button class="btn btn-danger" (click)="doKick()">{{'kick'|translate}}</button>
+            </span>
           </div>
         </ng-container>
       </div>
@@ -59,7 +65,8 @@
           </svg>
         </button>
 
-        <app-connection-status [connected]="connected$ | async" class="d-none d-md-inline-block m-2"></app-connection-status>
+        <app-connection-status [connected]="connected$ | async"
+                               class="d-none d-md-inline-block m-2"></app-connection-status>
 
         <app-in-game-menu [table]="table"></app-in-game-menu>
       </div>

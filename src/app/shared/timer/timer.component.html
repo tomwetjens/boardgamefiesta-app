@@ -1,4 +1,11 @@
 <span class="text" [ngClass]="{
- blink: minutes <= 0 && seconds <= 0,
- danger: minutes <= 0 && seconds <= 30,
- warning: minutes <= 0 && seconds > 30}">{{minutes}}:{{seconds|number:'2.0-0'}}</span>
+ blink: hours <= 0 && minutes <= 0 && seconds <= 0,
+ danger: hours <= 0 && minutes <= 0 && seconds <= 30,
+ warning: hours <= 0 && minutes <= 0 && seconds > 30}">
+  <ng-container *ngIf="hours > 0">
+    {{hours}}:{{minutes|number:'2.0-0'}}:{{seconds|number:'2.0-0'}}
+  </ng-container>
+  <ng-container *ngIf="hours <= 0">
+  {{minutes}}:{{seconds|number:'2.0-0'}}
+  </ng-container>
+</span>
