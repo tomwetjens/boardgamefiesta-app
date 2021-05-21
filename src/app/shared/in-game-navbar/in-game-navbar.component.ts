@@ -49,7 +49,9 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroyed),
         map(() => {
-          if (this.table && this.table.players[this.table.currentPlayer]) {
+          if (this.table
+            && !!this.table.player // Not spectator
+            && this.table.players[this.table.currentPlayer]) {
             const turnLimit = moment(this.table.players[this.table.currentPlayer].turnLimit);
             const now = moment();
             return now.isAfter(turnLimit);
