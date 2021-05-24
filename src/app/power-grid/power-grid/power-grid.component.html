@@ -1,0 +1,17 @@
+<ng-container *ngIf="(table$ | async) as table">
+  <ng-container *ngIf="(state$ | async) as state">
+    <app-in-game-navbar [table]="table"
+                        [canSkip]="canSkip$ | async"
+                        [busy]="busy"
+                        (skip)="skip(table)"
+                        (endTurn)="endTurn(table)"
+                        (undo)="undo(table)">
+    </app-in-game-navbar>
+
+    <power-grid-board
+      [table]="table"
+      [state]="state"
+      (perform)="perform(table, $event)">
+    </power-grid-board>
+  </ng-container>
+</ng-container>

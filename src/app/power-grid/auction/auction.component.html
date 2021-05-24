@@ -1,0 +1,13 @@
+<p>
+  {{auction|json}}
+</p>
+<p>
+  <power-grid-power-plant [powerPlant]="auction.powerPlant"></power-grid-power-plant>
+</p>
+<div class="bid">
+  <power-grid-elektro [value]="bid"></power-grid-elektro>
+  <div *ngIf="bidding">
+    <power-grid-up-down [(value)]="bid" [min]="auction.bid"></power-grid-up-down>
+    <button class="btn btn-primary" (click)="placeBid()">{{'power-grid.placeBid'|translate}}</button>
+  </div>
+</div>

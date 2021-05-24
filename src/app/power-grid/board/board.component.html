@@ -1,0 +1,59 @@
+<power-grid-action-bar [table]="table"
+                       [state]="state"
+                       [(selectedAction)]="selectedAction">
+</power-grid-action-bar>
+
+<div class="row no-gutters">
+  <div class="col col-8">
+    <power-grid-auction *ngIf="state.auction"
+                        [auction]="state.auction"
+                        [bidding]="selectedAction === 'PLACE_BID'"
+                        (perform)="perform.emit($event)">
+    </power-grid-auction>
+
+    <power-grid-power-plant-market *ngIf="selectedAction == 'START_AUCTION'"
+                                   [powerPlantMarket]="state.powerPlantMarket"
+                                   [selectable]="selectedAction == 'START_AUCTION'"
+                                   (selectPowerPlant)="selectPowerPlant($event)">
+    </power-grid-power-plant-market>
+
+    <div class="row no-gutters">
+      <div class="col col-6">
+        <power-grid-player-order [playerOrder]="state.playerOrder" [table]="table"></power-grid-player-order>
+      </div>
+      <div class="col col-6 text-right">
+        <power-grid-connected-cities [state]="state" [table]="table"></power-grid-connected-cities>
+      </div>
+    </div>
+
+    <power-grid-map [table]="table"
+                    [state]="state"
+                    [selectedAction]="selectedAction"
+                    (perform)="perform.emit($event)">
+    </power-grid-map>
+
+    <power-grid-power-plant-market *ngIf="selectedAction != 'START_AUCTION'"
+                                   [powerPlantMarket]="state.powerPlantMarket"
+                                   (selectPowerPlant)="selectPowerPlant($event)">
+    </power-grid-power-plant-market>
+
+    <power-grid-resource-market [resourceMarket]="state.resourceMarket">
+    </power-grid-resource-market>
+  </div>
+  <div class="col col-4">
+    <power-grid-player *ngIf="table.player"
+                       [table]="table"
+                       [player]="table.players[table.player]"
+                       [playerState]="state.playerStates[table.player]"
+                       [selectedAction]="selectedAction"
+                       (perform)="perform.emit($event)">
+    </power-grid-player>
+
+    <div *ngFor="let playerId of table.otherPlayers">
+      <power-grid-player [table]="table"
+                         [player]="table.players[playerId]"
+                         [playerState]="state.playerStates[playerId]">
+      </power-grid-player>
+    </div>
+  </div>
+</div>

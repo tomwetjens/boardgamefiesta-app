@@ -1,0 +1,30 @@
+:host {
+  display: inline-block;
+
+  margin: 8px 8px 0 0;
+  padding: 4px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+ol {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+
+    border: 1px solid black;
+    border-radius: 8px;
+
+    padding: 2px;
+    margin: 2px;
+
+    power-grid-player-house {
+      width: 48px;
+      height: 32px;
+    }
+  }
+}

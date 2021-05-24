@@ -1,0 +1,5 @@
+<div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
+  <span *ngIf="table.turn && selectedAction" class="instruction">
+    {{'power-grid.instruction.' + selectedAction | translate}}
+  </span>
+</div>

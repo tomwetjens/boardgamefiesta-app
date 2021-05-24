@@ -1,0 +1,8 @@
+<div class="inner">
+  <span class="cost">{{powerPlant.cost}}</span>
+  <div class="bar" [class]="icon">
+    <span class="icon" *ngFor="let i of [].constructor(powerPlant.requires)" [class]="icon"></span>
+    <span class="arrow"></span>
+    <span class="powers">{{powerPlant.powers}}</span>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.COAL, .OIL, .BIO_MASS, .URANIUM {
+  border-width: 1px;
+  border-radius: 4px;
+}
+
+.COAL {
+  background-color: saddlebrown;
+}
+
+.OIL {
+  background-color: darkgrey;
+}
+
+.BIO_MASS {
+  background-color: darkkhaki;
+}
+
+.URANIUM {
+  background-color: indianred;
+}
+
+.square:before{
+  content: "";
+  display: block;
+  padding-top: 100%;  /* initial ratio of 1:1*/
+}
+
+.cost {
+  width: 24px;
+  height: 24px;
+  background-color: darkgoldenrod;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+}

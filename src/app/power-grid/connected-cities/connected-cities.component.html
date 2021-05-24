@@ -1,0 +1,10 @@
+<ol>
+  <ng-container *ngFor="let _ of [].constructor(21); index as i">
+    <li>
+      {{i}}
+      <ng-container *ngFor="let entry of connected | keyvalue">
+        <power-grid-player-house *ngIf="entry.value === i + 1" [player]="table.players[entry.key]"></power-grid-player-house>
+      </ng-container>
+    </li>
+  </ng-container>
+</ol>

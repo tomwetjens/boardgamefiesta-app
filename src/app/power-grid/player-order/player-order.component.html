@@ -1,0 +1,9 @@
+<span class="bulb-large"></span>
+<ol>
+  <ng-container *ngFor="let playerId of playerOrder">
+    <li *ngIf="table.players[playerId] as player">
+      <power-grid-player-house [player]="player"></power-grid-player-house>
+    </li>
+  </ng-container>
+</ol>
+<span class="bulb-small"></span>

@@ -1,0 +1,22 @@
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline;
+    list-style-type: none;
+
+    &.selectable {
+      power-grid-power-plant {
+        cursor: pointer;
+
+        border: 3px solid #ffffff;
+
+        &:hover {
+          border: 3px solid #000000;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,46 @@
+<div class="row spaces">
+  <div class="col col-1 space" *ngFor="let i of [].constructor(8); index as spaceIndex">
+    <div class="row">
+      <div class="col col-4 COAL square" *ngFor="let j of [].constructor(3); index as spotIndex">
+        {{resourceMarket.available['COAL'] > (7 - spaceIndex) * 3 + (2 - spotIndex) ? '1' : '0'}}
+      </div>
+      <div class="cost">{{spaceIndex + 1}}</div>
+    </div>
+    <div class="row">
+      <div class="col col-3 OIL square" *ngFor="let j of [].constructor(3); index as spotIndex">
+        {{resourceMarket.available['OIL'] > (7 - spaceIndex) * 3 + (2 - spotIndex) ? '1' : '0'}}
+      </div>
+      <div class="col col-3 URANIUM square">
+        {{resourceMarket.available['URANIUM'] >= 4 + (8 - spaceIndex) ? '1' : '0'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-4 BIO_MASS square" *ngFor="let j of [].constructor(3); index as spotIndex">
+        {{resourceMarket.available['BIO_MASS'] > (7 - spaceIndex) * 3 + (2 - spotIndex) ? '1' : '0'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col col-1 space">
+    <div class="row">
+      <div class="col-6 URANIUM square">
+        <div class="cost">10</div>
+        {{resourceMarket.available['URANIUM'] >= 4 ? '1' : '0'}}
+      </div>
+      <div class="col-6 URANIUM square">
+        <div class="cost">12</div>
+        {{resourceMarket.available['URANIUM'] >= 3 ? '1' : '0'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 URANIUM square">
+        <div class="cost">14</div>
+        {{resourceMarket.available['URANIUM'] >= 2 ? '1' : '0'}}
+      </div>
+      <div class="col-6 URANIUM square">
+        <div class="cost">16</div>
+        {{resourceMarket.available['URANIUM'] >= 1 ? '1' : ''}}
+      </div>
+    </div>
+  </div>
+</div>

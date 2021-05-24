@@ -1,0 +1,10 @@
+{
+  "power-grid": {
+    "instruction": {
+      "PLACE_BID": "Place a bid for the Power Plant",
+      "REMOVE_POWER_PLANT": "Remove one of your power plants",
+      "START_AUCTION": "Choose a Power Plant to start auction"
+    },
+    "placeBid": "Place bid"
+  }
+}

@@ -1,0 +1,21 @@
+<app-in-game-player [table]="table"
+                    [player]="player">
+  <header>
+    <span class="balance"
+          ngbPopover="{{'power-grid.popover.balance'|translate}}"
+          triggers="mouseenter:mouseleave"
+          container="body">
+      <power-grid-elektro [value]="playerState.balance"></power-grid-elektro>
+    </span>
+  </header>
+  <main>
+    <ul class="powerPlants">
+      <li *ngFor="let powerPlantState of playerState.powerPlants">
+        <power-grid-power-plant [powerPlant]="powerPlantState.powerPlant"
+                                [ngClass]="{selectable:canSelectPowerPlant(powerPlantState)}"
+                                (click)="selectPowerPlant(powerPlantState)">
+        </power-grid-power-plant>
+      </li>
+    </ul>
+  </main>
+</app-in-game-player>

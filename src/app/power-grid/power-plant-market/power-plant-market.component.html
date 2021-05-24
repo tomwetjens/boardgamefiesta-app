@@ -1,0 +1,15 @@
+<ul class="actual">
+  <li *ngFor="let powerPlant of powerPlantMarket.actual"
+      [ngClass]="{selectable:this.selectable}">
+    <power-grid-power-plant [powerPlant]="powerPlant"
+                            (click)="selectPowerPlant.emit(powerPlant)">
+    </power-grid-power-plant>
+  </li>
+</ul>
+
+<ul class="future">
+  <li *ngFor="let powerPlant of powerPlantMarket.future">
+    <power-grid-power-plant [powerPlant]="powerPlant">
+    </power-grid-power-plant>
+  </li>
+</ul>
