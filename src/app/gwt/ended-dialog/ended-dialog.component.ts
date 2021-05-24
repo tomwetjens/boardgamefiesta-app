@@ -9,7 +9,6 @@ import {takeUntil} from "rxjs/operators";
 
 interface Column {
   player: TablePlayer;
-  winner: boolean;
   total: number;
 }
 
@@ -62,7 +61,6 @@ export class EndedDialogComponent implements OnInit, OnDestroy, OnChanges {
       .filter(player => !!player)
       .map(playerState => ({
         player: this.table.players[playerState.player.name],
-        winner: playerState.winner,
         total: playerState.score.total
       }));
   }

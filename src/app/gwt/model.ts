@@ -282,7 +282,6 @@ export interface PlayerState {
   readonly teepees: Teepee[];
   readonly objectives: Objective[];
   readonly score?: Score;
-  readonly winner?: boolean;
   readonly exchangeTokens?: number;
   readonly branchlets?: number;
   readonly automaState?: AutomaState;
