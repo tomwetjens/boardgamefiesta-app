@@ -25,9 +25,10 @@
   },
   "games": "Games",
   "game": {
-    "istanbul": {
-      "name": "Istanbul",
-      "description": "Het is een drukte van belang op de bazaar in Istanbul. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!"
+    "big-bazar": {
+      "name": "Big Bazar",
+      "summary": "Send your assistants through the shops of Big Bazar as you race to acquire rubies.",
+      "description": "There's hustle and bustle at Big Bazar as merchants and their assistants rush through the narrow alleys in their attempt to be more successful than their competitors. Everything must be well organized: wheelbarrows must be filled with goods at the warehouses, then swiftly transported by the assistants to various destinations. Your goal? Be the first merchant to collect a certain number of rubies."
     },
     "gwt": {
       "name": "Ranchers Of The Old West",
@@ -276,6 +277,10 @@
     "LEFT": "left the table",
     "PROPOSED_TO_LEAVE": "proposes to leave the table together",
     "AGREED_TO_LEAVE": "agrees to leave the table",
-    "UNDO": "undoes the previous action"
+    "UNDO": "undoes the previous action",
+    "SKIP": "skips an action",
+    "BEGIN_TURN": "begins turn",
+    "END_TURN": "ends turn",
+    "END": "ended the game"
   }
 }

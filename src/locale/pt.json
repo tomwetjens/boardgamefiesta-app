@@ -101,6 +101,9 @@
   "busy": "A tabela está sendo atualizada...",
   "computer": "Computador",
   "abandon": "Abandonar",
+  "playerNotPlaying": "Este jogador não está respondendo?",
+  "kick": "Expulsar jogador",
+  "confirmKick": "Tem certeza de que deseja expulsar este jogador do jogo? Este jogador <strong>não</strong> poderá voltar à mesa mais tarde!<br/><br/>O jogo continuará se ainda houver jogadores",
   "leave": "Sair da mesa",
   "connected": "Conectado",
   "connecting": "Conectando...",
@@ -203,7 +206,8 @@
     "MUST_BE_OWNER": "Você deve ser o dono dessa mesa.",
     "EMAIL_ALREADY_IN_USE": "Já existe outro usuário cadastrado com este endereço de e-mail.",
     "USERNAME_ALREADY_IN_USE": "Este nome de usuário já está em uso.",
-    "NOT_FOUND": "O recurso solicitado não foi encontrado."
+    "NOT_FOUND": "O recurso solicitado não foi encontrado.",
+    "CANNOT_KICK": "O jogador não pode ser expulso neste momento. Espere até que tenha passado tempo suficiente para dar ao jogador a chance de responder."
   },
   "log": {
     "CREATE": "criou uma nova tabela",
@@ -216,7 +220,11 @@
     "PROPOSED_TO_LEAVE": "propõe para sairmos juntos da mesa",
     "AGREED_TO_LEAVE": "concorda em sair da mesa",
     "UNDO": "desfaz a ação anterior",
-    "JOIN": "entrou na mesa"
+    "JOIN": "entrou na mesa",
+    "SKIP": "pula uma ação",
+    "BEGIN_TURN": "começa o turno",
+    "END_TURN": "termina o turno",
+    "END": "termina o jogo"
   },
   "changeUsernameDialog": {
     "title": "Alterar nome de usuário",

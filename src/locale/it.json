@@ -20,9 +20,9 @@
   },
   "games": "Games",
   "game": {
-    "istanbul": {
-      "name": "Istanbul",
-      "description": "Het is een drukte van belang op de bazaar in Istanbul. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!"
+    "big-bazar": {
+      "name": "BigBazar",
+      "description": "Het is een drukte van belang op de bazaar in BigBazar. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!"
     },
     "gwt": {
       "name": "Ranchers Of The Old West",
@@ -133,6 +133,9 @@
   "computer": "Computer",
   "abandon": "Abbandona",
   "join": "Unisiciti al tavolo",
+  "playerNotPlaying": "Il giocatore non sta muovendo?",
+  "kick": "Espelli giocatore",
+  "confirmKick": "Sei sicuro di volere espellere questo giocatore dalla partita? Questo giocatore <strong>non</strong> potrà più riunirsi al tavolo successivamente!<br/><br/>La partita continuerà se c'è ancora un numero sufficiente di giocatori al tavolo.",
   "leave": "Lascia il tavolo",
   "connected": "Connesso",
   "connecting": "Connessione in corso...",
@@ -236,7 +239,8 @@
     "MUST_BE_OWNER": "Devi essere il creatore del tavolo.",
     "EMAIL_ALREADY_IN_USE": "Esiste già un utente registrato con questo indirizzo e-mail.",
     "USERNAME_ALREADY_IN_USE": "Questo nome utente non è disponibile.",
-    "NOT_FOUND": "La risorsa richeista non è stata trovata."
+    "NOT_FOUND": "La risorsa richeista non è stata trovata.",
+    "CANNOT_KICK": "Il giocatore non può essere espulso al momento. Aspetta che passi un tempo sufficiente per far sì che il giocatore risponda."
   },
   "log": {
     "CREATE": "ha creato un nuovo tavolo",
@@ -249,7 +253,11 @@
     "LEFT": "ha lasciato il tavolo",
     "PROPOSED_TO_LEAVE": "ha proposto di lasciare il tavolo insieme",
     "AGREED_TO_LEAVE": "è d'accordo a lasciare il tavolo",
-    "UNDO": "annulla la mossa precedente"
+    "UNDO": "annulla la mossa precedente",
+    "SKIP": "salta un'azione",
+    "BEGIN_TURN": "inizia il turno",
+    "END_TURN": "termina il turno",
+    "END": "termina la partita"
   },
   "changeUsernameDialog": {
     "title": "Cambia nome utente",
