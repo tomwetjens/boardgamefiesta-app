@@ -1,17 +1,29 @@
 {
   "big-bazar": {
-    "name": "De Grote Bazaar",
-    "description": "Het is een drukte van belang op de grote bazaar. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!",
+    "endedDialog": "Het is afgelopen!",
+    "lira": "Lira",
     "sellGoodsDialog": "Verkoop handelswaren",
     "sellGoodsSelect": "Selecteer de handelswaren die je wilt verkopen:",
     "sellGoodsReward": "Deze handelswaren leveren je {{reward}} Lira op.",
     "sellGoodsConfirm": "Verkoop",
     "sellGoodsBonusCard": "Of je kunt een bonuskaart spelen om willekeurige handelswaren te verkopen:",
     "sellGoodsConfirmBonusCard": "Speel bonuskaart en verkoop",
+    "caravansaryConfirmDialog": "Neem 2 bonuskaarten",
+    "caravansaryConfirmMessage": "Trek 2 van de stapel of neem de bovenste 2 van de Karavaanserai?",
+    "takeFromDiscardPile": "Neem van Karavaanserai",
+    "takeFromDrawStack": "Trek van de stapel",
     "guessDialog": "Gok een nummer",
     "guessSelect": "Selecteer een nummer om te gokken:",
     "confirmActionRequiringBonusCard": "Deze actie vereist dat je een bonuskaart speelt. Weet je het zeker?",
     "perform": "Actie uitvoeren",
+    "familyMember": "Familielid",
+    "merchant": "Handelaar",
+    "dummy": "Dummy",
+    "smuggler": "Smokkelaar",
+    "governor": "Gouverneur",
+    "bonusCard": "Bonuskaart",
+    "noActionsLeft": "Er zijn geen acties meer die je kunt uitvoeren. Beëindig je beurt als je klaar bent.",
+    "computerExplanation": "(BETA) Ik verplaats alleen en beëindig beurt voor nu, sorry!",
     "places": {
       "1": "Wagenmaker",
       "2": "Zijde Pakhuis",
@@ -30,12 +42,31 @@
       "15": "Grote Moskee",
       "16": "Juwelier"
     },
+    "mosqueTile": {
+      "EXTRA_ASSISTANT": "5e (extra) assistent",
+      "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Betaal 2 Lira voor 1 handelswaar",
+      "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Betaal 2 Lira om een assistent terug te nemen",
+      "TURN_OR_REROLL_DICE": "Draai een dobbelsteen naar 4 of gooi opnieuw"
+    },
+    "option": {
+      "layoutType": {
+        "label": "Rangschikking",
+        "value": {
+          "IN_ORDER": "Op volgorde",
+          "LONG_PATHS": "Lange paden",
+          "RANDOM": "Willekeurig",
+          "SHORT_PATHS": "Korte paden"
+        }
+      }
+    },
     "actions": {
       "instructions": {
         "DISCARD_BONUS_CARD": "Selecteer een bonuskaart om af te leggen",
         "MOVE": "Selecteer een locatie om je handelaar naartoe te verplaatsen",
         "SEND_FAMILY_MEMBER": "Selecteer een locatie om je familielid naartoe te sturen",
-        "TAKE_MOSQUE_TILE": "Selecteer een moskeetegel"
+        "TAKE_MOSQUE_TILE": "Selecteer een moskeetegel",
+        "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Selecteer een locatie om je assistent van terug te nemen",
+        "RETURN_1_ASSISTANT": "Selecteer een locatie om je assistent van terug te nemen"
       },
       "buttons": {
         "BONUS_CARD_BUY_RUBY": "Speel bonuskaart om nog een robijn te kunnen kopen",
@@ -55,6 +86,7 @@
         "MAX_FABRIC": "Max zijde",
         "MAX_FRUIT": "Max fruit",
         "MAX_SPICE": "Max specerijen",
+        "MOVE": "Verplaats handelaar",
         "PAY_1_FABRIC": "Betaal 1 zijde",
         "PAY_1_FRUIT": "Betaal 1 fruit",
         "PAY_1_SPICE": "Betaal 1 specerij",
@@ -63,6 +95,7 @@
         "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Betaal 2 Lira voor 1 extra handelswaar",
         "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Betaal 2 Lira om assistant terug te nemen",
         "PAY_OTHER_MERCHANTS": "Betaal andere handelaren",
+        "RETURN_1_ASSISTANT": "Neem 1 assistent terug",
         "RETURN_ALL_ASSISTANTS": "Neem alle assistanten terug",
         "ROLL_FOR_BLUE_GOODS": "Rol de dobbelsteen",
         "SELL_GOODS": "Verkoop handelswaren",
@@ -102,6 +135,7 @@
         "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Betaal 2 Lira voor 1 extra handelswaar",
         "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Betaal 2 Lira om assistant terug te nemen",
         "PAY_OTHER_MERCHANTS": "Betaal andere handelaren",
+        "RETURN_1_ASSISTANT": "Neem 1 assistent terug",
         "RETURN_ALL_ASSISTANTS": "Neem alle assistanten terug",
         "ROLL_FOR_BLUE_GOODS": "Rol de dobbelsteen",
         "SELL_GOODS": "Verkoop handelswaren",
@@ -141,6 +175,69 @@
       "NO_RUBY_AVAILABLE": "Er is geen robijn meer beschikbaar op deze locatie.",
       "NO_BONUS_CARD_AVAILABLE": "Er is geen bonuskaart beschikbaar.",
       "DOESNT_HAVE_BONUS_CARD": "Je hebt niet de vereiste bonuskaart."
+    },
+    "log": {
+      "MOVE": "verplaatst handelaar naar <strong>{{value1}}</strong>",
+      "LEAVE_ASSISTANT": "laat een assistent achter",
+      "TAKE_GOODS": "neemt <strong>{{value1}}</strong> {{value2}}",
+      "ROLL_FOR_BLUE": "rolt <strong>{{value1}}</strong> en neemt <strong>{{value2}}</strong> blauwe handelswaren",
+      "GAIN_LIRA": "ontvangt <strong>{{value1}}</strong> Lira",
+      "GUESSED": "gokt <strong>{{value1}}</strong>",
+      "ROLLED": "rolt <strong>{{value1}}</strong> en <strong>{{value2}}</strong>",
+      "TURNED_DIE": "gebruikt een moskeetegel om een dobbelsteen te draaien",
+      "PICK_UP_ASSISTANT": "neemt een assistent terug",
+      "FAMILY_MEMBER_TO_POLICE_STATION": "plaatst familielid op <strong>Politiebureau</strong>",
+      "TAKE_BONUS_CARD": "trekt een bonuskaart",
+      "GAIN_BONUS_CARD": "neemt een bonuskaart: <strong>{{value1}}</strong>",
+      "PAY_GOODS": "betaalt <strong>{{value1}}</strong> {{value2}}",
+      "MUST_PAY_OTHER_MERCHANTS": "moet andere handelaren betalen",
+      "PAY_OTHER_PLAYER": "betaalt {{value1}} Lira aan <strong>{{value2}}</strong>",
+      "PAY_LIRA": "betaalt {{value1}} Lira",
+      "MOVE_DUMMY": "verplaatst <strong class=\"{{value1}}\">dummy handelaar</strong> naar <strong>{{value2}}</strong>",
+      "USE_GOVERNOR": "gebruikt de gouverneur",
+      "MOVE_GOVERNOR": "verplaatst de gouverneur naar <strong>{{value1}}</strong>",
+      "USE_SMUGGLER": "gebruikt de smokkelaar",
+      "MOVE_SMUGGLER": "verplaatst de smokkelaar naar <strong>{{value1}}</strong>",
+      "TAKE_MOSQUE_TILE": "neemt een moskeetegel: <strong>{{value1}}</strong>",
+      "BUY_WHEELBARROW_EXTENSION": "koopt karuitbreiding <strong>#{{value2}}</strong> voor {{value1}} Lira",
+      "MAX_GOODS": "ontvangt <strong>max</strong> {{value1}} ({{value2}})",
+      "MAY_PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "mag 2 Lira betalen voor 1 extra handelswaar",
+      "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "betaalt 2 Lira voor 1 extra handelswaar",
+      "PAY_2_LIRA_TO_RETURN_ASSISTANT": "betaalt 2 Lira om een assistent terug te nemen",
+      "MAY_USE_GEMSTONE_DEALER_2X": "mag de <strong>Juwelier</strong> nog een keer gebruiken",
+      "MAY_USE_POSTOFFICE_2X": "mag het <strong>Postkantoor</strong> nog een keer gebruiken",
+      "MAY_CATCH_FAMILY_MEMBER": "moet een familielid arresteren",
+      "CATCH_FAMILY_MEMBER": "arresteert familielid van <strong>{{value1}}</strong>",
+      "DISCARD_BONUS_CARD": "legt bonuskaart af: <strong>{{value1}}</strong>",
+      "RETURN_ALL_ASSISTANTS": "neemt alle assistenten terug",
+      "SELL_GOODS": "verkoopt <strong>{{value1}}</strong> {{value2}}",
+      "SEND_FAMILY_MEMBER": "stuurt familielid naar <strong>{{value1}}</strong>",
+      "MAY_DELIVER_TO_SULTAN_2X": "mag nog een keer handelswaar leveren aan Sultan",
+      "BUY_RUBY": "koopt een robijn voor <strong>{{value1}}</strong> Lira",
+      "PLAY_BONUS_CARD": "speelt bonuskaart: <strong>{{value1}}</strong>",
+      "LAST_ROUND": "start de laatste ronde",
+      "PLAY_LEFTOVER_BONUS_CARDS": "iedereen mag overgebleven bonuskaarten spelen",
+      "GAIN_RUBY_FROM_MOSQUE": "ontvangt 1 robijn van de moskee",
+      "value": {
+        "FABRIC": "Zijde",
+        "FRUIT": "Fruit",
+        "SPICE": "Specerijen",
+        "BLUE": "Blauwe handelswaar",
+        "EXTRA_ASSISTANT": "5e (extra) assistent",
+        "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Betaal 2 Lira voor 1 extra handelswaar",
+        "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Betaal 2 Lira om een assistent terug te nemen",
+        "TURN_OR_REROLL_DICE": "Draai een dobbelsteen naar 4 of gooi opnieuw",
+        "FAMILY_MEMBER_TO_POLICE_STATION": "Plaats familielid op Politiebureau",
+        "GAIN_1_GOOD": "Neem 1 handelswaar",
+        "GEMSTONE_DEALER_2X": "Gebruik Juwelier 2x",
+        "MOVE_0": "Verplaats handelaar 0 stappen",
+        "MOVE_3_OR_4": "Verplaats handelaar 3 of 4 stappen",
+        "POST_OFFICE_2X": "Gebruik het Postkantoor 2x",
+        "RETURN_1_ASSISTANT": "Neem 1 assistent terug",
+        "SMALL_MARKET_ANY_GOOD": "Verkoop willekeurige handelswaren op de Kleine Markt",
+        "SULTAN_2X": "Lever 2x handelswaren aan de Sultan",
+        "TAKE_5_LIRA": "Ontvang 5 Lira"
+      }
     }
   }
 }

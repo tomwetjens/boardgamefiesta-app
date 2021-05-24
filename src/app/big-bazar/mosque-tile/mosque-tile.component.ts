@@ -2,7 +2,7 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {MosqueTile} from "../model";
 
 @Component({
-  selector: 'app-mosque-tile',
+  selector: 'big-bazar-mosque-tile',
   templateUrl: './mosque-tile.component.html',
   styleUrls: ['./mosque-tile.component.scss']
 })

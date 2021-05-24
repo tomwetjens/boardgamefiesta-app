@@ -6,9 +6,7 @@
 </div>
 <div class="modal-body">
   <p [innerHTML]="'big-bazar.confirmActionRequiringBonusCard'|translate"></p>
-  <img src="/assets/games/big-bazar/bonus/{{bonusCard}}.png" class="bonus-card"
-       alt="{{'big-bazar.bonusCards.' + bonusCard|translate}}"
-       title="{{'big-bazar.bonusCards.' + bonusCard|translate}}"/>
+  <big-bazar-bonus-card [bonusCard]="bonusCard"></big-bazar-bonus-card>
 </div>
 <div class="modal-footer">
   <button (click)="ngbActiveModal.close()" class="btn btn-primary">

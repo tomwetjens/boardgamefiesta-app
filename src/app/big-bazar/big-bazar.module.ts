@@ -20,6 +20,10 @@ import { MosqueTileComponent } from './mosque-tile/mosque-tile.component';
 import { MosqueTilePopoverComponent } from './mosque-tile-popover/mosque-tile-popover.component';
 import { PlayerComponent } from './player/player.component';
 import { ConfirmBonusCardDialogComponent } from './confirm-bonus-card-dialog/confirm-bonus-card-dialog.component';
+import { BonusCardComponent } from './bonus-card/bonus-card.component';
+import { BonusCardPopoverComponent } from './bonus-card-popover/bonus-card-popover.component';
+import { BonusCardDeckComponent } from './bonus-card-deck/bonus-card-deck.component';
+import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
 
 const routes: Routes = [
   {
@@ -40,7 +44,11 @@ const routes: Routes = [
     MosqueTileComponent,
     MosqueTilePopoverComponent,
     PlayerComponent,
-    ConfirmBonusCardDialogComponent
+    ConfirmBonusCardDialogComponent,
+    BonusCardComponent,
+    BonusCardPopoverComponent,
+    BonusCardDeckComponent,
+    EndedDialogComponent
   ],
   imports: [
     CommonModule,

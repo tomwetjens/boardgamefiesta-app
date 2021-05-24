@@ -103,6 +103,7 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
       case Action.SEND_FAMILY_MEMBER:
       case Action.TAKE_MOSQUE_TILE:
       case Action.PAY_2_LIRA_TO_RETURN_ASSISTANT:
+      case Action.RETURN_1_ASSISTANT:
         this.selectedAction = action as Action;
         // Something becomes selectable
         break;

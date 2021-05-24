@@ -1,10 +1,15 @@
 :host {
+  display: inline-block;
+
   background-size: cover;
   background-repeat: no-repeat;
 
   border-radius: 4px;
 
   margin: 2px;
+
+  width: 150px;
+  height: 150px;
 
   &.EXTRA_ASSISTANT {
     background-image: url(../../../assets/games/big-bazar/mosque/blue2.png);

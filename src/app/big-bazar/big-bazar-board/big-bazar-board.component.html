@@ -9,6 +9,7 @@
             container="body">
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
+    <span *ngIf="!state.actions?.length">{{'big-bazar.noActionsLeft'|translate}}</span>
   </div>
 
   <p *ngIf="table.turn && selectedAction" class="instruction">
@@ -114,6 +115,10 @@
             <rect rx="20" ry="20" width="800" height="537"/>
           </clipPath>
 
+          <clipPath id="bonusCardClip">
+            <rect rx="20" ry="20" width="400" height="248"/>
+          </clipPath>
+
           <clipPath id="merchantClip">
             <circle r="40" cx="0" cy="0"/>
           </clipPath>
@@ -160,10 +165,26 @@
                 </g>
               </g>
 
+              <g *ngSwitchCase="6">
+                <!-- Caravansary -->
+                <g transform="translate(324, 188)">
+                  <text font-size="40" font-weight="bold" text-anchor="middle">{{place.discardPile?.length}}x</text>
+                </g>
+
+                <g transform="translate(124, 218)">
+                  <g *ngFor="let bonusCard of place.discardPile; index as index">
+                    <image [attr.href]="'/assets/games/big-bazar/bonus/' + bonusCard + '.png'"
+                           width="400" height="248"
+                           clip-path="url(#bonusCardClip)"
+                           filter="url(#dropShadow)"></image>
+                  </g>
+                </g>
+              </g>
+
               <g *ngSwitchCase="10">
                 <!-- Large market -->
                 <g transform="translate(175,170)" class="demand">
-                  <image href="/assets/games/big-bazar/market/large_market.jpg"
+                  <image href="/assets/games/big-bazar/market/large_market.png"
                          width="200"
                          height="300"></image>
 
@@ -179,7 +200,7 @@
               <g *ngSwitchCase="11">
                 <!-- Small market -->
                 <g transform="translate(175,170)" class="demand">
-                  <image href="/assets/games/big-bazar/market/small_market.jpg"
+                  <image href="/assets/games/big-bazar/market/small_market.png"
                          width="200"
                          height="300"></image>
 
@@ -381,6 +402,9 @@
           </g>
         </g>
       </svg>
+      <div>
+        <big-bazar-bonus-card-deck [size]="state.bonusCards"></big-bazar-bonus-card-deck>
+      </div>
     </div>
     <div class="col-2">
       <big-bazar-player *ngIf="table.player"
@@ -394,8 +418,7 @@
       <big-bazar-player *ngFor="let playerId of table.otherPlayers"
                         [player]="table.players[playerId]"
                         [table]="table"
-                        [state]="state"
-                        [summary]="true">
+                        [state]="state">
       </big-bazar-player>
 
       <app-log [table]="table"></app-log>

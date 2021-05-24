@@ -1,0 +1,24 @@
+:host {
+  display: inline-block;
+  position: relative;
+
+  width: 200px;
+  height: 124px;
+
+  background-image: url(../../../assets/games/big-bazar/bonus/back.png);
+}
+
+.size {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  width: 100%;
+
+  text-align: center;
+  vertical-align: middle;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  color: #ffffff;
+}

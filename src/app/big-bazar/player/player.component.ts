@@ -14,8 +14,6 @@ export class PlayerComponent implements OnInit {
   @Input() state: BigBazar;
   @Input() selectedAction: Action;
 
-  @Input() summary: boolean;
-
   @Output() perform = new EventEmitter<any>();
 
   goodsTypes: GoodsType[] = Object.keys(GoodsType).map(key => key as GoodsType);

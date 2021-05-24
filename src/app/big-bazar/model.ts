@@ -75,6 +75,7 @@ export enum MosqueTile {
 export interface PlayerState {
   readonly name: string;
   readonly bonusCards?: BonusCard[];
+  readonly numberOfBonusCards: number;
   readonly rubies: number;
   readonly lira: number;
   readonly capacity: number;
@@ -113,6 +114,8 @@ export interface BigBazar {
   readonly actions: Action[];
   readonly turn: boolean;
   readonly players: { [color in PlayerColor]: PlayerState };
+  readonly bonusCards: number;
+  readonly maxRubies: number;
 }
 
 export enum LayoutType {
