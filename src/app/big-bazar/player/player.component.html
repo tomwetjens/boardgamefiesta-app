@@ -1,0 +1,74 @@
+<app-in-game-player *ngIf="state.players[player.color] as playerState"
+                    [player]="player"
+                    [table]="table">
+  <main>
+    <ng-container *ngIf="!summary">
+      <span class="lira">{{playerState.lira}}</span>
+
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 400 270"
+           style="width:100%">
+
+        <g class="goods">
+          <g *ngFor="let goodsType of goodsTypes; index as index"
+             [attr.transform]="'translate(0,' + (index * 50) + ')'">
+            <image *ngFor="let _ of [].constructor(playerState.capacity); index as index"
+                   [attr.href]="'/assets/games/big-bazar/market/' + goodsType.toLowerCase() + '.png'"
+                   [attr.x]="index * 50"
+                   class="good"
+                   [class]="{available: (playerState.goods[goodsType] || 0) > index}"
+                   width="40"
+                   height="40"></image>
+
+            <rect *ngFor="let _ of [].constructor(5 - playerState.capacity); index as index"
+                  width="40" height="40" rx="4" ry="4"
+                  stroke="white" stroke-width="1" fill="none"
+                  [attr.x]="(playerState.capacity + index) * 50"></rect>
+          </g>
+        </g>
+
+        <g class="rubies" transform="translate(0, 215)">
+          <image *ngFor="let _ of [].constructor(6); index as index"
+                 href="/assets/games/big-bazar/ruby.png"
+                 [attr.x]="index * 50"
+                 class="ruby"
+                 [class]="{available: playerState.rubies > index}"
+                 width="40"
+                 height="40"></image>
+        </g>
+      </svg>
+    </ng-container>
+
+    <ng-container *ngIf="summary">
+      <span class="lira">{{playerState.lira}}</span>
+      <span class="capacity">{{playerState.capacity}}/5</span>
+      <span *ngFor="let goodsType of goodsTypes" class="goods" [class]="goodsType">
+            {{playerState.goods[goodsType] || 0}}
+          </span>
+      <span class="rubies">{{playerState.rubies}}/6</span>
+    </ng-container>
+
+    <div *ngIf="playerState.mosqueTiles?.length" class="mosque-tiles">
+      <ng-container *ngFor="let mosqueTile of playerState.mosqueTiles">
+        <ng-template #popover>
+          <app-mosque-tile-popover [mosqueTile]="mosqueTile"></app-mosque-tile-popover>
+        </ng-template>
+        <app-mosque-tile [mosqueTile]="mosqueTile"
+                         [ngbPopover]="popover"
+                         triggers="mouseenter:mouseleave"
+                         container="body"></app-mosque-tile>
+      </ng-container>
+    </div>
+
+    <div *ngIf="playerState.bonusCards?.length" class="bonus-cards">
+      <button *ngFor="let bonusCard of playerState.bonusCards"
+              [disabled]="!canSelectBonusCard(bonusCard)"
+              class="btn"
+              (click)="selectBonusCard(bonusCard)">
+        <img src="/assets/games/big-bazar/bonus/{{bonusCard}}.png" class="bonus-card"
+             alt="{{'big-bazar.bonusCards.' + bonusCard|translate}}"
+             title="{{'big-bazar.bonusCards.' + bonusCard|translate}}"/>
+      </button>
+    </div>
+  </main>
+</app-in-game-player>

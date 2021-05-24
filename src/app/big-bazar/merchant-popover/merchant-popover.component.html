@@ -1,0 +1,3 @@
+<app-player-name *ngIf="player" [player]="player"></app-player-name>
+<strong *ngIf="!player" [class]="playerColor">{{'big-bazar.dummy'|translate}}</strong>
+{{'big-bazar.merchant'|translate}}

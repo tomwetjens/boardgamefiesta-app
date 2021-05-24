@@ -1,0 +1,24 @@
+:host {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  border-radius: 4px;
+
+  margin: 2px;
+
+  &.EXTRA_ASSISTANT {
+    background-image: url(../../../assets/games/big-bazar/mosque/blue2.png);
+  }
+
+  &.PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD {
+    background-image: url(../../../assets/games/big-bazar/mosque/spice2.png);
+  }
+
+  &.PAY_2_LIRA_TO_RETURN_ASSISTANT {
+    background-image: url(../../../assets/games/big-bazar/mosque/fruit2.png);
+  }
+
+  &.TURN_OR_REROLL_DICE {
+    background-image: url(../../../assets/games/big-bazar/mosque/fabric2.png);
+  }
+}

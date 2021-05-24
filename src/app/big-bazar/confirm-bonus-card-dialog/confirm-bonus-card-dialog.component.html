@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{('confirmDialog')|translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p [innerHTML]="'big-bazar.confirmActionRequiringBonusCard'|translate"></p>
+  <img src="/assets/games/big-bazar/bonus/{{bonusCard}}.png" class="bonus-card"
+       alt="{{'big-bazar.bonusCards.' + bonusCard|translate}}"
+       title="{{'big-bazar.bonusCards.' + bonusCard|translate}}"/>
+</div>
+<div class="modal-footer">
+  <button (click)="ngbActiveModal.close()" class="btn btn-primary">
+    {{'big-bazar.perform'|translate}}
+  </button>
+  <button (click)="ngbActiveModal.dismiss()" class="btn btn-secondary">
+    {{'cancel'|translate}}
+  </button>
+</div>

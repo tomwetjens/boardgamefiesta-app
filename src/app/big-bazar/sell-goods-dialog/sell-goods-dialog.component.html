@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{'big-bazar.sellGoodsDialog'|translate}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>{{'big-bazar.sellGoodsSelect'|translate}}</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="btn-group btn-group-toggle goods">
+          <label *ngFor="let goodsType of market.demand; index as index"
+                 ngbButtonLabel
+                 class="btn btn-primary" [class]="goodsType">
+            <input type="checkbox" ngbButton [(ngModel)]="demandModel[index]" [disabled]="!canSelectDemand(index)">
+          </label>
+        </div>
+
+        <p>{{'big-bazar.sellGoodsReward'|translate:{reward: rewardForDemand} }}</p>
+
+        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:selectedGoods})"
+                [disabled]="rewardForDemand === 0">
+          {{'big-bazar.sellGoodsConfirm'|translate}}
+        </button>
+      </div>
+      <div class="col-6" *ngIf="hasAnyGoodBonusCard">
+        <p>{{'big-bazar.sellGoodsBonusCard'|translate}}</p>
+        <img class="bonus-card" src="/assets/games/big-bazar/bonus/SMALL_MARKET_ANY_GOOD.png"/>
+        <div *ngFor="let goodsType of goodsTypes"
+             class="btn-group btn-group-toggle goods" ngbRadioGroup>
+          <label *ngFor="let _ of [].constructor((playerState.goods[goodsType]||0)+1); index as index"
+                 ngbButtonLabel class="btn-primary" [class]="goodsType">
+            <input ngbButton type="radio" [value]="index"
+                   [checked]="anyGoodsModel[goodsType] === index"
+                   (click)="anyGoodsModel[goodsType] = index"
+                   [disabled]="numberOfSelectedAnyGoods === 5"> {{index}}
+          </label>
+        </div>
+
+        <p>{{'big-bazar.sellGoodsReward'|translate:{reward: rewardForAnyGoods} }}</p>
+
+        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:anyGoodsModel, bonusCard: bonusCard})"
+                [disabled]="rewardForAnyGoods === 0">
+          {{'big-bazar.sellGoodsConfirmBonusCard'|translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+</div>

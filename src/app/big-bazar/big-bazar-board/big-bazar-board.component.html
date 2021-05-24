@@ -1,0 +1,404 @@
+<div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
+  <div class="actions" *ngIf="table.turn && !selectedAction">
+    <button *ngFor="let action of state.actions"
+            class="btn btn-primary text-nowrap" (click)="selectAction(action)"
+            [disabled]="busy"
+            ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
+            placement="bottom"
+            triggers="mouseenter:mouseleave"
+            container="body">
+      {{table.game + '.actions.buttons.' + action|translate}}
+    </button>
+  </div>
+
+  <p *ngIf="table.turn && selectedAction" class="instruction">
+    <span>{{table.game + '.actions.instructions.' + selectedAction | translate}}</span>
+
+    <button *ngIf="state.actions.length > 1"
+            class="btn btn-primary"
+            (click)="selectedAction = null">
+      {{'cancel'|translate}}
+    </button>
+  </p>
+</div>
+
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-10">
+      <ng-template #governorPopover>
+        {{'big-bazar.governor'|translate}}
+      </ng-template>
+      <ng-template #smugglerPopover>
+        {{'big-bazar.smuggler'|translate}}
+      </ng-template>
+
+      <ng-template #merchantPopoverGREEN>
+        <app-merchant-popover [playerColor]="'GREEN'"
+                              [player]="table.players[state.players['GREEN']?.name]"
+                              [playerState]="state.players['GREEN']"></app-merchant-popover>
+      </ng-template>
+      <ng-template #merchantPopoverRED>
+        <app-merchant-popover [playerColor]="'RED'"
+                              [player]="table.players[state.players['RED']?.name]"
+                              [playerState]="state.players['RED']"></app-merchant-popover>
+      </ng-template>
+      <ng-template #merchantPopoverYELLOW>
+        <app-merchant-popover [playerColor]="'YELLOW'"
+                              [player]="table.players[state.players['YELLOW']?.name]"
+                              [playerState]="state.players['YELLOW']"></app-merchant-popover>
+      </ng-template>
+      <ng-template #merchantPopoverWHITE>
+        <app-merchant-popover [playerColor]="'WHITE'"
+                              [player]="table.players[state.players['WHITE']?.name]"
+                              [playerState]="state.players['WHITE']"></app-merchant-popover>
+      </ng-template>
+      <ng-template #merchantPopoverBLUE>
+        <app-merchant-popover [playerColor]="'BLUE'"
+                              [player]="table.players[state.players['BLUE']?.name]"
+                              [playerState]="state.players['BLUE']"></app-merchant-popover>
+      </ng-template>
+
+      <ng-template #assistantPopoverGREEN>
+        <app-assistant-popover [player]="table.players[state.players['GREEN']?.name]"
+                               [playerState]="state.players['GREEN']"></app-assistant-popover>
+      </ng-template>
+      <ng-template #assistantPopoverRED>
+        <app-assistant-popover [player]="table.players[state.players['RED']?.name]"
+                               [playerState]="state.players['RED']"></app-assistant-popover>
+      </ng-template>
+      <ng-template #assistantPopoverYELLOW>
+        <app-assistant-popover [player]="table.players[state.players['YELLOW']?.name]"
+                               [playerState]="state.players['YELLOW']"></app-assistant-popover>
+      </ng-template>
+      <ng-template #assistantPopoverWHITE>
+        <app-assistant-popover [player]="table.players[state.players['WHITE']?.name]"
+                               [playerState]="state.players['WHITE']"></app-assistant-popover>
+      </ng-template>
+      <ng-template #assistantPopoverBLUE>
+        <app-assistant-popover [player]="table.players[state.players['BLUE']?.name]"
+                               [playerState]="state.players['BLUE']"></app-assistant-popover>
+      </ng-template>
+
+      <ng-template #familyMemberPopoverGREEN>
+        <app-family-member-popover [player]="table.players[state.players['GREEN'].name]"
+                                   [playerState]="state.players['GREEN']"></app-family-member-popover>
+      </ng-template>
+      <ng-template #familyMemberPopoverRED>
+        <app-family-member-popover [player]="table.players[state.players['RED'].name]"
+                                   [playerState]="state.players['RED']"></app-family-member-popover>
+      </ng-template>
+      <ng-template #familyMemberPopoverYELLOW>
+        <app-family-member-popover [player]="table.players[state.players['YELLOW'].name]"
+                                   [playerState]="state.players['YELLOW']"></app-family-member-popover>
+      </ng-template>
+      <ng-template #familyMemberPopoverWHITE>
+        <app-family-member-popover [player]="table.players[state.players['WHITE'].name]"
+                                   [playerState]="state.players['WHITE']"></app-family-member-popover>
+      </ng-template>
+      <ng-template #familyMemberPopoverBLUE>
+        <app-family-member-popover [player]="table.players[state.players['BLUE'].name]"
+                                   [playerState]="state.players['BLUE']"></app-family-member-popover>
+      </ng-template>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 3300 2300"
+        style="width:100%">
+
+        <defs>
+          <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+            <feDropShadow dx="10" dy="10" stdDeviation="5"
+                          flood-color="black" flood-opacity="0.7"/>
+          </filter>
+
+          <clipPath id="placeClip">
+            <rect rx="20" ry="20" width="800" height="537"/>
+          </clipPath>
+
+          <clipPath id="merchantClip">
+            <circle r="40" cx="0" cy="0"/>
+          </clipPath>
+
+          <clipPath id="mosqueTileClip">
+            <rect rx="20" ry="20" width="270" height="270"/>
+          </clipPath>
+        </defs>
+
+        <g *ngFor="let places of state.layout; index as x"
+           [attr.transform]="'translate(' + (20 + x * 810) + ',0)'">
+
+          <g *ngFor="let place of places; index as y"
+             [attr.transform]="'translate(0,' + (20 + y * 547) + ')'"
+             class="place"
+             [ngClass]="{selectable:canSelectPlace(x, y)}"
+             (click)="selectPlace(x,y)"
+             filter="url(#dropShadow)">
+
+            <image [attr.href]="'/assets/games/big-bazar/places/' + place.number + '.png'"
+                   x="0"
+                   y="0"
+                   width="800"
+                   height="537"
+                   clip-path="url(#placeClip)"></image>
+
+            <text class="name" x="450" y="58"
+                  text-anchor="middle">{{'big-bazar.places.' + place.number|translate}}</text>
+
+            <g [ngSwitch]="place.number">
+              <g *ngSwitchCase="5">
+                <!-- Post Office -->
+                <g transform="translate(89, 316)">
+                  <rect *ngFor="let indicator of place.indicators; index as index"
+                        [attr.x]="index * 100"
+                        [attr.y]="indicator ? 98 : 0"
+                        stroke="black"
+                        stroke-width="2"
+                        rx="4" ry="4"
+                        fill="#DEB887"
+                        width="80"
+                        height="80">
+                  </rect>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="10">
+                <!-- Large market -->
+                <g transform="translate(175,170)" class="demand">
+                  <image href="/assets/games/big-bazar/market/large_market.jpg"
+                         width="200"
+                         height="300"></image>
+
+                  <image *ngFor="let goodsType of place.demand; index as index"
+                         [attr.href]="'/assets/games/big-bazar/market/' + goodsType.toLowerCase() + '.png'"
+                         width="70"
+                         height="70"
+                         [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
+                         [attr.y]="108 + Math.floor((index-1) / 2) * 75"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="11">
+                <!-- Small market -->
+                <g transform="translate(175,170)" class="demand">
+                  <image href="/assets/games/big-bazar/market/small_market.jpg"
+                         width="200"
+                         height="300"></image>
+
+                  <image *ngFor="let goodsType of place.demand; index as index"
+                         [attr.href]="'/assets/games/big-bazar/market/' + goodsType.toLowerCase() + '.png'"
+                         width="70"
+                         height="70"
+                         [attr.x]="index == 0 ? 62 : 24 + (index % 2) * 79"
+                         [attr.y]="108 + Math.floor((index-1) / 2) * 75"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="13">
+                <!-- Sultan's Palace -->
+                <g transform="translate(675,315)" class="rubies">
+                  <image *ngFor="let _ of [].constructor(11 - place.uncovered); index as index"
+                         href="/assets/games/big-bazar/ruby.png"
+                         width="80"
+                         height="80"
+                         [attr.x]="index < 2 ? 0 : (index < 9 ? (index - 1) * -91 : -638)"
+                         [attr.y]="index < 2 ? index * 92 : (index < 9 ? 96 : 96 - (index - 8) * 92)"
+                         filter="url(#dropShadow)"></image>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="14" class="mosque">
+                <!-- Small Mosque -->
+                <g transform="translate(160,185)">
+                  <image *ngIf="place.a"
+                         [attr.href]="'/assets/games/big-bazar/mosque/fabric' + place.a + '.png'"
+                         width="270"
+                         height="270"
+                         clip-path="url(#mosqueTileClip)"
+                         filter="url(#dropShadow)"></image>
+                  <rect width="270" height="270" rx="20" ry="20"
+                        [ngClass]="{selectable:canSelectMosqueTile('TURN_OR_REROLL_DICE')}"
+                        (click)="selectMosqueTile('TURN_OR_REROLL_DICE')"/>
+                  <g transform="translate(280,0)">
+                    <image *ngIf="place.b"
+                           [attr.href]="'/assets/games/big-bazar/mosque/spice' + place.b + '.png'"
+                           width="270"
+                           height="270"
+                           clip-path="url(#mosqueTileClip)"
+                           filter="url(#dropShadow)"></image>
+                    <rect width="270" height="270" rx="20" ry="20"
+                          [ngClass]="{selectable:canSelectMosqueTile('PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD')}"
+                          (click)="selectMosqueTile('PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD')"/>
+                  </g>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="15" class="mosque">
+                <!-- Great Mosque -->
+                <g transform="translate(160,185)">
+                  <image *ngIf="place.a"
+                         [attr.href]="'/assets/games/big-bazar/mosque/fruit' + place.a + '.png'"
+                         width="270"
+                         height="270"
+                         clip-path="url(#mosqueTileClip)"
+                         filter="url(#dropShadow)"></image>
+                  <rect width="270" height="270" rx="20" ry="20"
+                        [ngClass]="{selectable:canSelectMosqueTile('PAY_2_LIRA_TO_RETURN_ASSISTANT')}"
+                        (click)="selectMosqueTile('PAY_2_LIRA_TO_RETURN_ASSISTANT')"/>
+                  <g transform="translate(280,0)">
+                    <image *ngIf="place.b"
+                           [attr.href]="'/assets/games/big-bazar/mosque/blue' + place.b + '.png'"
+                           width="270"
+                           height="270"
+                           clip-path="url(#mosqueTileClip)"
+                           filter="url(#dropShadow)"></image>
+                    <rect width="270" height="270" rx="20" ry="20"
+                          [ngClass]="{selectable:canSelectMosqueTile('EXTRA_ASSISTANT')}"
+                          (click)="selectMosqueTile('EXTRA_ASSISTANT')"/>
+                  </g>
+                </g>
+              </g>
+
+              <g *ngSwitchCase="16">
+                <!-- Gemstone dealer -->
+                <g transform="translate(685,140)" class="rubies">
+                  <image *ngFor="let _ of [].constructor(24 - place.cost); index as index"
+                         href="/assets/games/big-bazar/ruby.png"
+                         width="80"
+                         height="80"
+                         [attr.x]="index < 4 ? 0 : (index < 10 ? (index - 3) * -92 : -650)"
+                         [attr.y]="index < 4 ? index * 92 : (index < 10 ? 270 : 270 - (index - 10) * 92)"
+                         filter="url(#dropShadow)"></image>
+                </g>
+              </g>
+            </g>
+
+            <g *ngIf="place.governor" transform="translate(650, 370)"
+               [ngbPopover]="governorPopover"
+               triggers="mouseenter:mouseleave"
+               container="body">
+              <circle r="40" cx="0" cy="0"
+                      stroke="black" stroke-width="1"
+                      fill="#4b26a8"
+                      filter="url(#dropShadow)"></circle>
+              <image href="/assets/games/big-bazar/governor.png"
+                     x="-40"
+                     y="-40"
+                     width="80"
+                     height="80"
+                     clip-path="url(#merchantClip)"></image>
+            </g>
+
+            <g *ngIf="place.smuggler" transform="translate(550, 370)"
+               [ngbPopover]="smugglerPopover"
+               triggers="mouseenter:mouseleave"
+               container="body">
+              <circle r="40" cx="0" cy="0"
+                      stroke="black" stroke-width="1"
+                      fill="black"
+                      filter="url(#dropShadow)"></circle>
+              <image href="/assets/games/big-bazar/smuggler.png"
+                     x="-40"
+                     y="-40"
+                     width="80"
+                     height="80"
+                     clip-path="url(#merchantClip)"></image>
+            </g>
+
+            <g transform="translate(120, 140)" class="merchants" *ngIf="place.merchants">
+              <g *ngFor="let merchant of place.merchants; index as merchantIndex" class="merchant"
+                 [attr.transform]="'translate(' + (merchantIndex * 90) + ',0)'"
+                 [ngbPopover]="merchant.color == 'GREEN' ? merchantPopoverGREEN :
+                        merchant.color == 'RED' ? merchantPopoverRED :
+                        merchant.color == 'WHITE' ? merchantPopoverWHITE :
+                        merchant.color == 'YELLOW' ? merchantPopoverYELLOW :
+                        merchant.color == 'BLUE' ? merchantPopoverBLUE : null"
+                 triggers="mouseenter:mouseleave"
+                 container="body">
+
+                <circle *ngFor="let assistant of [].constructor(merchant.assistants); index as assistantIndex"
+                        r="40" cx="0" [attr.cy]="(merchant.assistants - assistantIndex) * 20"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="merchant.color.toLowerCase()"
+                        [attr.filter]="assistantIndex == 0 ? 'url(#dropShadow)' : ''"></circle>
+
+                <!-- Top disc -->
+                <circle r="40" cx="0" cy="0"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="merchant.color.toLowerCase()"
+                        [attr.filter]="merchant.assistants == 0 ? 'url(#dropShadow)' : ''"></circle>
+
+                <!-- Merchant image -->
+                <image [attr.href]="'/assets/games/big-bazar/merchants/' + merchant.color.toLowerCase() + '.png'"
+                       x="-35"
+                       y="-35"
+                       width="70"
+                       height="70"
+                       clip-path="url(#merchantClip)"></image>
+              </g>
+            </g>
+
+            <g transform="translate(90, 280)" class="assistants" *ngIf="place.assistants">
+              <g *ngFor="let assistant of place.assistants | keyvalue; index as index">
+                <circle r="40" cx="0" cy="0"
+                        [attr.x]="index * 70"
+                        stroke="black" stroke-width="1"
+                        [attr.fill]="assistant.key.toLowerCase()"
+                        filter="url(#dropShadow)"
+                        [ngbPopover]="assistant.key == 'GREEN' ? assistantPopoverGREEN :
+                        assistant.key == 'RED' ? assistantPopoverRED :
+                        assistant.key == 'WHITE' ? assistantPopoverWHITE :
+                        assistant.key == 'YELLOW' ? assistantPopoverYELLOW :
+                        assistant.key == 'BLUE' ? assistantPopoverBLUE : null"
+                        triggers="mouseenter:mouseleave"
+                        container="body"></circle>
+              </g>
+            </g>
+
+            <g transform="translate(20,100)" class="family-members" *ngIf="place.familyMembers">
+              <g *ngFor="let familyMember of place.familyMembers; index as index">
+                <rect width="60" height="60"
+                      [attr.x]="0"
+                      [attr.y]="index * 80"
+                      stroke="black" stroke-width="1"
+                      [attr.fill]="familyMember.toLowerCase()"
+                      filter="url(#dropShadow)"
+                      [ngbPopover]="familyMember == 'GREEN' ? familyMemberPopoverGREEN :
+                        familyMember == 'RED' ? familyMemberPopoverRED :
+                        familyMember == 'WHITE' ? familyMemberPopoverWHITE :
+                        familyMember == 'YELLOW' ? familyMemberPopoverYELLOW :
+                        familyMember == 'BLUE' ? familyMemberPopoverBLUE : null"
+                      triggers="mouseenter:mouseleave"
+                      container="body">
+                </rect>
+              </g>
+            </g>
+
+            <!-- Selection click box on top-->
+            <rect class="clickbox"
+                  x="3" y="3"
+                  width="794" height="531"
+                  fill="none"
+                  rx="20" ry="20"></rect>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="col-2">
+      <big-bazar-player *ngIf="table.player"
+                        [player]="table.players[table.player]"
+                        [table]="table"
+                        [state]="state"
+                        [selectedAction]="selectedAction"
+                        (perform)="perform.emit($event)">
+      </big-bazar-player>
+
+      <big-bazar-player *ngFor="let playerId of table.otherPlayers"
+                        [player]="table.players[playerId]"
+                        [table]="table"
+                        [state]="state"
+                        [summary]="true">
+      </big-bazar-player>
+
+      <app-log [table]="table"></app-log>
+    </div>
+  </div>
+</div>

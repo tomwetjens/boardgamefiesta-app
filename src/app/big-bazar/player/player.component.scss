@@ -1,0 +1,120 @@
+app-in-game-player {
+  header {
+    display: inline-block;
+  }
+
+  svg {
+    .goods {
+      .good {
+        opacity: 0.25;
+
+        &.available {
+          opacity: 1;
+        }
+      }
+    }
+
+    .rubies {
+      .ruby {
+        opacity: 0.25;
+
+        &.available {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .lira {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    font-weight: bold;
+    margin: 2px;
+    background-image: url('../../../assets/games/big-bazar/lira.png');
+    background-size: cover;
+  }
+
+  .rubies {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    margin: 2px;
+    background-image: url('../../../assets/games/big-bazar/ruby.png');
+    background-size: cover;
+  }
+
+  .goods {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-weight: bold;
+    background-size: cover;
+    margin: 2px;
+
+    &.BLUE {
+      background-image: url('../../../assets/games/big-bazar/market/blue.png');
+    }
+
+    &.FABRIC {
+      background-image: url('../../../assets/games/big-bazar/market/fabric.png');
+    }
+
+    &.SPICE {
+      background-image: url('../../../assets/games/big-bazar/market/spice.png');
+    }
+
+    &.FRUIT {
+      background-image: url('../../../assets/games/big-bazar/market/fruit.png');
+    }
+  }
+
+  .bonus-cards {
+    button {
+      width: 100px;
+      height: 62px;
+
+      border-radius: 5px;
+      padding: 0;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+
+      img {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+      }
+
+      &:disabled {
+        opacity: 1;
+        border: none;
+      }
+
+      border: 2px solid white;
+
+      &:hover {
+        border-color: black;
+      }
+    }
+  }
+
+  .mosque-tiles {
+    app-mosque-tile {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+    }
+  }
+}

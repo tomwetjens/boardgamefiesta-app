@@ -1,0 +1,18 @@
+<ng-container *ngIf="(table$ | async) as table">
+  <ng-container *ngIf="(state$ | async) as state">
+    <app-in-game-navbar [table]="table"
+                        [canSkip]="canSkip$ | async"
+                        [busy]="busy"
+                        (skip)="skip(table)"
+                        (endTurn)="endTurn(table)"
+                        (undo)="undo(table)">
+    </app-in-game-navbar>
+
+    <app-big-bazar-board
+      [table]="table"
+      [state]="state"
+      [busy]="busy"
+      (perform)="perform(table, $event)">
+    </app-big-bazar-board>
+  </ng-container>
+</ng-container>
