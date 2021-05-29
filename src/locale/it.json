@@ -20,16 +20,13 @@
   },
   "games": "Games",
   "game": {
-    "big-bazar": {
-      "name": "BigBazar",
-      "description": "Het is een drukte van belang op de bazaar in BigBazar. Handelaren en hun assistenten haasten zich door de nauwe steegjes en proberen hun concurrenten te slim af te zijn. De sleutel tot succes ligt in een goede organisatie: assistenten vullen de handkarren bij de diverse pakhuizen en brengen deze vervolgens met gezwinde spoed naar de juiste bestemming.\n\nElke handelaar wil namelijk als eerste een bepaald aantal robijnen in zijn bezit krijgen. Zet je assistenten slim in en probeer de kostbare edelstenen sneller dan je tegenstanders te verzamelen in dit strategische spel!"
-    },
     "gwt": {
       "name": "Ranchers Of The Old West",
-      "summary": "Trasporta il tuo bestiame lungo le tratte del vecchio West. Ispirato al popolare gioco da tavolo Great Western Trail.<br/><a href=\"https://discord.gg/f5rzXXvU6Z\" target=\"_new\">Unisciti al server Discord</a>",
+      "summary": "Trasporta il tuo bestiame lungo le tratte del vecchio West. Ispirato al popolare gioco da tavolo Great Western Trail.",
       "description": "America nel 19° secolo: Sei il propietario di un ranch e porti ripetutamente il tuo bestiame dal Texas a Kansas City, laddove viene spedito via treno. Questo ti farà guadagnare denaro e punti vittoria.<br/>Inutile aggiungerlo: Ogni volta che arrivi a Kansas City, vuoi avere con te il bestiame di maggior valore. Per far ciò non dovrai solo mantenere la tua mandria in buona forma, ma anche usare in maniera efficace i vari edifici che si trovano lungo la tratta.<br/>Il successo richiederà che tu assuma lo staff più competente: cowboy per migliorare la mandria, artigiani per costruire i tuo edifici privati e ingegneri per gestire l'importante linea ferroviaria.<br/><br/>Se saprai gestire sapientemente la tua mandria, le opportunità e le insidie lungo la grande tratta del West, guadagnerai sicuramente più punti vittoria e vincerai la partita."
     }
   },
+  "joinDiscord": "Unisciti al server Discord",
   "findUser": "Trova Utente",
   "usernameOrEmail": "Nome utente o e-mail",
   "search": "Cerca",

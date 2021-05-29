@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="favicon.svg"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    id="svg2613"
    version="1.1"
    viewBox="0 0 210 297"
    height="297mm"
-   width="210mm">
+   width="210mm"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs2607">
     <radialGradient
@@ -141,15 +141,16 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="665.70882"
-     inkscape:cx="362.13801"
+     inkscape:cy="608.21429"
+     inkscape:cx="176.42857"
      inkscape:zoom="1.4"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base" />
+     id="base"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata2610">
     <rdf:RDF>
@@ -158,7 +159,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -166,6 +167,13 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Laag 1">
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.190052;stroke-linejoin:bevel"
+       id="path85"
+       cx="81.476089"
+       cy="128.57722"
+       rx="39.862465"
+       ry="39.536232" />
     <g
        inkscape:export-ydpi="95"
        inkscape:export-xdpi="95"

@@ -3,7 +3,7 @@ import {Table, TableMode, TablePlayer, TableType} from '../shared/model';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {TableService} from '../table.service';
-import {map, takeUntil} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -20,7 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   myTurnTables$: Observable<Table[]>;
   waitingTables$: Observable<Table[]>;
 
-  games$ = new BehaviorSubject(['gwt']);
+  games$ = new BehaviorSubject([
+    'gwt',
+    //'power-grid',
+    'big-bazar'
+  ]);
 
   constructor(private router: Router,
               private authService: AuthService,

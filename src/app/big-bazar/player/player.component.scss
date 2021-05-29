@@ -4,6 +4,16 @@ app-in-game-player {
   }
 
   svg {
+    .goods {
+      .good {
+        opacity: 0.5;
+
+        &.available {
+          opacity: 1;
+        }
+      }
+    }
+
     .rubies {
       .ruby {
         opacity: 0.5;

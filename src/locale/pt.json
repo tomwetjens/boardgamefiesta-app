@@ -8,16 +8,13 @@
   },
   "games": "Jogos",
   "game": {
-    "istambul": {
-      "name": "Istambul",
-      "description": "O bazar em Istambul é muito movimentado. Os comerciantes e seus assistentes correm pelas vielas estreitas tentando enganar o concorrente. A chave do sucesso está numa boa organização: os assistentes enchem os carrinhos de mão dos armazéns diversos e conduzem-nos rapidamente ao destino certo.\n\nCada comerciante deseja ser o primeiro a obter um certo número de rubis em sua posse. Mova seu assistente para coletar alcatrão e montanha de alcatrão neste jogo estratégico!"
-    },
     "gwt": {
       "name": "Ranchers Of The Old West",
-      "summary": "Reúna o seu gado ao longo das trilhas do Velho Oeste. Inspirado no popular jogo Great Western Trail.<br/><a href=\"https://discord.gg/f5rzXXvU6Z\" target=\"_new\">Entrar no Discord</a>",
+      "summary": "Reúna o seu gado ao longo das trilhas do Velho Oeste. Inspirado no popular jogo Great Western Trail.",
       "description": "América no século 19: você é um fazendeiro e reúne repetidamente seu gado do Texas a Kansas City, de onde você os envia com sua locomotiva. Isso lhe dá dinheiro e pontos de vitória.<br/>Nem é preciso dizer: Cada vez que você chega a Kansas City, quer entregar seu gado mais valioso. Isso não só exigirá que você mantenha seu rebanho em boa forma, mas também que utilize efetivamente as vários construções ao longo da trilha.<br/>O sucesso exigirá que você contrate uma equipe capacitada: vaqueiros para melhorar seu rebanho, artífices para construir suas próprias construções e engenheiros para administrar a importante linha ferroviária.<br/><br/>Se você manejar seu rebanho com inteligência e navegar pelas oportunidades e as armadilhas desta grande trilha do oeste, você certamente ganhará mais pontos de vitória e vencerá o jogo."
     }
   },
+  "joinDiscord": "Entrar no Discord",
   "findUser": "Encontrar Usuário",
   "usernameOrEmail": "Nome de usuário ou e-mail",
   "search": "Pesquisar",
