@@ -24,16 +24,27 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'istanbul/:tableId',
+    path: 'big-bazar/:tableId',
     component: TableComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        loadChildren: () => import('./istanbul/istanbul.module').then(m => m.IstanbulModule)
+        loadChildren: () => import('./big-bazar/big-bazar.module').then(m => m.BigBazarModule)
       }
     ]
   },
+  // {
+  //   path: 'power-grid/:tableId',
+  //   component: TableComponent,
+  //   canActivate: [AuthGuard],
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadChildren: () => import('./power-grid/power-grid.module').then(m => m.PowerGridModule)
+  //     }
+  //   ]
+  // },
   {
     path: '',
     component: LayoutComponent,
