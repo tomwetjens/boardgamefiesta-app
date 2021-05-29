@@ -24,6 +24,8 @@
     "bonusCard": "Bonus Card",
     "noActionsLeft": "There are no more actions you can perform. End your turn when you are ready.",
     "computerExplanation": "(BETA) I just move and end turn for now, sorry!",
+    "rubiesPopover": "Indicates the number of rubies of the player. To win, a player needs to be the first to acquire all the rubies.",
+    "liraPopover": "Amount of Lira (currency) the player has.",
     "places": {
       "1": "Wainwright",
       "2": "Fabric Warehouse",
@@ -42,6 +44,7 @@
       "15": "Great Mosque",
       "16": "Gemstone Dealer"
     },
+    "aMosqueTile": "Mosque tile",
     "mosqueTile": {
       "EXTRA_ASSISTANT": "5th (extra) assistant",
       "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Pay 2 Lira for 1 additional good",
@@ -162,6 +165,23 @@
       "SULTAN_2X": "If you carry out the action at the Sultan’s Palace 13 , after completing the action, carry it out one more time.",
       "TAKE_5_LIRA": "Take 5 Lira from the general supply."
     },
+    "stats": {
+      "liraGained": "Lira received during game",
+      "liraPaidToOtherMerchants": "Lira paid to other merchants",
+      "capacity": "Capacity of wheelbarrow",
+      "goods": "Goods in wheelbarrow",
+      "goodsGained": "Goods received during game",
+      "turns": "Turns",
+      "distanceMoved": "Distance merchant moved",
+      "assistantsLeft": "Assistants left",
+      "assistantsPickedUp": "Assistants picked up",
+      "placeUses": "{{place}} used",
+      "governorUses": "Governor used",
+      "smugglerUses": "Smuggler used",
+      "placedFamilyMembers": "Family members placed",
+      "caughtFamilyMembers": "Family members caught",
+      "playedBonusCards": "Played bonus cards"
+    },
     "errors": {
       "CANNOT_PERFORM_ACTION": "You cannot perform this action.",
       "CANNOT_SKIP_ACTION": "You cannot skip this action.",
@@ -174,7 +194,12 @@
       "NOT_ENOUGH_LIRA": "You don't have enough Lira.",
       "NO_RUBY_AVAILABLE": "There is no Ruby available at this Place.",
       "NO_BONUS_CARD_AVAILABLE": "No Bonus Card available.",
-      "DOESNT_HAVE_BONUS_CARD": "You don't have the required Bonus Card."
+      "DOESNT_HAVE_BONUS_CARD": "You don't have the required Bonus Card.",
+      "NO_ACTION":  "There is no action you can perform.",
+      "INVALID_GUESS":  "Guessed number must be 2-12.",
+      "NO_FAMILY_MEMBER_TO_CATCH":  "There is no family member to catch.",
+      "CANNOT_ADD_EXTENSION":  "You cannot add more extensions to your wheelbarrow.",
+      "ALREADY_AT_PLACE":  "You are already at this place."
     },
     "log": {
       "MOVE": "moves to <strong>{{value1}}</strong>",
@@ -223,12 +248,10 @@
         "FRUIT": "Fruit",
         "SPICE": "Spice",
         "BLUE": "Blue",
-
         "EXTRA_ASSISTANT": "5th (extra) assistant",
         "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Pay 2 Lira for 1 additional good",
         "PAY_2_LIRA_TO_RETURN_ASSISTANT": "Pay 2 Lira to return an assistant",
         "TURN_OR_REROLL_DICE": "Turn or reroll dice",
-
         "FAMILY_MEMBER_TO_POLICE_STATION": "Family Member to Police Station",
         "GAIN_1_GOOD": "Take 1 Good",
         "GEMSTONE_DEALER_2X": "Use Gemstone Dealer 2x",

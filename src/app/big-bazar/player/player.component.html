@@ -4,7 +4,18 @@
                     [score]="playerState.rubies">
   <main>
     <p *ngIf="!player.user">{{'big-bazar.computerExplanation'|translate}}</p>
-    <span class="lira" [title]="'big-bazar.lira'|translate">{{playerState.lira}}</span>
+
+    <ng-template #liraPopover>
+      <p [innerHTML]="'big-bazar.liraPopover'|translate"></p>
+    </ng-template>
+    <span class="lira" [title]="'big-bazar.lira'|translate"
+          [ngbPopover]="liraPopover"
+          triggers="mouseenter:mouseleave"
+          container="body">{{playerState.lira}}</span>
+
+    <ng-template #rubiesPopover>
+      <p [innerHTML]="'big-bazar.rubiesPopover'|translate"></p>
+    </ng-template>
 
     <svg xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 400 270"
@@ -17,22 +28,32 @@
       <g class="goods" transform="translate(20,20)">
         <g *ngFor="let goodsType of goodsTypes; index as index"
            [attr.transform]="'translate(0,' + (index * 50) + ')'">
+          <rect width="40" height="40" rx="6" ry="6"
+                stroke="white" stroke-width="1" fill="none"
+                x="0"></rect>
+
           <image *ngFor="let _ of [].constructor(playerState.capacity); index as index"
                  [attr.href]="'/assets/games/big-bazar/market/' + goodsType.toLowerCase() + '.png'"
-                 [attr.x]="index * 50"
+                 [attr.x]="(index+1) * 50"
                  class="good"
-                 [class]="{available: (playerState.goods[goodsType] || 0) > index}"
                  width="40"
                  height="40"></image>
 
           <rect *ngFor="let _ of [].constructor(5 - playerState.capacity); index as index"
-                width="40" height="40" rx="4" ry="4"
+                width="40" height="40" rx="6" ry="6"
                 stroke="white" stroke-width="1" fill="none"
-                [attr.x]="(playerState.capacity + index) * 50"></rect>
+                [attr.x]="(index + playerState.capacity + 1) * 50"></rect>
+
+          <rect width="20" height="20"
+                [class]="'fill-' + player.color" stroke="black" stroke-width="1"
+                y="10" [attr.x]="10 + (playerState.goods[goodsType]||0) * 50"></rect>
         </g>
       </g>
 
-      <g class="rubies" transform="translate(20, 215)">
+      <g class="rubies" transform="translate(20, 215)"
+         [ngbPopover]="rubiesPopover"
+         triggers="mouseenter:mouseleave"
+         container="body">
         <image *ngFor="let _ of [].constructor(state.maxRubies); index as index"
                href="/assets/games/big-bazar/ruby.png"
                [attr.x]="index * 50"

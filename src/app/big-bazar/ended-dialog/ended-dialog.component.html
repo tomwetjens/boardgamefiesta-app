@@ -23,9 +23,105 @@
     </thead>
     <tbody>
     <tr>
+      <th scope="row">{{'big-bazar.rubies'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.rubies}}
+      </td>
+    </tr>
+    <tr>
       <th scope="row">{{'big-bazar.lira'|translate}}</th>
       <td scope="col" *ngFor="let column of columns">
-        <strong>{{column.playerState.lira}}</strong>
+        {{column.playerState.lira}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.turns'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.turns}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.liraGained'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.liraGained}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.liraPaidToOtherMerchants'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.liraPaidToOtherMerchants}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.capacity'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.capacity}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.goods'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{(column.playerState.goods['FABRIC']||0)+(column.playerState.goods['FRUIT']||0)+(column.playerState.goods['SPICE']||0)+(column.playerState.goods['BLUE']||0)}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.goodsGained'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{(column.playerState.stats.goodsGained['FABRIC']||0)+(column.playerState.stats.goodsGained['FRUIT']||0)+(column.playerState.stats.goodsGained['SPICE']||0)+(column.playerState.stats.goodsGained['BLUE']||0)}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.distanceMoved'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.distanceMoved}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.assistantsLeft'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.assistantsLeft}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.assistantsPickedUp'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.assistantsPickedUp}}
+      </td>
+    </tr>
+    <tr *ngFor="let _ of [].constructor(16); index as index">
+      <th scope="row"> {{'big-bazar.stats.placeUses'|translate:{place:'big-bazar.places.' + (index+1)|translate } }}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.placeUses[index + 1]||0}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.governorUses'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.governorUses}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.smugglerUses'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.smugglerUses}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.placedFamilyMembers'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.placedFamilyMembers}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.caughtFamilyMembers'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.caughtFamilyMembers}}
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{'big-bazar.stats.playedBonusCards'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">
+        {{column.playerState.stats.playedBonusCards}}
       </td>
     </tr>
     </tbody>

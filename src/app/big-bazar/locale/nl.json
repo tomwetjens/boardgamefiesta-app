@@ -24,6 +24,8 @@
     "bonusCard": "Bonuskaart",
     "noActionsLeft": "Er zijn geen acties meer die je kunt uitvoeren. Beëindig je beurt als je klaar bent.",
     "computerExplanation": "(BETA) Ik verplaats alleen en beëindig beurt voor nu, sorry!",
+    "rubiesPopover": "De robijnen die de speler heeft. Om te winnen moet een speler de eerste zijn die het volledige aantal robijnen weet te verkrijgen.",
+    "liraPopover": "Lira (geld) dat de speler heeft.",
     "places": {
       "1": "Wagenmaker",
       "2": "Zijde Pakhuis",
@@ -42,6 +44,7 @@
       "15": "Grote Moskee",
       "16": "Juwelier"
     },
+    "aMosqueTile": "Moskeetegel",
     "mosqueTile": {
       "EXTRA_ASSISTANT": "5e (extra) assistent",
       "PAY_2_LIRA_FOR_1_ADDITIONAL_GOOD": "Betaal 2 Lira voor 1 handelswaar",
@@ -162,6 +165,23 @@
       "SULTAN_2X": "Als je op het Paleis van de sultan staat, mag je de actie tweemaal uitvoeren.",
       "TAKE_5_LIRA": "Neem 5 Lira van de bank."
     },
+    "stats": {
+      "liraGained": "Lira ontvangen tijdens spel",
+      "liraPaidToOtherMerchants": "Lira betaald aan andere handelaren",
+      "capacity": "Capaciteit van de kar",
+      "goods": "Handelswaren in de kar",
+      "goodsGained": "Handelswaren ontvangen tijdens spel",
+      "turns": "Beurten",
+      "distanceMoved": "Afstand door handelaar afgelegd",
+      "assistantsLeft": "Assistenten achtergelaten",
+      "assistantsPickedUp": "Assistenten opgepikt",
+      "placeUses": "{{place}} gebruikt",
+      "governorUses": "Gouverneur gebruikt",
+      "smugglerUses": "Smokkelaar gebruikt",
+      "placedFamilyMembers": "Familieleden geplaatst",
+      "caughtFamilyMembers": "Familieleden gearresteerd",
+      "playedBonusCards": "Gespeelde bonuskaarten"
+    },
     "errors": {
       "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan,",
       "CANNOT_PERFORM_ACTION": "Je kunt deze actie niet uitvoeren.",
@@ -174,7 +194,12 @@
       "NOT_ENOUGH_LIRA": "Je hebt niet genoeg Lira.",
       "NO_RUBY_AVAILABLE": "Er is geen robijn meer beschikbaar op deze locatie.",
       "NO_BONUS_CARD_AVAILABLE": "Er is geen bonuskaart beschikbaar.",
-      "DOESNT_HAVE_BONUS_CARD": "Je hebt niet de vereiste bonuskaart."
+      "DOESNT_HAVE_BONUS_CARD": "Je hebt niet de vereiste bonuskaart.",
+      "NO_ACTION":  "Er is geen actie die je kunt uitvoeren.",
+      "INVALID_GUESS":  "Het geraden getal moet tussen 2 en 12 liggen.",
+      "NO_FAMILY_MEMBER_TO_CATCH":  "Er is geen familielid om te arresteren.",
+      "CANNOT_ADD_EXTENSION":  "Je kunt geen uitbreidingen meer toevoegen aan je kar.",
+      "ALREADY_AT_PLACE":  "Je bent al op deze locatie."
     },
     "log": {
       "MOVE": "verplaatst handelaar naar <strong>{{value1}}</strong>",

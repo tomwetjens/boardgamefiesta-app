@@ -72,6 +72,22 @@ export enum MosqueTile {
   TURN_OR_REROLL_DICE = 'TURN_OR_REROLL_DICE'
 }
 
+interface PlayerStats {
+  assistantsLeft: number;
+  assistantsPickedUp: number;
+  caughtFamilyMembers: number;
+  distanceMoved: number;
+  goodsGained: { [goodsType in GoodsType]: number };
+  governorUses: number;
+  liraGained: number;
+  liraPaidToOtherMerchants: number;
+  placedFamilyMembers: number;
+  placeUses: { [place: number]: number };
+  playedBonusCards: { [bonusCard in BonusCard]: number };
+  smugglerUses: number;
+  turns: number;
+}
+
 export interface PlayerState {
   readonly name: string;
   readonly bonusCards?: BonusCard[];
@@ -81,6 +97,7 @@ export interface PlayerState {
   readonly capacity: number;
   readonly goods: { [goodsType in GoodsType]: number };
   readonly mosqueTiles: MosqueTile[];
+  readonly stats?: PlayerStats;
 }
 
 export interface Merchant {
