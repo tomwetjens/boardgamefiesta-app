@@ -359,9 +359,9 @@
             </g>
 
             <g transform="translate(90, 280)" class="assistants" *ngIf="place.assistants">
-              <g *ngFor="let assistant of place.assistants | keyvalue; index as index">
+              <g *ngFor="let assistant of place.assistants | keyvalue; index as index"
+                 [attr.transform]="'translate(' + (index * 90) + ',0)'">
                 <circle r="40" cx="0" cy="0"
-                        [attr.x]="index * 70"
                         stroke="black" stroke-width="1"
                         [attr.fill]="assistant.key.toLowerCase()"
                         filter="url(#dropShadow)"
