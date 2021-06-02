@@ -250,6 +250,8 @@
       "LAST_ROUND": "start de laatste ronde",
       "PLAY_LEFTOVER_BONUS_CARDS": "iedereen mag overgebleven bonuskaarten spelen",
       "GAIN_RUBY_FROM_MOSQUE": "ontvangt 1 robijn van de moskee",
+      "GAIN_RUBY_FROM_SULTAN": "ontvang 1 robijn van het paleis",
+      "DELIVER_TO_SULTAN": "levert goederen aan de Sultan",
       "value": {
         "FABRIC": "Zijde",
         "FRUIT": "Fruit",

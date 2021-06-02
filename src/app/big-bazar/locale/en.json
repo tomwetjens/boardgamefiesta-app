@@ -250,6 +250,8 @@
       "LAST_ROUND": "triggered last round",
       "PLAY_LEFTOVER_BONUS_CARDS": "everybody may play left over bonus cards",
       "GAIN_RUBY_FROM_MOSQUE": "gains 1 ruby from the mosque",
+      "GAIN_RUBY_FROM_SULTAN": "gains 1 ruby from the palace",
+      "DELIVER_TO_SULTAN": "delivers goods to the Sultan",
       "value": {
         "FABRIC": "Fabric",
         "FRUIT": "Fruit",
