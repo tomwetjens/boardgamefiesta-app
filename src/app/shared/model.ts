@@ -147,7 +147,14 @@ export enum LogEntryType {
   PROPOSED_TO_LEAVE = 'PROPOSED_TO_LEAVE',
   AGREED_TO_LEAVE = 'AGREED_TO_LEAVE',
   CREATE = 'CREATE',
-  IN_GAME_EVENT = 'IN_GAME_EVENT'
+  IN_GAME_EVENT = 'IN_GAME_EVENT',
+  LEFT = 'LEFT',
+  UNDO = 'UNDO',
+  JOIN = 'JOIN',
+  BEGIN_TURN = 'BEGIN_TURN',
+  END_TURN = 'END_TURN',
+  SKIP = 'SKIP',
+  END = 'END'
 }
 
 export interface LogEntry {

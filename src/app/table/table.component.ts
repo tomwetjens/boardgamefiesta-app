@@ -145,12 +145,24 @@ export class TableComponent implements OnInit, OnDestroy {
         case LogEntryType.IN_GAME_EVENT:
           this.notifyInGameEvent(table, logEntry);
           break;
+        case LogEntryType.BEGIN_TURN:
+        case LogEntryType.END_TURN:
+        case LogEntryType.UNDO:
+        case LogEntryType.KICK:
+        case LogEntryType.LEFT:
+          this.notifyEvent(table, logEntry);
+          break;
       }
     });
   }
 
   private notifyInGameEvent(table: Table, logEntry: LogEntry) {
     this.toastrService.inGameEvent(GAME_PROVIDERS[table.game].translate(logEntry, table), {},
+      !!logEntry.player ? table.players[logEntry.player.id] : null, logEntry.user);
+  }
+
+  private notifyEvent(table: Table, logEntry: LogEntry) {
+    this.toastrService.inGameEvent(this.translateService.instant('log.' + logEntry.type), {},
       !!logEntry.player ? table.players[logEntry.player.id] : null, logEntry.user);
   }
 
