@@ -2,6 +2,7 @@
   "big-bazar": {
     "endedDialog": "Het is afgelopen!",
     "lira": "Lira",
+    "rubies": "Robijnen",
     "sellGoodsDialog": "Verkoop handelswaren",
     "sellGoodsSelect": "Selecteer de handelswaren die je wilt verkopen:",
     "sellGoodsReward": "Deze handelswaren leveren je {{reward}} Lira op.",
