@@ -33,14 +33,16 @@
         </div>
       </ng-template>
     </ngb-carousel>
+  </section>
 
-    <ng-container *ngIf="loggedIn$ | async">
-      <h2>Top 10 Players</h2>
-      <p>
-        <app-ranking [gameId]="game.id"></app-ranking>
-      </p>
-    </ng-container>
+  <ng-container *ngIf="loggedIn$ | async">
+    <h2>Top 10 Players</h2>
+    <p>
+      <app-ranking [gameId]="game.id"></app-ranking>
+    </p>
+  </ng-container>
 
+  <section *ngIf="game.id === 'gwt'">
     <h2>Rules</h2>
     <p>To be described.</p>
 
@@ -57,21 +59,26 @@
       <dt>What do the difficulty levels (computer) mean? How does the computer play?</dt>
       <dd>
         <p>The computer player is inspired by <a
-        href="https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play" target="_new">Garth --
+          href="https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play" target="_new">Garth --
           Specialized Automa for GWT Solo Play</a>.</p>
-        <p>The computer is not bound to the same rules as you. Instead it its own deck of 'automa cards' that dictate which actions it does.
-        That means it can perform certain actions even though the computer is not currently at the appropriate building.
-        While this may seem weird at first, it actually has the same effects as playing a human player.
+        <p>The computer is not bound to the same rules as you. Instead it its own deck of 'automa cards' that dictate
+          which actions it does.
+          That means it can perform certain actions even though the computer is not currently at the appropriate
+          building.
+          While this may seem weird at first, it actually has the same effects as playing a human player.
         </p>
         <p>You can select the difficulty of the computer before starting a game:</p>
         <ul>
           <li>Easy: computer automatically makes his first delivery to Wichita / Chicago.</li>
           <li>Medium: computer starts with 1 employee of his specialization and makes
-          his first delivery to Colorado Springs / Chicago (and will skip Detroit).</li>
+            his first delivery to Colorado Springs / Chicago (and will skip Detroit).
+          </li>
           <li>Hard: computer starts with 2 different random employee tiles and makes his first delivery to
-          Albuquerque / Cleveland.</li>
+            Albuquerque / Cleveland.
+          </li>
           <li>Very Hard: computer starts with 1 employee tile of each type and a 2nd tile of a random type
-          (4 employee tiles total) and makes his first delivery to Albuquerque / Cleveland.</li>
+            (4 employee tiles total) and makes his first delivery to Albuquerque / Cleveland.
+          </li>
         </ul>
         <p>The computer's score is calculated mostly normally. He does not score for money, removing the 3VP
           disk, or station master tiles. He scores positive points for all objectives, as though they were
