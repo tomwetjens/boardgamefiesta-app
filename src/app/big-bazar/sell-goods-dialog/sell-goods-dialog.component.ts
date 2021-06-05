@@ -5,6 +5,11 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 const SMALL_MARKET_REWARDS = [2, 5, 9, 14, 20];
 const LARGE_MARKET_REWARDS = [3, 7, 12, 18, 25];
 
+type GoodsModel = {
+  [goodsType in GoodsType]: boolean[]
+};
+
+
 @Component({
   selector: 'app-sell-goods-dialog',
   templateUrl: './sell-goods-dialog.component.html',
@@ -19,29 +24,26 @@ export class SellGoodsDialogComponent implements OnInit {
 
   bonusCard = BonusCard.SMALL_MARKET_ANY_GOOD;
 
-  demandModel: boolean[] = Array(5).fill(false);
-
-  anyGoodsModel: { [goodsType in GoodsType]: number } = {
-    BLUE: 0,
-    SPICE: 0,
-    FABRIC: 0,
-    FRUIT: 0
-  };
+  demandModel: GoodsModel;
+  anyGoodsModel: GoodsModel;
 
   constructor(public ngbActiveModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {
-  }
+    this.demandModel = this.goodsTypes.reduce((model, goodsType) => {
+      model[goodsType] = Array(Math.min(this.playerState.goods[goodsType] || 0, this.market.demand.filter(gt => gt === goodsType).length)).fill(false);
+      return model;
+    }, {} as GoodsModel);
 
-  canSelectDemand(index: number): boolean {
-    const goodsType = this.market.demand[index];
-    return this.demandModel[index]
-      || this.hasEnoughGoods(goodsType, this.numberOfSelectedDemandGoods(goodsType) + 1);
+    this.anyGoodsModel = this.goodsTypes.reduce((model, goodsType) => {
+      model[goodsType] = Array(this.playerState.goods[goodsType] || 0).fill(false);
+      return model;
+    }, {} as GoodsModel);
   }
 
   get numberOfSelectedAnyGoods(): number {
-    return this.anyGoodsModel.BLUE + this.anyGoodsModel.FABRIC + this.anyGoodsModel.FRUIT + this.anyGoodsModel.SPICE;
+    return this.selectedAnyGoods.length;
   }
 
   get hasAnyGoodBonusCard(): boolean {
@@ -53,7 +55,7 @@ export class SellGoodsDialogComponent implements OnInit {
   }
 
   get rewardForDemand(): number {
-    const num = this.demandModel.filter(selected => selected).length;
+    const num = this.selectedGoods.length;;
     return num > 0 ? this.rewards[num - 1] : 0;
   }
 
@@ -62,25 +64,35 @@ export class SellGoodsDialogComponent implements OnInit {
     return num > 0 ? this.rewards[num - 1] : 0;
   }
 
-  private numberOfSelectedDemandGoods(goodsType: GoodsType): number {
-    return this.selectedGoods
-      .filter(selectedGoodsType => selectedGoodsType === goodsType)
-      .length;
-  }
-
   get selectedGoods(): GoodsType[] {
-    return this.demandModel
-      .map((selected, index) => selected ? this.market.demand[index] : null)
-      .filter(goodsType => !!goodsType);
+    return this.goodsTypes.flatMap(goodsType => this.demandModel[goodsType].filter(selected => selected).map(() => goodsType));
   }
 
   get selectedAnyGoods(): GoodsType[] {
     return this.goodsTypes
-      .flatMap(goodsType => Array(this.anyGoodsModel[goodsType]).fill(goodsType));
+      .flatMap(goodsType => this.anyGoodsModel[goodsType]
+        .filter(selected => !!selected)
+        .map(() => goodsType));
   }
 
   private hasEnoughGoods(goodsType: GoodsType, amount: number) {
     return this.playerState.goods[goodsType]
       && this.playerState.goods[goodsType] >= amount;
+  }
+
+  canSelectAny(goodsType: GoodsType, index: number): boolean {
+    return this.isAnySelected(goodsType, index) || this.numberOfSelectedAnyGoods < 5;
+  }
+
+  trackByValue(index: number, value: any): any {
+    return value;
+  }
+
+  trackByIndex(index: number, value: any): any {
+    return index;
+  }
+
+  private isAnySelected(goodsType: GoodsType, index: number) {
+    return this.anyGoodsModel[goodsType][index];
   }
 }

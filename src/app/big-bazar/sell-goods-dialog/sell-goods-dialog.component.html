@@ -11,11 +11,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-6">
-        <div class="btn-group btn-group-toggle goods">
-          <label *ngFor="let goodsType of market.demand; index as index"
-                 ngbButtonLabel
-                 class="btn btn-primary" [class]="goodsType">
-            <input type="checkbox" ngbButton [(ngModel)]="demandModel[index]" [disabled]="!canSelectDemand(index)">
+        <div *ngFor="let goodsType of goodsTypes; trackBy: trackByValue" class="btn-group btn-group-toggle goods">
+          <label *ngFor="let _ of demandModel[goodsType]; index as index; trackBy: trackByIndex"
+                 ngbButtonLabel class="btn btn-primary" [class]="goodsType">
+            <input ngbButton type="checkbox" [(ngModel)]="demandModel[goodsType][index]"/>
           </label>
         </div>
 
@@ -29,20 +28,17 @@
       <div class="col-6" *ngIf="hasAnyGoodBonusCard">
         <p>{{'big-bazar.sellGoodsBonusCard'|translate}}</p>
         <img class="bonus-card" src="/assets/games/big-bazar/bonus/SMALL_MARKET_ANY_GOOD.png"/>
-        <div *ngFor="let goodsType of goodsTypes"
-             class="btn-group btn-group-toggle goods" ngbRadioGroup>
-          <label *ngFor="let _ of [].constructor((playerState.goods[goodsType]||0)+1); index as index"
-                 ngbButtonLabel class="btn-primary" [class]="goodsType">
-            <input ngbButton type="radio" [value]="index"
-                   [checked]="anyGoodsModel[goodsType] === index"
-                   (click)="anyGoodsModel[goodsType] = index"
-                   [disabled]="numberOfSelectedAnyGoods === 5"> {{index}}
+        <div *ngFor="let goodsType of goodsTypes; trackBy: trackByValue" class="btn-group btn-group-toggle goods">
+          <label *ngFor="let _ of anyGoodsModel[goodsType]; index as index; trackBy: trackByIndex"
+                 ngbButtonLabel class="btn btn-primary" [class]="goodsType">
+            <input ngbButton type="checkbox" [(ngModel)]="anyGoodsModel[goodsType][index]"
+                   [disabled]="!canSelectAny(goodsType, index)"/>
           </label>
         </div>
 
         <p>{{'big-bazar.sellGoodsReward'|translate:{reward: rewardForAnyGoods} }}</p>
 
-        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:anyGoodsModel, bonusCard: bonusCard})"
+        <button class="btn btn-success" (click)="ngbActiveModal.close({goods:selectedAnyGoods, bonusCard: bonusCard})"
                 [disabled]="rewardForAnyGoods === 0">
           {{'big-bazar.sellGoodsConfirmBonusCard'|translate}}
         </button>
