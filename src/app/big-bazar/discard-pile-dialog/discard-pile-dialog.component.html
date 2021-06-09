@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{'big-bazar.discardPileDialog'|translate}}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngFor="let bonusCard of reverseDiscardPile">
+    <ng-template #popover>
+      <big-bazar-bonus-card-popover [bonusCard]="bonusCard"></big-bazar-bonus-card-popover>
+    </ng-template>
+    <big-bazar-bonus-card [bonusCard]="bonusCard"
+                          [ngbPopover]="popover"
+                          triggers="mouseenter:mouseleave"
+                          container="body"></big-bazar-bonus-card>
+  </div>
+</div>
+<div class="modal-footer">
+</div>

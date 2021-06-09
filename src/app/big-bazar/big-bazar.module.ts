@@ -13,17 +13,18 @@ import en from "./locale/en.json";
 import nl from "./locale/nl.json";
 import {RouterModule, Routes} from "@angular/router";
 import {BigBazarComponent} from './big-bazar/big-bazar.component';
-import { FamilyMemberPopoverComponent } from './family-member-popover/family-member-popover.component';
-import { MerchantPopoverComponent } from './merchant-popover/merchant-popover.component';
-import { AssistantPopoverComponent } from './assistant-popover/assistant-popover.component';
-import { MosqueTileComponent } from './mosque-tile/mosque-tile.component';
-import { MosqueTilePopoverComponent } from './mosque-tile-popover/mosque-tile-popover.component';
-import { PlayerComponent } from './player/player.component';
-import { ConfirmBonusCardDialogComponent } from './confirm-bonus-card-dialog/confirm-bonus-card-dialog.component';
-import { BonusCardComponent } from './bonus-card/bonus-card.component';
-import { BonusCardPopoverComponent } from './bonus-card-popover/bonus-card-popover.component';
-import { BonusCardDeckComponent } from './bonus-card-deck/bonus-card-deck.component';
-import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
+import {FamilyMemberPopoverComponent} from './family-member-popover/family-member-popover.component';
+import {MerchantPopoverComponent} from './merchant-popover/merchant-popover.component';
+import {AssistantPopoverComponent} from './assistant-popover/assistant-popover.component';
+import {MosqueTileComponent} from './mosque-tile/mosque-tile.component';
+import {MosqueTilePopoverComponent} from './mosque-tile-popover/mosque-tile-popover.component';
+import {PlayerComponent} from './player/player.component';
+import {ConfirmBonusCardDialogComponent} from './confirm-bonus-card-dialog/confirm-bonus-card-dialog.component';
+import {BonusCardComponent} from './bonus-card/bonus-card.component';
+import {BonusCardPopoverComponent} from './bonus-card-popover/bonus-card-popover.component';
+import {BonusCardDeckComponent} from './bonus-card-deck/bonus-card-deck.component';
+import {EndedDialogComponent} from './ended-dialog/ended-dialog.component';
+import {DiscardPileDialogComponent} from "./discard-pile-dialog/discard-pile-dialog.component";
 
 const routes: Routes = [
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
     BonusCardComponent,
     BonusCardPopoverComponent,
     BonusCardDeckComponent,
-    EndedDialogComponent
+    EndedDialogComponent,
+    DiscardPileDialogComponent
   ],
   imports: [
     CommonModule,

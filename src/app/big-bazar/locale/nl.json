@@ -10,9 +10,10 @@
     "sellGoodsBonusCard": "Of je kunt een bonuskaart spelen om willekeurige handelswaren te verkopen:",
     "sellGoodsConfirmBonusCard": "Speel bonuskaart en verkoop",
     "caravansaryConfirmDialog": "Neem 2 bonuskaarten",
-    "caravansaryConfirmMessage": "Trek 2 van de stapel of neem de bovenste 2 van de Karavaanserai?",
-    "takeFromDiscardPile": "Neem van Karavaanserai",
-    "takeFromDrawStack": "Trek van de stapel",
+    "caravansaryConfirmMessage": "Trek 1 van de stapel of neem de bovenste van de Karavaanserai?",
+    "discardPileDialog": "Aflegstapel",
+    "takeFromDiscardPile": "Neem 1 van Karavaanserai",
+    "takeFromDrawStack": "Trek 1 van de stapel",
     "guessDialog": "Gok een nummer",
     "guessSelect": "Selecteer een nummer om te gokken:",
     "confirmActionRequiringBonusCard": "Deze actie vereist dat je een bonuskaart speelt. Weet je het zeker?",
@@ -112,9 +113,13 @@
         "TAKE_1_FRUIT": "Ontvang 1 fruit",
         "TAKE_1_SPICE": "Ontvang 1 specerij",
         "TAKE_1_BLUE": "Ontvang 1 blauwe handelswaar",
+        "TAKE_3_LIRA": "Ontvang 3 Lira",
+        "TAKE_BONUS_CARD": "Neem bonuskaart",
+        "TAKE_BONUS_CARD_CARAVANSARY": "Neem bonuskaart (trek of van aflegstapel)",
         "TAKE_2_BONUS_CARDS": "Neem 2 bonuskaarten",
         "TAKE_MOSQUE_TILE": "Neem moskeetegel",
-        "USE_POST_OFFICE": "Gebruik het postkantoor"
+        "USE_POST_OFFICE": "Gebruik het postkantoor",
+        "PLACE_MEMBER_ON_POLICE_STATION": "Plaats familielid op Politiebureau"
       },
       "descriptions": {
         "BONUS_CARD_BUY_RUBY": "Speel bonuskaart om nog een robijn te kunnen kopen",
@@ -154,9 +159,13 @@
         "TAKE_1_FRUIT": "Ontvang 1 fruit",
         "TAKE_1_SPICE": "Ontvang 1 specerij",
         "TAKE_1_BLUE": "Ontvang 1 blauwe handelswaar",
+        "TAKE_3_LIRA": "Ontvang 3 Lira",
+        "TAKE_BONUS_CARD": "Neem bonuskaart",
+        "TAKE_BONUS_CARD_CARAVANSARY": "Neem bonuskaart (trek of van aflegstapel)",
         "TAKE_2_BONUS_CARDS": "Neem 2 bonuskaarten",
         "TAKE_MOSQUE_TILE": "Neem moskeetegel",
-        "USE_POST_OFFICE": "Gebruik het postkantoor"
+        "USE_POST_OFFICE": "Gebruik het postkantoor",
+        "PLACE_MEMBER_ON_POLICE_STATION": "Plaats familielid op Politiebureau"
       }
     },
     "bonusCards": {

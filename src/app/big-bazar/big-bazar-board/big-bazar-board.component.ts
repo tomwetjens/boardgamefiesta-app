@@ -8,6 +8,7 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {GuessDialogComponent} from '../guess-dialog/guess-dialog.component';
 import {MessageDialogComponent} from '../../shared/message-dialog/message-dialog.component';
 import {ConfirmBonusCardDialogComponent} from "../confirm-bonus-card-dialog/confirm-bonus-card-dialog.component";
+import {DiscardPileDialogComponent} from "../discard-pile-dialog/discard-pile-dialog.component";
 
 const AUTO_SELECTED_ACTIONS = [Action.MOVE];
 
@@ -68,6 +69,18 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
     return null;
   }
 
+  private getPlace(n: number): Place {
+    for (let x = 0; x < this.state.layout.length; x++) {
+      for (let y = 0; y < this.state.layout[x].length; y++) {
+        const place = this.state.layout[x][y];
+        if (place.number === n) {
+          return place;
+        }
+      }
+    }
+    return null;
+  }
+
   private getCurrentFamilyMemberPlace(color: PlayerColor): Place {
     for (let x = 0; x < this.state.layout.length; x++) {
       for (let y = 0; y < this.state.layout[x].length; y++) {
@@ -85,7 +98,7 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
       this.selectedAction = null;
     }
 
-    if (!this.selectedAction && this.state.actions) {
+    if (!this.selectedAction && this.state.actions && this.state.actions.length === 1) {
       for (const action of AUTO_SELECTED_ACTIONS) {
         if (this.state.actions.includes(action)) {
           this.selectAction(action);
@@ -117,8 +130,8 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
       case Action.GUESS_AND_ROLL_FOR_LIRA:
         return this.guessAndRollForLira();
 
-      case Action.TAKE_2_BONUS_CARDS:
-        return this.take2BonusCards();
+      case Action.TAKE_BONUS_CARD_CARAVANSARY:
+        return this.takeBonusCardCaravansary();
 
       default:
         this.selectedAction = null;
@@ -146,7 +159,8 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
     fromPromise(ngbModalRef.result)
       .subscribe(({goods, bonusCard}) => {
         this.perform.emit({type: Action.SELL_GOODS, goods, bonusCard});
-      }, () => {});
+      }, () => {
+      });
   }
 
   private guessAndRollForLira() {
@@ -224,8 +238,8 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
     }
   }
 
-  private take2BonusCards() {
-    const caravansary = this.state.layout[this.currentPlace.x][this.currentPlace.y] as Caravansary;
+  private takeBonusCardCaravansary() {
+    const caravansary = this.getPlace(6) as Caravansary;
 
     if (caravansary.discardPile && caravansary.discardPile.length > 0) {
       const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
@@ -238,10 +252,10 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
       componentInstance.cancelKey = 'big-bazar.takeFromDrawStack';
 
       fromPromise(ngbModalRef.result)
-        .subscribe(() => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: true}),
-          () => this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: false}));
+        .subscribe(() => this.perform.emit({type: Action.TAKE_BONUS_CARD_CARAVANSARY, caravansary: true}),
+          () => this.perform.emit({type: Action.TAKE_BONUS_CARD_CARAVANSARY, caravansary: false}));
     } else {
-      this.perform.emit({type: Action.TAKE_2_BONUS_CARDS, caravansary: false});
+      this.perform.emit({type: Action.TAKE_BONUS_CARD_CARAVANSARY, caravansary: false});
     }
   }
 
@@ -258,4 +272,14 @@ export class BigBazarBoardComponent implements OnInit, OnChanges {
     this.perform.emit({type: this.selectedAction, mosqueTile: mosqueTile as MosqueTile});
   }
 
+  showDiscardPile(discardPile: BonusCard[]) {
+    const ngbModalRef = this.ngbModal.open(DiscardPileDialogComponent);
+
+    const componentInstance = ngbModalRef.componentInstance as DiscardPileDialogComponent;
+    componentInstance.discardPile = discardPile;
+
+    fromPromise(ngbModalRef.result)
+      .subscribe(() => {
+      }, () => {});
+  }
 }

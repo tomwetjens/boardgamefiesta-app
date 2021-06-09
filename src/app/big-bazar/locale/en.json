@@ -10,9 +10,10 @@
     "sellGoodsBonusCard": "Or, you can use your Bonus Card to sell any Good:",
     "sellGoodsConfirmBonusCard": "Play Bonus Card and Sell these Goods",
     "caravansaryConfirmDialog": "Take 2 Bonus Cards",
-    "caravansaryConfirmMessage": "Draw 2 from the deck or take the top 2 from the Caravansary?",
-    "takeFromDiscardPile": "Take from Caravansary",
-    "takeFromDrawStack": "Draw from deck",
+    "caravansaryConfirmMessage": "Draw 1 from the deck or take 1 from the discard pile?",
+    "discardPileDialog": "Discard Pile",
+    "takeFromDiscardPile": "Take 1 from Discard Pile",
+    "takeFromDrawStack": "Draw 1 from deck",
     "guessDialog": "Guess a number",
     "guessSelect": "Select a number to guess",
     "confirmActionRequiringBonusCard": "This action requires you to play a Bonus Card. Are you sure?",
@@ -112,9 +113,12 @@
         "TAKE_1_FRUIT": "Take 1 Fruit",
         "TAKE_1_SPICE": "Take 1 Spice",
         "TAKE_1_BLUE": "Take 1 Blue Good",
-        "TAKE_2_BONUS_CARDS": "Take 2 Bonus Cards",
+        "TAKE_3_LIRA": "Take 3 Lira",
+        "TAKE_BONUS_CARD": "Take Bonus Card",
+        "TAKE_BONUS_CARD_CARAVANSARY": "Take Bonus Card (from deck or discard pile)",
         "TAKE_MOSQUE_TILE": "Take Mosque Tile",
-        "USE_POST_OFFICE": "Use Post Office"
+        "USE_POST_OFFICE": "Use Post Office",
+        "PLACE_MEMBER_ON_POLICE_STATION": "Send Family Member to Police Station"
       },
       "descriptions": {
         "BONUS_CARD_BUY_RUBY": "Play Bonus Card to buy another ruby",
@@ -154,9 +158,12 @@
         "TAKE_1_FRUIT": "Take 1 Fruit",
         "TAKE_1_SPICE": "Take 1 Spice",
         "TAKE_1_BLUE": "Take 1 Blue Good",
-        "TAKE_2_BONUS_CARDS": "Take 2 Bonus Cards",
+        "TAKE_3_LIRA": "Take 3 Lira",
+        "TAKE_BONUS_CARD": "Take Bonus Card",
+        "TAKE_BONUS_CARD_CARAVANSARY": "Take Bonus Card (from deck or discard pile)",
         "TAKE_MOSQUE_TILE": "Take Mosque Tile",
-        "USE_POST_OFFICE": "Use Post Office"
+        "USE_POST_OFFICE": "Use Post Office",
+        "PLACE_MEMBER_ON_POLICE_STATION": "Send Family Member to Police Station"
       }
     },
     "bonusCards": {

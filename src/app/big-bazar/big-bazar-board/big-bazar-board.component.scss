@@ -56,6 +56,29 @@
   }
 }
 
+.caravansary {
+  .discard-pile {
+    rect {
+      stroke: white;
+      fill: black;
+      fill-opacity: 0.001; /* >0, so browser considers it visible across the whole area */
+      stroke-width: 8;
+      cursor: pointer;
+
+      &:hover {
+          stroke: black;
+      }
+    }
+
+    &.disabled {
+      rect {
+        fill-opacity: 0;
+        stroke-width: 0;
+      }
+    }
+  }
+}
+
 .mosque {
   rect {
     fill: none;

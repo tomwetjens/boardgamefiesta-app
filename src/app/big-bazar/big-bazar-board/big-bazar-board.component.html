@@ -166,19 +166,28 @@
                 </g>
               </g>
 
-              <g *ngSwitchCase="6">
+              <g *ngSwitchCase="6" class="caravansary">
                 <!-- Caravansary -->
                 <g transform="translate(324, 188)">
                   <text font-size="40" font-weight="bold" text-anchor="middle">{{place.discardPile?.length}}x</text>
                 </g>
 
-                <g transform="translate(124, 218)">
+                <g transform="translate(124, 218)" class="discard-pile"
+                   [ngClass]="{disabled:!place.discardPile?.length}"
+                   (click)="showDiscardPile(place.discardPile)">
                   <g *ngFor="let bonusCard of place.discardPile; index as index">
                     <image [attr.href]="'/assets/games/big-bazar/bonus/' + bonusCard + '.png'"
                            width="400" height="248"
                            clip-path="url(#bonusCardClip)"
                            filter="url(#dropShadow)"></image>
                   </g>
+
+                  <!-- Selection click box on top-->
+                  <rect class="clickbox"
+                        x="0" y="0"
+                        width="400" height="248"
+                        fill="none"
+                        rx="20" ry="20"></rect>
                 </g>
               </g>
 
