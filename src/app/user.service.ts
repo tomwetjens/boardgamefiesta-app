@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Table, User} from './shared/model';
+import {EmailPreferences, Table, User} from './shared/model';
 import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
@@ -88,6 +88,11 @@ export class UserService {
 
   changeUsername(username: string) {
     return this.httpClient.post(environment.apiBaseUrl + '/user/change-username', {username})
+      .pipe(tap(_ => this._refresh.next(true)));
+  }
+
+  changeEmailPreferences(change: EmailPreferences) {
+    return this.httpClient.post(environment.apiBaseUrl + '/user/change-email-preferences', change)
       .pipe(tap(_ => this._refresh.next(true)));
   }
 }

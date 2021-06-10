@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
-import {User} from '../shared/model';
+import {EmailPreferences, User} from '../shared/model';
 import {Observable} from 'rxjs';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangeEmailDialogComponent} from "../user/change-email-dialog/change-email-dialog.component";
 import {fromPromise} from "rxjs/internal-compatibility";
 import {ChangePasswordDialogComponent} from "../user/change-password-dialog/change-password-dialog.component";
 import {ChangeUsernameDialogComponent} from "../user/change-username-dialog/change-username-dialog.component";
+import {TitleService} from "../title.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-profile',
@@ -18,11 +20,14 @@ export class ProfileComponent implements OnInit {
   user: Observable<User>;
 
   constructor(private userService: UserService,
+              private titleService: TitleService,
+              private translateService: TranslateService,
               private ngbModal: NgbModal) {
-    this.user = this.userService.currentUser;
   }
 
   ngOnInit(): void {
+    this.user = this.userService.currentUser;
+    this.titleService.setTitle(this.translateService.instant('profile.title'));
   }
 
   changeLocation(user: User, location: string) {
@@ -59,5 +64,9 @@ export class ProfileComponent implements OnInit {
     const componentInstance = ngbModalRef.componentInstance as ChangeUsernameDialogComponent;
     componentInstance.user = user;
     fromPromise(ngbModalRef.result).subscribe();
+  }
+
+  changeEmailPreferences(emailPreferences: EmailPreferences) {
+    this.userService.changeEmailPreferences(emailPreferences).subscribe();
   }
 }

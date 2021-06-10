@@ -17,7 +17,8 @@
             <label for="username">{{'profile.username'|translate}}</label>
             <input type="text" class="form-control" id="username" name="username" [ngModel]="user.username" required
                    readonly>
-            <button class="btn btn-secondary mt-2" (click)="changeUsername(user)">{{'user.changeUsername'|translate}}</button>
+            <button class="btn btn-secondary mt-2"
+                    (click)="changeUsername(user)">{{'user.changeUsername'|translate}}</button>
           </div>
 
           <div class="form-group">
@@ -57,6 +58,74 @@
             <app-time-zone-selector id="timeZone" [value]="user.timeZone"
                                     (changeTimeZone)="changeTimeZone(user, $event)"></app-time-zone-selector>
           </div>
+        </form>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>{{'user.emailPreferences'|translate}}</a>
+      <ng-template ngbNavContent>
+        <form>
+          <div class="form-group">
+            <label for="language">{{'user.sendInviteEmail'|translate}}</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sendInviteEmail" id="sendInviteEmailYes"
+                     [checked]="user.emailPreferences.sendInviteEmail"
+                     (change)="user.emailPreferences.sendInviteEmail = true; changeEmailPreferences(user.emailPreferences)">
+              <label class="form-check-label" for="sendInviteEmailYes">
+                {{'user.sendInviteEmailYes'|translate}}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sendInviteEmail" id="sendInviteEmailNo"
+                     [checked]="!user.emailPreferences.sendInviteEmail"
+                     (change)="user.emailPreferences.sendInviteEmail = false; changeEmailPreferences(user.emailPreferences)">
+              <label class="form-check-label" for="sendInviteEmailNo">
+                {{'user.sendInviteEmailNo'|translate}}
+              </label>
+            </div>
+          </div>
+
+          <section>
+            <h4>{{'user.turnBasedPreferences'|translate}}</h4>
+            <div class="form-group">
+              <label for="language">{{'user.sendTurnEmail'|translate}}</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sendTurnEmail" id="sendTurnEmailYes"
+                       [checked]="user.emailPreferences.turnBasedPreferences.sendTurnEmail"
+                       (change)="user.emailPreferences.turnBasedPreferences.sendTurnEmail = true; changeEmailPreferences(user.emailPreferences)">
+                <label class="form-check-label" for="sendTurnEmailYes">
+                  {{'user.sendTurnEmailYes'|translate}}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sendTurnEmail" id="sendTurnEmailNo"
+                       [checked]="!user.emailPreferences.turnBasedPreferences.sendTurnEmail"
+                       (change)="user.emailPreferences.turnBasedPreferences.sendTurnEmail = false; changeEmailPreferences(user.emailPreferences)">
+                <label class="form-check-label" for="sendTurnEmailNo">
+                  {{'user.sendTurnEmailNo'|translate}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="language">{{'user.sendEndedEmail'|translate}}</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sendEndedEmail" id="sendEndedEmailYes"
+                       [checked]="user.emailPreferences.turnBasedPreferences.sendEndedEmail"
+                       (change)="user.emailPreferences.turnBasedPreferences.sendEndedEmail = true; changeEmailPreferences(user.emailPreferences)">
+                <label class="form-check-label" for="sendEndedEmailYes">
+                  {{'user.sendEndedEmailYes'|translate}}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="sendEndedEmail" id="sendEndedEmailNo"
+                       [checked]="!user.emailPreferences.turnBasedPreferences.sendEndedEmail"
+                       (change)="user.emailPreferences.turnBasedPreferences.sendEndedEmail = false; changeEmailPreferences(user.emailPreferences)">
+                <label class="form-check-label" for="sendEndedEmailNo">
+                  {{'user.sendEndedEmailNo'|translate}}
+                </label>
+              </div>
+            </div>
+          </section>
         </form>
       </ng-template>
     </li>

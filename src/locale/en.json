@@ -67,9 +67,21 @@
     "changePassword": "Change password",
     "passwordChanged": "Password changed",
     "password": "Password",
-    "timeZone": "Time zone"
+    "timeZone": "Time zone",
+    "emailPreferences": "E-mail preferences",
+    "sendInviteEmail": "Send an e-mail when invited to a table",
+    "sendInviteEmailYes": "Yes, send me an e-mail when I am invited to a table.",
+    "sendInviteEmailNo": "No, don't send me an e-mail when I am invited to a table.",
+    "turnBasedPreferences": "Async/PBM preferences",
+    "sendTurnEmail": "Send an e-mail when it's my turn",
+    "sendTurnEmailYes": "Yes, send me an e-mail when it's my turn.",
+    "sendTurnEmailNo": "No, don't send me an e-mail when it's my turn.",
+    "sendEndedEmail": "Send an e-mail when a game ends",
+    "sendEndedEmailYes": "Yes, send me an e-mail when a game ends.",
+    "sendEndedEmailNo": "No, don't send me an e-mail when a game ends."
   },
   "profile": {
+    "title": "Profile",
     "avatar": "Avatar",
     "about": "About me",
     "preferences": "Preferences",

@@ -24,6 +24,17 @@ export interface User {
   language: string;
   location?: string;
   readonly timeZone: string;
+  readonly emailPreferences?: EmailPreferences;
+}
+
+export interface EmailPreferences {
+  sendInviteEmail: boolean;
+  turnBasedPreferences: TurnBasedPreferences;
+}
+
+export interface TurnBasedPreferences {
+  sendTurnEmail: boolean;
+  sendEndedEmail: boolean;
 }
 
 export enum PlayerType {
