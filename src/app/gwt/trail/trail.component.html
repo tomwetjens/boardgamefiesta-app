@@ -307,7 +307,7 @@
       </g>
     </g>
   </defs>
-  <image href="/assets/games/gwt/board.png" x="0" [attr.y]="state.railsToTheNorth ? 195 : 0" height="800"
+  <image [attr.href]="'/assets/games/' + table.game + '/board.png'" x="0" [attr.y]="state.railsToTheNorth ? 195 : 0" height="800"
          width="800"></image>
   <g *ngIf="state.railsToTheNorth">
     <image href="/assets/games/gwt/rttn.png" x="0" y="0" height="250" width="800"></image>

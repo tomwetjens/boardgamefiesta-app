@@ -24,6 +24,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'gwt2/:tableId',
+    component: TableComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./gwt/gwt.module').then(m => m.GwtModule)
+      }
+    ]
+  },
+  {
     path: 'big-bazar/:tableId',
     component: TableComponent,
     canActivate: [AuthGuard],
@@ -99,7 +110,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

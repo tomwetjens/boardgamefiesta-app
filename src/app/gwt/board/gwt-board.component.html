@@ -11,20 +11,20 @@
     <button *ngFor="let action of actions"
             class="btn btn-primary text-nowrap" (click)="selectAction(action)"
             [disabled]="busy"
-            ngbPopover="{{table.game + '.actions.descriptions.' + action | translate}}"
+            ngbPopover="{{'gwt.actions.descriptions.' + action | translate}}"
             placement="bottom"
             triggers="mouseenter:mouseleave"
             container="body">
-      {{table.game + '.actions.buttons.' + action|translate}}
+      {{'gwt.actions.buttons.' + action|translate}}
     </button>
 
     <span *ngIf="autoEndTurnTimer">
-      {{table.game + '.endTurn'|translate:{secs: autoEndTurnInSecs} }}
+      {{'gwt.endTurn'|translate:{secs: autoEndTurnInSecs} }}
     </span>
   </div>
 
   <p *ngIf="table.turn && selectedAction" class="instruction">
-    <span>{{table.game + '.actions.instructions.' + selectedAction | translate}}</span>
+    <span>{{'gwt.actions.instructions.' + selectedAction | translate}}</span>
 
     <button *ngIf="actions.length > 1"
             class="btn btn-primary"

@@ -34,6 +34,7 @@ import {LocationPopoverComponent} from './location-popover/location-popover.comp
 import {BuildingPopoverComponent} from './building-popover/building-popover.component';
 import {HazardPopoverComponent} from './hazard-popover/hazard-popover.component';
 import { BonusStationMastersComponent } from './bonus-station-masters/bonus-station-masters.component';
+import {Gwt2Provider} from "./gwt2.provider";
 
 const routes: Routes = [
   {
@@ -82,9 +83,11 @@ const routes: Routes = [
 })
 export class GwtModule {
 
-  constructor(private provider: GwtProvider,
+  constructor(private gwtProvider: GwtProvider,
+              private gwt2Provider: Gwt2Provider,
               private translateService: TranslateService) {
-    GAME_PROVIDERS['gwt'] = provider;
+    GAME_PROVIDERS['gwt'] = gwtProvider;
+    GAME_PROVIDERS['gwt2'] = gwt2Provider;
 
     this.translateService.setTranslation('en', en, true);
     this.translateService.setTranslation('it', it, true);
