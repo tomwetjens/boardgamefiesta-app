@@ -863,6 +863,7 @@
   "gwt2": {
     "actions": {
       "buttons": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Discard 1 Dutch Belt to move engine 2 forward",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Discard 1 cattle card to gain 6 dollars and add 1 objective card to your hand",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
@@ -871,6 +872,7 @@
         "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Remove card and gain 1 dollar"
       },
       "descriptions": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Discard 1 Dutch Belt to move engine 2 forward",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Discard 1 cattle card to gain 6 dollars and add 1 objective card to your hand",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
@@ -879,6 +881,7 @@
         "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Remove card and gain 1 dollar"
       },
       "instructions": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Discard 1 Dutch Belt to move engine 2 forward",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Discard 1 cattle card to gain 6 dollars and add 1 objective card to your hand",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
