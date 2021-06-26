@@ -1,11 +1,11 @@
 <ng-container *ngIf="location?.building">
   <ng-container *ngIf="location.building.player; else neutralBuilding">
     <app-player-name [player]="table.players[location.building.player.name]"></app-player-name>
-    <gwt-building-popover [building]="location.building.name" [color]="location.building.player.color"></gwt-building-popover>
+    <gwt-building-popover [table]="table" [building]="location.building.name" [color]="location.building.player.color"></gwt-building-popover>
     <span *ngIf="risk" [innerHTML]="'gwt.popover.location.' + name|translate"></span>
   </ng-container>
   <ng-template #neutralBuilding>
-    <gwt-building-popover [building]="location.building.name"></gwt-building-popover>
+    <gwt-building-popover [table]="table" [building]="location.building.name"></gwt-building-popover>
   </ng-template>
 </ng-container>
 <ng-container *ngIf="location?.hazard">

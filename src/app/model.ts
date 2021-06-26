@@ -43,3 +43,10 @@ export interface ErrorResponse {
 export interface AddFriendRequest {
   userId: string;
 }
+
+export interface Game {
+  id: string;
+  minNumberOfPlayers: number;
+  maxNumberOfPlayers: number;
+  computerSupport: boolean;
+}

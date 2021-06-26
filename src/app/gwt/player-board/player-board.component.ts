@@ -152,6 +152,7 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
+      case ActionType.REMOVE_CARD_AND_GAIN_1_DOLLAR:
         this.perform.emit({type: this.selectedAction, card});
         break;
 
@@ -161,7 +162,9 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
         break;
 
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
+      case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE:
+      case ActionType.DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS:
       case ActionType.DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET:
       case ActionType.DISCARD_PAIR_TO_GAIN_3_DOLLARS:
       case ActionType.DISCARD_PAIR_TO_GAIN_4_DOLLARS:
@@ -180,12 +183,15 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
+      case ActionType.REMOVE_CARD_AND_GAIN_1_DOLLAR:
         return true;
       case ActionType.DISCARD_1_OBJECTIVE_CARD_TO_GAIN_2_CERTIFICATES:
       case ActionType.PLAY_OBJECTIVE_CARD:
         return isObjectiveCard(card);
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_3_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
+      case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND:
       case ActionType.DISCARD_1_CATTLE_CARD_TO_GAIN_1_CERTIFICATE:
+      case ActionType.DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS:
         return isCattleCard(card);
       case ActionType.DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET:
         return isCattleCard(card) && card.breedingValue === 2;

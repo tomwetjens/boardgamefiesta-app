@@ -66,9 +66,12 @@ import {MessageDialogComponent} from "../../shared/message-dialog/message-dialog
 
 const SELECT_SPACE_ACTIONS = [
   ActionType.MOVE_ENGINE_1_FORWARD,
+  ActionType.MOVE_ENGINE_2_FORWARD,
   ActionType.MOVE_ENGINE_1_BACKWARDS_TO_GAIN_3_DOLLARS,
   ActionType.MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD,
+  ActionType.MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR,
   ActionType.MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS,
+  ActionType.MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS,
   ActionType.MOVE_ENGINE_2_OR_3_FORWARD,
   ActionType.MOVE_ENGINE_AT_LEAST_1_BACKWARDS_AND_GAIN_3_DOLLARS,
   ActionType.MOVE_ENGINE_AT_MOST_2_FORWARD,
@@ -767,9 +770,9 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
           && location.building.player.color === this.state.currentPlayer.color));
   }
 
-  selectTeepee(reward: number) {
+  selectTeepee(location: string) {
     if (this.selectedAction === ActionType.TRADE_WITH_TRIBES) {
-      this.perform.emit({type: this.selectedAction, reward});
+      this.perform.emit({type: this.selectedAction, location});
     }
   }
 

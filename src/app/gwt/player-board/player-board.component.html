@@ -26,7 +26,7 @@
           container="body">
       {{playerState.certificates}}
     </span>
-    <span class="exchangeTokens" *ngIf="state.railsToTheNorth && table.players[playerState.player.name].type != 'COMPUTER'"
+    <span class="exchangeTokens" *ngIf="(state.railsToTheNorth || table.game === 'gwt2') && table.players[playerState.player.name].type != 'COMPUTER'"
           ngbPopover="{{'gwt.popover.exchangeTokens'|translate}}"
           triggers="mouseenter:mouseleave"
           container="body"

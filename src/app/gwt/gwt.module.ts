@@ -33,8 +33,10 @@ import {BiddingComponent} from './bidding/bidding.component';
 import {LocationPopoverComponent} from './location-popover/location-popover.component';
 import {BuildingPopoverComponent} from './building-popover/building-popover.component';
 import {HazardPopoverComponent} from './hazard-popover/hazard-popover.component';
-import { BonusStationMastersComponent } from './bonus-station-masters/bonus-station-masters.component';
+import {BonusStationMastersComponent} from './bonus-station-masters/bonus-station-masters.component';
 import {Gwt2Provider} from "./gwt2.provider";
+
+const TRANSLATIONS = {'en': en, 'nl': nl, 'pt': pt, 'it': it};
 
 const routes: Routes = [
   {
@@ -89,10 +91,27 @@ export class GwtModule {
     GAME_PROVIDERS['gwt'] = gwtProvider;
     GAME_PROVIDERS['gwt2'] = gwt2Provider;
 
-    this.translateService.setTranslation('en', en, true);
-    this.translateService.setTranslation('it', it, true);
-    this.translateService.setTranslation('nl', nl, true);
-    this.translateService.setTranslation('pt', pt, true);
+    Object.keys(TRANSLATIONS).forEach(language => {
+      const translations = TRANSLATIONS[language];
+
+      // Adding missing 'gwt2' translations from 'gwt', so we don't have to maintain duplicate strings across editions
+      if (translations.gwt2) {
+        copyMissing(translations.gwt2, translations.gwt);
+      }
+
+      this.translateService.setTranslation(language, translations, true);
+    });
   }
 
+}
+
+function copyMissing(target: any, source: any): any {
+  for (const key of Object.keys(source)) {
+    if (!target[key]) {
+      target[key] = source[key];
+    } else if (typeof source[key] === 'object') {
+      copyMissing(target[key], source[key]);
+    }
+  }
+  return target;
 }

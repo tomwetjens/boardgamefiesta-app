@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PlayerColor} from "../../shared/model";
+import {PlayerColor, Table} from "../../shared/model";
 
 @Component({
   selector: 'gwt-building-popover',
@@ -8,6 +8,7 @@ import {PlayerColor} from "../../shared/model";
 })
 export class BuildingPopoverComponent implements OnInit {
 
+  @Input() table: Table;
   @Input() building: string;
   @Input() color?: PlayerColor;
 

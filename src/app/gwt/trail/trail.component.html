@@ -1,23 +1,23 @@
 <ng-template #popoverA>
-  <gwt-building-popover building="A"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="A"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverB>
-  <gwt-building-popover building="B"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="B"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverC>
-  <gwt-building-popover building="C"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="C"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverD>
-  <gwt-building-popover building="D"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="D"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverE>
-  <gwt-building-popover building="E"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="E"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverF>
-  <gwt-building-popover building="F"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="F"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverG>
-  <gwt-building-popover building="G"></gwt-building-popover>
+  <gwt-building-popover [table]="table" building="G"></gwt-building-popover>
 </ng-template>
 <ng-template #popoverLocationA>
   <gwt-location-popover [table]="table" [trail]="state.trail" name="A"></gwt-location-popover>
@@ -108,6 +108,9 @@
 </ng-template>
 <ng-template #popoverLocationC2>
   <gwt-location-popover [table]="table" [trail]="state.trail" name="C-2"></gwt-location-popover>
+</ng-template>
+<ng-template #popoverLocationD1>
+  <gwt-location-popover [table]="table" [trail]="state.trail" name="D-1"></gwt-location-popover>
 </ng-template>
 <ng-template #popoverLocationE1>
   <gwt-location-popover [table]="table" [trail]="state.trail" name="E-1"></gwt-location-popover>
@@ -307,7 +310,8 @@
       </g>
     </g>
   </defs>
-  <image [attr.href]="'/assets/games/' + table.game + '/board.png'" x="0" [attr.y]="state.railsToTheNorth ? 195 : 0" height="800"
+  <image [attr.href]="'/assets/games/' + table.game + '/board.png'" x="0" [attr.y]="state.railsToTheNorth ? 195 : 0"
+         height="800"
          width="800"></image>
   <g *ngIf="state.railsToTheNorth">
     <image href="/assets/games/gwt/rttn.png" x="0" y="0" height="250" width="800"></image>
@@ -356,42 +360,42 @@
       <rect width="33" height="33" rx="6" ry="6" x="0" y="0"/>
     </g>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['MEMPHIS']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['MEMPHIS']; index as i" [class]="'disc ' + color"
             cx="140" [attr.cy]="144 - (i * 4)" r="11"/>
     <rect class="city" x="115" y="127" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('MEMPHIS')" [ngClass]="{disabled:!canSelectCity('MEMPHIS')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['SAN_FRANCISCO']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['SAN_FRANCISCO']; index as i" [class]="'disc ' + color"
             cx="188.5" [attr.cy]="53 - (i * 4)" r="11"/>
     <rect class="city" x="163" y="35" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['DENVER']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['DENVER']; index as i" [class]="'disc ' + color"
             cx="336" [attr.cy]="53 - (i * 4)" r="11"/>
     <rect class="city" x="310" y="35" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('DENVER')" [ngClass]="{disabled:!canSelectCity('DENVER')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['MILWAUKEE']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['MILWAUKEE']; index as i" [class]="'disc ' + color"
             cx="414" [attr.cy]="54 - (i * 4)" r="11"/>
     <rect class="city" x="388" y="36" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('MILWAUKEE')" [ngClass]="{disabled:!canSelectCity('MILWAUKEE')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['GREEN_BAY']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['GREEN_BAY']; index as i" [class]="'disc ' + color"
             cx="543" [attr.cy]="53 - (i * 4)" r="11"/>
     <rect class="city" x="517" y="36" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('GREEN_BAY')" [ngClass]="{disabled:!canSelectCity('GREEN_BAY')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['MINNEAPOLIS']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['MINNEAPOLIS']; index as i" [class]="'disc ' + color"
             cx="695.5" [attr.cy]="54 - (i * 4)" r="11"/>
     <rect class="city" x="670" y="36" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('MINNEAPOLIS')" [ngClass]="{disabled:!canSelectCity('MINNEAPOLIS')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['MONTREAL']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['MONTREAL']; index as i" [class]="'disc ' + color"
             cx="769.5" [attr.cy]="100 - (i * 4)" r="11"/>
     <rect class="city" x="744" y="82" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('MONTREAL')" [ngClass]="{disabled:!canSelectCity('MONTREAL')}"/>
 
-    <circle *ngFor="let color of state.railroadTrack.cities['TORONTO']; index as i"  [class]="'disc ' + color"
+    <circle *ngFor="let color of state.railroadTrack.cities['TORONTO']; index as i" [class]="'disc ' + color"
             cx="621" [attr.cy]="150 - (i * 4)" r="11"/>
     <rect class="city" x="596" y="132" rx="2" ry="2" height="50" width="52"
           (click)="selectCity('TORONTO')" [ngClass]="{disabled:!canSelectCity('TORONTO')}"/>
@@ -1110,57 +1114,57 @@
       <g class="teepeeLocations" #teepeeLocations>
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-1'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-1'].teepee" y="665.6374365" x="235.67607971"
-             (click)="selectTeepee(1)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-1')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="665.6374365" x="235.67607971" id="TEEPEE-1"
              (click)="selectLocation('TEEPEE-1')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-1')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-2'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-2'].teepee" y="671.4180561" x="277.50137016"
-             (click)="selectTeepee(2)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-2')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="671.4180561" x="277.50137016" id="TEEPEE-2"
              (click)="selectLocation('TEEPEE-2')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-2')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-4'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-4'].teepee" y="680.8059289" x="321.4364901"
-             (click)="selectTeepee(4)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-4')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="680.8059289" x="321.4364901" id="TEEPEE-4"
              (click)="selectLocation('TEEPEE-4')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-4')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-6'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-6'].teepee" y="683.7798081" x="364.1911178"
-             (click)="selectTeepee(6)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-6')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="683.7798081" x="364.1911178" id="TEEPEE-6"
              (click)="selectLocation('TEEPEE-6')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-6')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-8'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-8'].teepee" y="686.7536873" x="405.4587778"
-             (click)="selectTeepee(8)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-8')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="686.7536873" x="405.4587778" id="TEEPEE-8"
              (click)="selectLocation('TEEPEE-8')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-8')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE-10'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE-10'].teepee" y="683.77978" x="448.2134055"
-             (click)="selectTeepee(10)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE-10')" [ngClass]="{disabled:!canSelectTeepee}"/>
         <use xlink:href="#teepeeLocation" class="location teepee" y="683.77978" x="448.2134055" id="TEEPEE-10"
              (click)="selectLocation('TEEPEE-10')" [ngClass]="{disabled:!canSelectLocation('TEEPEE-10')}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE--1'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE--1'].teepee" y="621.0992737" x="352.2437003"
-             (click)="selectTeepee(-1)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE--1')" [ngClass]="{disabled:!canSelectTeepee}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE--2'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE--2'].teepee" y="616.953484" x="395.8186232"
-             (click)="selectTeepee(-2)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE--2')" [ngClass]="{disabled:!canSelectTeepee}"/>
 
         <use class="teepee" *ngIf="state.trail.teepeeLocations['TEEPEE--3'].teepee"
              [attr.xlink:href]="'#' + state.trail.teepeeLocations['TEEPEE--3'].teepee" y="613.9796048" x="438.5730261"
-             (click)="selectTeepee(-3)" [ngClass]="{disabled:!canSelectTeepee}"/>
+             (click)="selectTeepee('TEEPEE--3')" [ngClass]="{disabled:!canSelectTeepee}"/>
       </g>
 
       <g class="buildingLocations" #buildingLocations>
         <image width="68.058" height="66.48" y="809.0254702" x="188.73680282"
                *ngIf="state.trail.locations['FLOOD-RISK-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationFloodRisk2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1173,7 +1177,7 @@
 
         <image width="68.058" height="66.48" y="811.6807797" x="271.05055994"
                *ngIf="state.trail.locations['FLOOD-RISK-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationFloodRisk1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1186,7 +1190,7 @@
 
         <image width="68.058" height="66.48" y="747.4228799" x="406.4700125"
                *ngIf="state.trail.locations['A-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationA1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1199,7 +1203,7 @@
 
         <image width="68.058" height="66.48" y="737.3328443" x="317.2525125"
                *ngIf="state.trail.locations['A-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationA2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1212,7 +1216,7 @@
 
         <image width="68.058" height="66.48" y="727.2427244" x="226.97290837"
                *ngIf="state.trail.locations['A-3']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationA3"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1225,7 +1229,7 @@
 
         <image width="68.058" height="66.48" y="706.0005013" x="119.16841328"
                *ngIf="state.trail.locations['B-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationB1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1238,7 +1242,7 @@
 
         <image width="68.058" height="66.48" y="622.624626" x="135.10008763"
                *ngIf="state.trail.locations['B-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationB2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1251,7 +1255,7 @@
 
         <image width="68.058" height="66.48" y="548.2767187" x="183.95728225"
                *ngIf="state.trail.locations['B-3']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationB3"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1264,7 +1268,7 @@
 
         <image width="68.058" height="66.48" y="500.4816535" x="69.24906395"
                *ngIf="state.trail.locations['DROUGHT-RISK-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationDroughtRisk1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1277,7 +1281,7 @@
 
         <image width="68.058" height="66.48" y="641.7426577" x="499.9359515"
                *ngIf="state.trail.locations['INDIAN-TRADE-RISK-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationIndianTradeRisk1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1290,7 +1294,7 @@
 
         <image width="68.058" height="66.48" y="564.7382326" x="499.9359515"
                *ngIf="state.trail.locations['INDIAN-TRADE-RISK-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationIndianTradeRisk2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1303,7 +1307,7 @@
 
         <image width="68.058" height="66.48" y="444.720716" x="314.5971749"
                *ngIf="state.trail.locations['C-1-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationC11"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1316,7 +1320,7 @@
 
         <image width="68.058" height="66.48" y="437.8169675" x="402.2215173"
                *ngIf="state.trail.locations['C-1-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationC12"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1329,20 +1333,33 @@
 
         <image width="68.058" height="66.48" y="533.4071822" x="313.0040454"
                *ngIf="state.trail.locations['C-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationC2"
                triggers="mouseenter:mouseleave"
                container="body"/>
         <rect class="location building" ry="3.699049" height="68.08" width="66.49" y="533.4071822" x="313.0040454"
-              id="C-2"
+              id="C-2" *ngIf="table.game !== 'gwt2'"
               (click)="selectLocation('C-2')" [ngClass]="{disabled:!canSelectLocation('C-2')}"
               [ngbPopover]="popoverLocationC2"
               triggers="mouseenter:mouseleave"
               container="body"/>
 
+        <image width="68.058" height="66.48" y="521" x="401"
+               *ngIf="state.trail.locations['D-1']?.building as building"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [ngbPopover]="popoverLocationD1"
+               triggers="mouseenter:mouseleave"
+               container="body"/>
+        <rect class="location building" ry="3.699049" height="68.08" width="66.49" y="520.10" x="400.62"
+              id="D-1" *ngIf="table.game === 'gwt2'"
+              (click)="selectLocation('D-1')" [ngClass]="{disabled:!canSelectLocation('D-1')}"
+              [ngbPopover]="popoverLocationD1"
+              triggers="mouseenter:mouseleave"
+              container="body"/>
+
         <image width="68.058" height="66.48" y="360.8137507" x="428.7743875"
                *ngIf="state.trail.locations['E-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationE1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1355,7 +1372,7 @@
 
         <image width="68.058" height="66.48" y="359.751655" x="330.5289195"
                *ngIf="state.trail.locations['E-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationE2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1368,7 +1385,7 @@
 
         <image width="68.058" height="66.48" y="380.4628443" x="216.35171252"
                *ngIf="state.trail.locations['F-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationF2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1381,7 +1398,7 @@
 
         <image width="68.058" height="66.48" y="271.59625913" x="417.6222"
                *ngIf="state.trail.locations['ROCKFALL-RISK-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationRockfallRisk1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1394,7 +1411,7 @@
 
         <image width="68.058" height="66.48" y="269.47201434" x="328.9357338"
                *ngIf="state.trail.locations['ROCKFALL-RISK-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationRockfallRisk2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1407,7 +1424,7 @@
 
         <image width="68.058" height="66.48" y="282.7484382" x="157.93550767"
                *ngIf="state.trail.locations['F-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationF1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1420,7 +1437,7 @@
 
         <image width="68.058" height="66.48" y="268.40990459" x="60.22112124"
                *ngIf="state.trail.locations['G-2']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationG2"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1433,7 +1450,7 @@
 
         <image width="68.058" height="66.48" y="346.4752199" x="28.88877824"
                *ngIf="state.trail.locations['G-1']?.building as building"
-               [attr.href]="'/assets/games/gwt/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
+               [attr.href]="'/assets/games/' + table.game + '/buildings/' + building.name + '_' + building.player.color.toString().toLowerCase() + '.png'"
                [ngbPopover]="popoverLocationG1"
                triggers="mouseenter:mouseleave"
                container="body"/>
@@ -1466,8 +1483,8 @@
               triggers="mouseenter:mouseleave"
               container="body"/>
         <rect class="location building neutral" ry="3.699049" height="68.08" width="66.49"
-              x="400.62"
-              y="520.10"
+              [attr.x]="table.game === 'gwt2' ? 313.0040454 : 400.62"
+              [attr.y]="table.game === 'gwt2' ? 533.4071822: 520.10"
               id="D" (click)="selectLocation('D')" [ngClass]="{disabled:!canSelectLocation( 'D')}"
               [ngbPopover]="popoverLocationD"
               triggers="mouseenter:mouseleave"

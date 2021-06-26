@@ -9,14 +9,14 @@
 <div class="modal-body">
   <ng-container *ngFor="let playerBuilding of playerState.buildings">
     <ng-template #popover>
-      <gwt-building-popover [building]="playerBuilding" [color]="playerState.player.color"></gwt-building-popover>
+      <gwt-building-popover [table]="table" [building]="playerBuilding" [color]="playerState.player.color"></gwt-building-popover>
     </ng-template>
-    <button
-      [class]="'building ' + playerState.player.color.toString().toLowerCase() + '-' + playerBuilding.toLowerCase()"
-      (click)="confirm(playerBuilding)"
-      [ngbPopover]="popover"
-      triggers="mouseenter:mouseleave"
-      container="body">
+    <button class="building"
+            [ngStyle]="{'background-image':'url(\'/assets/games/'+ table.game + '/buildings/' + playerBuilding.toLowerCase() + '_' + playerState.player.color.toString().toLowerCase() + '.png\')'}"
+            (click)="confirm(playerBuilding)"
+            [ngbPopover]="popover"
+            triggers="mouseenter:mouseleave"
+            container="body">
     </button>
   </ng-container>
 </div>

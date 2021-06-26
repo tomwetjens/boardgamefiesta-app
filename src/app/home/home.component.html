@@ -76,24 +76,24 @@
 </section>
 
 <section class="container">
-  <div class="card mb-3" *ngFor="let gameId of games$ | async">
+  <div class="card mb-3" *ngFor="let game of games$ | async">
     <div class="row g-0 no-gutters">
       <div class="col col-lg-2 col-md-3 col-sm-4">
-        <a [routerLink]="['games/', gameId]">
-          <img class="card-img" src="/assets/games/{{gameId}}/box.png" [alt]="'game.' + gameId + '.name'|translate">
+        <a [routerLink]="['games/', game.id]">
+          <img class="card-img" src="/assets/games/{{game.id}}/box.png" [alt]="'game.' + game.id + '.name'|translate">
         </a>
       </div>
       <div class="col col-lg-10 col-md-9 col-sm-8">
         <div class="card-body">
-          <h5 class="card-title">{{'game.' + gameId + '.name' | translate}}</h5>
+          <h5 class="card-title">{{'game.' + game.id + '.name' | translate}}</h5>
           <div class="card-text">
-            <p class="d-none d-md-inline" [innerHTML]="'game.' + gameId + '.summary'| translate"></p>
+            <p class="d-none d-md-inline" [innerHTML]="'game.' + game.id + '.summary'| translate"></p>
             <p class="mt-3">
-              <a [routerLink]="['/tables/', gameId]">{{'viewStartedTables'|translate}}</a>
+              <a [routerLink]="['/tables/', game.id]">{{'viewStartedTables'|translate}}</a>
             </p>
             <p class="mt-3">
-              <button class="btn btn-primary" (click)="play(gameId)">{{'play'|translate}}</button>
-              <span class="ml-2"><a [routerLink]="['games/', gameId]">{{'readMore'|translate}}</a></span>
+              <button class="btn btn-primary" (click)="play(game.id)">{{'play'|translate}}</button>
+              <span class="ml-2"><a [routerLink]="['games/', game.id]">{{'readMore'|translate}}</a></span>
             </p>
           </div>
         </div>
