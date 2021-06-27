@@ -31,6 +31,7 @@ export interface CattleCard {
 export interface CattleMarket {
   readonly cards: CattleCard[];
   readonly drawStackSize: number;
+  readonly drawStack?: CattleCard[];
 }
 
 export enum ActionType {

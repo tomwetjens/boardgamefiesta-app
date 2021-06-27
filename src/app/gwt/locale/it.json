@@ -8,7 +8,6 @@
     "objectivesDialog": "Obiettivi e Tessere",
     "discardPileDialog": "Pila Degli Scarti",
     "drawStackDialog": "Mazzo Di Pesca",
-    "drawStackRandomized": "Queste carte sono nel tuo mazzo, ma sono mostrate in ordine random. Il vero ordine risiede nel server, quindi non puoi sapere quale sarà la tua prossima pescata.",
     "deliverDialog": "Consegna a {{city}}",
     "endedDialog": "Ed è tutto!",
     "confirmEndTurn": "Puoi ancora effettuare azioni. Sei sicuro di voler terminare il tuo turno?",

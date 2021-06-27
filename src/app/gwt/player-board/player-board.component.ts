@@ -234,7 +234,7 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
   showDrawStack() {
     this.dialog = this.ngbModal.open(DrawStackDialogComponent);
     const componentInstance = this.dialog.componentInstance as DrawStackDialogComponent;
-    componentInstance.playerState = this.playerState;
+    componentInstance.drawStack = this.playerState.drawStack;
   }
 
   canSelectCowboy(index: number): boolean {

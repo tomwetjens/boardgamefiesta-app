@@ -7,8 +7,8 @@
   </button>
 </div>
 <div class="modal-body">
-  <app-card *ngFor="let card of playerState.drawStack" [card]="card"></app-card>
-  <p *ngIf="playerState.drawStack.length > 1">{{'gwt.drawStackRandomized'|translate}}</p>
+  <app-card *ngFor="let card of drawStack" [card]="card"></app-card>
+  <p *ngIf="drawStack.length > 1">{{'gwt.drawStackRandomized'|translate}}</p>
 </div>
 <div class="modal-footer">
 </div>

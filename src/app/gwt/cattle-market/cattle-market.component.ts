@@ -7,6 +7,7 @@ import {COW} from "../sounds";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {BuyCattleDialogComponent} from "../buy-cattle-dialog/buy-cattle-dialog.component";
 import {fromPromise} from "rxjs/internal-compatibility";
+import {DrawStackDialogComponent} from "../draw-stack-dialog/draw-stack-dialog.component";
 
 @Component({
   selector: 'app-cattle-market',
@@ -140,5 +141,11 @@ export class CattleMarketComponent implements OnInit, OnChanges {
 
   private canBuySingle(breedingValue: number): boolean {
     return !!this.state.possibleBuys.find(option => option.breedingValue === breedingValue && !option.pair);
+  }
+
+  showDrawStack() {
+    const ngbModalRef = this.ngbModal.open(DrawStackDialogComponent);
+    const componentInstance = ngbModalRef.componentInstance as DrawStackDialogComponent;
+    componentInstance.drawStack = this.state.cattleMarket.drawStack;
   }
 }

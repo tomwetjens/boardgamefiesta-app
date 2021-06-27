@@ -13,5 +13,6 @@
           }"
             (click)="selectCard(card)"></app-card>
 
-  <app-card-stack [size]="state.cattleMarket.drawStackSize" [emptyType]="'CATTLE'"></app-card-stack>
+  <app-card-stack (click)="showDrawStack()" [ngClass]="{disabled:!state.cattleMarket.drawStack}"
+                  [size]="state.cattleMarket.drawStackSize" [emptyType]="'CATTLE'"></app-card-stack>
 </div>

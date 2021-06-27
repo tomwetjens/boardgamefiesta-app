@@ -8,7 +8,6 @@
     "objectivesDialog": "Objetivos e Fichas",
     "discardPileDialog": "Pilha de Descarte",
     "drawStackDialog": "Pilha de Compra",
-    "drawStackRandomized": "Estas cartas estão em sua pilha de compra, mas são exibidas em uma ordem aleatória. A ordem real só é conhecida pelo servidor, então você não sabe qual vai comprar a seguir.",
     "deliverDialog": "Entregar para {{city}}",
     "endedDialog": "Isso é tudo pessoal!",
     "confirmEndTurn": "Você ainda pode realizar ações. Tem certeza que deseja encerrar sua vez?",

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PlayerState} from "../model";
+import {Card} from "../model";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -9,7 +9,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class DrawStackDialogComponent implements OnInit {
 
-  @Input() playerState: PlayerState;
+  @Input() drawStack: Card[];
 
   constructor(public ngbActiveModal: NgbActiveModal) {
   }
