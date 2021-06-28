@@ -894,7 +894,7 @@
       "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "discard a <strong>{{value1}}</strong> to gain $6 and must add 1 Objective Card to hand",
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "discards cattle card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) to gain $7",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "moves engine backwards to <strong>{{value1}}</strong> to remove 1 card and gain $1",
-      "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "moves engine backwards to <strong>{{value1}}</strong> to remove 2 cardS and gain $2",
+      "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "moves engine backwards to <strong>{{value1}}</strong> to remove 2 cards and gain $2",
       "REMOVE_CATTLE_CARD_AND_GAIN_1_DOLLAR": "removes cattle card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) and gains $1",
       "REMOVE_OBJECTIVE_CARD_AND_GAIN_2_DOLLARS": "removes objective card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) and gains $2",
       "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "discards 1 Dutch Belt cattle card to move engine 2 forward"
@@ -902,7 +902,7 @@
     "popover": {
       "building": {
         "2b": "Building 2b<br/><strong>Action:</strong> Discard 1 Dutch Belt cattle card and move your engine 2 spaces forward<br/><strong>Action:</strong> Discard 1 Jersey cattle card and gain 2 dollars",
-        "5a": "Building 5a<br/><strong>Action:</strong> Discard 1 cattle card with breeding value 3 and <br/><strong>Action:</strong> Perform a single or double auxiliary action",
+        "5a": "Building 5a<br/><strong>Action:</strong> Discard 1 cattle card with breeding value 3 and gain $7<br/><strong>Action:</strong> Perform a single or double auxiliary action",
         "6a": "Building 6a<br/><strong>Action:</strong> Hire 1 worker (cost reduced by $1)<br/><strong>Action:</strong> Move your engine up to as many spaces as you have engineers",
         "6b": "Building 6b<br/><strong>Action:</strong> Copy the actions of an adjacent building",
         "8b": "Building 8b<br/><strong>Action:</strong> Discard 1 cattle card to gain 6 dollars and gain 1 objective card directly to your hand",
