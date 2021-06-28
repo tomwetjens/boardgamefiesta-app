@@ -95,9 +95,10 @@ export class GwtModule {
       const translations = TRANSLATIONS[language];
 
       // Adding missing 'gwt2' translations from 'gwt', so we don't have to maintain duplicate strings across editions
-      if (translations.gwt2) {
-        copyMissing(translations.gwt2, translations.gwt);
+      if (!translations.gwt2) {
+        translations.gwt2 = {};
       }
+      copyMissing(translations.gwt2, translations.gwt);
 
       this.translateService.setTranslation(language, translations, true);
     });
