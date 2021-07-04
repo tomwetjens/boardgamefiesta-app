@@ -868,8 +868,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Verwijder kaart en ontvang $1"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
       },
       "descriptions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Leg 1 Dutch Belt af om locomotief 2 vooruit te zetten",
@@ -877,8 +876,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Verwijder kaart en ontvang $1"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
       },
       "instructions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Leg 1 Dutch Belt af om locomotief 2 vooruit te zetten",
@@ -886,8 +884,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Verwijder een kaart"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
       }
     },
     "log": {
@@ -895,8 +892,6 @@
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "legt runderkaart <strong>{{value1}}</strong> (<strong>{{value2}}p</strong>) en ontvangt 7 dollar",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "zet de locomotief 1 achteruit naar <strong>{{value1}}</strong> om 1 kaart te verwijderen en ontvangt 1 dollar",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "zet de locomotief 2 achteruit naar <strong>{{value1}}</strong> om 2 kaarten te verwijderen en ontvangt 2 dollar",
-      "REMOVE_CATTLE_CARD_AND_GAIN_1_DOLLAR": "verwijdert runderkaart <strong>{{value1}}</strong> (<strong>{{value2}}p</strong>) en ontvangt 1 dollar",
-      "REMOVE_OBJECTIVE_CARD_AND_GAIN_2_DOLLARS": "verwijdert doelkaart <strong>{{value1}}</strong> (<strong>{{value2}}p</strong>) en ontvangt 2 dollar",
       "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "verwijdert 1 Dutch Belt runderkaart om de locomotief 2 vooruit te zetten"
     },
     "popover": {

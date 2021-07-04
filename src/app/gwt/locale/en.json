@@ -868,8 +868,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Move engine 1 backwards to remove 1 card and gain 1 dollar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Remove card and gain 1 dollar"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars"
       },
       "descriptions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Discard 1 Dutch Belt to move engine 2 forward",
@@ -877,8 +876,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Move engine 1 backwards to remove 1 card and gain 1 dollar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Remove card and gain 1 dollar"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars"
       },
       "instructions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Discard 1 Dutch Belt to move engine 2 forward",
@@ -886,8 +884,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Discard 1 cattle card to gain 7 dollars",
         "MOVE_ENGINE_2_FORWARD": "Move engine 2 forward",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Move engine 1 backwards to remove 1 card and gain 1 dollar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars",
-        "REMOVE_CARD_AND_GAIN_1_DOLLAR": "Remove a card"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Move engine 2 backwards to remove 2 cards and gain 2 dollars"
       }
     },
     "log": {
@@ -895,8 +892,6 @@
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "discards cattle card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) to gain $7",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "moves engine backwards to <strong>{{value1}}</strong> to remove 1 card and gain $1",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "moves engine backwards to <strong>{{value1}}</strong> to remove 2 cards and gain $2",
-      "REMOVE_CATTLE_CARD_AND_GAIN_1_DOLLAR": "removes cattle card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) and gains $1",
-      "REMOVE_OBJECTIVE_CARD_AND_GAIN_2_DOLLARS": "removes objective card <strong>{{value1}}</strong> (<strong>{{value2}}VP</strong>) and gains $2",
       "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "discards 1 Dutch Belt cattle card to move engine 2 forward"
     },
     "popover": {

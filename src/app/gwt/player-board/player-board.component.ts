@@ -152,7 +152,6 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
-      case ActionType.REMOVE_CARD_AND_GAIN_1_DOLLAR:
         this.perform.emit({type: this.selectedAction, card});
         break;
 
@@ -183,7 +182,6 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
-      case ActionType.REMOVE_CARD_AND_GAIN_1_DOLLAR:
         return true;
       case ActionType.DISCARD_1_OBJECTIVE_CARD_TO_GAIN_2_CERTIFICATES:
       case ActionType.PLAY_OBJECTIVE_CARD:
