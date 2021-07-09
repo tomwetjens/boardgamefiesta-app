@@ -804,7 +804,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descartar 1 carta de gado de valor '3' para ganhar 7 dólares",
         "MOVE_ENGINE_2_FORWARD": "Mover sua locomotiva 2 para frente",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mover sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mover sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mover sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       },
       "descriptions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
@@ -812,7 +812,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
         "MOVE_ENGINE_2_FORWARD": "Mova sua locomotiva 2 para frente",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mova sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       },
       "instructions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
@@ -820,7 +820,7 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
         "MOVE_ENGINE_2_FORWARD": "Mova sua locomotiva 2 para frente",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mova sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       }
     },
     "log": {
