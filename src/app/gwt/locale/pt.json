@@ -12,6 +12,7 @@
     "deliverDialog": "Entregar para {{city}}",
     "endedDialog": "Isso é tudo pessoal!",
     "confirmEndTurn": "Você ainda pode realizar ações. Tem certeza que deseja encerrar sua vez?",
+    "confirmCannotUndo": "Você não pode desfazer esta ação. Você tem certeza de que quer isto?",
     "deliverRequiresCertificates": "Você deve gastar pelo menos {{atLeast}} certificados para entregar em {{city}}.",
     "deliverOptionalCertificates": "Opcionalmente, você pode gastar certificados adicionais ao entregar para {{city}}, para obter um pagamento maior.",
     "spendCertificates": "Selecione o número de certificados que deseja usar:",
@@ -37,6 +38,7 @@
         "completed": "Este objetivo foi concluído e marca {{score}} pontos.",
         "notCompleted": "Este objetivo (ainda não) foi concluído e marca {{score}} pontos."
       },
+      "exchangeTokens": "O número de fichas de troca que um jogador tem. Clique neste ícone para usar uma ficha de troca a qualquer momento.",
       "stationMaster": {
         "PERM_CERT_POINTS_FOR_EACH_2_CERTS": "Ficha de mestre da estação que dá 1 certificado permanente e 3 pontos para cada 2 certificados.",
         "PERM_CERT_POINTS_FOR_EACH_2_HAZARDS": "Ficha de mestre da estação que dá 1 certificado permanente e 3 pontos para cada 2 perigos.",
@@ -44,7 +46,6 @@
         "REMOVE_HAZARD_OR_TEEPEE_POINTS_FOR_EACH_2_OBJECTIVE_CARDS": "Ficha de mestre da estação que permite remover um perigo ou fazer comércio com os índios e dá 3 pontos para cada 2 cartas de objetivo na sua área de objetivos (completos ou não).",
         "GAIN_2_DOLLARS_POINT_FOR_EACH_WORKER": "Ficha de mestre da estação que permite ganhar 2 dólares e dá 1 ponto por cada trabalhador na sua ficha de jogador (incluindo aqueles já impressos).",
         "TWO_PERM_CERTS": "Ficha de mestre da estação que dá 2 certificado permanente.",
-        "GAIN_12_DOLLARS": "Ficha de mestre da estação que permite ganhar 12 dólares.",
         "TWELVE_DOLLARS": "Ficha de mestre da estação que permite ganhar 12 dólares, mas dá 0 pontos extras.",
         "PERM_CERT_POINTS_PER_2_STATIONS": "Ficha de mestre da estação dá 1 certificado permanente e 3 pontos para cada 2 estações aprimoradas.",
         "GAIN_2_CERTS_POINTS_PER_BUILDING": "Ficha de mestre da estação que permite mover o marcador de certificado até 2 espaços e dá 2 pontos para cada construção.",
@@ -84,12 +85,12 @@
         "8b": "Construção privativa 8b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
         "9b": "Construção privativa 9b<br/><strong> Ação:</strong> Aprimore qualquer estação atrás de sua locomotiva",
         "10b": "Construção privativa 10b<br/><strong> Ação:</strong> Ganhe 4 dólares<br/><strong>Ação:</strong> Mova sua locomotiva até 4 espaços para frente<br/><strong>Ação:</strong> Mova seu peão até 4 passos para frente",
-        "11a": "Construção 11a<br/><strong>Ação:</strong> Remover um perigo por $2",
-        "11b": "Construção 11b<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços quantos os perigos que você tiver removido",
-        "12a": "Construção 12a<br/><strong>Ação:</strong> Para cada espaço de sino em seu quadro de jogadores, que esteja completamente livre, você pode mover seu marcador de certificado 1 espaço para frente e ganhar 1 dólar",
-        "12b": "Construção 12b<br/><strong>Ação:</strong> Ganhe tantos dólares quanto você tem artífices<br/><strong>Ação</strong>: Colocar um ramal",
-        "13a": "Construção 13a<br/><strong>Ação:</strong> Descartar 1 carta de gado de Jersey para uma única ação auxiliar<br/><strong>Ação</strong>: Coloque uma de suas construções privativas trilha ($1 por artífice)",
-        "13b": "Construção 13b<br/><strong>Ação:</strong> Ganhe 2 dólares por estação aprimorada<br/><strong>Ação:</strong> Execute uma ação auxiliar simples ou dupla"
+        "11a": "Construção privativa 11a<br/><strong>Ação:</strong> Remover um perigo por $2",
+        "11b": "Construção privativa 11b<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços quantos os perigos que você tiver removido",
+        "12a": "Construção privativa 12a<br/><strong>Ação:</strong> Para cada espaço de sino em seu quadro de jogadores, que esteja completamente livre, você pode mover seu marcador de certificado 1 espaço para frente e ganhar 1 dólar",
+        "12b": "Construção privativa 12b<br/><strong>Ação:</strong> Ganhe tantos dólares quanto você tem artífices<br/><strong>Ação</strong>: Colocar um ramal",
+        "13a": "Construção privativa 13a<br/><strong>Ação:</strong> Descartar 1 carta de gado de Jersey para uma única ação auxiliar<br/><strong>Ação</strong>: Coloque uma de suas construções privativas trilha ($1 por artífice)",
+        "13b": "Construção privativa 13b<br/><strong>Ação:</strong> Ganhe 2 dólares por estação aprimorada<br/><strong>Ação:</strong> Execute uma ação auxiliar simples ou dupla"
       },
       "location": {
         "FLOOD-RISK-1": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares",
@@ -100,7 +101,6 @@
         "ROCKFALL-RISK-1": "<br/><br/><strong>Ação de risco:</strong> Descarte uma carta de gado para mover seu marcador de certificado 1 espaço para frente",
         "ROCKFALL-RISK-2": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares"
       },
-      "exchangeTokens": "O número de fichas de troca que um jogador tem. Clique neste ícone para usar uma ficha de troca a qualquer momento.",
       "hazard": {
         "DROUGHT": "<strong>Perigo:</strong> Seca{{points}} PV)",
         "ROCKFALL": "<strong>Perigo:</strong> Desmoronamento{{points}} PV{{points}} )",
@@ -794,7 +794,53 @@
       "STATION_MASTER_NOT_AVAILABLE": "Esta ficha de mestre da estação não está disponível.",
       "TOWN_NOT_ACCESSIBLE": "Esta cidade não é acessível.",
       "INVALID_CATTLE_TYPE": "Este tipo de carta de gado não é válido para esta ação."
+    }
+  },
+  "gwt2": {
+    "actions": {
+      "buttons": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descartar 1 Dutch Belt para mover sua locomotiva 2 para frente",
+        "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descartar 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
+        "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descartar 1 carta de gado de valor '3' para ganhar 7 dólares",
+        "MOVE_ENGINE_2_FORWARD": "Mover sua locomotiva 2 para frente",
+        "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mover sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mover sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+      },
+      "descriptions": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
+        "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
+        "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
+        "MOVE_ENGINE_2_FORWARD": "Mova sua locomotiva 2 para frente",
+        "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mova sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+      },
+      "instructions": {
+        "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
+        "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
+        "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
+        "MOVE_ENGINE_2_FORWARD": "Mova sua locomotiva 2 para frente",
+        "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Mova sua locomotiva 1 para trás para remover 1 carta e ganhar 1 dólar",
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares",
+      }
     },
-    "confirmCannotUndo": "Você não pode desfazer esta ação. Você tem certeza de que quer isto?"
+    "log": {
+      "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "descarta <strong>{{value1}}</strong> para ganhar $6 e deve adicionar 1 carta de objetivo à mão",
+      "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "descarta a carta de gado <strong>{{value1}}</strong> (<strong>{{value2}}PV</strong>) para ganhar $7",
+      "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 1 carta e ganhar $1",
+      "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 2 cartas e ganhar $2",
+      "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "descarta 1 carta de gado Dutch Belt para mover a locomotiva 2 para frente"
+    },
+    "popover": {
+      "building": {
+        "2b": "Construção privativa 2b<br/><strong> Ação:</strong> Descarte 1 carta de gado Dutch Belt e mova sua locomotiva até 2 espaços para frente<br/><strong>Ação:</strong> Descarte 1 carta de gado Jersey e ganhe 2 dólares",
+        "5a": "Construção privativa 5a<br/><strong> Ação:</strong> Descarte 1 carta de gado de valor '3' e ganhe 7 dólares<br/><strong>Ação:</strong>Execute uma ação auxiliar simples ou dupla",
+        "6a": "Construção privativa 6a<br/><strong> Ação:</strong> Contrate 1 trabalhador (custo reduzido em 1 dólar)<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços à quantidade de engenheiros possuir",
+        "6b": "Construção privativa 6b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
+        "8b": "Construção privativa 8b<br/><strong> Ação:</strong> Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
+        "11a": "Construção privativa 11a<br/><strong>Ação:</strong> Remova um perigo por $2<br/><strong>Action:</strong> Remova um perigo por $2",
+        "13a": "Construção privativa 13a<br/><strong>Ação:</strong> Ganhe 1 dólar por artífice que possuir<br/><strong>Ação:</strong> Mova seu peão 1 passo para frente",
+        "13b": "Construção privativa 13b<br/><strong>Ação:</strong> Ganhe 2 dólares por estação aprimorada<br/><strong>Ação:</strong> Ganhe uma ficha de troca"
+      }
+    }
   }
 }

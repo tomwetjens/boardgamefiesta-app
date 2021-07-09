@@ -902,7 +902,7 @@
         "6b": "Building 6b<br/><strong>Action:</strong> Copy the actions of an adjacent building",
         "8b": "Building 8b<br/><strong>Action:</strong> Discard 1 cattle card to gain 6 dollars and gain 1 objective card directly to your hand",
         "11a": "Building 11a<br/><strong>Action:</strong> Remove a hazard for $2<br/><strong>Action:</strong> Remove a hazard for $2",
-        "13a": "Building 13a<br/><strong>Action:</strong> Gain 1 dollar per engineer<br/><strong>Action:</strong> Move rancher 1 forward",
+        "13a": "Building 13a<br/><strong>Action:</strong> Gain 1 dollar per craftsman<br/><strong>Action:</strong> Move rancher 1 forward",
         "13b": "Building 13b<br/><strong>Action:</strong> Gain 2 dollars per upgraded station<br/><strong>Action:</strong> Take an exchange token"
       }
     }
