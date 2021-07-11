@@ -292,6 +292,7 @@ export interface PlayerState {
   readonly exchangeTokens?: number;
   readonly branchlets?: number;
   readonly automaState?: AutomaState;
+  readonly stats?: { [key: string]: any };
 }
 
 export interface AutomaState {
@@ -332,7 +333,22 @@ export enum City {
   EL_PASO = 'EL_PASO',
   SAN_DIEGO = 'SAN_DIEGO',
   SACRAMENTO = 'SACRAMENTO',
-  SAN_FRANCISCO = 'SAN_FRANCISCO'
+  SAN_FRANCISCO = 'SAN_FRANCISCO',
+
+  COLUMBIA = 'COLUMBIA',
+  ST_LOUIS = 'ST_LOUIS',
+  CHICAGO = 'CHICAGO',
+  DETROIT = 'DETROIT',
+  CLEVELAND = 'CLEVELAND',
+  PITTSBURGH = 'PITTSBURGH',
+  NEW_YORK_CITY = 'NEW_YORK_CITY',
+  MEMPHIS = 'MEMPHIS',
+  DENVER = 'DENVER',
+  MILWAUKEE = 'MILWAUKEE',
+  GREEN_BAY = 'GREEN_BAY',
+  MINNEAPOLIS = 'MINNEAPOLIS',
+  TORONTO = 'TORONTO',
+  MONTREAL = 'MONTREAL'
 }
 
 export interface RailroadTrack {

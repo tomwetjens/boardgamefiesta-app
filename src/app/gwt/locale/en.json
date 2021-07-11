@@ -735,6 +735,23 @@
       "CITIES": "Cities",
       "STATIONS": "Stations"
     },
+    "statsHeader": "Detailed results",
+    "stats": {
+      "seat": "Seat",
+      "turns": "Turns",
+      "cowboys": "Cowboys",
+      "craftsmen": "Craftsmen",
+      "engineers": "Engineers",
+      "stepLimit": "Step limit",
+       "handLimit": "Hand limit",
+      "permCerts": "Permanent certificates",
+      "tempCerts": "Temporary certificates",
+      "tempCertLimit": "Certificate limit",
+      "deliveries": "Deliveries to",
+      "stops": "Stops at building",
+      "stopsTeepee": "Stops at teepees",
+      "stopsHazard": "Stops at hazards"
+    },
     "option": {
       "mode": {
         "label": "Mode",

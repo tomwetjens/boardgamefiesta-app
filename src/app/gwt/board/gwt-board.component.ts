@@ -205,7 +205,7 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
       this.selectedAction = null;
 
       if (!this.dialog) {
-        this.dialog = this.ngbModal.open(EndedDialogComponent);
+        this.dialog = this.ngbModal.open(EndedDialogComponent, {scrollable: true, size: 'lg'});
 
         const componentInstance = this.dialog.componentInstance as EndedDialogComponent;
         componentInstance.table = this.table;

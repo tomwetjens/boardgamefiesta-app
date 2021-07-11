@@ -9,12 +9,13 @@
     <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col" *ngFor="let column of columns">
+      <th scope="col" class="text-nowrap" *ngFor="let column of columns">
         <app-player-name [player]="column.player"></app-player-name>
+        <span class="place1st" *ngIf="column.player.winner"></span>
       </th>
     </tr>
     <tr>
-      <th scope="col">{{'gwt.score.total'|translate}}</th>
+      <th scope="col" class="text-nowrap">{{'gwt.score.total'|translate}}</th>
       <th scope="col" *ngFor="let column of columns">
         <strong>{{column.total}}</strong>
       </th>
@@ -22,8 +23,70 @@
     </thead>
     <tbody>
     <tr *ngFor="let row of rows">
-      <th scope="row">{{'gwt.score.' + row.category|translate}}</th>
+      <th scope="row" class="text-nowrap">{{'gwt.score.' + row.category|translate}}</th>
       <td *ngFor="let score of row.scores">{{score}}</td>
+    </tr>
+    <tr>
+      <td [colSpan]="table.numberOfPlayers + 1">
+        <h5>{{'gwt.statsHeader'|translate}}</h5>
+      </td>
+    </tr>
+    </tbody>
+    <tr>
+      <th scope="row">{{'gwt.stats.seat'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.seat}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.turns'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.turns}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.cowboys'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.cowboys}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.craftsmen'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.craftsmen}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.engineers'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.engineers}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.stepLimit'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.stepLimit}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.handLimit'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.handLimit}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.permCerts'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.permCerts}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.tempCerts'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.tempCerts}}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{'gwt.stats.tempCertLimit'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.tempCertLimit}}</td>
+    </tr>
+    <tr *ngFor="let city of cities">
+      <th scope="row" class="text-nowrap">{{'gwt.stats.deliveries'|translate}} {{'gwt.log.values.' +city|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['deliveries.' + city]||0}}</td>
+    </tr>
+    <tr *ngFor="let building of buildings">
+      <th scope="row" class="text-nowrap">{{'gwt.stats.stops'|translate}} {{building}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.' + building]||0}}</td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-nowrap">{{'gwt.stats.stopsTeepee'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.teepee']||0}}</td>
+    </tr>
+    <tr>
+      <th scope="row" class="text-nowrap">{{'gwt.stats.stopsHazard'|translate}}</th>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.hazard']||0}}</td>
     </tr>
     </tbody>
   </table>
