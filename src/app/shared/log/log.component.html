@@ -12,8 +12,7 @@
 
     <span class="message" [ngSwitch]="logEntry.type">
       <span *ngSwitchCase="'IN_GAME_EVENT'" [innerHTML]="translateInGameEvent(logEntry)"></span>
-      <span *ngSwitchDefault
-            [innerHTML]="'log.' + logEntry.type|translate:{otherUser:logEntry.otherUser?.username}"></span>
+      <span *ngSwitchDefault [innerHTML]="translate(logEntry)"></span>
     </span>
   </div>
 </div>

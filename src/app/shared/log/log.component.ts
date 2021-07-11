@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LogEntry, LogEntryType, Table} from '../model';
+import {LogEntry, LogEntryType, Table, TablePlayer, User} from '../model';
 import {TableService} from '../../table.service';
 import {GAME_PROVIDERS} from "../api";
 import {fadeInOnEnterAnimation} from "angular-animations";
+import {TranslateService} from "@ngx-translate/core";
 
 interface Group {
   key: string;
@@ -29,7 +30,8 @@ export class LogComponent implements OnInit {
 
   groups: Group[] = [];
 
-  constructor(private tableService: TableService) {
+  constructor(private tableService: TableService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -60,6 +62,44 @@ export class LogComponent implements OnInit {
 
   translateInGameEvent(logEntry: LogEntry) {
     return GAME_PROVIDERS[this.table.game].translate(logEntry, this.table);
+  }
+
+  translate(logEntry: LogEntry) {
+    return this.translateService.instant('log.' + logEntry.type, {
+      ...this.toInterpolateParams(logEntry.parameters, this.table),
+      otherUser: logEntry.otherUser?.username
+    });
+  }
+
+  private toInterpolateParams(values: any[], table: Table) {
+    return values.reduce((ctx, value, index) => {
+      return {
+        ...ctx,
+        ['value' + (index + 1)]: this.translateValue(value, table)
+      };
+    }, {});
+  }
+
+  private translateValue(value: string, table: Table): string {
+    const player = table.players[value];
+
+    if (player) {
+      return this.translatePlayer(player);
+    }
+
+    const key = table.game + '.log.values.' + value;
+    const translated = this.translateService.instant(key);
+    return translated !== key ? translated : value;
+  }
+
+  private translatePlayer(player: TablePlayer): string {
+    return player.user
+      ? this.translateUser(player.user)
+      : this.translateService.instant('computer');
+  }
+
+  private translateUser(user: User) {
+    return user.username;
   }
 
   showMore() {
@@ -93,4 +133,5 @@ export class LogComponent implements OnInit {
     const oldestLogEntry = oldestGroup.logEntries[oldestGroup.logEntries.length - 1];
     return oldestLogEntry.type !== LogEntryType.CREATE;
   }
+
 }

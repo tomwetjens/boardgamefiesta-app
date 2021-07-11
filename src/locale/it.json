@@ -253,7 +253,9 @@
     "UNDO": "annulla la mossa precedente",
     "SKIP": "salta un'azione",
     "BEGIN_TURN": "inizia il turno",
+    "BEGIN_TURN_NR": "inizia il turno {{value1}}",
     "END_TURN": "termina il turno",
+    "END_TURN_NR": "termina il turno {{value1}}",
     "END": "termina la partita"
   },
   "changeUsernameDialog": {

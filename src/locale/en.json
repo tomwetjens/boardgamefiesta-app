@@ -298,7 +298,9 @@
     "UNDO": "undoes the previous action",
     "SKIP": "skips an action",
     "BEGIN_TURN": "begins turn",
+    "BEGIN_TURN_NR": "begins turn {{value1}}",
     "END_TURN": "ends turn",
+    "END_TURN_NR": "ends turn {{value1}}",
     "END": "ended the game"
   }
 }

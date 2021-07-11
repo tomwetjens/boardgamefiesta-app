@@ -266,7 +266,9 @@
     "UNDO": "maakt de vorige actie ongedaan",
     "SKIP": "slaat een actie over",
     "BEGIN_TURN": "is nu aan de beurt",
+    "BEGIN_TURN_NR": "is nu aan de beurt ({{value1}})",
     "END_TURN": "beëindigt beurt",
+    "END_TURN_NR": "beëindigt beurt {{value1}}",
     "END": "beëindigt het spel"
   }
 }
