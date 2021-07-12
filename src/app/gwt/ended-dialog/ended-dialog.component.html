@@ -73,19 +73,19 @@
     </tr>
     <tr *ngFor="let city of cities">
       <th scope="row" class="text-nowrap">{{'gwt.stats.deliveries'|translate}} {{'gwt.log.values.' +city|translate}}</th>
-      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['deliveries.' + city]||0}}</td>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats ? column.playerState.stats['deliveries.' + city]||0 : ''}}</td>
     </tr>
     <tr *ngFor="let building of buildings">
       <th scope="row" class="text-nowrap">{{'gwt.stats.stops'|translate}} {{building}}</th>
-      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.' + building]||0}}</td>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats ? column.playerState.stats['stops.' + building]||0 : ''}}</td>
     </tr>
     <tr>
       <th scope="row" class="text-nowrap">{{'gwt.stats.stopsTeepee'|translate}}</th>
-      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.teepee']||0}}</td>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats ? column.playerState.stats['stops.teepee']||0 : ''}}</td>
     </tr>
     <tr>
       <th scope="row" class="text-nowrap">{{'gwt.stats.stopsHazard'|translate}}</th>
-      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats['stops.hazard']||0}}</td>
+      <td scope="col" *ngFor="let column of columns">{{column.playerState.stats ? column.playerState.stats['stops.hazard']||0 : 0}}</td>
     </tr>
     </tbody>
   </table>
