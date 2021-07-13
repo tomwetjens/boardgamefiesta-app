@@ -671,6 +671,23 @@
       "CITIES": "Cidades",
       "STATIONS": "Estações"
     },
+    "statsHeader": "Resultados detalhados",
+    "stats": {
+      "seat": "Assento",
+      "turns": "Turnos",
+      "cowboys": "Vaqueiros",
+      "craftsmen": "Artífices",
+      "engineers": "Engenheiros",
+      "stepLimit": "Limite de passos",
+      "handLimit": "Limite de mão",
+      "permCerts": "Certificados permanentes",
+      "tempCerts": "Certificados temporários",
+      "tempCertLimit": "Limite do certificado",
+      "deliveries": "Entregas para",
+      "stops": "Paradas na construção",
+      "stopsTeepee": "Paradas nas tendas",
+      "stopsHazard": "Paradas nos perigos"
+    },
     "option": {
       "buildings": {
         "label": "Construções",
