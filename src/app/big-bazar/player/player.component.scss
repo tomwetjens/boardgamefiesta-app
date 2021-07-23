@@ -18,7 +18,7 @@ app-in-game-player {
   .lira {
     display: inline-block;
     width: 32px;
-    height: 32px;
+    height: 35px;
     line-height: 32px;
     text-align: center;
     vertical-align: middle;
@@ -28,6 +28,17 @@ app-in-game-player {
     font-size: 18px;
     margin: 8px;
     background-image: url('../../../assets/games/big-bazar/lira.png');
+    background-size: cover;
+  }
+
+  .start-player {
+    display: inline-block;
+    width: 35px;
+    height: 25px;
+    border-radius: 4px;
+    margin: 8px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.75) !important;
+    background-image: url('../../../assets/games/big-bazar/startplayer.png');
     background-size: cover;
   }
 

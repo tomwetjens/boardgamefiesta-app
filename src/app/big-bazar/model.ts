@@ -90,6 +90,7 @@ interface PlayerStats {
 
 export interface PlayerState {
   readonly name: string;
+  readonly startPlayer: boolean;
   readonly bonusCards?: BonusCard[];
   readonly numberOfBonusCards: number;
   readonly rubies: number;

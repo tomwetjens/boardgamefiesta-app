@@ -1,6 +1,7 @@
 {
   "big-bazar": {
     "endedDialog": "That's all folks!",
+    "startPlayer": "Start player",
     "lira": "Lira",
     "rubies": "Rubies",
     "sellGoodsDialog": "Sell Goods",
