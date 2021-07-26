@@ -2,10 +2,10 @@
 
 const fs = require('fs');
 
-const en = JSON.parse(fs.readFileSync('src/locale/en.json'));
-const pt = JSON.parse(fs.readFileSync('src/locale/it.json'));
+const base = JSON.parse(fs.readFileSync(process.argv[2]));
+const translation = JSON.parse(fs.readFileSync(process.argv[3]));
 
-console.log(JSON.stringify(diff(en, pt)));
+console.log(JSON.stringify(diff(base, translation)));
 
 function diff(src, dst) {
   const result = {};

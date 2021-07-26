@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 
-const a = JSON.parse(fs.readFileSync('src//locale/pt.json'));
-const b = JSON.parse(fs.readFileSync('src/locale/diff-pt.json'));
+const a = JSON.parse(fs.readFileSync(process.argv[2]));
+const b = JSON.parse(fs.readFileSync(process.argv[3]));
 
 console.log(JSON.stringify(merge(a,b)));
 
