@@ -6,7 +6,7 @@
                     (undo)="doUndo()">
 </app-in-game-navbar>
 
-<div class="action-bar sticky-top bg-secondary text-light d-flex justify-content-center flex-wrap">
+<div class="action-bar bg-secondary text-light d-flex justify-content-center flex-wrap" [ngClass]="{'sticky-top':state.status !== 'BIDDING'}">
   <div class="actions" *ngIf="table.turn && !selectedAction">
     <button *ngFor="let action of actions"
             class="btn btn-primary text-nowrap" (click)="selectAction(action)"
