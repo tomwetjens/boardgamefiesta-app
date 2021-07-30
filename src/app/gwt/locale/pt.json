@@ -85,7 +85,7 @@
         "8b": "Construção 8b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
         "9b": "Construção 9b<br/><strong> Ação:</strong> Aprimore qualquer estação atrás de sua locomotiva",
         "10b": "Construção 10b<br/><strong> Ação:</strong> Ganhe 4 dólares<br/><strong>Ação:</strong> Mova sua locomotiva até 4 espaços para frente<br/><strong>Ação:</strong> Mova seu peão até 4 passos para frente",
-        "11a": "Construção 11a<br/><strong>Ação:</strong> Remover um perigo por $2",
+        "11a": "Construção 11a<br/><strong>Ação:</strong> Remova um perigo por $2<br/><strong>Ação:</strong> Remova um perigo por $2",
         "11b": "Construção 11b<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços quantos os perigos que você tiver removido",
         "12a": "Construção 12a<br/><strong>Ação:</strong> Para cada espaço de sino em seu quadro de jogadores, que esteja completamente livre, você pode mover seu marcador de certificado 1 espaço para frente e ganhar 1 dólar",
         "12b": "Construção 12b<br/><strong>Ação:</strong> Ganhe tantos dólares quanto você tem artífices<br/><strong>Ação</strong>: Colocar um ramal",
@@ -102,9 +102,9 @@
         "ROCKFALL-RISK-2": "<br/><br/><strong>Ação de risco:</strong> Descarte 1 Jersey para mover seu marcador de certificado 1 espaço para frente e ganhar 2 dólares"
       },
       "hazard": {
-        "DROUGHT": "<strong>Perigo:</strong> Seca{{points}} PV)",
-        "ROCKFALL": "<strong>Perigo:</strong> Desmoronamento{{points}} PV{{points}} )",
-        "FLOOD": "<strong>Perigo:</strong> Inundação{{points}} PV{{points}} )"
+        "DROUGHT": "<strong>Perigo:</strong> Seca ({{points}} PV)",
+        "ROCKFALL": "<strong>Perigo:</strong> Desmoronamento ({{points}} PV)",
+        "FLOOD": "<strong>Perigo:</strong> Inundação ({{points}} PV)"
       },
       "mediumTownTile": {
         "GAIN_5_DOLLARS_OR_TAKE_CATTLE_CARD": "Quando você colocar um ramal aqui, você ganha 5 dólares ou pode tirar um carta de gado de valor 3 do mercado de gado.",
