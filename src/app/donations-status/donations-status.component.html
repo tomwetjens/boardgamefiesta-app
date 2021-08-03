@@ -1,0 +1,30 @@
+<div class="container" *ngIf="status$|async as status">
+  <div class="alert alert-warning mx-auto" *ngIf="status.percent < 90">
+    <p class="lead">
+      Board Game Fiesta needs your donation!
+    </p>
+    <p>
+      We are keeping the costs as low as possible, but running this website isn't free.
+      By becoming a patreon and donating, you support this website and keep it running!
+      If we can't cover the running costs, eventually we may have to shutdown.
+    </p>
+    <p>
+      We still need <strong>{{status.needs|currency}}</strong> to keep the website
+      running next month! You can donate any amount you like: <strong>{{1|currency}}</strong>, <strong>{{2|currency}}</strong>, <strong>{{5|currency}}</strong>, etc.
+    </p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{width:status.percent + '%'}"
+           [ngClass]="{'bg-danger':status.percent < 30,'bg-warning':status.percent >= 30 && status.percent <80}"
+           [attr.aria-valuenow]="status.percent"
+           [attr.aria-valuemin]="0"
+           [attr.aria-valuemax]="100">
+      </div>
+    </div>
+    <p class="small">Updated every 3 hours</p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ngNoForm>
+      <input type="hidden" name="cmd" value="_s-xclick" />
+      <input type="hidden" name="hosted_button_id" value="6F4W2WVHGN8FC" />
+      <input type="image" src="https://www.paypalobjects.com/en_US/NL/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    </form>
+  </div>
+</div>

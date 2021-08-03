@@ -31,6 +31,7 @@ import {GlobalErrorHandler} from "./global-error-handler.service";
 import {StartedTablesComponent} from './started-tables/started-tables.component';
 import {OpenTablesComponent} from './open-tables/open-tables.component';
 import {GameTablesComponent} from './game-tables/game-tables.component';
+import { DonationsStatusComponent } from './donations-status/donations-status.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {GameTablesComponent} from './game-tables/game-tables.component';
     TimeZoneSelectorComponent,
     StartedTablesComponent,
     OpenTablesComponent,
-    GameTablesComponent
+    GameTablesComponent,
+    DonationsStatusComponent
   ],
   imports: [
     BrowserModule,

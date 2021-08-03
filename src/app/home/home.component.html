@@ -1,4 +1,6 @@
 <ng-container *ngIf="loggedIn$ | async">
+  <app-donations-status></app-donations-status>
+
   <ng-container *ngIf="(myTurnTables$ | async) as tables">
     <section class="container" *ngIf="tables.length > 0">
       <h6>{{'yourTurn'|translate}}</h6>
