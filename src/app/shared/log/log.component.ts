@@ -87,9 +87,7 @@ export class LogComponent implements OnInit {
       return this.translatePlayer(player);
     }
 
-    const key = table.game + '.log.values.' + value;
-    const translated = this.translateService.instant(key);
-    return translated !== key ? translated : value;
+    return value;
   }
 
   private translatePlayer(player: TablePlayer): string {
