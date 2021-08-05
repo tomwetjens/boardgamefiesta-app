@@ -6,6 +6,11 @@
     "lead2": "Junte-se à comunidade de jogos de tabuleiro mais legal da web. Jogue diretamente de seu navegador. Não há downloads ou configuração necessária.",
     "startPlayingNow": "Comece a jogar agora"
   },
+  "donations-status": {
+    "lead": "O Board Game Fiesta precisa da sua doação!",
+    "call-to-action": "Estamos mantendo os custos o mais baixo possível, mas o funcionamento deste site não é gratuito. Ao se tornar um um doador, você apoia este site e o mantém funcionando! Se não pudermos cobrir os custos de operação, eventualmente teremos que fechar.<br/><br/>Ainda precisamos de <strong>{{needs}}</strong> para manter o site funcionando no próximo mês! Você pode doar qualquer quantia que desejar: <strong>$1,00</strong>, <strong>$2,00</strong>, <strong>$5,00</strong>, etc.",
+    "progress-explanation": "Atualizado a cada 3 horas"
+  },
   "games": "Jogos",
   "game": {
     "gwt": {
