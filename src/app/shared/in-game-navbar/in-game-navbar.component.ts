@@ -49,7 +49,9 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
 
   connected$: Observable<boolean>;
 
+  afterTurnLimit$: Observable<boolean>;
   canKick$: Observable<boolean>;
+  canForceEndTurn$: Observable<boolean>;
 
   constructor(private audioService: AudioService,
               private tableService: TableService,
@@ -63,12 +65,11 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.connected$ = this.tableService.connected$;
 
-    this.canKick$ = timer(0, 1000)
+    this.afterTurnLimit$ = timer(0, 1000)
       .pipe(
         takeUntil(this.destroyed),
         map(() => {
           if (this.table
-            && !!this.table.player // Not spectator
             && this.table.players[this.table.currentPlayer]) {
             const turnLimit = moment(this.table.players[this.table.currentPlayer].turnLimit);
             const now = moment();
@@ -76,6 +77,27 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
           }
           return false;
         }),
+        distinctUntilChanged(),
+        shareReplay(1)
+      );
+
+    this.canForceEndTurn$ = this.afterTurnLimit$
+      .pipe(
+        takeUntil(this.destroyed),
+        map(afterTurnLimit => afterTurnLimit
+          && this.table
+          && !!this.table.player/* Not spectator */),
+        distinctUntilChanged(),
+        shareReplay(1)
+      );
+
+    this.canKick$ = this.afterTurnLimit$
+      .pipe(
+        takeUntil(this.destroyed),
+        map(afterTurnLimit => afterTurnLimit
+          && this.table
+          && !!this.table.player/* Not spectator */
+          && this.table.players[this.table.currentPlayer].canKickAfterTurnLimit),
         distinctUntilChanged(),
         shareReplay(1)
       );
@@ -102,5 +124,16 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
     messageDialogComponent.cancelKey = 'cancel';
     fromPromise(ngbModalRef.result)
       .subscribe(() => this.tableService.kick(this.table.id, this.table.currentPlayer).subscribe());
+  }
+
+  doForceEndTurn() {
+    const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+    const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'confirmForceEndTurn';
+    messageDialogComponent.confirmKey = 'forceEndTurn';
+    messageDialogComponent.cancelKey = 'cancel';
+    fromPromise(ngbModalRef.result)
+      .subscribe(() => this.tableService.forceEndTurn(this.table.id, this.table.currentPlayer).subscribe());
   }
 }

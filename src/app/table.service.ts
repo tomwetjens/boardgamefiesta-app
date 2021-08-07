@@ -288,6 +288,10 @@ export class TableService {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/players/' + playerId + '/kick', null);
   }
 
+  forceEndTurn(id: string, playerId: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/players/' + playerId + '/force-end-turn', null);
+  }
+
   addComputer(id: string): Observable<void> {
     return this.httpClient.post<void>(environment.apiBaseUrl + '/tables/' + id + '/add-computer', null);
   }

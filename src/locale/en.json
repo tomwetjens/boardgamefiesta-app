@@ -174,7 +174,9 @@
   "join": "Join table",
   "playerNotPlaying": "Is this player not responding?",
   "kick": "Kick player",
+  "forceEndTurn": "Force end turn",
   "confirmKick": "Are you sure you want to kick this player from the game? This player will <strong>not</strong> be able to rejoin the table later!<br/><br/>The game will continue if there are still enough players left.",
+  "confirmForceEndTurn": "Are you sure you want to forcibly end this players turn?",
   "leave": "Leave table",
   "connected": "Connected",
   "connecting": "Connecting...",
@@ -287,7 +289,8 @@
     "EMAIL_ALREADY_IN_USE": "There is already another user registered with this e-mail address.",
     "USERNAME_ALREADY_IN_USE": "This username is already taken.",
     "NOT_FOUND": "The requested resource was not found.",
-    "CANNOT_KICK": "The player cannot be kicked at this moment. Wait until sufficient time has passed to give the player a chance to respond."
+    "CANNOT_KICK": "The player cannot be kicked at this moment. Wait until sufficient time has passed to give the player a chance to respond.",
+    "CANNOT_FORCE_END_TURN": "The players turn cannot be forcibly ended at this moment. Wait until sufficient time has passed to give the player a chance to respond."
   },
   "log": {
     "CREATE": "created a new table",
@@ -306,6 +309,7 @@
     "BEGIN_TURN_NR": "begins turn {{value1}}",
     "END_TURN": "ends turn",
     "END_TURN_NR": "ends turn {{value1}}",
-    "END": "ended the game"
+    "END": "ended the game",
+    "FORCE_END_TURN": "forcibly ends turn of <strong>{{otherUser}}</strong>"
   }
 }

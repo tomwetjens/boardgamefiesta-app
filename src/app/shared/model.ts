@@ -73,6 +73,7 @@ export interface TablePlayer {
   readonly status: PlayerStatus;
   readonly rating?: number;
   readonly turnLimit?: string;
+  readonly canKickAfterTurnLimit?: boolean;
   readonly color?: PlayerColor;
   readonly score?: number;
   readonly winner?: boolean;

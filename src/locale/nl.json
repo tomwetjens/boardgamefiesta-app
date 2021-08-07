@@ -150,7 +150,9 @@
   "join": "Aanschuiven bij tafel",
   "playerNotPlaying": "Reageert deze speler niet?",
   "kick": "Verwijder speler",
+  "forceEndTurn": "Forceer einde beurt",
   "confirmKick": "Weet je zeker dat je deze speler wilt verwijderen uit het spel? Deze speler kan <strong>niet</strong> weer opnieuw aanschuiven bij dit spel!<br/><br/>Het spel zal doorgaan als er nog genoeg spelers over blijven.",
+  "confirmForceEndTurn": "Weet je zeker dat je de beurt van deze speler geforceerd wilt beëindigen?",
   "leave": "Tafel verlaten",
   "connected": "Verbonden",
   "connecting": "Verbinding maken...",
@@ -269,6 +271,7 @@
     "BEGIN_TURN_NR": "is nu aan de beurt ({{value1}})",
     "END_TURN": "beëindigt beurt",
     "END_TURN_NR": "beëindigt beurt {{value1}}",
-    "END": "beëindigt het spel"
+    "END": "beëindigt het spel",
+    "FORCE_END_TURN": "beëindigt beurt van <strong>{{otherUser}}</strong> geforceerd"
   }
 }
