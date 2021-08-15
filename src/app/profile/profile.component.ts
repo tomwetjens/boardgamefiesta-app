@@ -18,7 +18,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
-import {EmailPreferences, User} from '../shared/model';
+import {ColorPreferences, EmailPreferences, User} from '../shared/model';
 import {Observable} from 'rxjs';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangeEmailDialogComponent} from "../user/change-email-dialog/change-email-dialog.component";
@@ -86,5 +86,9 @@ export class ProfileComponent implements OnInit {
 
   changeEmailPreferences(emailPreferences: EmailPreferences) {
     this.userService.changeEmailPreferences(emailPreferences).subscribe();
+  }
+
+  changeColorPreferences(colorPreferences: ColorPreferences) {
+    this.userService.changeColorPreferences(colorPreferences).subscribe();
   }
 }

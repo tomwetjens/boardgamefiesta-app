@@ -147,6 +147,29 @@
         </form>
       </ng-template>
     </li>
+
+    <li ngbNavItem>
+      <a ngbNavLink>{{'profile.tabs.colors'|translate}}</a>
+      <ng-template ngbNavContent>
+        <form>
+          <div class="form-group">
+            <label for="color1">{{'user.colorPreferences.color1'|translate}}</label>
+            <app-color-selector id="color1" [(value)]="user.colorPreferences.color1"
+                                (valueChange)="changeColorPreferences(user.colorPreferences)"></app-color-selector>
+          </div>
+          <div class="form-group">
+            <label for="color2">{{'user.colorPreferences.color2'|translate}}</label>
+            <app-color-selector id="color2" [(value)]="user.colorPreferences.color2"
+                                (valueChange)="changeColorPreferences(user.colorPreferences)"></app-color-selector>
+          </div>
+          <div class="form-group">
+            <label for="color3">{{'user.colorPreferences.color3'|translate}}</label>
+            <app-color-selector id="color3" [(value)]="user.colorPreferences.color3"
+                                (valueChange)="changeColorPreferences(user.colorPreferences)"></app-color-selector>
+          </div>
+        </form>
+      </ng-template>
+    </li>
   </ul>
   <div [ngbNavOutlet]="nav"></div>
 </section>

@@ -88,7 +88,13 @@
     "sendTurnEmailNo": "No, don't send me an e-mail when it's my turn.",
     "sendEndedEmail": "Send an e-mail when a game ends",
     "sendEndedEmailYes": "Yes, send me an e-mail when a game ends.",
-    "sendEndedEmailNo": "No, don't send me an e-mail when a game ends."
+    "sendEndedEmailNo": "No, don't send me an e-mail when a game ends.",
+    "colorPreferences": {
+      "notSelected": "Use any color that is available",
+      "color1": "Preferred color (if available)",
+      "color2": "Second preferred color (in case first is not available)",
+      "color3": "Third preferred color (in case second is not available)"
+    }
   },
   "profile": {
     "title": "Profile",
@@ -99,7 +105,10 @@
     "language": "Language",
     "email": "E-mail",
     "save": "Save",
-    "location": "Location"
+    "location": "Location",
+    "tabs": {
+      "colorPreferences": "Colors"
+    }
   },
   "in-game-navbar": {
     "mute": "Mute",
@@ -311,5 +320,14 @@
     "END_TURN_NR": "ends turn {{value1}}",
     "END": "ended the game",
     "FORCE_END_TURN": "forcibly ends turn of <strong>{{otherUser}}</strong>"
+  },
+  "colors": {
+    "RED": "Red",
+    "BLUE": "Blue",
+    "YELLOW": "Yellow",
+    "WHITE": "White",
+    "GREEN": "Green",
+    "BLACK": "Black",
+    "PURPLE": "Purple"
   }
 }

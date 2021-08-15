@@ -21,7 +21,9 @@ export enum PlayerColor {
   RED = 'RED',
   BLUE = 'BLUE',
   WHITE = 'WHITE',
-  GREEN = 'GREEN'
+  GREEN = 'GREEN',
+  BLACK = 'BLACK',
+  PURPLE = 'PURPLE'
 }
 
 export interface Player {
@@ -43,6 +45,7 @@ export interface User {
   location?: string;
   readonly timeZone: string;
   readonly emailPreferences?: EmailPreferences;
+  readonly colorPreferences?: ColorPreferences;
 }
 
 export interface EmailPreferences {
@@ -53,6 +56,12 @@ export interface EmailPreferences {
 export interface TurnBasedPreferences {
   sendTurnEmail: boolean;
   sendEndedEmail: boolean;
+}
+
+export interface ColorPreferences {
+  color1?: PlayerColor;
+  color2?: PlayerColor;
+  color3?: PlayerColor;
 }
 
 export enum PlayerType {

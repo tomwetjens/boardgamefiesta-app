@@ -49,7 +49,8 @@ import {GlobalErrorHandler} from "./global-error-handler.service";
 import {StartedTablesComponent} from './started-tables/started-tables.component';
 import {OpenTablesComponent} from './open-tables/open-tables.component';
 import {GameTablesComponent} from './game-tables/game-tables.component';
-import { DonationsStatusComponent } from './donations-status/donations-status.component';
+import {DonationsStatusComponent} from './donations-status/donations-status.component';
+import {ColorSelectorComponent} from './color-selector/color-selector.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { DonationsStatusComponent } from './donations-status/donations-status.co
     StartedTablesComponent,
     OpenTablesComponent,
     GameTablesComponent,
-    DonationsStatusComponent
+    DonationsStatusComponent,
+    ColorSelectorComponent
   ],
   imports: [
     BrowserModule,
