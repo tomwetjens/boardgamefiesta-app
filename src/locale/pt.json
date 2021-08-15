@@ -116,6 +116,7 @@
   "abandon": "Abandonar",
   "playerNotPlaying": "Este jogador não está respondendo?",
   "kick": "Expulsar jogador",
+  "forceEndTurn": "Forçar fim do turno",
   "confirmKick": "Tem certeza de que deseja expulsar este jogador do jogo? Este jogador <strong>não</strong> poderá voltar à mesa mais tarde!<br/><br/>O jogo continuará se ainda houver jogadores",
   "leave": "Sair da mesa",
   "connected": "Conectado",
