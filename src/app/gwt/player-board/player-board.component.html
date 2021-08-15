@@ -317,8 +317,20 @@
               ry="4"
               height="54"
               width="54"
+              *ngIf="table.game === 'gwt'"
               [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')}"
               (click)="clickAuxiliaryAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD')"/>
+        <rect id="aux-remove-card"
+              class="action"
+              x="13"
+              y="368"
+              rx="4"
+              ry="4"
+              height="54"
+              width="54"
+              *ngIf="table.game === 'gwt2'"
+              [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR')}"
+              (click)="clickAuxiliaryAction('MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR')"/>
 
         <rect id="aux-remove-card-2"
               class="action"
@@ -328,8 +340,20 @@
               ry="4"
               height="54"
               width="54"
+              *ngIf="table.game === 'gwt'"
               [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')}"
               (click)="clickAuxiliaryAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS')"/>
+        <rect id="aux-remove-card-2"
+              class="action"
+              x="114"
+              y="368"
+              rx="4"
+              ry="4"
+              height="54"
+              width="54"
+              *ngIf="table.game === 'gwt2'"
+              [ngClass]="{disabled: !canSelectAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS')}"
+              (click)="clickAuxiliaryAction('MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS')"/>
 
         <circle id="aux-dollar-2-disc"
                 class="disc"
