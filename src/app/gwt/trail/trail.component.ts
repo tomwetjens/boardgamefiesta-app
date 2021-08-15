@@ -303,7 +303,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
   @ViewChild('green')
   private greenElement !: ElementRef<Element>;
 
-  private rancherElements: { [playerColor in PlayerColor]: ElementRef };
+  private rancherElements: { [playerColor in PlayerColor]?: ElementRef };
 
   @ViewChild('A') private neutralBuildingA !: ElementRef<Element>;
   @ViewChild('B') private neutralBuildingB !: ElementRef<Element>;
