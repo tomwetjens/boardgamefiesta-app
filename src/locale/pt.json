@@ -50,7 +50,10 @@
     "email": "E-mail",
     "save": "Salvar",
     "location": "Local",
-    "title": "Perfil"
+    "title": "Perfil",
+    "tabs": {
+      "colorPreferences": "Cores"
+    }
   },
   "in-game-navbar": {
     "mute": "Sem som",
@@ -241,7 +244,8 @@
     "BEGIN_TURN_NR": "começa o turno {{value1}}",
     "END_TURN": "termina o turno",
     "END_TURN_NR": "termina o turno {{value1}}",
-    "END": "termina o jogo"
+    "END": "termina o jogo",
+    "FORCE_END_TURN": "força o fim do turno de <strong>{{otherUser}}</strong>"
   },
   "changeUsernameDialog": {
     "title": "Alterar nome de usuário",
@@ -285,7 +289,13 @@
     "sendTurnEmailNo": "Não, não envie um e-mail quando for o meu turno.",
     "sendEndedEmail": "Enviar um e-mail quando o jogo terminar",
     "sendEndedEmailYes": "Sim, envie um e-mail quando o jogo terminar.",
-    "sendEndedEmailNo": "Não, não envie um e-mail quando o jogo terminar."
+    "sendEndedEmailNo": "Não, não envie um e-mail quando o jogo terminar.",
+    "colorPreferences": {
+      "notSelected": "Use qualquer cor que estiver disponível",
+      "color1": "Cor preferida (se disponível)",
+      "color2": "Segunda cor preferida (no caso da primeira não estiver disponível)",
+      "color3": "Terceira cor preferida (no caso da segunda não estiver disponível)"
+    }
   },
   "createdAt": "criado em",
   "created": "criado",
@@ -304,5 +314,14 @@
   "minMaxNumberOfPlayers": "{{cur}} jogadores - precisa de pelo menos <strong>{{min}}</strong> jogadores (no máximo <strong>{{max}}</strong>)",
   "playerAtTableBadge": "Jogando",
   "ownerOfTableBadge": "Hospedeiro",
-  "invitedBy": "Convidado por"
+  "invitedBy": "Convidado por",
+  "colors": {
+    "RED": "Vermelho",
+    "BLUE": "Azul",
+    "YELLOW": "Amarelo",
+    "WHITE": "Branco",
+    "GREEN": "Verde",
+    "BLACK": "Preto",
+    "PURPLE": "Roxo"
+  }
 }
