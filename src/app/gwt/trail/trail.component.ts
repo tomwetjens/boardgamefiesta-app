@@ -215,7 +215,7 @@ interface HazardElement {
   location: Location;
 }
 
-const COLORS = ['orange', 'purple', 'cyan', 'salmon', 'green', 'silver'];
+const COLORS = ['orange', 'purple', 'cyan', 'salmon', 'green', 'silver', 'gold', 'navy', 'teal', 'brown'];
 
 interface PossibleMoveLine {
   x1: any;
