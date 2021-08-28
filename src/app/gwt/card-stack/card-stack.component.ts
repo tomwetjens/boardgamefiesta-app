@@ -26,6 +26,7 @@ import {Card} from '../model';
 })
 export class CardStackComponent implements OnInit {
 
+    @Input() gameId: string;
     @Input() cards: Card[];
     @Input() size: number;
     @Input() emptyType: 'CATTLE' | 'OBJECTIVE';

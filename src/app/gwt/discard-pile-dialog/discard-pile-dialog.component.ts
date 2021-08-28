@@ -27,6 +27,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class DiscardPileDialogComponent implements OnInit {
 
+  @Input() gameId: string;
   @Input() playerState: PlayerState;
 
   constructor(public ngbActiveModal: NgbActiveModal) {

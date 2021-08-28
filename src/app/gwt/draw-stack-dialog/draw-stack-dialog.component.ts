@@ -27,6 +27,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class DrawStackDialogComponent implements OnInit {
 
+  @Input() gameId: string;
   @Input() drawStack: Card[];
 
   constructor(public ngbActiveModal: NgbActiveModal) {

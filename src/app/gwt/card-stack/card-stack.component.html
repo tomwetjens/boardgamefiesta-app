@@ -16,7 +16,7 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<app-card *ngFor="let card of stack; index as i" [card]="card" [showPoints]="false"></app-card>
+<app-card *ngFor="let card of stack; index as i" [gameId]="gameId" [card]="card" [showPoints]="false"></app-card>
 
-<app-card *ngIf="!cards || !cards.length" [emptyType]="emptyType"></app-card>
+<app-card *ngIf="!cards || !cards.length" [gameId]="gameId" [emptyType]="emptyType"></app-card>
 <span *ngIf="!cards" class="size">{{size}}</span>

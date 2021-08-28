@@ -30,7 +30,7 @@
       <span class="position text-dark">
         {{'gwt.bidding.position'|translate:{position: row.position + 1} }}
       </span>
-      <app-card [card]="state.startingObjectiveCards[row.position]"></app-card>
+      <app-card [gameId]="table.game" [card]="state.startingObjectiveCards[row.position]"></app-card>
     </div>
     <div class="col" *ngFor="let cell of row.cells">
       <div class="bid">

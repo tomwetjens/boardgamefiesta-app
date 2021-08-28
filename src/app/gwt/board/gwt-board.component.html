@@ -71,7 +71,7 @@
                (perform)="perform.emit($event)">
     </app-trail>
 
-    <app-objective-cards [objectiveCards]="state.objectiveCards"
+    <app-objective-cards [objectiveCards]="state.objectiveCards" [gameId]="table.game"
                          [selectedAction]="selectedAction"
                          (action)="perform.emit($event)">
     </app-objective-cards>

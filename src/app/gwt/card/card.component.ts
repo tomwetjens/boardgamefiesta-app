@@ -17,7 +17,7 @@
  */
 
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {ActionType, Card, CattleCard, ObjectiveCard, Task} from '../model';
+import {ActionType, Card, CattleCard, CattleType, ObjectiveCard, Task} from '../model';
 
 @Component({
   selector: 'app-card',
@@ -26,6 +26,7 @@ import {ActionType, Card, CattleCard, ObjectiveCard, Task} from '../model';
 })
 export class CardComponent implements OnInit {
 
+  @Input() gameId: string;
   @Input() emptyType: 'CATTLE' | 'OBJECTIVE';
   @Input() card: Card;
   @Input() showPoints = true;
@@ -51,7 +52,7 @@ export class CardComponent implements OnInit {
   @HostBinding('class')
   get className(): string {
     if (this.type === 'CATTLE') {
-      return this.cattleCard.type;
+      return this.cattleCard.type === CattleType.SIMMENTAL ? this.cattleCard.type + this.cattleCard.breedingValue : this.cattleCard.type;
     } else if (this.type === 'OBJECTIVE') {
       let prefix;
 

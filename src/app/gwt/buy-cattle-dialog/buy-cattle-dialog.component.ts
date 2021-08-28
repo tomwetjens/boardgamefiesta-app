@@ -19,6 +19,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CattleCard, PossibleBuy} from "../model";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {Table} from "../../shared/model";
 
 @Component({
   selector: 'app-buy-cattle-dialog',
@@ -27,6 +28,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class BuyCattleDialogComponent implements OnInit {
 
+  @Input() table: Table;
   @Input() options: PossibleBuy[];
   @Input() cards: CattleCard[];
 

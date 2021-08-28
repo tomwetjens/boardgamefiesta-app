@@ -17,10 +17,12 @@
   -->
 
 <app-card-stack [emptyType]="'OBJECTIVE'" [size]="objectiveCards.drawStackSize"
+                [gameId]="gameId"
                 [ngClass]="{disabled:!canSelectDrawStack}"
                 (click)="clickDrawStack()"></app-card-stack>
 
 <app-card *ngFor="let card of objectiveCards.available"
+          [gameId]="gameId"
           [card]="card"
           [ngClass]="{disabled:!canSelectCard(card)}"
           (click)="selectCard(card)"></app-card>

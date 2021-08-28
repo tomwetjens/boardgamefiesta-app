@@ -19,7 +19,7 @@
 <ng-container [ngSwitch]="type">
   <div *ngSwitchCase="'CATTLE'"
        style="width:100%;height:100%"
-       ngbPopover="{{'gwt.popover.cattleCard'|translate:{type:'gwt.cattleType.' + cattleCard.type|translate,breedingValue:cattleCard.breedingValue, points:cattleCard.points} }}"
+       ngbPopover="{{gameId + '.popover.cattleCard'|translate:{type:gameId + '.cattleType.' + cattleCard.type|translate,breedingValue:cattleCard.breedingValue, points:cattleCard.points} }}"
        triggers="mouseenter:mouseleave"
        container="body">
     <div *ngIf="cattleCard.points && showPoints" class="points">
@@ -28,9 +28,9 @@
   </div>
   <ng-container *ngSwitchCase="'OBJECTIVE'">
     <ng-template #objectiveCardPopover>
-      {{'gwt.popover.objectiveCard'|translate: {
+      {{gameId + '.popover.objectiveCard'|translate: {
       points: objectiveCard.points,
-      action: 'gwt.actions.descriptions.' + (objectiveCard.action||'none')|translate,
+      action: gameId + '.actions.descriptions.' + (objectiveCard.action||'none')|translate,
       penalty: objectiveCard.penalty
     } }}
     </ng-template>

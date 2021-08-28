@@ -31,6 +31,7 @@ const ACTIONS = [ActionType.TAKE_OBJECTIVE_CARD, ActionType.ADD_1_OBJECTIVE_CARD
 })
 export class ObjectiveCardsComponent implements OnInit, OnChanges {
 
+  @Input() gameId: string = 'gwt';
   @Input() objectiveCards: ObjectiveCards;
 
   @Input() selectedAction: ActionType;

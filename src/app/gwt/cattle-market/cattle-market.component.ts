@@ -131,6 +131,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
     if (options.length > 1) {
       const ngbModalRef = this.ngbModal.open(BuyCattleDialogComponent);
       const componentInstance = ngbModalRef.componentInstance as BuyCattleDialogComponent;
+      componentInstance.table = this.table;
       componentInstance.cards = this.selectedCards;
       componentInstance.options = options;
 
@@ -164,6 +165,7 @@ export class CattleMarketComponent implements OnInit, OnChanges {
   showDrawStack() {
     const ngbModalRef = this.ngbModal.open(DrawStackDialogComponent);
     const componentInstance = ngbModalRef.componentInstance as DrawStackDialogComponent;
+    componentInstance.gameId = this.table.game;
     componentInstance.drawStack = this.state.cattleMarket.drawStack;
   }
 }

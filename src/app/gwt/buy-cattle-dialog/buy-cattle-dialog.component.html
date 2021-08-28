@@ -26,7 +26,7 @@
 </div>
 <div class="modal-body">
   <div class="cards">
-    <app-card *ngFor="let card of cards" [card]="card"></app-card>
+    <app-card *ngFor="let card of cards" [gameId]="table.game" [card]="card"></app-card>
   </div>
 </div>
 <div class="modal-footer">

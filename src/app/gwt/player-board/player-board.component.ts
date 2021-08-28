@@ -170,6 +170,7 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
     switch (this.selectedAction) {
       case ActionType.DISCARD_CARD:
       case ActionType.REMOVE_CARD:
+      case ActionType.UPGRADE_SIMMENTAL:
         this.perform.emit({type: this.selectedAction, card});
         break;
 
@@ -210,7 +211,9 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
       case ActionType.DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS:
         return isCattleCard(card);
       case ActionType.DISCARD_CATTLE_CARD_TO_PLACE_BRANCHLET:
-        return isCattleCard(card) && card.breedingValue === 2;
+        return isCattleCard(card) && [CattleType.GUERNSEY, CattleType.BLACK_ANGUS, CattleType.DUTCH_BELT].includes(card.type);
+      case ActionType.UPGRADE_SIMMENTAL:
+        return isCattleCard(card) && card.type === CattleType.SIMMENTAL && card.breedingValue < 5;
       case ActionType.DISCARD_PAIR_TO_GAIN_3_DOLLARS:
       case ActionType.DISCARD_PAIR_TO_GAIN_4_DOLLARS:
         return isCattleCard(card) && this.hasPair((card as CattleCard).type);
@@ -244,12 +247,14 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
   showDiscardPile() {
     this.dialog = this.ngbModal.open(DiscardPileDialogComponent);
     const componentInstance = this.dialog.componentInstance as DiscardPileDialogComponent;
+    componentInstance.gameId = this.table.game;
     componentInstance.playerState = this.playerState;
   }
 
   showDrawStack() {
     this.dialog = this.ngbModal.open(DrawStackDialogComponent);
     const componentInstance = this.dialog.componentInstance as DrawStackDialogComponent;
+    componentInstance.gameId = this.table.game;
     componentInstance.drawStack = this.playerState.drawStack;
   }
 
