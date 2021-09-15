@@ -88,6 +88,18 @@ const DIRECT_ACTIONS = [
   ActionType.UPGRADE_STATION_TOWN
 ];
 
+const CANNOT_UNDO_ACTIONS = [
+  ActionType.DRAW_CARD,
+  ActionType.DRAW_2_CARDS,
+  ActionType.DRAW_3_CARDS,
+  ActionType.DRAW_4_CARDS,
+  ActionType.DRAW_5_CARDS,
+  ActionType.DRAW_6_CARDS,
+  ActionType.DRAW_2_CATTLE_CARDS,
+  ActionType.TAKE_OBJECTIVE_CARD,
+  ActionType.ADD_1_OBJECTIVE_CARD_TO_HAND
+];
+
 const FREE_ACTIONS = [
   ActionType.DRAW_CARD,
   ActionType.DRAW_2_CARDS,
@@ -295,10 +307,27 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   selectAction(actionType: string) {
     if (DIRECT_ACTIONS.includes(actionType as ActionType)) {
-      this.perform.emit({type: actionType as ActionType});
+      if (CANNOT_UNDO_ACTIONS.includes(actionType as ActionType)) {
+        this.confirmCannotUndo().subscribe(() =>
+          this.perform.emit({type: actionType as ActionType}));
+      } else {
+        this.perform.emit({type: actionType as ActionType});
+      }
     } else {
       this.selectedAction = actionType as ActionType;
     }
+  }
+
+  private confirmCannotUndo() {
+    const ngbModalRef = this.ngbModal.open(MessageDialogComponent);
+
+    const messageDialogComponent = ngbModalRef.componentInstance as MessageDialogComponent;
+    messageDialogComponent.type = 'confirm';
+    messageDialogComponent.messageKey = 'gwt.confirmCannotUndo';
+    messageDialogComponent.confirmKey = 'confirm';
+    messageDialogComponent.cancelKey = 'cancel';
+
+    return fromPromise(ngbModalRef.result);
   }
 
   doUndo() {
