@@ -1,5 +1,63 @@
 {
   "gwt": {
+    "errors": {
+      "CANNOT_FORCE_END_TURN": "O turno dos jogadores não pode ser encerrado à força enquanto a ação atual ainda não estiver concluída.",
+      "NOT_ENOUGH_COWBOYS": "Você não tem vaqueiros suficientes para realizar esta ação.",
+      "CANNOT_SKIP_ACTION": "Você não pode pular esta ação.",
+      "CANNOT_PERFORM_ACTION": "Você não pode executar esta ação.",
+      "ALREADY_AT_SPACE": "Você já está neste espaço.",
+      "ALREADY_DELIVERED_TO_CITY": "Você já entregou nesta cidade.",
+      "ALREADY_HAS_HAZARD": "Você já tem este perigo.",
+      "ALREADY_HAS_STATION_MASTER": "Você já tem esta ficha de mestre da estação.",
+      "ALREADY_PLAYER_ON_SPACE": "Já existe outro jogador neste espaço.",
+      "ALREADY_UNLOCKED": "Você já removeu este disco.",
+      "ALREADY_UPGRADED_STATION": "Você já aprimorou esta estação.",
+      "AT_LEAST_2_PLAYERS_REQUIRED": "Você precisa de pelo menos 2 jogadores para iniciar este jogo.",
+      "AT_MOST_4_PLAYERS_SUPPORTED": "Você pode jogar este jogo com no máximo 4 jogadores.",
+      "BUILDING_NOT_AVAILABLE": "Esta construção não está disponível.",
+      "CANNOT_REPLACE_BUILDING_OF_OTHER_PLAYER": "Você não pode substituir a construção de outro jogador.",
+      "CANNOT_REPLACE_NEUTRAL_BUILDING": "Você não pode substituir uma construção neutra.",
+      "CANNOT_STEP_DIRECTLY_FROM_TO": "Você não pode mover-se diretamente de sua localização atual para esta localização.",
+      "CARD_NOT_IN_HAND": "Você não tem esta carta em suas mãos.",
+      "CATTLE_CARDS_NOT_IN_HAND": "Você não tem essas cartas de gado em sua mão.",
+      "CATTLE_CARD_NOT_AVAILABLE": "Esta carta de gado não está disponível.",
+      "CITY_VALUE_MUST_BE_LESS_THEN_OR_EQUAL_TO_SPACES_THAT_ENGINE_MOVED_BACKWARDS": "Você deve escolher uma cidade cujo valor seja menor ou igual ao número de espaços que moveu sua locomotiva para trás.",
+      "GAME_ENDED": "O jogo terminou.",
+      "MUST_CHOOSE_ACTION": "Você deve escolher uma das ações.",
+      "MUST_PICK_WHITE_DISC": "Você deve escolher um disco com cantos brancos.",
+      "MUST_SPECIFY_3_FORESIGHTS": "Você deve escolher as 3 fichas.",
+      "MUST_SPECIFY_CATTLE_CARD": "Você deve escolher uma carta de gado.",
+      "NOT_ENOUGH_BALANCE_TO_PAY": "Você não tem saldo suficiente para pagar por esta ação.",
+      "NOT_ENOUGH_BREEDING_VALUE": "Você não tem rendimento suficiente para entregar nesta cidade.",
+      "NOT_ENOUGH_CATTLE_CARDS_OF_BREEDING_VALUE_AVAILABLE": "Não há cartas de gado suficientes disponíveis com este valor de rendimento.",
+      "NOT_ENOUGH_CERTIFICATES": "Você não tem certificados suficientes para entregar nesta cidade.",
+      "NOT_ENOUGH_CRAFTSMEN": "Você não tem artífices suficientes para construir este edifício.",
+      "NOT_ENOUGH_WORKERS": "Você não tem trabalhadores suficientes.",
+      "NOT_FIRST_ACTION": "Você deve executar outra ação primeiro.",
+      "NO_ACTIONS": "Não há ações a serem realizadas.",
+      "NO_SUCH_LOCATION": "Este local não existe.",
+      "NO_SUCH_SPACE": "Este espaço não existe.",
+      "NO_TEEPEE_AT_LOCATION": "Não há tenda neste local.",
+      "OBJECTIVE_CARD_NOT_AVAILABLE": "Esta carta de objetivo não está disponível.",
+      "REPLACEMENT_BUILDING_MUST_BE_HIGHER": "Você deve escolher uma construção que tenha um valor maior do que aquele que você está tentando aprimorar.",
+      "SPACE_NOT_REACHABLE": "Este espaço não está acessível com sua locomotiva no momento.",
+      "STATION_MUST_BE_BEHIND_ENGINE": "A estação deve estar atrás de sua locomotiva.",
+      "STEPS_EXCEED_LIMIT": "Este local não está acessível dentro do seu limite de etapas atual.",
+      "WORKERS_EXCEED_LIMIT": "Você não pode ter mais trabalhadores deste tipo.",
+      "NO_SUCH_PLAYER": "Este jogador não existe.",
+      "WORKER_NOT_AVAILABLE": "Este trabalhador não está disponível.",
+      "LOCATION_NOT_ADJACENT": "Este local não é adjacente ao seu local atual.",
+      "MUST_START_ON_NEUTRAL_BUILDING": "Você deve começar em uma construção neutra.",
+      "BID_TOO_LOW": "Seu lance é muito baixo.",
+      "CITY_NOT_ACCESSIBLE": "Esta cidade não é acessível de Kansas City ou de qualquer uma das cidades onde você colocou um ramal.",
+      "ALREADY_PLACED_BRANCHLET": "Você já colocou um ramal nesta cidade.",
+      "NOT_ENOUGH_EXCHANGE_TOKENS": "Você não tem fichas de troca suficientes.",
+      "NO_BRANCHLETS": "Você não tem nenhum ramal para colocar em uma cidade.",
+      "NO_SUCH_TOWN": "Esta cidade não existe.",
+      "STATION_MASTER_NOT_AVAILABLE": "Esta ficha de mestre da estação não está disponível.",
+      "TOWN_NOT_ACCESSIBLE": "Esta cidade não é acessível.",
+      "INVALID_CATTLE_TYPE": "Este tipo de carta de gado não é válido para esta ação."
+    },
     "bidding": {
       "position": "#{{position}}",
       "placeBid": "Dar {{points}} PV"
@@ -819,68 +877,12 @@
           "true": "Sim"
         }
       }
-    },
-    "errors": {
-      "NOT_ENOUGH_COWBOYS": "Você não tem vaqueiros suficientes para realizar esta ação.",
-      "CANNOT_SKIP_ACTION": "Você não pode pular esta ação.",
-      "CANNOT_PERFORM_ACTION": "Você não pode executar esta ação.",
-      "ALREADY_AT_SPACE": "Você já está neste espaço.",
-      "ALREADY_DELIVERED_TO_CITY": "Você já entregou nesta cidade.",
-      "ALREADY_HAS_HAZARD": "Você já tem este perigo.",
-      "ALREADY_HAS_STATION_MASTER": "Você já tem esta ficha de mestre da estação.",
-      "ALREADY_PLAYER_ON_SPACE": "Já existe outro jogador neste espaço.",
-      "ALREADY_UNLOCKED": "Você já removeu este disco.",
-      "ALREADY_UPGRADED_STATION": "Você já aprimorou esta estação.",
-      "AT_LEAST_2_PLAYERS_REQUIRED": "Você precisa de pelo menos 2 jogadores para iniciar este jogo.",
-      "AT_MOST_4_PLAYERS_SUPPORTED": "Você pode jogar este jogo com no máximo 4 jogadores.",
-      "BUILDING_NOT_AVAILABLE": "Esta construção não está disponível.",
-      "CANNOT_REPLACE_BUILDING_OF_OTHER_PLAYER": "Você não pode substituir a construção de outro jogador.",
-      "CANNOT_REPLACE_NEUTRAL_BUILDING": "Você não pode substituir uma construção neutra.",
-      "CANNOT_STEP_DIRECTLY_FROM_TO": "Você não pode mover-se diretamente de sua localização atual para esta localização.",
-      "CARD_NOT_IN_HAND": "Você não tem esta carta em suas mãos.",
-      "CATTLE_CARDS_NOT_IN_HAND": "Você não tem essas cartas de gado em sua mão.",
-      "CATTLE_CARD_NOT_AVAILABLE": "Esta carta de gado não está disponível.",
-      "CITY_VALUE_MUST_BE_LESS_THEN_OR_EQUAL_TO_SPACES_THAT_ENGINE_MOVED_BACKWARDS": "Você deve escolher uma cidade cujo valor seja menor ou igual ao número de espaços que moveu sua locomotiva para trás.",
-      "GAME_ENDED": "O jogo terminou.",
-      "MUST_CHOOSE_ACTION": "Você deve escolher uma das ações.",
-      "MUST_PICK_WHITE_DISC": "Você deve escolher um disco com cantos brancos.",
-      "MUST_SPECIFY_3_FORESIGHTS": "Você deve escolher as 3 fichas.",
-      "MUST_SPECIFY_CATTLE_CARD": "Você deve escolher uma carta de gado.",
-      "NOT_ENOUGH_BALANCE_TO_PAY": "Você não tem saldo suficiente para pagar por esta ação.",
-      "NOT_ENOUGH_BREEDING_VALUE": "Você não tem rendimento suficiente para entregar nesta cidade.",
-      "NOT_ENOUGH_CATTLE_CARDS_OF_BREEDING_VALUE_AVAILABLE": "Não há cartas de gado suficientes disponíveis com este valor de rendimento.",
-      "NOT_ENOUGH_CERTIFICATES": "Você não tem certificados suficientes para entregar nesta cidade.",
-      "NOT_ENOUGH_CRAFTSMEN": "Você não tem artífices suficientes para construir este edifício.",
-      "NOT_ENOUGH_WORKERS": "Você não tem trabalhadores suficientes.",
-      "NOT_FIRST_ACTION": "Você deve executar outra ação primeiro.",
-      "NO_ACTIONS": "Não há ações a serem realizadas.",
-      "NO_SUCH_LOCATION": "Este local não existe.",
-      "NO_SUCH_SPACE": "Este espaço não existe.",
-      "NO_TEEPEE_AT_LOCATION": "Não há tenda neste local.",
-      "OBJECTIVE_CARD_NOT_AVAILABLE": "Esta carta de objetivo não está disponível.",
-      "REPLACEMENT_BUILDING_MUST_BE_HIGHER": "Você deve escolher uma construção que tenha um valor maior do que aquele que você está tentando aprimorar.",
-      "SPACE_NOT_REACHABLE": "Este espaço não está acessível com sua locomotiva no momento.",
-      "STATION_MUST_BE_BEHIND_ENGINE": "A estação deve estar atrás de sua locomotiva.",
-      "STEPS_EXCEED_LIMIT": "Este local não está acessível dentro do seu limite de etapas atual.",
-      "WORKERS_EXCEED_LIMIT": "Você não pode ter mais trabalhadores deste tipo.",
-      "NO_SUCH_PLAYER": "Este jogador não existe.",
-      "WORKER_NOT_AVAILABLE": "Este trabalhador não está disponível.",
-      "LOCATION_NOT_ADJACENT": "Este local não é adjacente ao seu local atual.",
-      "MUST_START_ON_NEUTRAL_BUILDING": "Você deve começar em uma construção neutra.",
-      "BID_TOO_LOW": "Seu lance é muito baixo.",
-      "CITY_NOT_ACCESSIBLE": "Esta cidade não é acessível de Kansas City ou de qualquer uma das cidades onde você colocou um ramal.",
-      "ALREADY_PLACED_BRANCHLET": "Você já colocou um ramal nesta cidade.",
-      "NOT_ENOUGH_EXCHANGE_TOKENS": "Você não tem fichas de troca suficientes.",
-      "NO_BRANCHLETS": "Você não tem nenhum ramal para colocar em uma cidade.",
-      "NO_SUCH_TOWN": "Esta cidade não existe.",
-      "STATION_MASTER_NOT_AVAILABLE": "Esta ficha de mestre da estação não está disponível.",
-      "TOWN_NOT_ACCESSIBLE": "Esta cidade não é acessível.",
-      "INVALID_CATTLE_TYPE": "Este tipo de carta de gado não é válido para esta ação."
     }
   },
   "gwt2": {
     "actions": {
       "buttons": {
+        "UPGRADE_SIMMENTAL": "Aprimorar a carta Simmental",
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descartar 1 Dutch Belt para mover sua locomotiva 2 para frente",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descartar 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descartar 1 carta de gado de valor '3' para ganhar 7 dólares",
@@ -889,6 +891,7 @@
         "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mover sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       },
       "descriptions": {
+        "UPGRADE_SIMMENTAL": "Aprimore a carta Simmental",
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
@@ -897,6 +900,7 @@
         "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       },
       "instructions": {
+        "UPGRADE_SIMMENTAL": "Selecione uma carta de gado Simmental em sua mão para aprimorar",
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Descarte 1 Dutch Belt para mover sua locomotiva 2 para frente",
         "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Descarte 1 carta de gado de valor '3' para ganhar 7 dólares",
@@ -905,12 +909,30 @@
         "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Mova sua locomotiva 2 para trás para remover 2 cartas e ganhar 2 dólares"
       }
     },
+    "cattleType": {
+      "SIMMENTAL": "Simmental"
+    },
     "log": {
+      "action": {
+        "UPGRADE_SIMMENTAL": "aprimora uma carta de gado <strong>Simmental</strong> <strong>{{value2}}PV</strong> para <strong>{{value4}}PV</strong>"
+      },
+      "values": {
+        "SIMMENTAL": "Simmental"
+      },
       "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "descarta <strong>{{value1}}</strong> para ganhar $6 e deve adicionar 1 carta de objetivo à mão",
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "descarta a carta de gado <strong>{{value1}}</strong> (<strong>{{value2}}PV</strong>) para ganhar $7",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 1 carta e ganhar $1",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 2 cartas e ganhar $2",
       "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "descarta 1 carta de gado Dutch Belt para mover a locomotiva 2 para frente"
+    },
+    "option": {
+      "simmental": {
+        "label": "Variante Simmental",
+        "value": {
+          "true": "Sim",
+          "false": "Não"
+        }
+      }
     },
     "popover": {
       "building": {
