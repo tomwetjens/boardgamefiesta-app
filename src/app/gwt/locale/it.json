@@ -699,10 +699,10 @@
         }
       },
       "railsToTheNorth": {
-        "label": "Espansione Northern Railroad (BETA)",
+        "label": "Espansione Northern Railroad",
         "value": {
           "false": "Nessuna espansione",
-          "true": "Si, con espansione (BETA)"
+          "true": "Si, con espansione"
         }
       },
       "stationMasterPromos": {

@@ -765,10 +765,10 @@
         }
       },
       "railsToTheNorth": {
-        "label": "Northern Railroad uitbreiding (BETA)",
+        "label": "Northern Railroad uitbreiding",
         "value": {
           "false": "Nee, geen uitbreiding",
-          "true": "Ja, met uitbreiding (BETA)"
+          "true": "Ja, met uitbreiding"
         }
       },
       "difficulty": {
