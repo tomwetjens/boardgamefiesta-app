@@ -143,7 +143,7 @@
         "8b": "Construção 8b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
         "9b": "Construção 9b<br/><strong> Ação:</strong> Aprimore qualquer estação atrás de sua locomotiva",
         "10b": "Construção 10b<br/><strong> Ação:</strong> Ganhe 4 dólares<br/><strong>Ação:</strong> Mova sua locomotiva até 4 espaços para frente<br/><strong>Ação:</strong> Mova seu peão até 4 passos para frente",
-        "11a": "Construção 11a<br/><strong>Ação:</strong> Remova um perigo por $2<br/><strong>Ação:</strong> Remova um perigo por $2",
+        "11a": "Construção 11a<br/><strong>Ação:</strong> Remova um perigo por $2",
         "11b": "Construção 11b<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços quantos os perigos que você tiver removido",
         "12a": "Construção 12a<br/><strong>Ação:</strong> Para cada espaço de sino em seu quadro de jogadores, que esteja completamente livre, você pode mover seu marcador de certificado 1 espaço para frente e ganhar 1 dólar",
         "12b": "Construção 12b<br/><strong>Ação:</strong> Ganhe tantos dólares quanto você tem artífices<br/><strong>Ação</strong>: Colocar um ramal",
@@ -941,7 +941,7 @@
         "6a": "Construção 6a<br/><strong> Ação:</strong> Contrate 1 trabalhador (custo reduzido em 1 dólar)<br/><strong>Ação:</strong> Mova sua locomotiva para frente até tantos espaços à quantidade de engenheiros possuir",
         "6b": "Construção 6b<br/><strong> Ação:</strong> Copie as ações de uma construção adjacente",
         "8b": "Construção 8b<br/><strong> Ação:</strong> Descarte 1 carta de gado para ganhar 6 dólares e pegar 1 carta de objetivo diretamente para sua mão",
-        "11a": "Construção 11a<br/><strong>Ação:</strong> Remova um perigo por $2<br/><strong>Action:</strong> Remova um perigo por $2",
+        "11a": "Construção 11a<br/><strong>Ação:</strong> Remova um perigo por $2<br/><strong>Ação:</strong> Remova um perigo por $2",
         "13a": "Construção 13a<br/><strong>Ação:</strong> Ganhe 1 dólar por artífice que possuir<br/><strong>Ação:</strong> Mova seu peão 1 passo para frente",
         "13b": "Construção 13b<br/><strong>Ação:</strong> Ganhe 2 dólares por estação aprimorada<br/><strong>Ação:</strong> Ganhe uma ficha de troca"
       }
