@@ -917,6 +917,7 @@
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "moves engine backwards to <strong>{{value1}}</strong> to remove 1 card and gain $1",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "moves engine backwards to <strong>{{value1}}</strong> to remove 2 cards and gain $2",
       "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "discards 1 Dutch Belt cattle card to move engine 2 forward",
+      "MOVE_ENGINE_2_FORWARD": "moves engine forward to <strong>{{value1}}</strong>",
       "action": {
         "UPGRADE_SIMMENTAL": "upgrades a <strong>Simmental</strong> <strong>{{value2}}VP</strong> cattle card to <strong>{{value4}}VP</strong>"
       },

@@ -923,7 +923,8 @@
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "descarta a carta de gado <strong>{{value1}}</strong> (<strong>{{value2}}PV</strong>) para ganhar $7",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 1 carta e ganhar $1",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "move a locomotiva para trás para <strong>{{value1}}</strong> para remover 2 cartas e ganhar $2",
-      "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "descarta 1 carta de gado Dutch Belt para mover a locomotiva 2 para frente"
+      "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "descarta 1 carta de gado Dutch Belt para mover a locomotiva 2 para frente",
+      "MOVE_ENGINE_2_FORWARD": "move a locomotiva para <strong>{{value1}}</strong>"
     },
     "option": {
       "simmental": {
