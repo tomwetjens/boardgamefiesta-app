@@ -49,6 +49,7 @@ import {AuthService} from "./auth.service";
 import {State} from "./gwt/model";
 import {webSocket} from "rxjs/webSocket";
 import {EventService} from "./event.service";
+import {DeviceSettingsService} from "./shared/device-settings.service";
 
 const MIN_TIME_BETWEEN_REFRESHES = 800;
 
@@ -76,7 +77,8 @@ export class TableService {
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
-              private eventService: EventService) {
+              private eventService: EventService,
+              private deviceSettingsService: DeviceSettingsService) {
     this.events$ = combineLatest([
       this.authService.token.pipe(distinctUntilChanged()),
       this._id.pipe(distinctUntilChanged())
@@ -205,8 +207,24 @@ export class TableService {
     this._refreshMyActiveTables.next(true);
   }
 
-  create(request: CreateTableRequest): Observable<Table> {
-    return this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/create', request);
+  create(gameId: string): Observable<Table> {
+    return this.deviceSettingsService.deviceSettings
+      .pipe(
+        map(deviceSettings => deviceSettings || {}),
+        map(deviceSettings => {
+          const tableSettings = deviceSettings['table'] || {};
+          const gameSettings = deviceSettings[gameId] || {};
+
+          const request: CreateTableRequest = {
+            game: gameId,
+            type: tableSettings['defaultType'] || TableType.REALTIME,
+            mode: tableSettings['defaultMode'] || TableMode.NORMAL,
+            options: gameSettings['defaultOptions'] || undefined
+          };
+          return request;
+        }),
+        switchMap(request => this.httpClient.post<Table>(environment.apiBaseUrl + '/tables/create', request))
+      );
   }
 
   private get(id: string): Observable<Table> {

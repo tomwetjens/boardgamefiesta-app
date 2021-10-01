@@ -42,6 +42,7 @@ import {ToastrService} from "../toastr.service";
 import {GAME_PROVIDERS, GameProvider, Option} from "../shared/api";
 import {InvitePlayerComponent} from "../invite-player/invite-player.component";
 import {TitleService} from "../title.service";
+import {DeviceSettingsService} from "../shared/device-settings.service";
 
 interface Seat {
   player?: TablePlayer;
@@ -78,7 +79,8 @@ export class TableComponent implements OnInit, OnDestroy {
               private titleService: TitleService,
               private translateService: TranslateService,
               private audioService: AudioService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private deviceSettingsService: DeviceSettingsService) {
 
   }
 
@@ -256,7 +258,7 @@ export class TableComponent implements OnInit, OnDestroy {
       ? this.confirmJoinAutoStart()
       : of(null))
       .pipe(switchMap(() => this.tableService.accept(table.id)))
-        .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
   }
 
   confirmJoinAutoStart(): Observable<void> {
@@ -277,7 +279,19 @@ export class TableComponent implements OnInit, OnDestroy {
 
   changeOptions(table: Table, options: Options) {
     this.tableService.changeOptions(table.id, {options})
-      .subscribe();
+      .subscribe(() => {
+        this.deviceSettingsService.deviceSettings
+          .pipe(map(deviceSettings => deviceSettings || {}))
+          .subscribe(deviceSettings => {
+            if (!deviceSettings[table.game]) {
+              deviceSettings[table.game] = {};
+            }
+
+            deviceSettings[table.game]['defaultOptions'] = options;
+
+            this.deviceSettingsService.save();
+          });
+      });
   }
 
   join(table: Table) {
@@ -304,12 +318,40 @@ export class TableComponent implements OnInit, OnDestroy {
 
   changeType(table: Table, type: TableType) {
     this.tableService.changeType(table.id, type)
-      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+      .subscribe(() => {
+        this.tableService.refresh();
+
+        this.deviceSettingsService.deviceSettings
+          .pipe(map(deviceSettings => deviceSettings || {}))
+          .subscribe(deviceSettings => {
+            if (!deviceSettings['table']) {
+              deviceSettings['table'] = {};
+            }
+
+            deviceSettings['table']['defaultType'] = type;
+
+            this.deviceSettingsService.save();
+          });
+      }, () => this.tableService.refresh());
   }
 
   changeMode(table: Table, mode: TableMode) {
     this.tableService.changeMode(table.id, mode)
-      .subscribe(() => this.tableService.refresh(), () => this.tableService.refresh());
+      .subscribe(() => {
+        this.tableService.refresh();
+
+        this.deviceSettingsService.deviceSettings
+          .pipe(map(deviceSettings => deviceSettings || {}))
+          .subscribe(deviceSettings => {
+            if (!deviceSettings['table']) {
+              deviceSettings['table'] = {};
+            }
+
+            deviceSettings['table']['defaultMode'] = mode;
+
+            this.deviceSettingsService.save();
+          });
+      }, () => this.tableService.refresh());
   }
 
   changeMinMaxPlayers(table: Table) {
