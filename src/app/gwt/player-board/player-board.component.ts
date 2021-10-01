@@ -79,6 +79,13 @@ export class PlayerBoardComponent implements OnInit, OnDestroy, OnChanges {
       && !!this.playerState.handValue;
   }
 
+  get canUseActionThatRequiresCowboys(): boolean {
+    return this.state
+      && this.state.actions
+      && (this.state.actions.includes(ActionType.DRAW_2_CATTLE_CARDS) || this.state.actions.includes(ActionType.BUY_CATTLE))
+      && !!this.playerState.handValue /* self */;
+  }
+
   get playerCount(): number {
     return this.state.otherPlayers.length + (!!this.state.player ? 1 : 0);
   }

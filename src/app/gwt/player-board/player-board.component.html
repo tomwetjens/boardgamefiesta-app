@@ -156,6 +156,17 @@
               width="30"
               height="30"></rect>
 
+        <g transform="translate(222, 212)" *ngIf="canUseActionThatRequiresCowboys">
+          <text font-size="32"
+                font-weight="bold"
+                text-anchor="middle"
+                fill="white"
+                stroke="black"
+                stroke-width="1">
+            {{playerState.cowboysRemaining}}/{{playerState.cowboys}}
+          </text>
+        </g>
+
         <use xlink:href="#CRAFTSMAN" *ngFor="let craftsman of craftsmen; index as i" class="worker"
              transform="scale(2.2, 2.2)"
              [attr.x]="122 + (i * 36.7)"
