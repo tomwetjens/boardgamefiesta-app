@@ -290,6 +290,7 @@ export interface PlayerState {
   readonly player: Player;
   readonly balance: Dollars;
   readonly cowboys: number;
+  readonly cowboysRemaining?: number;
   readonly craftsmen: number;
   readonly engineers: number;
   readonly certificates: number;
