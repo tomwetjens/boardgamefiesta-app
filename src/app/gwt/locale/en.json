@@ -875,7 +875,8 @@
       "STATION_MASTER_NOT_AVAILABLE": "This station master tile is not available.",
       "TOWN_NOT_ACCESSIBLE": "This town is not accessible.",
       "INVALID_CATTLE_TYPE": "This cattle card type is not valid for this action.",
-      "CANNOT_FORCE_END_TURN": "The players turn cannot be forcibly ended while the current action is not yet completed."
+      "CANNOT_FORCE_END_TURN": "The players turn cannot be forcibly ended while the current action is not yet completed.",
+      "NOT_ENOUGH_CARDS": "You don't have any more cards to draw."
     }
   },
   "gwt2": {
