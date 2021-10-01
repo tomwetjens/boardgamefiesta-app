@@ -49,11 +49,7 @@ export class GameTablesComponent implements OnInit {
   }
 
   createTable(gameId: string) {
-    this.tableService.create({
-      game: gameId,
-      type: TableType.REALTIME,
-      mode: TableMode.NORMAL
-    }).subscribe(table => {
+    this.tableService.create(gameId).subscribe(table => {
       this.router.navigate([table.game, table.id]);
     });
   }
