@@ -302,7 +302,23 @@
         "TAKE_BREEDING_VALUE_3_CATTLE_CARD": "neemt een <strong>{{value1}}</strong> runderkaart van de markt"
       },
       "values": {
-        "ROCKFALL":  "Vallend gesteente",
+        "40": "Groen station",
+        "41": "Rood station",
+        "42": "Groen zuidwest (medium)",
+        "43": "Groen zuid",
+        "44": "Groen noordwest (medium)",
+        "45": "Paars oost",
+        "46": "Paars west (medium)",
+        "47": "Blauw zuid",
+        "48": "Blauw (medium)",
+        "49": "Blauw noord",
+        "50": "Rood Milwaukee-Oost",
+        "51": "Rood Green Bay-Oost",
+        "52": "Rood Green Bay-Zuid (medium)",
+        "53": "Rood Minneapolis-West",
+        "54": "Rood Toronto-Noordoost",
+        "55": "Rood Montreal-Noord (medium)",
+        "ROCKFALL": "Vallend gesteente",
         "DROUGHT": "Droogte",
         "FLOOD": "Overstroming",
         "COWBOY": "Cowboy",
@@ -388,22 +404,6 @@
         "TOR": "Toronto",
         "MIN": "Minneapolis",
         "MON": "Montreal",
-        "40": "Groen station",
-        "41": "Rood station",
-        "42": "Groen zuidwest (medium)",
-        "43": "Groen zuid",
-        "44": "Groen noordwest (medium)",
-        "45": "Paars oost",
-        "46": "Paars west (medium)",
-        "47": "Blauw zuid",
-        "48": "Blauw (medium)",
-        "49": "Blauw noord",
-        "50": "Rood Milwaukee-Oost",
-        "51": "Rood Green Bay-Oost",
-        "52": "Rood Green Bay-Zuid (medium)",
-        "53": "Rood Minneapolis-West",
-        "54": "Rood Toronto-Noordoost",
-        "55": "Rood Montreal-Noord (medium)",
         "CERT_LIMIT_6": "Certificaatlimiet 6",
         "CERT_LIMIT_4": "Certificaatlimiet 4",
         "EXTRA_STEP_DOLLARS": "Extra stap (3 dollar)",
@@ -857,7 +857,26 @@
       "NO_SUCH_TOWN": "Deze stad bestaat niet.",
       "STATION_MASTER_NOT_AVAILABLE": "Deze stationscheftegel is niet beschikbaar.",
       "TOWN_NOT_ACCESSIBLE": "Deze stad is nog niet bereikbaar.",
-      "INVALID_CATTLE_TYPE": "Dit type runderkaart is niet geldig voor deze actie."
+      "INVALID_CATTLE_TYPE": "Dit type runderkaart is niet geldig voor deze actie.",
+      "CANNOT_FORCE_END_TURN": "De beurt van deze speler kan niet geforceerd worden beëindigd omdat de huidige actie nog niet is afgerond.",
+      "NOT_ENOUGH_CARDS": "Er zijn niet genoeg kaarten om te trekken."
+    },
+    "statsHeader": "Gedetailleerd resultaat",
+    "stats": {
+      "seat": "Stoel",
+      "turns": "Beurten",
+      "cowboys": "Cowboys",
+      "craftsmen": "Ambachtsmannen",
+      "engineers": "Ingenieurs",
+      "stepLimit": "Staplimiet",
+      "handLimit": "Handlimiet",
+      "permCerts": "Permanente certificaten",
+      "tempCerts": "Tijdelijke certificaten",
+      "tempCertLimit": "Certificaatlimiet",
+      "deliveries": "Leveringen aan",
+      "stops": "Stops bij gebouw",
+      "stopsTeepee": "Stops bij tipi",
+      "stopsHazard": "Stops bij ramptegel"
     }
   },
   "gwt2": {
@@ -868,7 +887,8 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
+        "UPGRADE_SIMMENTAL": "Waardeer Simmental op"
       },
       "descriptions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Leg 1 Dutch Belt af om locomotief 2 vooruit te zetten",
@@ -876,7 +896,8 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
+        "UPGRADE_SIMMENTAL": "Waardeer Simmental op"
       },
       "instructions": {
         "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "Leg 1 Dutch Belt af om locomotief 2 vooruit te zetten",
@@ -884,7 +905,8 @@
         "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "Leg runderkaart af voor 7 dollar",
         "MOVE_ENGINE_2_FORWARD": "Zet locomotief 2 vooruit",
         "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "Zet locomotief 1 achteruit om 1 kaart te verwijderen en ontvang $1",
-        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2"
+        "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "Zet locomotief 2 achteruit om 2 kaarten te verwijderen en ontvang $2",
+        "UPGRADE_SIMMENTAL": "Kies een Simmental-kaart in je hand om hem op te waarderen."
       }
     },
     "log": {
@@ -892,7 +914,14 @@
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "legt runderkaart <strong>{{value1}}</strong> (<strong>{{value2}}p</strong>) en ontvangt 7 dollar",
       "MOVE_ENGINE_1_BACKWARDS_TO_REMOVE_1_CARD_AND_GAIN_1_DOLLAR": "zet de locomotief 1 achteruit naar <strong>{{value1}}</strong> om 1 kaart te verwijderen en ontvangt 1 dollar",
       "MOVE_ENGINE_2_BACKWARDS_TO_REMOVE_2_CARDS_AND_GAIN_2_DOLLARS": "zet de locomotief 2 achteruit naar <strong>{{value1}}</strong> om 2 kaarten te verwijderen en ontvangt 2 dollar",
-      "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "verwijdert 1 Dutch Belt runderkaart om de locomotief 2 vooruit te zetten"
+      "DISCARD_1_DUTCH_BELT_TO_MOVE_ENGINE_2_FORWARD": "verwijdert 1 Dutch Belt runderkaart om de locomotief 2 vooruit te zetten",
+      "MOVE_ENGINE_2_FORWARD": "zet locotief vooruit naar <strong>{{value1}}</strong>",
+      "action": {
+        "UPGRADE_SIMMENTAL": "waardeert een <strong>Simmental</strong> <strong>{{value2}}p</strong> kaart op naar <strong>{{value4}}p</strong>"
+      },
+      "values": {
+        "SIMMENTAL": "Simmental"
+      }
     },
     "popover": {
       "building": {
@@ -904,6 +933,18 @@
         "11a": "Gebouw 11a<br/><strong>Action:</strong> Verwijder een ramp voor 2 dollar<br/><strong>Action:</strong> Verwijder een ramp voor 2 dollar",
         "13a": "Gebouw 13a<br/><strong>Action:</strong> Ontvang 1 dollar per ambachtsman<br/><strong>Action:</strong> Verplaats rancher 1 vooruit",
         "13b": "Gebouw 13b<br/><strong>Action:</strong> Ontvang 2 dollars per opgewaardeerd treinstation<br/><strong>Action:</strong> Ontvang een wisselfiche"
+      }
+    },
+    "cattleType": {
+      "SIMMENTAL": "Simmental"
+    },
+    "option": {
+      "simmental": {
+        "label": "Simmental variant",
+        "value": {
+          "true": "Ja",
+          "false": "Nee"
+        }
       }
     }
   }

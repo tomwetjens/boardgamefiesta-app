@@ -34,6 +34,11 @@
       "name": "Ranchers Of The Old West",
       "summary": "Drijf jouw kudde runderen over de paden van het Wilde Westen. Geïnspireerd door het populaire bordspel Great Western Trail.",
       "description": "Strategische runderhandel in het Amerika van de 19e eeuw Uitdagend bordspel vol moeilijke beslissingen en strategische variatie.<br/>Drijf jouw kudde runderen van Texas naar Kansas City. Houd je dieren in goede conditie, benut de gebouwen op de route verstandig en huur cowboys, ambachtslieden en ingenieurs in."
+    },
+    "gwt2": {
+      "name": "Ranchers Of The Old West (2e editie)",
+      "summary": "Drijf jouw kudde runderen over de paden van het Wilde Westen. Geïnspireerd door de 2e editie van het populaire bordspel Great Western Trail.",
+      "description": "Strategische runderhandel in het Amerika van de 19e eeuw Uitdagend bordspel vol moeilijke beslissingen en strategische variatie.<br/>Drijf jouw kudde runderen van Texas naar Kansas City. Houd je dieren in goede conditie, benut de gebouwen op de route verstandig en huur cowboys, ambachtslieden en ingenieurs in."
     }
   },
   "joinDiscord": "Bezoek Discord server",
@@ -65,7 +70,24 @@
     "changePassword": "Wijzig wachtwoord",
     "passwordChanged": "Wachtwoord gewijzigd",
     "password": "Wachtwoord",
-    "timeZone": "Tijdzone"
+    "timeZone": "Tijdzone",
+    "emailPreferences": "E-mailvoorkeuren",
+    "sendInviteEmail": "Stuur een e-mail als ik word uitgenodigd voor een tafel",
+    "sendInviteEmailYes": "Ja, stuur me een e-mail als ik word uitgenodigd voor een tafel",
+    "sendInviteEmailNo": "Nee, stuur me geen e-mail als ik word uitgenodigd voor een tafel",
+    "turnBasedPreferences": "Async/PBM voorkeuren",
+    "sendTurnEmail": "Stuur me een e-mail als het mijn beurt is",
+    "sendTurnEmailYes": "Ja, stuur me een e-mail als het mijn beurt is",
+    "sendTurnEmailNo": "Nee, stuur me geen e-mail als het mijn beurt is",
+    "sendEndedEmail": "Stuur me een e-mail als een spel is afgelopen",
+    "sendEndedEmailYes": "Ja, stuur me een e-mail als een spel is afgelopen",
+    "sendEndedEmailNo": "Nee, stuur me geen e-mail als een spel is afgelopen",
+    "colorPreferences": {
+      "notSelected": "Willekeurige kleur (die beschikbaar is)",
+      "color1": "Voorkeurskleur (if available)",
+      "color2": "Tweede voorkeurskleur (als eerste voorkeur niet beschikbaar is)",
+      "color3": "Derde voorkeurskleur (als tweede voorkeur niet beschikbaar is)"
+    }
   },
   "profile": {
     "avatar": "Avatar",
@@ -75,7 +97,11 @@
     "language": "Taal",
     "email": "E-mail",
     "save": "Opslaan",
-    "location": "Locatie"
+    "location": "Locatie",
+    "title": "Profiel",
+    "tabs": {
+      "colorPreferences": "Spelerskleur"
+    }
   },
   "in-game-navbar": {
     "mute": "Dempen",
@@ -168,7 +194,7 @@
   "confirmStart": "Sommige spelers hebben nog niet gereageerd. Wil je het spel starten zonder hen?",
   "waitForPlayers": "Wachten",
   "popover": {
-    "waitingForPlayer":  "Wachten tot deze speler een actie uitvoert."
+    "waitingForPlayer": "Wachten tot deze speler een actie uitvoert."
   },
   "lastSeen": "Laatst gezien",
   "ago": "geleden",
@@ -252,7 +278,9 @@
     "MUST_BE_OWNER": "Je moet de beheerder van deze tafel zijn.",
     "EMAIL_ALREADY_IN_USE": "Er is al een gebruiker geregistreerd met dit e-mailadres.",
     "USERNAME_ALREADY_IN_USE": "Deze gebruikersnaam is al bezet.",
-    "NOT_FOUND": "De gevraagde gegevens zijn niet gevonden."
+    "NOT_FOUND": "De gevraagde gegevens zijn niet gevonden.",
+    "CANNOT_KICK": "Deze speler kan niet verwijderd worden op dit moment. Wacht tot er voldoende tijd is verstreken om de speler de tijd te geven te spelen.",
+    "CANNOT_FORCE_END_TURN": "De beurt van deze speler kan niet beëindigd worden op dit moment. Wacht tot er voldoende tijd is verstreken om de speler de tijd te geven te spelen."
   },
   "log": {
     "CREATE": "maakt een nieuw spel",
@@ -273,5 +301,19 @@
     "END_TURN_NR": "beëindigt beurt {{value1}}",
     "END": "beëindigt het spel",
     "FORCE_END_TURN": "beëindigt beurt van <strong>{{otherUser}}</strong> geforceerd"
+  },
+  "donations-status": {
+    "lead": "Board Game Fiesta heeft je donatie nodig!",
+    "call-to-action": "We houden de kosten zo laag mogelijk, maar deze website draaiende houden is niet gratis. Door te doneren hou je deze website draaiende! Als we de kosten niet kunnen dekken moeten we uiteindelijk de website offline halen.<br/><br/>We hebben nog <strong>{{needs}}</strong> om de volgende maand te blijven draaien! Je kunt ieder bedrag doneren: <strong>&eur;1,00</strong>, <strong>&eur;2,00</strong>, <strong>&eur;5,00</strong>, etc.",
+    "progress-explanation": "Wordt iedere 3 uur bijgewerkt"
+  },
+  "colors": {
+    "RED": "Rood",
+    "BLUE": "Blauw",
+    "YELLOW": "Geel",
+    "WHITE": "Wit",
+    "GREEN": "Groen",
+    "BLACK": "Zwart",
+    "PURPLE": "Paars"
   }
 }
