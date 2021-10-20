@@ -332,7 +332,7 @@
          height="800"
          width="800"></image>
   <g *ngIf="state.railsToTheNorth">
-    <image href="/assets/games/gwt/rttn.png" x="0" y="0" height="250" width="800"></image>
+    <image [attr.href]="'/assets/games/' + table.game + '/rttn.png'" x="0" y="0" height="250" width="800"></image>
 
     <g transform="translate(24.5,65)">
       <g *ngIf="state.railroadTrack.stations[10]?.stationMaster"
