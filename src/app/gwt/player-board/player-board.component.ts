@@ -47,7 +47,7 @@ interface Branchlet {
 @Component({
   selector: 'app-player-board',
   animations: [
-    flipInYOnEnterAnimation(),
+    // flipInYOnEnterAnimation(),
     bounceOutUpOnLeaveAnimation()
   ],
   templateUrl: './player-board.component.html',
