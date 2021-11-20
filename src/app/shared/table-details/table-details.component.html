@@ -66,5 +66,6 @@
   </ng-container>
 </ul>
 <p>
-  <a class="btn btn-primary" [routerLink]="['/', table.game, table.id]">{{'open'|translate}}</a>
+  <a *ngIf="table.canJoin" class="btn btn-success" [routerLink]="['/', table.game, table.id]">{{'join'|translate}}</a>
+  <a *ngIf="!table.canJoin" class="btn btn-primary" [routerLink]="['/', table.game, table.id]">{{'open'|translate}}</a>
 </p>

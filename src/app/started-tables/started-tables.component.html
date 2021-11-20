@@ -18,7 +18,7 @@
 
 <div class="list-group">
   <app-table-details class="list-group-item"
-                     [ngClass]="{'list-group-item-light':!table.player,'list-group-item-primary':!!table.player}"
+                     [ngClass]="{'bg-primary':!!table.player}"
                      *ngFor="let table of tables"
                      [table]="table">
   </app-table-details>
