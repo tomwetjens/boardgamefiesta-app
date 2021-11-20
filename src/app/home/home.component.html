@@ -37,7 +37,7 @@
   <ng-container *ngIf="(waitingTables$ | async) as tables">
     <section class="container" *ngIf="tables.length > 0">
       <h6>{{'yourOtherTables'|translate}}</h6>
-      <div *ngFor="let table of tables" class="alert alert-secondary table">
+      <div *ngFor="let table of tables" class="alert alert-secondary">
         <strong>{{'game.' + table.game + '.name' | translate}}</strong>
 
         <ng-container [ngSwitch]="table.status">
