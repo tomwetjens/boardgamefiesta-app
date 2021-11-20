@@ -26,7 +26,7 @@
   "donations-status": {
     "lead": "Board Game Fiesta needs your donation!",
     "call-to-action": "We are keeping the costs as low as possible, but running this website isn't free. By becoming a patreon and donating, you support this website and keep it running! If we can't cover the running costs, eventually we may have to shutdown.<br/><br/>We still need <strong>{{needs}}</strong> to keep the website running next month! You can donate any amount you like: <strong>$1.00</strong>, <strong>$2.00</strong>, <strong>$5.00</strong>, etc.",
-    "progress-explanation": "Updated every 3 hours"
+    "progress-explanation": "Updated every 3 hours (last 30 days of PayPal transactions)"
   },
   "games": "Games",
   "game": {

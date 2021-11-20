@@ -305,7 +305,7 @@
   "donations-status": {
     "lead": "Board Game Fiesta heeft je donatie nodig!",
     "call-to-action": "We houden de kosten zo laag mogelijk, maar deze website draaiende houden is niet gratis. Door te doneren hou je deze website draaiende! Als we de kosten niet kunnen dekken moeten we uiteindelijk de website offline halen.<br/><br/>We hebben nog <strong>{{needs}}</strong> om de volgende maand te blijven draaien! Je kunt ieder bedrag doneren: <strong>$1.00</strong>, <strong>$2.00</strong>, <strong>$5.00</strong>, etc.",
-    "progress-explanation": "Wordt iedere 3 uur bijgewerkt"
+    "progress-explanation": "Wordt iedere 3 uur bijgewerkt (PayPal transacties van de laatste 30 dagen)"
   },
   "colors": {
     "RED": "Rood",

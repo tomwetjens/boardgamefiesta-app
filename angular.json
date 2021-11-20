@@ -29,7 +29,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "node_modules/bootswatch/dist/spacelab/bootstrap.css",
+              "node_modules/bootswatch/dist/slate/bootstrap.css",
               "src/styles.scss"
             ],
             "scripts": [

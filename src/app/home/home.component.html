@@ -22,7 +22,7 @@
   <ng-container *ngIf="(myTurnTables$ | async) as tables">
     <section class="container" *ngIf="tables.length > 0">
       <h6>{{'yourTurn'|translate}}</h6>
-      <div *ngFor="let table of tables" class="alert alert-primary table">
+      <div *ngFor="let table of tables" class="alert alert-primary">
         <strong>{{'game.' + table.game + '.name' | translate}}</strong>
         {{'started'|translate}} {{table.started | cal}}.
         <button (click)="openTable(table)" class="btn btn-success">{{'play'|translate}}</button>
@@ -113,6 +113,7 @@
             </p>
             <p class="mt-3">
               <button class="btn btn-primary" (click)="play(game.id)">{{'play'|translate}}</button>
+              &nbsp;
               <span class="ml-2"><a [routerLink]="['games/', game.id]">{{'readMore'|translate}}</a></span>
             </p>
           </div>

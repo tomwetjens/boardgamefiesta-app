@@ -25,3 +25,8 @@
   width: 131px;
   height: 40px;
 }
+
+.navbar-brand {
+  border: 0; /* override Bootstrap 5 */
+  margin: 8px;
+}

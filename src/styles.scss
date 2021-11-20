@@ -41,7 +41,6 @@ body {
   bottom: 0;
   width: 100%;
   height: 120px; /* Set the fixed height of the footer here */
-  background-color: #f5f5f5;
 }
 
 .btn {
@@ -196,4 +195,18 @@ body {
 
 section {
   margin: 24px 0;
+}
+
+@import "node_modules/bootswatch/dist/slate/variables";
+
+.badge-primary {
+  background-color: $primary; /* fix some Bootswatch themes have no colors assigned for badge */
+}
+
+.badge-info {
+  background-color: $info; /* fix some Bootswatch themes have no colors assigned for badge */
+}
+
+.badge-dark {
+  background-color: $dark; /* fix some Bootswatch themes have no colors assigned for badge */
 }

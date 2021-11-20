@@ -23,3 +23,8 @@
     display: none; /* hide arrow */
   }
 }
+
+.dropdown-menu {
+  top: 1px !important;
+  left: -290px !important; /* fix for Bootstrap 5 to prevent menu behind scrollbar */
+}

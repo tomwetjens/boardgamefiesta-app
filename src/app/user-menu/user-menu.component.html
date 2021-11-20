@@ -16,11 +16,11 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<div *ngIf="loggedIn$ | async" ngbDropdown placement="bottom-right">
+<div *ngIf="loggedIn$ | async" ngbDropdown placement="bottom-left" display="dynamic">
   <button id="userMenu" class="navbar-toggler" type="button" ngbDropdownToggle>
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div ngbDropdownMenu aria-labelledby="userMenu" class="dropdown-menu dropdown-menu-right">
+  <div ngbDropdownMenu aria-labelledby="userMenu" class="dropdown-menu">
     <ng-container *ngIf="user | async as user">
       <a [routerLink]="['/user', user.username]" ngbDropdownItem>
         <app-avatar [user]="user"></app-avatar>

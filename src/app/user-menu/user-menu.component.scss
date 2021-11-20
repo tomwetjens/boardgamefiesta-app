@@ -31,3 +31,8 @@
     right: 8px;
   }
 }
+
+.dropdown-menu {
+  top: 1px !important;
+  left: -200% !important; /* fix for Bootstrap 5 to prevent menu behind scrollbar */
+}

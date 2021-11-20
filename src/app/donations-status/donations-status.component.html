@@ -17,7 +17,7 @@
   -->
 
 <div class="container" *ngIf="status$|async as status">
-  <div class="alert alert-warning mx-auto" *ngIf="status.percent < 90">
+  <div class="alert alert-secondary mx-auto" *ngIf="status.percent < 90">
     <p class="lead" [innerHTML]="'donations-status.lead'|translate"></p>
     <p [innerHTML]="'donations-status.call-to-action'|translate:{needs:status.needs|currency}"></p>
     <div class="progress">
