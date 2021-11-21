@@ -35,9 +35,13 @@ import {
   ActionType,
   Building,
   City,
+  CityStrip,
   HazardType,
   Location,
+  ORIGINAL_CITY_STRIP,
   PossibleMove,
+  RTTN_CITY_STRIP,
+  SECOND_EDITION_CITY_STRIP,
   Space,
   State,
   TURNOUTS,
@@ -341,6 +345,12 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
               private ngbModal: NgbModal,
               private toastrService: ToastrService,
               private audioService: AudioService) {
+  }
+
+  get cityStrip(): CityStrip {
+    return this.state?.railsToTheNorth ? RTTN_CITY_STRIP
+      : this.table?.game === 'gwt2' ? SECOND_EDITION_CITY_STRIP
+        : ORIGINAL_CITY_STRIP;
   }
 
   ngOnInit(): void {
@@ -674,7 +684,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
     });
   }
 
-  canSelectCity(city: string): boolean {
+  canSelectCity(city: City|string): boolean {
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
         return this.state.possibleDeliveries && this.state.possibleDeliveries.some(pd => pd.city === city as City);
@@ -733,7 +743,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
       && this.state.jobMarket.rows[this.state.jobMarket.currentRowIndex].workers.length === this.state.jobMarket.rowLimit - 1;
   }
 
-  selectCity(city: string) {
+  selectCity(city: City|string) {
     switch (this.selectedAction) {
       case ActionType.DELIVER_TO_CITY:
         if (this.state.possibleDeliveries) {
@@ -746,6 +756,7 @@ export class TrailComponent implements OnInit, AfterViewInit, AfterContentChecke
             } else {
               const ngbModalRef = this.ngbModal.open(DeliveryCityComponent);
 
+              ngbModalRef.componentInstance.gameId = this.table.game;
               ngbModalRef.componentInstance.possibleDelivery = possibleDelivery;
               ngbModalRef.componentInstance.playerState = this.state.player;
 

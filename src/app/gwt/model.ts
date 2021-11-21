@@ -356,6 +356,19 @@ export enum City {
   SACRAMENTO = 'SACRAMENTO',
   SAN_FRANCISCO = 'SAN_FRANCISCO',
 
+  // Second edition:
+  // KANSAS_CITY,
+  FULTON = 'FULTON',
+  // ST_LOUIS,
+  BLOOMINGTON = 'BLOOMINGTON',
+  PEORIA = 'PEORIA',
+  CHICAGO_2 = 'CHICAGO_2',
+  TOLEDO = 'TOLEDO',
+  PITTSBURGH_2 = 'PITTSBURGH_2',
+  PHILADELPHIA = 'PHILADELPHIA',
+  // NEW_YORK_CITY,
+
+  // Rttn expansion:
   COLUMBIA = 'COLUMBIA',
   ST_LOUIS = 'ST_LOUIS',
   CHICAGO = 'CHICAGO',
@@ -371,6 +384,45 @@ export enum City {
   TORONTO = 'TORONTO',
   MONTREAL = 'MONTREAL'
 }
+
+export type CityStrip = City[];
+
+export const ORIGINAL_CITY_STRIP: CityStrip = [
+  City.KANSAS_CITY,
+  City.TOPEKA,
+  City.WICHITA,
+  City.COLORADO_SPRINGS,
+  City.SANTA_FE,
+  City.ALBUQUERQUE,
+  City.EL_PASO,
+  City.SAN_DIEGO,
+  City.SACRAMENTO,
+  City.SAN_FRANCISCO
+];
+
+export const SECOND_EDITION_CITY_STRIP: CityStrip = [
+  City.KANSAS_CITY,
+  City.FULTON,
+  City.ST_LOUIS,
+  City.BLOOMINGTON,
+  City.PEORIA,
+  City.CHICAGO_2,
+  City.TOLEDO,
+  City.PITTSBURGH_2,
+  City.PHILADELPHIA,
+  City.NEW_YORK_CITY
+];
+
+export const RTTN_CITY_STRIP: CityStrip = [
+  City.KANSAS_CITY,
+  City.COLUMBIA,
+  City.ST_LOUIS,
+  City.CHICAGO,
+  City.DETROIT,
+  City.CLEVELAND,
+  City.PITTSBURGH,
+  City.NEW_YORK_CITY
+];
 
 export interface RailroadTrack {
   readonly players: { [color in PlayerColor]: Space };

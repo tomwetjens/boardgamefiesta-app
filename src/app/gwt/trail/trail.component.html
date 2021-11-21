@@ -596,56 +596,55 @@
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['TOPEKA']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[1]]; index as i"
               [class]="'disc ' + color"
               cx="210"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['WICHITA']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[2]]; index as i"
               [class]="'disc ' + color"
               cx="305"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['COLORADO_SPRINGS']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[3]]; index as i"
               [class]="'disc ' + color"
               cx="368"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['SANTA_FE']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[4]]; index as i"
               [class]="'disc ' + color"
               cx="431"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['ALBUQUERQUE']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[5]]; index as i"
               [class]="'disc ' + color"
               cx="495"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['EL_PASO']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[6]]; index as i"
               [class]="'disc ' + color"
               cx="558"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['SAN_DIEGO']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[7]]; index as i"
               [class]="'disc ' + color"
               cx="621"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <circle *ngFor="let color of state.railroadTrack.cities['SACRAMENTO']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[8]]; index as i"
               [class]="'disc ' + color"
               cx="684"
               [attr.cy]="17 - (i * 4)"
               r="11"/>
 
-      <!-- SAN_FRANCISCO -->
-      <circle *ngFor="let color of state.railroadTrack.cities['SAN_FRANCISCO']; index as i"
+      <circle *ngFor="let color of state.railroadTrack.cities[cityStrip[9]]; index as i"
               [class]="'disc ' + color"
               cx="748"
               [attr.cy]="17 - (i * 4)"
@@ -659,8 +658,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('KANSAS_CITY')" [ngClass]="{disabled:!canSelectCity('KANSAS_CITY')}"/>
-      <rect id="city-TOPEKA"
+            (click)="selectCity(cityStrip[0])" [ngClass]="{disabled:!canSelectCity(cityStrip[0])}"/>
+      <rect id="city-1"
             class="city"
             x="184"
             y="0"
@@ -668,8 +667,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('TOPEKA')" [ngClass]="{disabled:!canSelectCity('TOPEKA')}"/>
-      <rect id="city-WICHITA"
+            (click)="selectCity(cityStrip[1])" [ngClass]="{disabled:!canSelectCity(cityStrip[1])}"/>
+      <rect id="city-2"
             class="city"
             x="279"
             y="0"
@@ -677,8 +676,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('WICHITA')" [ngClass]="{disabled:!canSelectCity('WICHITA')}"/>
-      <rect id="city-COLORADO_SPRINGS"
+            (click)="selectCity(cityStrip[2])" [ngClass]="{disabled:!canSelectCity(cityStrip[2])}"/>
+      <rect id="city-3"
             class="city"
             x="343"
             y="0"
@@ -686,8 +685,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('COLORADO_SPRINGS')" [ngClass]="{disabled:!canSelectCity('COLORADO_SPRINGS')}"/>
-      <rect id="city-SANTA_FE"
+            (click)="selectCity(cityStrip[3])" [ngClass]="{disabled:!canSelectCity(cityStrip[3])}"/>
+      <rect id="city-4"
             class="city"
             x="406"
             y="0"
@@ -695,8 +694,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('SANTA_FE')" [ngClass]="{disabled:!canSelectCity('SANTA_FE')}"/>
-      <rect id="city-ALBUQUERQUE"
+            (click)="selectCity(cityStrip[4])" [ngClass]="{disabled:!canSelectCity(cityStrip[4])}"/>
+      <rect id="city-5"
             class="city"
             x="469"
             y="0"
@@ -704,8 +703,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('ALBUQUERQUE')" [ngClass]="{disabled:!canSelectCity('ALBUQUERQUE')}"/>
-      <rect id="city-EL_PASO"
+            (click)="selectCity(cityStrip[5])" [ngClass]="{disabled:!canSelectCity(cityStrip[5])}"/>
+      <rect id="city-6"
             class="city"
             x="532"
             y="0"
@@ -713,8 +712,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('EL_PASO')" [ngClass]="{disabled:!canSelectCity('EL_PASO')}"/>
-      <rect id="city-SAN_DIEGO"
+            (click)="selectCity(cityStrip[6])" [ngClass]="{disabled:!canSelectCity(cityStrip[6])}"/>
+      <rect id="city-7"
             class="city"
             x="595"
             y="0"
@@ -722,8 +721,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('SAN_DIEGO')" [ngClass]="{disabled:!canSelectCity('SAN_DIEGO')}"/>
-      <rect id="city-SACRAMENTO"
+            (click)="selectCity(cityStrip[7])" [ngClass]="{disabled:!canSelectCity(cityStrip[7])}"/>
+      <rect id="city-8"
             class="city"
             x="659"
             y="0"
@@ -731,8 +730,8 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('SACRAMENTO')" [ngClass]="{disabled:!canSelectCity('SACRAMENTO')}"/>
-      <rect id="city-SAN_FRANCISCO"
+            (click)="selectCity(cityStrip[8])" [ngClass]="{disabled:!canSelectCity(cityStrip[8])}"/>
+      <rect id="city-9"
             class="city"
             x="722"
             y="0"
@@ -740,7 +739,7 @@
             ry="2"
             height="50"
             width="52"
-            (click)="selectCity('SAN_FRANCISCO')" [ngClass]="{disabled:!canSelectCity('SAN_FRANCISCO')}"/>
+            (click)="selectCity(cityStrip[9])" [ngClass]="{disabled:!canSelectCity(cityStrip[9])}"/>
     </g>
 
     <g id="railroad-track" class="railroad-track">

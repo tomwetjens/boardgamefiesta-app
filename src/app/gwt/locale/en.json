@@ -923,7 +923,14 @@
         "UPGRADE_SIMMENTAL": "upgrades a <strong>Simmental</strong> <strong>{{value2}}VP</strong> cattle card to <strong>{{value4}}VP</strong>"
       },
       "values": {
-        "SIMMENTAL": "Simmental"
+        "SIMMENTAL": "Simmental",
+        "FULTON": "Fulton",
+        "BLOOMINGTON": "Bloomington",
+        "PEORIA": "Peoria",
+        "CHICAGO_2": "Chicago",
+        "TOLEDO": "Toledo",
+        "PITTSBURGH_2": "Pittsburgh",
+        "PHILADELPHIA": "Philadelphia"
       }
     },
     "option": {
