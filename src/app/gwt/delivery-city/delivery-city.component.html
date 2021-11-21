@@ -18,7 +18,7 @@
 
 <div class="modal-header">
   <h4
-    class="modal-title">{{'gwt.deliverDialog'|translate:{city: 'gwt.log.values.' + possibleDelivery.city|translate} }}</h4>
+    class="modal-title">{{'gwt.deliverDialog'|translate:{city: gameId + '.log.values.' + possibleDelivery.city|translate} }}</h4>
   <button type="button" class="btn close" aria-label="Close" (click)="ngbActiveModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -28,11 +28,11 @@
     <p *ngIf="possibleDelivery.certificates > 0">
       {{'gwt.deliverRequiresCertificates'|translate:{
       atLeast: possibleDelivery.certificates,
-      city: 'gwt.log.values.' + possibleDelivery.city|translate
+      city: gameId + '.log.values.' + possibleDelivery.city|translate
     } }}
     </p>
     <p *ngIf="possibleDelivery.certificates < playerState.certificates">
-      {{'gwt.deliverOptionalCertificates'|translate:{city: 'gwt.log.values.' + possibleDelivery.city|translate} }}
+      {{'gwt.deliverOptionalCertificates'|translate:{city: gameId + '.log.values.' + possibleDelivery.city|translate} }}
     </p>
 
     <p>

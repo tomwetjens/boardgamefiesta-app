@@ -90,7 +90,7 @@
       <td scope="col" *ngFor="let column of columns">{{column.playerState.stats?.tempCertLimit}}</td>
     </tr>
     <tr *ngFor="let city of cities">
-      <th scope="row" class="text-nowrap">{{'gwt.stats.deliveries'|translate}} {{'gwt.log.values.' +city|translate}}</th>
+      <th scope="row" class="text-nowrap">{{'gwt.stats.deliveries'|translate}} {{table.game + '.log.values.' + city|translate}}</th>
       <td scope="col" *ngFor="let column of columns">{{column.playerState.stats ? column.playerState.stats['deliveries.' + city]||0 : ''}}</td>
     </tr>
     <tr *ngFor="let building of buildings">

@@ -32,6 +32,7 @@ interface Option {
 })
 export class DeliveryCityComponent implements OnInit {
 
+  @Input() gameId: string;
   @Input() playerState: PlayerState;
   @Input() possibleDelivery: PossibleDelivery;
 
