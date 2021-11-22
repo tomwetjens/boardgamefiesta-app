@@ -90,6 +90,8 @@
                       triggers="mouseenter:mouseleave"
                       container="body"></app-card-stack>
     </button>
+
+    <span *ngIf="playerState.automaState" [innerHTML]="'gwt.computerExplanation'|translate"></span>
   </header>
   <section score>
     <table class="table table-sm" *ngIf="playerState.score !== undefined && playerState.score !== null">

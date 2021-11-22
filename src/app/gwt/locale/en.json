@@ -26,6 +26,7 @@
     },
     "buyCattleDialog": "Buy cattle cards",
     "endTurn": "There are no more actions you can perform. Automatically ending your turn in {{secs}} seconds.",
+    "computerExplanation": "I'm a computer using <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play\" target=\"_new\">Garth solo variant</a> rules.",
     "popover": {
       "balance": "Current balance in dollars.",
       "handValue": "The breeding values of each different type of cattle that you have in hand is counted towards your total breeding value. This means each type is counted only once, no matter how many cards of that type you have.",
