@@ -424,6 +424,25 @@ export const RTTN_CITY_STRIP: CityStrip = [
   City.NEW_YORK_CITY
 ];
 
+export const RTTN_CITIES = [
+  City.KANSAS_CITY,
+  City.COLUMBIA,
+  City.ST_LOUIS,
+  City.CHICAGO,
+  City.DETROIT,
+  City.CLEVELAND,
+  City.PITTSBURGH,
+  City.NEW_YORK_CITY,
+  City.MEMPHIS,
+  City.SAN_FRANCISCO,
+  City.DENVER,
+  City.MILWAUKEE,
+  City.GREEN_BAY,
+  City.TORONTO,
+  City.MINNEAPOLIS,
+  City.MONTREAL
+];
+
 export interface RailroadTrack {
   readonly players: { [color in PlayerColor]: Space };
   readonly cities: { [city in City]: PlayerColor[] };

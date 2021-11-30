@@ -77,13 +77,14 @@
     "permCertificates": "Usar certificados permanentes",
     "tempCertificates": "Gastar certificados temporários",
     "totalCertificates": "Total",
-    "totalBreedingValue": "Valor de rendimento total",
+    "totalBreedingValue": "Rendimento total",
     "cattleMarket": {
       "select": "Escolha uma única carta de gado ou um par de cartas de gado e clique em confirmar.<br/>Você pode repetir esta ação contanto que tenha dólares e cowboys suficientes.",
       "buy": "Comprar cartas de gado"
     },
     "buyCattleDialog": "Compre cartas de gado",
     "endTurn": "Não há mais ações que você possa executar. Encerrando seu turno automaticamente em {{secs}} segundos.",
+    "computerExplanation": "Sou um computador usando a variante <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play/\" target=\"_new\">Garth</a>.",
     "popover": {
       "balance": "Saldo atual em dólares.",
       "handValue": "Os valores de rendimento de cada tipo diferente de gado que você tenha em mãos são contados em seu valor de rendimento total. Isso significa que cada tipo é contado apenas uma vez, não importa quantas cartas desse tipo você tenha.",

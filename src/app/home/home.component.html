@@ -50,7 +50,7 @@
           </span>
               <span *ngSwitchCase="true">
             {{'invitedBy'|translate}}&nbsp;<strong>{{table.owner.username}}</strong>&nbsp;
-            <button (click)="accept(table)" class="btn btn-success">{{'accept'|translate}}</button>
+            <button (click)="openTable(table)" class="btn btn-success">{{'join'|translate}}</button>
             &nbsp;
             <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>

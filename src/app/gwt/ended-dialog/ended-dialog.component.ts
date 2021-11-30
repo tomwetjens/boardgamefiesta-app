@@ -19,7 +19,15 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Table, TablePlayer} from '../../shared/model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {City, PlayerState, ScoreCategory, State} from '../model';
+import {
+  City,
+  ORIGINAL_CITY_STRIP,
+  PlayerState,
+  RTTN_CITIES,
+  ScoreCategory,
+  SECOND_EDITION_CITY_STRIP,
+  State
+} from '../model';
 import {AudioService} from "../../audio.service";
 import {SCORE_MUSIC} from "../sounds";
 import {Subject} from "rxjs";
@@ -60,33 +68,9 @@ export class EndedDialogComponent implements OnInit, OnDestroy, OnChanges {
       .pipe(takeUntil(this.destroyed))
       .subscribe();
 
-    this.cities = this.state.railsToTheNorth
-      ? [City.KANSAS_CITY,
-        City.COLUMBIA,
-        City.ST_LOUIS,
-        City.CHICAGO,
-        City.DETROIT,
-        City.CLEVELAND,
-        City.PITTSBURGH,
-        City.NEW_YORK_CITY,
-        City.MEMPHIS,
-        City.SAN_FRANCISCO,
-        City.DENVER,
-        City.MILWAUKEE,
-        City.GREEN_BAY,
-        City.TORONTO,
-        City.MINNEAPOLIS,
-        City.MONTREAL]
-      : [City.KANSAS_CITY,
-        City.TOPEKA,
-        City.WICHITA,
-        City.COLORADO_SPRINGS,
-        City.SANTA_FE,
-        City.ALBUQUERQUE,
-        City.EL_PASO,
-        City.SAN_DIEGO,
-        City.SACRAMENTO,
-        City.SAN_FRANCISCO];
+    this.cities = this.state.railsToTheNorth ? RTTN_CITIES
+      : this.table.game === 'gwt2' ? SECOND_EDITION_CITY_STRIP
+      : ORIGINAL_CITY_STRIP;
 
     this.buildings = Array.from(
       new Set<string>([
