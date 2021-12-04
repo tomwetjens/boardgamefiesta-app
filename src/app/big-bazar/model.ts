@@ -151,6 +151,7 @@ export interface BigBazar {
   readonly actions: Action[];
   readonly turn: boolean;
   readonly players: { [color in PlayerColor]: PlayerState };
+  readonly otherPlayers: PlayerColor[];
   readonly bonusCards: number;
   readonly maxRubies: number;
 }

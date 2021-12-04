@@ -443,8 +443,8 @@
                         (perform)="perform.emit($event)">
       </big-bazar-player>
 
-      <big-bazar-player *ngFor="let playerId of table.otherPlayers"
-                        [player]="table.players[playerId]"
+      <big-bazar-player *ngFor="let playerColor of state.otherPlayers"
+                        [player]="table.players[state.players[playerColor].name]"
                         [table]="table"
                         [state]="state">
       </big-bazar-player>
