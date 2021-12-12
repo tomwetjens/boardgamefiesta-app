@@ -134,6 +134,11 @@
   &.SINGLE_OR_DOUBLE_AUXILIARY_ACTION_SAN_FRANCISCO {
     background-image: url(../../../assets/games/gwt/cards/aux_sf.png);
   }
+  &.gwt2 {
+    &.SINGLE_OR_DOUBLE_AUXILIARY_ACTION_SAN_FRANCISCO {
+      background-image: url(../../../assets/games/gwt2/cards/aux_sf.png);
+    }
+  }
 
   &.DRAW_CARD_5_H {
     background-image: url(../../../assets/games/gwt/cards/draw_5h.png);

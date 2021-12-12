@@ -931,7 +931,8 @@
         "CHICAGO_2": "Chicago",
         "TOLEDO": "Toledo",
         "PITTSBURGH_2": "Pittsburgh",
-        "PHILADELPHIA": "Philadelphia"
+        "PHILADELPHIA": "Philadelphia",
+        "AUX_SF": "New York - Auxiliary Action"
       }
     },
     "option": {

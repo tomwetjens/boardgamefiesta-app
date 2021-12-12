@@ -52,7 +52,7 @@ export class CardComponent implements OnInit {
   @HostBinding('class')
   get className(): string {
     if (this.type === 'CATTLE') {
-      return this.cattleCard.type === CattleType.SIMMENTAL ? this.cattleCard.type + this.cattleCard.breedingValue : this.cattleCard.type;
+      return this.gameId + ' ' + this.cattleCard.type === CattleType.SIMMENTAL ? this.cattleCard.type + this.cattleCard.breedingValue : this.cattleCard.type;
     } else if (this.type === 'OBJECTIVE') {
       let prefix;
 
@@ -81,7 +81,7 @@ export class CardComponent implements OnInit {
           prefix = 'MOVE';
           break;
       }
-      return prefix + '_' + this.objectiveCard.tasks.map(task => {
+      return this.gameId + ' ' + prefix + '_' + this.objectiveCard.tasks.map(task => {
         switch (task) {
           case Task.BREEDING_VALUE_3:
             return '3';
@@ -105,7 +105,7 @@ export class CardComponent implements OnInit {
       })
         .join('_');
     }
-    return this.emptyType === 'CATTLE' ? 'back' : 'back_grey';
+    return this.gameId + ' ' + (this.emptyType === 'CATTLE' ? 'back' : 'back_grey');
   }
 
 }

@@ -921,7 +921,8 @@
         "UPGRADE_SIMMENTAL": "waardeert een <strong>Simmental</strong> <strong>{{value2}}p</strong> kaart op naar <strong>{{value4}}p</strong>"
       },
       "values": {
-        "SIMMENTAL": "Simmental"
+        "SIMMENTAL": "Simmental",
+        "AUX_SF": "New York - hulpactie"
       }
     },
     "popover": {

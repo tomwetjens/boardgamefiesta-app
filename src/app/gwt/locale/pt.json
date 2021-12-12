@@ -84,7 +84,7 @@
     },
     "buyCattleDialog": "Compre cartas de gado",
     "endTurn": "Não há mais ações que você possa executar. Encerrando seu turno automaticamente em {{secs}} segundos.",
-    "computerExplanation": "Sou um computador usando a variante <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play/\" target=\"_new\">Garth</a>.",
+    "computerExplanation": "Sou um computador usando a variante <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play\" target=\"_new\">Garth</a>.",
     "popover": {
       "balance": "Saldo atual em dólares.",
       "handValue": "Os valores de rendimento de cada tipo diferente de gado que você tenha em mãos são contados em seu valor de rendimento total. Isso significa que cada tipo é contado apenas uma vez, não importa quantas cartas desse tipo você tenha.",
@@ -918,7 +918,8 @@
         "UPGRADE_SIMMENTAL": "aprimora uma carta de gado <strong>Simmental</strong> <strong>{{value2}}PV</strong> para <strong>{{value4}}PV</strong>"
       },
       "values": {
-        "SIMMENTAL": "Simmental"
+        "SIMMENTAL": "Simmental",
+        "AUX_SF": "New York - Ação Auxiliar"
       },
       "DISCARD_1_CATTLE_CARD_TO_GAIN_6_DOLLARS_AND_ADD_1_OBJECTIVE_CARD_TO_HAND": "descarta <strong>{{value1}}</strong> para ganhar $6 e deve adicionar 1 carta de objetivo à mão",
       "DISCARD_CATTLE_CARD_TO_GAIN_7_DOLLARS": "descarta a carta de gado <strong>{{value1}}</strong> (<strong>{{value2}}PV</strong>) para ganhar $7",
