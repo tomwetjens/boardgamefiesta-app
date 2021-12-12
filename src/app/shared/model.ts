@@ -117,6 +117,7 @@ export interface Table {
   readonly visibility: Visibility;
   readonly options: Options;
   readonly status: TableStatus;
+  readonly progress: number;
   readonly canAccept: boolean;
   readonly player?: string;
   readonly otherPlayers: string[];
