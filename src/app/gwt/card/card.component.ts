@@ -52,7 +52,10 @@ export class CardComponent implements OnInit {
   @HostBinding('class')
   get className(): string {
     if (this.type === 'CATTLE') {
-      return this.gameId + ' ' + this.cattleCard.type === CattleType.SIMMENTAL ? this.cattleCard.type + this.cattleCard.breedingValue : this.cattleCard.type;
+      return this.gameId + ' ' +
+        (this.cattleCard.type === CattleType.SIMMENTAL
+          ? (this.cattleCard.type + this.cattleCard.breedingValue)
+          : this.cattleCard.type);
     } else if (this.type === 'OBJECTIVE') {
       let prefix;
 
