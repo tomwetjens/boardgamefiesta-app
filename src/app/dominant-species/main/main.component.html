@@ -1,0 +1,15 @@
+<ng-container *ngIf="table$|async as table">
+  <ng-container *ngIf="state$|async as state">
+    <app-in-game-navbar [table]="table"
+                        [canSkip]="false"
+                        [busy]="false">
+    </app-in-game-navbar>
+
+    <ds-action-bar [actions]="state.actions" [(selectedAction)]="selectedAction"></ds-action-bar>
+
+    <ds-board [table]="table"
+              [state]="state.state"
+              [selectedAction]="selectedAction"
+              (perform)="perform($event, table)"></ds-board>
+  </ng-container>
+</ng-container>

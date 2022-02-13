@@ -43,10 +43,6 @@ body {
   height: 120px; /* Set the fixed height of the footer here */
 }
 
-.btn {
-  font-size: 10pt;
-}
-
 .navbar-brand {
   padding: 2px 8px;
 
@@ -59,7 +55,13 @@ body {
 .btn {
   padding: 4px 6px;
   text-transform: none;
+  font-size: 10pt;
   font-weight: bold;
+  text-decoration: none;
+}
+
+.alert a {
+  text-decoration: none;
 }
 
 .no-gutters {

@@ -1,0 +1,12 @@
+<dl class="actions">
+  <ng-container *ngFor="let item of actionDisplay.actionPawns | keyvalue">
+    <dt>{{item.key}}</dt>
+    <dd>
+      <ol class="action-pawns">
+        <li *ngFor="let actionPawn of item.value; index as index">
+          <ds-action-space [actionPawn]="actionPawn" (click)="placeActionPawn(item.key, index)"></ds-action-space>
+        </li>
+      </ol>
+    </dd>
+  </ng-container>
+</dl>

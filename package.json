@@ -34,6 +34,7 @@
     "iso-language-codes": "^1.1.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
+    "ngx-panzoom": "^12.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.11.4"

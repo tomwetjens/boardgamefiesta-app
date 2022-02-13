@@ -65,17 +65,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroyed.next(true);
   }
 
-  accept(table: Table) {
-    this.tableService.accept(table.id)
-      .subscribe(() => this.openTable(table));
-  }
-
   reject(table: Table) {
     this.tableService.reject(table.id)
       .subscribe(() => this.refreshTables());
   }
 
-  openTable(table: Table) {
+  private openTable(table: Table) {
     this.router.navigate([table.game, table.id]);
   }
 

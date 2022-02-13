@@ -1,0 +1,27 @@
+<pan-zoom [config]="panZoomConfig">
+  <svg viewBox="-633 -540 1920 1080">
+    <g class="hexagon" *ngFor="let hex of hexes"
+       [attr.transform]="'translate(' + hex.hex.center.x + ',' + hex.hex.center.y + ')'">
+      <polygon [attr.points]="hex.hex.points"
+               (click)="selectHexagon(hex.coords)"/>
+    </g>
+
+    <g class="tile" *ngFor="let tile of tiles"
+       [attr.transform]="'translate(' + tile.hex.center.x + ',' + tile.hex.center.y + ')'"
+       (click)="selectTile(tile.tile)">
+      <polygon class="terrain" [ngClass]="tile.tile.type" [attr.points]="tile.hex.points"/>
+
+      <g transform="scale(0.8)" *ngIf="tile.tile.tundra">
+        <polygon class="tundra" [attr.points]="tile.hex.points"/>
+      </g>
+    </g>
+
+    <circle class="element" *ngFor="let element of elements" [ngClass]="element.element.type"
+            r="20" [attr.cx]="element.center.x" [attr.cy]="element.center.y"/>
+  </svg>
+</pan-zoom>
+
+<ds-action-display [actionDisplay]="state.actionDisplay"
+                   [selectedAction]="selectedAction"
+                   (perform)="perform.emit($event)"></ds-action-display>
+

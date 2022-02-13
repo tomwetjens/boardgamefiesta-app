@@ -25,7 +25,7 @@
       <div *ngFor="let table of tables" class="alert alert-primary">
         <strong>{{'game.' + table.game + '.name' | translate}}</strong>
         {{'started'|translate}} {{table.started | cal}}.
-        <button (click)="openTable(table)" class="btn btn-success">{{'play'|translate}}</button>
+        <a [routerLink]="[table.game, table.id]" class="btn btn-success">{{'play'|translate}}</a>
 
         <span class="avatars">
         <app-avatar *ngFor="let player of otherHumanPlayers(table)" [user]="player.user"></app-avatar>
@@ -46,11 +46,11 @@
             <ng-container [ngSwitch]="table.canAccept">
           <span *ngSwitchCase="false">
             {{'notStarted'|translate}}
-            <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
+            <a [routerLink]="[table.game, table.id]" class="btn btn-primary">{{'open'|translate}}</a>
           </span>
               <span *ngSwitchCase="true">
             {{'invitedBy'|translate}}&nbsp;<strong>{{table.owner.username}}</strong>&nbsp;
-            <button (click)="openTable(table)" class="btn btn-success">{{'join'|translate}}</button>
+            <a [routerLink]="[table.game, table.id]"  class="btn btn-success">{{'join'|translate}}</a>
             &nbsp;
             <button (click)="reject(table)" class="btn btn-danger">{{'reject'|translate}}</button>
           </span>
@@ -62,7 +62,7 @@
             </ng-container>
             <span>{{'waitingFor'|translate}}</span>
             <app-player-name [player]="table.players[table.currentPlayer]"></app-player-name>
-            <button (click)="openTable(table)" class="btn btn-primary">{{'open'|translate}}</button>
+            <a [routerLink]="[table.game, table.id]"  class="btn btn-primary">{{'open'|translate}}</a>
           </ng-container>
         </ng-container>
 

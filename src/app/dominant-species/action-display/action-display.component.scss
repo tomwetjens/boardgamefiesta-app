@@ -1,0 +1,33 @@
+:host {
+  border: #9e9374 solid 1px;
+  box-shadow: black 3px 3px 8px;
+  background-color: #f1ebed;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  grid-column-start: 1;
+  color: #548774;
+  font-weight: bold;
+  border: #715122 solid 2px;
+  background-color: #f1ebed;
+  position: relative;
+  left: -20px;
+  padding: 4px;
+  margin: 8px 0;
+}
+
+dd {
+  grid-column-start: 2;
+  margin: 8px 8px 16px 4px;
+}
+
+.action-pawns {
+  li {
+    display: inline-block;
+  }
+}

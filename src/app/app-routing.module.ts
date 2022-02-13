@@ -63,6 +63,17 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'ds/:tableId',
+    component: TableComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./dominant-species/dominant-species.module').then(m => m.DominantSpeciesModule)
+      }
+    ]
+  },
   // {
   //   path: 'power-grid/:tableId',
   //   component: TableComponent,
