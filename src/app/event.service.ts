@@ -55,7 +55,7 @@ export class EventService {
       map(() => this.oauthService.hasValidIdToken() ? this.oauthService.getIdToken() : null),
       distinctUntilChanged(),
       switchMap(token => webSocket({
-        url: environment.wsBaseUrl + '/events' + (!!token ? '?token=' + token : ''),
+        url: environment.wsBaseUrl + (!!token ? '?token=' + token : ''),
         openObserver: {
           next: event => {
             const webSocket = event.target as WebSocket;

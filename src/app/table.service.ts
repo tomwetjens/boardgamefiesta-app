@@ -84,7 +84,7 @@ export class TableService {
       this._id.pipe(distinctUntilChanged())
     ]).pipe(
       switchMap(([token, id]) => webSocket({
-        url: environment.wsBaseUrl + '/tables/' + id + '/events?token=' + token,
+        url: environment.wsBaseUrl + '?table=' + id + '&token=' + token,
         openObserver: {
           next: () => {
             console.log('Connected to table');
