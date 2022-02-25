@@ -30,7 +30,7 @@ import {
   TableType,
   User
 } from './shared/model';
-import {BehaviorSubject, combineLatest, from, Observable, ReplaySubject, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, combineLatest, from, Observable, of, ReplaySubject, Subject, throwError, timer} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
   catchError,
@@ -50,8 +50,10 @@ import {State} from "./gwt/model";
 import {webSocket} from "rxjs/webSocket";
 import {EventService} from "./event.service";
 import {DeviceSettingsService} from "./shared/device-settings.service";
+import {BrowserService} from "./browser.service";
 
 const MIN_TIME_BETWEEN_REFRESHES = 800;
+const HEARTBEAT_INTERVAL = 60000;
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +66,7 @@ export class TableService {
   private _id = new ReplaySubject<string>(1);
   private _connectedCount = 0;
   private _reconnected$: Observable<boolean>;
+  private _webSockets: WebSocket[] = [];
 
   events$: Observable<Event>;
   connected$ = new BehaviorSubject<boolean>(false);
@@ -77,8 +80,20 @@ export class TableService {
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
+              private browserService: BrowserService,
               private eventService: EventService,
               private deviceSettingsService: DeviceSettingsService) {
+    browserService.active
+      .pipe(
+        switchMap(active => active
+          ? timer(0, HEARTBEAT_INTERVAL).pipe(map(() => active))
+          : of<boolean>().pipe(startWith(active))))
+      .subscribe(active => {
+        this._webSockets.forEach(webSocket => {
+          this.heartbeat(active, webSocket);
+        });
+      });
+
     this.events$ = combineLatest([
       this.authService.token.pipe(distinctUntilChanged()),
       this._id.pipe(distinctUntilChanged())
@@ -86,15 +101,25 @@ export class TableService {
       switchMap(([token, id]) => webSocket({
         url: environment.wsBaseUrl + '?table=' + id + '&token=' + token,
         openObserver: {
-          next: () => {
+          next: event => {
             console.log('Connected to table');
+
+            const webSocket = event.target as WebSocket;
+
+            this._webSockets.push(webSocket);
+            this.browserService.active.subscribe(active => this.heartbeat(active, webSocket));
+
             this._connectedCount++;
             this.connected$.next(this._connectedCount > 0);
           }
         },
         closeObserver: {
-          next: () => {
+          next: event => {
             console.log('Disconnected from table');
+
+            const webSocket = event.target as WebSocket;
+            this._webSockets.splice(this._webSockets.indexOf(webSocket), 1);
+
             this._connectedCount = Math.max(0, this._connectedCount - 1);
             this.connected$.next(this._connectedCount > 0);
           }
@@ -189,6 +214,11 @@ export class TableService {
       switchMap(() => this.find()),
       shareReplay(1)
     );
+  }
+
+  private heartbeat(active: boolean, webSocket: WebSocket) {
+    const event = {type: active ? 'ACTIVE' : 'INACTIVE'};
+    webSocket.send(JSON.stringify(event));
   }
 
   load(id: string) {
