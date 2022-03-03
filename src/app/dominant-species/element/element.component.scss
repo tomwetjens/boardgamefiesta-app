@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+span {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%; // TODO replace with image
+  box-shadow: 1px 1px 2px #000000;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  &.GRASS {
+    background-color: #8fd32c;
+    background-image: url('../../../assets/games/ds/grass.png');
+  }
+
+  &.GRUB {
+    background-color: #503442;
+    background-image: url('../../../assets/games/ds/grub.png');
+  }
+
+  &.MEAT {
+    background-color: #593b36;
+    background-image: url('../../../assets/games/ds/meat.png');
+  }
+
+  &.SUN {
+    background-color: #49412e;
+    background-image: url('../../../assets/games/ds/sun.png');
+  }
+
+  &.WATER {
+    background-color: #2f484f;
+    background-image: url('../../../assets/games/ds/water.png');
+  }
+
+  &.SEED {
+    background-color: #4a492c;
+    background-image: url('../../../assets/games/ds/seed.png');
+  }
+
+  &.selectable {
+    border: 3px solid #ffffff;
+    cursor: pointer;
+
+    &:hover {
+      border-color: black;
+    }
+  }
+
+  &.selected {
+    border: 3px solid black;
+  }
+}

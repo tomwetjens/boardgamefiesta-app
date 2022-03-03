@@ -1,0 +1,9 @@
+<ng-template #popover>
+  <p>{{'ds.animalType.' + animalType|translate}}</p>
+</ng-template>
+<span [class]="animalType"
+      [ngbPopover]="popover"
+      triggers="mouseenter:mouseleave"
+      container="body">
+  <span *ngIf="player" class="color" [class]="'bg-' + player.color"></span>
+</span>

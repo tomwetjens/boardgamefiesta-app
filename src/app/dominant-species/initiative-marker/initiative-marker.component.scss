@@ -1,0 +1,38 @@
+span {
+  display: block;
+  width: 48px;
+  height: 48px;
+  position: relative;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  &.MAMMALS {
+    background-image: url('../../../assets/games/ds/mammals.png');
+  }
+  &.REPTILES {
+    background-image: url('../../../assets/games/ds/reptiles.png');
+  }
+  &.BIRDS {
+    background-image: url('../../../assets/games/ds/birds.png');
+  }
+  &.AMPHIBIANS {
+    background-image: url('../../../assets/games/ds/amphibians.png');
+  }
+  &.ARACHNIDS {
+    background-image: url('../../../assets/games/ds/arachnids.png');
+  }
+  &.INSECTS {
+    background-image: url('../../../assets/games/ds/insects.png');
+  }
+
+  .color {
+    display: block;
+    width: 30%;
+    height: 30%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}

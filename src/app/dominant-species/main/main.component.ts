@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TableService} from "../../table.service";
-import {Observable, ReplaySubject} from "rxjs";
+import {combineLatest, Observable, ReplaySubject} from "rxjs";
 import {Table} from "../../shared/model";
-import {Action, ActionName, State} from "../model";
+import {Action, ActionName, DominantSpecies} from "../model";
 import {takeUntil} from "rxjs/operators";
 
 @Component({
@@ -15,7 +15,7 @@ export class MainComponent implements OnInit, OnDestroy {
   private destroyed = new ReplaySubject<boolean>(1);
 
   table$: Observable<Table>;
-  state$: Observable<State>;
+  state$: Observable<DominantSpecies>;
 
   selectedAction: ActionName;
 
@@ -25,10 +25,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.state$
+    combineLatest([this.state$, this.table$])
       .pipe(takeUntil(this.destroyed))
-      .subscribe(state => {
-        this.autoSelectAction(state);
+      .subscribe(([state, table]) => {
+        this.autoSelectAction(state, table);
       });
   }
 
@@ -37,17 +37,28 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   perform(action: Action, table: Table) {
-    this.tableService.perform(table.id, action).subscribe();
+    this.tableService.perform(table.id, action)
+      .subscribe();
   }
 
-  private autoSelectAction(state: State) {
+  private autoSelectAction(state: DominantSpecies, table: Table) {
     if (!this.selectedAction || !state?.actions?.includes(this.selectedAction)) {
-      if (state?.actions?.length === 1) {
+      if (table.turn && state?.actions?.length === 1) {
         this.selectedAction = state.actions[0];
         console.log('Automatically selected action: ' + this.selectedAction);
       } else {
         this.selectedAction = null;
       }
+    } else {
+      this.selectedAction = null;
     }
+  }
+
+  endTurn(table: Table) {
+    this.tableService.endTurn(table.id).subscribe();
+  }
+
+  skip(table: Table) {
+    this.tableService.skip(table.id).subscribe();
   }
 }

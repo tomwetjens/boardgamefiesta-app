@@ -31,6 +31,21 @@ import {ActionSpaceComponent} from "./action-space/action-space.component";
 import {ActionDisplayComponent} from "./action-display/action-display.component";
 import {NgxPanZoomModule} from "ngx-panzoom";
 import { ActionBarComponent } from './action-bar/action-bar.component';
+import { PlayerComponent } from './player/player.component';
+import { ElementSpaceComponent } from './element-space/element-space.component';
+import { DrawBagComponent } from './draw-bag/draw-bag.component';
+import { WanderlustTilesComponent } from './wanderlust-tiles/wanderlust-tiles.component';
+import { ActionPawnComponent } from './action-pawn/action-pawn.component';
+import en from './locale/en.json';
+import nl from "./locale/nl.json";
+import { InitiativeMarkerComponent } from './initiative-marker/initiative-marker.component';
+import { ElementComponent } from './element/element.component';
+import { ElementPopoverComponent } from './element-popover/element-popover.component';
+import { BonusPointsTableComponent } from './bonus-points-table/bonus-points-table.component';
+import { ScoringTableComponent } from './scoring-table/scoring-table.component';
+import { FoodChainComponent } from './food-chain/food-chain.component';
+import { TilePopoverComponent } from './tile-popover/tile-popover.component';
+import { CardsDisplayComponent } from './cards-display/cards-display.component';
 
 const routes: Routes = [
   {
@@ -45,7 +60,20 @@ const routes: Routes = [
     BoardComponent,
     ActionSpaceComponent,
     ActionDisplayComponent,
-    ActionBarComponent
+    ActionBarComponent,
+    PlayerComponent,
+    ElementSpaceComponent,
+    DrawBagComponent,
+    WanderlustTilesComponent,
+    ActionPawnComponent,
+    InitiativeMarkerComponent,
+    ElementComponent,
+    ElementPopoverComponent,
+    BonusPointsTableComponent,
+    ScoringTableComponent,
+    FoodChainComponent,
+    TilePopoverComponent,
+    CardsDisplayComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +93,9 @@ export class DominantSpeciesModule {
   constructor(private provider: DominantSpeciesProvider,
               private translateService: TranslateService) {
     GAME_PROVIDERS['ds'] = provider;
+
+    this.translateService.setTranslation('en', en, true);
+    this.translateService.setTranslation('nl', nl, true);
   }
 
 }

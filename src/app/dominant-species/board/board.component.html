@@ -1,27 +1,183 @@
+<div class="action-bar">
+  <div *ngIf="canConfirm">
+    <button class="btn btn-primary"
+            (click)="confirm()">{{'ds.confirm'|translate}}</button>
+    <button class="btn btn-secondary"
+            (click)="reset()">{{'ds.reset'|translate}}</button>
+  </div>
+</div>
+
+<ng-template #popoverGRASS>
+  <ds-element-popover [elementType]="'GRASS'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverSEED>
+  <ds-element-popover [elementType]="'SEED'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverGRUB>
+  <ds-element-popover [elementType]="'GRUB'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverMEAT>
+  <ds-element-popover [elementType]="'MEAT'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverSUN>
+  <ds-element-popover [elementType]="'SUN'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverWATER>
+  <ds-element-popover [elementType]="'WATER'"></ds-element-popover>
+</ng-template>
+<ng-template #popoverFOREST>
+  <ds-tile-popover [tileType]="'FOREST'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverJUNGLE>
+  <ds-tile-popover [tileType]="'JUNGLE'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverMOUNTAIN>
+  <ds-tile-popover [tileType]="'MOUNTAIN'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverSAVANNAH>
+  <ds-tile-popover [tileType]="'SAVANNAH'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverSEA>
+  <ds-tile-popover [tileType]="'SEA'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverDESERT>
+  <ds-tile-popover [tileType]="'DESERT'"></ds-tile-popover>
+</ng-template>
+<ng-template #popoverWETLAND>
+  <ds-tile-popover [tileType]="'WETLAND'"></ds-tile-popover>
+</ng-template>
+
 <pan-zoom [config]="panZoomConfig">
   <svg viewBox="-633 -540 1920 1080">
-    <g class="hexagon" *ngFor="let hex of hexes"
-       [attr.transform]="'translate(' + hex.hex.center.x + ',' + hex.hex.center.y + ')'">
-      <polygon [attr.points]="hex.hex.points"
-               (click)="selectHexagon(hex.coords)"/>
+    <defs>
+      <pattern id="SAVANNAH" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/savannah.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="DESERT" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/desert.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="MOUNTAIN" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/mountain.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="FOREST" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/forest.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="JUNGLE" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/jungle.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="SEA" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/sea.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="WETLAND" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/wetland.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+      <pattern id="TUNDRA" patternUnits="userSpaceOnUse" width="100" height="100">
+        <image href="/assets/games/ds/tundra.png" x="0" y="0" width="100" height="100"/>
+      </pattern>
+    </defs>
+
+    <g class="hexagon" *ngFor="let hex of hexes; trackBy:trackByHex"
+       [attr.transform]="'translate(' + hex.hex.center.x + ',' + hex.hex.center.y + ')'"
+       [ngClass]="{selectable:canSelectHex(hex.coords)}"
+       [class]="state?.wanderlustTiles[selectedWanderlustTile]?.faceUp"
+       (click)="selectHex(hex.coords)">
+      <polygon [attr.points]="hex.hex.points"/>
     </g>
 
-    <g class="tile" *ngFor="let tile of tiles"
+    <g class="tile" *ngFor="let tile of tiles; trackBy:trackByTile"
        [attr.transform]="'translate(' + tile.hex.center.x + ',' + tile.hex.center.y + ')'"
-       (click)="selectTile(tile.tile)">
-      <polygon class="terrain" [ngClass]="tile.tile.type" [attr.points]="tile.hex.points"/>
+       [ngClass]="{selectable:canSelectTile(tile), selected:isTileSelected(tile)}"
+       [ngbPopover]="tile.tile.type === 'FOREST' ? popoverFOREST :
+       tile.tile.type === 'JUNGLE' ? popoverJUNGLE :
+       tile.tile.type === 'MOUNTAIN' ? popoverMOUNTAIN :
+       tile.tile.type === 'SAVANNAH' ? popoverSAVANNAH:
+       tile.tile.type === 'SEA' ? popoverSEA :
+       tile.tile.type === 'DESERT' ? popoverDESERT :
+       tile.tile.type === 'WETLAND' ? popoverWETLAND : null"
+       triggers="mouseenter:mouseleave"
+       container="body"
+       (click)="selectTile(tile)">
 
-      <g transform="scale(0.8)" *ngIf="tile.tile.tundra">
-        <polygon class="tundra" [attr.points]="tile.hex.points"/>
+      <g class="terrain" [ngClass]="tile.tile.type">
+        <polygon [attr.points]="tile.hex.points" [attr.fill]="'url(#' + tile.tile.type + ')'"/>
+        <g transform="scale(0.95)">
+          <polygon [attr.points]="tile.hex.points" fill="none"/>
+        </g>
+      </g>
+
+      <g class="tundra" transform="scale(0.8)" *ngIf="tile.tile.tundra">
+        <polygon [attr.points]="tile.hex.points" fill="url(#TUNDRA)"/>
+        <g transform="scale(0.95)">
+          <polygon [attr.points]="tile.hex.points" fill="none"/>
+        </g>
+      </g>
+
+      <g class="species">
+        <g *ngFor="let cubeGroup of tile.cubes; index as index"
+           [attr.transform]="'translate(' + cubeGroup.x + ',' + cubeGroup.y + ')'">
+          <g *ngFor="let cube of cubeGroup.cubes; index as index2"
+             [attr.transform]="'translate(' + cube.x + ',' + cube.y + ')'"
+             [class]="'fill-' + state.animals[cubeGroup.animalType].player.color">
+            <g transform="scale(1.5)">
+              <g transform="translate(-12 -102)" stroke="#000" stroke-linejoin="bevel" stroke-width=".265">
+                <path d="m12.1 106 10.6 1.03v9.37l-10.6-1.05z"/>
+                <path d="m12.1 106 3.33-3.69 10.6 0.907-3.39 3.82z"/>
+                <path d="m26.1 103v9.35l-3.39 3.84v-9.37z"/>
+              </g>
+            </g>
+          </g>
+          <text>{{cubeGroup.cubes.length}}</text>
+        </g>
       </g>
     </g>
 
-    <circle class="element" *ngFor="let element of elements" [ngClass]="element.element.type"
-            r="20" [attr.cx]="element.center.x" [attr.cy]="element.center.y"/>
+    <g *ngFor="let element of elements; trackBy:trackByElement"
+       class="element" [class]="element.element.type"
+       [ngClass]="{selectable:canSelectElement(element),selected:isElementSelected(element)}"
+       [attr.transform]="'translate(' + element.center.x +  ',' +element.center.y +  ')'"
+       (click)="selectElement(element)"
+       [ngbPopover]="element.element.type === 'GRASS' ? popoverGRASS :
+       element.element.type === 'GRUB' ? popoverGRUB :
+       element.element.type === 'SEED' ? popoverSEED :
+       element.element.type === 'MEAT' ? popoverMEAT:
+       element.element.type === 'SUN' ? popoverSUN :
+       element.element.type === 'WATER' ? popoverWATER : null"
+       triggers="mouseenter:mouseleave"
+       container="body">
+      <circle r="20"/>
+      <image [attr.href]="'/assets/games/ds/' + element.element.type.toLowerCase() + '.png'"
+             x="-20" y="-20" width="40" height="40"></image>
+    </g>
+
+    <g *ngIf="canSelectCorner">
+      <g class="corner" *ngFor="let corner of selectableCorners; trackBy:trackByCorner"
+         [attr.transform]="'translate(' + corner.center.x +  ',' +corner.center.y +  ')'"
+         [class]="selectedElementTypes.length > 0 ? selectedElementTypes[0] : null"
+         (click)="selectCorner(corner.corner)">
+        <circle r="20"/>
+        <image *ngIf="selectedElementTypes[0]"
+               [attr.href]="'/assets/games/ds/' + selectedElementTypes[0].toLowerCase() + '.png'"
+               x="-20" y="-20" width="40" height="40"></image>
+      </g>
+    </g>
   </svg>
 </pan-zoom>
 
-<ds-action-display [actionDisplay]="state.actionDisplay"
+<ds-action-display *ngIf="state?.actionDisplay"
+                   [table]="table"
+                   [state]="state"
                    [selectedAction]="selectedAction"
+                   [selectedElementTypes]="selectedElementTypes"
+                   (selectElementType)="selectElementType($event)"
                    (perform)="perform.emit($event)"></ds-action-display>
 
+<ds-food-chain></ds-food-chain>
+
+<ds-scoring-table></ds-scoring-table>
+
+<ds-bonus-points-table></ds-bonus-points-table>
+
+<ds-wanderlust-tiles [wanderlustTiles]="state.wanderlustTiles"
+                     [selectable]="canSelectWanderlustTile"
+                     (selectWanderlustTile)="selectWanderlustTile($event)">
+</ds-wanderlust-tiles>

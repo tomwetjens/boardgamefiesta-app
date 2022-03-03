@@ -1,5 +1,1 @@
-<div [hidden]="selectedAction">
-  <button *ngFor="let action of actions">
-    {{action}}
-  </button>
-</div>
+<span *ngIf="selectedAction" [innerHTML]="'ds.instruction.' + selectedAction|translate"></span>

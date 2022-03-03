@@ -1,0 +1,63 @@
+{
+  "ds": {
+    "animalType": {
+      "MAMMALS": "Mammals",
+      "REPTILES": "Reptiles",
+      "BIRDS": "Birds",
+      "AMPHIBIANS": "Amphibians",
+      "ARACHNIDS": "Arachnids",
+      "INSECTS": "Insects"
+    },
+    "actionType": {
+      "ABUNDANCE": "Abundance",
+      "ADAPTATION": "Adaptation",
+      "COMPETITION": "Competition",
+      "DEPLETION": "Depletion",
+      "DOMINATION": "Domination",
+      "GLACIATION": "Glaciation",
+      "INITIATIVE": "Initiative",
+      "MIGRATION": "Migration",
+      "REGRESSION": "Regression",
+      "SPECIATION": "Speciation",
+      "WANDERLUST": "Wanderlust",
+      "WASTELAND": "Wasteland"
+    },
+    "bonusPointsTable": "Bonus Points Table",
+    "confirm": "Confirm",
+    "elementType": {
+      "GRASS": "Grass",
+      "GRUB": "Grub",
+      "MEAT": "Meat",
+      "SUN": "Sun",
+      "WATER": "Water",
+      "SEED": "Seed"
+    },
+    "foodChain": "Food Chain",
+    "instruction": {
+      "PlaceActionPawn": "<strong>Place Action Pawn:</strong> Select a vacant Action Space to place an Action Pawn",
+      "Adaptation": "<strong>Adaptation:</strong> Select an Element from the Adaptation box to add to your Animal",
+      "Abundance": "<strong>Abundance:</strong> Select an Element from the Abundance box and then select a vacant Corner to place it on",
+      "Regression": "<strong>Regression:</strong> Select Elements (up to the number of Action Pawns you placed) from the Regression box that you don't want to be removed from your Animal",
+      "Depletion": "<strong>Depletion:</strong> Select an Element on Earth to place back into the draw bag",
+      "Wasteland": "<strong>Wasteland:</strong> Select Element from the Wasteland box to place it back into the draw bag",
+      "Glaciation": "<strong>Glaciation:</strong> Select a non-Tundra Tile (adjacent to a Tundra tile) to turn it into Tundra as well",
+      "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them",
+      "Competition": "<strong>Competition:</strong> Select an Opposing Species on a Tile (of each type matching the AP) to eliminate that Species from the Tile"
+    },
+    "popover": {
+      "actionPawn": "Action Pawn"
+    },
+    "quantity": "Quantity",
+    "reset": "Reset",
+    "tileType": {
+      "FOREST": "Forest",
+      "JUNGLE": "Jungle",
+      "MOUNTAIN": "Mountain",
+      "DESERT": "Desert",
+      "SEA": "Sea",
+      "WETLAND": "Wetland"
+    },
+    "victoryPoints": "Victory Points",
+    "wanderlustTiles": "Wanderlust Tiles"
+  }
+}

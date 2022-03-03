@@ -1,0 +1,42 @@
+h1 {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+table {
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px #000000;
+  background: #d6bb78;
+  border: 2px #907d53 solid;
+  box-shadow: 2px 2px 8px #000000;
+
+  th {
+    text-align: right;
+    padding: 4px;
+    height: 24px;
+  }
+
+  td {
+    text-align: center;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    border: 1px #9a6a3c solid;
+  }
+
+  .quantity {
+    td {
+      background: #c9a47a;
+    }
+  }
+
+  .victory-points {
+    td {
+      background: #d6bea6;
+    }
+  }
+}

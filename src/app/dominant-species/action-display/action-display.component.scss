@@ -1,7 +1,11 @@
 :host {
+  display: block;
   border: #9e9374 solid 1px;
   box-shadow: black 3px 3px 8px;
   background-color: #f1ebed;
+  padding: 4px;
+  width: 562px;
+  min-height: 808px;
 }
 
 dl {
@@ -11,23 +15,195 @@ dl {
 
 dt {
   grid-column-start: 1;
-  color: #548774;
-  font-weight: bold;
-  border: #715122 solid 2px;
-  background-color: #f1ebed;
   position: relative;
-  left: -20px;
-  padding: 4px;
-  margin: 8px 0;
+  left: -16px;
+  margin: 2px 0;
+  min-height: 48px;
+  padding: 6px 0;
+
+  span {
+    display: inline-block;
+    width: 100%;
+    padding: 4px;
+
+    color: #548774;
+    font-weight: bold;
+    border: #715122 solid 2px;
+    background-color: #f1ebed;
+    box-shadow: 1px 1px 2px #000000;
+  }
 }
 
 dd {
   grid-column-start: 2;
-  margin: 8px 8px 16px 4px;
+  margin: 0 0;
+
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    width: 100%;
+
+    > * {
+      width: auto;
+      max-width: unset;
+    }
+  }
+
+  &.INITIATIVE {
+    background-image: url('../../../assets/games/ds/initiative-track.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 3px 0;
+    height: 84px;
+    padding: 14px 0;
+    margin: 0 0 4px 0;
+  }
+
+  &.REGRESSION {
+    background-image: url('../../../assets/games/ds/regression.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0;
+    background-size: 196px 69px;
+    height: 74px;
+    padding: 20px 0 0;
+
+    ds-element-space {
+      background: none;
+    }
+  }
+
+  &.WASTELAND {
+    background-image: url('../../../assets/games/ds/wasteland.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0;
+    background-size: 196px 69px;
+    height: 69px;
+    padding: 19px 0 0;
+
+    ds-element-space {
+      background: none;
+    }
+  }
+
+  &.DEPLETION {
+    background-image: url('../../../assets/games/ds/depletion.png');
+    background-repeat: no-repeat;
+    background-position: 2px 0;
+    background-size: 196px 69px;
+    height: 74px;
+    padding: 18px 0 0;
+
+    ds-element-space {
+      background: none;
+    }
+  }
+
+  &.GLACIATION {
+    background-image: url('../../../assets/games/ds/glaciation.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 342px 49px;
+
+    .action-pawns {
+      padding: 0 2px;
+
+      li {
+        margin: 0 49px 0 0;
+      }
+    }
+  }
+
+  &.SPECIATION {
+    .action-pawns {
+      margin: 0 0 8px 0;
+
+      li {
+        position: relative;
+
+        ds-element {
+          position: absolute;
+          left: -4px;
+          bottom: -4px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .speciation {
+      display: block;
+      width: 100%;
+      height: 63px;
+      background-image: url('../../../assets/games/ds/speciation.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &.MIGRATION {
+    background-image: url('../../../assets/games/ds/birds.png');
+    background-repeat: no-repeat;
+    background-position: 292px 0px;
+    background-size: 48px 48px;
+
+    .action-pawns {
+      li {
+        position: relative;
+      }
+    }
+
+    .distance {
+      display: block;
+      position: absolute;
+      left: 2px;
+      bottom: -4px;
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #000000;
+    }
+  }
+
+  &.COMPETITION {
+    background-image: url('../../../assets/games/ds/competition.png');
+    background-repeat: no-repeat;
+    background-position: 3px 0;
+    background-size: 433px 94px;
+    height: 94px;
+    padding: 18px 0;
+
+    .action-pawns {
+      li:nth-child(2) {
+        margin: 0 0 0 28px;
+      }
+    }
+  }
 }
 
 .action-pawns {
+  margin: 0;
+  padding: 0 4px;
+
   li {
     display: inline-block;
+  }
+}
+
+.elements {
+  margin: 0 4px;
+  padding: 0;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.initiative-track {
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 8px;
   }
 }

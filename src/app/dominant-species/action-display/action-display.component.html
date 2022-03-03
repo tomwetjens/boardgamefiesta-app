@@ -1,12 +1,45 @@
 <dl class="actions">
-  <ng-container *ngFor="let item of actionDisplay.actionPawns | keyvalue">
-    <dt>{{item.key}}</dt>
-    <dd>
-      <ol class="action-pawns">
-        <li *ngFor="let actionPawn of item.value; index as index">
-          <ds-action-space [actionPawn]="actionPawn" (click)="placeActionPawn(item.key, index)"></ds-action-space>
-        </li>
-      </ol>
+  <ng-container *ngFor="let actionType of executionOrder">
+    <dt><span>{{'ds.actionType.' + actionType|translate}}</span></dt>
+    <dd [class]="actionType">
+      <div class="row">
+        <ol class="elements" *ngIf="elements[actionType] as elements; index as index">
+          <li *ngFor="let element of elements; index as index">
+            <ds-element-space [element]="element"
+                              [selectable]="canSelectElement(actionType, index)"
+                              [selected]="isElementSelected(actionType, index)"
+                              (selectElement)="selectElement(actionType, index)">
+            </ds-element-space>
+          </li>
+        </ol>
+
+        <ol class="action-pawns">
+          <li *ngFor="let animalType of state?.actionDisplay?.actionPawns[actionType]; index as index">
+            <ds-action-space [animal]="state.animals[animalType]"
+                             [player]="table?.players[state?.animals[animalType]?.player?.name]"
+                             [selectable]="canSelectActionSpace(actionType, index)"
+                             (selectActionSpace)="placeActionPawn(actionType, index)">
+            </ds-action-space>
+
+            <ds-element *ngIf="actionType === 'SPECIATION' && index < 6" [elementType]="speciation[index]"></ds-element>
+
+            <span *ngIf="actionType === 'MIGRATION' && index <= 5" class="distance">{{7 - index}}</span>
+          </li>
+          <li *ngIf="actionType === 'REGRESSION'">
+          </li>
+        </ol>
+
+        <ol *ngIf="actionType === 'INITIATIVE'" class="initiative-track">
+          <li *ngFor="let animalType of state.initiativeTrack">
+            <ds-initiative-marker [animalType]="animalType" [player]="state.animals[animalType].player"></ds-initiative-marker>
+          </li>
+        </ol>
+      </div>
+
+      <div class="row">
+        <div *ngIf="actionType === 'SPECIATION'" class="speciation">
+        </div>
+      </div>
     </dd>
   </ng-container>
 </dl>

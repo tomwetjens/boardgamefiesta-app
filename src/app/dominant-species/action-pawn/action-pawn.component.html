@@ -1,0 +1,22 @@
+<ng-template #popover>
+  <p>
+    <app-player-name [player]="player"></app-player-name>
+    {{'ds.animalType.' + animal.type|translate}}
+    <ds-initiative-marker [animalType]="animal.type" [player]="animal.player"></ds-initiative-marker>
+  </p>
+  <p>{{'ds.popover.actionPawn'|translate}}</p>
+</ng-template>
+<svg viewBox="0 0 50.2 71.9" xmlns="http://www.w3.org/2000/svg"
+     [ngbPopover]="popover"
+     triggers="mouseenter:mouseleave"
+     container="body">
+  <g transform="translate(.00345 -90.4)" [class]="'fill-' + player.color" stroke="#000" stroke-linejoin="bevel">
+    <path transform="scale(.265)"
+          d="m1.32 384v181h0.0215a93.5 38.8 0 0 0-0.00781 0.0996 93.5 38.8 0 0 0 93.5 38.8 93.5 38.8 0 0 0 93.5-38.8 93.5 38.8 0 0 0-2e-3 -0.0996h0.0156v-181z"
+          stroke-width="2.67"/>
+    <ellipse cx="25.1" cy="101" rx="24.7" ry="10.3" stroke-width=".706"/>
+    <text x="25.1" y="130" text-anchor="middle" dominant-baseline="middle">
+      <ng-content></ng-content>
+    </text>
+  </g>
+</svg>

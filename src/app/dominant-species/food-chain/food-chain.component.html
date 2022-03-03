@@ -1,0 +1,9 @@
+<h1>{{'ds.foodChain'|translate}}</h1>
+<dl>
+  <ng-container *ngFor="let animalType of foodChain">
+    <dd>
+      <ds-initiative-marker [animalType]="animalType"></ds-initiative-marker>
+    </dd>
+    <dt>{{'ds.animalType.' + animalType|translate}}</dt>
+  </ng-container>
+</dl>

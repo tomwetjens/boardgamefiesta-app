@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AnimalType} from "../model";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Animal, AnimalType} from "../model";
+import {TablePlayer} from "../../shared/model";
 
 @Component({
   selector: 'ds-action-space',
@@ -8,7 +9,11 @@ import {AnimalType} from "../model";
 })
 export class ActionSpaceComponent implements OnInit {
 
-  @Input() actionPawn?: AnimalType;
+  @Input() selectable: boolean;
+  @Input() animal?: Animal;
+  @Input() player?: TablePlayer;
+
+  @Output() selectActionSpace = new EventEmitter<void>();
 
   constructor() {
   }

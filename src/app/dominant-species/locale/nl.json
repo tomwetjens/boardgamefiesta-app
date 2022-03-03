@@ -1,0 +1,53 @@
+{
+  "ds": {
+    "animalType": {
+      "MAMMALS": "Zoogdieren",
+      "REPTILES": "Reptielen",
+      "BIRDS": "Vogels",
+      "AMPHIBIANS": "Amfibiën",
+      "ARACHNIDS": "Spinachtigen",
+      "INSECTS": "Insecten"
+    },
+    "actionType": {
+      "ABUNDANCE": "Overvloed",
+      "ADAPTATION": "Aanpassing",
+      "COMPETITION": "Concurrentie",
+      "DEPLETION": "Uitputting",
+      "DOMINATION": "Overheersing",
+      "GLACIATION": "Gletsjer",
+      "INITIATIVE": "Initiatief",
+      "MIGRATION": "Migratie",
+      "REGRESSION": "Regressie",
+      "SPECIATION": "Soortvorming",
+      "WANDERLUST": "Reislust",
+      "WASTELAND": "Woestenij"
+    },
+    "bonusPointsTable": "Bonuspunten",
+    "confirm": "Bevestig actie",
+    "elementType": {
+      "GRASS": "Gras",
+      "GRUB": "Wormen",
+      "MEAT": "Vlees",
+      "SUN": "Zon",
+      "WATER": "Water",
+      "SEED": "Zaden"
+    },
+    "foodChain": "Voedselketen",
+    "popover": {
+      "actionPawn": "Actiepion"
+    },
+    "quantity": "Aantal",
+    "reset": "Ongedaan maken",
+    "tileType": {
+      "FOREST": "Bos",
+      "JUNGLE": "Jungle",
+      "MOUNTAIN": "Bergen",
+      "SAVANNAH": "Savanne",
+      "DESERT": "Woestijn",
+      "SEA": "Zee",
+      "WETLAND": "Moeras"
+    },
+    "victoryPoints": "Punten",
+    "wanderlustTiles": "Reislusttegels"
+  }
+}

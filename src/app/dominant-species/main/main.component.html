@@ -2,14 +2,43 @@
   <ng-container *ngIf="state$|async as state">
     <app-in-game-navbar [table]="table"
                         [canSkip]="false"
-                        [busy]="false">
+                        [busy]="false"
+                        (endTurn)="endTurn(table)"
+                        (skip)="skip(table)">
     </app-in-game-navbar>
 
-    <ds-action-bar [actions]="state.actions" [(selectedAction)]="selectedAction"></ds-action-bar>
+    <div>
+      <div class="row no-gutters">
+        <div class="col-10">
+          <ds-action-bar [actions]="state.actions"
+                         [(selectedAction)]="selectedAction"></ds-action-bar>
 
-    <ds-board [table]="table"
-              [state]="state.state"
-              [selectedAction]="selectedAction"
-              (perform)="perform($event, table)"></ds-board>
+          <ds-board [table]="table"
+                    [state]="state"
+                    [selectedAction]="selectedAction"
+                    (perform)="perform($event, table)">
+          </ds-board>
+          <ds-draw-bag [drawBag]="state.drawBag">
+          </ds-draw-bag>
+          <ds-cards-display [cards]="state.availableCards">
+          </ds-cards-display>
+        </div>
+        <div class="col-2">
+          <ds-player *ngIf="table.player"
+                     [player]="table.players[table.player]"
+                     [animal]="state.animals[state.players[table.player]]"
+                     [table]="table"
+                     [state]="state">
+          </ds-player>
+
+          <ds-player *ngFor="let otherPlayerId of table.otherPlayers"
+                     [player]="table.players[otherPlayerId]"
+                     [animal]="state.animals[state.players[otherPlayerId]]"
+                     [table]="table"
+                     [state]="state">
+          </ds-player>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </ng-container>

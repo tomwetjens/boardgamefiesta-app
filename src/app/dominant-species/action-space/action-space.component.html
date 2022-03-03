@@ -1,2 +1,2 @@
-<span *ngIf="actionPawn">{{actionPawn}}</span>
-<button *ngIf="!actionPawn">AP</button>
+<ds-action-pawn *ngIf="animal && player" [animal]="animal" [player]="player"></ds-action-pawn>
+<div class="clicker" *ngIf="selectable && (!animal || !player)" (click)="selectActionSpace.emit()"></div>

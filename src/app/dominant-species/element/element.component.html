@@ -1,0 +1,10 @@
+<ng-template #popover>
+  <ds-element-popover [elementType]="elementType"></ds-element-popover>
+</ng-template>
+<span [class]="elementType" [ngClass]="{selectable:selectable,selected:selected}"
+      [ngbPopover]="popover"
+      triggers="mouseenter:mouseleave"
+      container="body"
+      (click)="selectElement.emit(elementType)">
+  <ng-content></ng-content>
+</span>

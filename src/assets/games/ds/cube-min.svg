@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14.2mm" height="14.4mm" version="1.1" viewBox="0 0 14.2 14.4" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-12 -102)" stroke="#000" stroke-linejoin="bevel" stroke-width=".265">
+  <path d="m12.1 106 10.6 1.03v9.37l-10.6-1.05z" fill="#f00" style="paint-order:normal"/>
+  <path d="m12.1 106 3.33-3.69 10.6 0.907-3.39 3.82z" fill="#ad0000" style="paint-order:normal"/>
+  <path d="m26.1 103v9.35l-3.39 3.84v-9.37z" fill="#810000" style="paint-order:normal"/>
+ </g>
+</svg>
