@@ -10,6 +10,7 @@ export class WanderlustTilesComponent implements OnInit {
 
   @Input() wanderlustTiles: WanderlustTiles;
   @Input() selectable: boolean;
+  @Input() selectedStack: number;
   @Output() selectWanderlustTile = new EventEmitter<number>();
 
   constructor() { }

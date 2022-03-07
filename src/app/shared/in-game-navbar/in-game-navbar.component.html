@@ -30,7 +30,8 @@
                 *ngIf="table.turn"
                 [disabled]="busy"
                 (click)="endTurn.emit()">
-          {{'endTurn'|translate}}
+          <span>{{'endTurn'|translate}}</span>
+          <span *ngIf="autoEndTurn">&nbsp;({{autoEndTurnInSecs}})</span>
         </button>&nbsp;
         <button class="btn btn-warning text-nowrap" *ngIf="table.turn"
                 [disabled]="busy || !canSkip"

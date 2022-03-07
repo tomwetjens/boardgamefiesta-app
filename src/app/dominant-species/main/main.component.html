@@ -2,17 +2,16 @@
   <ng-container *ngIf="state$|async as state">
     <app-in-game-navbar [table]="table"
                         [canSkip]="false"
-                        [busy]="false"
+                        [autoEndTurn]="canAutoEndTurn(table, state)"
+                        [busy]="busy"
                         (endTurn)="endTurn(table)"
-                        (skip)="skip(table)">
+                        (skip)="skip(table)"
+                        (undo)="undo(table)">
     </app-in-game-navbar>
 
     <div>
       <div class="row no-gutters">
         <div class="col-10">
-          <ds-action-bar [actions]="state.actions"
-                         [(selectedAction)]="selectedAction"></ds-action-bar>
-
           <ds-board [table]="table"
                     [state]="state"
                     [selectedAction]="selectedAction"
@@ -20,7 +19,9 @@
           </ds-board>
           <ds-draw-bag [drawBag]="state.drawBag">
           </ds-draw-bag>
-          <ds-cards-display [cards]="state.availableCards">
+          <ds-cards-display [cards]="state.availableCards"
+                            [selectable]="canSelectCard"
+                            (selectCard)="selectCard($event, table)">
           </ds-cards-display>
         </div>
         <div class="col-2">
@@ -37,6 +38,8 @@
                      [table]="table"
                      [state]="state">
           </ds-player>
+
+          <app-log [table]="table"></app-log>
         </div>
       </div>
     </div>

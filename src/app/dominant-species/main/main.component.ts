@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {TableService} from "../../table.service";
 import {combineLatest, Observable, ReplaySubject} from "rxjs";
 import {Table} from "../../shared/model";
-import {Action, ActionName, DominantSpecies} from "../model";
+import {Action, ActionName, Card, DominantSpecies} from "../model";
 import {takeUntil} from "rxjs/operators";
 
 @Component({
@@ -16,10 +16,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
   table$: Observable<Table>;
   state$: Observable<DominantSpecies>;
+  busy = false;
 
   selectedAction: ActionName;
 
-  constructor(private tableService: TableService) {
+  constructor(private ngZone: NgZone,
+              private tableService: TableService) {
     this.table$ = tableService.table$;
     this.state$ = tableService.state$;
   }
@@ -28,7 +30,8 @@ export class MainComponent implements OnInit, OnDestroy {
     combineLatest([this.state$, this.table$])
       .pipe(takeUntil(this.destroyed))
       .subscribe(([state, table]) => {
-        this.autoSelectAction(state, table);
+        this.ngZone.runOutsideAngular(() =>
+          this.autoSelectAction(state, table));
       });
   }
 
@@ -42,23 +45,43 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private autoSelectAction(state: DominantSpecies, table: Table) {
-    if (!this.selectedAction || !state?.actions?.includes(this.selectedAction)) {
-      if (table.turn && state?.actions?.length === 1) {
-        this.selectedAction = state.actions[0];
-        console.log('Automatically selected action: ' + this.selectedAction);
-      } else {
-        this.selectedAction = null;
-      }
+    console.debug('autoSelectAction: ', {turn: table.turn, actions: state?.actions});
+    if (table.turn && state?.actions?.length === 1) {
+      this.selectedAction = state.actions[0];
+      console.log('Automatically selected action: ' + this.selectedAction);
     } else {
       this.selectedAction = null;
     }
   }
 
+  canAutoEndTurn(table: Table, state: DominantSpecies): boolean {
+    return !table.ended && table.turn && state.actions?.length === 0;
+  }
+
   endTurn(table: Table) {
-    this.tableService.endTurn(table.id).subscribe();
+    this.busy = true;
+    this.tableService.endTurn(table.id).subscribe(() => this.busy = false, () => this.busy = false);
   }
 
   skip(table: Table) {
-    this.tableService.skip(table.id).subscribe();
+    this.busy = true;
+    this.tableService.skip(table.id).subscribe(() => this.busy = false, () => this.busy = false);
+  }
+
+  undo(table: Table) {
+    this.busy = true;
+    this.tableService.undo(table.id).subscribe(() => this.busy = false, () => this.busy = false);
+  }
+
+  get canSelectCard(): boolean {
+    return this.selectedAction === ActionName.DominanceCard;
+  }
+
+  selectCard(card: Card, table: Table) {
+    this.perform({
+      [this.selectedAction]: {
+        card
+      }
+    }, table);
   }
 }

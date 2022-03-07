@@ -1,4 +1,6 @@
-<div class="action-bar">
+<div class="action-bar" *ngIf="selectedAction">
+  <span [innerHTML]="'ds.instruction.' + selectedAction|translate"></span>
+
   <div *ngIf="canConfirm">
     <button class="btn btn-primary"
             (click)="confirm()">{{'ds.confirm'|translate}}</button>
@@ -50,38 +52,24 @@
 <pan-zoom [config]="panZoomConfig">
   <svg viewBox="-633 -540 1920 1080">
     <defs>
-      <pattern id="SAVANNAH" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/savannah.png" x="0" y="0" width="100" height="100"/>
+      <pattern *ngFor="let tileType of tileTypes" [attr.id]="tileType" patternUnits="userSpaceOnUse" width="100"
+               height="100">
+        <image [attr.href]="'/assets/games/ds/' + tileType.toLowerCase() + '.png'" x="0" y="0" width="100"
+               height="100"/>
       </pattern>
-      <pattern id="DESERT" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/desert.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="MOUNTAIN" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/mountain.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="FOREST" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/forest.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="JUNGLE" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/jungle.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="SEA" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/sea.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="WETLAND" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/wetland.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
-      <pattern id="TUNDRA" patternUnits="userSpaceOnUse" width="100" height="100">
-        <image href="/assets/games/ds/tundra.png" x="0" y="0" width="100" height="100"/>
-      </pattern>
+
+      <marker *ngFor="let color of playerColors" [attr.id]="'arrowhead-' + color" markerWidth="10" markerHeight="7"
+              refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" class="fill-RED"/>
+      </marker>
     </defs>
 
     <g class="hexagon" *ngFor="let hex of hexes; trackBy:trackByHex"
        [attr.transform]="'translate(' + hex.hex.center.x + ',' + hex.hex.center.y + ')'"
        [ngClass]="{selectable:canSelectHex(hex.coords)}"
-       [class]="state?.wanderlustTiles[selectedWanderlustTile]?.faceUp"
        (click)="selectHex(hex.coords)">
-      <polygon [attr.points]="hex.hex.points"/>
+      <polygon [attr.points]="hex.hex.points"
+               [attr.fill]="'url(#' + state.wanderlustTiles[selectedWanderlustTile]?.faceUp + ')'"/>
     </g>
 
     <g class="tile" *ngFor="let tile of tiles; trackBy:trackByTile"
@@ -113,40 +101,84 @@
       </g>
 
       <g class="species">
-        <g *ngFor="let cubeGroup of tile.cubes; index as index"
-           [attr.transform]="'translate(' + cubeGroup.x + ',' + cubeGroup.y + ')'">
-          <g *ngFor="let cube of cubeGroup.cubes; index as index2"
-             [attr.transform]="'translate(' + cube.x + ',' + cube.y + ')'"
-             [class]="'fill-' + state.animals[cubeGroup.animalType].player.color">
-            <g transform="scale(1.5)">
-              <g transform="translate(-12 -102)" stroke="#000" stroke-linejoin="bevel" stroke-width=".265">
-                <path d="m12.1 106 10.6 1.03v9.37l-10.6-1.05z"/>
-                <path d="m12.1 106 3.33-3.69 10.6 0.907-3.39 3.82z"/>
-                <path d="m26.1 103v9.35l-3.39 3.84v-9.37z"/>
-              </g>
+        <g *ngIf="tile.tile.dominant"
+           class="cone" [class]="'fill-' + state.animals[tile.tile.dominant].player.color">
+          <g transform="scale(2)">
+            <g transform="translate(-52 -116)">
+              <path d="m53.9 105-5.24 18.1s0.107 1.6 5.5 1.61c4.87 9e-3 4.99-1.48 4.99-1.48z" stroke="#000"
+                    stroke-width=".265px"/>
+              <path d="m53.9 105-0.0155 19.7s0.6-0.0569 1.46-0.115l1.27-0.0866z"
+                    [class]="'fill-light-' + state.animals[tile.tile.dominant].player.color"/>
             </g>
           </g>
-          <text>{{cubeGroup.cubes.length}}</text>
+        </g>
+
+        <g *ngFor="let cubeGroup of tile.cubes; trackBy:trackByCubeGroup"
+           [attr.transform]="'translate(' + cubeGroup.x + ',' + cubeGroup.y + ')'"
+           class="cubes" [class]="'fill-' + state.animals[cubeGroup.animalType].player.color"
+           [ngClass]="{selectable:canSelectSpecies(tile, cubeGroup.animalType),selected:isSpeciesSelected(tile, cubeGroup.animalType)}"
+           (click)="selectSpecies(tile,cubeGroup.animalType)">
+          <g [attr.transform]="'rotate('+ cubeGroup.rotation + ')'">
+            <g *ngFor="let cube of cubeGroup.cubes; trackBy:trackByCube"
+               [attr.transform]="'translate(' + cube.x + ',' + cube.y + ')'"
+               class="cube">
+              <rect [attr.x]="-(cube.size/2)" [attr.y]="-(cube.size/2)" [attr.width]="cube.size"
+                    [attr.height]="cube.size"></rect>
+            </g>
+          </g>
+          <text text-anchor="middle" dominant-baseline="middle"
+                *ngIf="tile.species[cubeGroup.animalType] > 8">
+            {{tile.species[cubeGroup.animalType]}}
+          </text>
+
+          <text class="added" x="-10" y="-20" text-anchor="middle" dominant-baseline="middle"
+                *ngIf="tile.deltas[cubeGroup.animalType]?.added > 0">
+            +{{tile.deltas[cubeGroup.animalType]?.added}}
+          </text>
+          <text class="removed" x="10" y="-20" text-anchor="middle" dominant-baseline="middle"
+                *ngIf="tile.deltas[cubeGroup.animalType]?.removed > 0">
+            -{{tile.deltas[cubeGroup.animalType]?.removed}}
+          </text>
         </g>
       </g>
     </g>
 
-    <g *ngFor="let element of elements; trackBy:trackByElement"
-       class="element" [class]="element.element.type"
-       [ngClass]="{selectable:canSelectElement(element),selected:isElementSelected(element)}"
-       [attr.transform]="'translate(' + element.center.x +  ',' +element.center.y +  ')'"
-       (click)="selectElement(element)"
-       [ngbPopover]="element.element.type === 'GRASS' ? popoverGRASS :
+    <g class="elements">
+      <g *ngFor="let element of elements; trackBy:trackByElement"
+         class="element" [class]="element.element.type"
+         [ngClass]="{selectable:canSelectElement(element),selected:isElementSelected(element)}"
+         [attr.transform]="'translate(' + element.center.x +  ',' +element.center.y +  ')'"
+         (click)="selectElement(element)"
+         [ngbPopover]="element.element.type === 'GRASS' ? popoverGRASS :
        element.element.type === 'GRUB' ? popoverGRUB :
        element.element.type === 'SEED' ? popoverSEED :
        element.element.type === 'MEAT' ? popoverMEAT:
        element.element.type === 'SUN' ? popoverSUN :
        element.element.type === 'WATER' ? popoverWATER : null"
-       triggers="mouseenter:mouseleave"
-       container="body">
-      <circle r="20"/>
-      <image [attr.href]="'/assets/games/ds/' + element.element.type.toLowerCase() + '.png'"
-             x="-20" y="-20" width="40" height="40"></image>
+         triggers="mouseenter:mouseleave"
+         container="body">
+        <circle r="20"/>
+        <image [attr.href]="'/assets/games/ds/' + element.element.type.toLowerCase() + '.png'"
+               x="-20" y="-20" width="40" height="40"></image>
+      </g>
+    </g>
+
+    <g class="moves">
+      <g class="move" *ngFor="let move of moves"
+         [class]="'stroke-' + state.animals[state.currentAnimal].player.color">
+
+        <!-- <path [attr.d]="'M' + move.from.hex.center.x + ',' + move.from.hex.center.y + ' ' + move.to.hex.center.x + ',' + move.to.hex.center.y"></path>-->
+        <line [attr.x1]="move.from.hex.center.x"
+              [attr.y1]="move.from.hex.center.y"
+              [attr.x2]="move.to.hex.center.x"
+              [attr.y2]="move.to.hex.center.y"
+              [attr.marker-end]="'url(#arrowhead-' + state.animals[state.currentAnimal].player.color + ')'"></line>
+        <text [attr.x]="move.text.x"
+              [attr.y]="move.text.y"
+              [class]="'fill-' + state.animals[state.currentAnimal].player.color">
+          ({{move.species}})
+        </text>
+      </g>
     </g>
 
     <g *ngIf="canSelectCorner">
@@ -162,6 +194,8 @@
     </g>
   </svg>
 </pan-zoom>
+
+{{'ds.round'|translate}}:{{state.round}}
 
 <ds-action-display *ngIf="state?.actionDisplay"
                    [table]="table"
@@ -179,5 +213,6 @@
 
 <ds-wanderlust-tiles [wanderlustTiles]="state.wanderlustTiles"
                      [selectable]="canSelectWanderlustTile"
+                     [selectedStack]="selectedWanderlustTile"
                      (selectWanderlustTile)="selectWanderlustTile($event)">
 </ds-wanderlust-tiles>

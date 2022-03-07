@@ -104,23 +104,34 @@ export class ActionDisplayComponent implements OnInit, OnChanges {
   }
 
   isElementSelected(actionType: ActionType, index: number): boolean {
-    if (actionType !== ActionType.REGRESSION || this.selectedAction !== ActionName.Regression) {
-      return false;
-    }
-
     const elementType = this.state.actionDisplay.elements[actionType][index];
 
-    const totalSelected = this.selectedElementTypes.filter(e => e === elementType).length;
+    switch (this.selectedAction) {
+      case ActionName.Abundance:
+        return actionType === ActionType.ABUNDANCE && this.isElementTypeSelected(elementType);
+      case ActionName.Wanderlust:
+        return actionType === ActionType.WANDERLUST && this.isElementTypeSelected(elementType);
 
-    if (totalSelected === 0) {
-      return false;
+      case ActionName.Regression:
+        if (actionType !== ActionType.REGRESSION) {
+          return false;
+        }
+
+        const totalSelected = this.selectedElementTypes.filter(e => e === elementType).length;
+
+        if (totalSelected === 0) {
+          return false;
+        }
+
+        const before = this.state.actionDisplay.elements[actionType]
+          .filter((e, i) => e === elementType && i < index)
+          .length;
+
+        return before < totalSelected;
+
+      default:
+        return false;
     }
-
-    const before = this.state.actionDisplay.elements[actionType]
-      .filter((e, i) => e === elementType && i < index)
-      .length;
-
-    return before < totalSelected;
   }
 
   canSelectActionSpace(actionType: ActionType, index: number): boolean {

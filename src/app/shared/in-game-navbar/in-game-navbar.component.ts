@@ -16,11 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {Table} from '../model';
 import {AudioService} from "../../audio.service";
 import {TableService} from "../../table.service";
-import {Observable, Subject, timer} from "rxjs";
+import {interval, Observable, Subject, Subscription, timer} from "rxjs";
 import moment from "moment";
 import {distinctUntilChanged, map, shareReplay, takeUntil} from "rxjs/operators";
 import {MessageDialogComponent} from "../message-dialog/message-dialog.component";
@@ -32,7 +42,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   templateUrl: './in-game-navbar.component.html',
   styleUrls: ['./in-game-navbar.component.scss']
 })
-export class InGameNavbarComponent implements OnInit, OnDestroy {
+export class InGameNavbarComponent implements OnInit, OnChanges, OnDestroy {
 
   private destroyed = new Subject();
 
@@ -42,6 +52,11 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
   @Input() canSkip: boolean;
 
   @Input() busy: boolean;
+  @Input() autoEndTurn = false;
+  @Input() autoEndTurnSecs = 30;
+
+  autoEndTurnTimer: Subscription;
+  autoEndTurnInSecs: number;
 
   @Output() skip = new EventEmitter<void>();
   @Output() endTurn = new EventEmitter<void>();
@@ -53,7 +68,8 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
   canKick$: Observable<boolean>;
   canForceEndTurn$: Observable<boolean>;
 
-  constructor(private audioService: AudioService,
+  constructor(private ngZone: NgZone,
+              private audioService: AudioService,
               private tableService: TableService,
               private ngbModal: NgbModal) {
   }
@@ -101,6 +117,52 @@ export class InGameNavbarComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         shareReplay(1)
       );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.autoEndTurn) {
+      if (this.autoEndTurn) {
+        if (!this.autoEndTurnTimer) {
+          this.startAutoEndTurnTimer();
+        }
+      } else {
+        if (this.autoEndTurnTimer) {
+          this.stopAutoEndTurnTimer();
+        }
+      }
+    }
+  }
+
+  private stopAutoEndTurnTimer() {
+    if (this.autoEndTurnTimer) {
+      if (!this.autoEndTurnTimer.closed) {
+        this.autoEndTurnTimer.unsubscribe();
+      }
+      this.autoEndTurnTimer = null;
+      this.autoEndTurnInSecs = null;
+    }
+  }
+
+  private startAutoEndTurnTimer() {
+    if (!this.autoEndTurnTimer || this.autoEndTurnTimer.closed) {
+      this.autoEndTurnInSecs = this.autoEndTurnSecs;
+      this.autoEndTurnTimer = interval(1000)
+        .pipe(takeUntil(this.destroyed))
+        .subscribe(() => {
+          this.ngZone.run(() => {
+            this.autoEndTurnInSecs--;
+
+            if (this.autoEndTurnInSecs === 0) {
+              this.stopAutoEndTurnTimer();
+
+              // Extra safety check, in case timer was not cancelled in time
+              if (!this.table.ended && this.table.turn) {
+                this.endTurn.emit();
+              }
+            }
+          });
+        });
+    }
   }
 
   ngOnDestroy(): void {

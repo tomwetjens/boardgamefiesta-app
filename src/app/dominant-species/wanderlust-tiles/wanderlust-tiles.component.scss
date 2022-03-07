@@ -21,6 +21,10 @@ svg {
 }
 
 .stack {
+  .base {
+    fill: lightgrey;
+  }
+
   text {
     font-size: 32px;
     color: black;
@@ -71,6 +75,14 @@ svg {
     //fill: lightgrey;
     stroke-width: 1px;
     stroke: #333e54;
+  }
+
+  &.selected {
+    &:hover {
+      .terrain {
+        stroke: black;
+      }
+    }
   }
 
   &.selectable {

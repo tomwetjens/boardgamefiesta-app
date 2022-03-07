@@ -23,6 +23,112 @@
       "WASTELAND": "Wasteland"
     },
     "bonusPointsTable": "Bonus Points Table",
+    "card": {
+      "AQUATIC": {
+        "name": "Aquatic",
+        "description": "Place 1 element onto a sea or wetland tile. Place up to 4 species from your GP onto that same tile."
+      },
+      "BIODIVERSITY": {
+        "name": "Biodiversity",
+        "description": "Gain 1 VP for each tile that you share with 1 or more opposing species."
+      },
+      "BIOMASS": {
+        "name": "Biomass",
+        "description": "Eliminate 1 species on each tile containing more species than element markers."
+      },
+      "BLIGHT": {
+        "name": "Blight",
+        "description": "Remove all but 1 element marker from a tile of your choice."
+      },
+      "CATASTROPHE": {
+        "name": "Catastrophe",
+        "description": "Select 1 tile and eliminate all but 1 species. Then eliminate 1 species on each adjacent tile."
+      },
+      "COLD_SNAP": {
+        "name": "Cold Snap",
+        "description": "All other players must eliminate 1 of their own species from every tundra tile."
+      },
+      "DISEASE": {
+        "name": "Disease",
+        "description": "Each player having more elements than you loses 1 element of their choice."
+      },
+      "ECODIVERSITY": {
+        "name": "Ecodiversity",
+        "description": "Gain 1 VP for each element token on the board that matches any element type of yours."
+      },
+      "EVOLUTION": {
+        "name": "Evolution",
+        "description": "Select up to 2 other players and replace 1 of each of their species anywhere on the board with 1 of yours."
+      },
+      "FECUNDITY": {
+        "name": "Fecundity",
+        "description": "Place up to 1 species from your GP onto every tile already containing 1 of your species."
+      },
+      "FERTILE": {
+        "name": "Fertile",
+        "description": "Select 1 tile you have at least 1 of your species on and score VPs equal to the total number of species there."
+      },
+      "HABITAT": {
+        "name": "Habitat",
+        "description": "Pick 1 element to add to the board."
+      },
+      "HIBERNATION": {
+        "name": "Hibernation",
+        "description": "Place up to 5 of your eliminated species onto any 1 tile. They ignore Extinction this turn."
+      },
+      "ICE_AGE": {
+        "name": "Ice Age",
+        "description": "Each player scores bonus VPs based on the number of domination markers they have on the board."
+      },
+      "ICE_SHEET": {
+        "name": "Ice Sheet",
+        "description": "Take a Glaciation action."
+      },
+      "IMMIGRANTS": {
+        "name": "Immigrants",
+        "description": "In FC order, all players pick to lose 1 element, 1 AP or all but one of their species on each tile they’re on."
+      },
+      "INSTINCT": {
+        "name": "Instinct",
+        "description": "Place 1 of your APs into any vacant eyeball space."
+      },
+      "INTELLIGENCE": {
+        "name": "Intelligence",
+        "description": "You and each player above you in the FC gets 1 new AP."
+      },
+      "MASS_EXODUS": {
+        "name": "Mass Exodus",
+        "description": "Select 1 tile and move all species from there to 1 or more adjacent tiles."
+      },
+      "METAMORPHOSIS": {
+        "name": "Metamorphosis",
+        "description": "Swap 1 of your elements with 1 of your choice from the bag."
+      },
+      "NICHE_BIOMES": {
+        "name": "Niche Biomes",
+        "description": "Each player having more VPs than you loses VPs = to 1 place value of the tile just scored."
+      },
+      "NOCTURNAL": {
+        "name": "Noctural",
+        "description": "Move your initiative marker 1 space to the left."
+      },
+      "OMNIVORE": {
+        "name": "Omnivore",
+        "description": "Gain 1 new AP."
+      },
+      "PARASITISM": {
+        "name": "Parasitism",
+        "description": "You and each player below you in the FC gets 1 new AP."
+      },
+      "PREDATOR": {
+        "name": "Predator",
+        "description": "Eliminate 1 opposing species on every tile you occupy."
+      },
+      "SYMBIOTIC": {
+        "name": "Symbiotic",
+        "description": "You and each player with fewer elements than you gets 1 random element from the bag."
+      }
+    },
     "confirm": "Confirm",
     "elementType": {
       "GRASS": "Grass",
@@ -42,7 +148,101 @@
       "Wasteland": "<strong>Wasteland:</strong> Select Element from the Wasteland box to place it back into the draw bag",
       "Glaciation": "<strong>Glaciation:</strong> Select a non-Tundra Tile (adjacent to a Tundra tile) to turn it into Tundra as well",
       "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them",
-      "Competition": "<strong>Competition:</strong> Select an Opposing Species on a Tile (of each type matching the AP) to eliminate that Species from the Tile"
+      "Competition": "<strong>Competition:</strong> Select an Opposing Species on a Tile (one of each type matching the AP) to eliminate 1 of that Species from the Tile",
+      "Wanderlust": "<strong>Wanderlust:</strong> Select a Tile from the Wanderlust Tiles and then select a blank hex to place it on. Then you may select an Element from the Wanderlust box and select a vacant corner on the newly placed tile to place it on.",
+      "WanderlustMove": "<strong>Wanderlust (Move):</strong> Select one or more Tiles with your species currently adjacent to the newly-placed tile to move all, none or some of them onto that tile.",
+      "Migration": "<strong>Migration:</strong> Select a Tile to move species from, then select an adjacent Tile to move them to. You may move up to the number of species indicated with the Action Pawn. Birds species may move up to 2 tiles away.",
+      "Domination": "<strong>Domination:</strong> Select a Tile (that hasn't been scored this round) to score it. Then the dominant animal must select and execute a Card.",
+      "DominanceCard": "<strong>Domination (Card):</strong> Select a Card from the display to execute it.",
+      "Aquatic": "<strong>Aquatic:</strong> Select a Wetland or Sea tile to add up to 4 new Species on it"
+    },
+    "log": {
+      "PLACE_ACTION_PAWN": "places Action Pawn for <strong>{{value1}}</strong> on <strong>{{value2}}</strong> in space #{{value3}}",
+      "INITIATIVE": "<strong>Initiative:</strong> {{value1}} are now #{{value2}} on the Initiative Track",
+      "ADAPTATION": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong> through Adaptation",
+      "REGRESSION": "<strong>{{value1}}</strong> can skip {{value2}} of {{value3}} Regressions on {{value1}}",
+      "SKIP_ELEMENT_TYPE": "skips removing <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
+      "REMOVE_ELEMENT_FROM_ANIMAL": "removes Element <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
+      "ADD_ELEMENT_TO_ANIMAL": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong>",
+      "ABUNDANCE": "adds Element <strong>{{value2}}</strong> to Earth at <strong>{{value3}}</strong> through Abundance",
+      "WASTELAND": "places Element <strong>{{value2}}</strong> back in the draw bag through Wasteland",
+      "SELECT_ELEMENT": "selects Element <strong>{{value2}}</strong> at <strong>{{value3}}</strong> for Speciation",
+      "SPECIATION": "adds <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> to {{value4}} tile <strong>{{value3}}</strong> through Speciation",
+      "WANDERLUST": "takes <strong>{{value3}}</strong> tile from Wanderlust Tiles #{{value2}} and places it on <strong>{{value4}}</strong>",
+      "ADD_ELEMENT": "adds Element <strong>{{value2}}</strong> to newly placed tile",
+      "GAIN_BONUS_VPS": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> bonus VPs",
+      "GAIN_VPS": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> VPs",
+      "MOVE_SPECIES": "moves <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> to newly placed <strong>{{value6}}</strong> tile at <strong>{{value5}}</strong>",
+      "MIGRATION": "moves <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> to <strong>{{value6}}</strong> tile at <strong>{{value5}}</strong> through Migration",
+      "COMPETITION": "eliminates 1 species of <strong>{{value2}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> through Competition",
+      "EXECUTING": "triggers <strong>{{value2}}</strong>",
+      "DOMINATION": "selects <strong>{{value3}}</strong> Tile at <strong>{{value2}}</strong> (where <strong>{{value4}}</strong> are dominant) for Domination",
+      "SCORE_TILE": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> VPs from scoring <strong>{{value4}}</strong> Tile at <strong>{{value3}}</strong>",
+      "CARD": "chooses Dominance Card <strong>{{value2}}</strong>",
+      "GAIN_ACTION_PAWN": "<strong>{{value1}}</strong> gain 1 Action Pawn",
+      "PLANNING_PHASE": "starts Planning phase",
+      "EXECUTION_PHASE": "starts Execution phase",
+      "RESET_PHASE": "starts Reset phase",
+      "values": {
+        "": "None",
+        "MAMMALS": "Mammals",
+        "REPTILES": "Reptiles",
+        "BIRDS": "Birds",
+        "AMPHIBIANS": "Amphibians",
+        "ARACHNIDS": "Arachnids",
+        "INSECTS": "Insects",
+        "GRASS": "Grass",
+        "GRUB": "Grub",
+        "MEAT": "Meat",
+        "SUN": "Sun",
+        "WATER": "Water",
+        "SEED": "Seed",
+        "ABUNDANCE": "Abundance",
+        "ADAPTATION": "Adaptation",
+        "COMPETITION": "Competition",
+        "DEPLETION": "Depletion",
+        "DOMINATION": "Domination",
+        "GLACIATION": "Glaciation",
+        "INITIATIVE": "Initiative",
+        "MIGRATION": "Migration",
+        "REGRESSION": "Regression",
+        "SPECIATION": "Speciation",
+        "WANDERLUST": "Wanderlust",
+        "WASTELAND": "Wasteland",
+        "FOREST": "Forest",
+        "JUNGLE": "Jungle",
+        "MOUNTAIN": "Mountain",
+        "DESERT": "Desert",
+        "SEA": "Sea",
+        "WETLAND": "Wetland",
+        "SAVANNAH": "Savannah",
+        "AQUATIC": "Aquatic",
+        "BIODIVERSITY": "Biodiversity",
+        "BIOMASS": "Biomass",
+        "BLIGHT": "Blight",
+        "CATASTROPHE": "Catastrophe",
+        "COLD_SNAP": "Cold Snap",
+        "DISEASE": "Disease",
+        "ECODIVERSITY": "Ecodiversity",
+        "EVOLUTION": "Evolution",
+        "FECUNDITY": "Fecundity",
+        "FERTILE": "Fertile",
+        "HABITAT": "Habitat",
+        "HIBERNATION": "Hibernation",
+        "ICE_AGE": "Ice Age",
+        "ICE_SHEET": "Ice Sheet",
+        "IMMIGRANTS": "Immigrants",
+        "INSTINCT": "Instinct",
+        "INTELLIGENCE": "Intelligence",
+        "MASS_EXODUS": "Mass Exodus",
+        "METAMORPHOSIS": "Metamorphosis",
+        "NICHE_BIOMES": "Niche Biomes",
+        "NOCTURNAL": "Noctural",
+        "OMNIVORE": "Omnivore",
+        "PARASITISM": "Parasitism",
+        "PREDATOR": "Predator",
+        "SYMBIOTIC": "Symbiotic"
+      }
     },
     "popover": {
       "actionPawn": "Action Pawn"
@@ -55,7 +255,8 @@
       "MOUNTAIN": "Mountain",
       "DESERT": "Desert",
       "SEA": "Sea",
-      "WETLAND": "Wetland"
+      "WETLAND": "Wetland",
+      "SAVANNAH": "Savannah"
     },
     "victoryPoints": "Victory Points",
     "wanderlustTiles": "Wanderlust Tiles"

@@ -144,6 +144,7 @@ export interface DominantSpecies {
   elements: Element[];
   initiativeTrack: AnimalType[];
   lastPlacedTile?: Hex;
+  scoredTiles: Hex[];
   phase: Phase;
   players: { [playerId: string]: AnimalType };
   round: number;
@@ -162,9 +163,12 @@ export enum ActionName {
   Glaciation = 'Glaciation',
   Speciation = 'Speciation',
   Wanderlust = 'Wanderlust',
+  WanderlustMove = 'WanderlustMove',
   Migration = 'Migration',
   Competition = 'Competition',
-  Domination = 'Domination'
+  Domination = 'Domination',
+  DominanceCard = 'DominanceCard',
+  Aquatic = 'Aquatic'
 }
 
 /**
@@ -222,3 +226,16 @@ export function getMaxSpeciation(tile: Tile): number {
 }
 
 export const SPECIATION_ELEMENT_TYPES = [ElementType.MEAT, ElementType.SUN, ElementType.SEED, ElementType.WATER, ElementType.GRUB, ElementType.GRASS];
+
+export const MAX_SPECIES_TO_MIGRATE = [7, 6, 5, 4, 3, 2];
+
+export const COMPETITION_TILE_TYPES = [
+  [TileType.SEA, TileType.DESERT, TileType.FOREST, TileType.JUNGLE, TileType.WETLAND, TileType.MOUNTAIN, TileType.SAVANNAH],
+  [TileType.JUNGLE, TileType.WETLAND],
+  [TileType.WETLAND, TileType.DESERT],
+  [TileType.DESERT, TileType.FOREST],
+  [TileType.FOREST, TileType.SAVANNAH],
+  [TileType.SAVANNAH, TileType.MOUNTAIN],
+  [TileType.MOUNTAIN, TileType.SEA],
+  [TileType.SEA, TileType.JUNGLE]
+];

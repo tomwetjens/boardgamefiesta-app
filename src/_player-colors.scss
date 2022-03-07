@@ -16,72 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-.RED {
-  color: red !important;
-}
+$playerColors: (
+  "RED": (normal:"red", light:lighten(red, 30%)),
+  "BLUE":(normal:"blue", light:lighten(blue, 30%)),
+  "YELLOW":(normal:"yellow", light:lighten(yellow, 30%)),
+  "GREEN":(normal:"green", light:lighten(green, 30%)),
+  "WHITE":(normal:"white", light:lighten(white, 30%)),
+  "PURPLE":(normal:"purple", light:lighten(purple, 30%)),
+  "BLACK":(normal:"black", light:lighten(black, 30%))
+);
 
-.BLUE {
-  color: blue !important;
-}
+@each $key, $colors in $playerColors {
+  .#{$key} {
+    color: #{map-get($colors, normal)} !important;
+  }
 
-.YELLOW {
-  color: yellow !important;
-}
+  .fill-#{$key} {
+    fill: #{map-get($colors, normal)} !important;
+  }
+  .fill-light-#{$key} {
+    fill: map-get($colors, light) !important;
+  }
 
-.WHITE {
-  color: white !important;
-}
+  .stroke-#{$key} {
+    stroke: #{map-get($colors, normal)} !important;
+  }
 
-.GREEN {
-  color: green !important;
-}
-
-.fill-RED {
-  fill: red !important;
-}
-
-.fill-BLUE {
-  fill: blue !important;
-}
-
-.fill-YELLOW {
-  fill: yellow !important;
-}
-
-.fill-WHITE {
-  fill: white !important;
-}
-
-.fill-GREEN {
-  fill: green !important;
-}
-
-.bg-RED {
-  background: red !important;
-}
-
-.bg-BLUE {
-  background: blue !important;
-  color: white;
-}
-
-.bg-YELLOW {
-  background: yellow !important;
-}
-
-.bg-WHITE {
-  background: white !important;
-}
-
-.bg-GREEN {
-  background: green !important;
-}
-
-.bg-BLACK {
-  background: black !important;
-  color: white;
-}
-
-.bg-PURPLE {
-  background: purple !important;
+  .bg-#{$key} {
+    background: #{map-get($colors, normal)} !important;
+  }
 }

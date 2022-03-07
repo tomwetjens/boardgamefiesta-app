@@ -55,7 +55,7 @@
              points="-50,-86.60254037844386 50,-86.60254037844386 100,0 50,86.60254037844386 -50,86.60254037844386 -100,0"/>
 
     <g class="tile" *ngIf="stack.faceUp"
-       [ngClass]="{selectable:selectable}"
+       [ngClass]="{selectable:selectable,selected:index===selectedStack}"
        (click)="selectWanderlustTile.emit(index)"
        [ngbPopover]="stack.faceUp === 'FOREST' ? popoverFOREST :
        stack.faceUp === 'JUNGLE' ? popoverJUNGLE :

@@ -1,1 +1,7 @@
-{{cards|json}}
+<ul>
+  <li *ngFor="let card of cards">
+    <button [disabled]="!selectable" (click)="selectCard.emit(card)">
+      <ds-card [card]="card"></ds-card>
+    </button>
+  </li>
+</ul>

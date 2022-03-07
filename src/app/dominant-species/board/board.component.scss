@@ -9,6 +9,23 @@
   background-color: #e9d6ab;
 }
 
+.action-bar {
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 50%;
+  height: auto;
+
+  padding: 12px 4px 4px 12px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px black;
+
+  background: #f3edd7;
+  color: black;
+  z-index: 999;
+}
+
 pan-zoom {
   display: block;
   width: 100%;
@@ -17,10 +34,15 @@ pan-zoom {
 
 .hexagon {
   polygon {
-    fill: #f3edd7;
     stroke: #e8e2cc;
     stroke-width: 1;
     paint-order: fill stroke markers;
+  }
+
+  &:not(.selectable:hover) {
+    polygon {
+      fill: #f3edd7;
+    }
   }
 
   &.selectable {
@@ -37,43 +59,43 @@ pan-zoom {
 
       &.JUNGLE {
         polygon {
-          fill: darkgreen;
+          //fill: darkgreen;
         }
       }
 
       &.FOREST {
         polygon {
-          fill: green;
+          //fill: green;
         }
       }
 
       &.SAVANNAH {
         polygon {
-          fill: lightgreen;
+          //fill: lightgreen;
         }
       }
 
       &.WETLAND {
         polygon {
-          fill: lightblue;
+          //fill: lightblue;
         }
       }
 
       &.SEA {
         polygon {
-          fill: blue;
+          //fill: blue;
         }
       }
 
       &.MOUNTAIN {
         polygon {
-          fill: saddlebrown;
+          //fill: saddlebrown;
         }
       }
 
       &.DESERT {
         polygon {
-          fill: sandybrown;
+          //fill: sandybrown;
         }
       }
     }
@@ -198,6 +220,59 @@ pan-zoom {
   }
 }
 
+.cubes {
+  .cube {
+    stroke: black;
+    stroke-linejoin: bevel;
+    stroke-width: .265;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  }
+
+  text {
+    stroke: black;
+    stroke-width: 1;
+    font-weight: bold;
+    font-size: 24px;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  }
+
+  &.fill-BLACK {
+    text {
+      stroke: white;
+      -webkit-filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, .7));
+      filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, .7));
+    }
+  }
+
+  &.selectable {
+    .cube {
+      stroke: white;
+      stroke-width: 2;
+      cursor: pointer;
+
+      &:hover {
+        stroke: black;
+      }
+    }
+  }
+
+  &.selected {
+    .cube {
+      stroke: black;
+      stroke-width: 3px;
+
+      animation: blinker 1s linear infinite;
+    }
+  }
+}
+
+.cone {
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+}
+
 @keyframes blinker {
   50% {
     opacity: 0.8;
@@ -219,7 +294,7 @@ pan-zoom {
     stroke: black;
 
     image {
-     visibility: visible;
+      visibility: visible;
     }
 
     &.GRASS {
@@ -254,6 +329,30 @@ pan-zoom {
   }
 }
 
+.move {
+  stroke-width: 6;
+
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+
+  text {
+    stroke: black;
+    stroke-width: 0.5;
+    font-weight: bold;
+    font-size: 16px;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .7));
+  }
+
+  &.fill-BLACK {
+    text {
+      stroke: white;
+      -webkit-filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, .7));
+      filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, .7));
+    }
+  }
+}
+
 ds-action-display {
   position: absolute;
   top: 8px;
@@ -263,13 +362,13 @@ ds-action-display {
 ds-food-chain {
   position: absolute;
   left: 8px;
-  top: 48px;
+  top: 80px;
 }
 
 ds-scoring-table {
   position: absolute;
   left: 8px;
-  top: 400px;
+  top: 448px;
 }
 
 ds-bonus-points-table {
