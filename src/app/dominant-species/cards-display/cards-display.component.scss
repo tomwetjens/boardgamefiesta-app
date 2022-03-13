@@ -1,11 +1,17 @@
-ul {
-  margin: 0;
-  padding: 0;
+:host {
+  display: flex;
+  margin: 8px;
 }
 
-li {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  display: inline-block;
+ds-card {
+  margin: 0 2px 0 0;
+
+  &.selectable {
+    cursor: pointer;
+    border: 3px solid white;
+
+    &:hover {
+      border-color: black;
+    }
+  }
 }

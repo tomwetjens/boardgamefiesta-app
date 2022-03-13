@@ -9,18 +9,54 @@
       "INSECTS": "Insects"
     },
     "actionType": {
-      "ABUNDANCE": "Abundance",
-      "ADAPTATION": "Adaptation",
-      "COMPETITION": "Competition",
-      "DEPLETION": "Depletion",
-      "DOMINATION": "Domination",
-      "GLACIATION": "Glaciation",
-      "INITIATIVE": "Initiative",
-      "MIGRATION": "Migration",
-      "REGRESSION": "Regression",
-      "SPECIATION": "Speciation",
-      "WANDERLUST": "Wanderlust",
-      "WASTELAND": "Wasteland"
+      "ABUNDANCE": {
+        "name": "Abundance",
+        "description": "Select an Element from the Abundance box and then select a vacant Corner to place it on"
+      },
+      "ADAPTATION": {
+        "name": "Adaptation",
+        "description": "Select an Element from the Adaptation box to add to your Animal"
+      },
+      "COMPETITION": {
+        "name": "Competition",
+        "description": "Select an Opposing Species on a Tile (one of each type matching the AP) to eliminate 1 of that Species from the Tile"
+      },
+      "DEPLETION": {
+        "name": "Depletion",
+        "description": "Select an Element on Earth to place back into the draw bag"
+      },
+      "DOMINATION": {
+        "name": "Domination",
+        "description": "Select a Tile (that hasn't been scored this round) to score it. Then the dominant animal must select and execute a Card."
+      },
+      "GLACIATION": {
+        "name": "Glaciation",
+        "description": "Select a non-Tundra Tile (adjacent to a Tundra tile) to turn it into Tundra as well"
+      },
+      "INITIATIVE": {
+        "name": "Initiative",
+        "description": "At the start of the Execution Phase, remove any AP that was placed here.<br/>That player performs the following activities:<ul><li>On the Initiative track, swap his animal’s initiative marker with that of the animal directly to the left of it—thus effectively moving one space forward on the Initiative track.<br/>Ignore this activity if the acting animal already occupies<br/>the front (left-most) Initiative spot.</li><li>Place the AP that was just removed into any vacant eye-ball space.</li></ul>"
+      },
+      "MIGRATION": {
+        "name": "Migration",
+        "description": "Select a Tile to move species from, then select an adjacent Tile to move them to. You may move up to the number of species indicated with the Action Pawn. Birds species may move up to 2 tiles away."
+      },
+      "REGRESSION": {
+        "name": "Regression",
+        "description": "Select Elements (up to the number of Action Pawns you placed) from the Regression box that you don't want to be removed from your Animal"
+      },
+      "SPECIATION": {
+        "name": "Speciation",
+        "description": "Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them"
+      },
+      "WANDERLUST": {
+        "name": "Wanderlust",
+        "description": "Select a Tile from the Wanderlust Tiles and then select a blank hex to place it on. Then you may select an Element from the Wanderlust box and select a vacant corner on the newly placed tile to place it on."
+      },
+      "WASTELAND": {
+        "name": "Wasteland",
+        "description": "Select Element from the Wasteland box to place it back into the draw bag"
+      }
     },
     "bonusPointsTable": "Bonus Points Table",
     "card": {
@@ -140,49 +176,65 @@
     },
     "foodChain": "Food Chain",
     "instruction": {
-      "PlaceActionPawn": "<strong>Place Action Pawn:</strong> Select a vacant Action Space to place an Action Pawn",
       "Adaptation": "<strong>Adaptation:</strong> Select an Element from the Adaptation box to add to your Animal",
+      "Aquatic": "<strong>Aquatic:</strong> Select an Element Type from the draw bag and then select a vacant Corner of a Wetland or Sea tile to place it on. You may then add up to 4 new Species on that Wetland or Sea tile.",
       "Abundance": "<strong>Abundance:</strong> Select an Element from the Abundance box and then select a vacant Corner to place it on",
-      "Regression": "<strong>Regression:</strong> Select Elements (up to the number of Action Pawns you placed) from the Regression box that you don't want to be removed from your Animal",
-      "Depletion": "<strong>Depletion:</strong> Select an Element on Earth to place back into the draw bag",
-      "Wasteland": "<strong>Wasteland:</strong> Select Element from the Wasteland box to place it back into the draw bag",
-      "Glaciation": "<strong>Glaciation:</strong> Select a non-Tundra Tile (adjacent to a Tundra tile) to turn it into Tundra as well",
-      "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them",
+      "Catastrophe": "<strong>Catastrophe:</strong> Select 1 Tile and then 1 Species to eliminate ALL other Species on that tile and then select 1 Species on each adjacent tile to eliminate.",
       "Competition": "<strong>Competition:</strong> Select an Opposing Species on a Tile (one of each type matching the AP) to eliminate 1 of that Species from the Tile",
+      "Depletion": "<strong>Depletion:</strong> Select an Element on Earth to place back into the draw bag",
+      "DominanceCard": "<strong>Domination (Card):</strong> Select a Card from the display to execute it.",
+      "Domination": "<strong>Domination:</strong> Select a Tile (that hasn't been scored this round) to score it. Then the dominant animal must select and execute a Card.",
+      "Evolution": "<strong>Evolution:</strong> Select up to 2 species of different opposing players to replace each of them with one species of your own.",
+      "Glaciation": "<strong>Glaciation:</strong> Select a non-Tundra Tile (adjacent to a Tundra tile) to turn it into Tundra as well",
+      "PlaceActionPawn": "<strong>Place Action Pawn:</strong> Select a vacant Action Space to place an Action Pawn",
+      "Regression": "<strong>Regression:</strong> Select Elements (up to the number of Action Pawns you placed) from the Regression box that you don't want to be removed from your Animal",
+      "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them",
+      "MassExodus": "<strong>MassExodus:</strong> Select a Tile and then move all Species on that tile to adjacent Tiles by selecting one or more Species on the tile and then selecting an adjacent Tile to move them to onto that Tile.",
+      "Migration": "<strong>Migration:</strong> Select a Tile to move species from, then select an adjacent Tile to move them to. You may move up to the number of species indicated with the Action Pawn. Birds species may move up to 2 tiles away.",
       "Wanderlust": "<strong>Wanderlust:</strong> Select a Tile from the Wanderlust Tiles and then select a blank hex to place it on. Then you may select an Element from the Wanderlust box and select a vacant corner on the newly placed tile to place it on.",
       "WanderlustMove": "<strong>Wanderlust (Move):</strong> Select one or more Tiles with your species currently adjacent to the newly-placed tile to move all, none or some of them onto that tile.",
-      "Migration": "<strong>Migration:</strong> Select a Tile to move species from, then select an adjacent Tile to move them to. You may move up to the number of species indicated with the Action Pawn. Birds species may move up to 2 tiles away.",
-      "Domination": "<strong>Domination:</strong> Select a Tile (that hasn't been scored this round) to score it. Then the dominant animal must select and execute a Card.",
-      "DominanceCard": "<strong>Domination (Card):</strong> Select a Card from the display to execute it.",
-      "Aquatic": "<strong>Aquatic:</strong> Select a Wetland or Sea tile to add up to 4 new Species on it"
+      "Wasteland": "<strong>Wasteland:</strong> Select Element from the Wasteland box to place it back into the draw bag"
     },
     "log": {
-      "PLACE_ACTION_PAWN": "places Action Pawn for <strong>{{value1}}</strong> on <strong>{{value2}}</strong> in space #{{value3}}",
-      "INITIATIVE": "<strong>Initiative:</strong> {{value1}} are now #{{value2}} on the Initiative Track",
-      "ADAPTATION": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong> through Adaptation",
-      "REGRESSION": "<strong>{{value1}}</strong> can skip {{value2}} of {{value3}} Regressions on {{value1}}",
-      "SKIP_ELEMENT_TYPE": "skips removing <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
-      "REMOVE_ELEMENT_FROM_ANIMAL": "removes Element <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
-      "ADD_ELEMENT_TO_ANIMAL": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong>",
       "ABUNDANCE": "adds Element <strong>{{value2}}</strong> to Earth at <strong>{{value3}}</strong> through Abundance",
-      "WASTELAND": "places Element <strong>{{value2}}</strong> back in the draw bag through Wasteland",
-      "SELECT_ELEMENT": "selects Element <strong>{{value2}}</strong> at <strong>{{value3}}</strong> for Speciation",
-      "SPECIATION": "adds <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> to {{value4}} tile <strong>{{value3}}</strong> through Speciation",
-      "WANDERLUST": "takes <strong>{{value3}}</strong> tile from Wanderlust Tiles #{{value2}} and places it on <strong>{{value4}}</strong>",
+      "ADAPTATION": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong> through Adaptation",
       "ADD_ELEMENT": "adds Element <strong>{{value2}}</strong> to newly placed tile",
+      "ADD_ELEMENT_TO_ANIMAL": "adds Element <strong>{{value2}}</strong> to <strong>{{value1}}</strong>",
+      "ADD_SPECIES": "adds {{value2}} species to {{value4}} tile at {{value3}}",
+      "CARD": "chooses Dominance Card <strong>{{value2}}</strong>",
+      "CATASTROPHE": "<strong>Catastrophe:</strong> selects {{value4}} Tile at {{value3}} to eliminate all Species but 1 of {{value2}}",
+      "COMPETITION": "eliminates 1 species of <strong>{{value2}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> through Competition",
+      "DEPLETION": "removes element {{value2}} from {{value3}} through Depletion",
+      "DOMINATION": "selects <strong>{{value3}}</strong> Tile at <strong>{{value2}}</strong> (where <strong>{{value4}}</strong> are dominant) for Domination",
+      "ELIMINATE_SPECIES": "eliminates {{value3}} species of {{value2}} from {{value5}} tile at {{value4}}",
+      "EXECUTING": "triggers <strong>{{value2}}</strong>",
+      "EXECUTION_PHASE": "starts Execution phase",
+      "EXTINCTION": "<strong>Extinction:</strong> {{value2}} species of {{value1}} are eliminated from {{value4}} tile at {{value3}}",
+      "GAIN_ACTION_PAWN": "<strong>{{value1}}</strong> gain 1 Action Pawn",
       "GAIN_BONUS_VPS": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> bonus VPs",
       "GAIN_VPS": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> VPs",
-      "MOVE_SPECIES": "moves <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> to newly placed <strong>{{value6}}</strong> tile at <strong>{{value5}}</strong>",
+      "GAIN_VPS_FROM_TILE": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> VPs from scoring <strong>{{value4}}</strong> Tile at <strong>{{value3}}</strong>",
+      "GLACIATION": "<strong>Glaciation:</strong> {{value3}} tile at {{value2}} is now tundra",
+      "HIBERNATION": "{{value2}} eliminated species of {{value1}} are added to {{value4}} tile at {{value3}} and ignore extinction this turn",
+      "INITIATIVE": "<strong>Initiative:</strong> {{value1}} are now #{{value2}} on the Initiative Track",
+      "LOSE_VPS": "{{value1}} lose {{value2}} VPs",
       "MIGRATION": "moves <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> to <strong>{{value6}}</strong> tile at <strong>{{value5}}</strong> through Migration",
-      "COMPETITION": "eliminates 1 species of <strong>{{value2}}</strong> from <strong>{{value4}}</strong> tile at <strong>{{value3}}</strong> through Competition",
-      "EXECUTING": "triggers <strong>{{value2}}</strong>",
-      "DOMINATION": "selects <strong>{{value3}}</strong> Tile at <strong>{{value2}}</strong> (where <strong>{{value4}}</strong> are dominant) for Domination",
-      "SCORE_TILE": "<strong>{{value1}}</strong> gain <strong>{{value2}}</strong> VPs from scoring <strong>{{value4}}</strong> Tile at <strong>{{value3}}</strong>",
-      "CARD": "chooses Dominance Card <strong>{{value2}}</strong>",
-      "GAIN_ACTION_PAWN": "<strong>{{value1}}</strong> gain 1 Action Pawn",
-      "PLANNING_PHASE": "starts Planning phase",
-      "EXECUTION_PHASE": "starts Execution phase",
+      "MOVE_SPECIES": "moves <strong>{{value3}}</strong> species of <strong>{{value2}}</strong> from <strong>{{value5}}</strong> tile at <strong>{{value4}}</strong> to <strong>{{value7}}</strong> tile at <strong>{{value6}}</strong>",
+      "PLACE_ACTION_PAWN": "places Action Pawn for <strong>{{value1}}</strong> on <strong>{{value2}}</strong> in space #{{value3}}",
+      "PLANNING_PHASE": "starts Planning phase of turn {{value2}}",
+      "REGRESSION": "<strong>{{value1}}</strong> can skip {{value2}} of {{value3}} Regressions on {{value1}}",
+      "REMOVE_ACTION_PAWN": "{{value1}} remove an Action Pawn",
+      "REMOVE_ALL_SPECIES_BUT_1": "removes all species but 1 of {{value4}} from {{value3}} tile at {{value2}}",
+      "REMOVE_ELEMENT": "removes element <strong>{{value2}}</strong> from <strong>{{value3}}</strong>",
+      "REMOVE_ELEMENT_FROM_ANIMAL": "removes Element <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
+      "REMOVE_SPECIES": "removes {{value3}} species of {{value2}} from {{value5}} tile at {{value4}}",
       "RESET_PHASE": "starts Reset phase",
+      "SAVE_FROM_EXTINCTION": "saves 1 Species of <strong>Mammals</strong> on <strong>{{value2}}</strong> tile at <strong>{{value3}}</strong>",
+      "SELECT_ELEMENT": "selects Element <strong>{{value2}}</strong> at <strong>{{value3}}</strong> for Speciation",
+      "SKIP_REGRESSION_OF_ELEMENT": "skips removing <strong>{{value2}}</strong> from <strong>{{value1}}</strong>",
+      "SPECIATION": "adds <strong>{{value2}}</strong> species of <strong>{{value1}}</strong> to {{value4}} tile <strong>{{value3}}</strong> through Speciation",
+      "WANDERLUST": "takes <strong>{{value3}}</strong> tile from Wanderlust Tiles #{{value2}} and places it on <strong>{{value4}}</strong>",
+      "WASTELAND": "places Element <strong>{{value2}}</strong> back in the draw bag through Wasteland",
       "values": {
         "": "None",
         "MAMMALS": "Mammals",
@@ -249,6 +301,7 @@
     },
     "quantity": "Quantity",
     "reset": "Reset",
+    "round": "Turn",
     "tileType": {
       "FOREST": "Forest",
       "JUNGLE": "Jungle",

@@ -1,8 +1,26 @@
 :host {
-  display: inline-block;
+  display: block;
+}
+
+.back, .card {
   width: 100px;
-  height: 200px;
+  height: 120px;
 
   background: #2d2419;
   border-radius: 8px;
+
+  text-align: center;
+}
+
+.card {
+  h1 {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }
+
+  p {
+    font-size: 10px;
+    color: white;
+  }
 }

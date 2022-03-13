@@ -86,6 +86,7 @@ export interface Animal {
   player: Player;
   type: AnimalType;
   genePool: number;
+  eliminatedSpecies: number;
   actionPawns: number;
   score: number;
   elements: ElementType[];
@@ -153,22 +154,36 @@ export interface DominantSpecies {
 }
 
 export enum ActionName {
-  PlaceActionPawn = 'PlaceActionPawn',
-  Initiative = 'Initiative',
-  Adaptation = 'Adaptation',
-  Regression = 'Regression',
   Abundance = 'Abundance',
-  Wasteland = 'Wasteland',
+  Adaptation = 'Adaptation',
+  Aquatic = 'Aquatic',
+  Biomass = 'Biomass',
+  Blight = 'Blight',
+  Catastrophe = 'Catastrophe',
+  Competition = 'Competition',
   Depletion = 'Depletion',
+  DominanceCard = 'DominanceCard',
+  Domination = 'Domination',
+  Evolution = 'Evolution',
+  Fecundity = 'Fecundity',
+  Fertile = 'Fertile',
   Glaciation = 'Glaciation',
+  Habitat = 'Habitat',
+  Hibernation = 'Hibernation',
+  MassExodus = 'MassExodus',
+  Metamorphosis = 'Metamorphosis',
+  Migration = 'Migration',
+  PlaceActionPawn = 'PlaceActionPawn',
+  Predator = 'Predator',
+  Regression = 'Regression',
+  RemoveActionPawn = 'RemoveActionPawn',
+  RemoveAllBut1SpeciesOnEachTile = 'RemoveAllBut1SpeciesOnEachTile',
+  RemoveElement = 'RemoveElement',
+  SaveFromExtinction = 'SaveFromExtinction',
   Speciation = 'Speciation',
   Wanderlust = 'Wanderlust',
   WanderlustMove = 'WanderlustMove',
-  Migration = 'Migration',
-  Competition = 'Competition',
-  Domination = 'Domination',
-  DominanceCard = 'DominanceCard',
-  Aquatic = 'Aquatic'
+  Wasteland = 'Wasteland',
 }
 
 /**

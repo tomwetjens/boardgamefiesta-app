@@ -1,5 +1,18 @@
 :host {
   display: block;
+  margin: 8px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  list-style-type: none;
 }
 
 ds-element {

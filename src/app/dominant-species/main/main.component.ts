@@ -45,10 +45,8 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private autoSelectAction(state: DominantSpecies, table: Table) {
-    console.debug('autoSelectAction: ', {turn: table.turn, actions: state?.actions});
     if (table.turn && state?.actions?.length === 1) {
       this.selectedAction = state.actions[0];
-      console.log('Automatically selected action: ' + this.selectedAction);
     } else {
       this.selectedAction = null;
     }
@@ -71,17 +69,5 @@ export class MainComponent implements OnInit, OnDestroy {
   undo(table: Table) {
     this.busy = true;
     this.tableService.undo(table.id).subscribe(() => this.busy = false, () => this.busy = false);
-  }
-
-  get canSelectCard(): boolean {
-    return this.selectedAction === ActionName.DominanceCard;
-  }
-
-  selectCard(card: Card, table: Table) {
-    this.perform({
-      [this.selectedAction]: {
-        card
-      }
-    }, table);
   }
 }

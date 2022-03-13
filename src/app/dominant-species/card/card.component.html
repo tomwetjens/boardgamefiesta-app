@@ -1,2 +1,14 @@
-<h1>{{'ds.card.' + card + '.name'|translate}}</h1>
-<p>{{'ds.card.' + card + '.description'|translate}}</p>
+<ng-template #popover>
+  <strong>{{'ds.card.' + card + '.name'|translate}}</strong>
+  <p>{{'ds.card.' + card + '.description'|translate}}</p>
+</ng-template>
+<div *ngIf="card" class="card"
+     [ngbPopover]="popover"
+     triggers="mouseenter:mouseleave"
+     container="body">
+  <h1>{{'ds.card.' + card + '.name'|translate}}</h1>
+  <p>{{'ds.card.' + card + '.description'|translate}}</p>
+</div>
+<div *ngIf="!card" class="back">
+  <ng-content></ng-content>
+</div>

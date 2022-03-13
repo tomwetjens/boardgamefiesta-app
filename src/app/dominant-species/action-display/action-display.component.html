@@ -1,6 +1,14 @@
 <dl class="actions">
   <ng-container *ngFor="let actionType of executionOrder">
-    <dt><span>{{'ds.actionType.' + actionType|translate}}</span></dt>
+    <ng-template #popover>
+      <strong>{{'ds.actionType.' + actionType + '.name'|translate}}</strong>
+      <section [innerHTML]="'ds.actionType.' + actionType + '.description'|translate"></section>
+    </ng-template>
+    <dt [ngbPopover]="popover"
+        triggers="mouseenter:mouseleave"
+        container="body">
+      <span>{{'ds.actionType.' + actionType + '.name'|translate}}</span>
+    </dt>
     <dd [class]="actionType">
       <div class="row">
         <ol class="elements" *ngIf="elements[actionType] as elements; index as index">
@@ -31,7 +39,8 @@
 
         <ol *ngIf="actionType === 'INITIATIVE'" class="initiative-track">
           <li *ngFor="let animalType of state.initiativeTrack">
-            <ds-initiative-marker [animalType]="animalType" [player]="state.animals[animalType].player"></ds-initiative-marker>
+            <ds-initiative-marker [animalType]="animalType"
+                                  [player]="state.animals[animalType].player"></ds-initiative-marker>
           </li>
         </ol>
       </div>

@@ -1,7 +1,7 @@
-<ul>
-  <li *ngFor="let card of cards">
-    <button [disabled]="!selectable" (click)="selectCard.emit(card)">
-      <ds-card [card]="card"></ds-card>
-    </button>
-  </li>
-</ul>
+<ds-card>
+  {{deckSize}}
+</ds-card>
+<ds-card *ngFor="let card of cards" [card]="card"
+         [ngClass]="{selectable:selectable}"
+         (click)="selectable && selectCard.emit(card)">
+</ds-card>

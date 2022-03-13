@@ -9,20 +9,124 @@
       "INSECTS": "Insecten"
     },
     "actionType": {
-      "ABUNDANCE": "Overvloed",
-      "ADAPTATION": "Aanpassing",
-      "COMPETITION": "Concurrentie",
-      "DEPLETION": "Uitputting",
-      "DOMINATION": "Overheersing",
-      "GLACIATION": "Gletsjer",
-      "INITIATIVE": "Initiatief",
-      "MIGRATION": "Migratie",
-      "REGRESSION": "Regressie",
-      "SPECIATION": "Soortvorming",
-      "WANDERLUST": "Reislust",
-      "WASTELAND": "Woestenij"
+      "ABUNDANCE": {
+        "name": "Overvloed"
+      },
+      "ADAPTATION": {
+        "name": "Aanpassing"
+      },
+      "COMPETITION": {
+        "name": "Concurrentie"
+      },
+      "DEPLETION": {
+        "name": "Uitputting"
+      },
+      "DOMINATION": {
+        "name": "Dominantie"
+      },
+      "GLACIATION": {
+        "name": "Gletsjer"
+      },
+      "INITIATIVE": {
+        "name": "Initiatief"
+      },
+      "MIGRATION": {
+        "name": "Migratie"
+      },
+      "REGRESSION": {
+        "name": "Regressie"
+      },
+      "SPECIATION": {
+        "name": "Soortvorming"
+      },
+      "WANDERLUST": {
+        "name": "Reislust"
+      },
+      "WASTELAND": {
+        "name": "Woestenij"
+      }
     },
     "bonusPointsTable": "Bonuspunten",
+    "card": {
+      "AQUATIC": {
+        "name": "Aquatisch"
+      },
+      "BIODIVERSITY": {
+        "name": "Biodiversiteit"
+      },
+      "BIOMASS": {
+        "name": "Biomassa"
+      },
+      "BLIGHT": {
+        "name": "Schadelijke invloed"
+      },
+      "CATASTROPHE": {
+        "name": "Ramp"
+      },
+      "COLD_SNAP": {
+        "name": "Koudegolf"
+      },
+      "DISEASE": {
+        "name": "Ziekte"
+      },
+      "ECODIVERSITY": {
+        "name": "Ecodiversiteit"
+      },
+      "EVOLUTION": {
+        "name": "Evolutie"
+      },
+      "FECUNDITY": {
+        "name": "Vruchtbaarheid"
+      },
+      "FERTILE": {
+        "name": "Vruchtbaar"
+      },
+      "HABITAT": {
+        "name": "Habitat"
+      },
+      "HIBERNATION": {
+        "name": "Winterslaap"
+      },
+      "ICE_AGE": {
+        "name": "IJstijd"
+      },
+      "ICE_SHEET": {
+        "name": "IJsplaat"
+      },
+      "IMMIGRANTS": {
+        "name": "Immigranten"
+      },
+      "INSTINCT": {
+        "name": "Instinct"
+      },
+      "INTELLIGENCE": {
+        "name": "Intelligentie"
+      },
+      "MASS_EXODUS": {
+        "name": "Massale uittocht"
+      },
+      "METAMORPHOSIS": {
+        "name": "Metamorfose"
+      },
+      "NICHE_BIOMES": {
+        "name": "Niche Biomen"
+      },
+      "NOCTURNAL": {
+        "name": "Nachtdieren"
+      },
+      "OMNIVORE": {
+        "name": "Omnivoor"
+      },
+      "PARASITISM": {
+        "name": "Parasitisme"
+      },
+      "PREDATOR": {
+        "name": "Roofdier"
+      },
+      "SYMBIOTIC": {
+        "name": "Symbiose"
+      }
+    },
     "confirm": "Bevestig actie",
     "elementType": {
       "GRASS": "Gras",
@@ -33,9 +137,26 @@
       "SEED": "Zaden"
     },
     "foodChain": "Voedselketen",
+    "instruction": {
+      "PlaceActionPawn": "<strong>Actiepion plaatsen:</strong> Kies een lege Actieplek om een Actiepion te plaatsen.",
+      "Catastrophe": "<strong>Ramp:</strong> Kies 1 Tegel en daarna 1 Soort om ALLE andere soorten op die tegel te elimineren. Kies daarna 1 Soort op elke aangrenzende tegel om te elimineren.",
+      "DominanceCard": "<strong>Dominantie (kaart):</strong> Kies een Kaart uit de beschikbare kaarten om deze uit te voeren."
+    },
     "log": {
-      "PLACE_ACTION_PAWN": "plaatst een Actiepion voor <strong>{{value1}}</strong> op <strong>{{value2}}</strong> in vakje #{{value3}}",
-      "CARD": "kiest Dominantiekaart <strong>{{value2}}</strong>",
+      "PLACE_ACTION_PAWN": "plaatst een Actiepion voor <strong>{{value1}}</strong> bij <strong>{{value2}}</strong> op plek {{value3}}",
+      "CARD": "kiest kaart <strong>{{value2}}</strong>",
+      "CATASTROPHE": "<strong>Ramp:</strong> kiest <strong>{{value4}}</strong> Tegel op {{value3}} om all Soorten behalve 1 van <strong>{{value2}}</strong> te elimineren",
+      "DOMINATION": "kiest een <strong>{{value3}}</strong> Tegel op <strong>{{value2}}</strong> (waar <strong>{{value4}}</strong> dominant zijn) voor Dominantie",
+      "ELIMINATE_SPECIES": "elimineert <strong>{{value3}}</strong> Soort(en) <strong>{{value2}}</strong> van <strong>{{value5}}</strong> Tegel op {{value4}}",
+      "EXECUTING": "activeert <strong>{{value2}}</strong>",
+      "EXECUTION_PHASE": "start de Actiefase",
+      "EXTINCTION": "<strong>Uitsterving:</strong> {{value2}} soorten {{value1}} zijn geëlimineerd van {{value4}} tegel op {{value3}}",
+      "GAIN_ACTION_PAWN": "<strong>{{value1}}</strong> krijgen 1 Actiepion",
+      "GAIN_VPS_FROM_TILE": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> punten voor de <strong>{{value4}}</strong> Tegel op <strong>{{value3}}</strong>",
+      "MOVE_SPECIES": "verplaatst <strong>{{value3}}</strong> soorten <strong>{{value2}}</strong> van <strong>{{value5}}</strong> Tegel op <strong>{{value4}}</strong> naar <strong>{{value7}}</strong> Tegel op <strong>{{value6}}</strong>",
+      "PLANNING_PHASE": "start de Planningsfase van beurt {{value2}}",
+      "REMOVE_ELEMENT": "verwijdert element <strong>{{value2}}</strong> van <strong>{{value3}}</strong>",
+      "RESET_PHASE": "start de Opruimfase",
       "values": {
         "": "Geen",
         "MAMMALS": "Zoogdieren",
@@ -54,7 +175,7 @@
         "ADAPTATION": "Aanpassing",
         "COMPETITION": "Concurrentie",
         "DEPLETION": "Uitputting",
-        "DOMINATION": "Overheersing",
+        "DOMINATION": "Dominantie",
         "GLACIATION": "Gletsjer",
         "INITIATIVE": "Initiatief",
         "MIGRATION": "Migratie",
@@ -102,6 +223,7 @@
     },
     "quantity": "Aantal",
     "reset": "Ongedaan maken",
+    "round": "Beurt",
     "tileType": {
       "FOREST": "Bos",
       "JUNGLE": "Jungle",

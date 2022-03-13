@@ -15,6 +15,7 @@ import {
   ActionName,
   ActionType,
   AnimalType,
+  Card,
   COMPETITION_TILE_TYPES,
   coordsToCorner,
   coordsToHex,
@@ -58,12 +59,14 @@ interface Delta {
   removed?: number;
 }
 
+type Deltas = { [animalType in AnimalType]?: Delta };
+
 interface TileItem {
   tile: Tile;
   coords: AxialCoordinates;
   hex: Hexagon;
   species: Species;
-  deltas: { [animalType in AnimalType]?: Delta };
+  deltas: Deltas;
   cubes: CubeGroup[];
 }
 
@@ -81,8 +84,17 @@ interface CornerItem {
 interface MoveItem {
   from: TileItem;
   to: TileItem;
-  text: XYCoords;
+  center: XYCoords;
+  animalType: AnimalType;
   species: number;
+}
+
+function hasDeltas(tile: TileItem) {
+  return tile.deltas && Object.keys(tile.deltas).some(key => tile.deltas[key]?.removed > 0 || tile.deltas[key]?.added > 0);
+}
+
+function hasSpeciesOnTile(tile: TileItem) {
+  return tile.species && Object.keys(tile.species).some(key => tile.species[key] > 0);
 }
 
 @Component({
@@ -127,7 +139,7 @@ export class BoardComponent implements OnInit, OnChanges {
     panOnClickDrag: true
   });
 
-  selectedElement: ElementItem;
+  selectedElements: ElementItem[] = [];
   selectedTiles: TileItem[] = [];
   selectedAnimalTypes: AnimalType[] = [];
   selectedWanderlustTile: number;
@@ -142,35 +154,15 @@ export class BoardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.state) {
-      this.tiles = this.state?.tiles
-        .map(tile => {
-          const coords = hexToCoords(tile.hex);
-          return {
-            tile,
-            coords,
-            hex: this.layout.render(coords),
-            species: Object.assign({}, tile.species) as any,
-            deltas: {} as any,
-            cubes: this.calculateCubes(tile.species)
-          };
-        }) || [];
+      this.tiles = this.calculateTiles();
       this.addedTiles = [];
-
-      this.elements = this.state?.elements
-        .map(element => {
-          const coords = cornerToCoords(element.corner);
-          return {
-            coords,
-            center: this.layout.intersection(coords.a, coords.b, coords.c),
-            element
-          };
-        }) || [];
+      this.elements = this.calculateElements();
     }
 
     if (changes.state || changes.selectedAction) {
       this.selectableCorners = this.canSelectCorner ? this.calculateSelectableCorners() : [];
       this.selectedElementTypes = [];
-      this.selectedElement = null;
+      this.selectedElements = [];
       this.selectedCorner = null;
       this.selectedTiles = [];
       this.selectedAnimalTypes = [];
@@ -182,15 +174,43 @@ export class BoardComponent implements OnInit, OnChanges {
         case ActionName.Speciation:
           const selectableElements = this.elements.filter(element => this.canSelectElement(element));
           if (selectableElements.length === 1) {
-            this.selectedElement = selectableElements[0];
+            this.selectedElements = [selectableElements[0]];
           }
           break;
       }
     }
   }
 
-  private calculateCubes(species: Species): CubeGroup[] {
-    const animalTypes = Object.keys(species);
+  private calculateElements() {
+    return this.state?.elements
+      .map(element => {
+        const coords = cornerToCoords(element.corner);
+        return {
+          coords,
+          center: this.layout.intersection(coords.a, coords.b, coords.c),
+          element
+        };
+      }) || [];
+  }
+
+  private calculateTiles() {
+    return this.state?.tiles
+      .map(tile => {
+        const coords = hexToCoords(tile.hex);
+        return {
+          tile,
+          coords,
+          hex: this.layout.render(coords),
+          species: Object.assign({}, tile.species) as any,
+          deltas: {} as any,
+          cubes: this.calculateCubes(tile.species, {})
+        };
+      }) || [];
+  }
+
+  private calculateCubes(species: Species, deltas: Deltas): CubeGroup[] {
+    const animalTypes = [...new Set(Object.keys(species)
+      .concat(Object.keys(deltas).filter(k => deltas[k]?.added > 0 || deltas[k]?.removed > 0)))];
 
     const cubeSize = 10;
     const maxCubesToDisplay = 8;
@@ -199,6 +219,7 @@ export class BoardComponent implements OnInit, OnChanges {
     const anglePerGroup = (2 * Math.PI) / animalTypes.length;
 
     return animalTypes
+      .sort()
       .map((animalType, groupIndex) => {
         const numberOfCubesToDisplay = Math.min(maxCubesToDisplay, species[animalType] || 0);
 
@@ -235,9 +256,10 @@ export class BoardComponent implements OnInit, OnChanges {
   get canSelectCorner(): boolean {
     switch (this.selectedAction) {
       case ActionName.Abundance:
-        return this.selectedElementTypes.length === 1;
+      case ActionName.Aquatic:
+        return this.selectedElementTypes.length > 0 && !this.selectedCorner;
       case ActionName.Wanderlust:
-        return this.addedTiles.length === 1 && this.selectedElementTypes.length === 1;
+        return this.addedTiles.length > 0 && this.selectedElementTypes.length > 0;
       default:
         return false;
     }
@@ -250,14 +272,40 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Speciation:
       case ActionName.WanderlustMove:
       case ActionName.Migration:
-      case ActionName.Aquatic:
         return this.tiles.some(tile => tile.deltas[this.state.currentAnimal]?.added > 0);
+      case ActionName.Aquatic:
+        return this.selectedCorner && this.selectedElementTypes.length > 0;
       case ActionName.Wanderlust:
         return this.addedTiles.length === 1;
       case ActionName.Competition:
         return this.selectedTiles.length > 0 && this.selectedAnimalTypes.length === this.selectedTiles.length;
+      case ActionName.Evolution:
+        return this.selectedTiles.length > 0 && this.selectedAnimalTypes.length > 0;
+      case ActionName.Catastrophe:
+        return this.selectedTiles.length > 0 && hasDeltas(this.selectedTiles[0])
+          && this.tiles.filter(tile => isAdjacent(tile.coords, this.selectedTiles[0].coords)).every(adjacent => hasDeltas(adjacent));
+      case ActionName.MassExodus:
+        return this.selectedTiles.length > 0 && !hasSpeciesOnTile(this.selectedTiles[0]);
+      case ActionName.Blight:
+        if (this.selectedTiles.length === 0) {
+          return false;
+        }
+        const adjacentElements = this.elements.filter(element => isCornerAdjacent(element.coords, this.selectedTiles[0].coords));
+        return this.selectedElements.length === Math.max(0, adjacentElements.length - 1)
+          && this.selectedElements.every(selectedElement => adjacentElements.includes(selectedElement));
       default:
         return false;
+    }
+  }
+
+  get canReset(): boolean {
+    switch (this.selectedAction) {
+      case ActionName.Catastrophe:
+      case ActionName.MassExodus:
+      case ActionName.Blight:
+        return this.selectedTiles.length > 0;
+      default:
+        return this.canConfirm;
     }
   }
 
@@ -276,7 +324,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
         this.perform.emit({
           [this.selectedAction]: {
-            element: this.selectedElement?.element.corner,
+            element: this.selectedElements.length > 0 ? this.selectedElements[0].element.corner : null,
             tiles: speciatedTiles.map(tile => tile.tile.hex),
             species: speciatedTiles.map(tile => tile.deltas[this.state.currentAnimal].added)
           }
@@ -284,12 +332,14 @@ export class BoardComponent implements OnInit, OnChanges {
         break;
 
       case ActionName.Aquatic:
-        const changedAquaticTiles = this.tiles.filter(tile => tile.deltas[this.state.currentAnimal]?.added > 0);
+        const tile = this.tiles.find(tile => tile.deltas[this.state.currentAnimal]?.added > 0);
 
         this.perform.emit({
           [this.selectedAction]: {
-            tile: this.selectedTiles[0].tile.hex,
-            species: changedAquaticTiles.map(tile => tile.deltas[this.state.currentAnimal].added).reduce((a, b) => a + b, 0)
+            elementType: this.selectedElementTypes[0],
+            corner: coordsToCorner(this.selectedCorner),
+            tile: tile?.tile.hex,
+            species: tile?.deltas[this.state.currentAnimal].added
           }
         });
         break;
@@ -327,6 +377,7 @@ export class BoardComponent implements OnInit, OnChanges {
         break;
 
       case ActionName.Competition:
+      case ActionName.Evolution:
         this.perform.emit({
           [this.selectedAction]: {
             tiles: this.selectedTiles.map(tile => tile.tile.hex),
@@ -335,17 +386,55 @@ export class BoardComponent implements OnInit, OnChanges {
         });
         break;
 
+      case ActionName.Catastrophe:
+        const selectedTile = this.selectedTiles[0];
+        const adjacentTiles = this.tiles.filter(tile => isAdjacent(tile.coords, selectedTile.coords));
+        this.perform.emit({
+          [this.selectedAction]: {
+            tile: selectedTile.tile.hex,
+            keep: Object.keys(selectedTile.species).find(at => selectedTile.species[at] === 1),
+            adjacentTiles: adjacentTiles.map(adjacent => adjacent.tile.hex),
+            animals: adjacentTiles.map(adjacent => Object.keys(adjacent.deltas).find(at => adjacent.deltas[at]?.removed === 1))
+          }
+        });
+        break;
+
+      case ActionName.MassExodus:
+        this.perform.emit({
+          [this.selectedAction]: {
+            from: this.selectedTiles[0].tile.hex,
+            moves: this.moves.map(move => ({
+              to: move.to.tile.hex,
+              animal: move.animalType,
+              species: move.species
+            }))
+          }
+        });
+        break;
+
+      case ActionName.Blight:
+        this.perform.emit({
+          [this.selectedAction]: {
+            tile: this.selectedTiles[0].tile.hex,
+            elements: this.selectedElements.map(elem => elem.element.corner)
+          }
+        });
+        break;
     }
   }
 
   reset() {
+    this.selectedElementTypes = [];
+    this.selectedElements = [];
+    this.selectedCorner = null;
     this.selectedTiles = [];
     this.selectedAnimalTypes = [];
-    this.tiles.forEach(tile => {
-      tile.species = Object.assign({}, tile.species);
-      tile.deltas = {} as any;
-      tile.cubes = this.calculateCubes(tile.species);
-    });
+    this.selectedWanderlustTile = null;
+    this.addedTiles = [];
+    this.moves = [];
+    this.tiles = this.calculateTiles();
+    this.elements = this.calculateElements();
+    this.selectableCorners = this.canSelectCorner ? this.calculateSelectableCorners() : [];
   }
 
   selectHex(coords: AxialCoordinates) {
@@ -429,11 +518,64 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Aquatic:
         this.aquatic(tile);
         break;
+
+      case ActionName.Catastrophe:
+        if (this.selectedTiles.length === 0) {
+          this.selectedTiles.push(tile);
+
+          // Auto select species if possible
+          const animalsWithSpecies = Object.keys(tile.species)
+            .map(at => at as AnimalType)
+            .filter(at => tile.species[at] > 0);
+          if (animalsWithSpecies.length === 1) {
+            this.selectSpecies(tile, animalsWithSpecies[0]);
+          }
+
+          this.tiles
+            .filter(t => isAdjacent(tile.coords, t.coords))
+            .forEach(adjacent => {
+              // Auto select on adjacent if possible
+              const animalsWithSpecies = Object.keys(adjacent.tile.species)
+                .map(at => at as AnimalType)
+                .filter(at => adjacent.tile.species[at] > 0);
+              if (animalsWithSpecies.length === 1) {
+                this.selectSpecies(adjacent, animalsWithSpecies[0]);
+              }
+            });
+        }
+        break;
+
+      case ActionName.MassExodus:
+        if (this.selectedTiles.length === 0) {
+          this.selectedTiles.push(tile);
+
+          // Auto select species if possible
+          const animalsWithSpecies = Object.keys(tile.species)
+            .map(at => at as AnimalType)
+            .filter(at => tile.species[at] > 0);
+          if (animalsWithSpecies.length === 1) {
+            this.selectSpecies(tile, animalsWithSpecies[0]);
+          }
+        } else if (isAdjacent(tile.coords, this.selectedTiles[0].coords)) {
+          // adjacent
+          if (this.selectedAnimalTypes.length > 0) {
+            this.move(this.selectedTiles[0], tile, this.selectedAnimalTypes[0], 1);
+          }
+        }
+        break;
+
+      case ActionName.Blight:
+        if (this.selectedTiles.length > 0) {
+          this.selectedElements = this.selectedElements
+            .filter(selectedElement => isCornerAdjacent(selectedElement.coords, tile.coords));
+        }
+        this.selectedTiles = [tile];
+        break;
     }
   }
 
   private migration(to: TileItem) {
-    this.move(this.selectedTiles[0], to);
+    this.move(this.selectedTiles[0], to, this.state.currentAnimal, 1);
 
     if (!this.hasPreExistingSpeciesLeftOnTile(this.selectedTiles[0])
       || !this.hasNotReachedMaxSpeciesToMigrate()
@@ -444,13 +586,13 @@ export class BoardComponent implements OnInit, OnChanges {
 
   private wanderlustMove(from: TileItem) {
     const to = this.tiles.find(other => other.tile.hex === this.state.lastPlacedTile);
-    this.move(from, to);
+    this.move(from, to, this.state.currentAnimal, 1);
   }
 
-  private move(from: TileItem, to: TileItem) {
-    this.changeSpecies(from, -1);
-    this.changeSpecies(to, 1);
-    this.addOrMergeMove(from, to, 1);
+  private move(from: TileItem, to: TileItem, animalType: AnimalType, amount: number) {
+    this.changeSpecies(from, animalType, -amount);
+    this.changeSpecies(to, animalType, amount);
+    this.addOrMergeMove(from, to, animalType, amount);
   }
 
   private aquatic(tile: TileItem) {
@@ -461,7 +603,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
     const currentDelta = tile.deltas[this.state.currentAnimal]?.added || 0;
     if (currentDelta < 4) {
-      this.changeSpecies(tile, 1);
+      this.changeSpecies(tile, this.state.currentAnimal, 1);
     } else {
       this.resetChangedSpecies(tile);
     }
@@ -471,14 +613,13 @@ export class BoardComponent implements OnInit, OnChanges {
     const currentDelta = tile.deltas[this.state.currentAnimal]?.added || 0;
     const maxSpeciation = getMaxSpeciation(tile.tile);
     if (currentDelta < maxSpeciation) {
-      this.changeSpecies(tile, 1);
+      this.changeSpecies(tile, this.state.currentAnimal, 1);
     } else {
       this.resetChangedSpecies(tile);
     }
   }
 
-  private changeSpecies(tile: TileItem, amount: number = 1) {
-    const animalType = this.state.currentAnimal;
+  private changeSpecies(tile: TileItem, animalType: AnimalType, amount: number = 1) {
     const deltas = tile.deltas[animalType] || {};
 
     if (amount < 0) {
@@ -502,7 +643,7 @@ export class BoardComponent implements OnInit, OnChanges {
       tile.species[animalType] = newSpecies;
     }
 
-    tile.cubes = this.calculateCubes(tile.species);
+    tile.cubes = this.calculateCubes(tile.species, tile.deltas);
   }
 
   private resetChangedSpecies(tile: TileItem) {
@@ -512,13 +653,13 @@ export class BoardComponent implements OnInit, OnChanges {
     }
     delete tile.deltas[this.state.currentAnimal];
 
-    tile.cubes = this.calculateCubes(tile.species);
+    tile.cubes = this.calculateCubes(tile.species, tile.deltas);
   }
 
   canSelectTile(tile: TileItem): boolean {
     switch (this.selectedAction) {
       case ActionName.Speciation:
-        return this.selectedElement && isCornerAdjacent(this.selectedElement.coords, tile.coords);
+        return this.selectedElements.length > 0 && isCornerAdjacent(this.selectedElements[0].coords, tile.coords);
       case ActionName.Glaciation:
         return !tile.tile.tundra && this.isAdjacentToTundra(tile.coords);
       case ActionName.WanderlustMove:
@@ -531,15 +672,29 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Domination:
         return !this.state.scoredTiles.includes(tile.tile.hex);
       case ActionName.Aquatic:
-        return [TileType.WETLAND, TileType.SEA].includes(tile.tile.type);
+        return this.selectedElementTypes.length > 0
+          && this.selectedCorner && isCornerAdjacent(this.selectedCorner, tile.coords)
+          && [TileType.SEA, TileType.WETLAND].includes(tile.tile.type);
+      case ActionName.Catastrophe:
+        return this.selectedTiles.length === 0;
+      case ActionName.MassExodus:
+        return this.selectedTiles.length === 0
+          || (this.selectedAnimalTypes.length > 0 && isAdjacent(tile.coords, this.selectedTiles[0].coords)
+            && this.hasPreExistingSpeciesLeftOnTile(this.selectedTiles[0], this.selectedAnimalTypes[0]));
+      case ActionName.Blight:
+        return true;
       default:
         return false;
     }
   }
 
-  private hasPreExistingSpeciesLeftOnTile(tile: TileItem) {
-    const preExistingSpecies = tile.tile.species[this.state.currentAnimal] || 0;
-    const removed = tile.deltas[this.state.currentAnimal]?.removed || 0;
+  get canSelectElementTypeFromDrawBag(): boolean {
+    return this.selectedAction === ActionName.Aquatic;
+  }
+
+  private hasPreExistingSpeciesLeftOnTile(tile: TileItem, animalType: AnimalType = this.state.currentAnimal) {
+    const preExistingSpecies = tile.tile.species[animalType] || 0;
+    const removed = tile.deltas[animalType]?.removed || 0;
     const preExistingSpeciesLeft = removed > 0 ? preExistingSpecies - removed : preExistingSpecies;
     return preExistingSpeciesLeft > 0;
   }
@@ -566,8 +721,24 @@ export class BoardComponent implements OnInit, OnChanges {
 
   selectCorner(corner: AxialCorner) {
     console.debug('selectCorner:', corner);
+
     this.selectedCorner = corner;
-    this.performOnceEverythingSelected();
+
+    switch (this.selectedAction) {
+      case ActionName.Aquatic:
+        this.elements.push({
+          element: {
+            corner: coordsToCorner(corner),
+            type: this.selectedElementTypes[0]
+          },
+          coords: corner,
+          center: this.layout.intersection(corner.a, corner.b, corner.c)
+        });
+        break;
+
+      default:
+        this.performOnceEverythingSelected();
+    }
   }
 
   canSelectElement(element: ElementItem): boolean {
@@ -577,6 +748,8 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Speciation:
         const speciationElementType = this.getSpeciationElementType();
         return element.element.type === speciationElementType && this.isNotInsectsFreeAction();
+      case ActionName.Blight:
+        return true;
       default:
         return false;
     }
@@ -613,31 +786,65 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Speciation:
         const previousSelectableTiles = this.tiles.filter(tile => this.canSelectTile(tile));
 
-        this.selectedElement = element;
+        this.selectedElements = [element];
 
         const noLongerSelectableTiles = previousSelectableTiles.filter(tile => !this.canSelectTile(tile));
         noLongerSelectableTiles.forEach(tile => {
           // Reset any deltas
           tile.species = Object.assign({}, tile.tile.species);
           tile.deltas = {} as any;
-          tile.cubes = this.calculateCubes(tile.species);
+          tile.cubes = this.calculateCubes(tile.species, {});
         })
+        break;
+
+      case ActionName.Blight:
+        if (this.selectedElements.includes(element)) {
+          const index = this.selectedElements.indexOf(element);
+          this.selectedElements.splice(index, 1);
+        } else {
+          this.selectedElements.push(element);
+        }
+
+        if (this.selectedTiles.length > 0) {
+          if (!isCornerAdjacent(element.coords, this.selectedTiles[0].coords)) {
+            this.selectedTiles = [];
+          }
+        }
+
+        if (this.selectedTiles.length === 0) {
+          // Auto select tile if possible
+          const adjacentTiles = this.tiles
+            .filter(tile => isCornerAdjacent(element.coords, tile.coords))
+            .filter(tile => {
+              const adjacentElements = this.elements.filter(elem => isCornerAdjacent(elem.coords, tile.coords));
+              return this.selectedElements.length === Math.max(0, adjacentElements.length - 1)
+                && this.selectedElements.every(elem => adjacentElements.includes(elem));
+            });
+          if (adjacentTiles.length === 1) {
+            this.selectedTiles = [adjacentTiles[0]];
+          }
+        }
+
         break;
     }
   }
 
   isElementSelected(element: ElementItem): boolean {
-    return this.selectedElement?.element.corner === element.element.corner;
+    return this.selectedElements.includes(element);
   }
 
   selectElementType(elementType: ElementType) {
     console.debug('selectElementType:', elementType);
 
-    if (this.selectedElementTypes.includes(elementType)) {
-      const index = this.selectedElementTypes.indexOf(elementType);
-      this.selectedElementTypes.splice(index, 1);
+    if (this.selectedAction === ActionName.Regression) {
+      if (this.selectedElementTypes.includes(elementType)) {
+        const index = this.selectedElementTypes.indexOf(elementType);
+        this.selectedElementTypes.splice(index, 1);
+      } else {
+        this.selectedElementTypes.push(elementType);
+      }
     } else {
-      this.selectedElementTypes.push(elementType);
+      this.selectedElementTypes = [elementType];
     }
 
     switch (this.selectedAction) {
@@ -651,6 +858,7 @@ export class BoardComponent implements OnInit, OnChanges {
         break;
 
       case ActionName.Abundance:
+      case ActionName.Aquatic:
         this.selectableCorners = this.calculateSelectableCorners();
         break;
 
@@ -692,7 +900,10 @@ export class BoardComponent implements OnInit, OnChanges {
   private calculateSelectableCorners(): CornerItem[] {
     switch (this.selectedAction) {
       case ActionName.Abundance:
-        return this.calculateEmptyCornersOnTiles();
+        return this.calculateEmptyCornersOnTiles(this.state.tiles);
+      case ActionName.Aquatic:
+        return this.calculateEmptyCornersOnTiles(this.state.tiles
+          .filter(tile => [TileType.WETLAND, TileType.SEA].includes(tile.type)));
       case ActionName.Wanderlust:
         return this.addedTiles
           .map(tile => tile.coords)
@@ -711,8 +922,8 @@ export class BoardComponent implements OnInit, OnChanges {
     }
   }
 
-  private calculateEmptyCornersOnTiles() {
-    return this.state?.tiles // start from the existing tiles so we at least have an adjacent tile (reduces search space)
+  private calculateEmptyCornersOnTiles(tiles: Tile[]) {
+    return tiles // start from the existing tiles so we at least have an adjacent tile (reduces search space)
       .map(tile => hexToCoords(tile.hex))
       .flatMap(a =>
         HEXES
@@ -809,7 +1020,7 @@ export class BoardComponent implements OnInit, OnChanges {
     return this.state.tiles.some(tile => isAdjacent(coords, hexToCoords(tile.hex)));
   }
 
-  private addOrMergeMove(from: TileItem, to: TileItem, species: number) {
+  private addOrMergeMove(from: TileItem, to: TileItem, animalType: AnimalType, species: number) {
     const existing = this.moves.find(move => move.from === from && move.to === to);
 
     if (existing) {
@@ -820,7 +1031,7 @@ export class BoardComponent implements OnInit, OnChanges {
         y: from.hex.center.y + (to.hex.center.y - from.hex.center.y) / 2
       };
 
-      this.moves.push({from, to, text, species});
+      this.moves.push({from, to, center: text, animalType, species});
     }
   }
 
@@ -838,7 +1049,14 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Competition:
         return animalType !== this.state.currentAnimal && tile.species[animalType] > 0 && tile.species[this.state.currentAnimal] > 0
           && COMPETITION_TILE_TYPES[this.getCurrentActionPawnIndex(ActionType.COMPETITION)].includes(tile.tile.type);
-
+      case ActionName.Evolution:
+        return animalType !== this.state.currentAnimal && tile.species[animalType] > 0 && !this.selectedAnimalTypes.includes(animalType);
+      case ActionName.Catastrophe:
+        return this.selectedTiles.length > 0
+          && (this.selectedTiles.includes(tile) || isAdjacent(tile.coords, this.selectedTiles[0].coords))
+          && !hasDeltas(tile);
+      case ActionName.MassExodus:
+        return this.selectedTiles.length === 0 || this.selectedTiles.includes(tile);
       default:
         return false;
     }
@@ -867,13 +1085,64 @@ export class BoardComponent implements OnInit, OnChanges {
           this.selectedTiles.push(tile);
           this.selectedAnimalTypes.push(animalType);
         }
-        return;
+        break;
+
+      case ActionName.Evolution:
+        this.selectedTiles.push(tile);
+        this.selectedAnimalTypes.push(animalType);
+        break;
+
+      case ActionName.Catastrophe:
+        if (tile === this.selectedTiles[0]) {
+          // Eliminate all but 1 of the selected species
+          if (tile.tile.species[animalType] > 1) {
+            this.changeSpecies(tile, animalType, -(tile.tile.species[animalType] - 1));
+          }
+
+          // Eliminate all other species
+          const otherAnimalsWithSpeciesOnTile = Object.keys(tile.tile.species)
+            .map(at => at as AnimalType)
+            .filter(at => at !== animalType)
+            .filter(at => tile.tile.species[at] > 0);
+          for (const otherAnimalType of otherAnimalsWithSpeciesOnTile) {
+            this.changeSpecies(tile, otherAnimalType, -tile.tile.species[otherAnimalType]);
+          }
+        } else {
+          // Adjacent tile
+          this.changeSpecies(tile, animalType, -1);
+        }
+        break;
+
+      case ActionName.MassExodus:
+        if (this.selectedTiles.length === 0) {
+          this.selectedTiles.push(tile);
+        }
+        if (this.selectedTiles[0] === tile) {
+          this.selectedAnimalTypes = [animalType];
+        }
+        break;
     }
   }
 
   isSpeciesSelected(tile: TileItem, animalType: AnimalType): boolean {
     const index = this.selectedTiles.indexOf(tile);
     return index >= 0 && this.selectedAnimalTypes[index] === animalType;
+  }
+
+  get canSelectCard(): boolean {
+    return this.selectedAction === ActionName.DominanceCard;
+  }
+
+  selectCard(card: Card) {
+    if (!this.canSelectCard) {
+      return;
+    }
+
+    this.perform.emit({
+      [this.selectedAction]: {
+        card
+      }
+    });
   }
 }
 

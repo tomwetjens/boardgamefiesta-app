@@ -9,6 +9,7 @@ import {Card} from "../model";
 export class CardsDisplayComponent implements OnInit {
 
   @Input() cards: Card[];
+  @Input() deckSize: number;
   @Input() selectable: boolean;
   @Output() selectCard = new EventEmitter<Card>();
 

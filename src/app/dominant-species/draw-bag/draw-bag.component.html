@@ -1,6 +1,10 @@
-<ds-element [elementType]="'GRASS'">{{drawBag.elements.GRASS || 0}}</ds-element>
-<ds-element [elementType]="'GRUB'">{{drawBag.elements.GRUB || 0}}</ds-element>
-<ds-element [elementType]="'SUN'">{{drawBag.elements.SUN || 0}}</ds-element>
-<ds-element [elementType]="'MEAT'">{{drawBag.elements.MEAT || 0}}</ds-element>
-<ds-element [elementType]="'WATER'">{{drawBag.elements.WATER || 0}}</ds-element>
-<ds-element [elementType]="'SEED'">{{drawBag.elements.SEED || 0}}</ds-element>
+<ul>
+  <li *ngFor="let elementType of elementTypes">
+    <ds-element [elementType]="elementType"
+                [selectable]="selectable && drawBag.elements[elementType] > 0"
+                [selected]="selectedElementTypes.includes(elementType)"
+                (selectElement)="selectElementType.emit(elementType)">
+      {{drawBag.elements[elementType] || 0}}
+    </ds-element>
+  </li>
+</ul>
