@@ -26,7 +26,7 @@ export const environment: Environment = {
   production: false,
 
   apiBaseUrl: 'http://localhost:8080',
-  wsBaseUrl: 'ws://localhost:8080',
+  wsBaseUrl: 'ws://localhost:8080/events',
 
   auth: {
     issuer: 'https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_s6Ypfd935',
