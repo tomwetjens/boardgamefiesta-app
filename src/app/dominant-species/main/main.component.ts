@@ -2,7 +2,7 @@ import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {TableService} from "../../table.service";
 import {combineLatest, Observable, ReplaySubject} from "rxjs";
 import {Table} from "../../shared/model";
-import {Action, ActionName, Card, DominantSpecies} from "../model";
+import {Action, ActionName, DominantSpecies, ElementType} from "../model";
 import {takeUntil} from "rxjs/operators";
 
 @Component({
@@ -69,5 +69,13 @@ export class MainComponent implements OnInit, OnDestroy {
   undo(table: Table) {
     this.busy = true;
     this.tableService.undo(table.id).subscribe(() => this.busy = false, () => this.busy = false);
+  }
+
+  selectElement(elementType: ElementType, table: Table) {
+    this.perform({
+      [this.selectedAction]: {
+        element: elementType
+      }
+    }, table);
   }
 }

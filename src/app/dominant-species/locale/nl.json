@@ -152,6 +152,8 @@
       "EXECUTION_PHASE": "start de Actiefase",
       "EXTINCTION": "<strong>Uitsterving:</strong> {{value2}} soorten {{value1}} zijn geëlimineerd van {{value4}} tegel op {{value3}}",
       "GAIN_ACTION_PAWN": "<strong>{{value1}}</strong> krijgen 1 Actiepion",
+      "GAIN_BONUS_VPS": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> bonuspunten",
+      "GAIN_VPS": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> punten",
       "GAIN_VPS_FROM_TILE": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> punten voor de <strong>{{value4}}</strong> Tegel op <strong>{{value3}}</strong>",
       "MOVE_SPECIES": "verplaatst <strong>{{value3}}</strong> soorten <strong>{{value2}}</strong> van <strong>{{value5}}</strong> Tegel op <strong>{{value4}}</strong> naar <strong>{{value7}}</strong> Tegel op <strong>{{value6}}</strong>",
       "PLANNING_PHASE": "start de Planningsfase van beurt {{value2}}",

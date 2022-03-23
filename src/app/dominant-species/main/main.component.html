@@ -23,7 +23,8 @@
                      [player]="table.players[table.player]"
                      [animal]="state.animals[state.players[table.player]]"
                      [table]="table"
-                     [state]="state">
+                     [state]="state"
+                     (selectElement)="selectElement($event, table)">
           </ds-player>
 
           <ds-player *ngFor="let otherPlayerId of table.otherPlayers"

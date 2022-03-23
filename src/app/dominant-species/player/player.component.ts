@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Table, TablePlayer} from "../../shared/model";
-import {Animal, DominantSpecies} from "../model";
+import {ActionName, Animal, DominantSpecies, ElementType} from "../model";
 
 @Component({
   selector: 'ds-player',
@@ -14,10 +14,17 @@ export class PlayerComponent implements OnInit {
   @Input() state: DominantSpecies;
   @Input() animal: Animal;
 
+  @Output() selectElement = new EventEmitter<ElementType>();
+
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  get canSelectElement(): boolean {
+    return this.animal.type === this.state.currentAnimal
+      && this.state.actions.includes(ActionName.RemoveElement);
   }
 
 }

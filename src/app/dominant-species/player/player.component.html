@@ -21,8 +21,10 @@
     {{animal.eliminatedSpecies}}
 
     <ol class="elements">
-      <li *ngFor="let elementType of animal.elements">
-        <ds-element [elementType]="elementType"></ds-element>
+      <li *ngFor="let elementType of animal.elements; index as index">
+        <ds-element [elementType]="elementType"
+                    [selectable]="index > 1 && canSelectElement"
+                    (click)="index > 1 && canSelectElement && selectElement.emit(elementType)"></ds-element>
       </li>
     </ol>
   </main>

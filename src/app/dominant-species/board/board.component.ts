@@ -273,6 +273,9 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.WanderlustMove:
       case ActionName.Migration:
         return this.tiles.some(tile => tile.deltas[this.state.currentAnimal]?.added > 0);
+      case ActionName.Predator:
+        return this.tiles.filter(tile => this.hasSpeciesOnTile(tile))
+          .every(tile => Object.keys(tile.deltas).some(at => this.isOpposing(at as AnimalType) && tile.deltas[at]?.removed > 0));
       case ActionName.Aquatic:
         return this.selectedCorner && this.selectedElementTypes.length > 0;
       case ActionName.Wanderlust:
@@ -304,6 +307,8 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.MassExodus:
       case ActionName.Blight:
         return this.selectedTiles.length > 0;
+      case ActionName.Predator:
+        return this.tiles.some(tile => hasDeltas(tile));
       default:
         return this.canConfirm;
     }
@@ -420,6 +425,22 @@ export class BoardComponent implements OnInit, OnChanges {
           }
         });
         break;
+
+      case ActionName.Predator:
+        const predatorTiles = this.tiles.filter(tile => this.hasSpeciesOnTile(tile)
+          && Object.keys(tile.deltas)
+            .filter(at => this.isOpposing(at as AnimalType))
+            .some(at => tile.deltas[at]?.removed > 0));
+        this.perform.emit({
+          [this.selectedAction]: {
+            tiles: predatorTiles.map(tile => tile.tile.hex),
+            animals: predatorTiles.map(tile => Object.keys(tile.deltas).find(at => tile.deltas[at]?.removed > 0))
+          }
+        });
+        break;
+
+      default:
+        throw new Error('Don\'t know how to confirm action: ' + this.selectedAction);
     }
   }
 
@@ -647,12 +668,14 @@ export class BoardComponent implements OnInit, OnChanges {
   }
 
   private resetChangedSpecies(tile: TileItem) {
-    tile.species[this.state.currentAnimal] = tile.tile.species[this.state.currentAnimal] || 0;
-    if (tile.species[this.state.currentAnimal] === 0) {
-      delete tile.species[this.state.currentAnimal];
-    }
-    delete tile.deltas[this.state.currentAnimal];
+    // tile.species[this.state.currentAnimal] = tile.tile.species[this.state.currentAnimal] || 0;
+    // if (tile.species[this.state.currentAnimal] === 0) {
+    //   delete tile.species[this.state.currentAnimal];
+    // }
+    // delete tile.deltas[this.state.currentAnimal];
 
+    tile.species = Object.assign({}, tile.tile.species);
+    tile.deltas = {};
     tile.cubes = this.calculateCubes(tile.species, tile.deltas);
   }
 
@@ -1057,9 +1080,19 @@ export class BoardComponent implements OnInit, OnChanges {
           && !hasDeltas(tile);
       case ActionName.MassExodus:
         return this.selectedTiles.length === 0 || this.selectedTiles.includes(tile);
+      case ActionName.Predator:
+        return this.hasSpeciesOnTile(tile) && this.isOpposing(animalType) && !tile.deltas[animalType]?.removed;
       default:
         return false;
     }
+  }
+
+  private hasSpeciesOnTile(tile: TileItem) {
+    return tile.tile.species[this.state.currentAnimal] > 0;
+  }
+
+  private isOpposing(animalType: AnimalType) {
+    return animalType != this.state.currentAnimal;
   }
 
   selectSpecies(tile: TileItem, animalType: AnimalType) {
@@ -1120,6 +1153,11 @@ export class BoardComponent implements OnInit, OnChanges {
         if (this.selectedTiles[0] === tile) {
           this.selectedAnimalTypes = [animalType];
         }
+        break;
+
+      case ActionName.Predator:
+        this.resetChangedSpecies(tile);
+        this.changeSpecies(tile, animalType, -1);
         break;
     }
   }

@@ -17,13 +17,13 @@
  */
 
 $playerColors: (
-  "RED": (normal:"red", light:lighten(red, 30%)),
-  "BLUE":(normal:"blue", light:lighten(blue, 30%)),
-  "YELLOW":(normal:"yellow", light:lighten(yellow, 30%)),
-  "GREEN":(normal:"green", light:lighten(green, 30%)),
-  "WHITE":(normal:"white", light:lighten(white, 30%)),
-  "PURPLE":(normal:"purple", light:lighten(purple, 30%)),
-  "BLACK":(normal:"black", light:lighten(black, 30%))
+  "RED": (normal:"red", light:lighten(red, 30%), contrasting:"black"),
+  "BLUE":(normal:"blue", light:lighten(blue, 30%), contrasting:"white"),
+  "YELLOW":(normal:"yellow", light:lighten(yellow, 30%), contrasting:"black"),
+  "GREEN":(normal:"green", light:lighten(green, 20%), contrasting:"black"),
+  "WHITE":(normal:"white", light:lighten(white, 30%), contrasting:"black"),
+  "PURPLE":(normal:"purple", light:lighten(purple, 30%), contrasting:"black"),
+  "BLACK":(normal:"black", light:lighten(black, 30%), contrasting:"white")
 );
 
 @each $key, $colors in $playerColors {
@@ -33,6 +33,10 @@ $playerColors: (
 
   .fill-#{$key} {
     fill: #{map-get($colors, normal)} !important;
+    stroke: #{map-get($colors, contrasting)} !important;
+    text {
+      fill: #{map-get($colors, contrasting)} !important;
+    }
   }
   .fill-light-#{$key} {
     fill: map-get($colors, light) !important;
