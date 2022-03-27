@@ -18,16 +18,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#./stack.sh create dev
-#./stack.sh update dev
+#./deploy.sh dev
+#./deploy.sh prod
 
-ACTION=$1-stack
-ENV=$2
+ENV=$1
 
-STACK_NAME=boardgamefiesta-$ENV
+STACK_PREFIX=boardgamefiesta-$ENV
 
-echo "${ACTION}: $STACK_NAME"
+echo "Deploying $ENV"
 
-aws cloudformation $ACTION --stack-name $STACK_NAME-app \
-  --template-body file://app.yaml \
-  --parameters ParameterKey=Environment,ParameterValue=$ENV
+aws cloudformation deploy --stack-name $STACK_PREFIX-webapp \
+  --template-file app.yaml \
+  --capabilities CAPABILITY_IAM \
+  --no-fail-on-empty-changeset \
+  --parameter-overrides Environment=$ENV
+
+BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name boardgamefiesta-dev-webapp --query "Stacks[0].Outputs[?OutputKey=='BucketName'].OutputValue" --output text)
+
+echo $BUCKET_NAME
+
+aws s3 sync ../dist/boardgamefiesta-app s3://$BUCKET_NAME
