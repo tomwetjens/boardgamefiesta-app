@@ -43,4 +43,4 @@ DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name boardgamefiest
 
 aws cloudfront create-invalidation \
     --distribution-id $DISTRIBUTION_ID \
-    --paths '/' '/index.html' '/ngsw.json'
+    --paths '/' '/index.html' '/ngsw.json' '/manifest.webmanifest' '/favicon.ico'
