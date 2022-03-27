@@ -16,6 +16,18 @@ Resources:
         ErrorDocument: index.html
         IndexDocument: index.html
 
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub '${Bucket.Arn}/*'
+
   Distribution:
     Type: AWS::CloudFront::Distribution
     DependsOn:
@@ -45,7 +57,7 @@ Resources:
           - Id: S3
             DomainName: !Sub '${Bucket}.s3-website.${AWS::Region}.amazonaws.com'
             CustomOriginConfig:
-              OriginProtocolPolicy: https-only
+              OriginProtocolPolicy: http-only
         PriceClass: PriceClass_100
         ViewerCertificate:
           AcmCertificateArn: 'arn:aws:acm:us-east-1:598172618529:certificate/67df310f-1baf-437f-a48c-a062182be260'
@@ -85,3 +97,7 @@ Outputs:
     Value: !Ref ARecord
     Export:
       Name: !Sub '${AWS::StackName}-DomainName'
+  DistributionId:
+    Value: !Ref Distribution
+    Export:
+      Name: !Sub '${AWS::StackName}-DistributionId'
