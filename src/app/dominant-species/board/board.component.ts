@@ -14,6 +14,7 @@ import {
   Action,
   ActionName,
   ActionType,
+  Animal,
   AnimalType,
   Card,
   COMPETITION_TILE_TYPES,
@@ -257,6 +258,7 @@ export class BoardComponent implements OnInit, OnChanges {
     switch (this.selectedAction) {
       case ActionName.Abundance:
       case ActionName.Aquatic:
+      case ActionName.Habitat:
         return this.selectedElementTypes.length > 0 && !this.selectedCorner;
       case ActionName.Wanderlust:
         return this.addedTiles.length > 0 && this.selectedElementTypes.length > 0;
@@ -592,6 +594,14 @@ export class BoardComponent implements OnInit, OnChanges {
         }
         this.selectedTiles = [tile];
         break;
+
+      case ActionName.SaveFromExtinction:
+        this.perform.emit({
+          [this.selectedAction]: {
+            tile: tile.tile.hex
+          }
+        });
+        break;
     }
   }
 
@@ -706,13 +716,15 @@ export class BoardComponent implements OnInit, OnChanges {
             && this.hasPreExistingSpeciesLeftOnTile(this.selectedTiles[0], this.selectedAnimalTypes[0]));
       case ActionName.Blight:
         return true;
+      case ActionName.SaveFromExtinction:
+        return this.hasEndangeredSpeciesOnTile(tile, AnimalType.MAMMALS);
       default:
         return false;
     }
   }
 
   get canSelectElementTypeFromDrawBag(): boolean {
-    return this.selectedAction === ActionName.Aquatic;
+    return [ActionName.Aquatic, ActionName.Habitat].includes(this.selectedAction);
   }
 
   private hasPreExistingSpeciesLeftOnTile(tile: TileItem, animalType: AnimalType = this.state.currentAnimal) {
@@ -882,6 +894,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
       case ActionName.Abundance:
       case ActionName.Aquatic:
+      case ActionName.Habitat:
         this.selectableCorners = this.calculateSelectableCorners();
         break;
 
@@ -923,6 +936,7 @@ export class BoardComponent implements OnInit, OnChanges {
   private calculateSelectableCorners(): CornerItem[] {
     switch (this.selectedAction) {
       case ActionName.Abundance:
+      case ActionName.Habitat:
         return this.calculateEmptyCornersOnTiles(this.state.tiles);
       case ActionName.Aquatic:
         return this.calculateEmptyCornersOnTiles(this.state.tiles
@@ -978,6 +992,7 @@ export class BoardComponent implements OnInit, OnChanges {
   private performOnceEverythingSelected() {
     switch (this.selectedAction) {
       case ActionName.Abundance:
+      case ActionName.Habitat:
         if (this.selectedCorner && this.selectedElementTypes.length === 1) {
           this.perform.emit({
             [this.selectedAction]: {
@@ -1182,6 +1197,28 @@ export class BoardComponent implements OnInit, OnChanges {
       }
     });
   }
+
+  private hasEndangeredSpeciesOnTile(tile: TileItem, animalType: AnimalType) {
+    if ((tile.tile.species[animalType] || 0) <= 0) {
+      return false;
+    }
+
+    const matchingElements = this.matchElements(tile, this.state.animals[animalType]);
+
+    return matchingElements === 0;
+  }
+
+  private matchElements(tile: TileItem, animal: Animal) {
+    const adjacentElements = this.elements.filter(e => isCornerAdjacent(e.coords, tile.coords));
+
+    const matchingElements = animal.elements.map(elementOnAnimal => adjacentElements
+      .filter(adjacentElement => adjacentElement.element.type === elementOnAnimal)
+      .length)
+      .reduce((a, b) => a + b, 0);
+
+    return matchingElements;
+  }
+
 }
 
 

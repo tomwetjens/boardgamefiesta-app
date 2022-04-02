@@ -34,7 +34,7 @@ $playerColors: (
   .fill-#{$key} {
     fill: #{map-get($colors, normal)} !important;
     stroke: #{map-get($colors, contrasting)} !important;
-    text {
+    .fill-contrasting {
       fill: #{map-get($colors, contrasting)} !important;
     }
   }
