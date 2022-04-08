@@ -46,6 +46,9 @@ import {FoodChainComponent} from './food-chain/food-chain.component';
 import {TilePopoverComponent} from './tile-popover/tile-popover.component';
 import {CardsDisplayComponent} from './cards-display/cards-display.component';
 import {CardComponent} from './card/card.component';
+import { CubeComponent } from './cube/cube.component';
+import { TundraTilesComponent } from './tundra-tiles/tundra-tiles.component';
+import { EndedDialogComponent } from './ended-dialog/ended-dialog.component';
 
 const routes: Routes = [
   {
@@ -73,7 +76,10 @@ const routes: Routes = [
     FoodChainComponent,
     TilePopoverComponent,
     CardsDisplayComponent,
-    CardComponent
+    CardComponent,
+    CubeComponent,
+    TundraTilesComponent,
+    EndedDialogComponent
   ],
   imports: [
     CommonModule,

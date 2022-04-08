@@ -1,10 +1,10 @@
-.elements {
-  display: block;
+ol {
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 0;
 
   li {
-    display: inline-block;
     list-style-type: none;
 
     margin: 0 2px;
@@ -17,9 +17,11 @@ ds-initiative-marker {
 
 ds-action-pawn {
   display: inline-block;
+  width: 32px;
+  height: 32px;
 }
 
-.cube {
+ds-cube {
   display: inline-block;
   width: 32px;
   height: 32px;

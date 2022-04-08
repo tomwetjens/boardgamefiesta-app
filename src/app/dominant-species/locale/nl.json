@@ -10,121 +10,159 @@
     },
     "actionType": {
       "ABUNDANCE": {
-        "name": "Overvloed"
+        "name": "Overvloed",
+        "description": "Kies een Element uit het Overvloed-vak en kies dan een lege hoek om deze te plaatsen."
       },
       "ADAPTATION": {
-        "name": "Aanpassing"
+        "name": "Aanpassing",
+        "description": "Kies een Element uit het Aanpassing-vak om deze toe te voegen aan je Diersoort."
       },
       "COMPETITION": {
-        "name": "Concurrentie"
+        "name": "Concurrentie",
+        "description": "Kies een tegengestelde soort op een Tegel (een van elk type aangegeven door de Actiepion) om 1 van die soort van de Tegel te elimineren."
       },
       "DEPLETION": {
-        "name": "Uitputting"
+        "name": "Uitputting",
+        "description": "Kies een Element op Aarde om deze terug in de trekzak te doen."
       },
       "DOMINATION": {
-        "name": "Dominantie"
+        "name": "Dominantie",
+        "description": "Kies een Tegel (die deze beurt nog niet gescoord is) om deze te scoren. Daarna mag de dominante Diersoort een Kaart kiezen en deze uitvoeren."
       },
       "GLACIATION": {
-        "name": "Gletsjer"
+        "name": "Gletsjer",
+        "description": "Kies een niet-toendrategel (aangrenzend aan een toendrategel) om deze ook toendra te maken."
       },
       "INITIATIVE": {
-        "name": "Initiatief"
+        "name": "Initiatief",
+        "description": ""
       },
       "MIGRATION": {
-        "name": "Migratie"
+        "name": "Migratie",
+        "description": "Kies een Tegel om soorten vanaf te verplaatsen, kies daarna een aangrenzende Tegel om ze naartoe te verplaatsen. Je mag maximaal het aantal soorten verplaatsen dat is aangegeven door je Actiepion. Vogelsoorten mogen maximaal 2 Tegels ver verplaatst worden."
       },
       "REGRESSION": {
-        "name": "Regressie"
+        "name": "Regressie",
+        "description": "Kies Elementen (maximaal het aantal door jouw geplaatste Actiepionnen) uit het Regressie-vak die je niet wilt verwijderen van je Diersoort."
       },
       "SPECIATION": {
-        "name": "Soortvorming"
+        "name": "Soortvorming",
+        "description": "Kies een Element op Aarde en kies dan aangrenzende Tegels om maximaal 4 soorten op elk te plaatsen."
       },
       "WANDERLUST": {
-        "name": "Reislust"
+        "name": "Reislust",
+        "description": "Kies een Tegel van de Reislusttegels en kies dan een lege locatie om deze te plaatsen. Daarna mag je een Element kiezen uit het Reislust-vak en een lege hoek kiezen op de zojuist geplaatste Tegel om deze te plaatsen."
       },
       "WASTELAND": {
-        "name": "Woestenij"
+        "name": "Woestenij",
+        "description": "Kies een Element uit het Woestenij-vak om deze terug in de trekzak te doen."
       }
     },
     "bonusPointsTable": "Bonuspunten",
     "card": {
       "AQUATIC": {
-        "name": "Aquatisch"
+        "name": "Aquatisch",
+        "description": "Plaats 1 element op een Zee- of Moerastegel. Voeg maximaal 4 soorten uit je genenpoel toe aan die tegel."
       },
       "BIODIVERSITY": {
-        "name": "Biodiversiteit"
+        "name": "Biodiversiteit",
+        "description": "Krijg 1 punt voor elke tegel die je deelt met 1 of meer tegenstanders."
       },
       "BIOMASS": {
-        "name": "Biomassa"
+        "name": "Biomassa",
+        "description": "Elimineer 1 soort op elke tegel met meer soorten dan elementen."
       },
       "BLIGHT": {
-        "name": "Schadelijke invloed"
+        "name": "Schadelijke invloed",
+        "description": "Verwijder alle elementen behalve 1 van een tegel naar keuze."
       },
       "CATASTROPHE": {
-        "name": "Ramp"
+        "name": "Ramp",
+        "description": "Kies 1 tegel en elimineer alle soorten behalve 1. Elimineer daarna 1 soort op elke aangrenzende tegel."
       },
       "COLD_SNAP": {
-        "name": "Koudegolf"
+        "name": "Koudegolf",
+        "description": "Alle andere spelers moeten 1 eigen soort elimineren van elke toendrategel."
       },
       "DISEASE": {
-        "name": "Ziekte"
+        "name": "Ziekte",
+        "description": "Elke speler met meer elementen dan jij moet 1 element naar keuze verwijderen."
       },
       "ECODIVERSITY": {
-        "name": "Ecodiversiteit"
+        "name": "Ecodiversiteit",
+        "description": "Krijg 1 punt voor elk element op het bord dat overeenkomt met je diersoort."
       },
       "EVOLUTION": {
-        "name": "Evolutie"
+        "name": "Evolutie",
+        "description": "Kies maximaal 2 andere spelers en vervang 1 van elk van hun soorten door 1 soort van jou."
       },
       "FECUNDITY": {
-        "name": "Vruchtbaarheid"
+        "name": "Vruchtbaarheid",
+        "description": "Plaats maximaal 1 soort uit je genenpoel op elke tegel waar al een soort van jou is."
       },
       "FERTILE": {
-        "name": "Vruchtbaar"
+        "name": "Vruchtbaar",
+        "description": "Kies 1 tegel waar je tenminste 1 soort hebt en krijg 1 punt voor elke soort op die tegel."
       },
       "HABITAT": {
-        "name": "Habitat"
+        "name": "Habitat",
+        "description": "Kies 1 element en voeg deze toe aan het bord."
       },
       "HIBERNATION": {
-        "name": "Winterslaap"
+        "name": "Winterslaap",
+        "description": "Plaats maximaal 5 geëlimineerde soorten op een tegel. Deze soorten zullen deze beurt niet uitsterven."
       },
       "ICE_AGE": {
-        "name": "IJstijd"
+        "name": "IJstijd",
+        "description": "Elke speler krijgt bonuspunten op basis van het aantal dominantiekegels op het bord."
       },
       "ICE_SHEET": {
-        "name": "IJsplaat"
+        "name": "IJsplaat",
+        "description": "Doe een Gletsjer actie."
       },
       "IMMIGRANTS": {
-        "name": "Immigranten"
+        "name": "Immigranten",
+        "description": "Volgens voedselketen, alle spelers verwijderen 1 element, 1 Actiepion of al hun soorten behalve 1 op elke tegel."
       },
       "INSTINCT": {
-        "name": "Instinct"
+        "name": "Instinct",
+        "description": "Plaats 1 van je Actiepionnen op een leeg actieveld naar keuze."
       },
       "INTELLIGENCE": {
-        "name": "Intelligentie"
+        "name": "Intelligentie",
+        "description": "Jij en elke speler boven je in de voedselketen krijgt 1 nieuwe Actiepion."
       },
       "MASS_EXODUS": {
-        "name": "Massale uittocht"
+        "name": "Massale uittocht",
+        "description": "Kies 1 tegel en verplaats alle soorten naar 1 of meer aangrenzende tegels."
       },
       "METAMORPHOSIS": {
-        "name": "Metamorfose"
+        "name": "Metamorfose",
+        "description": "Verwissel 1 van je elementen met 1 naar keuze uit de trekzak."
       },
       "NICHE_BIOMES": {
-        "name": "Niche Biomen"
+        "name": "Niche Biomen",
+        "description": "Elke speler met meer punten dan jij verliest punten gelijk aan de waarde voor 1e plaats van de zojuist gescoorde tegel."
       },
       "NOCTURNAL": {
-        "name": "Nachtdieren"
+        "name": "Nachtdieren",
+        "description": "Verplaats 1 plek naar links op het Initiatiefspoor."
       },
       "OMNIVORE": {
-        "name": "Omnivoor"
+        "name": "Omnivoor",
+        "description": "Krijg 1 nieuwe Actiepion."
       },
       "PARASITISM": {
-        "name": "Parasitisme"
+        "name": "Parasitisme",
+        "description": "Jij en elke speler onder je in de voedselketen krijgt 1 nieuwe Actiepion."
       },
       "PREDATOR": {
-        "name": "Roofdier"
+        "name": "Roofdier",
+        "description": "Elimineer 1 soort van een tegenstander op elke tegel waar je soorten hebt."
       },
       "SYMBIOTIC": {
-        "name": "Symbiose"
+        "name": "Symbiose",
+        "description": "Jij en elke speler met minder elementen dan jij krijgt 1 willekeurig element uit de trekzak."
       }
     },
     "confirm": "Bevestig actie",
@@ -136,17 +174,109 @@
       "WATER": "Water",
       "SEED": "Zaden"
     },
+    "errors": {
+      "ACTION_SPACE_NOT_ALLOWED": "Je kunt geen Actiepion plaatsen op deze plek.",
+      "ALREADY_ELEMENT_AT_CORNER": "Er ligt al een Element op deze hoek.",
+      "ALREADY_TILE_AT_HEX": "Er ligt al een Tegel op deze locatie.",
+      "ALREADY_TUNDRA": "Deze Tegel is al toendra.",
+      "ANIMAL_NOT_FOUND": "Diersoort niet gevonden.",
+      "CANNOT_MOVE_THROUGH_BLANK_HEX": "Je kunt geen soorten verplaatsen via een lege locatie.",
+      "CANNOT_PERFORM_ACTION": "Je kunt deze actie niet uitvoeren.",
+      "CANNOT_REMOVE_ELEMENT": "Je kunt dit Element niet weghalen.",
+      "CANNOT_SKIP_ACTION": "Je kunt deze actie niet overslaan.",
+      "CANNOT_SKIP_MORE_ELEMENT_TYPES_THAN_ACTION_PAWNS_PLACED": "Je kunt niet meer Elementtypes overslaan dan dat je Actiepionnen geplaatst hebt.",
+      "CARD_NOT_AVAILABLE": "Kaart niet beschikbaar.",
+      "DUPLICATE_TILES": "Je mag geen Tegels dubbel opgeven.",
+      "DUPLICATE_TILE_TYPES": "Je mag geen Tegeltypes dubbel opgeven.",
+      "ELEMENT_NOT_AVAILABLE": "Element niet beschikbaar.",
+      "ELEMENT_NOT_FOUND": "Element niet gevonden.",
+      "ELEMENT_NOT_IN_DEPLETION_BOX": "Element niet in het Uitputting-vak.",
+      "ELEMENT_NOT_IN_DRAW_BAG": "Element niet in de trekzak.",
+      "ELEMENT_NOT_IN_REGRESSION_BOX": "Element niet in het Regressie-vak.",
+      "INVALID_ACTION_SPACE": "Ongeldige plek voor Actiepion.",
+      "INVALID_ELEMENT_TYPE": "Ongeldig elementtype.",
+      "INVALID_HEX": "Ongeldige locatie.",
+      "INVALID_MOVE": "Ongeldige verplaatsing.",
+      "INVALID_SPECIES": "Ongeldige soort.",
+      "INVALID_TILE": "Ongeldige tegel.",
+      "MAX_4_SPECIES_ALLOWED": "Je kunt maximaal 4 soorten plaatsen.",
+      "MAX_5_ELIMINATED_SPECIES_ALLOWED": "Je kunt maximaal 5 geëlimineerde soorten plaatsen.",
+      "MAX_DISTANCE_EXCEEDED": "Je kunt soorten niet verder verplaatsen dan de aangegeven maximale afstand voor de Diersoort.",
+      "MAX_ELEMENTS_REACHED": "Je kunt niet meer Elementen toevoegen aan je Diersoort.",
+      "MAX_SPECIES_EXCEEDED": "Je kunt niet meer soorten verplaatsen dan het maximum aangegeven bij de Actiepion.",
+      "MUST_BE_ADJACENT_TO_AQUATIC_TILE": "Tegels moeten aangrenzend zijn aan een Moeras- of Zee-tegel.",
+      "MUST_BE_ADJACENT_TO_ELEMENT": "Soorten moeten aangrenzend geplaatst worden aan het gekozene Element.",
+      "MUST_BE_ADJACENT_TO_TILE": "Element moet worden geplaatst op een lege hoek aangrenzend aan de gekozene Tegel.",
+      "MUST_BE_ADJACENT_TO_TUNDRA_TILE": "Tegel moet aangrenzend zijn aan een toendrategel.",
+      "MUST_BE_MAMMALS": "Je moet de Zoogdieren zijn om een soort te redden van Uitsterving.",
+      "MUST_MOVE_ALL_SPECIES_ON_TILE": "Je moet alle soorten op de Tegel verplaatsen naar aangrenzende Tegels.",
+      "MUST_SELECT_1_TILE": "Je moet 1 Tegel kiezen.",
+      "MUST_SELECT_ADJACENT_TILES": "Je moet aangrenzende Tegels kiezen.",
+      "MUST_SELECT_ALL_ADJACENT_TILES": "Je moet alle aangrenzende Tegels kiezen.",
+      "MUST_SELECT_ALL_AFFECTED_TILES": "Je moet alle Tegels kiezen die meer soorten hebben dan aangrenzende Elementen.",
+      "MUST_SELECT_ALL_BUT_1_ELEMENT_ON_TILE": "Je moet alle behalve 1 Element op een Tegel kiezen.",
+      "MUST_SELECT_ALL_TILES_OCCUPIED_BY_PLAYER": "Je moet alle Tegels kiezen die worden bewoond door je Diersoort.",
+      "MUST_SELECT_ANIMAL_FOR_EACH_TILE": "Je moet een Diersoort kiezen op elke Tegel.",
+      "MUST_SELECT_AT_LEAST_1_TILE": "Je moet tenminste 1 Tegel kiezen.",
+      "MUST_SELECT_DIFFERENT_PLAYERS": "Je moet verschillende spelers kiezen.",
+      "MUST_SELECT_OPPOSING_SPECIES": "Je moet tegengestelde soorten kiezen.",
+      "MUST_SELECT_UP_TO_2_TILES": "Je mag niet meer dan 2 Tegels kiezen.",
+      "MUST_SELECT_UP_TO_3_TILES": "Je mag niet meer dan 3 Tegels kiezen.",
+      "MUST_SPECIFY_SPECIES_FOR_EACH_TILE": "Je moet het aantal soorten opgeven voor elke tegel",
+      "NOT_CURRENT_PLAYER": "Je kunt de actie niet uitvoeren, want je bent niet aan de beurt.",
+      "NOT_ENOUGH_ELIMINATED_SPECIES": "Je Diersoort heeft niet genoeg geëlimineerde soorten.",
+      "NOT_ENOUGH_SPECIES_IN_GENE_POOL": "Je Diersoort heeft niet genoeg soorten in de genenpoel.",
+      "NOT_ENOUGH_SPECIES_ON_TILE": "Er zitten niet genoeg soorten op de Tegel.",
+      "NOT_OPPOSING_SPECIES": "Niet een tegengestelde soort.",
+      "NO_ACTION_PAWN": "Geen Actiepion van de huidige Diersoort op het huidige Actietype.",
+      "NO_ACTION_TO_SKIP": "Geen actie om over te slaan.",
+      "NO_ELEMENTS_IN_DRAW_BAG": "Geen Elementen over in de trekzak.",
+      "NO_ELEMENT_AT_CORNER": "Geen Element op de opgegeven hoek.",
+      "NO_TILE_AVAILABLE": "Geen Tegel beschikbaar.",
+      "NO_TILE_SCORED": "Geen Tegel gescoord.",
+      "NO_TILE_SELECTED": "Geen Tegel gekozen.",
+      "NO_TUNDRA_TILE_AVAILABLE": "Geen toendrategel beschikbaar.",
+      "SPECIES_MUST_BE_POSITIVE": "Je moet 1 of meer soorten opgeven om te plaatsen of weg te halen.",
+      "TILE_ALREADY_SCORED": "Deze tegel is al gescoord deze beurt.",
+      "TILE_NOT_FOUND": "Tegel niet gevonden.",
+      "TILE_NOT_OCCUPIED_BY_PLAYER": "Tegel niet bewoond door je Diersoort."
+    },
     "foodChain": "Voedselketen",
     "instruction": {
-      "PlaceActionPawn": "<strong>Actiepion plaatsen:</strong> Kies een lege Actieplek om een Actiepion te plaatsen.",
+      "Adaptation": "<strong>Aanpassing:</strong> Kies een Element uit het Aanpassing-vak om deze toe te voegen aan je Diersoort.",
+      "Aquatic": "<strong>Aquatisch:</strong> Kies een Element uit de trekzak en kies dan een lege hoek van een Moeras- of Zeetegel om deze te plaatsen. Je mag daarna maximaal 4 nieuwe soorten op die Tegel plaatsen.",
+      "Abundance": "<strong>Overvloed:</strong> Kies een Element uit het Overvloed-vak en kies dan een lege hoek om deze te plaatsen.",
       "Catastrophe": "<strong>Ramp:</strong> Kies 1 Tegel en daarna 1 Soort om ALLE andere soorten op die tegel te elimineren. Kies daarna 1 Soort op elke aangrenzende tegel om te elimineren.",
-      "DominanceCard": "<strong>Dominantie (kaart):</strong> Kies een Kaart uit de beschikbare kaarten om deze uit te voeren."
+      "Competition": "<strong>Concurrentie:</strong> Kies een tegengestelde soort op een Tegel (een van elk type aangegeven door de Actiepion) om 1 van die soort van de Tegel te elimineren.",
+      "Depletion": "<strong>Uitputting:</strong> Kies een Element op Aarde om deze terug in de trekzak te doen.",
+      "DominanceCard": "<strong>Dominantie (kaart):</strong> Kies een Kaart uit de beschikbare kaarten om deze uit te voeren.",
+      "Domination": "<strong>Domination:</strong> Kies een Tegel (die deze beurt nog niet gescoord is) om deze te scoren. Daarna mag de dominante Diersoort een Kaart kiezen en deze uitvoeren.",
+      "Evolution": "<strong>Evolutie:</strong> Kies maximaal 2 soorten van verschillende tegenstanders om deze te vervangen door een van je eigen soorten.",
+      "Glaciation": "<strong>Gletsjer:</strong> Kies een niet-toendrategel (aangrenzend aan een toendrategel) om deze ook toendra te maken.",
+      "Habitat": "<strong>Habitat:</strong> Kies een Element (uit de trekzak) en kies dan een lege hoek om deze te plaatsen.",
+      "PlaceActionPawn": "<strong>Actiepion plaatsen:</strong> Kies een lege Actieplek om een Actiepion te plaatsen.",
+      "Regression": "<strong>Regressie:</strong> Kies Elementen (maximaal het aantal door jouw geplaatste Actiepionnen) uit het Regressie-vak die je niet wilt verwijderen van je Diersoort.",
+      "Speciation": "<strong>Soortvorming:</strong> Kies een Element op Aarde en kies dan aangrenzende Tegels om maximaal 4 soorten op elk te plaatsen.",
+      "MassExodus": "<strong>MassExodus:</strong> Kies een Tegel en verplaats dan alle soorten op die Tegel naar aangrenzende Tegels door een of meer soorten te kiezen op de Tegel en dan een aangrenzende Tegel te kiezen om ze naartoe te verplaatsen.",
+      "Migration": "<strong>Migratie:</strong> Kies een Tegel om soorten vanaf te verplaatsen, kies daarna een aangrenzende Tegel om ze naartoe te verplaatsen. Je mag maximaal het aantal soorten verplaatsen dat is aangegeven door je Actiepion. Vogelsoorten mogen maximaal 2 Tegels ver verplaatst worden.",
+      "Predator": "<strong>Roofdier:</strong> Kies 1 tegengestelde soort op elke Tegel die jouw Diersoort bewoont, om deze te elimineren.",
+      "RemoveElement": "<strong>Verwijder element:</strong> Kies een Element van je Diersoort om te verwijderen.",
+      "SaveFromExtinction": "<strong>Red van uitsterven:</strong> Kies een Tegel waarop je 1 van je Bedreigde soorten wilt redden van Uitsterving.",
+      "Wanderlust": "<strong>Reislust:</strong> Kies een Tegel van de Reislusttegels en kies dan een lege locatie om deze te plaatsen. Daarna mag je een Element kiezen uit het Reislust-vak en een lege hoek kiezen op de zojuist geplaatste Tegel om deze te plaatsen.",
+      "WanderlustMove": "<strong>Reislust (Verplaatsen):</strong> Kies 1 of meer Tegels met je soort er op, aangrenzende aan de zojuist geplaatste tegel om alle, geen, of een aantal soorten te verplaatsen van deze tegel naar de nieuwe tegel.",
+      "Wasteland": "<strong>Woestenij:</strong> Kies een Element uit het Woestenij-vak om deze terug in de trekzak te doen."
     },
     "log": {
-      "PLACE_ACTION_PAWN": "plaatst een Actiepion voor <strong>{{value1}}</strong> bij <strong>{{value2}}</strong> op plek {{value3}}",
+      "ABUNDANCE": "<strong>Overvloed:</strong> plaatst Element <strong>{{value2}}</strong> op <strong>{{value3}}</strong>",
+      "ADAPTATION": "<strong>Adaptation:</strong> voegt Element <strong>{{value2}}</strong> toe aan <strong>{{value1}}</strong>",
+      "ADD_ELEMENT": "plaatst Element <strong>{{value2}}</strong> op zojuist geplaatste tegel",
+      "ADD_ELEMENT_TO_ANIMAL": "voegt Element <strong>{{value2}}</strong> toe aan <strong>{{value1}}</strong>",
+      "ADD_SPECIES": "voegt {{value2}} soorten toe aan {{value4}} tegel op {{value3}}",
       "CARD": "kiest kaart <strong>{{value2}}</strong>",
-      "CATASTROPHE": "<strong>Ramp:</strong> kiest <strong>{{value4}}</strong> Tegel op {{value3}} om all Soorten behalve 1 van <strong>{{value2}}</strong> te elimineren",
-      "DOMINATION": "kiest een <strong>{{value3}}</strong> Tegel op <strong>{{value2}}</strong> (waar <strong>{{value4}}</strong> dominant zijn) voor Dominantie",
+      "CATASTROPHE": "<strong>Ramp:</strong> kiest <strong>{{value4}}</strong> Tegel op {{value3}} om alle Soorten behalve 1 van <strong>{{value2}}</strong> te elimineren",
+      "COMPETITION": "<strong>Concurrentie:</strong> elimineert 1 soort <strong>{{value2}}</strong> van <strong>{{value4}}</strong> tegel op <strong>{{value3}}</strong>",
+      "DEPLETION": "<strong>Uitputting:</strong> verwijdert Element {{value2}} van {{value3}}",
+      "DOMINATION": "<strong>Dominantie:</strong> kiest een <strong>{{value3}}</strong> Tegel op <strong>{{value2}}</strong> (waar <strong>{{value4}}</strong> dominant zijn)",
       "ELIMINATE_SPECIES": "elimineert <strong>{{value3}}</strong> Soort(en) <strong>{{value2}}</strong> van <strong>{{value5}}</strong> Tegel op {{value4}}",
       "EXECUTING": "activeert <strong>{{value2}}</strong>",
       "EXECUTION_PHASE": "start de Actiefase",
@@ -155,12 +285,29 @@
       "GAIN_BONUS_VPS": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> bonuspunten",
       "GAIN_VPS": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> punten",
       "GAIN_VPS_FROM_TILE": "<strong>{{value1}}</strong> krijgen <strong>{{value2}}</strong> punten voor de <strong>{{value4}}</strong> Tegel op <strong>{{value3}}</strong>",
+      "GLACIATION": "<strong>Gletsjer:</strong> {{value3}} tegel op {{value2}} is nu toendra",
+      "HIBERNATION": "<strong>Winterslaap:</strong> voegt {{value2}} geëlimineerde soorten {{value1}} toe aan {{value4}} tegel op {{value3}} (die deze beurt niet uit kunnen uitsterven)",
+      "INITIATIVE": "<strong>Initiatief:</strong> {{value1}} zijn nu {{value2}}e op het Initiatiefspoor",
+      "LOSE_VPS": "{{value1}} verliezen {{value2}} punten",
+      "MIGRATION": "<strong>Migratie:</strong> verplaatst <strong>{{value2}}</strong> soorten <strong>{{value1}}</strong> van <strong>{{value4}}</strong> tegel op <strong>{{value3}}</strong> naar <strong>{{value6}}</strong> tegel op <strong>{{value5}}</strong>",
       "MOVE_SPECIES": "verplaatst <strong>{{value3}}</strong> soorten <strong>{{value2}}</strong> van <strong>{{value5}}</strong> Tegel op <strong>{{value4}}</strong> naar <strong>{{value7}}</strong> Tegel op <strong>{{value6}}</strong>",
+      "PLACE_ACTION_PAWN": "plaatst een Actiepion voor <strong>{{value1}}</strong> bij <strong>{{value2}}</strong> op plek {{value3}}",
       "PLANNING_PHASE": "start de Planningsfase van beurt {{value2}}",
+      "REGRESSION": "<strong>{{value1}}</strong> kunnen {{value2}} van {{value3}} Regressies overslaan",
+      "REMOVE_ACTION_PAWN": "{{value1}} verliest een Actiepion",
+      "REMOVE_ALL_SPECIES_BUT_1": "verwijdert alle <strong>{{value4}}</strong> soorten behalve 1 van {{value3}} tegel op {{value2}}",
       "REMOVE_ELEMENT": "verwijdert element <strong>{{value2}}</strong> van <strong>{{value3}}</strong>",
+      "REMOVE_ELEMENT_FROM_ANIMAL": "verwijdert Element <strong>{{value2}}</strong> van <strong>{{value1}}</strong>",
+      "REMOVE_SPECIES": "verwijdert {{value3}} soorten {{value2}} van {{value5}} tegel op {{value4}}",
       "RESET_PHASE": "start de Opruimfase",
+      "SAVE_FROM_EXTINCTION": "redt 1 soort <strong>Zoogdieren</strong> op <strong>{{value2}}</strong> Tegel op <strong>{{value3}}</strong>",
+      "SELECT_ELEMENT": "kiest Element <strong>{{value2}}</strong> op <strong>{{value3}}</strong> voor Soortvorming",
+      "SKIP_REGRESSION_OF_ELEMENT": "slaat verwijderen van Element <strong>{{value2}}</strong> van <strong>{{value1}}</strong> over",
+      "SPECIATION": "<strong>Soortvorming:</strong> voegt <strong>{{value2}}</strong> soorten <strong>{{value1}}</strong> toe aan {{value4}} tegel <strong>{{value3}}</strong>",
+      "WANDERLUST": "<strong>Reislust:</strong> kiest <strong>{{value3}}</strong> tegel van Reislusttegels stapel {{value2}} en plaatst deze op <strong>{{value4}}</strong>",
+      "WASTELAND": "<strong>Woestenij:</strong> doet Element <strong>{{value2}}</strong> terug in de trekzak",
       "values": {
-        "": "Geen",
+        "": "Geen diersoorten",
         "MAMMALS": "Zoogdieren",
         "REPTILES": "Reptielen",
         "BIRDS": "Vogels",
@@ -221,7 +368,11 @@
       }
     },
     "popover": {
-      "actionPawn": "Actiepion"
+      "actionPawn": "Actiepion",
+      "genePool": "Genenpoel",
+      "eliminatedSpecies": "Geëlimineerde soorten",
+      "availableTundraTiles": "Beschikbare Toendrategels",
+      "deck": "Dominantiekaarten Trekstapel"
     },
     "quantity": "Aantal",
     "reset": "Ongedaan maken",

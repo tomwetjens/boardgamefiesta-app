@@ -3,6 +3,16 @@
   margin: 8px;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  display: inline-block;
+}
+
 ds-card {
   margin: 0 2px 0 0;
 

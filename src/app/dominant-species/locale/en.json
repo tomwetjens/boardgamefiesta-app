@@ -8,6 +8,10 @@
       "ARACHNIDS": "Arachnids",
       "INSECTS": "Insects"
     },
+    "action": {
+      "RemoveActionPawn": "Lose an Action Pawn",
+      "RemoveAllBut1SpeciesOnEachTile": "Remove all but 1 of your Species on each Tile"
+    },
     "actionType": {
       "ABUNDANCE": {
         "name": "Abundance",
@@ -165,6 +169,7 @@
         "description": "You and each player with fewer elements than you gets 1 random element from the bag."
       }
     },
+    "selectAction": "Choose action",
     "confirm": "Confirm",
     "elementType": {
       "GRASS": "Grass",
@@ -226,7 +231,7 @@
       "NOT_CURRENT_PLAYER": "You cannot perform an action because you are not the current player.",
       "NOT_ENOUGH_ELIMINATED_SPECIES": "Your Animal does not have enough eliminated Species.",
       "NOT_ENOUGH_SPECIES_IN_GENE_POOL": "Your Animal does not have enough Species in its Gene Pool.",
-      "NOT_ENOUGH_SPECIES_ON_TILE": "There a not enough Species on the Tile.",
+      "NOT_ENOUGH_SPECIES_ON_TILE": "There are not enough Species on the Tile.",
       "NOT_OPPOSING_SPECIES": "You must select opposing Species.",
       "NO_ACTION_PAWN": "There is no Action Pawn for the current Animal on the current Action Type.",
       "NO_ACTION_TO_SKIP": "There is not action to skip.",
@@ -368,7 +373,11 @@
       }
     },
     "popover": {
-      "actionPawn": "Action Pawn"
+      "actionPawn": "Action Pawn",
+      "genePool": "Gene Pool",
+      "eliminatedSpecies": "Eliminated Species",
+      "availableTundraTiles": "Available Tundra Tiles",
+      "deck": "Dominance Cards Deck"
     },
     "quantity": "Quantity",
     "reset": "Reset",

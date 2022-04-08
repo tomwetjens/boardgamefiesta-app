@@ -1,0 +1,15 @@
+<svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="cube">
+  <g [class]="'fill-' + animal.player.color">
+    <g transform="scale(1.5)">
+      <g transform="translate(-12 -102)" stroke="#000" stroke-linejoin="bevel" stroke-width=".265">
+        <path d="m12.1 106 10.6 1.03v9.37l-10.6-1.05z"/>
+        <path d="m12.1 106 3.33-3.69 10.6 0.907-3.39 3.82z"/>
+        <path d="m26.1 103v9.35l-3.39 3.84v-9.37z"/>
+      </g>
+    </g>
+    <text x="8" y="14" text-anchor="middle" dominant-baseline="middle"
+          class="fill-contrasting" stroke-width="0">
+      <ng-content></ng-content>
+    </text>
+  </g>
+</svg>

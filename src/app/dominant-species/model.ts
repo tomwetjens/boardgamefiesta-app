@@ -157,7 +157,7 @@ export enum ActionName {
   Abundance = 'Abundance',
   Adaptation = 'Adaptation',
   Aquatic = 'Aquatic',
-  Biomass = 'Biomass', // TODO
+  Biomass = 'Biomass',
   Blight = 'Blight',
   Catastrophe = 'Catastrophe',
   Competition = 'Competition',
@@ -165,11 +165,11 @@ export enum ActionName {
   DominanceCard = 'DominanceCard',
   Domination = 'Domination',
   Evolution = 'Evolution',
-  Fecundity = 'Fecundity', // TODO
-  Fertile = 'Fertile', // TODO
+  Fecundity = 'Fecundity',
+  Fertile = 'Fertile',
   Glaciation = 'Glaciation',
   Habitat = 'Habitat',
-  Hibernation = 'Hibernation', // TODO
+  Hibernation = 'Hibernation',
   MassExodus = 'MassExodus',
   Metamorphosis = 'Metamorphosis', // TODO
   Migration = 'Migration',
@@ -179,7 +179,7 @@ export enum ActionName {
   RemoveActionPawn = 'RemoveActionPawn', // TODO
   RemoveAllBut1SpeciesOnEachTile = 'RemoveAllBut1SpeciesOnEachTile', // TODO
   RemoveElement = 'RemoveElement',
-  SaveFromExtinction = 'SaveFromExtinction', // TODO
+  SaveFromExtinction = 'SaveFromExtinction',
   Speciation = 'Speciation',
   Wanderlust = 'Wanderlust',
   WanderlustMove = 'WanderlustMove',

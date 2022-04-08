@@ -1,7 +1,15 @@
-<ds-card>
-  {{deckSize}}
-</ds-card>
-<ds-card *ngFor="let card of cards" [card]="card"
-         [ngClass]="{selectable:selectable}"
-         (click)="selectable && selectCard.emit(card)">
-</ds-card>
+<ul>
+  <li>
+    <ds-card [ngbPopover]="'ds.popover.deck'|translate"
+             triggers="mouseenter:mouseleave"
+             container="body">
+      {{deckSize}}
+    </ds-card>
+  </li>
+  <li *ngFor="let card of cards">
+    <ds-card [card]="card"
+             [ngClass]="{selectable:selectable}"
+             (click)="selectable && selectCard.emit(card)">
+    </ds-card>
+  </li>
+</ul>

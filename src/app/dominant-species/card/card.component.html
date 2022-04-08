@@ -9,6 +9,8 @@
   <h1>{{'ds.card.' + card + '.name'|translate}}</h1>
   <p>{{'ds.card.' + card + '.description'|translate}}</p>
 </div>
-<div *ngIf="!card" class="back">
-  <ng-content></ng-content>
+<div *ngIf="!card" class="card back">
+  <span>
+    <ng-content></ng-content>
+  </span>
 </div>

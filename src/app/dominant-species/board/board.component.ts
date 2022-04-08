@@ -35,6 +35,9 @@ import {
 } from '../model';
 import {PanZoomConfig} from 'ngx-panzoom';
 import {PlayerColor, Table} from "../../shared/model";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {EndedDialogComponent} from "../ended-dialog/ended-dialog.component";
 
 interface HexItem {
   coords: AxialCoordinates;
@@ -90,6 +93,11 @@ interface MoveItem {
   species: number;
 }
 
+const DIRECT_ACTIONS = [
+  ActionName.RemoveActionPawn,
+  ActionName.RemoveAllBut1SpeciesOnEachTile
+];
+
 function hasDeltas(tile: TileItem) {
   return tile.deltas && Object.keys(tile.deltas).some(key => tile.deltas[key]?.removed > 0 || tile.deltas[key]?.added > 0);
 }
@@ -98,12 +106,18 @@ function hasSpeciesOnTile(tile: TileItem) {
   return tile.species && Object.keys(tile.species).some(key => tile.species[key] > 0);
 }
 
+function getTotalSpecies(tile: TileItem) {
+  return tile.tile.species && Object.keys(tile.tile.species).map(key => tile.tile.species[key]).reduce((a, b) => a + b, 0);
+}
+
 @Component({
   selector: 'ds-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit, OnChanges {
+
+  private dialog: NgbModalRef;
 
   @Input() table: Table;
 
@@ -147,7 +161,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
   moves: MoveItem[] = [];
 
-  constructor() {
+  constructor(private ngbModal: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -178,6 +192,21 @@ export class BoardComponent implements OnInit, OnChanges {
             this.selectedElements = [selectableElements[0]];
           }
           break;
+      }
+
+      if (this.table.ended) {
+        if (!this.dialog) {
+          this.dialog = this.ngbModal.open(EndedDialogComponent, {scrollable: true, size: 'lg'});
+
+          const componentInstance = this.dialog.componentInstance as EndedDialogComponent;
+          componentInstance.table = this.table;
+          componentInstance.state = this.state;
+
+          fromPromise(this.dialog.result).subscribe({
+            error: () => this.dialog = null,
+            complete: () => this.dialog = null
+          });
+        }
       }
     }
   }
@@ -274,10 +303,17 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Speciation:
       case ActionName.WanderlustMove:
       case ActionName.Migration:
+      case ActionName.Fecundity:
         return this.tiles.some(tile => tile.deltas[this.state.currentAnimal]?.added > 0);
       case ActionName.Predator:
         return this.tiles.filter(tile => this.hasSpeciesOnTile(tile))
           .every(tile => Object.keys(tile.deltas).some(at => this.isOpposing(at as AnimalType) && tile.deltas[at]?.removed > 0));
+      case ActionName.Biomass:
+        return this.tiles
+          .filter(tile => getTotalSpecies(tile) > this.getAdjacentElements(tile).length)
+          .every(tile => hasDeltas(tile));
+      case ActionName.Hibernation:
+        return this.selectedTiles.length > 0 && hasDeltas(this.selectedTiles[0]);
       case ActionName.Aquatic:
         return this.selectedCorner && this.selectedElementTypes.length > 0;
       case ActionName.Wanderlust:
@@ -308,8 +344,11 @@ export class BoardComponent implements OnInit, OnChanges {
       case ActionName.Catastrophe:
       case ActionName.MassExodus:
       case ActionName.Blight:
+      case ActionName.Hibernation:
         return this.selectedTiles.length > 0;
       case ActionName.Predator:
+      case ActionName.Biomass:
+      case ActionName.Fecundity:
         return this.tiles.some(tile => hasDeltas(tile));
       default:
         return this.canConfirm;
@@ -334,6 +373,15 @@ export class BoardComponent implements OnInit, OnChanges {
             element: this.selectedElements.length > 0 ? this.selectedElements[0].element.corner : null,
             tiles: speciatedTiles.map(tile => tile.tile.hex),
             species: speciatedTiles.map(tile => tile.deltas[this.state.currentAnimal].added)
+          }
+        });
+        break;
+
+      case ActionName.Hibernation:
+        this.perform.emit({
+          [this.selectedAction]: {
+            tile: this.selectedTiles[0].tile.hex,
+            species: this.selectedTiles[0].deltas[this.state.currentAnimal]?.added || 0
           }
         });
         break;
@@ -441,6 +489,26 @@ export class BoardComponent implements OnInit, OnChanges {
         });
         break;
 
+      case ActionName.Biomass:
+        const biomassTiles = this.tiles
+          .filter(tile => getTotalSpecies(tile) > this.getAdjacentElements(tile).length)
+          .filter(tile => hasDeltas(tile));
+        this.perform.emit({
+          [this.selectedAction]: {
+            tiles: biomassTiles.map(tile => tile.tile.hex),
+            animals: biomassTiles.map(tile => Object.keys(tile.deltas).find(at => tile.deltas[at]?.removed > 0))
+          }
+        });
+        break;
+
+      case ActionName.Fecundity:
+        this.perform.emit({
+          [this.selectedAction]: {
+            tiles: this.tiles.filter(tile => tile.deltas[this.state.currentAnimal]?.added > 0).map(tile => tile.tile.hex)
+          }
+        });
+        break;
+
       default:
         throw new Error('Don\'t know how to confirm action: ' + this.selectedAction);
     }
@@ -503,6 +571,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
     switch (this.selectedAction) {
       case ActionName.Glaciation:
+      case ActionName.Fertile:
         this.perform.emit({
           [this.selectedAction]: {
             tile: tile.tile.hex
@@ -512,6 +581,21 @@ export class BoardComponent implements OnInit, OnChanges {
 
       case ActionName.Speciation:
         this.speciation(tile);
+        break;
+
+      case ActionName.Fecundity:
+        this.resetChangedSpecies(tile);
+        this.changeSpecies(tile, this.state.currentAnimal, 1);
+        break;
+
+      case ActionName.Hibernation:
+        if (this.selectedTiles.length === 0 || this.selectedTiles.includes(tile)) {
+          this.selectedTiles = [tile];
+          const currentDelta = tile.deltas[this.state.currentAnimal]?.added || 0;
+          if (currentDelta < 5) {
+            this.changeSpecies(tile, this.state.currentAnimal, 1);
+          }
+        }
         break;
 
       case ActionName.WanderlustMove:
@@ -710,6 +794,8 @@ export class BoardComponent implements OnInit, OnChanges {
           && [TileType.SEA, TileType.WETLAND].includes(tile.tile.type);
       case ActionName.Catastrophe:
         return this.selectedTiles.length === 0;
+      case ActionName.Hibernation:
+        return this.selectedTiles.length === 0 || this.selectedTiles.includes(tile);
       case ActionName.MassExodus:
         return this.selectedTiles.length === 0
           || (this.selectedAnimalTypes.length > 0 && isAdjacent(tile.coords, this.selectedTiles[0].coords)
@@ -718,6 +804,9 @@ export class BoardComponent implements OnInit, OnChanges {
         return true;
       case ActionName.SaveFromExtinction:
         return this.hasEndangeredSpeciesOnTile(tile, AnimalType.MAMMALS);
+      case ActionName.Fecundity:
+      case ActionName.Fertile:
+        return this.hasSpeciesOnTile(tile) && !hasDeltas(tile);
       default:
         return false;
     }
@@ -1097,6 +1186,8 @@ export class BoardComponent implements OnInit, OnChanges {
         return this.selectedTiles.length === 0 || this.selectedTiles.includes(tile);
       case ActionName.Predator:
         return this.hasSpeciesOnTile(tile) && this.isOpposing(animalType) && !tile.deltas[animalType]?.removed;
+      case ActionName.Biomass:
+        return !hasDeltas(tile) && getTotalSpecies(tile) > this.getAdjacentElements(tile).length;
       default:
         return false;
     }
@@ -1171,6 +1262,7 @@ export class BoardComponent implements OnInit, OnChanges {
         break;
 
       case ActionName.Predator:
+      case ActionName.Biomass:
         this.resetChangedSpecies(tile);
         this.changeSpecies(tile, animalType, -1);
         break;
@@ -1219,6 +1311,19 @@ export class BoardComponent implements OnInit, OnChanges {
     return matchingElements;
   }
 
+  private getAdjacentElements(tile: TileItem): ElementItem[] {
+    return this.elements.filter(e => isCornerAdjacent(e.coords, tile.coords));
+  }
+
+  selectAction(action: ActionName) {
+    if (DIRECT_ACTIONS.includes(action)) {
+      this.perform.emit({
+        [action]: {}
+      });
+    } else {
+      this.selectedAction = action;
+    }
+  }
 }
 
 

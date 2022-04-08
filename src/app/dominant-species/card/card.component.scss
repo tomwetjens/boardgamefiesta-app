@@ -2,25 +2,48 @@
   display: block;
 }
 
-.back, .card {
-  width: 100px;
-  height: 120px;
-
-  background: #2d2419;
+.card {
+  width: 150px;
+  height: 211px;
   border-radius: 8px;
+
+  background-color: #ebe8df;
+  background-image: url('../../../assets/games/ds/card_front.png');
+  background-size: cover;
+  background-position: center;
 
   text-align: center;
 }
 
+.back {
+  background-color: #e4d29e;
+  background-image: url('../../../assets/games/ds/card_back.png');
+  background-size: cover;
+  background-position: center;
+
+  span {
+    position: relative;
+    top: 8px;
+    font-size: 14px;
+    color: black;
+  }
+}
+
 .card {
   h1 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    color: white;
+    color: #ff5d3c;
+    position: relative;
+    top: 47%;
+    text-shadow: 1px 1px 1px #000000;
   }
 
   p {
-    font-size: 10px;
-    color: white;
+    font-size: 58%;
+    color: black;
+    position: relative;
+    top: 50%;
+    padding: 0 18%;
   }
 }

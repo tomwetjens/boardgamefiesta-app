@@ -1,13 +1,26 @@
-<div class="action-bar" *ngIf="selectedAction">
-  <span [innerHTML]="'ds.instruction.' + selectedAction|translate"></span>
+<div class="action-bar" *ngIf="selectedAction || (table.turn && state.actions.length > 1)">
+  <ng-container *ngIf="selectedAction">
+    <span [innerHTML]="'ds.instruction.' + selectedAction|translate"></span>
 
-  <div *ngIf="canReset">
-    <button class="btn btn-primary" [disabled]="!canConfirm"
-            (click)="confirm()">{{'ds.confirm'|translate}}</button>
+    <div *ngIf="canReset">
+      <button class="btn btn-primary" [disabled]="!canConfirm"
+              (click)="confirm()">{{'ds.confirm'|translate}}</button>
+      &nbsp;
+      <button class="btn btn-secondary"
+              (click)="reset()">{{'ds.reset'|translate}}</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!selectedAction && state.actions.length > 1">
+    <strong>{{'ds.selectAction'|translate}}:</strong>
     &nbsp;
-    <button class="btn btn-secondary"
-            (click)="reset()">{{'ds.reset'|translate}}</button>
-  </div>
+    <ng-container *ngFor="let action of state.actions">
+      <button class="btn btn-primary" (click)="selectAction(action)">
+        {{'ds.action.' + action|translate}}
+      </button>
+      &nbsp;
+    </ng-container>
+  </ng-container>
 </div>
 
 <ng-template #popoverGRASS>
@@ -214,9 +227,9 @@
                        [selectedStack]="selectedWanderlustTile"
                        (selectWanderlustTile)="selectWanderlustTile($event)">
   </ds-wanderlust-tiles>
-</div>
 
-{{'ds.round'|translate}}:{{state.round}}
+  <ds-tundra-tiles [availableTundraTiles]="state.availableTundraTiles"></ds-tundra-tiles>
+</div>
 
 <ds-draw-bag [drawBag]="state.drawBag"
              [selectable]="canSelectElementTypeFromDrawBag"
