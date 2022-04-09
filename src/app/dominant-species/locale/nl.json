@@ -8,6 +8,10 @@
       "ARACHNIDS": "Spinachtigen",
       "INSECTS": "Insecten"
     },
+    "action": {
+      "RemoveActionPawn": "Verlies een Actiepion",
+      "RemoveAllBut1SpeciesOnEachTile": "Verwijder al je soorten behalve 1 van elke tegel"
+    },
     "actionType": {
       "ABUNDANCE": {
         "name": "Overvloed",
@@ -35,7 +39,7 @@
       },
       "INITIATIVE": {
         "name": "Initiatief",
-        "description": ""
+        "description": "Aan het begin van de Uitvoeringsfase, verwijder de eventuele Actiepion die hier geplaatst was.<br/>Die speler voert de volgende acties uit:<ul><li>Op het Initiatiefspoor, verwissel de diersoortmarker van die speler met die van de diersoortmarker direct links ervan-effectief een stap vooruit op het Initiatiefspoor.<br/>Negeer deze stap als de diersoortmarker van die speler al vooraan staat.</li><li>Plaats de Actiepion die net verwijderd is op een vrij Actieveld naar keuze.</li></ul>"
       },
       "MIGRATION": {
         "name": "Migratie",
@@ -165,6 +169,7 @@
         "description": "Jij en elke speler met minder elementen dan jij krijgt 1 willekeurig element uit de trekzak."
       }
     },
+    "selectAction": "Kies actie",
     "confirm": "Bevestig actie",
     "elementType": {
       "GRASS": "Gras",
@@ -335,10 +340,10 @@
         "FOREST": "Bos",
         "JUNGLE": "Jungle",
         "MOUNTAIN": "Bergen",
-        "SAVANNAH": "Savanne",
         "DESERT": "Woestijn",
         "SEA": "Zee",
         "WETLAND": "Moeras",
+        "SAVANNAH": "Savanne",
         "AQUATIC": "Aquatisch",
         "BIODIVERSITY": "Biodiversiteit",
         "BIOMASS": "Biomassa",
@@ -381,10 +386,10 @@
       "FOREST": "Bos",
       "JUNGLE": "Jungle",
       "MOUNTAIN": "Bergen",
-      "SAVANNAH": "Savanne",
       "DESERT": "Woestijn",
       "SEA": "Zee",
-      "WETLAND": "Moeras"
+      "WETLAND": "Moeras",
+      "SAVANNAH": "Savanne"
     },
     "victoryPoints": "Punten",
     "wanderlustTiles": "Reislusttegels"
