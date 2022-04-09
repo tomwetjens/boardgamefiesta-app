@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.place1st {
+  display: inline-block;
+  background-image: url(../../../assets/icons/1st.png);
+  background-size: contain;
+  width: 22px;
+  height: 40px;
+}

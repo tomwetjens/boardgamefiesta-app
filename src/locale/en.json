@@ -17,6 +17,9 @@
     "submit": "Confirm",
     "policy": "Minimum 8 characters"
   },
+  "endedDialog": {
+    "title": "That's all folks!"
+  },
   "home": {
     "welcome": "Welcome",
     "lead": "Play your favorite board games with friends or other players around the world!.",

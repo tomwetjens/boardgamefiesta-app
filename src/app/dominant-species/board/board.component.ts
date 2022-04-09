@@ -200,7 +200,6 @@ export class BoardComponent implements OnInit, OnChanges {
 
           const componentInstance = this.dialog.componentInstance as EndedDialogComponent;
           componentInstance.table = this.table;
-          componentInstance.state = this.state;
 
           fromPromise(this.dialog.result).subscribe({
             error: () => this.dialog = null,

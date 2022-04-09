@@ -17,6 +17,9 @@
     "submit": "Wijzig wachtwoord",
     "policy": "Minimaal 8 karakters"
   },
+  "endedDialog": {
+    "title": "Afgelopen!"
+  },
   "home": {
     "welcome": "Welkom",
     "lead": "Play your favorite board games with friends or other players around the world!.",
