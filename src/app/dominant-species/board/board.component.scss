@@ -1,7 +1,8 @@
 :host {
   display: block;
   width: 100%;
-  min-height: 871px;
+  min-width: 1527px;
+  min-height: 1100px;
   margin: 0;
   padding: 0 0 8px 0;
   position: relative;
@@ -29,6 +30,11 @@
   width: 100%;
   height: max(calc(100vh - 70px), 871px);
   position: relative;
+
+  svg {
+    width: 1800px;
+    height: 1000px;
+  }
 }
 
 pan-zoom {
