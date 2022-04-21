@@ -83,7 +83,6 @@
       "buy": "Comprar cartas de gado"
     },
     "buyCattleDialog": "Compre cartas de gado",
-    "endTurn": "Não há mais ações que você possa executar. Encerrando seu turno automaticamente em {{secs}} segundos.",
     "computerExplanation": "Sou um computador usando a variante <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play\" target=\"_new\">Garth</a>.",
     "popover": {
       "balance": "Saldo atual em dólares.",

@@ -23,7 +23,6 @@
       "buy": "Compra mucche"
     },
     "buyCattleDialog": "Compra mucche",
-    "endTurn": "Le tue azioni sono finite. Il tuo turno finirà in automatico in {{secs}} secondi.",
     "popover": {
       "balance": "Denaro attuale.",
       "handValue": "Il valore di ogni tua mucca di colore diverso che hai in mano conta per definire il valore totale della tua mano. Ciò vuol dire che ogni mucca dello stesso tipo è contata una volta sola, indipendentemente dal numero di carte che hai in mano dello stesso colore.",

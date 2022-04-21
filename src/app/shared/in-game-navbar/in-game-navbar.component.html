@@ -29,9 +29,9 @@
         <button class="btn btn-danger text-light text-nowrap"
                 *ngIf="table.turn"
                 [disabled]="busy"
-                (click)="endTurn.emit()">
+                (click)="doEndTurn()">
           <span>{{'endTurn'|translate}}</span>
-          <span *ngIf="autoEndTurn">&nbsp;({{autoEndTurnInSecs}})</span>
+          <span *ngIf="autoEndTurn && autoEndTurnTimer && autoEndTurnInSecs >= 0">&nbsp;({{autoEndTurnInSecs}})</span>
         </button>&nbsp;
         <button class="btn btn-warning text-nowrap" *ngIf="table.turn"
                 [disabled]="busy || !canSkip"
@@ -41,7 +41,7 @@
         <button class="btn btn-secondary text-nowrap"
                 *ngIf="table.turn && table.canUndo"
                 [disabled]="busy"
-                (click)="undo.emit()" [title]="'undo'|translate">
+                (click)="doUndo()" [title]="'undo'|translate">
           <svg class="bi" width="16" height="16" fill="currentColor">
             <use xlink:href="/assets/bootstrap-icons.svg#chevron-bar-left"/>
           </svg>

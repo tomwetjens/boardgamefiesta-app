@@ -25,7 +25,6 @@
       "buy": "Koop runderkaarten"
     },
     "buyCattleDialog": "Koop runderkaarten",
-    "endTurn": "Je kunt geen andere acties meer uitvoeren. Je beurt wordt automatisch beëindigd over {{secs}} seconden.",
     "computerExplanation": "Ik ben een computer met <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play\" target=\"_new\">Garth solo variant</a> regels.",
     "popover": {
       "balance": "Dollars die de speler op dit moment heeft.",

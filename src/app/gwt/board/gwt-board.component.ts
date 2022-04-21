@@ -160,9 +160,6 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   private dialog: NgbModalRef;
 
-  autoEndTurnTimer: Subscription;
-  autoEndTurnInSecs: number;
-
   @Input() table: Table;
   @Input() state: State;
   @Input() busy: boolean;
@@ -210,6 +207,11 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  get autoEndTurn(): boolean {
+    return this.state?.turn && !this.state?.ended
+      && this.state?.actions?.filter(action => action !== ActionType.USE_EXCHANGE_TOKEN).length === 0;
+  }
+
   private stateChanged(currentState: State, previousState: State) {
     this.actions = currentState.actions
       ? currentState.actions.filter(action => action !== ActionType.USE_EXCHANGE_TOKEN)
@@ -218,22 +220,15 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
     if (currentState.turn) {
       if (this.actions.length === 1
         && AUTO_SELECTED_ACTIONS.includes(this.actions[0])) {
-        this.stopAutoEndTurnTimer();
         this.selectedAction = this.actions[0];
-      } else if (this.actions.length === 0) {
-        this.selectedAction = null;
-        this.startAutoEndTurnTimer();
       } else {
-        this.stopAutoEndTurnTimer();
         this.selectedAction = null;
       }
     } else {
-      this.stopAutoEndTurnTimer();
       this.selectedAction = null;
     }
 
     if (currentState.ended) {
-      this.stopAutoEndTurnTimer();
       this.selectedAction = null;
 
       if (!this.dialog) {
@@ -248,32 +243,6 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
           complete: () => this.dialog = null
         });
       }
-    }
-  }
-
-  private stopAutoEndTurnTimer() {
-    if (this.autoEndTurnTimer && !this.autoEndTurnTimer.closed) {
-      this.autoEndTurnTimer.unsubscribe();
-      this.autoEndTurnTimer = null;
-    }
-  }
-
-  private startAutoEndTurnTimer() {
-    if (!this.autoEndTurnTimer || this.autoEndTurnTimer.closed) {
-      this.autoEndTurnInSecs = 30;
-      this.autoEndTurnTimer = interval(1000)
-        .pipe(takeUntil(this.destroyed))
-        .subscribe(() => {
-          this.autoEndTurnInSecs--;
-          if (this.autoEndTurnInSecs === 0) {
-            this.stopAutoEndTurnTimer();
-
-            // Extra safety check, in case timer was not cancelled in time
-            if (this.state.turn && this.state.actions.length === 0) {
-              this.doEndTurn();
-            }
-          }
-        });
     }
   }
 
@@ -331,7 +300,6 @@ export class GwtBoardComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   doUndo() {
-    this.stopAutoEndTurnTimer();
     this.undo.emit();
   }
 }

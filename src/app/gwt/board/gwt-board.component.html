@@ -20,6 +20,8 @@
                     [canSkip]="canSkip"
                     [busy]="busy"
                     (skip)="skip.emit($event)"
+                    [autoEndTurn]="autoEndTurn"
+                    [autoEndTurnSecs]="30"
                     (endTurn)="doEndTurn()"
                     (undo)="doUndo()">
 </app-in-game-navbar>
@@ -35,10 +37,6 @@
             container="body">
       {{table.game + '.actions.buttons.' + action|translate}}
     </button>
-
-    <span *ngIf="autoEndTurnTimer">
-      {{table.game + '.endTurn'|translate:{secs: autoEndTurnInSecs} }}
-    </span>
   </div>
 
   <p *ngIf="table.turn && selectedAction" class="instruction">

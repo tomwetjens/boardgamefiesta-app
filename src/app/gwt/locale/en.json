@@ -25,7 +25,6 @@
       "buy": "Buy cattle cards"
     },
     "buyCattleDialog": "Buy cattle cards",
-    "endTurn": "There are no more actions you can perform. Automatically ending your turn in {{secs}} seconds.",
     "computerExplanation": "I'm a computer using <a href=\"https://boardgamegeek.com/filepage/151608/garth-specialized-automa-gwt-solo-play\" target=\"_new\">Garth solo variant</a> rules.",
     "popover": {
       "balance": "Current balance in dollars.",

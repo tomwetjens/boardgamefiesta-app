@@ -156,7 +156,7 @@ export class InGameNavbarComponent implements OnInit, OnChanges, OnDestroy {
               this.stopAutoEndTurnTimer();
 
               // Extra safety check, in case timer was not cancelled in time
-              if (!this.table.ended && this.table.turn) {
+              if (!this.table.ended && this.table.turn && this.autoEndTurn) {
                 this.endTurn.emit();
               }
             }
@@ -197,5 +197,15 @@ export class InGameNavbarComponent implements OnInit, OnChanges, OnDestroy {
     messageDialogComponent.cancelKey = 'cancel';
     fromPromise(ngbModalRef.result)
       .subscribe(() => this.tableService.forceEndTurn(this.table.id, this.table.currentPlayer).subscribe());
+  }
+
+  doEndTurn() {
+    this.stopAutoEndTurnTimer();
+    this.endTurn.emit();
+  }
+
+  doUndo() {
+    this.stopAutoEndTurnTimer();
+    this.undo.emit();
   }
 }
