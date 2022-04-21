@@ -17,7 +17,7 @@
   -->
 
 <div *ngFor="let group of groups; trackBy: trackGroup" class="group">
-  <div class="text-dark timestamp" [title]="group.logEntries[0].timestamp | moment:'LLLL'">
+  <div class="text-light timestamp" [title]="group.logEntries[0].timestamp | moment:'LLLL'">
     {{group.logEntries[0].timestamp | logTime}}
   </div>
   <div *ngFor="let logEntry of group.logEntries; trackBy: trackLogEntry" class="log-entry" [@fadeInOnEnter]>
