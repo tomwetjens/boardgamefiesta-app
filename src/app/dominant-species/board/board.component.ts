@@ -872,7 +872,8 @@ export class BoardComponent implements OnInit, OnChanges {
         const speciationElementType = this.getSpeciationElementType();
         return element.element.type === speciationElementType && this.isNotInsectsFreeAction();
       case ActionName.Blight:
-        return true;
+        return this.selectedTiles.length > 0 && isCornerAdjacent(element.coords, this.selectedTiles[0].coords)
+          && this.selectedElements.length < this.getAdjacentElements(this.selectedTiles[0]).length - 1;
       default:
         return false;
     }

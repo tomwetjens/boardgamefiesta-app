@@ -251,6 +251,7 @@
       "Adaptation": "<strong>Adaptation:</strong> Select an Element from the Adaptation box to add to your Animal",
       "Aquatic": "<strong>Aquatic:</strong> Select an Element Type from the draw bag and then select a vacant Corner of a Wetland or Sea tile to place it on. You may then add up to 4 new Species on that Wetland or Sea tile.",
       "Abundance": "<strong>Abundance:</strong> Select an Element from the Abundance box and then select a vacant Corner to place it on",
+      "Blight": "<strong>Blight:</strong> Select 1 Tile and then select ALL but 1 Elements on that Tile to remove",
       "Catastrophe": "<strong>Catastrophe:</strong> Select 1 Tile and then 1 Species to eliminate ALL other Species on that tile and then select 1 Species on each adjacent tile to eliminate.",
       "Competition": "<strong>Competition:</strong> Select an Opposing Species on a Tile (one of each type matching the AP) to eliminate 1 of that Species from the Tile",
       "Depletion": "<strong>Depletion:</strong> Select an Element on Earth to place back into the draw bag",
