@@ -23,6 +23,7 @@ import {Table} from "../../shared/model";
 import {TableService} from "../../table.service";
 import {Action, State} from "../model";
 import {TranslateService} from "@ngx-translate/core";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-gwt',
@@ -40,7 +41,7 @@ export class GwtComponent implements OnInit {
               private tableService: TableService,
               private translateService: TranslateService) {
     this.table$ = this.tableService.table$;
-    this.state$ = this.tableService.state$;
+    this.state$ = this.tableService.state$.pipe(map(state => state as State));
   }
 
   ngOnInit(): void {

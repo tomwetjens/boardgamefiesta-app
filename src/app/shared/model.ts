@@ -142,6 +142,7 @@ export interface Table {
   readonly minNumberOfPlayersGame: number;
   readonly maxNumberOfPlayersGame: number;
   readonly autoStart: boolean;
+  readonly state?: object;
 }
 
 export interface CreateTableRequest {

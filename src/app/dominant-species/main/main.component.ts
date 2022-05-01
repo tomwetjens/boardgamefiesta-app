@@ -3,7 +3,7 @@ import {TableService} from "../../table.service";
 import {combineLatest, Observable, ReplaySubject} from "rxjs";
 import {Table} from "../../shared/model";
 import {Action, ActionName, DominantSpecies, ElementType} from "../model";
-import {takeUntil} from "rxjs/operators";
+import {map, takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'ds-main',
@@ -23,7 +23,7 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(private ngZone: NgZone,
               private tableService: TableService) {
     this.table$ = tableService.table$;
-    this.state$ = tableService.state$;
+    this.state$ = tableService.state$.pipe(map(state => state as DominantSpecies));
   }
 
   ngOnInit(): void {

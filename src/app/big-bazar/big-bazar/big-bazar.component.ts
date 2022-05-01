@@ -17,16 +17,16 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {combineLatest, Observable, Subject} from "rxjs";
-import {Table, TableStatus} from "../../shared/model";
-import {Action} from "../../gwt/model";
-import {ActivatedRoute} from "@angular/router";
-import {TableService} from "../../table.service";
-import {filter, map, takeUntil} from "rxjs/operators";
-import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {fromPromise} from "rxjs/internal-compatibility";
-import {EndedDialogComponent} from "../ended-dialog/ended-dialog.component";
-import {BigBazar} from "../model";
+import {combineLatest, Observable, Subject} from 'rxjs';
+import {Table, TableStatus} from '../../shared/model';
+import {Action} from '../../gwt/model';
+import {ActivatedRoute} from '@angular/router';
+import {TableService} from '../../table.service';
+import {filter, map, takeUntil} from 'rxjs/operators';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {EndedDialogComponent} from '../ended-dialog/ended-dialog.component';
+import {BigBazar} from '../model';
 
 @Component({
   selector: 'app-big-bazar',
@@ -49,7 +49,7 @@ export class BigBazarComponent implements OnInit, OnDestroy {
               private ngbModal: NgbModal,
               private tableService: TableService) {
     this.table$ = this.tableService.table$;
-    this.state$ = this.tableService.state$;
+    this.state$ = this.tableService.state$.pipe(map(state => state as BigBazar));
 
     this.canSkip$ = combineLatest([this.table$, this.state$]).pipe(
       map(([table, state]) => table.turn && state.actions && state.actions.length > 0));

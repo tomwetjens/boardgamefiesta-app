@@ -19,34 +19,25 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {
-  CreateTableRequest,
-  Event,
-  EventType,
-  LogEntry,
-  Table,
-  TableMode,
-  TableStatus,
-  TableType,
-  User
-} from './shared/model';
+import {CreateTableRequest, Event, LogEntry, Table, TableMode, TableType, User} from './shared/model';
 import {BehaviorSubject, combineLatest, from, Observable, of, ReplaySubject, Subject, throwError, timer} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
   catchError,
-  concatMap, debounceTime,
+  concatMap,
+  debounceTime,
   distinctUntilChanged,
   filter,
   map,
   retry,
   share,
-  shareReplay, skip, skipWhile,
+  shareReplay,
+  skip,
   startWith,
   switchMap,
   tap
 } from "rxjs/operators";
 import {AuthService} from "./auth.service";
-import {State} from "./gwt/model";
 import {webSocket} from "rxjs/webSocket";
 import {EventService} from "./event.service";
 import {DeviceSettingsService} from "./shared/device-settings.service";
@@ -71,7 +62,7 @@ export class TableService {
   events$: Observable<Event>;
   connected$ = new BehaviorSubject<boolean>(false);
   table$: Observable<Table>;
-  state$: Observable<any>;
+  state$: Observable<object>;
   /**
    * only new log entries as they come in, oldest first
    */
@@ -158,28 +149,9 @@ export class TableService {
       shareReplay(1));
 
     this.state$ = this.table$.pipe(
-      distinctUntilChanged((a, b) => a.status === b.status),
-      filter(table => [TableStatus.STARTED, TableStatus.ENDED].includes(table.status)),
-      switchMap(table => {
-        return combineLatest([
-          this._refreshState.pipe(
-            startWith(true) // Always start with a value because of combineLatest
-          ),
-          this.events$.pipe(
-            // Only trigger on interesting events
-            filter(event => [EventType.STATE_CHANGED].includes(event.type)),
-            startWith({}) // Always start with a value because of combineLatest
-          ),
-          this._reconnected$.pipe(
-            startWith(true)) // Always start with a value because of combineLatest
-        ]).pipe(
-          debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
-          switchMap(() => this.getState(table.id)),
-          // For each new table, immediately start with an empty value to prevent replaying
-          // the state of the previous table, while it is fetching the state of the new table
-          startWith(null as State));
-      }),
-      shareReplay(1));
+      filter(table => !!table?.state),
+      map(table => table.state)
+    );
 
     this.log$ = this._id.pipe(
       distinctUntilChanged(),
@@ -199,9 +171,9 @@ export class TableService {
                   new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())),
                 concatMap(logEntries => from(logEntries)),
                 tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
-          }),
-          shareReplay());
-      }));
+          }));
+      }),
+      shareReplay());
 
     this.myActiveTables$ = combineLatest([
       this._refreshMyActiveTables.pipe(startWith(true)),// Always start with a value because of combineLatest
