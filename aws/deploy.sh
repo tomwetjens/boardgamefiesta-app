@@ -33,12 +33,12 @@ aws cloudformation deploy --stack-name $STACK_PREFIX-webapp \
   --no-fail-on-empty-changeset \
   --parameter-overrides Environment=$ENV
 
-BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name boardgamefiesta-dev-webapp \
+BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK_PREFIX-webapp \
   --query "Stacks[0].Outputs[?OutputKey=='BucketName'].OutputValue" --output text)
 
 aws s3 sync ../dist/boardgamefiesta-app s3://$BUCKET_NAME
 
-DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name boardgamefiesta-dev-webapp \
+DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK_PREFIX-webapp \
   --query "Stacks[0].Outputs[?OutputKey=='DistributionId'].OutputValue" --output text)
 
 aws cloudfront create-invalidation \
