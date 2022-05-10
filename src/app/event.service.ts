@@ -32,7 +32,7 @@ const HEARTBEAT_INTERVAL = 60000;
 })
 export class EventService {
 
-  events = new Subject<Event>();
+  private events = new Subject<Event>();
 
   webSockets: WebSocket[] = [];
   connected = new BehaviorSubject<boolean>(false);
