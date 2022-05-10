@@ -20,7 +20,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {CreateTableRequest, Event, LogEntry, Table, TableMode, TableType, User} from './shared/model';
-import {BehaviorSubject, combineLatest, from, Observable, of, ReplaySubject, Subject, throwError, timer} from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  from,
+  merge,
+  Observable,
+  of,
+  ReplaySubject,
+  Subject,
+  throwError,
+  timer
+} from 'rxjs';
 import {ChangeOptionsRequest} from './model';
 import {
   catchError,
@@ -35,7 +46,8 @@ import {
   skip,
   startWith,
   switchMap,
-  tap
+  tap,
+  throttleTime
 } from "rxjs/operators";
 import {AuthService} from "./auth.service";
 import {webSocket} from "rxjs/webSocket";
@@ -43,7 +55,7 @@ import {EventService} from "./event.service";
 import {DeviceSettingsService} from "./shared/device-settings.service";
 import {BrowserService} from "./browser.service";
 
-const MIN_TIME_BETWEEN_REFRESHES = 800;
+const MIN_TIME_BETWEEN_REFRESH = 800;
 const HEARTBEAT_INTERVAL = 60000;
 
 @Injectable({
@@ -132,21 +144,21 @@ export class TableService {
       debounceTime(1000) // Only emit if reconnected after some time
     );
 
-    this.table$ = this._id.pipe(
-      distinctUntilChanged(),
-      switchMap(id => {
-        return combineLatest([
-          this._refresh.pipe(startWith(true)), // Always start with a value because of combineLatest
-          this.events$.pipe(startWith({})), // Always start with a value because of combineLatest
-          this._reconnected$.pipe(startWith(true)) // Always start with a value because of combineLatest
-        ]).pipe(
-          debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
-          switchMap(() => this.get(id)),
-          // For each new id, immediately start with an empty value to prevent replaying
-          // the previous table, while it is fetching the new table
-          startWith(null as Table));
-      }),
-      shareReplay(1));
+    this.table$ = combineLatest([
+      this._id.pipe(distinctUntilChanged()),
+      // Other triggers that retrieve the table again
+      merge(
+        this._refresh,
+        this.events$,
+        this._reconnected$
+      ).pipe(
+        throttleTime(MIN_TIME_BETWEEN_REFRESH), // When refresh, event or reconnected happens at the same time, just do it once
+        startWith([])  // Always start with a value because of combineLatest
+      )
+    ]).pipe(
+      switchMap(([id]) => this.get(id)),
+      shareReplay(1)
+    );
 
     this.state$ = this.table$.pipe(
       filter(table => !!table?.state),
@@ -176,11 +188,11 @@ export class TableService {
       shareReplay());
 
     this.myActiveTables$ = combineLatest([
-      this._refreshMyActiveTables.pipe(startWith(true)),// Always start with a value because of combineLatest
-      this.eventService.events.pipe(startWith({})),// Always start with a value because of combineLatest
-      this._reconnected$.pipe(startWith(true))// Always start with a value because of combineLatest
+      this._refreshMyActiveTables.pipe(startWith(true)), // Always start with a value because of combineLatest
+      this.eventService.events$.pipe(startWith({})), // Always start with a value because of combineLatest
+      this._reconnected$.pipe(startWith(true)) // Always start with a value because of combineLatest
     ]).pipe(
-      debounceTime(MIN_TIME_BETWEEN_REFRESHES), // When refresh, event or reconnected happens at the same time, just do it once
+      throttleTime(MIN_TIME_BETWEEN_REFRESH), // When refresh, event or reconnected happens at the same time, just do it once
       map(() => true),
       startWith(true),
       switchMap(() => this.find()),
