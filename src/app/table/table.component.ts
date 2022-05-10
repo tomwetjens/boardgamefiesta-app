@@ -122,7 +122,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.table
       .pipe(bufferCount(2, 1))
       .subscribe(([previous, current]) => {
-        if (current && previous) {
+        if (current && previous && current.id === previous.id) {
           if (current.turn && !previous.turn) {
             this.audioService.alert();
           }

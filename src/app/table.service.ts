@@ -75,10 +75,17 @@ export class TableService {
   connected$ = new BehaviorSubject<boolean>(false);
   table$: Observable<Table>;
   state$: Observable<object>;
+
   /**
-   * only new log entries as they come in, oldest first
+   * The first subscriber triggers the initial fetch of the 30 most recent log entries (for the current table).
+   * After the initial fetch, it emits only new log entries as they come in.
+   *
+   * New subscribers will be emitted all log entries that have been fetched up until now (for the current table).
+   *
+   * The order of the emitted log entries is chronologically (i.e. most recent is emitted last).
    */
   log$: Observable<LogEntry>;
+
   myActiveTables$: Observable<Table[]>;
 
   constructor(private httpClient: HttpClient,
@@ -156,8 +163,7 @@ export class TableService {
         startWith([])  // Always start with a value because of combineLatest
       )
     ]).pipe(
-      switchMap(([id]) => this.get(id)),
-      shareReplay(1)
+      switchMap(([id]) => this.get(id).pipe(shareReplay(1))),
     );
 
     this.state$ = this.table$.pipe(
@@ -167,25 +173,10 @@ export class TableService {
 
     this.log$ = this._id.pipe(
       distinctUntilChanged(),
-      switchMap(id => {
-        let lastRequestedDate = new Date(0);
-        return combineLatest([
-          this.events$.pipe(startWith({})),
-          this._reconnected$.pipe(startWith(true))
-        ]).pipe(
-          map(() => lastRequestedDate),
-          switchMap(since => {
-            // Request log entries since
-            return this.getLogSince(id, since, 30)
-              .pipe(
-                // Make sure log entries are sorted ascending
-                map(logEntries => logEntries.sort((a, b) =>
-                  new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())),
-                concatMap(logEntries => from(logEntries)),
-                tap(logEntry => lastRequestedDate = new Date(logEntry.timestamp)));
-          }));
-      }),
-      shareReplay());
+      map(id => this.logStreamForTable$(id)),
+      shareReplay(1), // When resubscribed to the same (unchanged) table, then reuse the existing stream
+      switchMap(stream => stream)
+    );
 
     this.myActiveTables$ = combineLatest([
       this._refreshMyActiveTables.pipe(startWith(true)), // Always start with a value because of combineLatest
@@ -382,4 +373,40 @@ export class TableService {
     });
   }
 
+  /**
+   * The first subscriber triggers the initial fetch of the 30 most recent log entries.
+   * After the initial fetch, it emits only new log entries as they come in.
+   *
+   * New subscribers will be emitted all log entries that have been fetched up until now.
+   *
+   * The order of the emitted log entries is chronologically (i.e. most recent is emitted last).
+   */
+  private logStreamForTable$(id: string): Observable<LogEntry> {
+    let since: Date = new Date(0);
+
+    return merge(
+      this.events$.pipe(filter(event => event.tableId === id)),
+      this._reconnected$
+    ).pipe(
+      startWith([]), // Initial
+      concatMap(() => {
+        // Fetch (new) log entries since last received log entry
+        const initial = since.getTime() === 0;
+        return this.getLogSince(id, since, initial ? 30 : 999)
+          .pipe(
+            // Make sure log entries are sorted chronologically
+            map(logEntries => logEntries.sort(compareLogEntryByTimestamp)),
+            // Turn array into a stream of log entries
+            concatMap(logEntries => from(logEntries)),
+            // Record timestamp of last emitted log entry for next fetch
+            tap(logEntry => since = new Date(logEntry.timestamp)));
+      }),
+      // Replay entire stream (up until now) to new subscribers
+      shareReplay()
+    );
+  }
+}
+
+function compareLogEntryByTimestamp(a: LogEntry, b: LogEntry): number {
+  return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
 }

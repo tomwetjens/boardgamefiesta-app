@@ -6,6 +6,7 @@ import {DeviceSettingsService} from './shared/device-settings.service';
 import {from} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../environments/environment";
+import {LogEntry, LogEntryType} from "./shared/model";
 
 
 describe('TableService', () => {
@@ -23,7 +24,7 @@ describe('TableService', () => {
     tableService = new TableService(httpClient, authService, browserService, eventService, deviceSettingsService);
   });
 
-  describe('table$ and load', () => {
+  describe('table$', () => {
     it('initially should have no table', () => {
       const subscriber = jasmine.createSpy('subscriber');
       tableService.table$.subscribe(subscriber);
@@ -135,5 +136,133 @@ describe('TableService', () => {
       expect(subscriber).toHaveBeenCalledTimes(2);
     });
   });
-})
-;
+
+  describe('log$', () => {
+
+    it('initially should have no logs', () => {
+      const subscriber = jasmine.createSpy('subscriber');
+      tableService.log$.subscribe(subscriber);
+
+      expect(subscriber).not.toHaveBeenCalled();
+      expect(httpClient.get).not.toHaveBeenCalled();
+    });
+
+    const logEntry1 = {
+      timestamp: '2022-05-10T14:32:00.000Z',
+      type: LogEntryType.CREATE,
+      user: {id: 'aUserId', username: 'aUser'},
+      parameters: []
+    };
+    const logEntry2 = {
+      timestamp: '2022-05-10T14:32:20.000Z',
+      type: LogEntryType.START,
+      user: {id: 'aUserId', username: 'aUser'},
+      parameters: []
+    };
+
+    it('should get initial logs for table', () => {
+      const logEntries: LogEntry[] = [logEntry1, logEntry2];
+      httpClient.get.and.returnValue(from([logEntries]));
+
+      const subscriber = jasmine.createSpy('subscriber');
+      tableService.log$.subscribe(subscriber);
+
+      tableService.load('aId');
+
+      expect(httpClient.get).toHaveBeenCalledOnceWith(environment.apiBaseUrl + '/tables/aId/log', {
+        params: {
+          since: '1970-01-01T00:00:00.000Z',
+          limit: '30'
+        }
+      });
+
+      expect(subscriber).toHaveBeenCalledTimes(2);
+      expect(subscriber.calls.allArgs()).toEqual([[logEntry1], [logEntry2]]);
+    });
+
+    it('should fetch most recent logs when switching to new table', () => {
+      const logEntries: LogEntry[] = [logEntry1, logEntry2];
+      httpClient.get.and.returnValue(from([logEntries]));
+
+      tableService.load('aId');
+
+      const subscriber1 = jasmine.createSpy('subscriber1');
+      tableService.log$.subscribe(subscriber1);
+
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiBaseUrl + '/tables/aId/log', {
+        params: {
+          since: '1970-01-01T00:00:00.000Z',
+          limit: '30'
+        }
+      });
+
+      expect(subscriber1).toHaveBeenCalledTimes(2);
+      expect(subscriber1.calls.allArgs()).toEqual([[logEntry1], [logEntry2]]);
+
+      tableService.load('anotherId');
+
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiBaseUrl + '/tables/anotherId/log', {
+        params: {
+          since: '1970-01-01T00:00:00.000Z',
+          limit: '30'
+        }
+      });
+
+      expect(subscriber1).toHaveBeenCalledTimes(4);
+      expect(subscriber1.calls.allArgs()).toEqual([[logEntry1], [logEntry2], [logEntry1], [logEntry2]]);
+
+      const subscriber2 = jasmine.createSpy('subscriber2');
+      tableService.log$.subscribe(subscriber2);
+
+      expect(subscriber2).toHaveBeenCalledTimes(2);
+      expect(subscriber2.calls.allArgs()).toEqual([[logEntry1], [logEntry2]]);
+    });
+
+    it('should not fetch logs again if resubscribed (and no other triggers)', () => {
+      const logEntries: LogEntry[] = [logEntry1, logEntry2];
+      httpClient.get.and.returnValue(from([logEntries]));
+
+      const subscriber1 = jasmine.createSpy('subscriber');
+      tableService.log$.subscribe(subscriber1);
+
+      tableService.load('aId');
+
+      expect(httpClient.get).toHaveBeenCalledOnceWith(environment.apiBaseUrl + '/tables/aId/log', {
+        params: {
+          since: '1970-01-01T00:00:00.000Z',
+          limit: '30'
+        }
+      });
+
+      expect(subscriber1).toHaveBeenCalledTimes(2);
+      expect(subscriber1.calls.allArgs()).toEqual([[logEntry1], [logEntry2]]);
+
+      subscriber1.calls.reset();
+      httpClient.get.calls.reset();
+
+      const subscriber2 = jasmine.createSpy('subscriber');
+      tableService.log$.subscribe(subscriber2);
+
+      expect(subscriber2).toHaveBeenCalledTimes(2);
+      expect(subscriber2.calls.allArgs()).toEqual([[logEntry1], [logEntry2]]);
+      expect(httpClient.get).not.toHaveBeenCalled();
+      expect(subscriber1).not.toHaveBeenCalled();
+    });
+
+    it('should get logs again if refresh is triggered', () => {
+      // TODO
+    });
+
+    it('should fetch logs since last fetch if event is received', () => {
+      // TODO
+    });
+
+    xit('should fetch logs since last fetch again if reconnected', () => {
+      // TODO
+    });
+
+    it('should fetch logs once if multiple triggers happen simultaneously', () => {
+      // TODO
+    });
+  });
+});
