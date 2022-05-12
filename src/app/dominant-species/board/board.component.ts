@@ -1175,7 +1175,7 @@ export class BoardComponent implements OnInit, OnChanges {
     switch (this.selectedAction) {
       case ActionName.Competition:
         return animalType !== this.state.currentAnimal && tile.species[animalType] > 0 && tile.species[this.state.currentAnimal] > 0
-          && COMPETITION_TILE_TYPES[this.getCurrentActionPawnIndex(ActionType.COMPETITION)].includes(tile.tile.type);
+          && (tile.tile.tundra || COMPETITION_TILE_TYPES[this.getCurrentActionPawnIndex(ActionType.COMPETITION)].includes(tile.tile.type));
       case ActionName.Evolution:
         return animalType !== this.state.currentAnimal && tile.species[animalType] > 0 && !this.selectedAnimalTypes.includes(animalType);
       case ActionName.Catastrophe:
