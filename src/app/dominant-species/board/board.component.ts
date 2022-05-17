@@ -775,7 +775,8 @@ export class BoardComponent implements OnInit, OnChanges {
   canSelectTile(tile: TileItem): boolean {
     switch (this.selectedAction) {
       case ActionName.Speciation:
-        return this.selectedElements.length > 0 && isCornerAdjacent(this.selectedElements[0].coords, tile.coords);
+        return (this.selectedElements.length > 0 && isCornerAdjacent(this.selectedElements[0].coords, tile.coords))
+          || this.isInsectsFreeAction();
       case ActionName.Glaciation:
         return !tile.tile.tundra && this.isAdjacentToTundra(tile.coords);
       case ActionName.WanderlustMove:
@@ -824,7 +825,7 @@ export class BoardComponent implements OnInit, OnChanges {
 
   private canMigrateSpeciesTo(tile: TileItem) {
     return (isAdjacent(this.selectedTiles[0].coords, tile.coords)
-      || (this.state.currentAnimal === AnimalType.BIRDS && this.isTwoTilesAway(this.selectedTiles[0], tile)))
+        || (this.state.currentAnimal === AnimalType.BIRDS && this.isTwoTilesAway(this.selectedTiles[0], tile)))
       && this.hasNotReachedMaxSpeciesToMigrate()
       && this.hasPreExistingSpeciesLeftOnTile(this.selectedTiles[0]);
   }
@@ -870,7 +871,7 @@ export class BoardComponent implements OnInit, OnChanges {
         return this.state.actionDisplay.elements[ActionType.DEPLETION].includes(element.element.type);
       case ActionName.Speciation:
         const speciationElementType = this.getSpeciationElementType();
-        return element.element.type === speciationElementType && this.isNotInsectsFreeAction();
+        return element.element.type === speciationElementType && !this.isInsectsFreeAction();
       case ActionName.Blight:
         return this.selectedTiles.length > 0 && isCornerAdjacent(element.coords, this.selectedTiles[0].coords)
           && this.selectedElements.length < this.getAdjacentElements(this.selectedTiles[0]).length - 1;
@@ -888,9 +889,8 @@ export class BoardComponent implements OnInit, OnChanges {
       .findIndex(actionPawn => actionPawn === this.state.currentAnimal);
   }
 
-  private isNotInsectsFreeAction() {
-    return this.state.currentAnimal !== AnimalType.INSECTS ||
-      this.state.actionDisplay.actionPawns[ActionType.SPECIATION].some(actionPawn => !!actionPawn);
+  private isInsectsFreeAction() {
+    return this.state.currentAnimal === AnimalType.INSECTS && this.getCurrentActionPawnIndex(ActionType.SPECIATION) === 6;
   }
 
   selectElement(element: ElementItem) {

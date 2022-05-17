@@ -262,7 +262,7 @@
       "Habitat": "<strong>Habitat:</strong> Select an Element (from the Draw Bag) and then select a vacant Corner to place it on.",
       "PlaceActionPawn": "<strong>Place Action Pawn:</strong> Select a vacant Action Space to place an Action Pawn",
       "Regression": "<strong>Regression:</strong> Select Elements (up to the number of Action Pawns you placed) from the Regression box that you don't want to be removed from your Animal",
-      "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them",
+      "Speciation": "<strong>Speciation:</strong> Select an Element on Earth and then select adjacent Tiles to place up to 4 new Species on them. Insects (Free Action): Select any Tile to place 1 Species on that Tile.",
       "MassExodus": "<strong>MassExodus:</strong> Select a Tile and then move all Species on that tile to adjacent Tiles by selecting one or more Species on the tile and then selecting an adjacent Tile to move them to onto that Tile.",
       "Migration": "<strong>Migration:</strong> Select a Tile to move species from, then select an adjacent Tile to move them to. You may move up to the number of species indicated with the Action Pawn. Birds species may move up to 2 tiles away.",
       "Predator": "<strong>Predator:</strong> Select 1 opposing Species on each Tile you occupy to eliminate it",

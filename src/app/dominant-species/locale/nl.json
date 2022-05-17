@@ -262,7 +262,7 @@
       "Habitat": "<strong>Habitat:</strong> Kies een Element (uit de trekzak) en kies dan een lege hoek om deze te plaatsen.",
       "PlaceActionPawn": "<strong>Actiepion plaatsen:</strong> Kies een lege Actieplek om een Actiepion te plaatsen.",
       "Regression": "<strong>Regressie:</strong> Kies Elementen (maximaal het aantal door jouw geplaatste Actiepionnen) uit het Regressie-vak die je niet wilt verwijderen van je Diersoort.",
-      "Speciation": "<strong>Soortvorming:</strong> Kies een Element op Aarde en kies dan aangrenzende Tegels om maximaal 4 soorten op elk te plaatsen.",
+      "Speciation": "<strong>Soortvorming:</strong> Kies een Element op Aarde en kies dan aangrenzende Tegels om maximaal 4 soorten op elk te plaatsen. Insecten (Vrije actie): Kies een Tegel om 1 Soort op die Tegel te plaatsen.",
       "MassExodus": "<strong>MassExodus:</strong> Kies een Tegel en verplaats dan alle soorten op die Tegel naar aangrenzende Tegels door een of meer soorten te kiezen op de Tegel en dan een aangrenzende Tegel te kiezen om ze naartoe te verplaatsen.",
       "Migration": "<strong>Migratie:</strong> Kies een Tegel om soorten vanaf te verplaatsen, kies daarna een aangrenzende Tegel om ze naartoe te verplaatsen. Je mag maximaal het aantal soorten verplaatsen dat is aangegeven door je Actiepion. Vogelsoorten mogen maximaal 2 Tegels ver verplaatst worden.",
       "Predator": "<strong>Roofdier:</strong> Kies 1 tegengestelde soort op elke Tegel die jouw Diersoort bewoont, om deze te elimineren.",
