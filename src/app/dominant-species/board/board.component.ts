@@ -399,7 +399,15 @@ export class BoardComponent implements OnInit, OnChanges {
         break;
 
       case ActionName.Wanderlust:
-        return this.addedTiles.length === 1;
+        this.perform.emit({
+          [this.selectedAction]: {
+            stack: this.selectedWanderlustTile,
+            hex: this.addedTiles[0].tile.hex,
+            elementType: this.selectedElementTypes.length > 0 ? this.selectedElementTypes[0] : null,
+            corner: this.selectableCorners.length > 0 ? coordsToCorner(this.selectableCorners[0].corner) : null
+          }
+        });
+        break;
 
       case ActionName.WanderlustMove:
         const changedTiles = this.tiles.filter(tile => tile.deltas[this.state.currentAnimal]?.removed > 0);
