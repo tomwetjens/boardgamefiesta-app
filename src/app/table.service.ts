@@ -163,7 +163,8 @@ export class TableService {
         startWith([])  // Always start with a value because of combineLatest
       )
     ]).pipe(
-      switchMap(([id]) => this.get(id).pipe(shareReplay(1))),
+      switchMap(([id]) => this.get(id)),
+      shareReplay(1)
     );
 
     this.state$ = this.table$.pipe(
