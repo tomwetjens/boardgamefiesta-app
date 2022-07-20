@@ -9,6 +9,7 @@
       "INSECTS": "Insects"
     },
     "action": {
+      "RemoveElement": "Remove Element from Animal",
       "RemoveActionPawn": "Lose an Action Pawn",
       "RemoveAllBut1SpeciesOnEachTile": "Remove all but 1 of your Species on each Tile"
     },
@@ -63,6 +64,7 @@
       }
     },
     "bonusPointsTable": "Bonus Points Table",
+    "cancel": "Cancel",
     "card": {
       "AQUATIC": {
         "name": "Aquatic",

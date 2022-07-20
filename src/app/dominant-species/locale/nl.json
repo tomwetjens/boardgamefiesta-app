@@ -9,6 +9,7 @@
       "INSECTS": "Insecten"
     },
     "action": {
+      "RemoveElement": "Verwijder Element van Diersoort",
       "RemoveActionPawn": "Verlies een Actiepion",
       "RemoveAllBut1SpeciesOnEachTile": "Verwijder al je soorten behalve 1 van elke tegel"
     },
@@ -63,6 +64,7 @@
       }
     },
     "bonusPointsTable": "Bonuspunten",
+    "cancel": "Annuleren",
     "card": {
       "AQUATIC": {
         "name": "Aquatisch",

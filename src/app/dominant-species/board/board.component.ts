@@ -124,6 +124,7 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() state: DominantSpecies;
 
   @Input() selectedAction: ActionName;
+  @Output() selectedActionChange = new EventEmitter<ActionName>();
   selectedElementTypes: ElementType[] = [];
   selectedCorner: AxialCorner;
 
@@ -1330,7 +1331,13 @@ export class BoardComponent implements OnInit, OnChanges {
       });
     } else {
       this.selectedAction = action;
+      this.selectedActionChange.emit(action);
     }
+  }
+
+  cancel() {
+    this.selectedAction = null;
+    this.selectedActionChange.emit(null);
   }
 }
 

@@ -9,6 +9,11 @@
       <button class="btn btn-secondary"
               (click)="reset()">{{'ds.reset'|translate}}</button>
     </div>
+
+    <div *ngIf="state.actions.length > 1">
+      <button class="btn btn-secondary"
+              (click)="cancel()">{{'ds.cancel'|translate}}</button>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="!selectedAction && state.actions.length > 1">

@@ -14,7 +14,7 @@
         <div class="col-10">
           <ds-board [table]="table"
                     [state]="state"
-                    [selectedAction]="selectedAction"
+                    [(selectedAction)]="selectedAction"
                     (perform)="perform($event, table)">
           </ds-board>
         </div>
