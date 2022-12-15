@@ -15,10 +15,11 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-
+<div class="alert alert-warning">
+  On February 1, 2023 this website will be closed due to the fact that users are moving to BGA and donations are not covering the costs anymore.
+  Thanks for playing and supporting Board Game Fiesta!
+</div>
 <ng-container *ngIf="loggedIn$ | async">
-  <app-donations-status></app-donations-status>
-
   <ng-container *ngIf="(myTurnTables$ | async) as tables">
     <section class="container" *ngIf="tables.length > 0">
       <h6>{{'yourTurn'|translate}}</h6>
